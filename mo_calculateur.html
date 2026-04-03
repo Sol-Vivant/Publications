@@ -253,9 +253,121 @@ body {
   .sv-section { padding: 0 1rem; }
 }
 
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; }
-.gauge { height: 8px; border-radius: 4px; background: #E5E7EB; overflow: hidden; }
-.gauge-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+/* ── Layout principal ── */
+.mo-layout {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.mo-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1rem;
+}
+.mo-sidebar::-webkit-scrollbar { width: 4px; }
+.mo-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+.mo-main { flex: 1; min-width: 0; }
+
+/* ── Cards ── */
+.mo-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.mo-card h2 {
+  font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: #334155; margin-bottom: 0.75rem;
+}
+
+/* ── Section didactique collapsible ── */
+.didactic-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border: 1px solid #e2e8f0; border-radius: 12px;
+  cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
+}
+.didactic-toggle:hover { background: linear-gradient(135deg, #f1f5f9, #e2e8f0); border-color: #cbd5e1; }
+.didactic-toggle h2 { font-size: 0.85rem; font-weight: 700; color: #334155; margin: 0; }
+.didactic-toggle .chevron { font-size: 0.9rem; color: #94a3b8; transition: transform 0.2s; }
+.didactic-toggle .chevron.open { transform: rotate(90deg); }
+.didactic-content { animation: fadeIn 0.2s ease-in; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Matière item ── */
+.mat-item { padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; font-size: 0.85rem; }
+.mat-item:hover { background: #f8fafc; }
+.mat-item.in-panier { background: #f0fdf4; border-color: #bbf7d0; }
+.mat-item .mat-name { font-weight: 500; color: #334155; }
+.mat-item .mat-cn { font-size: 0.75rem; color: #94a3b8; }
+.mat-item .mat-syn { font-size: 0.7rem; color: #cbd5e1; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mat-item .mat-cat { display: inline-block; font-size: 0.65rem; padding: 0 6px; border-radius: 9px; line-height: 1.6; }
+
+/* ── KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+.kpi-card { text-align: center; padding: 1rem; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.kpi-value { font-size: 1.75rem; font-weight: 800; line-height: 1.1; }
+.kpi-unit { font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
+.kpi-label { font-size: 0.8rem; font-weight: 500; color: #64748b; margin-top: 0.35rem; }
+.kpi-sub { font-size: 0.7rem; color: #94a3b8; }
+
+/* ── Mélanges prédéfinis ── */
+.presets-bar { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem; margin-bottom: 1rem; }
+.preset-btn { flex-shrink: 0; padding: 0.5rem 0.85rem; border-radius: 10px; border: 1px solid #e2e8f0; background: #fff; cursor: pointer; transition: all 0.15s; text-align: left; min-width: 150px; }
+.preset-btn:hover { border-color: #93c5fd; background: #eff6ff; }
+.preset-btn .preset-name { font-size: 0.8rem; font-weight: 600; color: #334155; }
+.preset-btn .preset-info { font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
+
+/* ── Panier ── */
+.panier-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9; }
+.panier-item:last-child { border-bottom: none; }
+.panier-remove { color: #fca5a5; cursor: pointer; font-size: 0.85rem; border: none; background: none; padding: 2px; line-height: 1; }
+.panier-remove:hover { color: #ef4444; }
+
+/* ── Diagnostic ── */
+.diag-box { padding: 0.85rem 1rem; border-radius: 10px; border-left: 4px solid; margin-bottom: 0.5rem; }
+.reco-box { padding: 0.85rem 1rem; border-radius: 10px; background: #f0fdf4; border-left: 4px solid #22c55e; margin-bottom: 0.5rem; }
+.alert-box { padding: 0.6rem 0.85rem; border-radius: 8px; font-size: 0.82rem; margin-bottom: 0.4rem; border: 1px solid; }
+.alert-danger { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+.alert-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+.alert-success { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+.alert-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+
+/* ── Gauge C/N ── */
+.cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, #ef4444 0%, #f59e0b 15%, #22c55e 22%, #22c55e 28%, #f59e0b 35%, #ef4444 60%, #7f1d1d 100%); position: relative; margin: 0.5rem 0; }
+.cn-gauge-marker { position: absolute; top: -2px; width: 4px; height: 14px; background: #1e293b; border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 4px rgba(0,0,0,0.3); }
+
+/* ── Table caractérisation ── */
+.carac-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.carac-table th { text-align: left; padding: 0.5rem 0.4rem; color: #64748b; border-bottom: 2px solid #e2e8f0; font-weight: 600; font-size: 0.72rem; text-transform: uppercase; }
+.carac-table td { padding: 0.4rem; border-bottom: 1px solid #f1f5f9; }
+.carac-table tr:hover { background: #f8fafc; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mo-layout { flex-direction: column; padding: 0.75rem; }
+  .mo-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .presets-bar { flex-wrap: wrap; }
+}
+@media (max-width: 640px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .kpi-value { font-size: 1.3rem; }
+}
 
 /* ── Encart Incorporation ── */
 .encart-incorp { margin-top: 0.75rem; border: 1px solid rgba(146,64,14,0.25); border-radius: 10px; overflow: hidden; background: #FFFBEB; }
@@ -264,18 +376,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .encart-incorp-title { flex: 1; font-weight: 600; font-size: 0.85rem; color: #92400E; }
 .encart-incorp-body { padding: 0.75rem 1rem; font-size: 0.8rem; color: #44403C; line-height: 1.5; }
 .encart-incorp-subtitle { font-weight: 600; font-size: 0.8rem; color: #78350F; margin: 0.75rem 0 0.35rem; }
-
-/* Conditions checklist */
 .encart-condition { display: flex; gap: 0.5rem; padding: 0.3rem 0; align-items: flex-start; }
 .encart-condition-check { color: #92400E; font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
 .encart-condition-label { font-weight: 500; font-size: 0.8rem; color: #44403C; }
 .encart-condition-detail { font-size: 0.75rem; color: #78716C; line-height: 1.4; }
-
-/* Barre Eh */
 .encart-eh-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin: 0.5rem 0; }
 .encart-eh-zone { padding: 0.5rem; border-radius: 8px; }
-
-/* Grille anaérobie subie vs choisie */
 .encart-anaero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0; }
 @media (max-width: 640px) { .encart-anaero-grid { grid-template-columns: 1fr; } }
 .encart-anaero-card { padding: 0.6rem; border-radius: 8px; font-size: 0.78rem; }
@@ -287,24 +393,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .encart-anaero-note { margin-top: 0.4rem; font-size: 0.72rem; color: #166534; font-style: italic; }
 .encart-signal-list { list-style: none; padding: 0; margin: 0; }
 .encart-signal-list li { font-size: 0.75rem; color: #7F1D1D; padding: 1px 0; }
-.encart-signal-list li::before { content: '• '; color: #DC2626; }
+.encart-signal-list li::before { content: '\2022 '; color: #DC2626; }
 .encart-technique-list { list-style: none; padding: 0; margin: 0.25rem 0; }
 .encart-technique-list li { font-size: 0.75rem; color: #166534; padding: 1px 0; }
-.encart-technique-list li::before { content: '✓ '; color: #059669; }
-
-/* Microsites */
+.encart-technique-list li::before { content: '\2713 '; color: #059669; }
 .encart-microsites { font-size: 0.73rem; color: #78716C; padding: 0.4rem 0.5rem; background: rgba(146,64,14,0.05); border-radius: 4px; margin: 0.4rem 0; font-style: italic; }
-
-/* Timeline */
 .encart-timeline { padding: 0.5rem; background: rgba(254,243,199,0.3); border-left: 3px solid #D97706; border-radius: 0 4px 4px 0; margin: 0.5rem 0; font-size: 0.8rem; }
-
-/* Cas d'étude */
 .encart-case { padding: 0.35rem 0; border-bottom: 1px solid rgba(146,64,14,0.08); }
 .encart-case:last-child { border-bottom: none; }
-.encart-case-header { font-size: 0.8rem; }
-
-/* Source */
 .encart-source { margin-top: 0.5rem; font-size: 0.7rem; color: #A8A29E; font-style: italic; }
+
 </style>
 </head>
 <body>
@@ -312,7 +410,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 <header class="sv-header">
   <h1>Calculateur Matière Organique</h1>
   <div class="sv-subtitle">C/N, humification, mélanges interactifs — 48 matières</div>
-  <div class="sv-meta"><a href="https://sol-vivant.github.io/Publications/" style="color:rgba(255,255,255,0.7);text-decoration:none">Le Sol Vivant cet Holobionte</a> — Jean-Michel Juzan — Généré le 2026-04-03 12:07</div>
+  <div class="sv-meta"><a href="https://sol-vivant.github.io/Publications/" style="color:rgba(255,255,255,0.7);text-decoration:none">Le Sol Vivant cet Holobionte</a> — Jean-Michel Juzan — Généré le 2026-04-03 16:42</div>
 </header>
 
 <div id="root"></div>
@@ -331,8 +429,8 @@ const DATA = {"matieres": [{"id": 34, "categorie": "Fumier/compost", "matiere": 
 <script type="text/babel">
 
 
-
-const CATEGORIES = [...new Set(DATA.matieres.map(m => m.categorie))];
+// ── Helpers & Constants ──
+const ACTIVE_CATS = [...new Set(DATA.matieres.map(m => m.categorie))].filter(c => c !== 'Sol/biomasse');
 const CAT_COLORS = {
   'Végétale': '#059669', 'Fumier/compost': '#D97706',
   'Résidus': '#DC2626', 'Mélange': '#2563EB', 'Sol/biomasse': '#6B7280'
@@ -367,13 +465,6 @@ function getRegle(cn) {
   );
 }
 
-const PERTE = {
-  'brf_direct': { min: 0, max: 0, label: 'BRF / Paillage direct', desc: 'Pas de perte — humification directe in situ', color: '#059669' },
-  'bokashi': { min: 5, max: 10, label: 'Bokashi', desc: 'Fermentation anaérobie. 97% MO conservée. CO₂ : 25 kg/t', color: '#2563EB' },
-  'lombricompost': { min: 20, max: 30, label: 'Lombricompost', desc: 'Vermicompostage. 70-80% MO conservée', color: '#7C3AED' },
-  'thermophile': { min: 40, max: 60, label: 'Compost thermophile', desc: 'Compostage aérobie. CO₂ : 669 kg/t. Hygiénisation >60°C', color: '#DC2626' },
-};
-
 function cnColor(cn) {
   if (cn < 10) return '#DC2626';
   if (cn < 15) return '#F59E0B';
@@ -383,30 +474,11 @@ function cnColor(cn) {
 }
 
 function cnZone(cn) {
-  if (cn < 15) return { label: 'Minéralisation', color: '#DC2626', desc: 'Libère N, P, S rapidement' };
-  if (cn <= 25) return { label: 'Zone neutre', color: '#059669', desc: 'Équilibre humification/minéralisation' };
-  return { label: 'Immobilisation', color: '#F59E0B', desc: 'Faim d\'azote possible — formation humus' };
+  if (cn < 15) return { label: 'Minéralisation', color: '#DC2626' };
+  if (cn <= 25) return { label: 'Zone neutre', color: '#059669' };
+  return { label: 'Immobilisation', color: '#F59E0B' };
 }
 
-// ── KPI Card ──
-function KPI({ value, unit, label, color, sub }) {
-  return <div className="text-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-    <div className="text-3xl font-bold" style={{color: color || '#1e293b'}}>{value}</div>
-    {unit && <div className="text-xs text-gray-400">{unit}</div>}
-    <div className="text-sm font-medium text-gray-600 mt-1">{label}</div>
-    {sub && <div className="text-xs text-gray-400 mt-0.5">{sub}</div>}
-  </div>;
-}
-
-// ── Gauge bar ──
-function Gauge({ value, min, max, color }) {
-  const pct = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
-  return <div className="h-2 rounded-full bg-gray-200 overflow-hidden mt-1">
-    <div className="h-full rounded-full transition-all duration-500" style={{width: pct+'%', background: color}} />
-  </div>;
-}
-
-// ── Search with synonyms ──
 function matchFilter(m, query) {
   if (!query) return true;
   const q = query.toLowerCase();
@@ -415,12 +487,16 @@ function matchFilter(m, query) {
     m.categorie.toLowerCase().includes(q);
 }
 
-
-// ── Encart Incorporation ──
+const PERTE = {
+  'brf_direct': { min: 0, max: 0, label: 'BRF / Paillage direct', desc: 'Humification directe in situ — pas de perte', color: '#059669' },
+  'bokashi': { min: 5, max: 10, label: 'Bokashi', desc: 'Fermentation anaérobie lactique. 90-95% MO conservée', color: '#2563EB' },
+  'lombricompost': { min: 20, max: 30, label: 'Lombricompost', desc: 'Vermicompostage. 70-80% MO conservée', color: '#7C3AED' },
+  'thermophile': { min: 40, max: 60, label: 'Compost thermophile', desc: 'Compostage aérobie >60°C. 40-60% MO perdue en CO₂', color: '#DC2626' },
+};
+// ── EncartIncorporation component (unchanged from live) ──
 function EncartIncorporation({ cn }) {
   const [expanded, setExpanded] = React.useState(cn > 30);
   if (!DATA.incorporation || DATA.incorporation.length === 0) return null;
-
   const encarts = DATA.incorporation.filter(e =>
     cn >= e.cn_seuil_min && (e.cn_seuil_max === null || cn <= e.cn_seuil_max)
   );
@@ -436,8 +512,6 @@ function EncartIncorporation({ cn }) {
     </div>
     {expanded && <div className="encart-incorp-body">
       <p style={{fontSize:'0.8rem',color:'#44403C',lineHeight:'1.5',marginBottom:'0.75rem'}}>{encart.contenu}</p>
-
-      {/* Conditions checklist */}
       {encart.conditions && encart.conditions.length > 0 && <div style={{marginBottom:'0.75rem'}}>
         <div className="encart-incorp-subtitle">Conditions requises</div>
         {encart.conditions.map((c, i) =>
@@ -450,14 +524,12 @@ function EncartIncorporation({ cn }) {
           </div>
         )}
       </div>}
-
-      {/* Redox : Aérobie / Anaérobie */}
       {rdx && <div style={{marginBottom:'0.75rem'}}>
         <div className="encart-incorp-subtitle">Aérobie / Anaérobie — la nuance fondamentale</div>
         <div className="encart-eh-bar">
-          {rdx.zones.map((z, i) => <div key={i} className="encart-eh-zone" style={{background: z.color + '20', borderLeft: '3px solid ' + z.color}}>
-            <div style={{color: z.color, fontWeight: 600, fontSize: '0.78rem'}}>{z.label}</div>
-            <div style={{fontSize:'0.72rem',color:'#78716C'}}>{z.eh_min != null ? 'Eh > ' + z.eh_min + ' mV' : z.eh_max != null ? 'Eh < ' + z.eh_max + ' mV' : ''}</div>
+          {rdx.zones.map((z, i) => <div key={i} className="encart-eh-zone" style={{background: z.color+'20', borderLeft:'3px solid '+z.color}}>
+            <div style={{color:z.color,fontWeight:600,fontSize:'0.78rem'}}>{z.label}</div>
+            <div style={{fontSize:'0.72rem',color:'#78716C'}}>{z.eh_min != null ? 'Eh > '+z.eh_min+' mV' : z.eh_max != null ? 'Eh < '+z.eh_max+' mV' : ''}</div>
             <div style={{fontSize:'0.72rem',color:'#9CA3AF',marginTop:'2px'}}>{z.process}</div>
           </div>)}
         </div>
@@ -482,8 +554,6 @@ function EncartIncorporation({ cn }) {
         </div>
         <div className="encart-microsites">{rdx.microsites}</div>
       </div>}
-
-      {/* Eh hardcoded fallback si pas de redox en DB */}
       {!rdx && <div style={{marginBottom:'0.75rem'}}>
         <div className="encart-incorp-subtitle">Diagnostic redox (Eh)</div>
         <div className="encart-eh-bar">
@@ -498,34 +568,31 @@ function EncartIncorporation({ cn }) {
           </div>)}
         </div>
       </div>}
-
-      {/* Timeline */}
       {encart.timeline && <div className="encart-timeline">
         <span style={{fontWeight:600,fontSize:'0.8rem',color:'#92400E'}}>Période de transition : </span>
         <span style={{fontSize:'0.8rem',color:'#44403C'}}>{encart.timeline}</span>
       </div>}
-
-      {/* Cas documentés */}
       {encart.cas_etude && encart.cas_etude.length > 0 && <div style={{marginTop:'0.5rem'}}>
         <div className="encart-incorp-subtitle">Cas documentés (réseau MSV / Ver de Terre Production)</div>
         {encart.cas_etude.map((c, i) =>
-          <div key={i} className="encart-case" style={{padding:'4px 0',borderBottom:'1px solid rgba(146,64,14,0.08)'}}>
+          <div key={i} className="encart-case">
             <div style={{fontSize:'0.8rem'}}><strong>{c.nom}</strong> <span style={{color:'#A8A29E'}}>({c.type})</span></div>
             <div style={{fontSize:'0.75rem',color:'#44403C'}}>MO : {c.mo_avant} → <strong style={{color:'#059669'}}>{c.mo_apres}</strong> en {c.duree}</div>
             <div style={{fontSize:'0.7rem',color:'#78716C'}}>{c.detail}</div>
           </div>
         )}
       </div>}
-
       {encart.source && <div className="encart-source">Source : {encart.source}</div>}
     </div>}
   </div>;
 }
-
+// ── App component ──
 function App() {
   const [panier, setPanier] = React.useState([]);
   const [filter, setFilter] = React.useState('');
   const [catFilter, setCatFilter] = React.useState(null);
+  const [showSolBio, setShowSolBio] = React.useState(false);
+  const [showDidactic, setShowDidactic] = React.useState(false);
   const [showKirkby, setShowKirkby] = React.useState(null);
 
   const addMatiere = (m) => {
@@ -542,220 +609,332 @@ function App() {
     setPanier(items);
   };
 
-  // Calculs
+  // ── Calculs ──
   const totalQty = panier.reduce((s, p) => s + p.qty, 0);
   const cnGlobal = totalQty > 0 ? panier.reduce((s, p) => {
     const cn = getCnAvg(p) || 25;
     return s + cn * p.qty;
   }, 0) / totalQty : null;
-
   const k1Avg = totalQty > 0 ? panier.reduce((s, p) => {
     const k1 = (p.k1_min && p.k1_max) ? (p.k1_min + p.k1_max) / 2 : 20;
     return s + k1 * p.qty;
   }, 0) / totalQty : null;
-
   const humusKg = (totalQty && k1Avg) ? totalQty * (k1Avg / 100) : null;
   const regle = cnGlobal ? getRegle(cnGlobal) : null;
   const zone = cnGlobal ? cnZone(cnGlobal) : null;
 
+  // ── Alertes ──
+  const alertes = [];
+  if (cnGlobal !== null) {
+    if (cnGlobal < 10) alertes.push({ type: 'danger', text: "Minéralisation très rapide — risque de lessivage d'azote. Ajouter une source carbonée (paille, BRF)." });
+    if (cnGlobal > 30 && cnGlobal <= 50) alertes.push({ type: 'warning', text: "Faim d'azote probable. Ajouter une source azotée (fumier volaille, urine, légumineuses)." });
+    if (cnGlobal > 50) alertes.push({ type: 'danger', text: "Immobilisation forte de l'azote. Décomposition très lente. Compenser avec un apport N rapide." });
+    if (cnGlobal >= 20 && cnGlobal <= 25) alertes.push({ type: 'success', text: "Zone optimale pour l'humification. Équilibre minéralisation/immobilisation." });
+  }
+  if (k1Avg !== null && k1Avg < 10) {
+    alertes.push({ type: 'info', text: "Coefficient isohumique faible (<10%) — carbone très stable mais peu d'effet nutritif à court terme." });
+  }
+
+  // Kirkby ratio
+  const showKirkbyRatio = cnGlobal && cnGlobal >= 15 && cnGlobal <= 30;
+
+  // ── Filtrage matières ──
   const filtered = DATA.matieres.filter(m =>
-    matchFilter(m, filter) && (!catFilter || m.categorie === catFilter)
+    matchFilter(m, filter) &&
+    (!catFilter || m.categorie === catFilter) &&
+    (showSolBio || m.categorie !== 'Sol/biomasse')
   );
 
-  return <div className="max-w-7xl mx-auto px-4 py-6">
-
-    {/* ── TITRE ── */}
-    <div className="text-center mb-6">
-      <h1 className="text-2xl font-bold text-gray-800">Matière Organique — Tableau de bord</h1>
-      <p className="text-gray-500 text-sm mt-1">{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.kirkby.length} fiches · {DATA.regles.length} règles</p>
+  return <div>
+    {/* ── HEADER ── */}
+    <div style={{textAlign:'center', padding:'1rem 1.5rem 0.5rem'}}>
+      <h1 style={{fontSize:'1.5rem',fontWeight:800,color:'#1e293b',margin:0}}>Calculateur Matière Organique</h1>
+      <p style={{fontSize:'0.8rem',color:'#94a3b8',marginTop:'0.25rem'}}>{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.regles.length} règles</p>
     </div>
 
-    {/* ── KPI ROW ── */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-      <KPI value={cnGlobal ? cnGlobal.toFixed(1) : '—'} label="C/N global"
-        color={cnGlobal ? cnColor(cnGlobal) : '#999'}
-        sub={zone ? zone.label : 'Ajoutez des matières'} />
-      <KPI value={k1Avg ? k1Avg.toFixed(0)+'%' : '—'} label="k₁ humification"
-        color={k1Avg > 25 ? '#059669' : k1Avg > 15 ? '#F59E0B' : '#999'}
-        sub={k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''} />
-      <KPI value={humusKg ? humusKg.toFixed(0) : '—'} unit="kg humus"
-        label={'par ' + totalQty + ' kg'} color="#7C3AED"
-        sub={humusKg ? 'potentiel d\'humification' : ''} />
-      <KPI value={totalQty || '—'} unit="kg" label="Masse totale"
-        color="#1e293b" sub={panier.length + ' matière' + (panier.length !== 1 ? 's' : '')} />
-    </div>
-
-    {/* ── MAIN GRID ── */}
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-
-      {/* ── COL 1 : Mélange ── */}
-      <div className="space-y-4">
-        {/* Mélanges prédéfinis */}
-        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-          <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Mélanges prédéfinis</h2>
-          <div className="space-y-1">
-            {DATA.melanges.map(mel =>
-              <button key={mel.id} onClick={() => loadMelange(mel)}
-                className="w-full text-left p-2 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-200 transition text-sm">
-                <div className="font-medium text-gray-700">{mel.nom}</div>
-                <div className="text-xs text-gray-400">{mel.objectif} · C/N {mel.cn_cible_min}-{mel.cn_cible_max}</div>
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Panier */}
-        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-          <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">
-            Mélange ({panier.length} · {totalQty} kg)
-          </h2>
-          {panier.length === 0 && <p className="text-gray-400 text-sm italic">Sélectionnez un mélange prédéfini ou ajoutez des matières</p>}
-          {panier.map(p => {
-            const cn = getCnAvg(p) || 0;
-            return <div key={p.id} className="flex items-center gap-2 py-1.5 border-b border-gray-50 last:border-0">
-              <button onClick={() => removeMatiere(p.id)} className="text-red-300 hover:text-red-500 text-sm">✕</button>
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-gray-700 truncate">{p.matiere}</div>
-                <div className="text-xs text-gray-400">C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}%</div>
-              </div>
-              <input type="number" min="0" max="10000" value={p.qty}
-                onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
-                className="w-16 text-right text-sm border border-gray-200 rounded px-2 py-1" />
-              <span className="text-xs text-gray-400 w-6">kg</span>
-            </div>;
-          })}
-          {cnGlobal && regle && <div className="mt-3 space-y-2">
-            <div className="p-3 rounded-lg" style={{background: zone.color+'10', borderLeft: '4px solid '+zone.color}}>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">{regle.icone}</span>
-                <span className="font-bold text-sm" style={{color: zone.color}}>{regle.label} — {regle.comportement}</span>
-              </div>
-              {regle.diagnostic && <p className="text-xs text-gray-600 leading-relaxed">{regle.diagnostic}</p>}
-            </div>
-            {regle.recommandation && <div className="p-3 rounded-lg bg-green-50 border-l-4 border-green-500">
-              <div className="text-xs font-semibold text-green-700 mb-1">Recommandation</div>
-              <p className="text-xs text-gray-600 leading-relaxed">{regle.recommandation}</p>
-            </div>}
-            {cnGlobal > 25 && <EncartIncorporation cn={cnGlobal} />}
-            {cnGlobal > 25 && <EncartIncorporation cn={cnGlobal} />}
-          </div>}
-        </div>
-      </div>
-
-      {/* ── COL 2 : Comprendre (Kirkby) ── */}
-      <div className="space-y-4">
-        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-          <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Comprendre la MO</h2>
-          {DATA.kirkby.map((k, i) =>
-            <div key={i} className="mb-2">
-              <button onClick={() => setShowKirkby(showKirkby === i ? null : i)}
-                className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-gray-700">{k.titre}</span>
-                  <span className="text-gray-300">{showKirkby === i ? '▾' : '▸'}</span>
-                </div>
-              </button>
-              {showKirkby === i && <div className="px-2 pb-2 text-xs text-gray-600 leading-relaxed whitespace-pre-line">
-                {k.contenu}
-                {k.donnees && k.section === 'formule' && <div className="mt-2 grid grid-cols-4 gap-2">
-                  {Object.entries(k.donnees).map(([el, val]) =>
-                    <div key={el} className="text-center p-2 bg-blue-50 rounded-lg">
-                      <div className="text-lg font-bold text-blue-700">{val}</div>
-                      <div className="text-xs text-blue-500">{el}</div>
-                    </div>
-                  )}
-                </div>}
-                {k.donnees && k.section === 'curseur' && <div className="mt-2">
-                  {k.donnees.zones.map((z, j) =>
-                    <div key={j} className="flex items-center gap-2 py-1">
-                      <div className="w-3 h-3 rounded-full" style={{background: z.color}} />
-                      <span className="text-xs"><strong>C/N {z.min}-{z.max}</strong> : {z.label}</span>
-                    </div>
-                  )}
-                  {cnGlobal && <div className="mt-2 h-3 rounded-full bg-gray-200 relative overflow-hidden">
-                    <div className="absolute left-0 top-0 h-full bg-red-500 opacity-30" style={{width: '15%'}} />
-                    <div className="absolute top-0 h-full bg-green-500 opacity-30" style={{left: '15%', width: '10%'}} />
-                    <div className="absolute top-0 h-full bg-yellow-500 opacity-30" style={{left: '25%', width: '75%'}} />
-                    <div className="absolute top-0 w-1 h-full bg-gray-800 rounded"
-                      style={{left: Math.min(95, cnGlobal)+'%'}} title={'C/N '+cnGlobal.toFixed(1)} />
-                  </div>}
-                </div>}
-                {k.donnees && k.section === 'sol' && <div className="mt-2 grid grid-cols-3 gap-1">
-                  {Object.entries(k.donnees.seuils_mo_argile).map(([key, val]) =>
-                    <div key={key} className="text-center p-1.5 bg-gray-50 rounded">
-                      <div className="text-sm font-bold">{val}%</div>
-                      <div className="text-xs text-gray-500">{key}</div>
-                    </div>
-                  )}
-                </div>}
-              </div>}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* ── COL 3 : Bibliothèque matières ── */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-        <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Matières ({filtered.length})</h2>
-        <input type="text" placeholder="Rechercher : tonte, gazon, BRF..." value={filter}
-          onChange={e => setFilter(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm mb-2 focus:outline-none focus:border-blue-400" />
-        <div className="flex flex-wrap gap-1 mb-2">
+    <div className="mo-layout">
+      {/* ══════════ SIDEBAR GAUCHE : Matières ══════════ */}
+      <aside className="mo-sidebar">
+        <h2 style={{fontSize:'0.8rem',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',color:'#334155',marginBottom:'0.5rem'}}>
+          Matières ({filtered.length})
+        </h2>
+        <input type="text" placeholder="Rechercher : tonte, gazon, BRF..."
+          value={filter} onChange={e => setFilter(e.target.value)}
+          style={{width:'100%',padding:'0.4rem 0.6rem',border:'1px solid #e2e8f0',borderRadius:'8px',fontSize:'0.82rem',marginBottom:'0.5rem',outline:'none'}} />
+        <div style={{display:'flex',flexWrap:'wrap',gap:'4px',marginBottom:'0.5rem'}}>
           <button onClick={() => setCatFilter(null)}
-            className={`text-xs px-2 py-0.5 rounded-full ${!catFilter ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}>Tout</button>
-          {CATEGORIES.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
-            className={`text-xs px-2 py-0.5 rounded-full ${catFilter === c ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}>{c}</button>)}
+            style={{fontSize:'0.7rem',padding:'2px 8px',borderRadius:'12px',border:'none',cursor:'pointer',
+              background: !catFilter ? '#1e293b' : '#f1f5f9', color: !catFilter ? '#fff' : '#64748b'}}>Tout</button>
+          {ACTIVE_CATS.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
+            style={{fontSize:'0.7rem',padding:'2px 8px',borderRadius:'12px',border:'none',cursor:'pointer',
+              background: catFilter === c ? '#1e293b' : '#f1f5f9', color: catFilter === c ? '#fff' : '#64748b'}}>{c}</button>)}
         </div>
-        <div className="max-h-[500px] overflow-y-auto space-y-0.5">
+        <div style={{overflowY:'auto',flex:1}}>
           {filtered.map(m => {
             const inP = panier.find(p => p.id === m.id);
             const cn = getCnAvg(m);
             return <div key={m.id} onClick={() => !inP && addMatiere(m)}
-              className={`p-2 rounded-lg text-sm cursor-pointer transition ${inP ? 'bg-green-50 border border-green-200' : 'hover:bg-gray-50 border border-transparent'}`}>
-              <div className="flex justify-between items-center">
-                <span className="font-medium text-gray-700">{m.matiere}</span>
-                <span className="text-xs text-gray-400">C/N {cn ? cn.toFixed(0) : '?'}</span>
+              className={'mat-item' + (inP ? ' in-panier' : '')}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                <span className="mat-name">{m.matiere}</span>
+                <span className="mat-cn">C/N {cn ? cn.toFixed(0) : '?'}</span>
               </div>
-              <div className="flex gap-1 mt-0.5 items-center">
-                <span className="text-xs px-1.5 py-0 rounded-full" style={{background: (CAT_COLORS[m.categorie]||'#888')+'20', color: CAT_COLORS[m.categorie]||'#888'}}>{m.categorie}</span>
-                {m.k1_min && <span className="text-xs text-gray-400">k₁ {m.k1_min}-{m.k1_max}%</span>}
+              <div style={{display:'flex',gap:'4px',marginTop:'2px',alignItems:'center'}}>
+                <span className="mat-cat" style={{background:(CAT_COLORS[m.categorie]||'#888')+'20',color:CAT_COLORS[m.categorie]||'#888'}}>{m.categorie}</span>
+                {m.k1_min && <span style={{fontSize:'0.7rem',color:'#94a3b8'}}>k₁ {m.k1_min}-{m.k1_max}%</span>}
               </div>
-              {m.synonymes && filter && <div className="text-xs text-gray-300 mt-0.5 truncate">{m.synonymes}</div>}
+              {m.synonymes && filter && <div className="mat-syn">{m.synonymes}</div>}
             </div>;
           })}
         </div>
-      </div>
-    </div>
+        {/* Toggle Sol/biomasse */}
+        <div style={{marginTop:'0.5rem',paddingTop:'0.5rem',borderTop:'1px solid #e2e8f0'}}>
+          <button onClick={() => setShowSolBio(!showSolBio)}
+            style={{fontSize:'0.7rem',color:'#94a3b8',background:'none',border:'none',cursor:'pointer',textDecoration:'underline'}}>
+            {showSolBio ? 'Masquer' : 'Afficher'} Sol/biomasse (7 réf.)
+          </button>
+        </div>
+      </aside>
+      {/* ══════════ MAIN CONTENT ══════════ */}
+      <main className="mo-main">
 
-    {/* ── MODES DE TRANSFORMATION ── */}
-    <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm mb-6">
-      <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Modes de transformation — Comparaison</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {Object.entries(PERTE).map(([key, mode]) => {
-          const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
-          const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
-          return <div key={key} className="p-3 rounded-xl border-2 transition" style={{borderColor: mode.color+'40'}}>
-            <div className="font-medium text-sm mb-1" style={{color: mode.color}}>{mode.label}</div>
-            <div className="text-xs text-gray-500 mb-2">{mode.desc}</div>
-            <div className="space-y-1">
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-400">Perte MO</span>
-                <span className="font-medium">{mode.min === mode.max ? mode.min+'%' : mode.min+'-'+mode.max+'%'}</span>
+        {/* ── KPI ROW ── */}
+        <div className="kpi-grid">
+          <div className="kpi-card">
+            <div className="kpi-value" style={{color: cnGlobal ? cnColor(cnGlobal) : '#ccc'}}>{cnGlobal ? cnGlobal.toFixed(1) : '—'}</div>
+            <div className="kpi-label">C/N global</div>
+            <div className="kpi-sub">{zone ? zone.label : 'Ajoutez des matières'}</div>
+          </div>
+          <div className="kpi-card">
+            <div className="kpi-value" style={{color: k1Avg > 25 ? '#059669' : k1Avg > 15 ? '#F59E0B' : '#ccc'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
+            <div className="kpi-label">k₁ humification</div>
+            <div className="kpi-sub">{k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''}</div>
+          </div>
+          <div className="kpi-card">
+            <div className="kpi-value" style={{color:'#7C3AED'}}>{humusKg ? humusKg.toFixed(0) : '—'}</div>
+            <div className="kpi-unit">kg humus</div>
+            <div className="kpi-label">par {totalQty || 0} kg</div>
+          </div>
+          <div className="kpi-card">
+            <div className="kpi-value" style={{color:'#1e293b'}}>{totalQty || '—'}</div>
+            <div className="kpi-unit">kg</div>
+            <div className="kpi-label">Masse totale</div>
+            <div className="kpi-sub">{panier.length} matière{panier.length !== 1 ? 's' : ''}</div>
+          </div>
+        </div>
+
+        {/* ── Jauge C/N ── */}
+        {cnGlobal && <div style={{marginBottom:'1rem'}}>
+          <div className="cn-gauge">
+            <div className="cn-gauge-marker" style={{left: Math.min(95, Math.max(2, cnGlobal / 100 * 100))+'%'}} />
+          </div>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.65rem',color:'#94a3b8',marginTop:'2px'}}>
+            <span>0</span><span>10</span><span>20</span><span>30</span><span>50</span><span>100</span>
+          </div>
+        </div>}
+
+        {/* ── Mélanges prédéfinis ── */}
+        <div className="presets-bar">
+          {DATA.melanges.map(mel =>
+            <button key={mel.id} className="preset-btn" onClick={() => loadMelange(mel)}>
+              <div className="preset-name">{mel.nom}</div>
+              <div className="preset-info">C/N {mel.cn_cible_min}-{mel.cn_cible_max} · {mel.objectif}</div>
+            </button>
+          )}
+        </div>
+
+        {/* ── Panier ── */}
+        <div className="mo-card">
+          <h2>Mélange ({panier.length} matière{panier.length !== 1 ? 's' : ''} · {totalQty} kg)</h2>
+          {panier.length === 0 && <p style={{color:'#94a3b8',fontSize:'0.85rem',fontStyle:'italic'}}>
+            Cliquez sur une matière à gauche ou choisissez un mélange prédéfini
+          </p>}
+          {panier.map(p => {
+            const cn = getCnAvg(p) || 0;
+            const pct = totalQty > 0 ? (p.qty / totalQty * 100).toFixed(0) : 0;
+            return <div key={p.id} className="panier-item">
+              <button className="panier-remove" onClick={() => removeMatiere(p.id)}>✕</button>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:'0.85rem',fontWeight:500,color:'#334155',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{p.matiere}</div>
+                <div style={{fontSize:'0.72rem',color:'#94a3b8'}}>C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}% · {pct}%</div>
               </div>
-              {humusMin != null && <div className="flex justify-between text-xs">
-                <span className="text-gray-400">Humus</span>
-                <span className="font-bold" style={{color: mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
-              </div>}
-              <Gauge value={100-mode.max} min={0} max={100} color={mode.color} />
-            </div>
-          </div>;
-        })}
-      </div>
-    </div>
+              <input type="range" min="0" max="1000" step="10" value={p.qty}
+                onChange={e => updateQty(p.id, parseInt(e.target.value))}
+                style={{width:'80px'}} />
+              <input type="number" min="0" max="10000" value={p.qty}
+                onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
+                style={{width:'60px',textAlign:'right',fontSize:'0.82rem',border:'1px solid #e2e8f0',borderRadius:'6px',padding:'3px 6px'}} />
+              <span style={{fontSize:'0.7rem',color:'#94a3b8',width:'20px'}}>kg</span>
+            </div>;
+          })}
+        </div>
 
-    {/* ── FOOTER ── */}
-    <div className="text-center text-xs text-gray-400 mt-4 pb-4">
-      Données depuis sol_vivant.db · Formule de Kirkby (2016) · Modèle AMG · SPNA · Agriton
+        {/* ── Diagnostic + Recommandation ── */}
+        {cnGlobal && regle && <div className="mo-card">
+          <h2>Diagnostic</h2>
+          <div className="diag-box" style={{borderLeftColor: zone.color, background: zone.color+'10'}}>
+            <div style={{display:'flex',alignItems:'center',gap:'0.5rem',marginBottom:'0.35rem'}}>
+              <span style={{fontSize:'1.1rem'}}>{regle.icone}</span>
+              <span style={{fontWeight:700,fontSize:'0.9rem',color:zone.color}}>{regle.label} — {regle.comportement}</span>
+            </div>
+            {regle.interpretation && <p style={{fontSize:'0.82rem',color:'#475569',lineHeight:1.5,margin:0}}>{regle.interpretation}</p>}
+            {regle.diagnostic && <p style={{fontSize:'0.8rem',color:'#64748b',lineHeight:1.5,marginTop:'0.35rem'}}>{regle.diagnostic}</p>}
+          </div>
+          {regle.recommandation && <div className="reco-box">
+            <div style={{fontSize:'0.75rem',fontWeight:600,color:'#166534',marginBottom:'0.25rem'}}>Recommandation</div>
+            <p style={{fontSize:'0.82rem',color:'#475569',lineHeight:1.5,margin:0}}>{regle.recommandation}</p>
+          </div>}
+
+          {/* Kirkby ratio */}
+          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'10px',background:'#faf5ff',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
+            <div style={{fontWeight:600,fontSize:'0.82rem',color:'#6d28d9',marginBottom:'0.25rem'}}>Ratio de Kirkby</div>
+            <div style={{fontSize:'0.8rem',color:'#6b21a8'}}>Pour 1 tonne de C stabilisé : 83 kg N + 20 kg P + 14 kg S nécessaires.</div>
+          </div>}
+
+          {/* Alertes */}
+          {alertes.map((a, i) => <div key={i} className={'alert-box alert-' + a.type}>
+            {a.type === 'danger' ? '⚠' : a.type === 'warning' ? '⚡' : a.type === 'success' ? '✓' : 'ℹ'} {a.text}
+          </div>)}
+
+          {/* Encart incorporation (UNE SEULE FOIS — fix du doublon) */}
+          {cnGlobal > 25 && <EncartIncorporation cn={cnGlobal} />}
+        </div>}
+        {/* ── Modes de transformation ── */}
+        {panier.length > 0 && <div className="mo-card">
+          <h2>Modes de transformation — Comparaison</h2>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(4, 1fr)',gap:'0.75rem'}}>
+            {Object.entries(PERTE).map(([key, mode]) => {
+              const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
+              const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
+              return <div key={key} style={{padding:'0.75rem',borderRadius:'10px',border:'2px solid '+mode.color+'40'}}>
+                <div style={{fontWeight:600,fontSize:'0.82rem',color:mode.color,marginBottom:'0.25rem'}}>{mode.label}</div>
+                <div style={{fontSize:'0.72rem',color:'#64748b',marginBottom:'0.5rem'}}>{mode.desc}</div>
+                <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.72rem'}}>
+                  <span style={{color:'#94a3b8'}}>Perte MO</span>
+                  <span style={{fontWeight:600}}>{mode.min === mode.max ? mode.min+'%' : mode.min+'-'+mode.max+'%'}</span>
+                </div>
+                {humusMin != null && <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.72rem',marginTop:'2px'}}>
+                  <span style={{color:'#94a3b8'}}>Humus</span>
+                  <span style={{fontWeight:700,color:mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
+                </div>}
+                <div style={{height:'6px',borderRadius:'3px',background:'#e5e7eb',overflow:'hidden',marginTop:'0.4rem'}}>
+                  <div style={{height:'100%',borderRadius:'3px',background:mode.color,width:(100-mode.max)+'%',transition:'width 0.3s'}} />
+                </div>
+              </div>;
+            })}
+          </div>
+        </div>}
+
+        {/* ══════════ SECTION DIDACTIQUE (collapsible) ══════════ */}
+        <div className="didactic-toggle" onClick={() => setShowDidactic(!showDidactic)}>
+          <h2>Comprendre la Matière Organique</h2>
+          <span className={'chevron' + (showDidactic ? ' open' : '')}>▸</span>
+        </div>
+
+        {showDidactic && <div className="didactic-content">
+
+          {/* ── Kirkby accordion ── */}
+          <div className="mo-card">
+            <h2>La formule de Kirkby et les fondamentaux</h2>
+            {DATA.kirkby.map((k, i) =>
+              <div key={i} style={{marginBottom:'0.5rem'}}>
+                <button onClick={() => setShowKirkby(showKirkby === i ? null : i)}
+                  style={{width:'100%',textAlign:'left',padding:'0.5rem 0.6rem',borderRadius:'8px',border:'none',background:showKirkby===i?'#f1f5f9':'transparent',cursor:'pointer',transition:'background 0.15s'}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                    <span style={{fontSize:'0.85rem',fontWeight:500,color:'#334155'}}>{k.titre}</span>
+                    <span style={{color:'#94a3b8',fontSize:'0.8rem'}}>{showKirkby === i ? '▾' : '▸'}</span>
+                  </div>
+                </button>
+                {showKirkby === i && <div style={{padding:'0.5rem 0.6rem',fontSize:'0.8rem',color:'#475569',lineHeight:1.6,whiteSpace:'pre-line'}}>
+                  {k.contenu}
+                  {k.donnees && k.section === 'formule' && <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'0.5rem',marginTop:'0.5rem'}}>
+                    {Object.entries(k.donnees).map(([el, val]) =>
+                      <div key={el} style={{textAlign:'center',padding:'0.5rem',background:'#eff6ff',borderRadius:'8px'}}>
+                        <div style={{fontSize:'1.2rem',fontWeight:700,color:'#2563eb'}}>{val}</div>
+                        <div style={{fontSize:'0.72rem',color:'#60a5fa'}}>{el}</div>
+                      </div>
+                    )}
+                  </div>}
+                  {k.donnees && k.section === 'curseur' && <div style={{marginTop:'0.5rem'}}>
+                    {k.donnees.zones.map((z, j) =>
+                      <div key={j} style={{display:'flex',alignItems:'center',gap:'0.5rem',padding:'2px 0'}}>
+                        <div style={{width:'10px',height:'10px',borderRadius:'50%',background:z.color}} />
+                        <span style={{fontSize:'0.78rem'}}><strong>C/N {z.min}-{z.max}</strong> : {z.label}</span>
+                      </div>
+                    )}
+                  </div>}
+                  {k.donnees && k.section === 'sol' && <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'0.4rem',marginTop:'0.5rem'}}>
+                    {Object.entries(k.donnees.seuils_mo_argile).map(([key, val]) =>
+                      <div key={key} style={{textAlign:'center',padding:'0.4rem',background:'#f8fafc',borderRadius:'6px'}}>
+                        <div style={{fontSize:'0.9rem',fontWeight:700}}>{val}%</div>
+                        <div style={{fontSize:'0.7rem',color:'#64748b'}}>{key}</div>
+                      </div>
+                    )}
+                  </div>}
+                  {k.donnees && k.section === 'modes' && <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:'0.4rem',marginTop:'0.5rem'}}>
+                    {k.donnees.modes.map((mode, j) =>
+                      <div key={j} style={{padding:'0.5rem',borderRadius:'8px',border:'1px solid #e2e8f0',background:'#fafafa'}}>
+                        <div style={{fontWeight:600,fontSize:'0.8rem',color:'#334155'}}>{mode.nom}</div>
+                        <div style={{fontSize:'0.72rem',color:'#64748b',marginTop:'2px'}}>{mode.description || mode.desc || ''}</div>
+                      </div>
+                    )}
+                  </div>}
+                </div>}
+              </div>
+            )}
+          </div>
+
+          {/* ── Référence : plages C/N ── */}
+          <div className="mo-card">
+            <h2>Référence : plages C/N</h2>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'0.5rem'}}>
+              {DATA.regles.map((r, i) => <div key={i} style={{padding:'0.5rem',borderRadius:'8px',border:'1px solid '+cnColor((r.cn_min||0)+5)+'40'}}>
+                <div style={{fontWeight:700,fontSize:'0.78rem',color:cnColor((r.cn_min||0)+5)}}>{r.label}</div>
+                <div style={{fontSize:'0.72rem',color:'#64748b',marginTop:'2px'}}>{r.comportement}</div>
+                {r.icone && <div style={{fontSize:'0.9rem',marginTop:'2px'}}>{r.icone}</div>}
+              </div>)}
+            </div>
+          </div>
+
+          {/* ── Caractérisation physique ── */}
+          <div className="mo-card">
+            <h2>Caractérisation physique ({DATA.caracterisation.length} matières)</h2>
+            <p style={{fontSize:'0.75rem',color:'#94a3b8',marginBottom:'0.75rem'}}>Densité apparente, matière sèche, coût indicatif et effet sur l'autofertilité du sol.</p>
+            <div style={{overflowX:'auto'}}>
+              <table className="carac-table">
+                <thead><tr>
+                  <th>Matière</th><th style={{textAlign:'center'}}>Densité</th><th style={{textAlign:'center'}}>MS %</th>
+                  <th style={{textAlign:'center'}}>C/N</th><th style={{textAlign:'center'}}>k₁ %</th>
+                  <th style={{textAlign:'center'}}>Coût</th><th style={{textAlign:'center'}}>Effet</th><th>Notes</th>
+                </tr></thead>
+                <tbody>
+                  {DATA.caracterisation.map((c, i) => <tr key={i}>
+                    <td style={{fontWeight:500,color:'#334155'}}>{c.matiere}</td>
+                    <td style={{textAlign:'center',color:'#64748b'}}>{c.densite}</td>
+                    <td style={{textAlign:'center',color:'#64748b'}}>{c.taux_ms}</td>
+                    <td style={{textAlign:'center',color:cnColor((c.cn_min+(c.cn_max||c.cn_min))/2)}}>
+                      {c.cn_min === c.cn_max ? c.cn_min : c.cn_min+'–'+c.cn_max}
+                    </td>
+                    <td style={{textAlign:'center',color:'#2563eb'}}>{c.k1_pct || '—'}</td>
+                    <td style={{textAlign:'center',color:'#64748b'}}>
+                      {c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Négatif' : c.cout_min+'–'+c.cout_max)}
+                    </td>
+                    <td style={{textAlign:'center'}}>
+                      <span style={{color: c.effet==='+++'?'#059669':c.effet==='++'?'#10b981':'#6ee7b7',fontWeight:c.effet==='+++'?700:500}}>{c.effet}</span>
+                    </td>
+                    <td style={{color:'#94a3b8',fontSize:'0.72rem'}}>{c.notes || ''}{c.epaisseur ? ' ('+c.epaisseur+' cm)' : ''}</td>
+                  </tr>)}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>}
+
+        {/* ── Footer ── */}
+        <div style={{textAlign:'center',fontSize:'0.72rem',color:'#94a3b8',marginTop:'1.5rem',paddingBottom:'1rem'}}>
+          Le Sol Vivant cet Holobionte · Calculateur MO · Données depuis sol_vivant.db · Formule de Kirkby (2016)
+        </div>
+      </main>
     </div>
   </div>;
 }
