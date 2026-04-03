@@ -3,39 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculateur Matière Organique — Le Sol Vivant</title>
-<meta property="og:title" content="Calculateur Matière Organique — Le Sol Vivant">
-<meta property="og:description" content="Calculateur C/N et matière organique : 48 matières, mélanges interactifs, simulation d'apports au sol.">
-<meta property="og:image" content="https://sol-vivant.github.io/Publications/img/mo_calculateur.png">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Calculateur Matiere Organique — Le Sol Vivant">
-<meta name="twitter:description" content="Calculateur C/N et matiere organique : 48 matieres, melanges interactifs, simulation d'apports au sol.">
-<meta name="twitter:image" content="https://sol-vivant.github.io/Publications/img/mo_calculateur.png">
+<title>Calculateur Matière Organique — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Calculateur Matière Organique — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="Calculateur C/N et matière organique : 48 matières, mélanges interactifs, simulation apports." />
+<meta property="og:image" content="https://sol-vivant.github.io/Publications/img/mo_calculateur.png" />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Calculateur Matière Organique — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Calculateur C/N et matière organique : 48 matières, mélanges interactifs, simulation apports." />
+<meta name="twitter:image" content="https://sol-vivant.github.io/Publications/img/mo_calculateur.png" />
 <link rel="icon" type="image/png" href="img/mo_calculateur.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-  body { font-family: 'Georgia', serif; background: #F8F6F3; }
-  .gauge { height: 8px; border-radius: 4px; background: #E5E7EB; overflow: hidden; }
-  .gauge-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
-  .card { background: white; border-radius: 12px; border: 1px solid #E5E7EB; padding: 16px; margin-bottom: 12px; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
-  .cat-Végétale { background: #D1FAE5; color: #065F46; }
-  .cat-Fumier\/compost { background: #FEF3C7; color: #92400E; }
-  .cat-Résidus { background: #FEE2E2; color: #991B1B; }
-  .cat-Mélange { background: #DBEAFE; color: #1E40AF; }
-  .cat-Sol\/biomasse { background: #E5E7EB; color: #374151; }
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem auto;
+  padding: 0 1.5rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; }
+.gauge { height: 8px; border-radius: 4px; background: #E5E7EB; overflow: hidden; }
+.gauge-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
 </style>
 </head>
 <body>
+
+<header class="sv-header">
+  <h1>Calculateur Matière Organique</h1>
+  <div class="sv-subtitle">C/N, humification, mélanges interactifs — 48 matières</div>
+  <div class="sv-meta"><a href="https://sol-vivant.github.io/Publications/" style="color:rgba(255,255,255,0.7);text-decoration:none">Le Sol Vivant cet Holobionte</a> — Jean-Michel Juzan — Généré le 2026-04-03 09:20</div>
+</header>
+
 <div id="root"></div>
+
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
+  · Données depuis sol_vivant.db
+</footer>
+
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
+
 <script>
-const DATA = {"matieres": [{"id": 34, "categorie": "Fumier/compost", "matiere": "Compost mûr (déchets verts, herbe)", "cn_min": 13.0, "cn_max": 19.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018"}, {"id": 35, "categorie": "Fumier/compost", "matiere": "Digestat (résidu biogaz de fumier)", "cn_min": 11.0, "cn_max": null, "cn_note": "11,8", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018"}, {"id": 30, "categorie": "Fumier/compost", "matiere": "Fumier bovin", "cn_min": 16.0, "cn_max": 30.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Zanella et al. 2017 ; Silva et al. 2019"}, {"id": 33, "categorie": "Fumier/compost", "matiere": "Fumier de bétail composté", "cn_min": 18.0, "cn_max": null, "cn_note": "18,8", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Kalala et al. 2020"}, {"id": 31, "categorie": "Fumier/compost", "matiere": "Fumier de cheval", "cn_min": 20.0, "cn_max": 56.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Das 2020 ; Zanella et al. 2017"}, {"id": 29, "categorie": "Fumier/compost", "matiere": "Fumier de mouton", "cn_min": 9.0, "cn_max": 29.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019"}, {"id": 28, "categorie": "Fumier/compost", "matiere": "Fumier de porc", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Silva et al. 2019"}, {"id": 27, "categorie": "Fumier/compost", "matiere": "Fumier de poulet / litière volaille", "cn_min": 4.0, "cn_max": 22.0, "cn_note": "7–10 typique", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Zanella et al. 2017 ; Silva et al. 2019"}, {"id": 32, "categorie": "Fumier/compost", "matiere": "Fumier équin", "cn_min": 21.0, "cn_max": 25.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Silva et al. 2019"}, {"id": 6, "categorie": "Mélange", "matiere": "Amendement forestier lent (feuilles chêne + compost mûr, 2:1)", "cn_min": 27.0, "cn_max": 31.0, "cn_note": "~29", "k1_min": 15.0, "k1_max": 22.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 5, "categorie": "Mélange", "matiere": "Bokashi enrichi N (fumier poulet + résidus végétaux, 1:3)", "cn_min": 24.0, "cn_max": 28.0, "cn_note": "~26", "k1_min": 20.0, "k1_max": 28.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 1, "categorie": "Mélange", "matiere": "Bokashi équilibré (drèches C/N13 + paille C/N105, ~3:1)", "cn_min": 20.0, "cn_max": 25.0, "cn_note": "~22", "k1_min": 25.0, "k1_max": 35.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 4, "categorie": "Mélange", "matiere": "Compost maison équilibré (déchets cuisine + copeaux, ~12:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 2, "categorie": "Mélange", "matiere": "Couvert hivernal décomposable (vesce + seigle, ~2:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 3, "categorie": "Mélange", "matiere": "Couvert mulch persistant (avoine + triticale, 1:1)", "cn_min": 45.0, "cn_max": 55.0, "cn_note": "~50", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Corpus Le Sol Vivant cet Holobionte"}, {"id": 39, "categorie": "Résidus", "matiere": "Boues d'épuration", "cn_min": 4.0, "cn_max": null, "cn_note": "4,85", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Brenzinger et al. 2018"}, {"id": 40, "categorie": "Résidus", "matiere": "Carton ondulé", "cn_min": 563.0, "cn_max": null, "cn_note": "~563", "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020"}, {"id": 36, "categorie": "Résidus", "matiere": "Farine d'os", "cn_min": 4.0, "cn_max": 7.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019"}, {"id": 37, "categorie": "Résidus", "matiere": "Farine de viande et d'os", "cn_min": 6.0, "cn_max": null, "cn_note": "6,0", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019"}, {"id": 41, "categorie": "Résidus", "matiere": "Journal / papier", "cn_min": 127.0, "cn_max": 178.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020"}, {"id": 38, "categorie": "Résidus", "matiere": "Tourteau de ricin", "cn_min": 6.0, "cn_max": 9.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019"}, {"id": 42, "categorie": "Sol/biomasse", "matiere": "Biomasse microbienne du sol", "cn_min": 5.0, "cn_max": 12.0, "cn_note": "~8", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Gleixner 2013 ; Valadares et al. 2016"}, {"id": 44, "categorie": "Sol/biomasse", "matiere": "Humus brut", "cn_min": 25.0, "cn_max": 40.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus C/N data"}, {"id": 43, "categorie": "Sol/biomasse", "matiere": "Humus stable (MAOM)", "cn_min": 12.0, "cn_max": 15.0, "cn_note": "~12", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Hedde 2006 ; Kirkby et al. 2013"}, {"id": 45, "categorie": "Sol/biomasse", "matiere": "Matière organique en décomposition", "cn_min": 18.0, "cn_max": 22.0, "cn_note": "~20", "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Corpus C/N data"}, {"id": 47, "categorie": "Sol/biomasse", "matiere": "Sol Chernozem", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021"}, {"id": 46, "categorie": "Sol/biomasse", "matiere": "Sol argileux agricole", "cn_min": 14.0, "cn_max": null, "cn_note": "14,76", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018"}, {"id": 48, "categorie": "Sol/biomasse", "matiere": "Sol brun forestier", "cn_min": 12.0, "cn_max": 14.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021"}, {"id": 13, "categorie": "Végétale", "matiere": "Aiguilles de conifères", "cn_min": 40.0, "cn_max": 80.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017"}, {"id": 23, "categorie": "Végétale", "matiere": "Broyat de bois", "cn_min": 100.0, "cn_max": 200.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Zanella et al. 2017"}, {"id": 24, "categorie": "Végétale", "matiere": "Copeaux de bois dur", "cn_min": 451.0, "cn_max": 819.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020"}, {"id": 25, "categorie": "Végétale", "matiere": "Copeaux de bois mou", "cn_min": 212.0, "cn_max": 1313.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020"}, {"id": 22, "categorie": "Végétale", "matiere": "Drèches de brasserie", "cn_min": 12.0, "cn_max": 14.0, "cn_note": "~13", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Kebede 2020 ; Cacace et al. 2022"}, {"id": 11, "categorie": "Végétale", "matiere": "Feuilles moins tendres (chêne, platane, hêtre)", "cn_min": 20.0, "cn_max": 40.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Zanella et al. 2017"}, {"id": 12, "categorie": "Végétale", "matiere": "Feuilles persistantes (chêne vert, olivier)", "cn_min": 30.0, "cn_max": 50.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017"}, {"id": 10, "categorie": "Végétale", "matiere": "Feuilles tendres (charme, frêne, cerisier, orme)", "cn_min": 10.0, "cn_max": 30.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Zanella et al. 2017"}, {"id": 7, "categorie": "Végétale", "matiere": "Jeunes matériaux végétaux / Légumineuses", "cn_min": 8.0, "cn_max": 15.0, "cn_note": "~10", "k1_min": 20.0, "k1_max": 35.0, "interpretation": null, "source": "Seifu et al. 2022"}, {"id": 21, "categorie": "Végétale", "matiere": "Lupin", "cn_min": 19.0, "cn_max": null, "cn_note": "19,9", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Sharma et al. 2015"}, {"id": 19, "categorie": "Végétale", "matiere": "Maïs (résidus/tiges)", "cn_min": 60.0, "cn_max": 73.0, "cn_note": null, "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015 ; Das 2020"}, {"id": 18, "categorie": "Végétale", "matiere": "Orge (résidus)", "cn_min": 50.0, "cn_max": null, "cn_note": "50,1", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015"}, {"id": 16, "categorie": "Végétale", "matiere": "Paille d'avoine", "cn_min": 31.0, "cn_max": 98.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015 ; Das 2020"}, {"id": 15, "categorie": "Végétale", "matiere": "Paille de blé", "cn_min": 100.0, "cn_max": 150.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Sharma et al. 2015 ; Das 2020"}, {"id": 17, "categorie": "Végétale", "matiere": "Paille de riz", "cn_min": 47.0, "cn_max": null, "cn_note": "47,3", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015"}, {"id": 14, "categorie": "Végétale", "matiere": "Pailles de céréales (général)", "cn_min": 48.0, "cn_max": 150.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Das 2020"}, {"id": 9, "categorie": "Végétale", "matiere": "Plantes herbacées", "cn_min": 25.0, "cn_max": 80.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Knicker 2004"}, {"id": 8, "categorie": "Végétale", "matiere": "Plantes supérieures (ligno-cellulosique)", "cn_min": 15.0, "cn_max": 300.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Gleixner 2013"}, {"id": 20, "categorie": "Végétale", "matiere": "Sarments de vigne", "cn_min": 60.0, "cn_max": null, "cn_note": "~60", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Zanella et al. 2017"}, {"id": 26, "categorie": "Végétale", "matiere": "Sciure", "cn_min": 142.0, "cn_max": 750.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020"}], "caracterisation": [{"matiere": "BRF", "densite": 0.3, "taux_ms": 60.0, "cn_min": 50.0, "cn_max": 80.0, "k1_pct": 50.0, "cout_min": 20.0, "cout_max": 40.0, "effet": "+++", "epaisseur": 5.0, "notes": "5cm=+1%MO"}, {"matiere": "Broyat déchet vert", "densite": 0.4, "taux_ms": 50.0, "cn_min": 15.0, "cn_max": 30.0, "k1_pct": 35.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "++", "epaisseur": null, "notes": "Pas de faim d'azote"}, {"matiere": "Compost déchets verts", "densite": 0.35, "taux_ms": 55.0, "cn_min": 10.0, "cn_max": 10.0, "k1_pct": 10.0, "cout_min": 10.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": "Pas de faim d'azote"}, {"matiere": "Compost fumier bovin", "densite": 0.85, "taux_ms": 25.0, "cn_min": 10.0, "cn_max": 10.0, "k1_pct": 35.0, "cout_min": 10.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Enrubannage luzerne", "densite": 0.2, "taux_ms": 60.0, "cn_min": 15.0, "cn_max": 30.0, "k1_pct": 25.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Feuilles", "densite": 0.1, "taux_ms": 75.0, "cn_min": 20.0, "cn_max": 70.0, "k1_pct": 20.0, "cout_min": 0.0, "cout_max": 0.0, "effet": "++", "epaisseur": null, "notes": null}, {"matiere": "Foin", "densite": 0.1, "taux_ms": 55.0, "cn_min": 40.0, "cn_max": 60.0, "k1_pct": 12.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "++", "epaisseur": null, "notes": null}, {"matiere": "Fumier de bovin", "densite": 0.65, "taux_ms": 25.0, "cn_min": 12.0, "cn_max": 18.0, "k1_pct": 25.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Fumier de cheval", "densite": 0.2, "taux_ms": 40.0, "cn_min": 20.0, "cn_max": 50.0, "k1_pct": 20.0, "cout_min": -10.0, "cout_max": 0.0, "effet": "++", "epaisseur": null, "notes": null}, {"matiere": "Fumier de volaille", "densite": 0.45, "taux_ms": 50.0, "cn_min": 7.0, "cn_max": 10.0, "k1_pct": 30.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Lisier", "densite": 0.7, "taux_ms": 40.0, "cn_min": 4.0, "cn_max": 9.0, "k1_pct": 15.0, "cout_min": 0.0, "cout_max": 4.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Paille", "densite": 0.1, "taux_ms": 60.0, "cn_min": 50.0, "cn_max": 70.0, "k1_pct": 15.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "++", "epaisseur": 30.0, "notes": "30cm=+1%MO"}, {"matiere": "Paillette (lin,miscanthus,chanvre)", "densite": 0.1, "taux_ms": 60.0, "cn_min": 30.0, "cn_max": 60.0, "k1_pct": 12.0, "cout_min": 20.0, "cout_max": 80.0, "effet": "++", "epaisseur": null, "notes": null}, {"matiere": "Tonte gazon", "densite": 0.4, "taux_ms": 20.0, "cn_min": 10.0, "cn_max": 15.0, "k1_pct": 25.0, "cout_min": 0.0, "cout_max": 0.0, "effet": "+", "epaisseur": null, "notes": null}, {"matiere": "Urine", "densite": 1.0, "taux_ms": 5.0, "cn_min": 0.8, "cn_max": 0.8, "k1_pct": null, "cout_min": 0.0, "cout_max": 0.0, "effet": "+", "epaisseur": null, "notes": "C/N 0,8"}], "regles": [{"cn_min": null, "cn_max": 10.0, "label": "< 10", "comportement": "MINÉRALISATION TRÈS RAPIDE", "interpretation": "Risque de lessivage N. Amendement puissant."}, {"cn_min": 10.0, "cn_max": 15.0, "label": "10–15", "comportement": "MINÉRALISATION ACTIVE", "interpretation": "N libéré rapidement. Cible pour apports frais."}, {"cn_min": 15.0, "cn_max": 20.0, "label": "15–20", "comportement": "ÉQUILIBRE LÉGÈREMENT +", "interpretation": "Légère minéralisation. Fumiers bien maturés."}, {"cn_min": 20.0, "cn_max": 25.0, "label": "20–25", "comportement": "ZONE NEUTRE", "interpretation": "Ni gain ni perte nette d'N. Compost mature cible."}, {"cn_min": 25.0, "cn_max": 30.0, "label": "25–30", "comportement": "DÉBUT D'IMMOBILISATION", "interpretation": "Faible faim d'azote. Surveiller les cultures."}, {"cn_min": 30.0, "cn_max": 50.0, "label": "30–50", "comportement": "IMMOBILISATION", "interpretation": "Faim d'azote. Apport N recommandé. Pailles."}, {"cn_min": 50.0, "cn_max": 100.0, "label": "50–100", "comportement": "IMMOBILISATION FORTE", "interpretation": "Apport N nécessaire. Pailles de céréales."}, {"cn_min": 100.0, "cn_max": null, "label": "> 100", "comportement": "IMMOBILISATION TRÈS FORTE", "interpretation": "Décomposition très lente. Bois, sciure, carton."}]};
+const DATA = {"matieres": [{"id": 34, "categorie": "Fumier/compost", "matiere": "Compost mûr (déchets verts, herbe)", "cn_min": 13.0, "cn_max": 19.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "compost vert ; compost collectif ; compost déchetterie"}, {"id": 35, "categorie": "Fumier/compost", "matiere": "Digestat (résidu biogaz de fumier)", "cn_min": 11.0, "cn_max": null, "cn_note": "11,8", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "digestat ; résidu méthanisation ; biogaz"}, {"id": 30, "categorie": "Fumier/compost", "matiere": "Fumier bovin", "cn_min": 16.0, "cn_max": 30.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Zanella et al. 2017 ; Silva et al. 2019", "synonymes": "fumier vache ; bouse ; fumier bovin pailleux"}, {"id": 33, "categorie": "Fumier/compost", "matiere": "Fumier de bétail composté", "cn_min": 18.0, "cn_max": null, "cn_note": "18,8", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Kalala et al. 2020", "synonymes": "fumier composté ; fumier vieilli"}, {"id": 31, "categorie": "Fumier/compost", "matiere": "Fumier de cheval", "cn_min": 20.0, "cn_max": 56.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Das 2020 ; Zanella et al. 2017", "synonymes": "fumier équin ; crottin"}, {"id": 29, "categorie": "Fumier/compost", "matiere": "Fumier de mouton", "cn_min": 9.0, "cn_max": 29.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "fumier ovin ; crottes de mouton"}, {"id": 28, "categorie": "Fumier/compost", "matiere": "Fumier de porc", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Silva et al. 2019", "synonymes": "fumier porcin ; lisier de porc"}, {"id": 27, "categorie": "Fumier/compost", "matiere": "Fumier de poulet / litière volaille", "cn_min": 4.0, "cn_max": 22.0, "cn_note": "7–10 typique", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Zanella et al. 2017 ; Silva et al. 2019", "synonymes": "fiente ; fiente de poulet ; litière poulailler ; fumier avicole"}, {"id": 32, "categorie": "Fumier/compost", "matiere": "Fumier équin", "cn_min": 21.0, "cn_max": 25.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Silva et al. 2019", "synonymes": "fumier cheval ; crottin ; fumier équin pailleux"}, {"id": 6, "categorie": "Mélange", "matiere": "Amendement forestier lent (feuilles chêne + compost mûr, 2:1)", "cn_min": 27.0, "cn_max": 31.0, "cn_note": "~29", "k1_min": 15.0, "k1_max": 22.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "mulch forestier ; litière + compost"}, {"id": 5, "categorie": "Mélange", "matiere": "Bokashi enrichi N (fumier poulet + résidus végétaux, 1:3)", "cn_min": 24.0, "cn_max": 28.0, "cn_note": "~26", "k1_min": 20.0, "k1_max": 28.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "bokashi azoté ; bokashi fumier"}, {"id": 1, "categorie": "Mélange", "matiere": "Bokashi équilibré (drèches C/N13 + paille C/N105, ~3:1)", "cn_min": 20.0, "cn_max": 25.0, "cn_note": "~22", "k1_min": 25.0, "k1_max": 35.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "bokashi ; fermenté ; EM bokashi"}, {"id": 4, "categorie": "Mélange", "matiere": "Compost maison équilibré (déchets cuisine + copeaux, ~12:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "compost maison ; compost domestique"}, {"id": 2, "categorie": "Mélange", "matiere": "Couvert hivernal décomposable (vesce + seigle, ~2:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "couvert hivernal ; vesce-seigle ; couvert légumineuse-graminée"}, {"id": 3, "categorie": "Mélange", "matiere": "Couvert mulch persistant (avoine + triticale, 1:1)", "cn_min": 45.0, "cn_max": 55.0, "cn_note": "~50", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "mulch vivant ; couvert carboné"}, {"id": 39, "categorie": "Résidus", "matiere": "Boues d'épuration", "cn_min": 4.0, "cn_max": null, "cn_note": "4,85", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Brenzinger et al. 2018", "synonymes": "boues STEP ; boues station épuration"}, {"id": 40, "categorie": "Résidus", "matiere": "Carton ondulé", "cn_min": 563.0, "cn_max": null, "cn_note": "~563", "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "carton ; emballage"}, {"id": 36, "categorie": "Résidus", "matiere": "Farine d'os", "cn_min": 4.0, "cn_max": 7.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "os broyé ; phosphate organique"}, {"id": 37, "categorie": "Résidus", "matiere": "Farine de viande et d'os", "cn_min": 6.0, "cn_max": null, "cn_note": "6,0", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "farine animale ; MBM"}, {"id": 41, "categorie": "Résidus", "matiere": "Journal / papier", "cn_min": 127.0, "cn_max": 178.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "papier journal ; papier recyclé"}, {"id": 38, "categorie": "Résidus", "matiere": "Tourteau de ricin", "cn_min": 6.0, "cn_max": 9.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "tourteau ; ricin ; engrais organique du commerce"}, {"id": 42, "categorie": "Sol/biomasse", "matiere": "Biomasse microbienne du sol", "cn_min": 5.0, "cn_max": 12.0, "cn_note": "~8", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Gleixner 2013 ; Valadares et al. 2016", "synonymes": "microbes ; biomasse sol ; microflore"}, {"id": 44, "categorie": "Sol/biomasse", "matiere": "Humus brut", "cn_min": 25.0, "cn_max": 40.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus C/N data", "synonymes": "humus brut ; litière non décomposée"}, {"id": 43, "categorie": "Sol/biomasse", "matiere": "Humus stable (MAOM)", "cn_min": 12.0, "cn_max": 15.0, "cn_note": "~12", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Hedde 2006 ; Kirkby et al. 2013", "synonymes": "MAOM ; humus stable ; carbone protégé ; complexe organo-minéral"}, {"id": 45, "categorie": "Sol/biomasse", "matiere": "Matière organique en décomposition", "cn_min": 18.0, "cn_max": 22.0, "cn_note": "~20", "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Corpus C/N data", "synonymes": "MO labile ; matière en décomposition ; litière active"}, {"id": 47, "categorie": "Sol/biomasse", "matiere": "Sol Chernozem", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021", "synonymes": "tchernoziom ; terre noire ; sol steppique"}, {"id": 46, "categorie": "Sol/biomasse", "matiere": "Sol argileux agricole", "cn_min": 14.0, "cn_max": null, "cn_note": "14,76", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "sol argileux ; argile ; sol lourd"}, {"id": 48, "categorie": "Sol/biomasse", "matiere": "Sol brun forestier", "cn_min": 12.0, "cn_max": 14.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021", "synonymes": "sol forestier ; sol brun ; cambisol"}, {"id": 13, "categorie": "Végétale", "matiere": "Aiguilles de conifères", "cn_min": 40.0, "cn_max": 80.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017", "synonymes": "pin ; sapin ; épicéa ; résineux"}, {"id": 23, "categorie": "Végétale", "matiere": "Broyat de bois", "cn_min": 100.0, "cn_max": 200.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Zanella et al. 2017", "synonymes": "broyat ; copeaux ; bois broyé"}, {"id": 24, "categorie": "Végétale", "matiere": "Copeaux de bois dur", "cn_min": 451.0, "cn_max": 819.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "copeaux chêne ; copeaux hêtre ; bois dur"}, {"id": 25, "categorie": "Végétale", "matiere": "Copeaux de bois mou", "cn_min": 212.0, "cn_max": 1313.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "copeaux pin ; copeaux sapin ; bois tendre ; résineux"}, {"id": 22, "categorie": "Végétale", "matiere": "Drèches de brasserie", "cn_min": 12.0, "cn_max": 14.0, "cn_note": "~13", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Kebede 2020 ; Cacace et al. 2022", "synonymes": "drèches ; résidu brasserie ; marc de bière"}, {"id": 11, "categorie": "Végétale", "matiere": "Feuilles moins tendres (chêne, platane, hêtre)", "cn_min": 20.0, "cn_max": 40.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Zanella et al. 2017", "synonymes": "feuilles mortes chêne ; litière forestière"}, {"id": 12, "categorie": "Végétale", "matiere": "Feuilles persistantes (chêne vert, olivier)", "cn_min": 30.0, "cn_max": 50.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017", "synonymes": "feuilles persistantes ; feuilles coriaces ; sclérophylles"}, {"id": 10, "categorie": "Végétale", "matiere": "Feuilles tendres (charme, frêne, cerisier, orme)", "cn_min": 10.0, "cn_max": 30.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Zanella et al. 2017", "synonymes": "feuilles mortes ; litière ; feuillage"}, {"id": 7, "categorie": "Végétale", "matiere": "Jeunes matériaux végétaux / Légumineuses", "cn_min": 8.0, "cn_max": 15.0, "cn_note": "~10", "k1_min": 20.0, "k1_max": 35.0, "interpretation": null, "source": "Seifu et al. 2022", "synonymes": "trèfle ; luzerne ; vesce ; fèverole ; pois ; haricot ; légumineuse"}, {"id": 21, "categorie": "Végétale", "matiere": "Lupin", "cn_min": 19.0, "cn_max": null, "cn_note": "19,9", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Sharma et al. 2015", "synonymes": "lupin ; lupinus ; légumineuse"}, {"id": 19, "categorie": "Végétale", "matiere": "Maïs (résidus/tiges)", "cn_min": 60.0, "cn_max": 73.0, "cn_note": null, "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "résidus maïs ; cannes maïs ; tiges maïs"}, {"id": 18, "categorie": "Végétale", "matiere": "Orge (résidus)", "cn_min": 50.0, "cn_max": null, "cn_note": "50,1", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015", "synonymes": "résidus orge ; paille orge"}, {"id": 16, "categorie": "Végétale", "matiere": "Paille d'avoine", "cn_min": 31.0, "cn_max": 98.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "paille avoine"}, {"id": 15, "categorie": "Végétale", "matiere": "Paille de blé", "cn_min": 100.0, "cn_max": 150.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "paille blé ; chaume blé"}, {"id": 17, "categorie": "Végétale", "matiere": "Paille de riz", "cn_min": 47.0, "cn_max": null, "cn_note": "47,3", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015", "synonymes": "paille riz ; rizière"}, {"id": 14, "categorie": "Végétale", "matiere": "Pailles de céréales (général)", "cn_min": 48.0, "cn_max": 150.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Das 2020", "synonymes": "paille ; céréales ; chaume"}, {"id": 9, "categorie": "Végétale", "matiere": "Plantes herbacées", "cn_min": 25.0, "cn_max": 80.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Knicker 2004", "synonymes": "herbe ; gazon ; tonte ; pelouse ; prairie ; fauche"}, {"id": 8, "categorie": "Végétale", "matiere": "Plantes supérieures (ligno-cellulosique)", "cn_min": 15.0, "cn_max": 300.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Gleixner 2013", "synonymes": "bois ; cellulose ; lignine ; lignocellulose"}, {"id": 20, "categorie": "Végétale", "matiere": "Sarments de vigne", "cn_min": 60.0, "cn_max": null, "cn_note": "~60", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Zanella et al. 2017", "synonymes": "sarments ; vigne ; résidus viticoles"}, {"id": 26, "categorie": "Végétale", "matiere": "Sciure", "cn_min": 142.0, "cn_max": 750.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "sciure bois ; sciure"}], "caracterisation": [{"matiere": "BRF", "densite": 0.3, "taux_ms": 60.0, "cn_min": 50.0, "cn_max": 80.0, "k1_pct": 50.0, "cout_min": 20.0, "cout_max": 40.0, "effet": "+++", "epaisseur": 5.0, "notes": "5cm=+1%MO", "volume_l_par_kg": 3.3}, {"matiere": "Broyat déchet vert", "densite": 0.4, "taux_ms": 50.0, "cn_min": 15.0, "cn_max": 30.0, "k1_pct": 35.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "++", "epaisseur": null, "notes": "Pas de faim d'azote", "volume_l_par_kg": 2.5}, {"matiere": "Compost déchets verts", "densite": 0.35, "taux_ms": 55.0, "cn_min": 10.0, "cn_max": 10.0, "k1_pct": 10.0, "cout_min": 10.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": "Pas de faim d'azote", "volume_l_par_kg": null}, {"matiere": "Compost fumier bovin", "densite": 0.85, "taux_ms": 25.0, "cn_min": 10.0, "cn_max": 10.0, "k1_pct": 35.0, "cout_min": 10.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": null}, {"matiere": "Enrubannage luzerne", "densite": 0.2, "taux_ms": 60.0, "cn_min": 15.0, "cn_max": 30.0, "k1_pct": 25.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": null}, {"matiere": "Feuilles", "densite": 0.1, "taux_ms": 75.0, "cn_min": 20.0, "cn_max": 70.0, "k1_pct": 20.0, "cout_min": 0.0, "cout_max": 0.0, "effet": "++", "epaisseur": null, "notes": null, "volume_l_par_kg": 10.0}, {"matiere": "Foin", "densite": 0.1, "taux_ms": 55.0, "cn_min": 40.0, "cn_max": 60.0, "k1_pct": 12.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "++", "epaisseur": null, "notes": null, "volume_l_par_kg": 10.0}, {"matiere": "Fumier de bovin", "densite": 0.65, "taux_ms": 25.0, "cn_min": 12.0, "cn_max": 18.0, "k1_pct": 25.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": 1.5}, {"matiere": "Fumier de cheval", "densite": 0.2, "taux_ms": 40.0, "cn_min": 20.0, "cn_max": 50.0, "k1_pct": 20.0, "cout_min": -10.0, "cout_max": 0.0, "effet": "++", "epaisseur": null, "notes": null, "volume_l_par_kg": 5.0}, {"matiere": "Fumier de volaille", "densite": 0.45, "taux_ms": 50.0, "cn_min": 7.0, "cn_max": 10.0, "k1_pct": 30.0, "cout_min": 0.0, "cout_max": 20.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": 1.7}, {"matiere": "Lisier", "densite": 0.7, "taux_ms": 40.0, "cn_min": 4.0, "cn_max": 9.0, "k1_pct": 15.0, "cout_min": 0.0, "cout_max": 4.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": null}, {"matiere": "Paille", "densite": 0.1, "taux_ms": 60.0, "cn_min": 50.0, "cn_max": 70.0, "k1_pct": 15.0, "cout_min": 80.0, "cout_max": 80.0, "effet": "++", "epaisseur": 30.0, "notes": "30cm=+1%MO", "volume_l_par_kg": 10.0}, {"matiere": "Paillette (lin,miscanthus,chanvre)", "densite": 0.1, "taux_ms": 60.0, "cn_min": 30.0, "cn_max": 60.0, "k1_pct": 12.0, "cout_min": 20.0, "cout_max": 80.0, "effet": "++", "epaisseur": null, "notes": null, "volume_l_par_kg": 10.0}, {"matiere": "Tonte gazon", "densite": 0.4, "taux_ms": 20.0, "cn_min": 10.0, "cn_max": 15.0, "k1_pct": 25.0, "cout_min": 0.0, "cout_max": 0.0, "effet": "+", "epaisseur": null, "notes": null, "volume_l_par_kg": null}, {"matiere": "Urine", "densite": 1.0, "taux_ms": 5.0, "cn_min": 0.8, "cn_max": 0.8, "k1_pct": null, "cout_min": 0.0, "cout_max": 0.0, "effet": "+", "epaisseur": null, "notes": "C/N 0,8", "volume_l_par_kg": null}], "regles": [{"cn_min": null, "cn_max": 10.0, "label": "< 10", "comportement": "MINÉRALISATION TRÈS RAPIDE", "interpretation": "Risque de lessivage N. Amendement puissant.", "diagnostic": "Matière très azotée, décomposition quasi immédiate. L'azote est libéré massivement — risque de lessivage vers les nappes si le sol est nu. Ce type d'apport agit comme un engrais organique rapide, pas comme un amendement de fond.", "recommandation": "Utiliser uniquement en période de croissance active (printemps). Toujours associer à un couvert végétal ou une culture en place pour capter l'azote libéré. Ne jamais appliquer sur sol nu en automne/hiver. Pour un effet plus durable, mélanger avec une matière carbonée (paille, BRF) pour remonter le C/N vers 20-25.", "icone": "🔴"}, {"cn_min": 10.0, "cn_max": 15.0, "label": "10–15", "comportement": "MINÉRALISATION ACTIVE", "interpretation": "N libéré rapidement. Cible pour apports frais.", "diagnostic": "Matière riche en azote, minéralisation active dans les 2-4 semaines. L'azote est rapidement disponible pour les plantes. Bon pour un coup de boost en début de culture. Le fumier frais, les tontes et les légumineuses sont typiques de cette plage.", "recommandation": "Idéal en apport de surface au printemps, avant implantation ou en top-dressing. Pour construire du stock de MO à long terme, compléter avec des matières plus carbonées. Le mélange avec du BRF ou de la paille (ratio 1:2) donne un excellent compromis fertilisation/humification.", "icone": "🟠"}, {"cn_min": 15.0, "cn_max": 20.0, "label": "15–20", "comportement": "ÉQUILIBRE LÉGÈREMENT +", "interpretation": "Légère minéralisation. Fumiers bien maturés.", "diagnostic": "Légère minéralisation nette — le sol reçoit un peu plus d'azote qu'il n'en consomme. C'est la zone des fumiers bien maturés et des composts jeunes. Bon équilibre entre nutrition immédiate et construction de sol.", "recommandation": "Zone confortable pour la plupart des usages. Convient en toute saison sur culture en place. Pour le maraîchage, c'est la cible idéale pour les apports réguliers (compost mi-mûr, fumier composté 3-6 mois).", "icone": "🟡"}, {"cn_min": 20.0, "cn_max": 25.0, "label": "20–25", "comportement": "ZONE NEUTRE", "interpretation": "Ni gain ni perte nette d'N. Compost mature cible.", "diagnostic": "Zone neutre — ni minéralisation ni immobilisation nette. Le mélange ne provoque pas de faim d'azote et ne libère pas d'excédent. C'est la cible pour les composts mûrs et les mélanges équilibrés type bokashi.", "recommandation": "C'est le C/N idéal pour un amendement polyvalent applicable en toute situation. Si votre mélange tombe dans cette zone, il est prêt à l'emploi sans correction. C'est aussi la cible de la formule de Kirkby : le ratio CNPS 100:8:2:1.5 correspond à cette zone d'humification optimale.", "icone": "🟢"}, {"cn_min": 25.0, "cn_max": 30.0, "label": "25–30", "comportement": "DÉBUT D'IMMOBILISATION", "interpretation": "Faible faim d'azote. Surveiller les cultures.", "diagnostic": "Début d'immobilisation — les micro-organismes commencent à puiser l'azote du sol pour décomposer la matière. Effet léger et temporaire (quelques semaines). La paille broyée et les couverts végétaux mûrs sont typiques.", "recommandation": "Surveiller les cultures sensibles (salades, jeunes plants). Si vous observez un jaunissement, apporter un complément azoté rapide (purin d'ortie, fiente diluée). Sinon, laisser faire — l'azote sera restitué après décomposition. Excellent pour mulcher entre les rangs.", "icone": "🟡"}, {"cn_min": 30.0, "cn_max": 50.0, "label": "30–50", "comportement": "IMMOBILISATION", "interpretation": "Faim d'azote. Apport N recommandé. Pailles.", "diagnostic": "Immobilisation significative — les micro-organismes captent activement l'azote du sol. La faim d'azote peut durer plusieurs semaines à plusieurs mois. Les pailles de céréales non broyées et les feuilles mortes sont typiques.", "recommandation": "Ne pas appliquer en contact direct avec les racines des cultures en croissance. Privilégier un apport en surface (mulch) plutôt qu'incorporé. Compenser par un apport azoté : 8 kg N pour chaque tonne de C apportée (formule de Kirkby). En pratique : 1 m³ de paille → ajouter 3 kg de fiente ou 15 L de purin concentré.", "icone": "🟠"}, {"cn_min": 50.0, "cn_max": 100.0, "label": "50–100", "comportement": "IMMOBILISATION FORTE", "interpretation": "Apport N nécessaire. Pailles de céréales.", "diagnostic": "Immobilisation forte et prolongée. La décomposition est lente (6-18 mois). Mais c'est aussi dans cette zone que se forme le plus d'humus stable — le coefficient d'humification k₁ est maximal pour le BRF et les matières ligneuses.", "recommandation": "Appliquer en surface, JAMAIS enfoui. Le BRF dans cette zone est un excellent constructeur de sol à long terme : il stimule les champignons lignivores et produit de l'humus stable. Prévoir une source d'azote d'accompagnement la première année. À partir de la 2e année, l'effet s'inverse et le sol devient plus fertile.", "icone": "🔴"}, {"cn_min": 100.0, "cn_max": null, "label": "> 100", "comportement": "IMMOBILISATION TRÈS FORTE", "interpretation": "Décomposition très lente. Bois, sciure, carton.", "diagnostic": "Décomposition très lente (1-3 ans). Matière presque inerte à court terme — bois massif, sciure sèche, carton. Immobilisation maximale de l'azote. Mais rôle important pour la structure du sol et l'habitat fongique.", "recommandation": "Réserver au paillage de surface épais (chemins, allées, pied de haies) ou au BRF pré-composté. Ne jamais incorporer au sol tel quel — la faim d'azote serait sévère et prolongée. Pour accélérer la décomposition, pré-tremper dans du purin ou du jus de bokashi avant application.", "icone": "🔴"}], "melanges": [{"id": 1, "nom": "Bokashi classique", "description": "Mélange fermenté anaérobie avec EM", "objectif": "Amendement humifiant, conservation maximale de la MO", "composants": [{"matiere_id": 29, "matiere": "Drèches de brasserie", "proportion": 75}, {"matiere_id": 6, "matiere": "Paille de blé / orge", "proportion": 25}], "cn_cible_min": 20.0, "cn_cible_max": 25.0, "ratio_ideal": "3:1 (azoté:carboné)", "notes": "Ratio 3:1 en masse. Ajouter EM + argile + calcaire coquillier. Fermentation 6-8 semaines."}, {"id": 2, "nom": "Compost thermophile équilibré", "description": "Compostage aérobie classique en tas retourné", "objectif": "Amendement stable, hygiénisé (>60°C)", "composants": [{"matiere_id": 6, "matiere": "Paille de blé / orge", "proportion": 60}, {"matiere_id": 1, "matiere": "Jeunes matériaux végétaux / Légumineuses", "proportion": 20}, {"matiere_id": 25, "matiere": "Fumier de bovin", "proportion": 20}], "cn_cible_min": 25.0, "cn_cible_max": 30.0, "ratio_ideal": "3:1 (carboné:azoté)", "notes": "Retourner toutes les 2 semaines. Température cible >55°C pendant 3 jours. Maturité : 3-6 mois."}, {"id": 3, "nom": "Paillage BRF", "description": "Bois raméal fragmenté en couverture du sol", "objectif": "Humification directe, stimulation fongique, couverture", "composants": [{"matiere_id": 7, "matiere": "Bois broyé BRF / rameaux frais", "proportion": 100}], "cn_cible_min": 50.0, "cn_cible_max": 80.0, "ratio_ideal": "100% BRF", "notes": "Étaler 5-10 cm en surface. Ne pas incorporer. Favorise les champignons lignivores. Faim d azote possible la 1ère année."}, {"id": 4, "nom": "Couvert vesce-seigle", "description": "Couvert hivernal légumineuse + graminée", "objectif": "Fixation N2 + biomasse carbonée, bon compromis C/N", "composants": [{"matiere_id": 38, "matiere": "Couvert hivernal décomposable (vesce + seigle, ~2:1)", "proportion": 100}], "cn_cible_min": 22.0, "cn_cible_max": 28.0, "ratio_ideal": "2:1 (vesce:seigle)", "notes": "Semis septembre-octobre. Destruction au rouleau ou gel. La vesce fixe 50-100 kg N/ha."}, {"id": 5, "nom": "Lombricompost maison", "description": "Vermicompostage de déchets de cuisine", "objectif": "Amendement riche et vivant, petit volume", "composants": [{"matiere_id": 30, "matiere": "Marc de raisin", "proportion": 30}, {"matiere_id": 1, "matiere": "Jeunes matériaux végétaux / Légumineuses", "proportion": 50}, {"matiere_id": 24, "matiere": "Fumier de bovin", "proportion": 20}], "cn_cible_min": 15.0, "cn_cible_max": 20.0, "ratio_ideal": "déchets verts + bruns", "notes": "Eisenia fetida. Température 15-25°C. Récolte tous les 3-4 mois. Perte MO 20-30%."}], "kirkby": [{"section": "formule", "titre": "La formule de Kirkby", "contenu": "Pour chaque tonne de carbone stockée dans le sol sous forme d'humus stable, le sol a besoin de fixer simultanément 80 kg d'azote, 20 kg de phosphore et 15 kg de soufre. C'est la stœchiométrie CNPS : le ratio 100:8:2:1.5 (Kirkby et al., 2011, 2016).\n\nConséquence contre-intuitive : apporter de l'azote minéral au sol AUGMENTE la séquestration de carbone, car N est souvent le facteur limitant de l'humification.", "donnees": {"C": 100, "N": 8, "P": 2, "S": 1.5}}, {"section": "implication", "titre": "Implication pratique", "contenu": "Si vous apportez 1 tonne de BRF (C/N 60, k1=50%) :\n- Carbone apporté : ~200 kg C (40% de MS × 50% C)\n- Humus potentiel : 100 kg C (k1=50%)\n- Besoin N pour humifier : 100 × 8/100 = 8 kg N\n- Besoin P : 100 × 2/100 = 2 kg P\n- Besoin S : 100 × 1.5/100 = 1.5 kg S\n\nSans cet azote, le BRF provoque une 'faim d'azote' — les microbes immobilisent le N du sol pour décomposer le bois. Solution : associer un apport azoté (tonte, légumineuse).", "donnees": null}, {"section": "curseur", "titre": "Le curseur C/N", "contenu": "Le ratio C/N détermine ce que les microorganismes font de la matière organique :\n\nC/N < 15 : MINÉRALISATION — les microbes libèrent N, P, S. Effet fertilisant rapide.\nC/N 20-25 : ZONE NEUTRE — équilibre humification/minéralisation.\nC/N > 30 : IMMOBILISATION — les microbes captent le N du sol (faim d'azote). Mais c'est aussi là que se forme l'humus stable (k1 élevé).\n\nL'objectif n'est pas de viser un C/N unique mais de comprendre le levier :\n- Besoin rapide de nutriments → matière à C/N bas (tonte, fiente)\n- Construction de sol long terme → matière à C/N élevé (BRF, paille) + apport N", "donnees": {"zones": [{"min": 0, "max": 15, "label": "Minéralisation", "color": "#DC2626"}, {"min": 15, "max": 25, "label": "Zone neutre", "color": "#10B981"}, {"min": 25, "max": 100, "label": "Immobilisation", "color": "#F59E0B"}]}}, {"section": "sol", "titre": "Influence du type de sol", "contenu": "Le type de sol modifie la vitesse de minéralisation ET la capacité de stockage :\n\n- Sol argileux : protège la MO (complexe organo-minéral). Minéralisation lente. Stock C élevé. Le ratio MO/argile doit dépasser 17% (seuil structural).\n- Sol sableux : peu de protection. Minéralisation rapide. Stock C faible. Nécessite des apports fréquents et des couverts permanents.\n- Sol limoneux : intermédiaire. Risque de battance si MO < 2%.\n\nLe modèle AMG montre que l'argile réduit le coefficient de minéralisation K de façon exponentielle. Chaque 10% d'argile en plus = ~15% de minéralisation en moins.", "donnees": {"seuils_mo_argile": {"optimal": 24, "realiste": 17, "degrade": 12}}}, {"section": "modes", "titre": "Les 4 modes de transformation", "contenu": "Selon comment vous traitez la MO avant de l'appliquer, les pertes et l'effet changent radicalement :\n\n| Mode | Perte MO | CO2 eq/t | C/N final | Humus |\n| BRF/paillage direct | 0% | 0 | conservé | maximum |\n| Bokashi (anaérobie) | 5-10% | 25 | conservé | 95% |\n| Lombricompost | 20-30% | ~80 | amélioré | 75% |\n| Compost thermophile | 40-60% | 669 | réduit | 45% |\n\nLe bokashi conserve 97% de la MO initiale vs 38% pour le compost (SPNA 2016). L'empreinte carbone est 27× plus faible par tonne de produit fini (Agriton).", "donnees": {"modes": ["brf_direct", "bokashi", "lombricompost", "thermophile"]}}]};
 </script>
 <script type="text/babel">
+
+
 
 const CATEGORIES = [...new Set(DATA.matieres.map(m => m.categorie))];
 const CAT_COLORS = {
@@ -43,7 +289,6 @@ const CAT_COLORS = {
   'Résidus': '#DC2626', 'Mélange': '#2563EB', 'Sol/biomasse': '#6B7280'
 };
 
-// Parse C/N from cn_note string (e.g. "~10", "11,8", "~60")
 function parseCnNote(note) {
   if (!note) return null;
   const cleaned = note.replace('~', '').replace(',', '.').trim();
@@ -51,17 +296,14 @@ function parseCnNote(note) {
   return isNaN(val) ? null : val;
 }
 
-// Get effective C/N average for a matiere, with cn_note fallback
 function getCnAvg(m) {
-  const min = m.cn_min;
-  const max = m.cn_max;
+  const min = m.cn_min, max = m.cn_max;
   if (min != null && max != null) return (min + max) / 2;
   if (min != null) return min;
   if (max != null) return max;
   return parseCnNote(m.cn_note);
 }
 
-// Find matching carac data for a matiere
 function findCarac(matiere) {
   return DATA.caracterisation.find(c =>
     matiere.toLowerCase().includes(c.matiere.toLowerCase().split(' ')[0]) ||
@@ -69,326 +311,301 @@ function findCarac(matiere) {
   );
 }
 
-// Get C/N rule for a value
 function getRegle(cn) {
-  if (cn === null || cn === undefined || isNaN(cn)) return null;
+  if (cn == null || isNaN(cn)) return null;
   return DATA.regles.find(r =>
     (r.cn_min === null || cn >= r.cn_min) && (r.cn_max === null || cn <= r.cn_max)
   );
 }
 
-// Composting MO loss data (min/max as numbers for calculation)
-const PERTE_COMPOSTAGE = {
-  'thermophile': { perte_min: 40, perte_max: 60, label: 'Compostage thermophile', desc: 'Perte de 40 a 60 % de la MO initiale (emise en CO2). Le compost mur est stable mais represente moins de la moitie du volume initial.' },
-  'lombricompost': { perte_min: 20, perte_max: 30, label: 'Lombricompostage', desc: 'Perte de 20 a 30 % de la MO. Processus plus efficient grace a l\'activite des vers.' },
-  'bokashi': { perte_min: 5, perte_max: 10, label: 'Fermentation Bokashi', desc: 'Perte minimale (5-10 %) par fermentation anaerobie lactique. La MO est conservee puis se decompose au sol.' },
-  'brf_direct': { perte_min: 0, perte_max: 0, label: 'BRF / Paillage direct', desc: 'Pas de perte prealable — la MO se decompose in situ. Humification maximale (k1 eleve).' },
+const PERTE = {
+  'brf_direct': { min: 0, max: 0, label: 'BRF / Paillage direct', desc: 'Pas de perte — humification directe in situ', color: '#059669' },
+  'bokashi': { min: 5, max: 10, label: 'Bokashi', desc: 'Fermentation anaérobie. 97% MO conservée. CO₂ : 25 kg/t', color: '#2563EB' },
+  'lombricompost': { min: 20, max: 30, label: 'Lombricompost', desc: 'Vermicompostage. 70-80% MO conservée', color: '#7C3AED' },
+  'thermophile': { min: 40, max: 60, label: 'Compost thermophile', desc: 'Compostage aérobie. CO₂ : 669 kg/t. Hygiénisation >60°C', color: '#DC2626' },
 };
 
 function cnColor(cn) {
   if (cn < 10) return '#DC2626';
   if (cn < 15) return '#F59E0B';
-  if (cn < 20) return '#10B981';
-  if (cn <= 25) return '#059669';
+  if (cn < 25) return '#059669';
   if (cn <= 30) return '#F59E0B';
-  if (cn <= 50) return '#EA580C';
   return '#DC2626';
+}
+
+function cnZone(cn) {
+  if (cn < 15) return { label: 'Minéralisation', color: '#DC2626', desc: 'Libère N, P, S rapidement' };
+  if (cn <= 25) return { label: 'Zone neutre', color: '#059669', desc: 'Équilibre humification/minéralisation' };
+  return { label: 'Immobilisation', color: '#F59E0B', desc: 'Faim d\'azote possible — formation humus' };
+}
+
+// ── KPI Card ──
+function KPI({ value, unit, label, color, sub }) {
+  return <div className="text-center p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+    <div className="text-3xl font-bold" style={{color: color || '#1e293b'}}>{value}</div>
+    {unit && <div className="text-xs text-gray-400">{unit}</div>}
+    <div className="text-sm font-medium text-gray-600 mt-1">{label}</div>
+    {sub && <div className="text-xs text-gray-400 mt-0.5">{sub}</div>}
+  </div>;
+}
+
+// ── Gauge bar ──
+function Gauge({ value, min, max, color }) {
+  const pct = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
+  return <div className="h-2 rounded-full bg-gray-200 overflow-hidden mt-1">
+    <div className="h-full rounded-full transition-all duration-500" style={{width: pct+'%', background: color}} />
+  </div>;
+}
+
+// ── Search with synonyms ──
+function matchFilter(m, query) {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  return m.matiere.toLowerCase().includes(q) ||
+    (m.synonymes || '').toLowerCase().includes(q) ||
+    m.categorie.toLowerCase().includes(q);
 }
 
 function App() {
   const [panier, setPanier] = React.useState([]);
   const [filter, setFilter] = React.useState('');
   const [catFilter, setCatFilter] = React.useState(null);
+  const [showKirkby, setShowKirkby] = React.useState(null);
 
   const addMatiere = (m) => {
     if (panier.find(p => p.id === m.id)) return;
     setPanier([...panier, { ...m, qty: 100 }]);
   };
-
-  const updateQty = (id, qty) => {
-    setPanier(panier.map(p => p.id === id ? { ...p, qty: Math.max(0, qty) } : p));
+  const updateQty = (id, qty) => setPanier(panier.map(p => p.id === id ? { ...p, qty: Math.max(0, qty) } : p));
+  const removeMatiere = (id) => setPanier(panier.filter(p => p.id !== id));
+  const loadMelange = (mel) => {
+    const items = mel.composants.map(c => {
+      const m = DATA.matieres.find(x => x.id === c.matiere_id);
+      return m ? { ...m, qty: c.proportion * 10 } : null;
+    }).filter(Boolean);
+    setPanier(items);
   };
 
-  const removeMatiere = (id) => {
-    setPanier(panier.filter(p => p.id !== id));
-  };
-
-  // === CALCULS ===
+  // Calculs
   const totalQty = panier.reduce((s, p) => s + p.qty, 0);
+  const cnGlobal = totalQty > 0 ? panier.reduce((s, p) => {
+    const cn = getCnAvg(p) || 25;
+    return s + cn * p.qty;
+  }, 0) / totalQty : null;
 
-  // C/N moyen pondéré (avec fallback cn_note)
-  let cnGlobal = null;
-  if (totalQty > 0 && panier.length > 0) {
-    let sumCN = 0, sumW = 0;
-    panier.forEach(p => {
-      if (p.qty > 0) {
-        const cn = getCnAvg(p);
-        if (cn && cn > 0) { sumCN += p.qty * cn; sumW += p.qty; }
-      }
-    });
-    cnGlobal = sumW > 0 ? sumCN / sumW : null;
-  }
+  const k1Avg = totalQty > 0 ? panier.reduce((s, p) => {
+    const k1 = (p.k1_min && p.k1_max) ? (p.k1_min + p.k1_max) / 2 : 20;
+    return s + k1 * p.qty;
+  }, 0) / totalQty : null;
 
-  // k1 moyen pondéré
-  let k1Global = null;
-  if (totalQty > 0) {
-    let sumK1 = 0, sumW = 0;
-    panier.forEach(p => {
-      if (p.qty > 0 && p.k1_min) {
-        const k1 = ((p.k1_min || 0) + (p.k1_max || p.k1_min || 0)) / 2;
-        sumK1 += p.qty * k1; sumW += p.qty;
-      }
-    });
-    k1Global = sumW > 0 ? sumK1 / sumW : null;
-  }
-
-  // Humus produit
-  const humusKg = k1Global && totalQty ? (totalQty * k1Global / 100) : null;
-
-  // Règle C/N
+  const humusKg = (totalQty && k1Avg) ? totalQty * (k1Avg / 100) : null;
   const regle = cnGlobal ? getRegle(cnGlobal) : null;
+  const zone = cnGlobal ? cnZone(cnGlobal) : null;
 
-  // Alertes
-  const alertes = [];
-  if (cnGlobal !== null) {
-    if (cnGlobal < 10) alertes.push({ type: 'danger', text: "Minéralisation très rapide — risque de lessivage d'azote. Ajouter une source carbonée (paille, BRF)." });
-    if (cnGlobal > 30 && cnGlobal <= 50) alertes.push({ type: 'warning', text: "Faim d'azote probable. Ajouter une source azotée (fumier volaille, urine, légumineuses)." });
-    if (cnGlobal > 50) alertes.push({ type: 'danger', text: "Immobilisation forte de l'azote. Décomposition très lente. Compenser avec un apport N rapide." });
-    if (cnGlobal >= 20 && cnGlobal <= 25) alertes.push({ type: 'success', text: "Zone optimale pour l'humification. Équilibre minéralisation/immobilisation." });
-  }
-  if (k1Global !== null && k1Global < 10) {
-    alertes.push({ type: 'info', text: "Coefficient isohumique faible (<10%) — carbone très stable mais peu d'effet nutritif à court terme." });
-  }
+  const filtered = DATA.matieres.filter(m =>
+    matchFilter(m, filter) && (!catFilter || m.categorie === catFilter)
+  );
 
-  // Filtrage matières
-  const filtered = DATA.matieres.filter(m => {
-    if (catFilter && m.categorie !== catFilter) return false;
-    if (filter && !m.matiere.toLowerCase().includes(filter.toLowerCase())) return false;
-    return true;
-  });
+  return <div className="max-w-7xl mx-auto px-4 py-6">
 
-  return <div className="max-w-6xl mx-auto px-4 py-8">
-    <div className="text-center mb-8">
-      <h1 className="text-3xl font-bold text-gray-800">Calculateur Matière Organique</h1>
-      <p className="text-gray-500 mt-2">Sélectionnez des matières, ajustez les quantités, obtenez le C/N global et le taux d'humification</p>
-      <p className="text-xs text-gray-400 mt-1">Données : {DATA.matieres.length} matières · {DATA.caracterisation.length} caractérisations · {DATA.regles.length} règles d'interprétation</p>
+    {/* ── TITRE ── */}
+    <div className="text-center mb-6">
+      <h1 className="text-2xl font-bold text-gray-800">Matière Organique — Tableau de bord</h1>
+      <p className="text-gray-500 text-sm mt-1">{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.kirkby.length} fiches · {DATA.regles.length} règles</p>
     </div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    {/* ── KPI ROW ── */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <KPI value={cnGlobal ? cnGlobal.toFixed(1) : '—'} label="C/N global"
+        color={cnGlobal ? cnColor(cnGlobal) : '#999'}
+        sub={zone ? zone.label : 'Ajoutez des matières'} />
+      <KPI value={k1Avg ? k1Avg.toFixed(0)+'%' : '—'} label="k₁ humification"
+        color={k1Avg > 25 ? '#059669' : k1Avg > 15 ? '#F59E0B' : '#999'}
+        sub={k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''} />
+      <KPI value={humusKg ? humusKg.toFixed(0) : '—'} unit="kg humus"
+        label={'par ' + totalQty + ' kg'} color="#7C3AED"
+        sub={humusKg ? 'potentiel d\'humification' : ''} />
+      <KPI value={totalQty || '—'} unit="kg" label="Masse totale"
+        color="#1e293b" sub={panier.length + ' matière' + (panier.length !== 1 ? 's' : '')} />
+    </div>
 
-      {/* === COLONNE GAUCHE : Sélecteur === */}
-      <div className="lg:col-span-1">
-        <div className="card">
-          <h2 className="font-bold text-gray-800 mb-3">Matières disponibles</h2>
-          <input type="text" placeholder="Filtrer..." value={filter} onChange={e => setFilter(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm mb-3 focus:outline-none focus:border-blue-400" />
-          <div className="flex flex-wrap gap-1 mb-3">
-            <button onClick={() => setCatFilter(null)}
-              className={`text-xs px-2 py-1 rounded-full ${!catFilter ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>Tout</button>
-            {CATEGORIES.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
-              className={`text-xs px-2 py-1 rounded-full ${catFilter === c ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{c}</button>)}
+    {/* ── MAIN GRID ── */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+
+      {/* ── COL 1 : Mélange ── */}
+      <div className="space-y-4">
+        {/* Mélanges prédéfinis */}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+          <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Mélanges prédéfinis</h2>
+          <div className="space-y-1">
+            {DATA.melanges.map(mel =>
+              <button key={mel.id} onClick={() => loadMelange(mel)}
+                className="w-full text-left p-2 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-200 transition text-sm">
+                <div className="font-medium text-gray-700">{mel.nom}</div>
+                <div className="text-xs text-gray-400">{mel.objectif} · C/N {mel.cn_cible_min}-{mel.cn_cible_max}</div>
+              </button>
+            )}
           </div>
-          <div className="max-h-96 overflow-y-auto space-y-1">
-            {filtered.map(m => {
-              const inPanier = panier.find(p => p.id === m.id);
-              const cnAvg = getCnAvg(m);
-              return <div key={m.id} onClick={() => !inPanier && addMatiere(m)}
-                className={`p-2 rounded-lg text-sm cursor-pointer transition ${inPanier ? 'bg-green-50 border border-green-200' : 'hover:bg-gray-50 border border-transparent'}`}>
-                <div className="flex justify-between items-center">
-                  <span className="font-medium text-gray-700">{m.matiere}</span>
-                  <span className="text-xs text-gray-400">C/N {cnAvg > 0 ? cnAvg.toFixed(0) : '?'}</span>
-                </div>
-                <div className="flex gap-2 mt-0.5">
-                  <span className={`badge cat-${m.categorie}`}>{m.categorie}</span>
-                  {m.k1_min && <span className="text-xs text-gray-400">k1: {m.k1_min}-{m.k1_max}%</span>}
-                </div>
-              </div>;
-            })}
-          </div>
+        </div>
+
+        {/* Panier */}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+          <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">
+            Mélange ({panier.length} · {totalQty} kg)
+          </h2>
+          {panier.length === 0 && <p className="text-gray-400 text-sm italic">Sélectionnez un mélange prédéfini ou ajoutez des matières</p>}
+          {panier.map(p => {
+            const cn = getCnAvg(p) || 0;
+            return <div key={p.id} className="flex items-center gap-2 py-1.5 border-b border-gray-50 last:border-0">
+              <button onClick={() => removeMatiere(p.id)} className="text-red-300 hover:text-red-500 text-sm">✕</button>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium text-gray-700 truncate">{p.matiere}</div>
+                <div className="text-xs text-gray-400">C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}%</div>
+              </div>
+              <input type="number" min="0" max="10000" value={p.qty}
+                onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
+                className="w-16 text-right text-sm border border-gray-200 rounded px-2 py-1" />
+              <span className="text-xs text-gray-400 w-6">kg</span>
+            </div>;
+          })}
+          {cnGlobal && regle && <div className="mt-3 space-y-2">
+            <div className="p-3 rounded-lg" style={{background: zone.color+'10', borderLeft: '4px solid '+zone.color}}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">{regle.icone}</span>
+                <span className="font-bold text-sm" style={{color: zone.color}}>{regle.label} — {regle.comportement}</span>
+              </div>
+              {regle.diagnostic && <p className="text-xs text-gray-600 leading-relaxed">{regle.diagnostic}</p>}
+            </div>
+            {regle.recommandation && <div className="p-3 rounded-lg bg-green-50 border-l-4 border-green-500">
+              <div className="text-xs font-semibold text-green-700 mb-1">Recommandation</div>
+              <p className="text-xs text-gray-600 leading-relaxed">{regle.recommandation}</p>
+            </div>}
+          </div>}
         </div>
       </div>
 
-      {/* === COLONNE DROITE : Panier + Résultats === */}
-      <div className="lg:col-span-2 space-y-4">
+      {/* ── COL 2 : Comprendre (Kirkby) ── */}
+      <div className="space-y-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+          <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Comprendre la MO</h2>
+          {DATA.kirkby.map((k, i) =>
+            <div key={i} className="mb-2">
+              <button onClick={() => setShowKirkby(showKirkby === i ? null : i)}
+                className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-gray-700">{k.titre}</span>
+                  <span className="text-gray-300">{showKirkby === i ? '▾' : '▸'}</span>
+                </div>
+              </button>
+              {showKirkby === i && <div className="px-2 pb-2 text-xs text-gray-600 leading-relaxed whitespace-pre-line">
+                {k.contenu}
+                {k.donnees && k.section === 'formule' && <div className="mt-2 grid grid-cols-4 gap-2">
+                  {Object.entries(k.donnees).map(([el, val]) =>
+                    <div key={el} className="text-center p-2 bg-blue-50 rounded-lg">
+                      <div className="text-lg font-bold text-blue-700">{val}</div>
+                      <div className="text-xs text-blue-500">{el}</div>
+                    </div>
+                  )}
+                </div>}
+                {k.donnees && k.section === 'curseur' && <div className="mt-2">
+                  {k.donnees.zones.map((z, j) =>
+                    <div key={j} className="flex items-center gap-2 py-1">
+                      <div className="w-3 h-3 rounded-full" style={{background: z.color}} />
+                      <span className="text-xs"><strong>C/N {z.min}-{z.max}</strong> : {z.label}</span>
+                    </div>
+                  )}
+                  {cnGlobal && <div className="mt-2 h-3 rounded-full bg-gray-200 relative overflow-hidden">
+                    <div className="absolute left-0 top-0 h-full bg-red-500 opacity-30" style={{width: '15%'}} />
+                    <div className="absolute top-0 h-full bg-green-500 opacity-30" style={{left: '15%', width: '10%'}} />
+                    <div className="absolute top-0 h-full bg-yellow-500 opacity-30" style={{left: '25%', width: '75%'}} />
+                    <div className="absolute top-0 w-1 h-full bg-gray-800 rounded"
+                      style={{left: Math.min(95, cnGlobal)+'%'}} title={'C/N '+cnGlobal.toFixed(1)} />
+                  </div>}
+                </div>}
+                {k.donnees && k.section === 'sol' && <div className="mt-2 grid grid-cols-3 gap-1">
+                  {Object.entries(k.donnees.seuils_mo_argile).map(([key, val]) =>
+                    <div key={key} className="text-center p-1.5 bg-gray-50 rounded">
+                      <div className="text-sm font-bold">{val}%</div>
+                      <div className="text-xs text-gray-500">{key}</div>
+                    </div>
+                  )}
+                </div>}
+              </div>}
+            </div>
+          )}
+        </div>
+      </div>
 
-        {/* Panier */}
-        <div className="card">
-          <h2 className="font-bold text-gray-800 mb-3">Mélange ({panier.length} matière{panier.length !== 1 ? 's' : ''} · {totalQty} kg)</h2>
-          {panier.length === 0 && <p className="text-gray-400 text-sm italic">Cliquez sur une matière à gauche pour l'ajouter au mélange</p>}
-          {panier.map(p => {
-            const cnAvg = getCnAvg(p) || 0;
-            const pct = totalQty > 0 ? (p.qty / totalQty * 100).toFixed(0) : 0;
-            return <div key={p.id} className="flex items-center gap-3 py-2 border-b border-gray-100 last:border-0">
-              <button onClick={() => removeMatiere(p.id)} className="text-red-400 hover:text-red-600 text-lg leading-none">&times;</button>
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-gray-700 truncate">{p.matiere}</div>
-                <div className="text-xs text-gray-400">C/N {cnAvg.toFixed(0)} · k1 {p.k1_min || '?'}-{p.k1_max || '?'}% · {pct}%</div>
+      {/* ── COL 3 : Bibliothèque matières ── */}
+      <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+        <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Matières ({filtered.length})</h2>
+        <input type="text" placeholder="Rechercher : tonte, gazon, BRF..." value={filter}
+          onChange={e => setFilter(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm mb-2 focus:outline-none focus:border-blue-400" />
+        <div className="flex flex-wrap gap-1 mb-2">
+          <button onClick={() => setCatFilter(null)}
+            className={`text-xs px-2 py-0.5 rounded-full ${!catFilter ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}>Tout</button>
+          {CATEGORIES.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
+            className={`text-xs px-2 py-0.5 rounded-full ${catFilter === c ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-600'}`}>{c}</button>)}
+        </div>
+        <div className="max-h-[500px] overflow-y-auto space-y-0.5">
+          {filtered.map(m => {
+            const inP = panier.find(p => p.id === m.id);
+            const cn = getCnAvg(m);
+            return <div key={m.id} onClick={() => !inP && addMatiere(m)}
+              className={`p-2 rounded-lg text-sm cursor-pointer transition ${inP ? 'bg-green-50 border border-green-200' : 'hover:bg-gray-50 border border-transparent'}`}>
+              <div className="flex justify-between items-center">
+                <span className="font-medium text-gray-700">{m.matiere}</span>
+                <span className="text-xs text-gray-400">C/N {cn ? cn.toFixed(0) : '?'}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <input type="range" min="0" max="1000" step="10" value={p.qty}
-                  onChange={e => updateQty(p.id, parseInt(e.target.value))}
-                  className="w-24" />
-                <input type="number" min="0" max="10000" value={p.qty}
-                  onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
-                  className="w-16 text-right text-sm border border-gray-200 rounded px-2 py-1" />
-                <span className="text-xs text-gray-400">kg</span>
+              <div className="flex gap-1 mt-0.5 items-center">
+                <span className="text-xs px-1.5 py-0 rounded-full" style={{background: (CAT_COLORS[m.categorie]||'#888')+'20', color: CAT_COLORS[m.categorie]||'#888'}}>{m.categorie}</span>
+                {m.k1_min && <span className="text-xs text-gray-400">k₁ {m.k1_min}-{m.k1_max}%</span>}
               </div>
+              {m.synonymes && filter && <div className="text-xs text-gray-300 mt-0.5 truncate">{m.synonymes}</div>}
             </div>;
           })}
         </div>
-
-        {/* Résultats */}
-        {panier.length > 0 && <div className="card">
-          <h2 className="font-bold text-gray-800 mb-4">Résultats du mélange</h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold" style={{color: cnGlobal ? cnColor(cnGlobal) : '#999'}}>{cnGlobal ? cnGlobal.toFixed(1) : '—'}</div>
-              <div className="text-xs text-gray-500 mt-1">C/N global</div>
-            </div>
-            <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">{k1Global ? k1Global.toFixed(0) + '%' : '—'}</div>
-              <div className="text-xs text-gray-500 mt-1">k1 humification</div>
-            </div>
-            <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold text-green-700">{humusKg ? humusKg.toFixed(0) + ' kg' : '—'}</div>
-              <div className="text-xs text-gray-500 mt-1">Humus stable / t</div>
-            </div>
-            <div className="text-center p-3 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold text-gray-700">{totalQty} kg</div>
-              <div className="text-xs text-gray-500 mt-1">Masse totale</div>
-            </div>
-          </div>
-
-          {/* Jauge C/N */}
-          {cnGlobal && <div className="mb-4">
-            <div className="flex justify-between text-xs text-gray-400 mb-1">
-              <span>Minéralisation rapide</span>
-              <span>Zone optimale</span>
-              <span>Immobilisation</span>
-            </div>
-            <div className="relative h-3 rounded-full bg-gradient-to-r from-red-400 via-yellow-400 via-green-500 via-yellow-400 to-red-400">
-              <div className="absolute top-0 w-1 h-3 bg-gray-800 rounded"
-                style={{left: `${Math.min(100, Math.max(0, cnGlobal / 100 * 100))}%`}}></div>
-            </div>
-            <div className="flex justify-between text-xs text-gray-300 mt-0.5">
-              <span>0</span><span>10</span><span>20</span><span>30</span><span>50</span><span>100</span>
-            </div>
-          </div>}
-
-          {/* Interprétation */}
-          {regle && <div className="p-3 bg-gray-50 rounded-lg mb-4">
-            <div className="font-bold text-sm" style={{color: cnColor(cnGlobal)}}>{regle.comportement}</div>
-            <div className="text-sm text-gray-600">{regle.interpretation}</div>
-            <div className="text-xs text-gray-400 mt-1">Plage C/N : {regle.label}</div>
-          </div>}
-
-          {/* Alertes */}
-          {alertes.map((a, i) => <div key={i} className={`p-3 rounded-lg mb-2 text-sm ${
-            a.type === 'danger' ? 'bg-red-50 text-red-700 border border-red-200' :
-            a.type === 'warning' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
-            a.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' :
-            'bg-blue-50 text-blue-700 border border-blue-200'
-          }`}>
-            {a.type === 'danger' ? '⚠' : a.type === 'warning' ? '⚡' : a.type === 'success' ? '✓' : 'ℹ'} {a.text}
-          </div>)}
-
-          {/* Ratio de Kirkby */}
-          {cnGlobal && cnGlobal >= 15 && cnGlobal <= 30 && <div className="p-3 bg-purple-50 rounded-lg text-sm">
-            <div className="font-medium text-purple-800 mb-1">Ratio de Kirkby (pour 1 tonne de C stabilisé)</div>
-            <div className="text-purple-700">83 kg N + 20 kg P + 14 kg S nécessaires. Si l'un manque, le carbone est minéralisé au lieu d'être stabilisé.</div>
-          </div>}
-        </div>}
-
-        {/* Perte de MO au compostage */}
-        {panier.length > 0 && <div className="card">
-          <h2 className="font-bold text-gray-800 mb-3">Perte de MO selon le mode de transformation</h2>
-          <p className="text-xs text-gray-500 mb-3">Le compostage transforme la MO brute en humus stable, mais une partie est perdue sous forme de CO₂. Le mode de transformation influence fortement le rendement final.</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {Object.values(PERTE_COMPOSTAGE).map((p, i) => {
-              const isThermo = p.label.includes('thermophile');
-              const perteLabel = p.perte_min === p.perte_max ? p.perte_min + ' %' : p.perte_min + '–' + p.perte_max + ' %';
-              const rendMin = 100 - p.perte_max;
-              const rendMax = 100 - p.perte_min;
-              const humusMin = humusKg ? (humusKg * rendMin / 100).toFixed(0) : null;
-              const humusMax = humusKg ? (humusKg * rendMax / 100).toFixed(0) : null;
-              return <div key={i} className={`p-3 rounded-lg border text-sm ${isThermo ? 'border-orange-300 bg-orange-50' : 'border-gray-200 bg-gray-50'}`}>
-                <div className="flex justify-between items-center mb-1">
-                  <span className={`font-bold ${isThermo ? 'text-orange-700' : 'text-gray-700'}`}>{p.label}</span>
-                  <span className={`badge ${p.perte_max > 30 ? 'bg-red-100 text-red-700' : p.perte_max > 10 ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}>
-                    Perte : {perteLabel}
-                  </span>
-                </div>
-                <div className="text-gray-600 text-xs">{p.desc}</div>
-                {humusMin && <div className="mt-2 text-xs font-medium text-gray-700">
-                  Humus estime : {humusMin === humusMax ? '~' + humusMin : humusMin + '–' + humusMax} kg <span className="text-gray-400">(sur {totalQty} kg brut, rendement {rendMin === rendMax ? rendMin : rendMin + '–' + rendMax} %)</span>
-                </div>}
-              </div>;
-            })}
-          </div>
-        </div>}
-
-        {/* Référence rapide */}
-        <div className="card">
-          <h2 className="font-bold text-gray-800 mb-3">Reference : plages C/N</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {DATA.regles.map((r, i) => <div key={i} className="p-2 rounded-lg border text-xs" style={{borderColor: cnColor((r.cn_min || 0) + 5)}}>
-              <div className="font-bold" style={{color: cnColor((r.cn_min || 0) + 5)}}>{r.label}</div>
-              <div className="text-gray-500 mt-0.5">{r.comportement}</div>
-            </div>)}
-          </div>
-        </div>
-
-        {/* Caractérisation physique des matières */}
-        <div className="card">
-          <h2 className="font-bold text-gray-800 mb-3">Caracterisation physique ({DATA.caracterisation.length} matieres)</h2>
-          <p className="text-xs text-gray-500 mb-3">Densite apparente, matiere seche, cout indicatif et effet sur l'autofertilite du sol.</p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b border-gray-200 text-left text-gray-500">
-                  <th className="py-1.5 pr-2">Matiere</th>
-                  <th className="py-1.5 px-2 text-center">Densite</th>
-                  <th className="py-1.5 px-2 text-center">MS %</th>
-                  <th className="py-1.5 px-2 text-center">C/N</th>
-                  <th className="py-1.5 px-2 text-center">k1 %</th>
-                  <th className="py-1.5 px-2 text-center">Cout</th>
-                  <th className="py-1.5 px-2 text-center">Effet</th>
-                  <th className="py-1.5 pl-2">Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {DATA.caracterisation.map((c, i) => <tr key={i} className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="py-1.5 pr-2 font-medium text-gray-700">{c.matiere}</td>
-                  <td className="py-1.5 px-2 text-center text-gray-600">{c.densite}</td>
-                  <td className="py-1.5 px-2 text-center text-gray-600">{c.taux_ms}</td>
-                  <td className="py-1.5 px-2 text-center" style={{color: cnColor((c.cn_min + (c.cn_max || c.cn_min)) / 2)}}>
-                    {c.cn_min === c.cn_max ? c.cn_min : c.cn_min + '–' + c.cn_max}
-                  </td>
-                  <td className="py-1.5 px-2 text-center text-blue-600">{c.k1_pct || '—'}</td>
-                  <td className="py-1.5 px-2 text-center text-gray-600">
-                    {c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Negatif' : c.cout_min + '–' + c.cout_max)}
-                  </td>
-                  <td className="py-1.5 px-2 text-center">
-                    <span className={`${c.effet === '+++' ? 'text-green-700 font-bold' : c.effet === '++' ? 'text-green-600' : 'text-green-500'}`}>{c.effet}</span>
-                  </td>
-                  <td className="py-1.5 pl-2 text-gray-400">{c.notes || ''}{c.epaisseur ? ' (' + c.epaisseur + ' cm)' : ''}</td>
-                </tr>)}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
       </div>
     </div>
 
-    <footer className="text-center text-xs text-gray-400 mt-8 pb-4">
-      Le Sol Vivant cet Holobionte · Calculateur MO · Données depuis sol_vivant.db
-    </footer>
+    {/* ── MODES DE TRANSFORMATION ── */}
+    <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm mb-6">
+      <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Modes de transformation — Comparaison</h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {Object.entries(PERTE).map(([key, mode]) => {
+          const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
+          const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
+          return <div key={key} className="p-3 rounded-xl border-2 transition" style={{borderColor: mode.color+'40'}}>
+            <div className="font-medium text-sm mb-1" style={{color: mode.color}}>{mode.label}</div>
+            <div className="text-xs text-gray-500 mb-2">{mode.desc}</div>
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-400">Perte MO</span>
+                <span className="font-medium">{mode.min === mode.max ? mode.min+'%' : mode.min+'-'+mode.max+'%'}</span>
+              </div>
+              {humusMin != null && <div className="flex justify-between text-xs">
+                <span className="text-gray-400">Humus</span>
+                <span className="font-bold" style={{color: mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
+              </div>}
+              <Gauge value={100-mode.max} min={0} max={100} color={mode.color} />
+            </div>
+          </div>;
+        })}
+      </div>
+    </div>
+
+    {/* ── FOOTER ── */}
+    <div className="text-center text-xs text-gray-400 mt-4 pb-4">
+      Données depuis sol_vivant.db · Formule de Kirkby (2016) · Modèle AMG · SPNA · Agriton
+    </div>
   </div>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+
 </script>
+
 </body>
 </html>

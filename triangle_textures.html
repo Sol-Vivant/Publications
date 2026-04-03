@@ -3,428 +3,595 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Triangle des Textures — Le Sol Vivant cet Holobionte</title>
-
-<!-- Open Graph (Facebook, LinkedIn) -->
-<meta property="og:title" content="Triangle des Textures — Le Sol Vivant cet Holobionte" />
+<title>Triangle des Textures GEPPA — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Triangle des Textures GEPPA — Le Sol Vivant cet Holobionte" />
 <meta property="og:description" content="Triangle des textures GEPPA interactif : 14 classes, diagnostic, tests terrain, liens corpus." />
 <meta property="og:image" content="https://sol-vivant.github.io/Publications/img/triangle_textures.png" />
 <meta property="og:type" content="website" />
-
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Triangle des Textures — Le Sol Vivant" />
-<meta name="twitter:description" content="Triangle des textures GEPPA interactif : 14 classes, diagnostic, tests terrain." />
+<meta name="twitter:title" content="Triangle des Textures GEPPA — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Triangle des textures GEPPA interactif : 14 classes, diagnostic, tests terrain, liens corpus." />
 <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/img/triangle_textures.png" />
-
 <link rel="icon" type="image/png" href="img/triangle_textures.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
+
 :root {
-  --bg: #f8f9fa; --card-bg: #fff; --text: #1a1a2e;
-  --accent: #3B82F6; --border: #e2e8f0;
-  --hover-fill: rgba(59,130,246,0.25);
-  --selected-fill: rgba(59,130,246,0.4);
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-       background: var(--bg); color: var(--text); line-height: 1.5; }
-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-         color: #fff; padding: 1.5rem 2rem; }
-header h1 { font-size: 1.5rem; font-weight: 600; }
-header p { font-size: 0.85rem; opacity: 0.7; margin-top: 0.25rem; }
-.container { display: flex; gap: 1.5rem; padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
-.triangle-panel { flex: 0 0 auto; max-width: 480px; }
-.detail-panel { width: 420px; flex-shrink: 0; }
-.card { background: var(--card-bg); border: 1px solid var(--border);
-         border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-.card h2 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent); }
-.card h3 { font-size: 0.95rem; margin: 0.75rem 0 0.25rem; }
-svg { width: 100%; height: auto; }
-.zone { fill: rgba(200,200,200,0.15); stroke: #666; stroke-width: 0.5;
-         cursor: pointer; transition: fill 0.15s; }
-.zone:hover { fill: var(--hover-fill); }
-.zone.selected { fill: var(--selected-fill); stroke: var(--accent); stroke-width: 1.5; }
-.zone-label { font-size: 11px; fill: #333; pointer-events: none; text-anchor: middle;
-               dominant-baseline: central; font-weight: 600; }
-.axis-label { font-size: 8px; fill: #555; }
-.grid-line { stroke: #ccc; stroke-width: 0.3; stroke-dasharray: 2,2; }
-.tick-label { font-size: 6px; fill: #888; text-anchor: middle; }
-.vertex-label { font-size: 9px; fill: #1a1a2e; font-weight: 700; text-anchor: middle; }
-.input-section { margin-top: 1rem; }
-.input-row { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
-.input-row label { font-size: 0.85rem; font-weight: 500; }
-.input-row input { width: 70px; padding: 0.4rem; border: 1px solid var(--border);
-                    border-radius: 4px; font-size: 0.9rem; text-align: center; }
-.input-row button { padding: 0.4rem 1rem; background: var(--accent); color: #fff;
-                     border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
-.input-row button:hover { background: #2563eb; }
-.input-result { margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent); font-weight: 500; }
-.marker { fill: #EF4444; stroke: #fff; stroke-width: 1; }
-.detail-empty { color: #999; font-style: italic; text-align: center; padding: 2rem; }
-.tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px;
-        font-size: 0.75rem; margin: 0.15rem; }
-.tag-risk { background: #FEE2E2; color: #B91C1C; }
-.tag-test { background: #DBEAFE; color: #1D4ED8; cursor: pointer; }
-.tag-test:hover { background: #BFDBFE; }
-.tag-term { background: #D1FAE5; color: #047857; }
-.tag-doc { background: #FEF3C7; color: #B45309; }
-.test-tooltip { display: none; position: absolute; background: #1a1a2e; color: #fff;
-                 padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.8rem;
-                 max-width: 300px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-.ranges { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0; }
-.range-box { text-align: center; padding: 0.4rem; border-radius: 4px; font-size: 0.8rem; }
-.range-sable { background: #FEF3C7; }
-.range-limon { background: #E0E7FF; }
-.range-argile { background: #FCE7F3; }
-.range-box strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
-.indicators { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0; }
-.indicator { padding: 0.4rem; border-radius: 4px; background: #f1f5f9; text-align: center;
-              font-size: 0.8rem; }
-.indicator strong { display: block; font-size: 0.7rem; color: #64748b; }
-.diag-bio { background: #f1f5f9; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem;
-             margin: 0.5rem 0; border-left: 3px solid var(--accent); }
-.card-link { display: block; background: #f8f9fa; border: 1px solid var(--border);
-              padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0; font-size: 0.8rem; }
-.card-link strong { color: var(--accent); }
-.bocal-section { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
-.bocal-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
-               padding: 1.2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
-.bocal-card img { max-width: 220px; border-radius: 6px; border: 1px solid var(--border); }
-.bocal-content h3 { margin-bottom: 0.5rem; font-size: 1rem; }
-.bocal-content p { font-size: 0.85rem; color: #475569; margin-bottom: 0.4rem; }
-.bocal-steps { list-style: none; padding: 0; }
-.bocal-steps li { font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid #f1f5f9; display: flex; gap: 0.5rem; }
-.bocal-steps li:last-child { border-bottom: none; }
-.bocal-time { font-weight: 700; color: var(--accent); min-width: 50px; }
-@media (max-width: 900px) {
-  .bocal-card { flex-direction: column; }
-  .container { flex-direction: column; }
-  .detail-panel { width: 100%; }
-  .triangle-panel { min-width: auto; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem auto;
+  padding: 0 1.5rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; }
+polygon { transition: fill 0.15s; }
 </style>
 </head>
 <body>
 
-<header>
+<header class="sv-header">
   <h1>Triangle des Textures GEPPA</h1>
-  <p>Le Sol Vivant cet Holobionte — Généré le 2026-04-01 15:39</p>
+  <div class="sv-subtitle">Classification granulométrique interactive — 14 classes</div>
+  <div class="sv-meta"><a href="https://sol-vivant.github.io/Publications/" style="color:rgba(255,255,255,0.7);text-decoration:none">Le Sol Vivant cet Holobionte</a> — Jean-Michel Juzan — Généré le 2026-04-03 09:42</div>
 </header>
 
-<div class="bocal-section">
-  <div class="bocal-card">
-    <img src="img/test_bocal.png" alt="Test du bocal (test de sédimentation)">
-    <div class="bocal-content">
-      <h3>Test du bocal — estimer la texture de votre sol</h3>
-      <p><strong>Matériel :</strong> un bocal d'1 litre, de l'eau, un échantillon de terre tamisée.</p>
-      <p><strong>Protocole :</strong> remplir le bocal aux 2/3 d'eau. Ajouter la terre tamisée jusqu'en haut du bocal. Fermer, secouer vigoureusement, puis laisser reposer. Les fractions se séparent par gravité :</p>
-      <ul class="bocal-steps">
-        <li><span class="bocal-time">30 s</span> Le <strong>sable</strong> décante au fond (particules &gt; 50 µm)</li>
-        <li><span class="bocal-time">2 h</span> Le <strong>limon</strong> se dépose au-dessus du sable (2–50 µm)</li>
-        <li><span class="bocal-time">24 h</span> L'<strong>argile</strong> finit par se déposer en surface (&lt; 2 µm)</li>
-      </ul>
-      <p>Mesurer l'épaisseur de chaque couche pour estimer les pourcentages, puis les entrer dans le triangle ci-dessous.</p>
-      <h3 style="margin-top: 0.8rem;">Test du boudin — confirmer au toucher</h3>
-      <p>Prendre une poignée de terre humide et la rouler entre les paumes :</p>
-      <ul class="bocal-steps">
-        <li><span class="bocal-time" style="min-width:70px;">Sable</span> La terre <strong>crisse</strong> sous le doigt ou craque sous la dent — impossible de former un boudin</li>
-        <li><span class="bocal-time" style="min-width:70px;">Limon</span> Le doigt y laisse une belle <strong>empreinte digitale</strong> — texture soyeuse, boudin fragile</li>
-        <li><span class="bocal-time" style="min-width:70px;">Argile</span> Le boudin se forme à partir de <strong>25% d'argile</strong> et ne casse plus au-delà de 40%</li>
-      </ul>
-    </div>
-  </div>
-</div>
+<div id="root"></div>
 
-<div class="container">
-  <div class="triangle-panel">
-    <div class="card">
-      <div id="triangle-svg"></div>
-      <div class="input-section">
-        <h3>Identifier une texture</h3>
-        <div class="input-row">
-          <label>Argile %</label><input type="number" id="in-argile" min="0" max="100" value="">
-          <label>Limon %</label><input type="number" id="in-limon" min="0" max="100" value="">
-          <label>Sable %</label><input type="number" id="in-sable" min="0" max="100" value="">
-          <button onclick="locatePoint()">Localiser</button>
-        </div>
-        <div id="input-result" class="input-result"></div>
-      </div>
-    </div>
-  </div>
-  <div class="detail-panel">
-    <div class="card" id="detail-card">
-      <div class="detail-empty">Cliquez sur une zone du triangle pour voir les détails</div>
-    </div>
-  </div>
-</div>
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v2.0
+  · Données depuis sol_vivant.db
+</footer>
 
-<div id="test-tooltip" class="test-tooltip"></div>
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
 
 <script>
-const DATA = {"textures": [{"id": 1, "code": "SS", "label": "Sable dominant", "sable_min": 80.0, "sable_max": 100.0, "limon_min": 0.0, "limon_max": 15.0, "argile_min": 0.0, "argile_max": 5.0, "ru_indicatif": "50–80", "cec_indicatif": "< 5", "risques": ["Très drainant", "Aucune rétention eau", "Sécheresse sévère"], "diagnostic_bio": "VESS peu discriminant. Suivre MO (seuil critique 1,5%). Solvita bas normal même si biologie active.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t14_test_dhumidite_au_toucher"], "source": "GEPPA/USDA adapté"}, {"id": 2, "code": "S", "label": "Sable", "sable_min": 70.0, "sable_max": 100.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "60–100", "cec_indicatif": "< 8", "risques": ["Drainant", "Faible RU", "Sensible sécheresse"], "diagnostic_bio": "CEC faible → apports fractionnés. Infiltration rapide = indicateur peu discriminant.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t03_test_bocal_test_de_sedimentation"], "source": "GEPPA/USDA adapté"}, {"id": 3, "code": "SL", "label": "Sable limoneux", "sable_min": 50.0, "sable_max": 70.0, "limon_min": 20.0, "limon_max": 40.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "80–120", "cec_indicatif": "5–10", "risques": ["Sensible sécheresse", "Structure instable"], "diagnostic_bio": "RU correcte. Surveiller stabilité agrégats en surface.", "tests_recommandes": ["t01_test_beche", "t05_test_de_stabilite_des_agregats", "t04_test_dinfiltration"], "source": "GEPPA/USDA adapté"}, {"id": 4, "code": "SA", "label": "Sable argileux", "sable_min": 50.0, "sable_max": 70.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 15.0, "argile_max": 30.0, "ru_indicatif": "90–130", "cec_indicatif": "10–15", "risques": ["Retrait-gonflement possible", "Compaction si travail à humidité excessive"], "diagnostic_bio": "Meilleure cohésion que sable pur. Surveiller portance.", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t12_test_de_friabilite"], "source": "GEPPA/USDA adapté"}, {"id": 5, "code": "LS", "label": "Limon sableux", "sable_min": 30.0, "sable_max": 50.0, "limon_min": 40.0, "limon_max": 60.0, "argile_min": 0.0, "argile_max": 15.0, "ru_indicatif": "100–140", "cec_indicatif": "8–12", "risques": ["Battance", "Ruissellement", "Sensible érosion"], "diagnostic_bio": "Risque battance = stabilité agrégats prioritaire. MO > 2,5% recommandé.", "tests_recommandes": ["t06_test_de_battance", "t05_test_de_stabilite_des_agregats", "t19_test_de_ruissellement"], "source": "GEPPA/USDA adapté"}, {"id": 6, "code": "LL", "label": "Limon dominant", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 70.0, "limon_max": 100.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "120–160", "cec_indicatif": "8–15", "risques": ["Très sensible battance", "Compaction", "Croûte de surface"], "diagnostic_bio": "Score VESS à surveiller en surface après pluie. MO > 2,5% recommandé.", "tests_recommandes": ["t06_test_de_battance", "t13_test_de_croute_de_surface", "t05_test_de_stabilite_des_agregats", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 7, "code": "L", "label": "Limon", "sable_min": 0.0, "sable_max": 30.0, "limon_min": 60.0, "limon_max": 100.0, "argile_min": 0.0, "argile_max": 20.0, "ru_indicatif": "120–160", "cec_indicatif": "10–18", "risques": ["Structure instable", "Risque battance"], "diagnostic_bio": "Intermédiaire équilibré. Bonne RU mais instable structuralement.", "tests_recommandes": ["t06_test_de_battance", "t05_test_de_stabilite_des_agregats", "t01_test_beche"], "source": "GEPPA/USDA adapté"}, {"id": 8, "code": "La", "label": "Limon argileux dominant", "sable_min": 0.0, "sable_max": 15.0, "limon_min": 50.0, "limon_max": 65.0, "argile_min": 20.0, "argile_max": 35.0, "ru_indicatif": "140–180", "cec_indicatif": "15–25", "risques": ["Bonne fertilité", "Risque compaction", "Risque engorgement"], "diagnostic_bio": "Bonne fertilité. Réaliser VESS au printemps (sol ressuyé).", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 9, "code": "LA", "label": "Limon argileux", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 40.0, "limon_max": 60.0, "argile_min": 20.0, "argile_max": 35.0, "ru_indicatif": "140–180", "cec_indicatif": "18–28", "risques": ["Forte rétention", "Engorgement hivernal", "Compaction"], "diagnostic_bio": "Engorgement hivernal fréquent → lire taches rouille/grises systématiquement.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}, {"id": 10, "code": "Al", "label": "Argile limoneuse dominante", "sable_min": 0.0, "sable_max": 15.0, "limon_min": 25.0, "limon_max": 40.0, "argile_min": 45.0, "argile_max": 60.0, "ru_indicatif": "150–200", "cec_indicatif": "25–40", "risques": ["Retrait-gonflement", "Engorgement"], "diagnostic_bio": "Forte plasticité. VESS réaliser en sol ressuyé. Éviter interventions mécaniques en conditions humides.", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t12_test_de_friabilite", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 11, "code": "AL", "label": "Argile limoneuse", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 25.0, "limon_max": 45.0, "argile_min": 35.0, "argile_max": 55.0, "ru_indicatif": "150–200", "cec_indicatif": "25–40", "risques": ["Forte rétention", "Engorgement hivernal", "Retrait-gonflement"], "diagnostic_bio": "Lire taches rouille/grises. Solvita bas en hiver = normal.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol", "t11_test_de_portance"], "source": "GEPPA/USDA adapté"}, {"id": 12, "code": "AS", "label": "Argile sableuse", "sable_min": 25.0, "sable_max": 45.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 35.0, "argile_max": 55.0, "ru_indicatif": "130–180", "cec_indicatif": "18–30", "risques": ["Moins plastique", "Forte rétention", "Drainage lent"], "diagnostic_bio": "Moins de risque retrait-gonflement que AL. Surveiller engorgement profond.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 13, "code": "A", "label": "Argile", "sable_min": 0.0, "sable_max": 40.0, "limon_min": 0.0, "limon_max": 40.0, "argile_min": 40.0, "argile_max": 60.0, "ru_indicatif": "150–200", "cec_indicatif": "25–45", "risques": ["Forte rétention", "Retrait-gonflement", "Engorgement"], "diagnostic_bio": "Fine, forte rétention, forte CEC. Retrait-gonflement et engorgement fréquents.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t11_test_de_portance", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}, {"id": 14, "code": "AA", "label": "Argile dominante", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 60.0, "argile_max": 100.0, "ru_indicatif": "160–220", "cec_indicatif": ">45", "risques": ["Très plastique", "Engorgement sévère", "Retrait-gonflement fort"], "diagnostic_bio": "Très plastique. Ne pas intervenir mécaniquement hors ressuyage. Solvita très variable.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}], "tests": {"t01_test_beche": {"title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible."}, "t02_profil_cultural": {"title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire."}, "t03_test_bocal_test_de_sedimentation": {"title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile."}, "t04_test_dinfiltration": {"title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement."}, "t05_test_de_stabilite_des_agregats": {"title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion."}, "t06_test_de_battance": {"title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée."}, "t07_comptage_des_vers_de_terre": {"title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol."}, "t08_test_racinaire": {"title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle."}, "t09_test_olfactif_du_sol": {"title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie."}, "t10_test_de_couleur_du_sol": {"title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation."}, "t11_test_de_portance": {"title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère."}, "t12_test_de_friabilite": {"title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts."}, "t13_test_de_croute_de_surface": {"title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau."}, "t14_test_dhumidite_au_toucher": {"title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol."}, "t15_test_de_respiration_du_sol_simplifie": {"title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple."}, "t16_test_de_decomposition_des_residus": {"title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface."}, "t17_test_de_couverture_du_sol": {"title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux."}, "t18_test_de_compactage_a_la_tige": {"title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées."}, "t19_test_de_ruissellement": {"title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage."}, "t20_test_de_biodiversite_visible": {"title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu."}}, "cards": [{"id": 11, "title": "Profil sol sableux : aération élevée, apports fractionnés, dynamique MO rapide", "description": "Sol sableux : faible CEC et réserve utile ; aération forte. Compatible avec apports fermentés si fractionnés ; attention à la minéralisation rapide.", "scope_ref": "soil_type:SAND", "docs_codes": ["S1", "S0"]}, {"id": 12, "title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau", "description": "Sol argileux : potentiel d’agrégation élevé (Ca + biofilms/EPS), mais risque de réduction profonde/anoxie si enfouissement + excès matière réduite + saturation.", "scope_ref": "soil_type:CLAY", "docs_codes": ["S1", "S4", "S0"]}, {"id": 13, "title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface", "description": "Sol limoneux : structure fragile ; battance/ruissellement si sol nu. Priorité à couverture permanente, apports de surface et consolidation biologique.", "scope_ref": "soil_type:SILT", "docs_codes": ["S1", "S0"]}, {"id": 14, "title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo", "description": "Sol calcaire : calcium structurant (floculation), porosité durable ; attention aux blocages P et oligo-éléments (soufre/bore) qui impactent métabolismes & symbioses.", "scope_ref": "soil_type:CALC", "docs_codes": ["S1", "S4"]}, {"id": 15, "title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale", "description": "Sol hydromorphe/organique : redox bas fréquent ; risques N2O/CH4 et toxicités (Fe/Mn réduits). Éviter apports réduits enfouis ; gérer l’eau et la continuité racinaire.", "scope_ref": "soil_type:HYDRO", "docs_codes": ["S1", "S0", "S4"]}, {"id": 16, "title": "Profil sol 'franc' (loam) : effets intermédiaires, sensibilité au travail du sol", "description": "Sol loam : bon compromis texture ; répond bien aux apports réguliers et couverts ; sensible aux perturbations mécaniques qui cassent habitats/biofilms.", "scope_ref": "soil_type:LOAM", "docs_codes": ["S1"]}], "terms": [{"fr": "Adsorption", "en": "adsorption", "definition": "Fixation réversible de molécules ou d'ions à la surface des colloïdes du sol (argiles, oxydes Fe/Al, MO) par forces électrostatiques, liaisons hydrogène ou interactions hydrophobes. L'adsorption contrôle la rétention des cations nutritifs (CEC), l'immobilisation du phosphate sur les oxydes Fe/Al et la stabilisation de la MO sur les surfaces minérales (MAOM). La matière organique augmente l'adsorption par sa charge négative et sa surface spécifique élevée. Gérer l'adsorption par le pH et la MO optimise la disponibilité nutritive.", "doc_code": "S1/S4", "strate": "S"}, {"fr": "CEC", "en": "CEC", "definition": "Capacité d'échange cationique. Quantité de cations (Ca²⁺, Mg²⁺, K⁺, Na⁺, H⁺) qu'un sol peut retenir sur ses sites d'échange (argiles, MO). Exprimée en cmol+/kg.", "doc_code": "S1", "strate": "S"}, {"fr": "Capacité d’Échange Cationique", "en": "Cation Exchange Capacity (CEC)", "definition": "Mesure de la quantité totale de cations (Ca²⁺, Mg²⁺, K⁺, NH₄⁺) qu'un sol peut retenir sur son complexe argilo-humique (Oursin, 2021). Elle dépend de la nature des argiles et, de manière critique, du taux de matière organique, dont la CEC est environ 10 fois supérieure à celle des argiles (Pellerin, Bamière, Savini, Rechauchère, et al., 2021; Pellerin, Bamière, Savini, Réchauchère, et al., 2021).\n\nEnjeu : Un sol avec une faible CEC est vulnérable au lessivage des nutriments, ce qui augmente les risques environnementaux et les coûts d'intrants (Nivelle, 2017).\n\nLevier de décision : En sols sableux (faible CEC minérale), l'augmentation du taux d'humus est le seul levier pour augmenter le \"réservoir\" de nutriments et limiter les pertes par lixiviation (Pellerin et al., 2021).", "doc_code": "S1", "strate": "S"}, {"fr": "Complexe Argilo-Humique (CAH)", "en": "organo-mineral complex", "definition": "Association intime argiles-humus stabilisée par des ponts cationiques bivalents (Ca²⁺, Mg²⁺) et des liaisons de coordination. Siège de la CEC et de la structure physique du sol. Le CAH protège la matière organique de la minéralisation rapide et détermine la stabilité des agrégats. Un sol à CAH bien développé (limon+argile+MO>3%) allie fertilité chimique, structure physique et résilience hydrique. Le labour détruit mécaniquement le CAH en fractionnant les agrégats organo-minéraux.", "doc_code": "S1", "strate": "S"}, {"fr": "Haber-Bosch", "en": "Haber-Bosch process", "definition": "Procédé industriel de synthèse de l'ammoniac (N₂+H₂→NH₃) à haute pression et température (1913). Consomme 1-2% de l'énergie mondiale (Robertson & Groffman, 2014). Responsable de la rupture des cycles naturels de l'azote et de la dépendance aux énergies fossiles. Levier : 30-40% de légumineuses en rotation pour court-circuiter ce procédé. Connexion Loi de la Trophobiose : l'azote Haber-Bosch favorise un excès d'acides aminés libres dans la sève, rendant les plantes vulnérables aux ravageurs.", "doc_code": "F2", "strate": "F"}, {"fr": "Illite", "en": "illite", "definition": "Argile micacée 2:1 non gonflante, intermédiaire entre micas et smectites. CEC modérée (15-40 cmol+/kg), source progressive de potassium structural par altération des bords des feuillets. Dominante dans les sols tempérés modérément altérés. Sa présence offre un équilibre favorable entre stabilité structurale et fertilité potassique. L'activité microbienne mobilise progressivement le K structural des illites — service écosystémique annulé par le recours au K soluble.", "doc_code": "S1", "strate": "S"}, {"fr": "Kaolinite", "en": "kaolinite", "definition": "Argile 1:1 stable, non gonflante, à faible CEC (3-15 cmol+/kg) et surface spécifique réduite. Caractéristique des sols tropicaux et subtropicaux fortement altérés et lessivés. Sa faible capacité de rétention nutritive impose des apports organiques élevés pour compenser les limitations minéralogiques. En ACS sur sols kaolinitiques : maximiser les apports de MO et l'activité biologique pour créer une fertilité par voie biologique.", "doc_code": "S1", "strate": "S"}, {"fr": "MAOM", "en": "mineral-associated organic matter", "definition": "Carbone organique d'origine microbienne associé et stabilisé aux surfaces des argiles et des oxydes Fe/Al. Fraction stable du sol (temps de résidence > 100 ans). Formée par précipitation de métabolites microbiens et de fragments de nécromasse sur les surfaces minérales. Complémentaire du POC (fraction labile). Le MAOM est le pool cible du carbon farming.", "doc_code": "S2/S4", "strate": "S"}, {"fr": "RothC", "en": "RothC model", "definition": "Modèle mécaniste de dynamique du carbone organique du sol développé à Rothamsted Research (Coleman & Jenkinson, 1996). Divise la MO en 5 pools : DPM (décomposable), RPM (résistante), BIO (biomasse microbienne), HUM (humus), IOM (inerte). Les transferts entre pools suivent des cinétiques du premier ordre modulées par température, humidité et couverture. Outil de référence pour certifier les crédits carbone agricoles. Entrées nécessaires : COS initial, pluviométrie, ETP, type de sol, apports de MO. Disponible en open source.", "doc_code": "S4", "strate": "S"}, {"fr": "Surface spécifique", "en": "specific surface area", "definition": "Aire totale des surfaces colloïdales par unité de masse (m²/g). Détermine la capacité d'adsorption, la rétention d'eau et la création de microhabitats microbiens. Varie de 1-10 m²/g (sables) à 10-40 m²/g (kaolinite), 80-120 m²/g (illite) et 600-800 m²/g (smectites). La MO humifiée atteint 800-900 m²/g. La surface spécifique active — argiles + MO — est l'indicateur physico-chimique le plus direct de la fertilité potentielle d'un sol.", "doc_code": "S1", "strate": "S"}, {"fr": "altération minérale", "en": "mineral weathering", "definition": "Dégradation des roches par processus physiques, chimiques et biologiques. Source primaire des argiles et du phosphore.", "doc_code": "F1", "strate": "F"}, {"fr": "biofilm comme système hydraulique", "en": "biofilm as water management system", "definition": "Le biofilm bactérien est la première technologie de rétention d'eau de l'histoire de la vie (4 Ga). Matrice d'EPS composée à 97% d'eau structurée, protégée de l'évaporation. Sur une surface minérale (argile, sable, roche), le biofilm CRÉE son propre environnement hydrique. C'est le fondement de la rétention d'eau dans les micropores et le premier maillon de la microagrégation (EPS + argile = premier micro-agrégat, bien avant les champignons).", "doc_code": "S2", "strate": "S"}, {"fr": "capacité au champ", "en": "field capacity", "definition": "Teneur en eau maximale retenue après ressuyage gravitaire (pF 2.5, -33 kPa). Limite supérieure de la réserve utile. Dépend de la texture, structure et MO du sol.", "doc_code": "S0", "strate": "S"}, {"fr": "conductivité hydraulique", "en": "hydraulic conductivity", "definition": "Capacité du sol à transmettre l'eau sous l'effet d'un gradient de potentiel (loi de Darcy). Dépend de la texture, de la structure et de la macroporosité biologique. Unité : mm/h ou cm/jour.", "doc_code": "S0", "strate": "S"}, {"fr": "conductivité hydraulique saturée", "en": "saturated hydraulic conductivity", "definition": "Vitesse maximale d'écoulement de l'eau dans un sol saturé (Ksat), exprimée en mm/h. Détermine la capacité d'infiltration et le risque de ruissellement. Varie de 0,01 mm/h (argile compacte) à >1 000 mm/h (sol biologique actif). Les macropores biologiques (galeries de vers anéciques, biopores racinaires) contribuent à 90% du flux malgré <5% du volume. L'activité biologique peut multiplier Ksat par 100 par rapport à un sol nu compacté.", "doc_code": "S0/V1/P2", "strate": "S"}, {"fr": "densité apparente", "en": "bulk density", "definition": "Masse de sol sec par unité de volume (g/cm³). Indicateur direct de la compaction. Sol sain : 0,9–1,3 g/cm³ ; sol compacté : >1,5 g/cm³ pour un limon.", "doc_code": "S1", "strate": "S"}, {"fr": "endogés", "en": "endogeic earthworms", "definition": "Vers géophages vivant dans les horizons minéraux (5-40 cm), se nourrissant de la MO incorporée aux argiles. Créent des galeries horizontales non permanentes. Indicateurs d'une bonne agrégation biologique des horizons de labour.", "doc_code": "V1", "strate": "V"}, {"fr": "faux plat du rendement (Zone 2)", "en": "yield plateau (regeneration Zone 2)", "definition": "Phase de la trajectoire de régénération (MO/Argile 17-24%) où le rendement stagne ou baisse alors que le carbone du sol augmente rapidement. Cause : les micro-organismes Y (forte CUE) captent N, P, S pour construire l'humus avant la plante. Le gain C est proportionnel à la baisse de rendement (Kirkby). Levier : fertilisation foliaire pour nourrir la plante sans alimenter la compétition microbienne.", "doc_code": "S4", "strate": "S"}, {"fr": "horizon pédologique", "en": "soil horizon", "definition": "Couche de sol relativement homogène, parallèle à la surface, différenciée par sa couleur, texture, structure et composition. Horizons principaux : O (litière), A (organo-minéral), B (accumulation), C (altération roche-mère).", "doc_code": "S1", "strate": "S"}, {"fr": "micro-agrégat", "en": "micro-aggregate", "definition": "Unité fonctionnelle du sol de 20–250 µm, stabilisée par la nécromasse microbienne, les EPS et les argiles. Protège le carbone organique de la décomposition (MAOM). Sa formation dépend de la diversité microbienne et de la présence de calcium.", "doc_code": "S1/S2", "strate": "S"}, {"fr": "montmorillonite (smectite)", "en": "montmorillonite (smectite)", "definition": "Argile 2:1 gonflante à très forte CEC (80–120 cmol+/kg) et surface spécifique (600–800 m²/g). Responsable du retrait-gonflement des sols. Capacité de fixation des cations et de l'eau interfoliaire.", "doc_code": "S1", "strate": "S"}, {"fr": "point de flétrissement permanent", "en": "permanent wilting point", "definition": "Teneur en eau à pF 4.2 (-1.5 MPa) en dessous de laquelle les plantes ne peuvent plus extraire l eau. Limite inférieure de la réserve utile. Dépend principalement de la texture argileuse.", "doc_code": "S0", "strate": "S"}, {"fr": "ratio C/Argile", "en": "carbon-to-clay ratio", "definition": "Rapport C organique/argile. Seuils Husson/Boivin : <12% dégradé, 17% limite, >24% bonne structure.", "doc_code": "P1/S1/P5", "strate": "P"}, {"fr": "ratio Carbone/Argile (C/Argile)", "en": "Carbon-to-Clay ratio (C/Clay)", "definition": "Proxy de l'état structural du sol (Husson, CIRAD). MO/Argile > 24% (ou C/Argile > 1/8) = sol bien structuré (Zone 1). 17-24% = zone de transition avec faux plat du rendement (Zone 2). 12-17% = seuil critique de déstructuration (Zone 3). < 12% = sol effondré (Zone 4). Corrélé au score VESS. Utilisable comme indicateur de pilotage de la régénération.", "doc_code": "S4", "strate": "S"}, {"fr": "réserve utile", "en": "plant available water capacity", "definition": "Volume d'eau retenu dans le sol entre la capacité au champ (pF 2,5) et le point de flétrissement permanent (pF 4,2), disponible pour les plantes. Exprimée en mm/m de sol. Dépend de la texture (argiles > limons > sables), de la teneur en MO et de la profondeur du profil exploité par les racines. La RU d'un sol régénératif augmente avec le stock de MO : chaque point de MO supplémentaire accroît la RU d'environ 2 mm/m.", "doc_code": "S0/S1", "strate": "S"}, {"fr": "saturation en carbone du sol", "en": "soil carbon saturation", "definition": "Capacité maximale d un sol à stocker du carbone stable (MAOM). Dépend de la surface spécifique des minéraux argileux et de la CEC. Au-delà de la saturation, le C supplémentaire reste en POC labile.", "doc_code": "S4", "strate": "S"}, {"fr": "test de sédimentation (test bocal)", "en": "jar sedimentation test", "definition": "Mise en suspension du sol dans l'eau pour estimer les proportions de sable (décante en 30s), limon (2h) et argile (24h). Méthode terrain rapide pour évaluer la texture et adapter les recommandations (CEC, RU, risque de battance).", "doc_code": "P1", "strate": "P"}, {"fr": "test ficelle GEPPA", "en": "GEPPA ribbon test", "definition": "Test de terrain du Groupe d'Étude Pour les Problèmes de Pédologie Appliquée pour estimer la teneur en argile du sol. Humidifier une poignée de terre et former un boudin de 5-10 cm : s'il peut être courbé en anneau sans se rompre → > 18% d'argile. La plasticité et la cohésion orientent l'adaptation des pratiques (travail du sol, amendements). Gratuit, immédiat, accessible à tous les agriculteurs.", "doc_code": "P1", "strate": "P"}, {"fr": "texture", "en": "texture", "definition": "Proportions de sable, limon et argile. Détermine rétention d'eau, CEC, porosité. Test bocal ou granulométrie laser.", "doc_code": "P1", "strate": "P"}, {"fr": "texture du sol", "en": "soil texture", "definition": "Proportion relative de sable (2–0,05 mm), limon (0,05–0,002 mm) et argile (<0,002 mm) dans la terre fine. Propriété permanente du sol qui détermine sa capacité de rétention d'eau, sa CEC et son comportement mécanique.", "doc_code": "S1", "strate": "S"}], "rules": [{"id": 3, "rule_name": "Compatibilité sol sableux", "condition_text": "Sol sableux + forte aération", "action_text": "Favoriser fermentation et apports fractionnés", "confidence": 0.9}, {"id": 4, "rule_name": "Risque asphyxie sol argileux", "condition_text": "Sol argileux + excès matière réduite + enfouissement", "action_text": "Limiter profondeur d'incorporation", "confidence": 0.9}, {"id": 11, "rule_name": "Compatibilité sol argileux", "condition_text": "CEC élevée + forte rétention eau", "action_text": "Fractionner apports fermentés, calcium actif", "confidence": 0.91}, {"id": 12, "rule_name": "Optimisation sol sableux", "condition_text": "Faible CEC + forte aération", "action_text": "Multiplier apports fermentés légers et couverture", "confidence": 0.9}, {"id": 14, "rule_name": "Calcium structurant prioritaire", "condition_text": "Sol argileux ou limono-argileux", "action_text": "Assurer calcium échangeable fonctionnel", "confidence": 0.92}, {"id": 23, "rule_name": "Zone Husson 1 — Sol autonome (C/Argile > 24%)", "condition_text": "Ratio C/Argile > 24%. Sol biologiquement mature, CUE élevée, stratégie Y dominante.", "action_text": "Entretien : couverts permanents, zéro travail du sol, restitution résidus. Pas d'apports massifs. Surveillance ratio F/B (objectif > 0.8).", "confidence": 0.95}, {"id": 24, "rule_name": "Zone Husson 2 — Transition avancée (C/Argile 17-24%)", "condition_text": "Ratio C/Argile entre 17% et 24%. Faux plat du rendement : les micro-organismes captent N,P,S pour construire l'humus AVANT la plante.", "action_text": "Patience : le faux plat N'EST PAS un échec. Maintenir couverts diversifiés, bokashi régulier, éviter l'impatience chimique. Gain C proportionnel à l'effort.", "confidence": 0.95}, {"id": 25, "rule_name": "Zone Husson 3 — Construction MO (C/Argile 12-17%)", "condition_text": "Ratio C/Argile entre 12% et 17%. Sol en construction, stratégie A dominante, CUE moyenne.", "action_text": "Couverts obligatoires multi-espèces (10-12 sp.), apports fermentés réguliers (bokashi, LiFoFer), stœchiométrie C/N surveillée. Objectif +0,1% MO/an.", "confidence": 0.95}, {"id": 26, "rule_name": "Zone Husson 4 — Urgence (C/Argile < 12%)", "condition_text": "Ratio C/Argile < 12%. Sol biologiquement appauvri, stratégie S dominante, CUE faible, risque priming effect maximal.", "action_text": "Apports massifs MO externe (compost, BRF), couvert permanent, AUCUN travail du sol, inoculation ciblée (PGPR, CMA). Patience 3-5 ans minimum. ATTENTION priming effect Phase 1.", "confidence": 0.95}], "cadre_texture": {"id": 3, "title": "Types de sols et comportements différenciés", "description": "Cadre : mêmes apports et mêmes pratiques → effets différents selon texture (sable/limon/argile), minéralogie, calcaire, hydromorphie. Les règles de diagnostic doivent être filtrées par type de sol."}, "corpus_name": "Le Sol Vivant cet Holobionte", "strate_colors": {"F": "#8B5CF6", "S": "#3B82F6", "V": "#10B981", "P": "#F59E0B", "H": "#EF4444"}, "generated": "2026-04-01 15:39"};
+const DATA = {"textures": [{"id": 1, "code": "SS", "label": "Sable dominant", "sable_min": 80.0, "sable_max": 100.0, "limon_min": 0.0, "limon_max": 15.0, "argile_min": 0.0, "argile_max": 5.0, "ru_indicatif": "50–80", "cec_indicatif": "< 5", "risques": ["Très drainant", "Aucune rétention eau", "Sécheresse sévère"], "diagnostic_bio": "VESS peu discriminant. Suivre MO (seuil critique 1,5%). Solvita bas normal même si biologie active.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t14_test_dhumidite_au_toucher"], "source": "GEPPA/USDA adapté"}, {"id": 2, "code": "S", "label": "Sable", "sable_min": 70.0, "sable_max": 100.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "60–100", "cec_indicatif": "< 8", "risques": ["Drainant", "Faible RU", "Sensible sécheresse"], "diagnostic_bio": "CEC faible → apports fractionnés. Infiltration rapide = indicateur peu discriminant.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t03_test_bocal_test_de_sedimentation"], "source": "GEPPA/USDA adapté"}, {"id": 3, "code": "SL", "label": "Sable limoneux", "sable_min": 50.0, "sable_max": 70.0, "limon_min": 20.0, "limon_max": 40.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "80–120", "cec_indicatif": "5–10", "risques": ["Sensible sécheresse", "Structure instable"], "diagnostic_bio": "RU correcte. Surveiller stabilité agrégats en surface.", "tests_recommandes": ["t01_test_beche", "t05_test_de_stabilite_des_agregats", "t04_test_dinfiltration"], "source": "GEPPA/USDA adapté"}, {"id": 4, "code": "SA", "label": "Sable argileux", "sable_min": 50.0, "sable_max": 70.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 15.0, "argile_max": 30.0, "ru_indicatif": "90–130", "cec_indicatif": "10–15", "risques": ["Retrait-gonflement possible", "Compaction si travail à humidité excessive"], "diagnostic_bio": "Meilleure cohésion que sable pur. Surveiller portance.", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t12_test_de_friabilite"], "source": "GEPPA/USDA adapté"}, {"id": 5, "code": "LS", "label": "Limon sableux", "sable_min": 30.0, "sable_max": 50.0, "limon_min": 40.0, "limon_max": 60.0, "argile_min": 0.0, "argile_max": 15.0, "ru_indicatif": "100–140", "cec_indicatif": "8–12", "risques": ["Battance", "Ruissellement", "Sensible érosion"], "diagnostic_bio": "Risque battance = stabilité agrégats prioritaire. MO > 2,5% recommandé.", "tests_recommandes": ["t06_test_de_battance", "t05_test_de_stabilite_des_agregats", "t19_test_de_ruissellement"], "source": "GEPPA/USDA adapté"}, {"id": 6, "code": "LL", "label": "Limon dominant", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 70.0, "limon_max": 100.0, "argile_min": 0.0, "argile_max": 10.0, "ru_indicatif": "120–160", "cec_indicatif": "8–15", "risques": ["Très sensible battance", "Compaction", "Croûte de surface"], "diagnostic_bio": "Score VESS à surveiller en surface après pluie. MO > 2,5% recommandé.", "tests_recommandes": ["t06_test_de_battance", "t13_test_de_croute_de_surface", "t05_test_de_stabilite_des_agregats", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 7, "code": "L", "label": "Limon", "sable_min": 0.0, "sable_max": 30.0, "limon_min": 60.0, "limon_max": 100.0, "argile_min": 0.0, "argile_max": 20.0, "ru_indicatif": "120–160", "cec_indicatif": "10–18", "risques": ["Structure instable", "Risque battance"], "diagnostic_bio": "Intermédiaire équilibré. Bonne RU mais instable structuralement.", "tests_recommandes": ["t06_test_de_battance", "t05_test_de_stabilite_des_agregats", "t01_test_beche"], "source": "GEPPA/USDA adapté"}, {"id": 8, "code": "La", "label": "Limon argileux dominant", "sable_min": 0.0, "sable_max": 15.0, "limon_min": 50.0, "limon_max": 65.0, "argile_min": 20.0, "argile_max": 35.0, "ru_indicatif": "140–180", "cec_indicatif": "15–25", "risques": ["Bonne fertilité", "Risque compaction", "Risque engorgement"], "diagnostic_bio": "Bonne fertilité. Réaliser VESS au printemps (sol ressuyé).", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 9, "code": "LA", "label": "Limon argileux", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 40.0, "limon_max": 60.0, "argile_min": 20.0, "argile_max": 35.0, "ru_indicatif": "140–180", "cec_indicatif": "18–28", "risques": ["Forte rétention", "Engorgement hivernal", "Compaction"], "diagnostic_bio": "Engorgement hivernal fréquent → lire taches rouille/grises systématiquement.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}, {"id": 10, "code": "Al", "label": "Argile limoneuse dominante", "sable_min": 0.0, "sable_max": 15.0, "limon_min": 25.0, "limon_max": 40.0, "argile_min": 45.0, "argile_max": 60.0, "ru_indicatif": "150–200", "cec_indicatif": "25–40", "risques": ["Retrait-gonflement", "Engorgement"], "diagnostic_bio": "Forte plasticité. VESS réaliser en sol ressuyé. Éviter interventions mécaniques en conditions humides.", "tests_recommandes": ["t01_test_beche", "t11_test_de_portance", "t12_test_de_friabilite", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 11, "code": "AL", "label": "Argile limoneuse", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 25.0, "limon_max": 45.0, "argile_min": 35.0, "argile_max": 55.0, "ru_indicatif": "150–200", "cec_indicatif": "25–40", "risques": ["Forte rétention", "Engorgement hivernal", "Retrait-gonflement"], "diagnostic_bio": "Lire taches rouille/grises. Solvita bas en hiver = normal.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol", "t11_test_de_portance"], "source": "GEPPA/USDA adapté"}, {"id": 12, "code": "AS", "label": "Argile sableuse", "sable_min": 25.0, "sable_max": 45.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 35.0, "argile_max": 55.0, "ru_indicatif": "130–180", "cec_indicatif": "18–30", "risques": ["Moins plastique", "Forte rétention", "Drainage lent"], "diagnostic_bio": "Moins de risque retrait-gonflement que AL. Surveiller engorgement profond.", "tests_recommandes": ["t01_test_beche", "t04_test_dinfiltration", "t02_profil_cultural"], "source": "GEPPA/USDA adapté"}, {"id": 13, "code": "A", "label": "Argile", "sable_min": 0.0, "sable_max": 40.0, "limon_min": 0.0, "limon_max": 40.0, "argile_min": 40.0, "argile_max": 60.0, "ru_indicatif": "150–200", "cec_indicatif": "25–45", "risques": ["Forte rétention", "Retrait-gonflement", "Engorgement"], "diagnostic_bio": "Fine, forte rétention, forte CEC. Retrait-gonflement et engorgement fréquents.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t11_test_de_portance", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}, {"id": 14, "code": "AA", "label": "Argile dominante", "sable_min": 0.0, "sable_max": 20.0, "limon_min": 0.0, "limon_max": 20.0, "argile_min": 60.0, "argile_max": 100.0, "ru_indicatif": "160–220", "cec_indicatif": ">45", "risques": ["Très plastique", "Engorgement sévère", "Retrait-gonflement fort"], "diagnostic_bio": "Très plastique. Ne pas intervenir mécaniquement hors ressuyage. Solvita très variable.", "tests_recommandes": ["t02_profil_cultural", "t10_test_de_couleur_du_sol", "t09_test_olfactif_du_sol"], "source": "GEPPA/USDA adapté"}], "tests": {"t01_test_beche": {"title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible."}, "t02_profil_cultural": {"title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire."}, "t03_test_bocal_test_de_sedimentation": {"title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile."}, "t04_test_dinfiltration": {"title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement."}, "t05_test_de_stabilite_des_agregats": {"title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion."}, "t06_test_de_battance": {"title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée."}, "t07_comptage_des_vers_de_terre": {"title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol."}, "t08_test_racinaire": {"title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle."}, "t09_test_olfactif_du_sol": {"title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie."}, "t10_test_de_couleur_du_sol": {"title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation."}, "t11_test_de_portance": {"title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère."}, "t12_test_de_friabilite": {"title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts."}, "t13_test_de_croute_de_surface": {"title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau."}, "t14_test_dhumidite_au_toucher": {"title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol."}, "t15_test_de_respiration_du_sol_simplifie": {"title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple."}, "t16_test_de_decomposition_des_residus": {"title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface."}, "t17_test_de_couverture_du_sol": {"title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux."}, "t18_test_de_compactage_a_la_tige": {"title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées."}, "t19_test_de_ruissellement": {"title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage."}, "t20_test_de_biodiversite_visible": {"title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu."}}, "cards": [{"id": 11, "title": "Profil sol sableux : aération élevée, apports fractionnés, dynamique MO rapide", "description": "Sol sableux : faible CEC et réserve utile ; aération forte. Compatible avec apports fermentés si fractionnés ; attention à la minéralisation rapide.", "scope_ref": "soil_type:SAND", "docs_codes": ["S1", "S0"]}, {"id": 12, "title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau", "description": "Sol argileux : potentiel d’agrégation élevé (Ca + biofilms/EPS), mais risque de réduction profonde/anoxie si enfouissement + excès matière réduite + saturation.", "scope_ref": "soil_type:CLAY", "docs_codes": ["S1", "S4", "S0"]}, {"id": 13, "title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface", "description": "Sol limoneux : structure fragile ; battance/ruissellement si sol nu. Priorité à couverture permanente, apports de surface et consolidation biologique.", "scope_ref": "soil_type:SILT", "docs_codes": ["S1", "S0"]}, {"id": 14, "title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo", "description": "Sol calcaire : calcium structurant (floculation), porosité durable ; attention aux blocages P et oligo-éléments (soufre/bore) qui impactent métabolismes & symbioses.", "scope_ref": "soil_type:CALC", "docs_codes": ["S1", "S4"]}, {"id": 15, "title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale", "description": "Sol hydromorphe/organique : redox bas fréquent ; risques N2O/CH4 et toxicités (Fe/Mn réduits). Éviter apports réduits enfouis ; gérer l’eau et la continuité racinaire.", "scope_ref": "soil_type:HYDRO", "docs_codes": ["S1", "S0", "S4"]}, {"id": 16, "title": "Profil sol 'franc' (loam) : effets intermédiaires, sensibilité au travail du sol", "description": "Sol loam : bon compromis texture ; répond bien aux apports réguliers et couverts ; sensible aux perturbations mécaniques qui cassent habitats/biofilms.", "scope_ref": "soil_type:LOAM", "docs_codes": ["S1"]}], "terms": [{"fr": "Adsorption", "en": "adsorption", "definition": "Fixation réversible de molécules ou d'ions à la surface des colloïdes du sol (argiles, oxydes Fe/Al, MO) par forces électrostatiques, liaisons hydrogène ou interactions hydrophobes. L'adsorption contrôle la rétention des cations nutritifs (CEC), l'immobilisation du phosphate sur les oxydes Fe/Al et la stabilisation de la MO sur les surfaces minérales (MAOM). La matière organique augmente l'adsorption par sa charge négative et sa surface spécifique élevée. Gérer l'adsorption par le pH et la MO optimise la disponibilité nutritive.", "doc_code": "S1/S4", "strate": "S"}, {"fr": "CEC", "en": "CEC", "definition": "Capacité d'échange cationique. Quantité de cations (Ca²⁺, Mg²⁺, K⁺, Na⁺, H⁺) qu'un sol peut retenir sur ses sites d'échange (argiles, MO). Exprimée en cmol+/kg.", "doc_code": "S1", "strate": "S"}, {"fr": "Capacité d’Échange Cationique", "en": "Cation Exchange Capacity (CEC)", "definition": "Mesure de la quantité totale de cations (Ca²⁺, Mg²⁺, K⁺, NH₄⁺) qu'un sol peut retenir sur son complexe argilo-humique (Oursin, 2021). Elle dépend de la nature des argiles et, de manière critique, du taux de matière organique, dont la CEC est environ 10 fois supérieure à celle des argiles (Pellerin, Bamière, Savini, Rechauchère, et al., 2021; Pellerin, Bamière, Savini, Réchauchère, et al., 2021).\n\nEnjeu : Un sol avec une faible CEC est vulnérable au lessivage des nutriments, ce qui augmente les risques environnementaux et les coûts d'intrants (Nivelle, 2017).\n\nLevier de décision : En sols sableux (faible CEC minérale), l'augmentation du taux d'humus est le seul levier pour augmenter le \"réservoir\" de nutriments et limiter les pertes par lixiviation (Pellerin et al., 2021).", "doc_code": "S1", "strate": "S"}, {"fr": "Complexe Argilo-Humique (CAH)", "en": "organo-mineral complex", "definition": "Association intime argiles-humus stabilisée par des ponts cationiques bivalents (Ca²⁺, Mg²⁺) et des liaisons de coordination. Siège de la CEC et de la structure physique du sol. Le CAH protège la matière organique de la minéralisation rapide et détermine la stabilité des agrégats. Un sol à CAH bien développé (limon+argile+MO>3%) allie fertilité chimique, structure physique et résilience hydrique. Le labour détruit mécaniquement le CAH en fractionnant les agrégats organo-minéraux.", "doc_code": "S1", "strate": "S"}, {"fr": "Haber-Bosch", "en": "Haber-Bosch process", "definition": "Procédé industriel de synthèse de l'ammoniac (N₂+H₂→NH₃) à haute pression et température (1913). Consomme 1-2% de l'énergie mondiale (Robertson & Groffman, 2014). Responsable de la rupture des cycles naturels de l'azote et de la dépendance aux énergies fossiles. Levier : 30-40% de légumineuses en rotation pour court-circuiter ce procédé. Connexion Loi de la Trophobiose : l'azote Haber-Bosch favorise un excès d'acides aminés libres dans la sève, rendant les plantes vulnérables aux ravageurs.", "doc_code": "F2", "strate": "F"}, {"fr": "Illite", "en": "illite", "definition": "Argile micacée 2:1 non gonflante, intermédiaire entre micas et smectites. CEC modérée (15-40 cmol+/kg), source progressive de potassium structural par altération des bords des feuillets. Dominante dans les sols tempérés modérément altérés. Sa présence offre un équilibre favorable entre stabilité structurale et fertilité potassique. L'activité microbienne mobilise progressivement le K structural des illites — service écosystémique annulé par le recours au K soluble.", "doc_code": "S1", "strate": "S"}, {"fr": "Kaolinite", "en": "kaolinite", "definition": "Argile 1:1 stable, non gonflante, à faible CEC (3-15 cmol+/kg) et surface spécifique réduite. Caractéristique des sols tropicaux et subtropicaux fortement altérés et lessivés. Sa faible capacité de rétention nutritive impose des apports organiques élevés pour compenser les limitations minéralogiques. En ACS sur sols kaolinitiques : maximiser les apports de MO et l'activité biologique pour créer une fertilité par voie biologique.", "doc_code": "S1", "strate": "S"}, {"fr": "MAOM", "en": "mineral-associated organic matter", "definition": "Carbone organique d'origine microbienne associé et stabilisé aux surfaces des argiles et des oxydes Fe/Al. Fraction stable du sol (temps de résidence > 100 ans). Formée par précipitation de métabolites microbiens et de fragments de nécromasse sur les surfaces minérales. Complémentaire du POC (fraction labile). Le MAOM est le pool cible du carbon farming.", "doc_code": "S2/S4", "strate": "S"}, {"fr": "RothC", "en": "RothC model", "definition": "Modèle mécaniste de dynamique du carbone organique du sol développé à Rothamsted Research (Coleman & Jenkinson, 1996). Divise la MO en 5 pools : DPM (décomposable), RPM (résistante), BIO (biomasse microbienne), HUM (humus), IOM (inerte). Les transferts entre pools suivent des cinétiques du premier ordre modulées par température, humidité et couverture. Outil de référence pour certifier les crédits carbone agricoles. Entrées nécessaires : COS initial, pluviométrie, ETP, type de sol, apports de MO. Disponible en open source.", "doc_code": "S4", "strate": "S"}, {"fr": "Surface spécifique", "en": "specific surface area", "definition": "Aire totale des surfaces colloïdales par unité de masse (m²/g). Détermine la capacité d'adsorption, la rétention d'eau et la création de microhabitats microbiens. Varie de 1-10 m²/g (sables) à 10-40 m²/g (kaolinite), 80-120 m²/g (illite) et 600-800 m²/g (smectites). La MO humifiée atteint 800-900 m²/g. La surface spécifique active — argiles + MO — est l'indicateur physico-chimique le plus direct de la fertilité potentielle d'un sol.", "doc_code": "S1", "strate": "S"}, {"fr": "altération minérale", "en": "mineral weathering", "definition": "Dégradation des roches par processus physiques, chimiques et biologiques. Source primaire des argiles et du phosphore.", "doc_code": "F1", "strate": "F"}, {"fr": "biofilm comme système hydraulique", "en": "biofilm as water management system", "definition": "Le biofilm bactérien est la première technologie de rétention d'eau de l'histoire de la vie (4 Ga). Matrice d'EPS composée à 97% d'eau structurée, protégée de l'évaporation. Sur une surface minérale (argile, sable, roche), le biofilm CRÉE son propre environnement hydrique. C'est le fondement de la rétention d'eau dans les micropores et le premier maillon de la microagrégation (EPS + argile = premier micro-agrégat, bien avant les champignons).", "doc_code": "S2", "strate": "S"}, {"fr": "capacité au champ", "en": "field capacity", "definition": "Teneur en eau maximale retenue après ressuyage gravitaire (pF 2.5, -33 kPa). Limite supérieure de la réserve utile. Dépend de la texture, structure et MO du sol.", "doc_code": "S0", "strate": "S"}, {"fr": "coefficient de minéralisation", "en": "mineralization coefficient", "definition": "Taux annuel K de minéralisation du carbone actif du sol. Dépend de la température, pH, argile, C:N, bilan hydrique.", "doc_code": "S4", "strate": "S"}, {"fr": "complexe organo-minéral", "en": "organo-mineral complex", "definition": "Association entre matière organique et particules minérales (argile, limon) protégeant le carbone de la minéralisation.", "doc_code": "S1", "strate": "S"}, {"fr": "conductivité hydraulique", "en": "hydraulic conductivity", "definition": "Capacité du sol à transmettre l'eau sous l'effet d'un gradient de potentiel (loi de Darcy). Dépend de la texture, de la structure et de la macroporosité biologique. Unité : mm/h ou cm/jour.", "doc_code": "S0", "strate": "S"}, {"fr": "conductivité hydraulique saturée", "en": "saturated hydraulic conductivity", "definition": "Vitesse maximale d'écoulement de l'eau dans un sol saturé (Ksat), exprimée en mm/h. Détermine la capacité d'infiltration et le risque de ruissellement. Varie de 0,01 mm/h (argile compacte) à >1 000 mm/h (sol biologique actif). Les macropores biologiques (galeries de vers anéciques, biopores racinaires) contribuent à 90% du flux malgré <5% du volume. L'activité biologique peut multiplier Ksat par 100 par rapport à un sol nu compacté.", "doc_code": "S0/V1/P2", "strate": "S"}, {"fr": "densité apparente", "en": "bulk density", "definition": "Masse de sol sec par unité de volume (g/cm³). Indicateur direct de la compaction. Sol sain : 0,9–1,3 g/cm³ ; sol compacté : >1,5 g/cm³ pour un limon.", "doc_code": "S1", "strate": "S"}, {"fr": "endogés", "en": "endogeic earthworms", "definition": "Vers géophages vivant dans les horizons minéraux (5-40 cm), se nourrissant de la MO incorporée aux argiles. Créent des galeries horizontales non permanentes. Indicateurs d'une bonne agrégation biologique des horizons de labour.", "doc_code": "V1", "strate": "V"}, {"fr": "faux plat du rendement", "en": "yield plateau", "definition": "Phase de la trajectoire de régénération (MO/Argile 17-24%) où le rendement stagne ou baisse alors que le carbone du sol augmente rapidement. Cause : les micro-organismes Y (forte CUE) captent N, P, S pour construire l'humus avant la plante. Le gain C est proportionnel à la baisse de rendement (Kirkby). Levier : fertilisation foliaire pour nourrir la plante sans alimenter la compétition microbienne.", "doc_code": "S4", "strate": "S"}, {"fr": "horizon pédologique", "en": "soil horizon", "definition": "Couche de sol relativement homogène, parallèle à la surface, différenciée par sa couleur, texture, structure et composition. Horizons principaux : O (litière), A (organo-minéral), B (accumulation), C (altération roche-mère).", "doc_code": "S1", "strate": "S"}, {"fr": "micro-agrégat", "en": "micro-aggregate", "definition": "Unité fonctionnelle du sol de 20–250 µm, stabilisée par la nécromasse microbienne, les EPS et les argiles. Protège le carbone organique de la décomposition (MAOM). Sa formation dépend de la diversité microbienne et de la présence de calcium.", "doc_code": "S1/S2", "strate": "S"}, {"fr": "montmorillonite (smectite)", "en": "montmorillonite (smectite)", "definition": "Argile 2:1 gonflante à très forte CEC (80–120 cmol+/kg) et surface spécifique (600–800 m²/g). Responsable du retrait-gonflement des sols. Capacité de fixation des cations et de l'eau interfoliaire.", "doc_code": "S1", "strate": "S"}, {"fr": "point de flétrissement permanent", "en": "permanent wilting point", "definition": "Teneur en eau à pF 4.2 (-1.5 MPa) en dessous de laquelle les plantes ne peuvent plus extraire l eau. Limite inférieure de la réserve utile. Dépend principalement de la texture argileuse.", "doc_code": "S0", "strate": "S"}, {"fr": "ratio C/Argile", "en": "carbon-to-clay ratio", "definition": "Rapport C organique/argile. Seuils Husson/Boivin : <12% dégradé, 17% limite, >24% bonne structure.", "doc_code": "P1/S1/P5", "strate": "P"}, {"fr": "ratio Carbone/Argile (C/Argile)", "en": "Carbon-to-Clay ratio (C/Clay)", "definition": "Proxy de l'état structural du sol (Husson, CIRAD). MO/Argile > 24% (ou C/Argile > 1/8) = sol bien structuré (Zone 1). 17-24% = zone de transition avec faux plat du rendement (Zone 2). 12-17% = seuil critique de déstructuration (Zone 3). < 12% = sol effondré (Zone 4). Corrélé au score VESS. Utilisable comme indicateur de pilotage de la régénération.", "doc_code": "S4", "strate": "S"}, {"fr": "réserve utile", "en": "plant available water capacity", "definition": "Volume d'eau retenu dans le sol entre la capacité au champ (pF 2,5) et le point de flétrissement permanent (pF 4,2), disponible pour les plantes. Exprimée en mm/m de sol. Dépend de la texture (argiles > limons > sables), de la teneur en MO et de la profondeur du profil exploité par les racines. La RU d'un sol régénératif augmente avec le stock de MO : chaque point de MO supplémentaire accroît la RU d'environ 2 mm/m.", "doc_code": "S0/S1", "strate": "S"}, {"fr": "saturation en carbone du sol", "en": "soil carbon saturation", "definition": "Capacité maximale d un sol à stocker du carbone stable (MAOM). Dépend de la surface spécifique des minéraux argileux et de la CEC. Au-delà de la saturation, le C supplémentaire reste en POC labile.", "doc_code": "S4", "strate": "S"}, {"fr": "test de sédimentation (test bocal)", "en": "jar sedimentation test", "definition": "Mise en suspension du sol dans l'eau pour estimer les proportions de sable (décante en 30s), limon (2h) et argile (24h). Méthode terrain rapide pour évaluer la texture et adapter les recommandations (CEC, RU, risque de battance).", "doc_code": "P1", "strate": "P"}, {"fr": "test ficelle GEPPA", "en": "GEPPA ribbon test", "definition": "Test de terrain du Groupe d'Étude Pour les Problèmes de Pédologie Appliquée pour estimer la teneur en argile du sol. Humidifier une poignée de terre et former un boudin de 5-10 cm : s'il peut être courbé en anneau sans se rompre → > 18% d'argile. La plasticité et la cohésion orientent l'adaptation des pratiques (travail du sol, amendements). Gratuit, immédiat, accessible à tous les agriculteurs.", "doc_code": "P1", "strate": "P"}, {"fr": "texture", "en": "texture", "definition": "Proportions de sable, limon et argile. Détermine rétention d'eau, CEC, porosité. Test bocal ou granulométrie laser.", "doc_code": "P1", "strate": "P"}, {"fr": "texture du sol", "en": "soil texture", "definition": "Proportion relative de sable (2–0,05 mm), limon (0,05–0,002 mm) et argile (<0,002 mm) dans la terre fine. Propriété permanente du sol qui détermine sa capacité de rétention d'eau, sa CEC et son comportement mécanique.", "doc_code": "S1", "strate": "S"}], "rules": [{"id": 3, "rule_name": "Compatibilité sol sableux", "condition_text": "Sol sableux + forte aération", "action_text": "Favoriser fermentation et apports fractionnés", "confidence": 0.9}, {"id": 4, "rule_name": "Risque asphyxie sol argileux", "condition_text": "Sol argileux + excès matière réduite + enfouissement", "action_text": "Limiter profondeur d'incorporation", "confidence": 0.9}, {"id": 11, "rule_name": "Compatibilité sol argileux", "condition_text": "CEC élevée + forte rétention eau", "action_text": "Fractionner apports fermentés, calcium actif", "confidence": 0.91}, {"id": 12, "rule_name": "Optimisation sol sableux", "condition_text": "Faible CEC + forte aération", "action_text": "Multiplier apports fermentés légers et couverture", "confidence": 0.9}, {"id": 14, "rule_name": "Calcium structurant prioritaire", "condition_text": "Sol argileux ou limono-argileux", "action_text": "Assurer calcium échangeable fonctionnel", "confidence": 0.92}, {"id": 23, "rule_name": "Zone Husson 1 — Sol autonome (C/Argile > 24%)", "condition_text": "Ratio C/Argile > 24%. Sol biologiquement mature, CUE élevée, stratégie Y dominante.", "action_text": "Entretien : couverts permanents, zéro travail du sol, restitution résidus. Pas d'apports massifs. Surveillance ratio F/B (objectif > 0.8).", "confidence": 0.95}, {"id": 24, "rule_name": "Zone Husson 2 — Transition avancée (C/Argile 17-24%)", "condition_text": "Ratio C/Argile entre 17% et 24%. Faux plat du rendement : les micro-organismes captent N,P,S pour construire l'humus AVANT la plante.", "action_text": "Patience : le faux plat N'EST PAS un échec. Maintenir couverts diversifiés, bokashi régulier, éviter l'impatience chimique. Gain C proportionnel à l'effort.", "confidence": 0.95}, {"id": 25, "rule_name": "Zone Husson 3 — Construction MO (C/Argile 12-17%)", "condition_text": "Ratio C/Argile entre 12% et 17%. Sol en construction, stratégie A dominante, CUE moyenne.", "action_text": "Couverts obligatoires multi-espèces (10-12 sp.), apports fermentés réguliers (bokashi, LiFoFer), stœchiométrie C/N surveillée. Objectif +0,1% MO/an.", "confidence": 0.95}, {"id": 26, "rule_name": "Zone Husson 4 — Urgence (C/Argile < 12%)", "condition_text": "Ratio C/Argile < 12%. Sol biologiquement appauvri, stratégie S dominante, CUE faible, risque priming effect maximal.", "action_text": "Apports massifs MO externe (compost, BRF), couvert permanent, AUCUN travail du sol, inoculation ciblée (PGPR, CMA). Patience 3-5 ans minimum. ATTENTION priming effect Phase 1.", "confidence": 0.95}], "cadre_texture": {"id": 3, "title": "Types de sols et comportements différenciés", "description": "Cadre : mêmes apports et mêmes pratiques → effets différents selon texture (sable/limon/argile), minéralogie, calcaire, hydromorphie. Les règles de diagnostic doivent être filtrées par type de sol."}, "corpus_name": "Le Sol Vivant cet Holobionte", "strate_colors": {"F": "#8B5CF6", "S": "#3B82F6", "V": "#10B981", "P": "#F59E0B", "H": "#EF4444"}, "generated": "2026-04-03 09:42"};
+</script>
+<script type="text/babel">
+
+
 
 const POLYGONS = {"AA": [[60, 0, 40], [60, 40, 0], [100, 0, 0], [100, 0, 0]], "A": [[40, 0, 60], [40, 20, 40], [45, 55, 0], [60, 40, 0], [60, 0, 40]], "Al": [[45, 55, 0], [40, 20, 40], [30, 30, 40], [30, 55, 15], [40, 60, 0]], "AL": [[30, 30, 40], [25, 30, 45], [25, 45, 30], [30, 55, 15]], "AS": [[25, 0, 75], [40, 0, 60], [40, 20, 40], [30, 30, 40], [25, 30, 45]], "La": [[30, 55, 15], [25, 45, 30], [20, 45, 35], [20, 65, 15], [25, 75, 0], [40, 60, 0]], "LA": [[25, 45, 30], [25, 30, 45], [17.5, 30, 52.5], [17.5, 50, 32.5], [20, 45, 35]], "L": [[20, 65, 15], [20, 45, 35], [17.5, 50, 32.5], [12.5, 50, 37.5], [0, 50, 50], [0, 80, 20], [12.5, 80, 7.5]], "LL": [[12.5, 80, 7.5], [0, 80, 20], [0, 100, 0], [10, 90, 0], [25, 75, 0]], "LS": [[12.5, 50, 37.5], [17.5, 50, 32.5], [17.5, 30, 52.5], [15, 20, 65], [0, 50, 50]], "SL": [[0, 50, 50], [15, 20, 65], [10, 10, 80], [0, 20, 80]], "SA": [[15, 20, 65], [17.5, 30, 52.5], [25, 30, 45], [25, 0, 75], [10, 0, 90], [10, 10, 80]], "S": [[0, 20, 80], [10, 10, 80], [10, 0, 90], [0, 0, 100]], "SS": []};
 
-// ── Ternary → Cartesian conversion ──
-// Triangle: Sable (bottom-left), Limon (bottom-right), Argile (top)
-const W = 400, H = W * Math.sqrt(3) / 2;
-const PAD = 35;
-const TW = W, TH = H;
-
-function ternToXY(argile, limon, sable) {
-  // Normalize
-  const total = argile + limon + sable;
-  const a = argile / total, l = limon / total, s = sable / total;
-  const x = PAD + (l + a / 2) * TW;
-  const y = PAD + (1 - a) * TH;
-  return [x, y];
+function ternToXY(a, l, s) {
+  const scale = 400;
+  const x = (l + a / 2) / 100 * scale;
+  const y = (1 - a / 100) * scale * 0.866;
+  return [x + 40, y + 20];
 }
 
-// ── Build SVG ──
-function buildTriangle() {
-  const svgW = W + PAD * 2;
-  const svgH = H + PAD * 2 + 10;
-  let svg = `<svg viewBox="0 0 ${svgW} ${svgH}" xmlns="http://www.w3.org/2000/svg">`;
-
-  // Grid lines
-  for (let pct = 10; pct < 100; pct += 10) {
-    const f = pct / 100;
-    // Argile lines (horizontal)
-    const [x1, y1] = ternToXY(pct, 100 - pct, 0);
-    const [x2, y2] = ternToXY(pct, 0, 100 - pct);
-    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="grid-line"/>`;
-    // Limon lines
-    const [x3, y3] = ternToXY(0, pct, 100 - pct);
-    const [x4, y4] = ternToXY(100 - pct, pct, 0);
-    svg += `<line x1="${x3}" y1="${y3}" x2="${x4}" y2="${y4}" class="grid-line"/>`;
-    // Sable lines
-    const [x5, y5] = ternToXY(0, 0, pct);  // Actually: sable axis
-    const [x6, y6] = ternToXY(100 - pct, 0, pct);
-    const [x5b, y5b] = ternToXY(0, 100 - pct, pct);
-    svg += `<line x1="${x6}" y1="${y6}" x2="${x5b}" y2="${y5b}" class="grid-line"/>`;
-  }
-
-  // Tick labels
-  for (let pct = 10; pct <= 90; pct += 10) {
-    // Argile (left axis)
-    const [ax, ay] = ternToXY(pct, 0, 100 - pct);
-    svg += `<text x="${ax - 12}" y="${ay}" class="tick-label" text-anchor="end">${pct}</text>`;
-    // Limon (right axis)
-    const [lx, ly] = ternToXY(pct, 100 - pct, 0);
-    svg += `<text x="${lx + 10}" y="${ly}" class="tick-label" text-anchor="start">${100-pct}</text>`;
-    // Sable (bottom axis)
-    const [sx, sy] = ternToXY(0, 100 - pct, pct);
-    svg += `<text x="${sx}" y="${sy + 14}" class="tick-label">${pct}</text>`;
-  }
-
-  // Vertex labels
-  const [topX, topY] = ternToXY(100, 0, 0);
-  const [blX, blY] = ternToXY(0, 0, 100);
-  const [brX, brY] = ternToXY(0, 100, 0);
-  svg += `<text x="${topX}" y="${topY - 10}" class="vertex-label">Argile 100%</text>`;
-  svg += `<text x="${blX}" y="${blY + 18}" class="vertex-label">Sable 100%</text>`;
-  svg += `<text x="${brX}" y="${brY + 18}" class="vertex-label">Limon 100%</text>`;
-
-  // Zone polygons
-  for (const [code, verts] of Object.entries(POLYGONS)) {
-    if (!verts.length) continue;
-    const points = verts.map(v => ternToXY(v[0], v[1], v[2])).map(p => p.join(',')).join(' ');
-    svg += `<polygon points="${points}" class="zone" data-code="${code}"/>`;
-    // Label at centroid
-    const cx = verts.reduce((s, v) => s + v[0], 0) / verts.length;
-    const cl = verts.reduce((s, v) => s + v[1], 0) / verts.length;
-    const cs = verts.reduce((s, v) => s + v[2], 0) / verts.length;
-    const [lx, ly] = ternToXY(cx, cl, cs);
-    const tex = DATA.textures.find(t => t.code === code);
-    const label = tex ? tex.label.split(' ')[0] : code;
-    svg += `<text x="${lx}" y="${ly}" class="zone-label">${code}</text>`;
-  }
-
-  // Marker placeholder
-  svg += `<circle id="marker" cx="0" cy="0" r="5" class="marker" style="display:none"/>`;
-
-  // Outer triangle border
-  const [t1x, t1y] = ternToXY(100, 0, 0);
-  const [t2x, t2y] = ternToXY(0, 0, 100);
-  const [t3x, t3y] = ternToXY(0, 100, 0);
-  svg += `<polygon points="${t1x},${t1y} ${t2x},${t2y} ${t3x},${t3y}" fill="none" stroke="#333" stroke-width="1.5"/>`;
-
-  svg += '</svg>';
-  document.getElementById('triangle-svg').innerHTML = svg;
-
-  // Attach events
-  document.querySelectorAll('.zone').forEach(z => {
-    z.addEventListener('click', () => selectZone(z.dataset.code));
-    z.addEventListener('mouseenter', () => z.classList.add('hovered'));
-    z.addEventListener('mouseleave', () => z.classList.remove('hovered'));
-  });
+function getCentroid(pts) {
+  let cx = 0, cy = 0;
+  pts.forEach(p => { const [x, y] = ternToXY(p[0], p[1], p[2]); cx += x; cy += y; });
+  return [cx / pts.length, cy / pts.length];
 }
 
-// ── Detail panel ──
-function selectZone(code) {
-  document.querySelectorAll('.zone').forEach(z => z.classList.remove('selected'));
-  document.querySelectorAll(`.zone[data-code="${code}"]`).forEach(z => z.classList.add('selected'));
-
-  const tex = DATA.textures.find(t => t.code === code);
-  if (!tex) return;
-
-  const panel = document.getElementById('detail-card');
-  let html = `<h2>${tex.label} (${tex.code})</h2>`;
-
-  // Ranges
-  html += `<div class="ranges">
-    <div class="range-box range-sable"><strong>Sable</strong>${tex.sable_min}–${tex.sable_max}%</div>
-    <div class="range-box range-limon"><strong>Limon</strong>${tex.limon_min}–${tex.limon_max}%</div>
-    <div class="range-box range-argile"><strong>Argile</strong>${tex.argile_min}–${tex.argile_max}%</div>
-  </div>`;
-
-  // Indicators
-  html += `<div class="indicators">
-    <div class="indicator"><strong>RU (mm/m)</strong>${tex.ru_indicatif || '–'}</div>
-    <div class="indicator"><strong>CEC (cmol/kg)</strong>${tex.cec_indicatif || '–'}</div>
-  </div>`;
-
-  // Risks
-  if (tex.risques && tex.risques.length) {
-    html += '<h3>Risques</h3>';
-    html += tex.risques.map(r => `<span class="tag tag-risk">${r}</span>`).join('');
+function pointInPoly(px, py, polyXY) {
+  let inside = false;
+  for (let i = 0, j = polyXY.length - 1; i < polyXY.length; j = i++) {
+    const [xi, yi] = polyXY[i], [xj, yj] = polyXY[j];
+    if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) inside = !inside;
   }
-
-  // Diagnostic bio
-  if (tex.diagnostic_bio) {
-    html += '<h3>Diagnostic biologique</h3>';
-    html += `<div class="diag-bio">${tex.diagnostic_bio}</div>`;
-  }
-
-  // Tests recommandés
-  if (tex.tests_recommandes && tex.tests_recommandes.length) {
-    html += '<h3>Tests terrain recommands</h3>';
-    html += tex.tests_recommandes.map(tcode => {
-      const test = DATA.tests[tcode];
-      const title = test ? test.title : tcode;
-      const desc = test ? test.description : '';
-      return `<span class="tag tag-test" onmouseenter="showTooltip(event,'${desc.replace(/'/g, "\\'")}')" onmouseleave="hideTooltip()">${title}</span>`;
-    }).join('');
-  }
-
-  // Concept card profil_sol
-  const card = findCard(code);
-  if (card) {
-    html += '<h3>Fiche profil sol</h3>';
-    html += `<div class="card-link"><strong>${card.title}</strong><br>${card.description}</div>`;
-    if (card.docs_codes && card.docs_codes.length) {
-      html += '<div>' + card.docs_codes.map(d => `<span class="tag tag-doc">${d}</span>`).join('') + '</div>';
-    }
-  }
-
-  // Related terms
-  const relatedTerms = findRelatedTerms(code);
-  if (relatedTerms.length) {
-    html += '<h3>Termes du thsaurus</h3>';
-    html += relatedTerms.map(t => `<span class="tag tag-term" title="${(t.definition||'').substring(0,120)}...">${t.fr}</span>`).join('');
-  }
-
-  panel.innerHTML = html;
+  return inside;
 }
 
-function findCard(code) {
-  // Map texture code to concept card scope_ref
-  const mapping = {
-    'SS': 'soil_type:SAND', 'S': 'soil_type:SAND',
-    'SL': 'soil_type:SAND', 'SA': 'soil_type:SAND',
-    'LS': 'soil_type:LOAM', 'L': 'soil_type:LOAM',
-    'LL': 'soil_type:SILT', 'La': 'soil_type:SILT',
-    'LA': 'soil_type:CLAY_LOAM', 'AL': 'soil_type:CLAY_LOAM',
-    'Al': 'soil_type:CLAY', 'A': 'soil_type:CLAY',
-    'AA': 'soil_type:CLAY', 'AS': 'soil_type:CLAY'
-  };
-  // Try exact scope_ref match first
-  const scopeRef = mapping[code];
-  let card = DATA.cards.find(c => c.scope_ref === scopeRef);
-  if (card) return card;
-  // Fallback: match by keywords in title
-  const keywords = {
-    'SS': 'sableux', 'S': 'sableux', 'SL': 'sableux', 'SA': 'sableux',
-    'LS': 'limoneux', 'LL': 'limoneux', 'La': 'limoneux', 'L': 'franc',
-    'LA': 'argileux', 'AL': 'argileux', 'Al': 'argileux',
-    'A': 'argileux', 'AA': 'argileux', 'AS': 'argileux'
-  };
-  const kw = keywords[code];
-  if (kw) card = DATA.cards.find(c => c.title.toLowerCase().includes(kw));
-  return card || null;
-}
-
-function findRelatedTerms(code) {
-  const tex = DATA.textures.find(t => t.code === code);
-  if (!tex) return [];
-  const label = tex.label.toLowerCase();
-  return DATA.terms.filter(t => {
-    const def = (t.definition || '').toLowerCase();
-    if (label.includes('sable') && def.includes('sable')) return true;
-    if (label.includes('argile') && def.includes('argile')) return true;
-    if (label.includes('limon') && def.includes('limon')) return true;
-    if (def.includes('texture')) return true;
-    return false;
-  });
-}
-
-// ── Input mode ──
-function locatePoint() {
-  const argile = parseFloat(document.getElementById('in-argile').value) || 0;
-  const limon = parseFloat(document.getElementById('in-limon').value) || 0;
-  const sable = parseFloat(document.getElementById('in-sable').value) || 0;
-  const total = argile + limon + sable;
-  const result = document.getElementById('input-result');
-
-  if (Math.abs(total - 100) > 1) {
-    result.textContent = `La somme doit faire 100% (actuellement ${total.toFixed(1)}%)`;
-    result.style.color = '#EF4444';
-    return;
-  }
-
-  result.style.color = '#3B82F6';
-  const [x, y] = ternToXY(argile, limon, sable);
-  const marker = document.getElementById('marker');
-  marker.setAttribute('cx', x);
-  marker.setAttribute('cy', y);
-  marker.style.display = 'block';
-
-  // Find matching zone
-  const matched = identifyTexture(argile, limon, sable);
-  if (matched) {
-    result.textContent = `Classe : ${matched.label} (${matched.code})`;
-    selectZone(matched.code);
-  } else {
-    result.textContent = 'Classe non identifie pour ces valeurs';
-  }
-}
-
-function identifyTexture(argile, limon, sable) {
-  // Use ref_textures ranges for classification
-  for (const tex of DATA.textures) {
-    if (argile >= tex.argile_min && argile <= tex.argile_max &&
-        limon >= tex.limon_min && limon <= tex.limon_max &&
-        sable >= tex.sable_min && sable <= tex.sable_max) {
-      return tex;
-    }
+function identifyTexture(a, l, s) {
+  const [px, py] = ternToXY(a, l, s);
+  for (const [code, pts] of Object.entries(POLYGONS)) {
+    if (!pts.length) continue;
+    const polyXY = pts.map(p => ternToXY(p[0], p[1], p[2]));
+    if (pointInPoly(px, py, polyXY)) return code;
   }
   return null;
 }
 
-// ── Tooltips ──
-function showTooltip(e, text) {
-  const tip = document.getElementById('test-tooltip');
-  tip.textContent = text;
-  tip.style.display = 'block';
-  tip.style.left = (e.pageX + 10) + 'px';
-  tip.style.top = (e.pageY - 30) + 'px';
-}
-function hideTooltip() {
-  document.getElementById('test-tooltip').style.display = 'none';
+function findTexData(code) {
+  return DATA.textures.find(t => t.code === code);
 }
 
-// ── Init ──
-buildTriangle();
+function KPI({ value, label, sub, color }) {
+  return <div className="text-center p-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+    <div className="text-xl font-bold" style={{color: color || '#1e293b'}}>{value}</div>
+    <div className="text-xs font-medium text-gray-600 mt-0.5">{label}</div>
+    {sub && <div className="text-xs text-gray-400">{sub}</div>}
+  </div>;
+}
+
+function App() {
+  const [selected, setSelected] = React.useState(null);
+  const [marker, setMarker] = React.useState(null);
+  const [showSection, setShowSection] = React.useState(null);
+
+  const tex = selected ? findTexData(selected) : null;
+
+  const locate = () => {
+    const a = parseFloat(document.getElementById('in-a').value) || 0;
+    const l = parseFloat(document.getElementById('in-l').value) || 0;
+    const s = parseFloat(document.getElementById('in-s').value) || 0;
+    if (Math.abs(a + l + s - 100) > 1) { alert('La somme doit faire 100%'); return; }
+    const code = identifyTexture(a, l, s);
+    if (code) { setSelected(code); setMarker([a, l, s]); }
+    else alert('Point hors triangle');
+  };
+
+  // Build SVG
+  const svgW = 480, svgH = 400;
+  const triangleSVG = <svg viewBox="0 0 480 400" className="w-full">
+    {/* Grid */}
+    {[20,40,60,80].map(v => {
+      const [x1,y1] = ternToXY(v, 0, 100-v);
+      const [x2,y2] = ternToXY(v, 100-v, 0);
+      return <line key={'ga'+v} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#e2e8f0" strokeWidth="0.5"/>;
+    })}
+    {[20,40,60,80].map(v => {
+      const [x1,y1] = ternToXY(0, v, 100-v);
+      const [x2,y2] = ternToXY(100-v, v, 0);
+      return <line key={'gl'+v} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#e2e8f0" strokeWidth="0.5"/>;
+    })}
+    {[20,40,60,80].map(v => {
+      const [x1,y1] = ternToXY(0, 100-v, v);
+      const [x2,y2] = ternToXY(v, 0, 100-v);
+      return <line key={'gs'+v} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#e2e8f0" strokeWidth="0.5"/>;
+    })}
+    {/* Polygons */}
+    {Object.entries(POLYGONS).map(([code, pts]) => {
+      if (!pts.length) return null;
+      const points = pts.map(p => ternToXY(p[0], p[1], p[2]).join(',')).join(' ');
+      const isSel = selected === code;
+      return <polygon key={code} points={points}
+        fill={isSel ? 'rgba(59,130,246,0.35)' : 'rgba(200,200,200,0.15)'}
+        stroke={isSel ? '#3B82F6' : '#94a3b8'} strokeWidth={isSel ? 2 : 0.5}
+        className="cursor-pointer hover:fill-blue-100 transition-colors"
+        onClick={() => { setSelected(code); setMarker(null); }} />;
+    })}
+    {/* Labels */}
+    {Object.entries(POLYGONS).map(([code, pts]) => {
+      if (!pts.length) return null;
+      const [cx, cy] = getCentroid(pts);
+      return <text key={'t'+code} x={cx} y={cy} textAnchor="middle" dominantBaseline="central"
+        fontSize="10" fontWeight="600" fill="#475569" className="pointer-events-none">{code}</text>;
+    })}
+    {/* Marker */}
+    {marker && (() => {
+      const [mx, my] = ternToXY(marker[0], marker[1], marker[2]);
+      return <circle cx={mx} cy={my} r="5" fill="#EF4444" stroke="#fff" strokeWidth="2"/>;
+    })()}
+    {/* Vertex labels */}
+    {(() => {
+      const [ax, ay] = ternToXY(100, 0, 0);
+      const [lx, ly] = ternToXY(0, 100, 0);
+      const [sx, sy] = ternToXY(0, 0, 100);
+      return <>
+        <text x={ax} y={ay-8} textAnchor="middle" fontSize="11" fontWeight="700" fill="#1e293b">Argile</text>
+        <text x={lx+15} y={ly+15} textAnchor="end" fontSize="11" fontWeight="700" fill="#1e293b">Limon</text>
+        <text x={sx-15} y={sy+15} textAnchor="start" fontSize="11" fontWeight="700" fill="#1e293b">Sable</text>
+      </>;
+    })()}
+    {/* Tick labels */}
+    {[20,40,60,80].map(v => {
+      const [x, y] = ternToXY(v, 0, 100-v);
+      return <text key={'ta'+v} x={x-12} y={y} fontSize="7" fill="#94a3b8" textAnchor="end">{v}</text>;
+    })}
+  </svg>;
+
+  return <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="text-center mb-6">
+      <h1 className="text-2xl font-bold text-gray-800">Triangle des Textures — Tableau de bord</h1>
+      <p className="text-gray-500 text-sm mt-1">{DATA.textures.length} classes · {DATA.terms.length} termes · {(DATA.rules||[]).length} règles diagnostiques · {(DATA.cards||[]).length} fiches profil sol</p>
+    </div>
+
+    {/* KPI */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <KPI value={tex ? tex.code : '—'} label="Classe" color="#3B82F6"
+        sub={tex ? tex.label : 'Cliquez sur le triangle'} />
+      <KPI value={tex && tex.ru_indicatif ? tex.ru_indicatif + ' mm/m' : '—'}
+        label="Réserve utile" color="#059669" sub="indicatif" />
+      <KPI value={tex && tex.cec_indicatif ? tex.cec_indicatif : '—'}
+        label="CEC indicatif" color="#7C3AED" sub="méq/100g" />
+      <KPI value={marker ? `${marker[0]}/${marker[1]}/${marker[2]}` : (tex ? `${tex.argile_min}-${tex.argile_max}%` : '—')}
+        label="A / L / S" color="#1e293b" sub="argile / limon / sable" />
+    </div>
+
+    {/* TESTS TERRAIN */}
+    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm mb-6">
+      <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Tests de terrain</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 className="font-semibold text-gray-700 mb-2">Test du bocal — sédimentation</h3>
+          <p className="text-sm text-gray-600 mb-2"><strong>Matériel :</strong> bocal 1L, eau, terre tamisée.</p>
+          <p className="text-sm text-gray-600 mb-3">Remplir aux 2/3 d'eau, ajouter la terre, secouer, laisser reposer :</p>
+          <div className="space-y-1.5">
+            <div className="flex gap-3 items-center p-2 bg-amber-50 rounded-lg">
+              <span className="font-bold text-amber-700 w-12 text-right">30 s</span>
+              <span className="text-sm"><strong>Sable</strong> décante au fond (&gt;50 µm)</span>
+            </div>
+            <div className="flex gap-3 items-center p-2 bg-indigo-50 rounded-lg">
+              <span className="font-bold text-indigo-700 w-12 text-right">2 h</span>
+              <span className="text-sm"><strong>Limon</strong> se dépose (2-50 µm)</span>
+            </div>
+            <div className="flex gap-3 items-center p-2 bg-rose-50 rounded-lg">
+              <span className="font-bold text-rose-700 w-12 text-right">24 h</span>
+              <span className="text-sm"><strong>Argile</strong> en surface (&lt;2 µm)</span>
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 mt-2">Mesurer les épaisseurs → entrer les % ci-dessous.</p>
+
+          <h3 className="font-semibold text-gray-700 mt-4 mb-2">Test du boudin — au toucher</h3>
+          <div className="space-y-1">
+            <div className="flex gap-2 text-sm"><span className="font-medium w-16">Sable</span> <span className="text-gray-600">Crisse sous le doigt — pas de boudin</span></div>
+            <div className="flex gap-2 text-sm"><span className="font-medium w-16">Limon</span> <span className="text-gray-600">Empreinte digitale — boudin fragile</span></div>
+            <div className="flex gap-2 text-sm"><span className="font-medium w-16">Argile</span> <span className="text-gray-600">Boudin solide dès 25% argile</span></div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center">
+          <img src="img/test_bocal.png" alt="Test du bocal" className="w-full rounded-xl border border-gray-200 shadow-sm" />
+        </div>
+      </div>
+    </div>
+
+    {/* TRIANGLE + DÉTAIL */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+        <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Triangle GEPPA</h2>
+        {triangleSVG}
+        <div className="mt-3 border-t border-gray-100 pt-3">
+          <h3 className="text-sm font-semibold text-gray-700 mb-2">Identifier une texture</h3>
+          <div className="flex gap-2 items-center flex-wrap">
+            <label className="text-xs text-gray-500">Argile %</label>
+            <input type="number" id="in-a" min="0" max="100" className="w-16 px-2 py-1 border border-gray-200 rounded text-sm text-center" />
+            <label className="text-xs text-gray-500">Limon %</label>
+            <input type="number" id="in-l" min="0" max="100" className="w-16 px-2 py-1 border border-gray-200 rounded text-sm text-center" />
+            <label className="text-xs text-gray-500">Sable %</label>
+            <input type="number" id="in-s" min="0" max="100" className="w-16 px-2 py-1 border border-gray-200 rounded text-sm text-center" />
+            <button onClick={locate} className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">Localiser</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Détail zone */}
+      <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+        <h2 className="font-bold text-gray-800 mb-2 text-sm uppercase tracking-wide">Détail de la zone</h2>
+        {!tex ? <p className="text-gray-400 text-sm italic py-8 text-center">Cliquez sur une zone du triangle</p> :
+        <div>
+          <h3 className="text-lg font-bold mb-2" style={{color: '#3B82F6'}}>{tex.label} ({tex.code})</h3>
+          <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="text-center p-2 bg-rose-50 rounded-lg">
+              <div className="text-sm font-bold text-rose-700">{tex.argile_min}-{tex.argile_max}%</div>
+              <div className="text-xs text-rose-500">Argile</div>
+            </div>
+            <div className="text-center p-2 bg-indigo-50 rounded-lg">
+              <div className="text-sm font-bold text-indigo-700">{tex.limon_min}-{tex.limon_max}%</div>
+              <div className="text-xs text-indigo-500">Limon</div>
+            </div>
+            <div className="text-center p-2 bg-amber-50 rounded-lg">
+              <div className="text-sm font-bold text-amber-700">{tex.sable_min}-{tex.sable_max}%</div>
+              <div className="text-xs text-amber-500">Sable</div>
+            </div>
+          </div>
+
+          {tex.diagnostic_bio && <div className="p-2 rounded-lg bg-blue-50 border-l-3 border-blue-500 text-sm text-gray-700 mb-3" style={{borderLeft: '3px solid #3B82F6'}}>
+            {tex.diagnostic_bio}
+          </div>}
+
+          {tex.risques && Array.isArray(tex.risques) && tex.risques.length > 0 && <div className="mb-3">
+            <span className="text-xs font-semibold text-gray-500 uppercase">Risques</span>
+            <div className="flex flex-wrap gap-1 mt-1">
+              {tex.risques.map((r, i) => <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-700">{r}</span>)}
+            </div>
+          </div>}
+
+          {tex.tests_recommandes && Array.isArray(tex.tests_recommandes) && <div className="mb-3">
+            <span className="text-xs font-semibold text-gray-500 uppercase">Tests recommandés</span>
+            <div className="flex flex-wrap gap-1 mt-1">
+              {tex.tests_recommandes.map((t, i) => {
+                const test = DATA.tests[t];
+                return <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 cursor-help"
+                  title={test ? test.description : t}>{test ? test.title : t}</span>;
+              })}
+            </div>
+          </div>}
+
+          {tex.ru_indicatif && <div className="grid grid-cols-2 gap-2">
+            <div className="p-2 bg-green-50 rounded-lg text-center">
+              <div className="text-sm font-bold text-green-700">{tex.ru_indicatif} mm/m</div>
+              <div className="text-xs text-green-500">Réserve utile</div>
+            </div>
+            <div className="p-2 bg-purple-50 rounded-lg text-center">
+              <div className="text-sm font-bold text-purple-700">{tex.cec_indicatif || '—'}</div>
+              <div className="text-xs text-purple-500">CEC</div>
+            </div>
+          </div>}
+        </div>}
+      </div>
+    </div>
+
+    {/* COMPRENDRE */}
+    <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm mb-6">
+      <h2 className="font-bold text-gray-800 mb-3 text-sm uppercase tracking-wide">Comprendre — Textures et sol vivant</h2>
+      {[
+        { id: 'importance', title: 'Pourquoi la texture est importante', content: 'La texture détermine la capacité du sol à retenir l\'eau (réserve utile), les nutriments (CEC), et l\'air (porosité). Un sol argileux retient bien mais draine mal. Un sol sableux draine bien mais retient peu. Le limon est intermédiaire mais sensible à la battance.' },
+        { id: 'moargile', title: 'Ratio MO/Argile — les seuils clés', content: 'Le rapport matière organique / argile détermine la qualité structurale du sol :\n• < 12% : sol dégradé, risque de battance, compaction\n• 17% : seuil réaliste, atteignable avec des pratiques ACS\n• > 24% : optimum, sol bien structuré et résilient\n\nPlus le sol est argileux, plus il a besoin de MO pour maintenir sa structure.' },
+        { id: 'kirkby', title: 'Texture et stockage de carbone', content: 'L\'argile protège la matière organique de la minéralisation via le complexe organo-minéral (MAOM). Le modèle AMG montre que chaque 10% d\'argile en plus réduit le coefficient de minéralisation K de ~15%.\n\nConséquence : un sol argileux stocke plus de carbone qu\'un sol sableux à apports égaux.' },
+      ].map(s =>
+        <div key={s.id} className="mb-1">
+          <button onClick={() => setShowSection(showSection === s.id ? null : s.id)}
+            className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition flex justify-between items-center">
+            <span className="text-sm font-medium text-gray-700">{s.title}</span>
+            <span className="text-gray-300">{showSection === s.id ? '▾' : '▸'}</span>
+          </button>
+          {showSection === s.id && <div className="px-2 pb-2 text-xs text-gray-600 leading-relaxed whitespace-pre-line">{s.content}</div>}
+        </div>
+      )}
+
+      {/* Termes liés */}
+      <div className="mb-1">
+        <button onClick={() => setShowSection(showSection === 'terms' ? null : 'terms')}
+          className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition flex justify-between items-center">
+          <span className="text-sm font-medium text-gray-700">Termes du thésaurus ({DATA.terms.length})</span>
+          <span className="text-gray-300">{showSection === 'terms' ? '▾' : '▸'}</span>
+        </button>
+        {showSection === 'terms' && <div className="px-2 pb-2 flex flex-wrap gap-1">
+          {DATA.terms.map((t, i) => <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-green-50 text-green-700"
+            title={t.definition || ''}>{t.fr}{t.en ? ` (${t.en})` : ''}</span>)}
+        </div>}
+      </div>
+
+      {/* Règles diagnostiques */}
+      {DATA.rules && DATA.rules.length > 0 && <div>
+        <button onClick={() => setShowSection(showSection === 'rules' ? null : 'rules')}
+          className="w-full text-left p-2 rounded-lg hover:bg-gray-50 transition flex justify-between items-center">
+          <span className="text-sm font-medium text-gray-700">Règles diagnostiques ({DATA.rules.length})</span>
+          <span className="text-gray-300">{showSection === 'rules' ? '▾' : '▸'}</span>
+        </button>
+        {showSection === 'rules' && <div className="px-2 pb-2 space-y-1">
+          {DATA.rules.map((r, i) => <div key={i} className="text-xs p-2 bg-gray-50 rounded-lg">
+            <strong>{r.rule_name}</strong> <span className="text-gray-400">({(r.confidence*100).toFixed(0)}%)</span>
+            <div className="text-gray-500">{r.condition_text} → {r.action_text}</div>
+          </div>)}
+        </div>}
+      </div>}
+    </div>
+
+    <div className="text-center text-xs text-gray-400 mt-4 pb-4">
+      Classification GEPPA 1963 · Données depuis sol_vivant.db
+    </div>
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+
 </script>
 
 </body>
