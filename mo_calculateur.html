@@ -17,10 +17,12 @@
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
 <link rel="apple-touch-icon" href="https://sol-vivant.github.io/Publications/img/mo-img.png">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4/dist/tailwind.min.css" rel="stylesheet">
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <style>
 
@@ -45,6 +47,15 @@
   --font-lg: 1.15rem;
   --font-xl: 1.5rem;
   --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
   --success: #059669;
   --success-light: #D1FAE5;
   --warning: #D97706;
@@ -498,7 +509,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-06 09:44 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 15:32 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -524,7 +535,7 @@ const DATA = {"matieres": [{"id": 96, "categorie": "Fumier/compost", "matiere": 
 
 // ── Helpers & Constants ──
 const ACTIVE_CATS = [...new Set(DATA.matieres.map(m => m.categorie))].filter(c => c !== 'Sol/biomasse');
-const CAT_COLORS_DEFAULT = ['#059669', '#D97706', '#DC2626', '#2563EB', '#6B7280', '#7C3AED', '#EC4899', '#14B8A6'];
+const CAT_COLORS_DEFAULT = ['var(--success)', 'var(--warning)', 'var(--danger)', 'var(--info)', '#6B7280', '#7C3AED', '#EC4899', '#14B8A6'];
 const CAT_COLORS = DATA.cat_colors || Object.fromEntries([...new Set(DATA.matieres.map(m => m.categorie))].map((c, i) => [c, CAT_COLORS_DEFAULT[i % CAT_COLORS_DEFAULT.length]]));
 
 function parseCnNote(note) {
@@ -555,8 +566,8 @@ function cnColor(cn) {
   // Dérivé des règles C/N : rouge extrêmes, vert optimal, ambre transition
   const r = getRegle(cn);
   if (!r) return '#6B7280';
-  if (r.icone === '🔥' || r.icone === '🧊' || r.icone === '❄️') return '#DC2626';
-  if (r.icone === '✅' || r.icone === '🌱') return '#059669';
+  if (r.icone === '🔥' || r.icone === '🧊' || r.icone === '❄️') return 'var(--danger)';
+  if (r.icone === '✅' || r.icone === '🌱') return 'var(--success)';
   return '#F59E0B';
 }
 
@@ -616,7 +627,7 @@ function EncartIncorporation({ cn }) {
 
 
     <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>{z.eh_min != null ? 'Eh > '+z.eh_min+' mV' : z.eh_max != null ? 'Eh < '+z.eh_max+' mV' : ''}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#475569',marginTop:'2px'}}>{z.process}</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',marginTop:'2px'}}>{z.process}</div>
           </div>)}
         </div>
         <div className="encart-anaero-grid">
@@ -644,18 +655,18 @@ function EncartIncorporation({ cn }) {
         <div className="encart-incorp-subtitle">Diagnostic redox (Eh)</div>
         <div className="encart-eh-bar">
           {(DATA.zones_eh_fallback || [
-            {label:'Aérobie',range:'> 300 mV',desc:'Humification OK',color:'#059669'},
-            {label:'Microaérobie',range:'200-300 mV',desc:'Prudence',color:'#D97706'},
-            {label:'Anaérobie',range:'< 200 mV',desc:'Fermentation',color:'#DC2626'}
+            {label:'Aérobie',range:'> 300 mV',desc:'Humification OK',color:'var(--success)'},
+            {label:'Microaérobie',range:'200-300 mV',desc:'Prudence',color:'var(--warning)'},
+            {label:'Anaérobie',range:'< 200 mV',desc:'Fermentation',color:'var(--danger)'}
           ]).map((z,i) => <div key={i} className="encart-eh-zone" style={{background:z.color+'20',borderLeft:'3px solid '+z.color}}>
             <div style={{color:z.color,fontWeight:600,fontSize:'var(--font-sm)'}}>{z.label}</div>
             <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>Eh {z.range}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#475569'}}>{z.desc}</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)'}}>{z.desc}</div>
           </div>)}
         </div>
       </div>}
       {encart.timeline && <div className="encart-timeline">
-        <span style={{fontWeight:600,fontSize:'var(--font-sm)',color:'#92400E'}}>Période de transition : </span>
+        <span style={{fontWeight:600,fontSize:'var(--font-sm)',color:'var(--color-warning-text)'}}>Période de transition : </span>
         <span style={{fontSize:'var(--font-sm)',color:'#44403C'}}>{encart.timeline}</span>
       </div>}
       {encart.cas_etude && encart.cas_etude.length > 0 && <div style={{marginTop:'0.5rem'}}>
@@ -663,7 +674,7 @@ function EncartIncorporation({ cn }) {
         {encart.cas_etude.map((c, i) =>
           <div key={i} className="encart-case">
             <div style={{fontSize:'var(--font-sm)'}}><strong>{c.nom}</strong> <span style={{color:'#A8A29E'}}>({c.type})</span></div>
-            <div style={{fontSize:'var(--font-xs)',color:'#44403C'}}>MO : {c.mo_avant} → <strong style={{color:'#059669'}}>{c.mo_apres}</strong> en {c.duree}</div>
+            <div style={{fontSize:'var(--font-xs)',color:'#44403C'}}>MO : {c.mo_avant} → <strong style={{color:'var(--success)'}}>{c.mo_apres}</strong> en {c.duree}</div>
             <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>{c.detail}</div>
           </div>
         )}
@@ -678,20 +689,20 @@ function ComprendreMO() {
   return <div style={{maxWidth:'900px',margin:'0',padding:'1rem'}}>
     <div className="mo-card">
       <h2>Ratio C/N — La clé de la décomposition</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         Le ratio Carbone/Azote (C/N) détermine la vitesse et le devenir de la matière organique dans le sol. 
         Un C/N bas (&lt;15) favorise la minéralisation rapide (libération d'azote). 
         Un C/N élevé (&gt;25) favorise l'immobilisation de l'azote par les microbes décomposeurs. 
         La plage 20-25 est optimale pour l'humification.
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#f0fdf4',borderRadius:'8px',fontSize:'var(--font-base)'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#f0fdf4',borderRadius:'var(--radius)',fontSize:'var(--font-base)'}}>
         <strong>Règle pratique :</strong> mélange C/N ≈ 25 = équilibre décomposition/humification.
       </div>
     </div>
 
     <div className="mo-card">
       <h2>Coefficient isohumique (k₁)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         Le k₁ exprime la fraction de matière organique apportée qui se retrouvera stabilisée sous forme d'humus 
         (carbone stable à long terme). Il dépend de la composition lignine/cellulose/protéines, de l'humidité, 
         de la température et du mode d'apport.
@@ -710,11 +721,11 @@ function ComprendreMO() {
 
     <div className="mo-card">
       <h2>Formule de Kirkby (ratio stœchiométrique)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         Kirkby et al. (2016) ont montré que la formation d'humus stable nécessite un apport équilibré en 
         nutriments (C:N:P:S). Le ratio-clé pour séquestrer 1 tonne de carbone stable :
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#faf5ff',borderRadius:'8px',borderLeft:'4px solid #7c3aed'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#faf5ff',borderRadius:'var(--radius)',borderLeft:'4px solid #7c3aed'}}>
         <strong>1000 kg C</strong> nécessite <strong>83 kg N + 20 kg P + 14 kg S</strong>
         <div style={{fontSize:'var(--font-sm)',color:'#7c3aed',marginTop:'0.3rem'}}>
           Sans ces nutriments, le C apporté est minéralisé au lieu d'être stabilisé.
@@ -724,14 +735,14 @@ function ComprendreMO() {
 
     <div className="mo-card">
       <h2>MAOM vs POM — La nouvelle vision (2020+)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         Depuis Cotrufo &amp; Lavallee (2019), la distinction fondamentale n'est plus labile/récalcitrant mais :
       </p>
-      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
+      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
         <li><strong>POM</strong> (Particulate Organic Matter) : débris végétaux libres, turnover rapide (années)</li>
         <li><strong>MAOM</strong> (Mineral-Associated Organic Matter) : C microbien stabilisé sur les surfaces minérales (argiles), turnover long (décennies à siècles)</li>
       </ul>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569',marginTop:'0.5rem'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginTop:'0.5rem'}}>
         <strong>Implication</strong> : le C stable du sol est majoritairement d'origine <em>microbienne</em> (nécromasse), 
         pas végétale. C'est la "pompe à carbone microbienne" (MCP, Liang et al. 2017).
       </p>
@@ -739,10 +750,10 @@ function ComprendreMO() {
 
     <div className="mo-card">
       <h2>Modes de transformation comparés</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         Le MÊME apport de matière organique donne des résultats très différents selon le mode de transformation :
       </p>
-      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
+      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
         <li><strong>Compostage aérobie</strong> : pertes C 40-60%, humification modérée</li>
         <li><strong>Bokashi (anaérobie)</strong> : pertes C &lt;10%, rétention quasi-totale</li>
         <li><strong>Incorporation directe</strong> : dépend du C/N et des conditions pédoclimatiques</li>
@@ -752,18 +763,18 @@ function ComprendreMO() {
 
     <div className="mo-card">
       <h2>Priming effect</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'#475569'}}>
+      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
         L'apport de MO fraîche peut paradoxalement <em>accélérer</em> la décomposition du carbone stable déjà présent 
         dans le sol. Ce "priming effect" s'explique par l'activation microbienne : les décomposeurs activés par 
         le substrat frais attaquent ensuite les réserves de C stable.
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#fef3c7',borderRadius:'8px',borderLeft:'4px solid #d97706',fontSize:'var(--font-base)'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#fef3c7',borderRadius:'var(--radius)',borderLeft:'4px solid #d97706',fontSize:'var(--font-base)'}}>
         <strong>Conséquence agronomique</strong> : des apports réguliers et équilibrés sont plus efficaces que 
         de gros apports ponctuels pour augmenter le stock de C du sol.
       </div>
     </div>
 
-    <div style={{textAlign:'center',fontSize:'var(--font-sm)',color:'#64748b',marginTop:'1.5rem',paddingBottom:'1rem'}}>
+    <div style={{textAlign:'center',fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'1.5rem',paddingBottom:'1rem'}}>
       Références : Kirkby et al. (2016) · Cotrufo &amp; Lavallee (2019) · Liang et al. (2017)
     </div>
 
@@ -772,7 +783,7 @@ function ComprendreMO() {
             const withPhys = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
             return <div className="mo-card">
               <h2>Caractérisation ({withPhys.length} matières documentées)</h2>
-              <p style={{fontSize:'var(--font-xs)',color:'#64748b',marginBottom:'0.75rem'}}>Données physiques, NPK et coût indicatif. Sources : Arvalis paille-fumier, guide MSV 2022.</p>
+              <p style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem'}}>Données physiques, NPK et coût indicatif. Sources : Arvalis paille-fumier, guide MSV 2022.</p>
               <div style={{overflowX:'auto'}}>
                 <table className="carac-table">
                   <thead><tr>
@@ -788,18 +799,18 @@ function ComprendreMO() {
                       const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
                       return <tr key={i}>
                         <td style={{fontWeight:500,color:'#334155',fontSize:'var(--font-sm)'}}>{c.matiere}</td>
-                        <td style={{textAlign:'center',color:'#64748b'}}>{c.densite || '—'}</td>
-                        <td style={{textAlign:'center',color:'#64748b'}}>{c.taux_ms || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.densite || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.taux_ms || '—'}</td>
                         <td style={{textAlign:'center',color:cnColor(cn)}}>{c.cn_min === c.cn_max ? c.cn_min : c.cn_min+'–'+c.cn_max}</td>
                         <td style={{textAlign:'center',color:'#2563eb'}}>{k1}</td>
-                        <td style={{textAlign:'center',color:'#059669'}}>{c.n_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'#D97706'}}>{c.p2o5_kg_t || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--success)'}}>{c.n_kg_t || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--warning)'}}>{c.p2o5_kg_t || '—'}</td>
                         <td style={{textAlign:'center',color:'#7C3AED'}}>{c.k2o_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'#2563EB'}}>{c.mgo_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'#64748b',fontSize:'var(--font-sm)'}}>
+                        <td style={{textAlign:'center',color:'var(--info)'}}>{c.mgo_kg_t || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>
                           {c.cout_min != null ? (c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Négatif' : c.cout_min+'–'+c.cout_max+' €/t')) : '—'}
                         </td>
-                        <td style={{color:'#64748b',fontSize:'var(--font-sm)'}}>{c.notes || ''}{c.epaisseur_1pct_mo_cm ? ' ('+c.epaisseur_1pct_mo_cm+' cm/+1%MO)' : ''}</td>
+                        <td style={{color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>{c.notes || ''}{c.epaisseur_1pct_mo_cm ? ' ('+c.epaisseur_1pct_mo_cm+' cm/+1%MO)' : ''}</td>
                       </tr>;
                     })}
                   </tbody>
@@ -878,8 +889,8 @@ function App() {
   return <div className="sv-page">
     {/* ── HEADER ── */}
     <div style={{textAlign:'center', padding:'1rem 1.5rem 0.5rem'}}>
-      <h1 style={{fontSize:'var(--font-xl)',fontWeight:800,color:'#1e293b',margin:0}}>Calculateur Matière Organique</h1>
-      <p style={{fontSize:'var(--font-sm)',color:'#64748b',marginTop:'0.25rem'}}>{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.regles.length} règles</p>
+      <h1 style={{fontSize:'var(--font-xl)',fontWeight:800,color:'var(--color-text)',margin:0}}>Calculateur Matière Organique</h1>
+      <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'0.25rem'}}>{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.regles.length} règles</p>
     </div>
 
     {/* ── TABS ── */}
@@ -901,14 +912,14 @@ function App() {
         </h2>
         <input type="text" placeholder="Rechercher : tonte, gazon, BRF..."
           value={filter} onChange={e => setFilter(e.target.value)}
-          style={{width:'100%',padding:'0.4rem 0.6rem',border:'1px solid #cbd5e1',borderRadius:'8px',fontSize:'var(--font-sm)',marginBottom:'0.5rem',outline:'none'}} />
+          style={{width:'100%',padding:'0.4rem 0.6rem',border:'1px solid #cbd5e1',borderRadius:'var(--radius)',fontSize:'var(--font-sm)',marginBottom:'0.5rem',outline:'none'}} />
         <div style={{display:'flex',flexWrap:'wrap',gap:'4px',marginBottom:'0.5rem'}}>
           <button onClick={() => setCatFilter(null)}
-            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'12px',border:'none',cursor:'pointer',
-              background: !catFilter ? '#1e293b' : '#f1f5f9', color: !catFilter ? '#fff' : '#64748b'}}>Tout</button>
+            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
+              background: !catFilter ? 'var(--color-text)' : 'var(--color-bg-muted)', color: !catFilter ? '#fff' : 'var(--color-text-muted)'}}>Tout</button>
           {ACTIVE_CATS.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
-            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'12px',border:'none',cursor:'pointer',
-              background: catFilter === c ? '#1e293b' : '#f1f5f9', color: catFilter === c ? '#fff' : '#64748b'}}>{c}</button>)}
+            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
+              background: catFilter === c ? 'var(--color-text)' : 'var(--color-bg-muted)', color: catFilter === c ? '#fff' : 'var(--color-text-muted)'}}>{c}</button>)}
         </div>
         <div style={{overflowY:'auto',flex:1}}>
           {filtered.map(m => {
@@ -922,8 +933,8 @@ function App() {
               </div>
               <div style={{display:'flex',gap:'4px',marginTop:'2px',alignItems:'center'}}>
                 <span className="mat-cat" style={{background:(CAT_COLORS[m.categorie]||'#888')+'20',color:CAT_COLORS[m.categorie]||'#888'}}>{m.categorie}</span>
-                {m.k1_min && <span style={{fontSize:'var(--font-sm)',color:'#64748b'}}>k₁ {m.k1_min}-{m.k1_max}%</span>}
-                {m.n_kg_t > 0 && <span style={{fontSize:'var(--font-xs)',color:'#64748b'}}>NPK</span>}
+                {m.k1_min && <span style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>k₁ {m.k1_min}-{m.k1_max}%</span>}
+                {m.n_kg_t > 0 && <span style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>NPK</span>}
               </div>
               {m.synonymes && filter && <div className="mat-syn">{m.synonymes}</div>}
             </div>;
@@ -932,7 +943,7 @@ function App() {
         {/* Toggle Sol/biomasse */}
         <div style={{marginTop:'0.5rem',paddingTop:'0.5rem',borderTop:'1px solid #cbd5e1'}}>
           <button onClick={() => setShowSolBio(!showSolBio)}
-            style={{fontSize:'var(--font-sm)',color:'#64748b',background:'none',border:'none',cursor:'pointer',textDecoration:'underline'}}>
+            style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',background:'none',border:'none',cursor:'pointer',textDecoration:'underline'}}>
             {showSolBio ? 'Masquer' : 'Afficher'} Sol/biomasse ({DATA.matieres.filter(m => m.categorie === 'Sol/biomasse').length} réf.)
           </button>
         </div>
@@ -948,7 +959,7 @@ function App() {
             <div className="kpi-sub">{zone ? zone.label : 'Ajoutez des matières'}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-value" style={{color: k1Avg > 25 ? '#059669' : k1Avg > 15 ? '#F59E0B' : '#ccc'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
+            <div className="kpi-value" style={{color: k1Avg > 25 ? 'var(--success)' : k1Avg > 15 ? '#F59E0B' : '#ccc'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
             <div className="kpi-label">k₁ humification</div>
             <div className="kpi-sub">{k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''}</div>
           </div>
@@ -958,7 +969,7 @@ function App() {
             <div className="kpi-label">par {totalQty || 0} kg</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-value" style={{color:'#1e293b'}}>{totalQty || '—'}</div>
+            <div className="kpi-value" style={{color:'var(--color-text)'}}>{totalQty || '—'}</div>
             <div className="kpi-unit">kg</div>
             <div className="kpi-label">Masse totale</div>
             <div className="kpi-sub">{panier.length} matière{panier.length !== 1 ? 's' : ''}</div>
@@ -968,16 +979,16 @@ function App() {
         {/* ── Bilan NPK ── */}
         {hasNpk && <div style={{display:'flex',gap:'8px',marginBottom:'0.75rem',flexWrap:'wrap'}}>
           {[
-            {label:'N', val:npk.n_kg_t, unit:'kg/t', color:'#059669'},
-            {label:'P₂O₅', val:npk.p2o5_kg_t, unit:'kg/t', color:'#D97706'},
+            {label:'N', val:npk.n_kg_t, unit:'kg/t', color:'var(--success)'},
+            {label:'P₂O₅', val:npk.p2o5_kg_t, unit:'kg/t', color:'var(--warning)'},
             {label:'K₂O', val:npk.k2o_kg_t, unit:'kg/t', color:'#7C3AED'},
-            {label:'MgO', val:npk.mgo_kg_t, unit:'kg/t', color:'#2563EB'},
-            {label:'C org', val:npk.c_kg_t, unit:'kg/t', color:'#64748b'},
+            {label:'MgO', val:npk.mgo_kg_t, unit:'kg/t', color:'var(--info)'},
+            {label:'C org', val:npk.c_kg_t, unit:'kg/t', color:'var(--color-text-muted)'},
           ].map(({label, val, unit, color}) => val > 0 && <div key={label} style={{
-            flex:'1',minWidth:'80px',background:'#f8fafc',border:'1px solid #cbd5e1',borderRadius:'8px',
+            flex:'1',minWidth:'80px',background:'var(--color-bg-subtle)',border:'1px solid #cbd5e1',borderRadius:'var(--radius)',
             padding:'0.5rem 0.75rem',textAlign:'center'}}>
             <div style={{fontSize:'var(--font-lg)',fontWeight:700,color}}>{val.toFixed(1)}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#64748b'}}>{label} {unit}</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{label} {unit}</div>
           </div>)}
         </div>}
 
@@ -986,7 +997,7 @@ function App() {
           <div className="cn-gauge">
             <div className="cn-gauge-marker" style={{left: Math.min(95, Math.max(2, cnGlobal / 100 * 100))+'%'}} />
           </div>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-xs)',color:'#64748b',marginTop:'2px'}}>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginTop:'2px'}}>
             <span>0</span><span>10</span><span>20</span><span>30</span><span>50</span><span>100</span>
           </div>
         </div>}
@@ -994,7 +1005,7 @@ function App() {
                 {/* ── Panier ── */}
         <div className="mo-card">
           <h2>Mélange ({panier.length} matière{panier.length !== 1 ? 's' : ''} · {totalQty} kg)</h2>
-          {panier.length === 0 && <p style={{color:'#64748b',fontSize:'var(--font-base)',fontStyle:'italic'}}>
+          {panier.length === 0 && <p style={{color:'var(--color-text-muted)',fontSize:'var(--font-base)',fontStyle:'italic'}}>
             Cliquez sur une matière à gauche ou choisissez un mélange prédéfini
           </p>}
           {panier.map(p => {
@@ -1004,8 +1015,8 @@ function App() {
               <button className="panier-remove" onClick={() => removeMatiere(p.id)}>✕</button>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontSize:'var(--font-base)',fontWeight:500,color:'#334155',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{p.matiere}</div>
-                <div style={{fontSize:'var(--font-sm)',color:'#64748b'}}>C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}% · {pct}%</div>
-                {p.n_kg_t > 0 && <div style={{fontSize:'var(--font-xs)',color:'#64748b'}}>N={p.n_kg_t} P={p.p2o5_kg_t} K={p.k2o_kg_t} Mg={p.mgo_kg_t} kg/t</div>}
+                <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}% · {pct}%</div>
+                {p.n_kg_t > 0 && <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>N={p.n_kg_t} P={p.p2o5_kg_t} K={p.k2o_kg_t} Mg={p.mgo_kg_t} kg/t</div>}
               </div>
               <input type="range" min="0" max="1000" step="10" value={p.qty}
                 onChange={e => updateQty(p.id, parseInt(e.target.value))}
@@ -1013,7 +1024,7 @@ function App() {
               <input type="number" min="0" max="10000" value={p.qty}
                 onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
                 style={{width:'60px',textAlign:'right',fontSize:'var(--font-sm)',border:'1px solid #cbd5e1',borderRadius:'6px',padding:'3px 6px'}} />
-              <span style={{fontSize:'var(--font-sm)',color:'#64748b',width:'20px'}}>kg</span>
+              <span style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',width:'20px'}}>kg</span>
             </div>;
           })}
         </div>
@@ -1026,16 +1037,16 @@ function App() {
               <span style={{fontSize:'var(--font-lg)'}}>{regle.icone}</span>
               <span style={{fontWeight:700,fontSize:'var(--font-base)',color:zone.color}}>{regle.label} — {regle.comportement}</span>
             </div>
-            {regle.interpretation && <p style={{fontSize:'var(--font-sm)',color:'#475569',lineHeight:1.5,margin:0}}>{regle.interpretation}</p>}
-            {regle.diagnostic && <p style={{fontSize:'var(--font-sm)',color:'#64748b',lineHeight:1.5,marginTop:'0.35rem'}}>{regle.diagnostic}</p>}
+            {regle.interpretation && <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',lineHeight:1.5,margin:0}}>{regle.interpretation}</p>}
+            {regle.diagnostic && <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',lineHeight:1.5,marginTop:'0.35rem'}}>{regle.diagnostic}</p>}
           </div>
           {regle.recommandation && <div className="reco-box">
-            <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'#166534',marginBottom:'0.25rem'}}>Recommandation</div>
-            <p style={{fontSize:'var(--font-sm)',color:'#475569',lineHeight:1.5,margin:0}}>{regle.recommandation}</p>
+            <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--color-success-text)',marginBottom:'0.25rem'}}>Recommandation</div>
+            <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',lineHeight:1.5,margin:0}}>{regle.recommandation}</p>
           </div>}
 
           {/* Kirkby ratio */}
-          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'10px',background:'#faf5ff',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
+          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'var(--radius)',background:'#faf5ff',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
             <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:'#6d28d9',marginBottom:'0.25rem'}}>Ratio de Kirkby</div>
             <div style={{fontSize:'var(--font-sm)',color:'#6b21a8'}}>Pour 1 tonne de C stabilisé : 83 kg N + 20 kg P + 14 kg S nécessaires.</div>
           </div>}
@@ -1055,15 +1066,15 @@ function App() {
             {Object.entries(PERTE).map(([key, mode]) => {
               const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
               const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
-              return <div key={key} style={{padding:'0.75rem',borderRadius:'10px',border:'2px solid '+mode.color+'40'}}>
+              return <div key={key} style={{padding:'0.75rem',borderRadius:'var(--radius)',border:'2px solid '+mode.color+'40'}}>
                 <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:mode.color,marginBottom:'0.25rem'}}>{mode.label}</div>
-                <div style={{fontSize:'var(--font-sm)',color:'#64748b',marginBottom:'0.5rem'}}>{mode.desc}</div>
+                <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginBottom:'0.5rem'}}>{mode.desc}</div>
                 <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-sm)'}}>
-                  <span style={{color:'#64748b'}}>Perte MO</span>
+                  <span style={{color:'var(--color-text-muted)'}}>Perte MO</span>
                   <span style={{fontWeight:600}}>{mode.min === mode.max ? mode.min+'%' : mode.min+'-'+mode.max+'%'}</span>
                 </div>
                 {humusMin != null && <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-sm)',marginTop:'2px'}}>
-                  <span style={{color:'#64748b'}}>Humus</span>
+                  <span style={{color:'var(--color-text-muted)'}}>Humus</span>
                   <span style={{fontWeight:700,color:mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
                 </div>}
                 <div style={{height:'6px',borderRadius:'3px',background:'#e5e7eb',overflow:'hidden',marginTop:'0.4rem'}}>
@@ -1075,7 +1086,7 @@ function App() {
         </div>}
 
 
-        <div style={{fontSize:'var(--font-sm)',color:'#64748b',marginTop:'1rem'}}>Calculateur MO · Formule de Kirkby (2016)</div>
+        <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'1rem'}}>Calculateur MO · Formule de Kirkby (2016)</div>
       </main>
     </div>}
   </div>;

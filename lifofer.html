@@ -22,6 +22,7 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4/dist/tailwind.min.css" rel="stylesheet">
 
+
 <style>
 
 :root {
@@ -45,6 +46,15 @@
   --font-lg: 1.15rem;
   --font-xl: 1.5rem;
   --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
   --success: #059669;
   --success-light: #D1FAE5;
   --warning: #D97706;
@@ -728,7 +738,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur LiFoFer — Litière Forestière Fermentée — Préparation interactive</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-06 09:44 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 15:32 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🌿 Calculateur LiFoFer</span>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -785,10 +795,10 @@ function convertSucreFromSource(gramsSucre, sourceSlug) {
 // ── KPI Row (durée, temp, pH, conservation) ───────────────────────
 function KPIRow({ conditions }) {
   const items = [
-    { label: "Durée", value: conditions.duree.valeur, detail: conditions.duree.detail, color: "#059669", bg: "#f0fdf4" },
-    { label: "Température", value: conditions.temperature.valeur, detail: `Optimum ${conditions.temperature.optimum}°C`, color: "#D97706", bg: "#fff7ed" },
+    { label: "Durée", value: conditions.duree.valeur, detail: conditions.duree.detail, color: "var(--success)", bg: "#f0fdf4" },
+    { label: "Température", value: conditions.temperature.valeur, detail: `Optimum ${conditions.temperature.optimum}°C`, color: "var(--warning)", bg: "#fff7ed" },
     { label: "pH cible", value: conditions.ph_cible.valeur, detail: conditions.ph_cible.detail, color: "#7C3AED", bg: "#faf5ff" },
-    { label: "Conservation", value: conditions.conservation.valeur, detail: conditions.conservation.detail, color: "#2563EB", bg: "#eff6ff" }
+    { label: "Conservation", value: conditions.conservation.valeur, detail: conditions.conservation.detail, color: "var(--info)", bg: "#eff6ff" }
   ];
   if (conditions.eh_cible) {
     items.splice(3, 0, { label: "Eh redox", value: conditions.eh_cible.valeur, detail: conditions.eh_cible.detail, color: "#4338CA", bg: "#eef2ff" });
@@ -925,12 +935,15 @@ function RecetteSidebar({ selectedId, setSelectedId, volume, setVolume, sucreSou
         {presets.map(v => <button key={v}
           onClick={() => setVolume(v)}
           className={`lf-preset-btn ${volume === v ? 'active' : ''}`}>{v} L</button>)}
-        <input type="number" min={recette.volume_min_L} max={recette.volume_max_L}
-          value={volume}
-          onChange={e => {
-            const v = parseInt(e.target.value) || recette.volume_min_L;
-            setVolume(Math.max(recette.volume_min_L, Math.min(recette.volume_max_L, v)));
+        <input type="number" key={volume} min={recette.volume_min_L} max={recette.volume_max_L}
+          defaultValue={volume}
+          onBlur={e => {
+            const v = parseInt(e.target.value);
+            if (isNaN(v) || v < recette.volume_min_L) setVolume(recette.volume_min_L);
+            else if (v > recette.volume_max_L) setVolume(recette.volume_max_L);
+            else setVolume(v);
           }}
+          onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
           className="lf-preset-input" placeholder="libre" />
       </div>
       {recette.volume_note && <div className="lf-note">{recette.volume_note}</div>}
@@ -1121,9 +1134,9 @@ function ExplicationSucre() {
       </div>
       {E.types_sucres.map((t, i) => <div key={i} className="lf-sources-row">
         <div style={{fontWeight:600}}>{t.type}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'#64748b',fontStyle:'italic'}}>{t.exemples}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'#475569'}}>{t.role}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'#64748b'}}>{t.sources}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',fontStyle:'italic'}}>{t.exemples}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-secondary)'}}>{t.role}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>{t.sources}</div>
       </div>)}
     </div>}
     <div className="lf-ref-enonce" style={{marginTop:'0.75rem'}}><strong>Dosage :</strong> {E.dosage}</div>
@@ -1217,8 +1230,8 @@ function SourcesSucreTable() {
     {SS.methode_fpj && <div className="lf-card">
       <h2>Variantes KNF — FPJ / FFJ</h2>
       <div className="lf-fpj-grid">
-        <div className="lf-fpj-card" style={{ borderLeftColor: '#059669' }}>
-          <div className="lf-fpj-title" style={{ color: '#059669' }}>{SS.methode_fpj.nom}</div>
+        <div className="lf-fpj-card" style={{ borderLeftColor: 'var(--success)' }}>
+          <div className="lf-fpj-title" style={{ color: 'var(--success)' }}>{SS.methode_fpj.nom}</div>
           <p className="lf-fpj-desc">{SS.methode_fpj.description}</p>
           <div className="lf-fpj-meta">
             <span><strong>Ratio</strong> {SS.methode_fpj.ratio}</span>
@@ -1226,8 +1239,8 @@ function SourcesSucreTable() {
           </div>
           <div className="lf-fpj-notes">{SS.methode_fpj.notes}</div>
         </div>
-        <div className="lf-fpj-card" style={{ borderLeftColor: '#DC2626' }}>
-          <div className="lf-fpj-title" style={{ color: '#DC2626' }}>{SS.methode_ffj.nom}</div>
+        <div className="lf-fpj-card" style={{ borderLeftColor: 'var(--danger)' }}>
+          <div className="lf-fpj-title" style={{ color: 'var(--danger)' }}>{SS.methode_ffj.nom}</div>
           <p className="lf-fpj-desc">{SS.methode_ffj.description}</p>
           <div className="lf-fpj-meta">
             <span><strong>Ratio</strong> {SS.methode_ffj.ratio}</span>
@@ -1276,7 +1289,7 @@ function TermesCurated() {
     {expanded && <div className="lf-termes-list">
       {DATA.terms.map((t, i) => <div key={i} className="lf-terme">
         <div className="lf-terme-head">
-          <span className="lf-terme-strate" style={{ background: (strateColors[t.strate] || '#64748b') + '20', color: strateColors[t.strate] || '#64748b' }}>{strateLabels[t.strate] || t.strate}</span>
+          <span className="lf-terme-strate" style={{ background: (strateColors[t.strate] || 'var(--color-text-muted)') + '20', color: strateColors[t.strate] || 'var(--color-text-muted)' }}>{strateLabels[t.strate] || t.strate}</span>
           <span className="lf-terme-fr">{t.fr}</span>
           {t.en && <span className="lf-terme-en">· {t.en}</span>}
         </div>
