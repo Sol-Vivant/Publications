@@ -16,25 +16,35 @@
 <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/img/lifofer-img.png" />
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
 <link rel="apple-touch-icon" href="https://sol-vivant.github.io/Publications/img/lifofer-img.png">
+
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4/dist/tailwind.min.css" rel="stylesheet">
+
 <style>
 
 :root {
   --bg: #f4f6f8;
   --card-bg: #ffffff;
   --text: #1e293b;
-  --text-secondary: #64748b;
+  --text-secondary: #475569;
   --accent: #2563EB;
   --accent-dark: #1d4ed8;
   --accent-light: #DBEAFE;
-  --border: #e2e8f0;
+  --border: #cbd5e1;
   --border-hover: #cbd5e1;
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Échelle typographique (source unique pour toutes les pages) */
+  --font-xs: 0.75rem;
+  --font-sm: 0.82rem;
+  --font-base: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.15rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.8rem;
   --success: #059669;
   --success-light: #D1FAE5;
   --warning: #D97706;
@@ -68,17 +78,17 @@ body {
   box-shadow: 0 2px 20px rgba(37,99,235,0.12);
 }
 .sv-header h1 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 .sv-header .sv-subtitle {
-  font-size: 0.85rem;
+  font-size: var(--font-base);
   opacity: 0.7;
   margin-top: 0.2rem;
 }
 .sv-header .sv-meta {
-  font-size: 0.75rem;
+  font-size: var(--font-xs);
   opacity: 0.45;
   margin-top: 0.15rem;
 }
@@ -86,9 +96,9 @@ body {
 /* ── Navigation / breadcrumb ── */
 .sv-nav {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 0.6rem 1.5rem;
-  font-size: 0.8rem;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border);
   background: var(--card-bg);
@@ -102,15 +112,15 @@ body {
 /* ── Navigation inter-pages ── */
 .sv-nav-pages {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 0.5rem 1.5rem;
-  font-size: 0.8rem;
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-sm);
   color: var(--text-secondary);
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
-  text-align: center;
+  text-align: left;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.2rem;
@@ -142,11 +152,46 @@ body {
 }
 .sv-card:hover { box-shadow: var(--shadow-hover); }
 .sv-card h2 {
-  font-size: 1.1rem;
+  font-size: var(--font-lg);
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: var(--accent);
 }
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: #f1f5f9; }
+.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ── Onglets (pattern Pratique / Comprendre) ── */
 .sv-tabs {
@@ -160,7 +205,7 @@ body {
 }
 .sv-tab:hover { color: var(--text); }
 .sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
-@media (max-width: 640px) { .sv-tab { font-size: 0.85rem; padding: 0.5rem 0.8rem; } }
+@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
 .sv-card h3 {
   font-size: 0.95rem;
   font-weight: 600;
@@ -185,7 +230,7 @@ body {
   display: inline-block;
   padding: 0.15rem 0.55rem;
   border-radius: 12px;
-  font-size: 0.75rem;
+  font-size: var(--font-xs);
   font-weight: 500;
   margin: 0.15rem;
   line-height: 1.4;
@@ -202,7 +247,7 @@ body {
   background: #f1f5f9;
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
-  font-size: 0.85rem;
+  font-size: var(--font-base);
   border-left: 4px solid var(--accent);
   margin: 0.75rem 0;
 }
@@ -215,7 +260,7 @@ body {
   padding: 0.4rem 0.6rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: var(--font-base);
   transition: border-color 0.15s;
   background: var(--card-bg);
 }
@@ -232,7 +277,7 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: var(--font-base);
   font-weight: 500;
   transition: background 0.15s;
 }
@@ -246,7 +291,7 @@ body {
   color: #fff;
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: var(--font-sm);
   max-width: 300px;
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -255,10 +300,10 @@ body {
 /* ── Footer ── */
 .sv-footer {
   max-width: 1400px;
-  margin: 2rem auto 0;
-  padding: 1rem 1.5rem;
-  text-align: center;
-  font-size: 0.75rem;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
   color: var(--text-secondary);
   border-top: 1px solid var(--border);
 }
@@ -267,8 +312,8 @@ body {
 /* ── Details / Glossary ── */
 .sv-details {
   max-width: 1400px;
-  margin: 1rem auto;
-  padding: 0 1.5rem;
+  margin: 1rem 0;
+  padding: 0 1.25rem;
 }
 .sv-details summary {
   cursor: pointer;
@@ -300,12 +345,13 @@ body {
   .sv-section { padding: 0 1rem; }
 }
 
+
 /* ═══════════════════════════════════════════════════════════════════
    LiFoFer v2 — Layout Recettes + Comprendre
    Extension de la charte Sol Vivant
    ═══════════════════════════════════════════════════════════════════ */
 
-.lf-app { max-width: 1400px; margin: 0 auto; padding: 0 1rem 2rem; }
+.lf-app { /* extends .sv-page (shared charte) */ }
 
 
 /* ── Layout Recettes ──────────────────────────────────────────────── */
@@ -338,8 +384,8 @@ body {
 .lf-recette-btn.active { background: #fff; border-color: #1e293b; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
 .lf-recette-icon { font-size: 1.4rem; flex-shrink: 0; }
 .lf-recette-meta { flex: 1; min-width: 0; }
-.lf-recette-name { font-weight: 600; font-size: 0.85rem; color: #1e293b; }
-.lf-recette-tagline { font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
+.lf-recette-name { font-weight: 600; font-size: var(--font-base); color: #1e293b; }
+.lf-recette-tagline { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
 
 /* Slider & presets */
 .lf-slider { width: 100%; margin: 0.4rem 0 0.5rem; }
@@ -349,22 +395,22 @@ body {
   background: #fff; font-size: 0.72rem; font-weight: 600; color: #64748b; cursor: pointer;
   transition: all 0.15s;
 }
-.lf-preset-btn:hover { border-color: #94a3b8; }
+.lf-preset-btn:hover { border-color: #64748b; }
 .lf-preset-btn.active { background: #059669; border-color: #059669; color: #fff; }
 
 /* Select */
 .lf-select {
   width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;
-  font-size: 0.82rem; background: #fff; cursor: pointer;
+  font-size: var(--font-sm); background: #fff; cursor: pointer;
 }
 .lf-select:focus { outline: none; border-color: #059669; }
 
-.lf-note { font-size: 0.7rem; color: #94a3b8; margin-top: 0.4rem; font-style: italic; }
+.lf-note { font-size: 0.7rem; color: #64748b; margin-top: 0.4rem; font-style: italic; }
 
 /* Number input */
 .lf-num-input {
   width: 70px; padding: 0.35rem 0.5rem; border: 1px solid #e2e8f0; border-radius: 6px;
-  font-weight: 600; text-align: center; font-size: 0.85rem;
+  font-weight: 600; text-align: center; font-size: var(--font-base);
 }
 .lf-num-input:focus { outline: none; border-color: #059669; }
 
@@ -374,20 +420,20 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1rem 1.25rem; margin-bottom: 1rem;
 }
 .lf-card h2 {
-  font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  font-size: var(--font-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: #334155; margin: 0 0 0.75rem;
 }
 .lf-card-highlight {
   background: linear-gradient(135deg, #f0fdf4, #ecfeff); border-color: #bbf7d0;
 }
-.lf-prose { font-size: 0.85rem; color: #475569; line-height: 1.55; margin: 0 0 0.5rem; }
+.lf-prose { font-size: var(--font-base); color: #475569; line-height: 1.55; margin: 0 0 0.5rem; }
 
 /* Collapse button */
 .lf-collapse-btn {
   display: flex; justify-content: space-between; align-items: center;
   width: 100%; background: none; border: none; cursor: pointer; padding: 0; text-align: left;
 }
-.lf-chevron { color: #94a3b8; font-size: 0.9rem; }
+.lf-chevron { color: #64748b; font-size: var(--font-base); }
 
 /* ── Recette Header ───────────────────────────────────────────────── */
 .lf-recette-header {
@@ -395,8 +441,8 @@ body {
   padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .lf-recette-header-title { display: flex; align-items: flex-start; gap: 0.75rem; }
-.lf-recette-header h1 { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin: 0; }
-.lf-recette-header p { font-size: 0.82rem; color: #64748b; line-height: 1.5; margin: 0.35rem 0 0; }
+.lf-recette-header h1 { font-size: var(--font-lg); font-weight: 700; color: #1e293b; margin: 0; }
+.lf-recette-header p { font-size: var(--font-sm); color: #64748b; line-height: 1.5; margin: 0.35rem 0 0; }
 
 /* ── KPI Grid ─────────────────────────────────────────────────────── */
 .lf-kpi-grid {
@@ -422,15 +468,15 @@ body {
 }
 .lf-ing-row:last-child { border-bottom: none; }
 .lf-ing-name {
-  font-weight: 600; font-size: 0.85rem; line-height: 1.35;
+  font-weight: 600; font-size: var(--font-base); line-height: 1.35;
   display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem;
 }
 .lf-ing-qty {
-  font-size: 0.82rem; white-space: nowrap; display: flex; align-items: baseline; gap: 0.35rem;
+  font-size: var(--font-sm); white-space: nowrap; display: flex; align-items: baseline; gap: 0.35rem;
 }
 .lf-ing-value { font-size: 1.05rem; font-weight: 700; }
-.lf-ing-unit { font-size: 0.75rem; color: #94a3b8; font-weight: 500; }
-.lf-ing-role { font-size: 0.78rem; color: #64748b; line-height: 1.4; }
+.lf-ing-unit { font-size: var(--font-xs); color: #64748b; font-weight: 500; }
+.lf-ing-role { font-size: var(--font-sm); color: #64748b; line-height: 1.4; }
 .lf-ing-extra { font-size: 0.7rem; color: #7C3AED; font-style: italic; margin-top: 2px; }
 
 .lf-badge {
@@ -445,20 +491,20 @@ body {
   background: #fef3c7; border-left: 3px solid #F59E0B; padding: 0.7rem 0.9rem;
   border-radius: 0 8px 8px 0; margin-bottom: 0.6rem;
 }
-.lf-test-poing-title { font-weight: 700; font-size: 0.82rem; color: #92400E; margin-bottom: 0.25rem; }
-.lf-test-poing-text { font-size: 0.78rem; color: #78350F; line-height: 1.45; }
-.lf-contenant { font-size: 0.82rem; color: #475569; line-height: 1.5; }
+.lf-test-poing-title { font-weight: 700; font-size: var(--font-sm); color: #92400E; margin-bottom: 0.25rem; }
+.lf-test-poing-text { font-size: var(--font-sm); color: #78350F; line-height: 1.45; }
+.lf-contenant { font-size: var(--font-sm); color: #475569; line-height: 1.5; }
 
 /* ── Diagnostic ───────────────────────────────────────────────────── */
 .lf-diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .lf-diag-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
 .lf-diag-ok { background: #f0fdf4; border-color: #bbf7d0; }
 .lf-diag-ko { background: #fef2f2; border-color: #fecaca; }
-.lf-diag-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.5rem; }
+.lf-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.5rem; }
 .lf-diag-ok .lf-diag-title { color: #166534; }
 .lf-diag-ko .lf-diag-title { color: #991b1b; }
 .lf-diag-list { list-style: none; padding: 0; margin: 0; }
-.lf-diag-list li { font-size: 0.78rem; line-height: 1.45; padding: 0.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.lf-diag-list li { font-size: var(--font-sm); line-height: 1.45; padding: 0.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
 .lf-diag-list li:last-child { border-bottom: none; }
 .lf-diag-list strong { color: #1e293b; }
 .lf-diag-detail { color: #64748b; }
@@ -476,13 +522,13 @@ body {
 .lf-phase-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
 .lf-phase-days { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
 .lf-phase-name { font-size: 0.92rem; font-weight: 700; }
-.lf-phase-stats { display: flex; gap: 1rem; font-size: 0.75rem; color: #475569; margin-bottom: 0.4rem; }
+.lf-phase-stats { display: flex; gap: 1rem; font-size: var(--font-xs); color: #475569; margin-bottom: 0.4rem; }
 .lf-phase-organismes { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
 .lf-phase-org {
   font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 999px;
   background: #fff; border: 1px solid #e2e8f0; color: #475569; font-style: italic;
 }
-.lf-phase-role { font-size: 0.78rem; color: #475569; line-height: 1.5; }
+.lf-phase-role { font-size: var(--font-sm); color: #475569; line-height: 1.5; }
 
 /* Redox zones */
 .lf-redox-zones {
@@ -490,7 +536,7 @@ body {
   gap: 0.5rem; margin: 0.75rem 0;
 }
 .lf-redox-zone { padding: 0.6rem 0.75rem; border-radius: 8px; border-top: 3px solid; }
-.lf-redox-label { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.2rem; }
+.lf-redox-label { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.2rem; }
 .lf-redox-eh { font-size: 0.72rem; color: #475569; font-weight: 600; margin-bottom: 0.25rem; }
 .lf-redox-process { font-size: 0.7rem; color: #64748b; line-height: 1.4; }
 
@@ -499,19 +545,19 @@ body {
 .lf-anaero-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
 .lf-anaero-good { background: #f0fdf4; border-color: #bbf7d0; }
 .lf-anaero-bad { background: #fef2f2; border-color: #fecaca; }
-.lf-anaero-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.4rem; }
+.lf-anaero-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
 .lf-anaero-good .lf-anaero-title { color: #166534; }
 .lf-anaero-bad .lf-anaero-title { color: #991b1b; }
-.lf-anaero-text { font-size: 0.78rem; color: #475569; line-height: 1.45; margin-bottom: 0.4rem; }
+.lf-anaero-text { font-size: var(--font-sm); color: #475569; line-height: 1.45; margin-bottom: 0.4rem; }
 .lf-anaero-list { list-style: none; padding: 0; margin: 0; }
-.lf-anaero-list li { font-size: 0.75rem; padding: 2px 0; color: #475569; }
+.lf-anaero-list li { font-size: var(--font-xs); padding: 2px 0; color: #475569; }
 .lf-anaero-list li::before { content: '✓ '; color: #059669; font-weight: 700; }
 .lf-anaero-signals li::before { content: '• '; color: #DC2626; }
 
 /* Bullet list */
 .lf-bullet-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
 .lf-bullet-list li {
-  font-size: 0.82rem; color: #475569; line-height: 1.55; padding: 0.3rem 0 0.3rem 1.2rem;
+  font-size: var(--font-sm); color: #475569; line-height: 1.55; padding: 0.3rem 0 0.3rem 1.2rem;
   position: relative; border-bottom: 1px solid #f1f5f9;
 }
 .lf-bullet-list li:last-child { border-bottom: none; }
@@ -530,17 +576,17 @@ body {
 .lf-ref-item { text-align: center; padding: 0.4rem; background: #fef3c7; border-radius: 6px; }
 .lf-ref-num { font-size: 1.05rem; font-weight: 800; color: #92400e; }
 .lf-ref-lbl { font-size: 0.65rem; color: #78350f; margin-top: 2px; }
-.lf-ref-note { font-size: 0.75rem; color: #78350f; line-height: 1.45; font-style: italic; }
+.lf-ref-note { font-size: var(--font-xs); color: #78350f; line-height: 1.45; font-style: italic; }
 .lf-ref-enonce {
   margin-top: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border-radius: 8px;
-  border-left: 3px solid #d97706; font-size: 0.82rem; color: #1e293b; font-weight: 500;
+  border-left: 3px solid #d97706; font-size: var(--font-sm); color: #1e293b; font-weight: 500;
 }
-.lf-note-editoriale { font-size: 0.78rem; color: #475569; line-height: 1.5; margin-top: 0.75rem; font-style: italic; }
+.lf-note-editoriale { font-size: var(--font-sm); color: #475569; line-height: 1.5; margin-top: 0.75rem; font-style: italic; }
 
 /* Convertisseur */
 .lf-converter-input {
   display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
-  font-size: 0.82rem; color: #475569; margin-bottom: 0.75rem;
+  font-size: var(--font-sm); color: #475569; margin-bottom: 0.75rem;
 }
 .lf-converter-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -550,10 +596,10 @@ body {
   padding: 0.6rem 0.75rem; border-radius: 8px; border: 2px solid;
   background: #fff;
 }
-.lf-conv-name { font-size: 0.78rem; font-weight: 600; margin-bottom: 0.3rem; }
+.lf-conv-name { font-size: var(--font-sm); font-weight: 600; margin-bottom: 0.3rem; }
 .lf-conv-main { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.2rem; white-space: nowrap; }
-.lf-conv-val { font-size: 1.1rem; font-weight: 800; color: #1e293b; }
-.lf-conv-alt { font-size: 0.72rem; color: #94a3b8; }
+.lf-conv-val { font-size: var(--font-lg); font-weight: 800; color: #1e293b; }
+.lf-conv-alt { font-size: 0.72rem; color: #64748b; }
 .lf-conv-meta { font-size: 0.68rem; color: #64748b; }
 
 /* Sources table */
@@ -566,9 +612,9 @@ body {
   font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: #64748b; border-bottom: 2px solid #e2e8f0;
 }
-.lf-num-col { text-align: right; font-size: 0.78rem; color: #475569; font-weight: 500; }
-.lf-src-name { font-weight: 600; font-size: 0.82rem; }
-.lf-src-notes { font-size: 0.7rem; color: #94a3b8; line-height: 1.4; margin-top: 2px; }
+.lf-num-col { text-align: right; font-size: var(--font-sm); color: #475569; font-weight: 500; }
+.lf-src-name { font-weight: 600; font-size: var(--font-sm); }
+.lf-src-notes { font-size: 0.7rem; color: #64748b; line-height: 1.4; margin-top: 2px; }
 .lf-src-adv { font-size: 0.72rem; color: #059669; line-height: 1.4; }
 
 /* FPJ/FFJ */
@@ -578,7 +624,7 @@ body {
   border-left: 4px solid; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
 }
 .lf-fpj-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.4rem; }
-.lf-fpj-desc { font-size: 0.78rem; color: #475569; line-height: 1.5; margin-bottom: 0.5rem; }
+.lf-fpj-desc { font-size: var(--font-sm); color: #475569; line-height: 1.5; margin-bottom: 0.5rem; }
 .lf-fpj-meta { display: flex; gap: 0.75rem; font-size: 0.72rem; color: #475569; margin-bottom: 0.4rem; }
 .lf-fpj-notes { font-size: 0.72rem; color: #64748b; font-style: italic; line-height: 1.4; }
 
@@ -592,10 +638,10 @@ body {
   font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: #64748b; border-bottom: 2px solid #e2e8f0;
 }
-.lf-dil-usage { font-weight: 600; font-size: 0.82rem; color: #1e293b; }
-.lf-dil-notes { font-size: 0.7rem; color: #94a3b8; line-height: 1.4; margin-top: 2px; }
-.lf-dil-ratio { font-weight: 700; font-size: 0.85rem; color: #059669; }
-.lf-dil-freq, .lf-dil-dose { font-size: 0.75rem; color: #475569; }
+.lf-dil-usage { font-weight: 600; font-size: var(--font-sm); color: #1e293b; }
+.lf-dil-notes { font-size: 0.7rem; color: #64748b; line-height: 1.4; margin-top: 2px; }
+.lf-dil-ratio { font-weight: 700; font-size: var(--font-base); color: #059669; }
+.lf-dil-freq, .lf-dil-dose { font-size: var(--font-xs); color: #475569; }
 
 /* Termes */
 .lf-termes-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
@@ -605,19 +651,19 @@ body {
   font-size: 0.62rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 999px;
   text-transform: uppercase; letter-spacing: 0.04em;
 }
-.lf-terme-fr { font-weight: 600; font-size: 0.82rem; color: #1e293b; }
-.lf-terme-en { font-size: 0.75rem; color: #94a3b8; font-style: italic; }
-.lf-terme-def { font-size: 0.75rem; color: #475569; line-height: 1.45; }
+.lf-terme-fr { font-weight: 600; font-size: var(--font-sm); color: #1e293b; }
+.lf-terme-en { font-size: var(--font-xs); color: #64748b; font-style: italic; }
+.lf-terme-def { font-size: var(--font-xs); color: #475569; line-height: 1.45; }
 
 /* Sources biblio */
-.lf-source-item { font-size: 0.78rem; color: #475569; line-height: 1.5; padding: 0.25rem 0; }
-.lf-source-year { color: #94a3b8; }
+.lf-source-item { font-size: var(--font-sm); color: #475569; line-height: 1.5; padding: 0.25rem 0; }
+.lf-source-year { color: #64748b; }
 .lf-source-title { color: #64748b; }
 .lf-source-link { color: #059669; text-decoration: underline; font-size: 0.72rem; }
 
 /* Footer */
 .lf-footer {
-  text-align: center; font-size: 0.7rem; color: #94a3b8;
+  text-align: center; font-size: 0.7rem; color: #64748b;
   padding: 1.5rem 0 0.5rem; border-top: 1px solid #e2e8f0; margin-top: 1.5rem;
 }
 
@@ -660,8 +706,8 @@ body {
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: #059669; margin-bottom: 0.2rem;
 }
-.lf-jalon-lieu { font-size: 0.72rem; color: #94a3b8; font-style: italic; margin-bottom: 0.15rem; }
-.lf-jalon-evenement { font-size: 0.82rem; color: #1e293b; line-height: 1.45; }
+.lf-jalon-lieu { font-size: 0.72rem; color: #64748b; font-style: italic; margin-bottom: 0.15rem; }
+.lf-jalon-evenement { font-size: var(--font-sm); color: #1e293b; line-height: 1.45; }
 .lf-jalon-sources { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
 .lf-jalon-src {
   font-size: 0.65rem; padding: 0.1rem 0.45rem; border-radius: 4px;
@@ -671,20 +717,25 @@ body {
   margin-top: 1rem; padding: 0.85rem 1rem; background: #f0fdf4;
   border-radius: 10px; border-left: 4px solid #059669;
 }
-.lf-filiation-title { font-weight: 700; font-size: 0.78rem; color: #166534; margin-bottom: 0.35rem; }
+.lf-filiation-title { font-weight: 700; font-size: var(--font-sm); color: #166534; margin-bottom: 0.35rem; }
+
 
 </style>
 </head>
 <body>
 
+
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur LiFoFer — Litière Forestière Fermentée — Préparation interactive</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-05 15:59 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-06 09:44 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
+
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🌿 Calculateur LiFoFer</span>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
 
+
 <div id="root"></div>
+
 
 <footer class="sv-footer">
   Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
@@ -692,6 +743,7 @@ body {
 </footer>
 
 <div id="sv-tooltip" class="sv-tooltip"></div>
+
 
 
 <script>
@@ -919,7 +971,7 @@ function RecettesView() {
       {/* En-tête recette */}
       <div className="lf-recette-header" style={{ borderLeftColor: recette.couleur }}>
         <div className="lf-recette-header-title">
-          <span style={{ fontSize: '1.8rem' }}>{recette.icone}</span>
+          <span style={{ fontSize:'var(--font-2xl)' }}>{recette.icone}</span>
           <div>
             <h1>{recette.nom}</h1>
             <p>{recette.description}</p>
@@ -1069,9 +1121,9 @@ function ExplicationSucre() {
       </div>
       {E.types_sucres.map((t, i) => <div key={i} className="lf-sources-row">
         <div style={{fontWeight:600}}>{t.type}</div>
-        <div style={{fontSize:'0.75rem',color:'#64748b',fontStyle:'italic'}}>{t.exemples}</div>
-        <div style={{fontSize:'0.75rem',color:'#475569'}}>{t.role}</div>
-        <div style={{fontSize:'0.75rem',color:'#64748b'}}>{t.sources}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'#64748b',fontStyle:'italic'}}>{t.exemples}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'#475569'}}>{t.role}</div>
+        <div style={{fontSize:'var(--font-xs)',color:'#64748b'}}>{t.sources}</div>
       </div>)}
     </div>}
     <div className="lf-ref-enonce" style={{marginTop:'0.75rem'}}><strong>Dosage :</strong> {E.dosage}</div>
@@ -1217,9 +1269,9 @@ function TermesCurated() {
   const strateColors = STRATES.couleurs || {};
   const strateLabels = STRATES.noms || {};
   return <div className="lf-card">
-    <button className="lf-collapse-btn" onClick={() => setExpanded(!expanded)}>
+    <button className="sv-accordion-header" style={{border:"none",background:"none",padding:0}} onClick={() => setExpanded(!expanded)}>
       <h2 style={{ margin: 0 }}>Termes du corpus ({DATA.terms.length})</h2>
-      <span className="lf-chevron">{expanded ? '▾' : '▸'}</span>
+      <span className="sv-accordion-chevron">{expanded ? '▾' : '▸'}</span>
     </button>
     {expanded && <div className="lf-termes-list">
       {DATA.terms.map((t, i) => <div key={i} className="lf-terme">
@@ -1264,7 +1316,7 @@ function ComprendreView() {
 // ── App ───────────────────────────────────────────────────────────
 function App() {
   const [tab, setTab] = React.useState('recettes');
-  return <div className="lf-app">
+  return <div className="sv-page lf-app">
     <div className="sv-tabs">
       <button className={`sv-tab ${tab === 'recettes' ? 'active' : ''}`} onClick={() => setTab('recettes')}>
         📋 Recettes
@@ -1275,9 +1327,7 @@ function App() {
     </div>
     {tab === 'recettes' && <RecettesView />}
     {tab === 'comprendre' && <div className="lf-comprendre-wrap"><ComprendreView /></div>}
-    <div className="lf-footer">
-      {DATA.corpus_name || 'Le Sol Vivant cet Holobionte'} · LiFoFer · Données depuis sol_vivant.db
-    </div>
+    <div className="lf-footer">LiFoFer · Source : Terre &amp; Humanisme</div>
   </div>;
 }
 
@@ -1285,6 +1335,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
 
 </script>
+
 
 </body>
 </html>
