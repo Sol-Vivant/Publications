@@ -63,6 +63,9 @@
   --danger-light: #FEE2E2;
   --info: #2563EB;
   --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
   --header-from: #0f172a;
   --header-to: #1e3a5f;
   --zone-sable: rgba(251,191,36,0.12);
@@ -369,90 +372,90 @@ body {
 .lf-sidebar {
   width: 300px; flex-shrink: 0; position: sticky; top: 4rem;
   height: calc(100vh - 5rem); overflow-y: auto;
-  background: #fff; border-radius: 12px; border: 1px solid #e2e8f0;
+  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1rem;
 }
 .lf-sidebar::-webkit-scrollbar { width: 4px; }
-.lf-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+.lf-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .lf-main { flex: 1; min-width: 0; }
 
-.lf-sidebar-section { margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9; }
+.lf-sidebar-section { margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-bg-muted); }
 .lf-sidebar-section:last-child { border-bottom: none; }
 .lf-sidebar-label {
   font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  color: #64748b; margin-bottom: 0.5rem;
+  color: var(--color-text-muted); margin-bottom: 0.5rem;
 }
 
 /* Recette buttons in sidebar */
 .lf-recette-btn {
   display: flex; align-items: center; gap: 0.6rem;
   width: 100%; padding: 0.65rem 0.75rem; margin-bottom: 0.4rem;
-  background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid;
+  background: var(--color-bg-subtle); border: 1px solid var(--border); border-left: 4px solid;
   border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.15s;
 }
-.lf-recette-btn:hover { background: #f1f5f9; transform: translateX(2px); }
-.lf-recette-btn.active { background: #fff; border-color: #1e293b; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.lf-recette-btn:hover { background: var(--color-bg-muted); transform: translateX(2px); }
+.lf-recette-btn.active { background: var(--card-bg); border-color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
 .lf-recette-icon { font-size: 1.4rem; flex-shrink: 0; }
 .lf-recette-meta { flex: 1; min-width: 0; }
-.lf-recette-name { font-weight: 600; font-size: var(--font-base); color: #1e293b; }
-.lf-recette-tagline { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+.lf-recette-name { font-weight: 600; font-size: var(--font-base); color: var(--text); }
+.lf-recette-tagline { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 2px; }
 
 /* Slider & presets */
 .lf-slider { width: 100%; margin: 0.4rem 0 0.5rem; }
 .lf-presets { display: flex; flex-wrap: wrap; gap: 4px; }
 .lf-preset-btn {
-  padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #e2e8f0;
-  background: #fff; font-size: 0.72rem; font-weight: 600; color: #64748b; cursor: pointer;
+  padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--card-bg); font-size: 0.72rem; font-weight: 600; color: var(--color-text-muted); cursor: pointer;
   transition: all 0.15s;
 }
-.lf-preset-btn:hover { border-color: #64748b; }
-.lf-preset-btn.active { background: #059669; border-color: #059669; color: #fff; }
+.lf-preset-btn:hover { border-color: var(--color-text-muted); }
+.lf-preset-btn.active { background: var(--success); border-color: var(--success); color: var(--card-bg); }
 
 /* Select */
 .lf-select {
-  width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 8px;
-  font-size: var(--font-sm); background: #fff; cursor: pointer;
+  width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px;
+  font-size: var(--font-sm); background: var(--card-bg); cursor: pointer;
 }
-.lf-select:focus { outline: none; border-color: #059669; }
+.lf-select:focus { outline: none; border-color: var(--success); }
 
-.lf-note { font-size: 0.7rem; color: #64748b; margin-top: 0.4rem; font-style: italic; }
+.lf-note { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 0.4rem; font-style: italic; }
 
 /* Number input */
 .lf-num-input {
-  width: 70px; padding: 0.35rem 0.5rem; border: 1px solid #e2e8f0; border-radius: 6px;
+  width: 70px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 6px;
   font-weight: 600; text-align: center; font-size: var(--font-base);
 }
-.lf-num-input:focus { outline: none; border-color: #059669; }
+.lf-num-input:focus { outline: none; border-color: var(--success); }
 
 /* ── Cards ────────────────────────────────────────────────────────── */
 .lf-card {
-  background: #fff; border-radius: 12px; border: 1px solid #e2e8f0;
+  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1rem 1.25rem; margin-bottom: 1rem;
 }
 .lf-card h2 {
   font-size: var(--font-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #334155; margin: 0 0 0.75rem;
+  color: var(--text); margin: 0 0 0.75rem;
 }
 .lf-card-highlight {
-  background: linear-gradient(135deg, #f0fdf4, #ecfeff); border-color: #bbf7d0;
+  background: linear-gradient(135deg, var(--success-light), var(--info-light)); border-color: var(--success-light);
 }
-.lf-prose { font-size: var(--font-base); color: #475569; line-height: 1.55; margin: 0 0 0.5rem; }
+.lf-prose { font-size: var(--font-base); color: var(--text-secondary); line-height: 1.55; margin: 0 0 0.5rem; }
 
 /* Collapse button */
 .lf-collapse-btn {
   display: flex; justify-content: space-between; align-items: center;
   width: 100%; background: none; border: none; cursor: pointer; padding: 0; text-align: left;
 }
-.lf-chevron { color: #64748b; font-size: var(--font-base); }
+.lf-chevron { color: var(--color-text-muted); font-size: var(--font-base); }
 
 /* ── Recette Header ───────────────────────────────────────────────── */
 .lf-recette-header {
-  background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; border-left: 4px solid;
+  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); border-left: 4px solid;
   padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .lf-recette-header-title { display: flex; align-items: flex-start; gap: 0.75rem; }
-.lf-recette-header h1 { font-size: var(--font-lg); font-weight: 700; color: #1e293b; margin: 0; }
-.lf-recette-header p { font-size: var(--font-sm); color: #64748b; line-height: 1.5; margin: 0.35rem 0 0; }
+.lf-recette-header h1 { font-size: var(--font-lg); font-weight: 700; color: var(--text); margin: 0; }
+.lf-recette-header p { font-size: var(--font-sm); color: var(--color-text-muted); line-height: 1.5; margin: 0.35rem 0 0; }
 
 /* ── KPI Grid ─────────────────────────────────────────────────────── */
 .lf-kpi-grid {
@@ -460,7 +463,7 @@ body {
   gap: 0.6rem; margin-bottom: 1rem;
 }
 .lf-kpi {
-  padding: 0.6rem 0.75rem; border-radius: 10px; border: 1px solid #e2e8f0;
+  padding: 0.6rem 0.75rem; border-radius: 10px; border: 1px solid var(--border);
   text-align: center;
 }
 .lf-kpi-label {
@@ -468,13 +471,13 @@ body {
   margin-bottom: 0.25rem;
 }
 .lf-kpi-value { font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
-.lf-kpi-detail { font-size: 0.68rem; color: #64748b; margin-top: 0.25rem; line-height: 1.3; }
+.lf-kpi-detail { font-size: 0.68rem; color: var(--color-text-muted); margin-top: 0.25rem; line-height: 1.3; }
 
 /* ── Ingredients ──────────────────────────────────────────────────── */
 .lf-ingredients { display: flex; flex-direction: column; }
 .lf-ing-row {
   display: grid; grid-template-columns: minmax(180px, 1.2fr) minmax(140px, 1fr) 2fr;
-  gap: 0.75rem; align-items: start; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f9;
+  gap: 0.75rem; align-items: start; padding: 0.6rem 0; border-bottom: 1px solid var(--color-bg-muted);
 }
 .lf-ing-row:last-child { border-bottom: none; }
 .lf-ing-name {
@@ -485,41 +488,41 @@ body {
   font-size: var(--font-sm); white-space: nowrap; display: flex; align-items: baseline; gap: 0.35rem;
 }
 .lf-ing-value { font-size: 1.05rem; font-weight: 700; }
-.lf-ing-unit { font-size: var(--font-xs); color: #64748b; font-weight: 500; }
-.lf-ing-role { font-size: var(--font-sm); color: #64748b; line-height: 1.4; }
-.lf-ing-extra { font-size: 0.7rem; color: #7C3AED; font-style: italic; margin-top: 2px; }
+.lf-ing-unit { font-size: var(--font-xs); color: var(--color-text-muted); font-weight: 500; }
+.lf-ing-role { font-size: var(--font-sm); color: var(--color-text-muted); line-height: 1.4; }
+.lf-ing-extra { font-size: 0.7rem; color: var(--purple); font-style: italic; margin-top: 2px; }
 
 .lf-badge {
   display: inline-block; padding: 0.1rem 0.5rem; border-radius: 999px;
   font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
 }
-.lf-badge-req { background: #fee2e2; color: #991b1b; }
-.lf-badge-opt { background: #e0f2fe; color: #075985; }
+.lf-badge-req { background: var(--danger-light); color: var(--color-danger-text); }
+.lf-badge-opt { background: var(--info-light); color: var(--accent-dark); }
 
 /* ── Test du poing / contenant ────────────────────────────────────── */
 .lf-test-poing {
-  background: #fef3c7; border-left: 3px solid #F59E0B; padding: 0.7rem 0.9rem;
+  background: var(--warning-light); border-left: 3px solid var(--warning); padding: 0.7rem 0.9rem;
   border-radius: 0 8px 8px 0; margin-bottom: 0.6rem;
 }
-.lf-test-poing-title { font-weight: 700; font-size: var(--font-sm); color: #92400E; margin-bottom: 0.25rem; }
-.lf-test-poing-text { font-size: var(--font-sm); color: #78350F; line-height: 1.45; }
-.lf-contenant { font-size: var(--font-sm); color: #475569; line-height: 1.5; }
+.lf-test-poing-title { font-weight: 700; font-size: var(--font-sm); color: var(--color-warning-text); margin-bottom: 0.25rem; }
+.lf-test-poing-text { font-size: var(--font-sm); color: var(--color-warning-text); line-height: 1.45; }
+.lf-contenant { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; }
 
 /* ── Diagnostic ───────────────────────────────────────────────────── */
 .lf-diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .lf-diag-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
-.lf-diag-ok { background: #f0fdf4; border-color: #bbf7d0; }
-.lf-diag-ko { background: #fef2f2; border-color: #fecaca; }
+.lf-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.lf-diag-ko { background: var(--danger-light); border-color: var(--danger-light); }
 .lf-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.5rem; }
-.lf-diag-ok .lf-diag-title { color: #166534; }
-.lf-diag-ko .lf-diag-title { color: #991b1b; }
+.lf-diag-ok .lf-diag-title { color: var(--color-success-text); }
+.lf-diag-ko .lf-diag-title { color: var(--color-danger-text); }
 .lf-diag-list { list-style: none; padding: 0; margin: 0; }
 .lf-diag-list li { font-size: var(--font-sm); line-height: 1.45; padding: 0.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
 .lf-diag-list li:last-child { border-bottom: none; }
-.lf-diag-list strong { color: #1e293b; }
-.lf-diag-detail { color: #64748b; }
+.lf-diag-list strong { color: var(--text); }
+.lf-diag-detail { color: var(--color-text-muted); }
 .lf-diag-action {
-  font-size: 0.72rem; color: #92400e; margin-top: 0.25rem;
+  font-size: 0.72rem; color: var(--color-warning-text); margin-top: 0.25rem;
   font-weight: 500; padding-left: 0.5rem;
 }
 
@@ -528,17 +531,17 @@ body {
 
 /* Succession microbienne */
 .lf-phases { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
-.lf-phase-card { padding: 0.75rem 0.9rem; border-radius: 10px; border-left: 4px solid; background: #f8fafc; }
+.lf-phase-card { padding: 0.75rem 0.9rem; border-radius: 10px; border-left: 4px solid; background: var(--color-bg-subtle); }
 .lf-phase-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
 .lf-phase-days { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
 .lf-phase-name { font-size: 0.92rem; font-weight: 700; }
-.lf-phase-stats { display: flex; gap: 1rem; font-size: var(--font-xs); color: #475569; margin-bottom: 0.4rem; }
+.lf-phase-stats { display: flex; gap: 1rem; font-size: var(--font-xs); color: var(--text-secondary); margin-bottom: 0.4rem; }
 .lf-phase-organismes { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
 .lf-phase-org {
   font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 999px;
-  background: #fff; border: 1px solid #e2e8f0; color: #475569; font-style: italic;
+  background: var(--card-bg); border: 1px solid var(--border); color: var(--text-secondary); font-style: italic;
 }
-.lf-phase-role { font-size: var(--font-sm); color: #475569; line-height: 1.5; }
+.lf-phase-role { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; }
 
 /* Redox zones */
 .lf-redox-zones {
@@ -547,56 +550,56 @@ body {
 }
 .lf-redox-zone { padding: 0.6rem 0.75rem; border-radius: 8px; border-top: 3px solid; }
 .lf-redox-label { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.2rem; }
-.lf-redox-eh { font-size: 0.72rem; color: #475569; font-weight: 600; margin-bottom: 0.25rem; }
-.lf-redox-process { font-size: 0.7rem; color: #64748b; line-height: 1.4; }
+.lf-redox-eh { font-size: 0.72rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 0.25rem; }
+.lf-redox-process { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.4; }
 
 /* Anaérobie grid */
 .lf-anaero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
 .lf-anaero-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
-.lf-anaero-good { background: #f0fdf4; border-color: #bbf7d0; }
-.lf-anaero-bad { background: #fef2f2; border-color: #fecaca; }
+.lf-anaero-good { background: var(--success-light); border-color: var(--success-light); }
+.lf-anaero-bad { background: var(--danger-light); border-color: var(--danger-light); }
 .lf-anaero-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
-.lf-anaero-good .lf-anaero-title { color: #166534; }
-.lf-anaero-bad .lf-anaero-title { color: #991b1b; }
-.lf-anaero-text { font-size: var(--font-sm); color: #475569; line-height: 1.45; margin-bottom: 0.4rem; }
+.lf-anaero-good .lf-anaero-title { color: var(--color-success-text); }
+.lf-anaero-bad .lf-anaero-title { color: var(--color-danger-text); }
+.lf-anaero-text { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.45; margin-bottom: 0.4rem; }
 .lf-anaero-list { list-style: none; padding: 0; margin: 0; }
-.lf-anaero-list li { font-size: var(--font-xs); padding: 2px 0; color: #475569; }
-.lf-anaero-list li::before { content: '✓ '; color: #059669; font-weight: 700; }
-.lf-anaero-signals li::before { content: '• '; color: #DC2626; }
+.lf-anaero-list li { font-size: var(--font-xs); padding: 2px 0; color: var(--text-secondary); }
+.lf-anaero-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.lf-anaero-signals li::before { content: '• '; color: var(--danger); }
 
 /* Bullet list */
 .lf-bullet-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
 .lf-bullet-list li {
-  font-size: var(--font-sm); color: #475569; line-height: 1.55; padding: 0.3rem 0 0.3rem 1.2rem;
-  position: relative; border-bottom: 1px solid #f1f5f9;
+  font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.55; padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative; border-bottom: 1px solid var(--color-bg-muted);
 }
 .lf-bullet-list li:last-child { border-bottom: none; }
-.lf-bullet-list li::before { content: '›'; position: absolute; left: 0; color: #059669; font-weight: 700; }
+.lf-bullet-list li::before { content: '›'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
 
 /* Règle conversion référence */
 .lf-ref-box {
-  background: #fff; border: 1px solid #d97706; border-radius: 10px;
+  background: var(--card-bg); border: 1px solid var(--warning); border-radius: 10px;
   padding: 0.85rem 1rem; margin: 0.75rem 0;
 }
 .lf-ref-box-title {
   font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  color: #92400e; margin-bottom: 0.5rem;
+  color: var(--color-warning-text); margin-bottom: 0.5rem;
 }
 .lf-ref-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.5rem; }
-.lf-ref-item { text-align: center; padding: 0.4rem; background: #fef3c7; border-radius: 6px; }
-.lf-ref-num { font-size: 1.05rem; font-weight: 800; color: #92400e; }
-.lf-ref-lbl { font-size: 0.65rem; color: #78350f; margin-top: 2px; }
-.lf-ref-note { font-size: var(--font-xs); color: #78350f; line-height: 1.45; font-style: italic; }
+.lf-ref-item { text-align: center; padding: 0.4rem; background: var(--warning-light); border-radius: 6px; }
+.lf-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.lf-ref-lbl { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+.lf-ref-note { font-size: var(--font-xs); color: var(--color-warning-text); line-height: 1.45; font-style: italic; }
 .lf-ref-enonce {
-  margin-top: 0.75rem; padding: 0.6rem 0.85rem; background: #fff; border-radius: 8px;
-  border-left: 3px solid #d97706; font-size: var(--font-sm); color: #1e293b; font-weight: 500;
+  margin-top: 0.75rem; padding: 0.6rem 0.85rem; background: var(--card-bg); border-radius: 8px;
+  border-left: 3px solid var(--warning); font-size: var(--font-sm); color: var(--text); font-weight: 500;
 }
-.lf-note-editoriale { font-size: var(--font-sm); color: #475569; line-height: 1.5; margin-top: 0.75rem; font-style: italic; }
+.lf-note-editoriale { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; margin-top: 0.75rem; font-style: italic; }
 
 /* Convertisseur */
 .lf-converter-input {
   display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
-  font-size: var(--font-sm); color: #475569; margin-bottom: 0.75rem;
+  font-size: var(--font-sm); color: var(--text-secondary); margin-bottom: 0.75rem;
 }
 .lf-converter-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -604,77 +607,77 @@ body {
 }
 .lf-conv-card {
   padding: 0.6rem 0.75rem; border-radius: 8px; border: 2px solid;
-  background: #fff;
+  background: var(--card-bg);
 }
 .lf-conv-name { font-size: var(--font-sm); font-weight: 600; margin-bottom: 0.3rem; }
 .lf-conv-main { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.2rem; white-space: nowrap; }
-.lf-conv-val { font-size: var(--font-lg); font-weight: 800; color: #1e293b; }
-.lf-conv-alt { font-size: 0.72rem; color: #64748b; }
-.lf-conv-meta { font-size: 0.68rem; color: #64748b; }
+.lf-conv-val { font-size: var(--font-lg); font-weight: 800; color: var(--text); }
+.lf-conv-alt { font-size: 0.72rem; color: var(--color-text-muted); }
+.lf-conv-meta { font-size: 0.68rem; color: var(--color-text-muted); }
 
 /* Sources table */
 .lf-sources-table { display: flex; flex-direction: column; }
 .lf-sources-header, .lf-sources-row {
   display: grid; grid-template-columns: 2fr 80px 70px 60px 2.5fr;
-  gap: 0.75rem; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f9;
+  gap: 0.75rem; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--color-bg-muted);
 }
 .lf-sources-header {
   font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #64748b; border-bottom: 2px solid #e2e8f0;
+  color: var(--color-text-muted); border-bottom: 2px solid var(--border);
 }
-.lf-num-col { text-align: right; font-size: var(--font-sm); color: #475569; font-weight: 500; }
+.lf-num-col { text-align: right; font-size: var(--font-sm); color: var(--text-secondary); font-weight: 500; }
 .lf-src-name { font-weight: 600; font-size: var(--font-sm); }
-.lf-src-notes { font-size: 0.7rem; color: #64748b; line-height: 1.4; margin-top: 2px; }
-.lf-src-adv { font-size: 0.72rem; color: #059669; line-height: 1.4; }
+.lf-src-notes { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.4; margin-top: 2px; }
+.lf-src-adv { font-size: 0.72rem; color: var(--success); line-height: 1.4; }
 
 /* FPJ/FFJ */
 .lf-fpj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem; }
 .lf-fpj-card {
-  padding: 0.85rem 1rem; border-radius: 10px; background: #f8fafc;
-  border-left: 4px solid; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;
+  padding: 0.85rem 1rem; border-radius: 10px; background: var(--color-bg-subtle);
+  border-left: 4px solid; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
 .lf-fpj-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.4rem; }
-.lf-fpj-desc { font-size: var(--font-sm); color: #475569; line-height: 1.5; margin-bottom: 0.5rem; }
-.lf-fpj-meta { display: flex; gap: 0.75rem; font-size: 0.72rem; color: #475569; margin-bottom: 0.4rem; }
-.lf-fpj-notes { font-size: 0.72rem; color: #64748b; font-style: italic; line-height: 1.4; }
+.lf-fpj-desc { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.5rem; }
+.lf-fpj-meta { display: flex; gap: 0.75rem; font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 0.4rem; }
+.lf-fpj-notes { font-size: 0.72rem; color: var(--color-text-muted); font-style: italic; line-height: 1.4; }
 
 /* Dilutions table */
 .lf-dilutions-table { display: flex; flex-direction: column; }
 .lf-dilutions-header, .lf-dilutions-row {
   display: grid; grid-template-columns: 2.5fr 1fr 1.3fr 1.3fr;
-  gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid #f1f5f9; align-items: start;
+  gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--color-bg-muted); align-items: start;
 }
 .lf-dilutions-header {
   font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #64748b; border-bottom: 2px solid #e2e8f0;
+  color: var(--color-text-muted); border-bottom: 2px solid var(--border);
 }
-.lf-dil-usage { font-weight: 600; font-size: var(--font-sm); color: #1e293b; }
-.lf-dil-notes { font-size: 0.7rem; color: #64748b; line-height: 1.4; margin-top: 2px; }
-.lf-dil-ratio { font-weight: 700; font-size: var(--font-base); color: #059669; }
-.lf-dil-freq, .lf-dil-dose { font-size: var(--font-xs); color: #475569; }
+.lf-dil-usage { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
+.lf-dil-notes { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.4; margin-top: 2px; }
+.lf-dil-ratio { font-weight: 700; font-size: var(--font-base); color: var(--success); }
+.lf-dil-freq, .lf-dil-dose { font-size: var(--font-xs); color: var(--text-secondary); }
 
 /* Termes */
 .lf-termes-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-.lf-terme { padding: 0.5rem 0.65rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+.lf-terme { padding: 0.5rem 0.65rem; background: var(--color-bg-subtle); border-radius: 8px; border: 1px solid var(--border); }
 .lf-terme-head { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.2rem; }
 .lf-terme-strate {
   font-size: 0.62rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 999px;
   text-transform: uppercase; letter-spacing: 0.04em;
 }
-.lf-terme-fr { font-weight: 600; font-size: var(--font-sm); color: #1e293b; }
-.lf-terme-en { font-size: var(--font-xs); color: #64748b; font-style: italic; }
-.lf-terme-def { font-size: var(--font-xs); color: #475569; line-height: 1.45; }
+.lf-terme-fr { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
+.lf-terme-en { font-size: var(--font-xs); color: var(--color-text-muted); font-style: italic; }
+.lf-terme-def { font-size: var(--font-xs); color: var(--text-secondary); line-height: 1.45; }
 
 /* Sources biblio */
-.lf-source-item { font-size: var(--font-sm); color: #475569; line-height: 1.5; padding: 0.25rem 0; }
-.lf-source-year { color: #64748b; }
-.lf-source-title { color: #64748b; }
-.lf-source-link { color: #059669; text-decoration: underline; font-size: 0.72rem; }
+.lf-source-item { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; padding: 0.25rem 0; }
+.lf-source-year { color: var(--color-text-muted); }
+.lf-source-title { color: var(--color-text-muted); }
+.lf-source-link { color: var(--success); text-decoration: underline; font-size: 0.72rem; }
 
 /* Footer */
 .lf-footer {
-  text-align: center; font-size: 0.7rem; color: #64748b;
-  padding: 1.5rem 0 0.5rem; border-top: 1px solid #e2e8f0; margin-top: 1.5rem;
+  text-align: center; font-size: 0.7rem; color: var(--color-text-muted);
+  padding: 1.5rem 0 0.5rem; border-top: 1px solid var(--border); margin-top: 1.5rem;
 }
 
 /* ── Responsive ──────────────────────────────────────────────────── */
@@ -693,16 +696,16 @@ body {
 }
 
 .lf-preset-input {
-  width: 70px; padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid #e2e8f0;
-  background: #fff; font-size: 0.72rem; font-weight: 600; color: #64748b;
+  width: 70px; padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--card-bg); font-size: 0.72rem; font-weight: 600; color: var(--color-text-muted);
   text-align: center;
 }
-.lf-preset-input:focus { outline: none; border-color: #059669; color: #059669; }
+.lf-preset-input:focus { outline: none; border-color: var(--success); color: var(--success); }
 
 /* ── Timeline lignée historique ─────────────────────────────────── */
 .lf-timeline {
   position: relative; margin: 1rem 0; padding-left: 1.5rem;
-  border-left: 2px solid #e2e8f0;
+  border-left: 2px solid var(--border);
 }
 .lf-jalon {
   position: relative; padding: 0.5rem 0 0.75rem 1rem; margin-bottom: 0.25rem;
@@ -710,24 +713,24 @@ body {
 .lf-jalon::before {
   content: ''; position: absolute; left: -1.9rem; top: 0.8rem;
   width: 10px; height: 10px; border-radius: 50%;
-  background: #059669; border: 2px solid #fff; box-shadow: 0 0 0 2px #059669;
+  background: var(--success); border: 2px solid var(--card-bg); box-shadow: 0 0 0 2px var(--success);
 }
 .lf-jalon-epoque {
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #059669; margin-bottom: 0.2rem;
+  color: var(--success); margin-bottom: 0.2rem;
 }
-.lf-jalon-lieu { font-size: 0.72rem; color: #64748b; font-style: italic; margin-bottom: 0.15rem; }
-.lf-jalon-evenement { font-size: var(--font-sm); color: #1e293b; line-height: 1.45; }
+.lf-jalon-lieu { font-size: 0.72rem; color: var(--color-text-muted); font-style: italic; margin-bottom: 0.15rem; }
+.lf-jalon-evenement { font-size: var(--font-sm); color: var(--text); line-height: 1.45; }
 .lf-jalon-sources { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
 .lf-jalon-src {
   font-size: 0.65rem; padding: 0.1rem 0.45rem; border-radius: 4px;
-  background: #f1f5f9; color: #64748b;
+  background: var(--color-bg-muted); color: var(--color-text-muted);
 }
 .lf-filiation {
-  margin-top: 1rem; padding: 0.85rem 1rem; background: #f0fdf4;
-  border-radius: 10px; border-left: 4px solid #059669;
+  margin-top: 1rem; padding: 0.85rem 1rem; background: var(--success-light);
+  border-radius: 10px; border-left: 4px solid var(--success);
 }
-.lf-filiation-title { font-weight: 700; font-size: var(--font-sm); color: #166534; margin-bottom: 0.35rem; }
+.lf-filiation-title { font-weight: 700; font-size: var(--font-sm); color: var(--color-success-text); margin-bottom: 0.35rem; }
 
 
 </style>
@@ -738,7 +741,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur LiFoFer — Litière Forestière Fermentée — Préparation interactive</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 15:32 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 17:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🌿 Calculateur LiFoFer</span>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -1186,7 +1189,7 @@ function SourcesSucreTable() {
         {SS.sources.filter(s => !s.est_reference && s.sucre_g_par_L > 0).map((s, i) => {
           const qty_L = gramsSucre / s.sucre_g_par_L;
           const qty_kg = qty_L * s.densite_kg_par_L;
-          const color = TYPE_COLORS[s.type] || '#888';
+          const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
           return <div key={i} className="lf-conv-card" style={{ borderColor: color }}>
             <div className="lf-conv-name" style={{ color }}>{s.nom}</div>
             <div className="lf-conv-main">
@@ -1211,7 +1214,7 @@ function SourcesSucreTable() {
           <div>Avantages</div>
         </div>
         {SS.sources.map((s, i) => {
-          const color = TYPE_COLORS[s.type] || '#888';
+          const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
           return <div key={i} className="lf-sources-row">
             <div>
               <div className="lf-src-name" style={{ color }}>{s.nom}</div>

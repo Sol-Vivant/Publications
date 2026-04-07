@@ -64,6 +64,9 @@
   --danger-light: #FEE2E2;
   --info: #2563EB;
   --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
   --header-from: #0f172a;
   --header-to: #1e3a5f;
   --zone-sable: rgba(251,191,36,0.12);
@@ -373,87 +376,87 @@ body {
   top: 1rem;
   height: calc(100vh - 2rem);
   overflow-y: auto;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 1rem;
 }
 .mo-sidebar::-webkit-scrollbar { width: 4px; }
-.mo-sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+.mo-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 .mo-main { flex: 1; min-width: 0; overflow: hidden; }
 
 /* ── Cards ── */
 .mo-card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
 }
 .mo-card h2 {
   font-size: var(--font-sm); font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.04em; color: #334155; margin-bottom: 0.75rem;
+  letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem;
 }
 
 /* ── Section didactique collapsible ── */
 .didactic-toggle {
   display: flex; justify-content: space-between; align-items: center;
   width: 100%; padding: 0.85rem 1.25rem;
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border: 1px solid #cbd5e1; border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: 1px solid var(--border); border-radius: 12px;
   cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
 }
-.didactic-toggle:hover { background: linear-gradient(135deg, #f1f5f9, #cbd5e1); border-color: #cbd5e1; }
-.didactic-toggle h2 { font-size: var(--font-base); font-weight: 700; color: #334155; margin: 0; }
-.didactic-toggle .chevron { font-size: var(--font-base); color: #64748b; transition: transform 0.2s; }
+.didactic-toggle:hover { background: linear-gradient(135deg, var(--color-bg-muted), var(--border)); border-color: var(--border); }
+.didactic-toggle h2 { font-size: var(--font-base); font-weight: 700; color: var(--text); margin: 0; }
+.didactic-toggle .chevron { font-size: var(--font-base); color: var(--color-text-muted); transition: transform 0.2s; }
 .didactic-toggle .chevron.open { transform: rotate(90deg); }
 .didactic-content { animation: fadeIn 0.2s ease-in; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── Matière item ── */
 .mat-item { padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; font-size: var(--font-base); }
-.mat-item:hover { background: #f8fafc; }
-.mat-item.in-panier { background: #f0fdf4; border-color: #bbf7d0; }
-.mat-item .mat-name { font-weight: 500; color: #334155; }
-.mat-item .mat-cn { font-size: var(--font-xs); color: #64748b; }
-.mat-item .mat-syn { font-size: 0.7rem; color: #cbd5e1; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mat-item:hover { background: var(--color-bg-subtle); }
+.mat-item.in-panier { background: var(--success-light); border-color: var(--success-light); }
+.mat-item .mat-name { font-weight: 500; color: var(--text); }
+.mat-item .mat-cn { font-size: var(--font-xs); color: var(--color-text-muted); }
+.mat-item .mat-syn { font-size: 0.7rem; color: var(--border); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mat-item .mat-cat { display: inline-block; font-size: var(--font-xs); padding: 0 6px; border-radius: 9px; line-height: 1.6; }
 
 /* ── KPI ── */
 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
-.kpi-card { text-align: center; padding: 0.4rem 0.5rem; background: #fff; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.kpi-card { text-align: center; padding: 0.4rem 0.5rem; background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .kpi-value { font-size: 1.3rem; font-weight: 800; line-height: 1; }
-.kpi-unit { font-size: var(--font-xs); color: #64748b; margin-top: 1px; }
-.kpi-label { font-size: var(--font-sm); font-weight: 500; color: #64748b; margin-top: 0.15rem; }
-.kpi-sub { font-size: 0.62rem; color: #64748b; }
+.kpi-unit { font-size: var(--font-xs); color: var(--color-text-muted); margin-top: 1px; }
+.kpi-label { font-size: var(--font-sm); font-weight: 500; color: var(--color-text-muted); margin-top: 0.15rem; }
+.kpi-sub { font-size: 0.62rem; color: var(--color-text-muted); }
 
 
 /* ── Panier ── */
-.panier-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9; }
+.panier-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--color-bg-muted); }
 .panier-item:last-child { border-bottom: none; }
-.panier-remove { color: #fca5a5; cursor: pointer; font-size: var(--font-base); border: none; background: none; padding: 2px; line-height: 1; }
-.panier-remove:hover { color: #ef4444; }
+.panier-remove { color: var(--danger-light); cursor: pointer; font-size: var(--font-base); border: none; background: none; padding: 2px; line-height: 1; }
+.panier-remove:hover { color: var(--danger); }
 
 /* ── Diagnostic ── */
 .diag-box { padding: 0.85rem 1rem; border-radius: 10px; border-left: 4px solid; margin-bottom: 0.5rem; }
-.reco-box { padding: 0.85rem 1rem; border-radius: 10px; background: #f0fdf4; border-left: 4px solid #22c55e; margin-bottom: 0.5rem; }
+.reco-box { padding: 0.85rem 1rem; border-radius: 10px; background: var(--success-light); border-left: 4px solid var(--success); margin-bottom: 0.5rem; }
 .alert-box { padding: 0.6rem 0.85rem; border-radius: 8px; font-size: var(--font-sm); margin-bottom: 0.4rem; border: 1px solid; }
-.alert-danger { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
-.alert-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
-.alert-success { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
-.alert-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+.alert-danger { background: var(--danger-light); color: var(--color-danger-text); border-color: var(--danger-light); }
+.alert-warning { background: var(--card-bg)beb; color: var(--color-warning-text); border-color: var(--warning-light); }
+.alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.alert-info { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent-light); }
 
 /* ── Gauge C/N ── */
-.cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, #ef4444 0%, #f59e0b 15%, #22c55e 22%, #22c55e 28%, #f59e0b 35%, #ef4444 60%, #7f1d1d 100%); position: relative; margin: 0.5rem 0; }
-.cn-gauge-marker { position: absolute; top: -2px; width: 4px; height: 14px; background: #1e293b; border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 4px rgba(0,0,0,0.3); }
+.cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, var(--danger) 0%, var(--warning) 15%, var(--success) 22%, var(--success) 28%, var(--warning) 35%, var(--danger) 60%, var(--color-danger-text) 100%); position: relative; margin: 0.5rem 0; }
+.cn-gauge-marker { position: absolute; top: -2px; width: 4px; height: 14px; background: var(--text); border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 4px rgba(0,0,0,0.3); }
 
 /* ── Table caractérisation ── */
 .carac-table { width: 100%; border-collapse: collapse; font-size: var(--font-sm); }
-.carac-table th { text-align: left; padding: 0.5rem 0.4rem; color: #64748b; border-bottom: 2px solid #cbd5e1; font-weight: 600; font-size: var(--font-sm); text-transform: uppercase; }
-.carac-table td { padding: 0.4rem; border-bottom: 1px solid #f1f5f9; }
-.carac-table tr:hover { background: #f8fafc; }
+.carac-table th { text-align: left; padding: 0.5rem 0.4rem; color: var(--color-text-muted); border-bottom: 2px solid var(--border); font-weight: 600; font-size: var(--font-sm); text-transform: uppercase; }
+.carac-table td { padding: 0.4rem; border-bottom: 1px solid var(--color-bg-muted); }
+.carac-table tr:hover { background: var(--color-bg-subtle); }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
@@ -467,38 +470,37 @@ body {
 }
 
 /* ── Encart Incorporation ── */
-.encart-incorp { margin-top: 0.75rem; border: 1px solid rgba(146,64,14,0.25); border-radius: 10px; overflow: hidden; background: #FFFBEB; }
-.encart-incorp-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; cursor: pointer; background: linear-gradient(135deg, #FEF3C7, rgba(253,230,138,0.25)); border-bottom: 1px solid rgba(146,64,14,0.12); transition: background 0.2s; }
-.encart-incorp-header:hover { background: linear-gradient(135deg, #FDE68A, rgba(253,230,138,0.4)); }
-.encart-incorp-title { flex: 1; font-weight: 600; font-size: var(--font-base); color: #92400E; }
-.encart-incorp-body { padding: 0.75rem 1rem; font-size: var(--font-sm); color: #44403C; line-height: 1.5; }
-.encart-incorp-subtitle { font-weight: 600; font-size: var(--font-sm); color: #78350F; margin: 0.75rem 0 0.35rem; }
+.encart-incorp { margin-top: 0.75rem; border: 1px solid rgba(146,64,14,0.25); border-radius: 10px; overflow: hidden; background: var(--card-bg)BEB; }
+.encart-incorp-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; cursor: pointer; background: linear-gradient(135deg, var(--warning-light), rgba(253,230,138,0.25)); border-bottom: 1px solid rgba(146,64,14,0.12); transition: background 0.2s; }
+.encart-incorp-header:hover { background: linear-gradient(135deg, var(--warning-light), rgba(253,230,138,0.4)); }
+.encart-incorp-title { flex: 1; font-weight: 600; font-size: var(--font-base); color: var(--color-warning-text); }
+.encart-incorp-.encart-incorp-subtitle { font-weight: 600; font-size: var(--font-sm); color: var(--color-warning-text); margin: 0.75rem 0 0.35rem; }
 .encart-condition { display: flex; gap: 0.5rem; padding: 0.3rem 0; align-items: flex-start; }
-.encart-condition-check { color: #92400E; font-size: var(--font-base); flex-shrink: 0; margin-top: 1px; }
-.encart-condition-label { font-weight: 500; font-size: var(--font-sm); color: #44403C; }
-.encart-condition-detail { font-size: var(--font-xs); color: #78716C; line-height: 1.4; }
+.encart-condition-check { color: var(--color-warning-text); font-size: var(--font-base); flex-shrink: 0; margin-top: 1px; }
+.encart-condition-label { font-weight: 500; font-size: var(--font-sm); color: var(--text); }
+.encart-condition-detail { font-size: var(--font-xs); color: var(--color-text-muted); line-height: 1.4; }
 .encart-eh-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin: 0.5rem 0; }
 .encart-eh-zone { padding: 0.5rem; border-radius: 8px; }
 .encart-anaero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0.5rem 0; }
 @media (max-width: 640px) { .encart-anaero-grid { grid-template-columns: 1fr; } }
 .encart-anaero-card { padding: 0.6rem; border-radius: 8px; font-size: var(--font-sm); }
-.encart-anaero-subie { background: #FEF2F2; border: 1px solid #FECACA; }
-.encart-anaero-choisie { background: #F0FDF4; border: 1px solid #BBF7D0; }
-.encart-anaero-header-bad { font-weight: 700; font-size: var(--font-sm); color: #991B1B; margin-bottom: 0.3rem; }
-.encart-anaero-header-good { font-weight: 700; font-size: var(--font-sm); color: #166534; margin-bottom: 0.3rem; }
-.encart-anaero-action { margin-top: 0.4rem; padding: 0.3rem 0.5rem; background: #FEE2E2; border-radius: 4px; font-weight: 600; font-size: var(--font-xs); color: #991B1B; }
-.encart-anaero-note { margin-top: 0.4rem; font-size: var(--font-sm); color: #166534; font-style: italic; }
+.encart-anaero-subie { background: var(--danger-light); border: 1px solid var(--danger-light); }
+.encart-anaero-choisie { background: var(--success-light); border: 1px solid var(--success-light); }
+.encart-anaero-header-bad { font-weight: 700; font-size: var(--font-sm); color: var(--color-danger-text); margin-bottom: 0.3rem; }
+.encart-anaero-header-good { font-weight: 700; font-size: var(--font-sm); color: var(--color-success-text); margin-bottom: 0.3rem; }
+.encart-anaero-action { margin-top: 0.4rem; padding: 0.3rem 0.5rem; background: var(--danger-light); border-radius: 4px; font-weight: 600; font-size: var(--font-xs); color: var(--color-danger-text); }
+.encart-anaero-note { margin-top: 0.4rem; font-size: var(--font-sm); color: var(--color-success-text); font-style: italic; }
 .encart-signal-list { list-style: none; padding: 0; margin: 0; }
-.encart-signal-list li { font-size: var(--font-xs); color: #7F1D1D; padding: 1px 0; }
-.encart-signal-list li::before { content: '\2022 '; color: #DC2626; }
+.encart-signal-list li { font-size: var(--font-xs); color: var(--color-danger-text); padding: 1px 0; }
+.encart-signal-list li::before { content: '\2022 '; color: var(--danger); }
 .encart-technique-list { list-style: none; padding: 0; margin: 0.25rem 0; }
-.encart-technique-list li { font-size: var(--font-xs); color: #166534; padding: 1px 0; }
-.encart-technique-list li::before { content: '\2713 '; color: #059669; }
-.encart-microsites { font-size: var(--font-xs); color: #78716C; padding: 0.4rem 0.5rem; background: rgba(146,64,14,0.05); border-radius: 4px; margin: 0.4rem 0; font-style: italic; }
-.encart-timeline { padding: 0.5rem; background: rgba(254,243,199,0.3); border-left: 3px solid #D97706; border-radius: 0 4px 4px 0; margin: 0.5rem 0; font-size: var(--font-sm); }
+.encart-technique-list li { font-size: var(--font-xs); color: var(--color-success-text); padding: 1px 0; }
+.encart-technique-list li::before { content: '\2713 '; color: var(--success); }
+.encart-microsites { font-size: var(--font-xs); color: var(--color-text-muted); padding: 0.4rem 0.5rem; background: rgba(146,64,14,0.05); border-radius: 4px; margin: 0.4rem 0; font-style: italic; }
+.encart-timeline { padding: 0.5rem; background: rgba(254,243,199,0.3); border-left: 3px solid var(--warning); border-radius: 0 4px 4px 0; margin: 0.5rem 0; font-size: var(--font-sm); }
 .encart-case { padding: 0.35rem 0; border-bottom: 1px solid rgba(146,64,14,0.08); }
 .encart-case:last-child { border-bottom: none; }
-.encart-source { margin-top: 0.5rem; font-size: 0.7rem; color: #A8A29E; font-style: italic; }
+.encart-source { margin-top: 0.5rem; font-size: 0.7rem; color: var(--color-text-muted); font-style: italic; }
 
 
 </style>
@@ -509,7 +511,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 15:32 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 17:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -535,7 +537,7 @@ const DATA = {"matieres": [{"id": 96, "categorie": "Fumier/compost", "matiere": 
 
 // ── Helpers & Constants ──
 const ACTIVE_CATS = [...new Set(DATA.matieres.map(m => m.categorie))].filter(c => c !== 'Sol/biomasse');
-const CAT_COLORS_DEFAULT = ['var(--success)', 'var(--warning)', 'var(--danger)', 'var(--info)', '#6B7280', '#7C3AED', '#EC4899', '#14B8A6'];
+const CAT_COLORS_DEFAULT = ['var(--success)', 'var(--warning)', 'var(--danger)', 'var(--info)', 'var(--color-text-muted)', 'var(--purple, #7c3aed)', 'var(--danger)', 'var(--success)'];
 const CAT_COLORS = DATA.cat_colors || Object.fromEntries([...new Set(DATA.matieres.map(m => m.categorie))].map((c, i) => [c, CAT_COLORS_DEFAULT[i % CAT_COLORS_DEFAULT.length]]));
 
 function parseCnNote(note) {
@@ -565,16 +567,16 @@ function getRegle(cn) {
 function cnColor(cn) {
   // Dérivé des règles C/N : rouge extrêmes, vert optimal, ambre transition
   const r = getRegle(cn);
-  if (!r) return '#6B7280';
+  if (!r) return 'var(--color-text-muted)';
   if (r.icone === '🔥' || r.icone === '🧊' || r.icone === '❄️') return 'var(--danger)';
   if (r.icone === '✅' || r.icone === '🌱') return 'var(--success)';
-  return '#F59E0B';
+  return 'var(--warning)';
 }
 
 function cnZone(cn) {
   if (cn == null) return null;
   const r = getRegle(cn);
-  if (!r) return { label: '?', color: '#6B7280' };
+  if (!r) return { label: '?', color: 'var(--color-text-muted)' };
   return { label: r.label, color: cnColor(cn) };
 }
 
@@ -605,7 +607,7 @@ function EncartIncorporation({ cn }) {
       <span className="sv-accordion-chevron" style={{transform:expanded?'rotate(90deg)':'none'}}>▸</span>
     </div>
     {expanded && <div className="encart-incorp-body">
-      <p style={{fontSize:'var(--font-sm)',color:'#44403C',lineHeight:'1.5',marginBottom:'0.75rem'}}>{encart.contenu}</p>
+      <p style={{fontSize:'var(--font-sm)',color:'var(--text)',lineHeight:'1.5',marginBottom:'0.75rem'}}>{encart.contenu}</p>
       {encart.conditions && encart.conditions.length > 0 && <div style={{marginBottom:'0.75rem'}}>
         <div className="encart-incorp-subtitle">Conditions requises</div>
         {encart.conditions.map((c, i) =>
@@ -626,15 +628,15 @@ function EncartIncorporation({ cn }) {
         
 
 
-    <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>{z.eh_min != null ? 'Eh > '+z.eh_min+' mV' : z.eh_max != null ? 'Eh < '+z.eh_max+' mV' : ''}</div>
+    <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{z.eh_min != null ? 'Eh > '+z.eh_min+' mV' : z.eh_max != null ? 'Eh < '+z.eh_max+' mV' : ''}</div>
             <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',marginTop:'2px'}}>{z.process}</div>
           </div>)}
         </div>
         <div className="encart-anaero-grid">
           <div className="encart-anaero-card encart-anaero-subie">
             <div className="encart-anaero-header-bad">{rdx.anaerobie_subie.icon} {rdx.anaerobie_subie.label}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'#4B5563',marginBottom:'4px'}}>{rdx.anaerobie_subie.risques}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'#6B7280',marginBottom:'2px'}}>Signaux terrain :</div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',marginBottom:'4px'}}>{rdx.anaerobie_subie.risques}</div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'2px'}}>Signaux terrain :</div>
             <ul className="encart-signal-list">
               {rdx.anaerobie_subie.signaux.map((s, i) => <li key={i}>{s}</li>)}
             </ul>
@@ -642,7 +644,7 @@ function EncartIncorporation({ cn }) {
           </div>
           <div className="encart-anaero-card encart-anaero-choisie">
             <div className="encart-anaero-header-good">{rdx.anaerobie_choisie.icon} {rdx.anaerobie_choisie.label}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'#4B5563',marginBottom:'4px'}}>{rdx.anaerobie_choisie.avantage}</div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',marginBottom:'4px'}}>{rdx.anaerobie_choisie.avantage}</div>
             <ul className="encart-technique-list">
               {rdx.anaerobie_choisie.techniques.map((t, i) => <li key={i}>{t}</li>)}
             </ul>
@@ -660,22 +662,22 @@ function EncartIncorporation({ cn }) {
             {label:'Anaérobie',range:'< 200 mV',desc:'Fermentation',color:'var(--danger)'}
           ]).map((z,i) => <div key={i} className="encart-eh-zone" style={{background:z.color+'20',borderLeft:'3px solid '+z.color}}>
             <div style={{color:z.color,fontWeight:600,fontSize:'var(--font-sm)'}}>{z.label}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>Eh {z.range}</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>Eh {z.range}</div>
             <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)'}}>{z.desc}</div>
           </div>)}
         </div>
       </div>}
       {encart.timeline && <div className="encart-timeline">
         <span style={{fontWeight:600,fontSize:'var(--font-sm)',color:'var(--color-warning-text)'}}>Période de transition : </span>
-        <span style={{fontSize:'var(--font-sm)',color:'#44403C'}}>{encart.timeline}</span>
+        <span style={{fontSize:'var(--font-sm)',color:'var(--text)'}}>{encart.timeline}</span>
       </div>}
       {encart.cas_etude && encart.cas_etude.length > 0 && <div style={{marginTop:'0.5rem'}}>
         <div className="encart-incorp-subtitle">Cas documentés (réseau MSV / Ver de Terre Production)</div>
         {encart.cas_etude.map((c, i) =>
           <div key={i} className="encart-case">
-            <div style={{fontSize:'var(--font-sm)'}}><strong>{c.nom}</strong> <span style={{color:'#A8A29E'}}>({c.type})</span></div>
-            <div style={{fontSize:'var(--font-xs)',color:'#44403C'}}>MO : {c.mo_avant} → <strong style={{color:'var(--success)'}}>{c.mo_apres}</strong> en {c.duree}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#78716C'}}>{c.detail}</div>
+            <div style={{fontSize:'var(--font-sm)'}}><strong>{c.nom}</strong> <span style={{color:'var(--color-text-muted)'}}>({c.type})</span></div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--text)'}}>MO : {c.mo_avant} → <strong style={{color:'var(--success)'}}>{c.mo_apres}</strong> en {c.duree}</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{c.detail}</div>
           </div>
         )}
       </div>}
@@ -695,7 +697,7 @@ function ComprendreMO() {
         Un C/N élevé (&gt;25) favorise l'immobilisation de l'azote par les microbes décomposeurs. 
         La plage 20-25 est optimale pour l'humification.
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#f0fdf4',borderRadius:'var(--radius)',fontSize:'var(--font-base)'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--success-light)',borderRadius:'var(--radius)',fontSize:'var(--font-base)'}}>
         <strong>Règle pratique :</strong> mélange C/N ≈ 25 = équilibre décomposition/humification.
       </div>
     </div>
@@ -725,9 +727,9 @@ function ComprendreMO() {
         Kirkby et al. (2016) ont montré que la formation d'humus stable nécessite un apport équilibré en 
         nutriments (C:N:P:S). Le ratio-clé pour séquestrer 1 tonne de carbone stable :
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#faf5ff',borderRadius:'var(--radius)',borderLeft:'4px solid #7c3aed'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--purple-light, #faf5ff)',borderRadius:'var(--radius)',borderLeft:'4px solid #7c3aed'}}>
         <strong>1000 kg C</strong> nécessite <strong>83 kg N + 20 kg P + 14 kg S</strong>
-        <div style={{fontSize:'var(--font-sm)',color:'#7c3aed',marginTop:'0.3rem'}}>
+        <div style={{fontSize:'var(--font-sm)',color:'var(--purple, #7c3aed)',marginTop:'0.3rem'}}>
           Sans ces nutriments, le C apporté est minéralisé au lieu d'être stabilisé.
         </div>
       </div>
@@ -768,7 +770,7 @@ function ComprendreMO() {
         dans le sol. Ce "priming effect" s'explique par l'activation microbienne : les décomposeurs activés par 
         le substrat frais attaquent ensuite les réserves de C stable.
       </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'#fef3c7',borderRadius:'var(--radius)',borderLeft:'4px solid #d97706',fontSize:'var(--font-base)'}}>
+      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--warning-light)',borderRadius:'var(--radius)',borderLeft:'4px solid #d97706',fontSize:'var(--font-base)'}}>
         <strong>Conséquence agronomique</strong> : des apports réguliers et équilibrés sont plus efficaces que 
         de gros apports ponctuels pour augmenter le stock de C du sol.
       </div>
@@ -798,14 +800,14 @@ function ComprendreMO() {
                       const cn = (c.cn_min + (c.cn_max || c.cn_min)) / 2;
                       const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
                       return <tr key={i}>
-                        <td style={{fontWeight:500,color:'#334155',fontSize:'var(--font-sm)'}}>{c.matiere}</td>
+                        <td style={{fontWeight:500,color:'var(--text)',fontSize:'var(--font-sm)'}}>{c.matiere}</td>
                         <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.densite || '—'}</td>
                         <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.taux_ms || '—'}</td>
                         <td style={{textAlign:'center',color:cnColor(cn)}}>{c.cn_min === c.cn_max ? c.cn_min : c.cn_min+'–'+c.cn_max}</td>
-                        <td style={{textAlign:'center',color:'#2563eb'}}>{k1}</td>
+                        <td style={{textAlign:'center',color:'var(--accent)'}}>{k1}</td>
                         <td style={{textAlign:'center',color:'var(--success)'}}>{c.n_kg_t || '—'}</td>
                         <td style={{textAlign:'center',color:'var(--warning)'}}>{c.p2o5_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'#7C3AED'}}>{c.k2o_kg_t || '—'}</td>
+                        <td style={{textAlign:'center',color:'var(--purple, #7c3aed)'}}>{c.k2o_kg_t || '—'}</td>
                         <td style={{textAlign:'center',color:'var(--info)'}}>{c.mgo_kg_t || '—'}</td>
                         <td style={{textAlign:'center',color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>
                           {c.cout_min != null ? (c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Négatif' : c.cout_min+'–'+c.cout_max+' €/t')) : '—'}
@@ -907,7 +909,7 @@ function App() {
     {tab === 'pratique' && <div className="mo-layout">
       {/* ══════════ SIDEBAR GAUCHE : Matières ══════════ */}
       <aside className="mo-sidebar">
-        <h2 style={{fontSize:'var(--font-sm)',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',color:'#334155',marginBottom:'0.5rem'}}>
+        <h2 style={{fontSize:'var(--font-sm)',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',color:'var(--text)',marginBottom:'0.5rem'}}>
           Matières ({filtered.length})
         </h2>
         <input type="text" placeholder="Rechercher : tonte, gazon, BRF..."
@@ -916,10 +918,10 @@ function App() {
         <div style={{display:'flex',flexWrap:'wrap',gap:'4px',marginBottom:'0.5rem'}}>
           <button onClick={() => setCatFilter(null)}
             style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
-              background: !catFilter ? 'var(--color-text)' : 'var(--color-bg-muted)', color: !catFilter ? '#fff' : 'var(--color-text-muted)'}}>Tout</button>
+              background: !catFilter ? 'var(--color-text)' : 'var(--color-bg-muted)', color: !catFilter ? 'var(--card-bg)' : 'var(--color-text-muted)'}}>Tout</button>
           {ACTIVE_CATS.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
             style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
-              background: catFilter === c ? 'var(--color-text)' : 'var(--color-bg-muted)', color: catFilter === c ? '#fff' : 'var(--color-text-muted)'}}>{c}</button>)}
+              background: catFilter === c ? 'var(--color-text)' : 'var(--color-bg-muted)', color: catFilter === c ? 'var(--card-bg)' : 'var(--color-text-muted)'}}>{c}</button>)}
         </div>
         <div style={{overflowY:'auto',flex:1}}>
           {filtered.map(m => {
@@ -932,7 +934,7 @@ function App() {
                 <span className="mat-cn">C/N {cn ? cn.toFixed(0) : '?'}</span>
               </div>
               <div style={{display:'flex',gap:'4px',marginTop:'2px',alignItems:'center'}}>
-                <span className="mat-cat" style={{background:(CAT_COLORS[m.categorie]||'#888')+'20',color:CAT_COLORS[m.categorie]||'#888'}}>{m.categorie}</span>
+                <span className="mat-cat" style={{background:(CAT_COLORS[m.categorie]||'var(--color-text-muted)')+'20',color:CAT_COLORS[m.categorie]||'var(--color-text-muted)'}}>{m.categorie}</span>
                 {m.k1_min && <span style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>k₁ {m.k1_min}-{m.k1_max}%</span>}
                 {m.n_kg_t > 0 && <span style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>NPK</span>}
               </div>
@@ -954,17 +956,17 @@ function App() {
         {/* ── KPI ROW ── */}
         <div className="kpi-grid">
           <div className="kpi-card">
-            <div className="kpi-value" style={{color: cnGlobal ? cnColor(cnGlobal) : '#ccc'}}>{cnGlobal ? cnGlobal.toFixed(1) : '—'}</div>
+            <div className="kpi-value" style={{color: cnGlobal ? cnColor(cnGlobal) : 'var(--border)'}}>{cnGlobal ? cnGlobal.toFixed(1) : '—'}</div>
             <div className="kpi-label">C/N global</div>
             <div className="kpi-sub">{zone ? zone.label : 'Ajoutez des matières'}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-value" style={{color: k1Avg > 25 ? 'var(--success)' : k1Avg > 15 ? '#F59E0B' : '#ccc'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
+            <div className="kpi-value" style={{color: k1Avg > 25 ? 'var(--success)' : k1Avg > 15 ? 'var(--warning)' : 'var(--border)'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
             <div className="kpi-label">k₁ humification</div>
             <div className="kpi-sub">{k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-value" style={{color:'#7C3AED'}}>{humusKg ? humusKg.toFixed(0) : '—'}</div>
+            <div className="kpi-value" style={{color:'var(--purple, #7c3aed)'}}>{humusKg ? humusKg.toFixed(0) : '—'}</div>
             <div className="kpi-unit">kg humus</div>
             <div className="kpi-label">par {totalQty || 0} kg</div>
           </div>
@@ -981,7 +983,7 @@ function App() {
           {[
             {label:'N', val:npk.n_kg_t, unit:'kg/t', color:'var(--success)'},
             {label:'P₂O₅', val:npk.p2o5_kg_t, unit:'kg/t', color:'var(--warning)'},
-            {label:'K₂O', val:npk.k2o_kg_t, unit:'kg/t', color:'#7C3AED'},
+            {label:'K₂O', val:npk.k2o_kg_t, unit:'kg/t', color:'var(--purple, #7c3aed)'},
             {label:'MgO', val:npk.mgo_kg_t, unit:'kg/t', color:'var(--info)'},
             {label:'C org', val:npk.c_kg_t, unit:'kg/t', color:'var(--color-text-muted)'},
           ].map(({label, val, unit, color}) => val > 0 && <div key={label} style={{
@@ -1014,7 +1016,7 @@ function App() {
             return <div key={p.id} className="panier-item">
               <button className="panier-remove" onClick={() => removeMatiere(p.id)}>✕</button>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:'var(--font-base)',fontWeight:500,color:'#334155',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{p.matiere}</div>
+                <div style={{fontSize:'var(--font-base)',fontWeight:500,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{p.matiere}</div>
                 <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}% · {pct}%</div>
                 {p.n_kg_t > 0 && <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>N={p.n_kg_t} P={p.p2o5_kg_t} K={p.k2o_kg_t} Mg={p.mgo_kg_t} kg/t</div>}
               </div>
@@ -1046,9 +1048,9 @@ function App() {
           </div>}
 
           {/* Kirkby ratio */}
-          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'var(--radius)',background:'#faf5ff',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
-            <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:'#6d28d9',marginBottom:'0.25rem'}}>Ratio de Kirkby</div>
-            <div style={{fontSize:'var(--font-sm)',color:'#6b21a8'}}>Pour 1 tonne de C stabilisé : 83 kg N + 20 kg P + 14 kg S nécessaires.</div>
+          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'var(--radius)',background:'var(--purple-light, #faf5ff)',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
+            <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:'var(--purple-dark, #6d28d9)',marginBottom:'0.25rem'}}>Ratio de Kirkby</div>
+            <div style={{fontSize:'var(--font-sm)',color:'var(--purple-dark, #6b21a8)'}}>Pour 1 tonne de C stabilisé : 83 kg N + 20 kg P + 14 kg S nécessaires.</div>
           </div>}
 
           {/* Alertes */}
@@ -1077,7 +1079,7 @@ function App() {
                   <span style={{color:'var(--color-text-muted)'}}>Humus</span>
                   <span style={{fontWeight:700,color:mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
                 </div>}
-                <div style={{height:'6px',borderRadius:'3px',background:'#e5e7eb',overflow:'hidden',marginTop:'0.4rem'}}>
+                <div style={{height:'6px',borderRadius:'3px',background:'var(--border)',overflow:'hidden',marginTop:'0.4rem'}}>
                   <div style={{height:'100%',borderRadius:'3px',background:mode.color,width:(100-mode.max)+'%',transition:'width 0.3s'}} />
                 </div>
               </div>;
