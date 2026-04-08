@@ -449,7 +449,7 @@ body {
 .alert-info { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent-light); }
 
 /* ── Gauge C/N ── */
-.cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, var(--danger) 0%, var(--warning) 15%, var(--success) 22%, var(--success) 28%, var(--warning) 35%, var(--danger) 60%, var(--color-danger-text) 100%); position: relative; margin: 0.5rem 0; }
+.cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, var(--danger) 0%, var(--warning) 35%, var(--success) 48%, var(--success) 55%, var(--warning) 65%, var(--danger) 85%, var(--color-danger-text) 100%); position: relative; margin: 0.5rem 0; }
 .cn-gauge-marker { position: absolute; top: -2px; width: 4px; height: 14px; background: var(--text); border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 4px rgba(0,0,0,0.3); }
 
 /* ── Table caractérisation ── */
@@ -511,7 +511,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-07 17:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 08:38 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -891,8 +891,7 @@ function App() {
   return <div className="sv-page">
     {/* ── HEADER ── */}
     <div style={{textAlign:'center', padding:'1rem 1.5rem 0.5rem'}}>
-      <h1 style={{fontSize:'var(--font-xl)',fontWeight:800,color:'var(--color-text)',margin:0}}>Calculateur Matière Organique</h1>
-      <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'0.25rem'}}>{DATA.matieres.length} matières · {DATA.melanges.length} mélanges · {DATA.regles.length} règles</p>
+      
     </div>
 
     {/* ── TABS ── */}
@@ -997,10 +996,10 @@ function App() {
         {/* ── Jauge C/N ── */}
         {cnGlobal && <div style={{marginBottom:'1rem'}}>
           <div className="cn-gauge">
-            <div className="cn-gauge-marker" style={{left: Math.min(95, Math.max(2, cnGlobal / 100 * 100))+'%'}} />
+            <div className="cn-gauge-marker" style={{left: Math.min(95, Math.max(2, Math.log(Math.max(1, cnGlobal)) / Math.log(500) * 100))+'%'}} />
           </div>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginTop:'2px'}}>
-            <span>0</span><span>10</span><span>20</span><span>30</span><span>50</span><span>100</span>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginTop:'2px',padding:'0 2px'}}>
+            <span>Minéralisation très forte</span><span>Équilibre</span><span>Immobilisation très forte</span>
           </div>
         </div>}
 
