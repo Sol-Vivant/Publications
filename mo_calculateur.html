@@ -17,12 +17,11 @@
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
 <link rel="apple-touch-icon" href="https://sol-vivant.github.io/Publications/img/mo-img.png">
 
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
 
 <style>
 
@@ -359,17 +358,21 @@ body {
   .sv-section { padding: 0 1rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Layout principal ── */
-.mo-layout {
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 1.5rem;
   min-height: calc(100vh - 80px);
 }
-.mo-sidebar {
+.sv-sidebar {
   width: 320px;
   flex-shrink: 0;
   position: sticky;
@@ -379,41 +382,580 @@ body {
   background: var(--card-bg);
   border-radius: 12px;
   border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow);
   padding: 1rem;
 }
-.mo-sidebar::-webkit-scrollbar { width: 4px; }
-.mo-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-.mo-main { flex: 1; min-width: 0; overflow: hidden; }
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
 
-/* ── Cards ── */
-.mo-card {
-  background: var(--card-bg);
-  border-radius: 12px;
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
   border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
   padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
   margin-bottom: 1rem;
 }
-.mo-card h2 {
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '¹3 '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '2 '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+/* ── MO Calculator — CSS spécifique page ── */
+/* Classes de layout/card/KPI/table/alert migrées vers CHARTER_CSS (sv-*) */
+
+/* ── sv-card h2 override (style outil scientifique) ── */
+.sv-card h2 {
   font-size: var(--font-sm); font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem;
 }
-
-/* ── Section didactique collapsible ── */
-.didactic-toggle {
-  display: flex; justify-content: space-between; align-items: center;
-  width: 100%; padding: 0.85rem 1.25rem;
-  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
-  border: 1px solid var(--border); border-radius: 12px;
-  cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
-}
-.didactic-toggle:hover { background: linear-gradient(135deg, var(--color-bg-muted), var(--border)); border-color: var(--border); }
-.didactic-toggle h2 { font-size: var(--font-base); font-weight: 700; color: var(--text); margin: 0; }
-.didactic-toggle .chevron { font-size: var(--font-base); color: var(--color-text-muted); transition: transform 0.2s; }
-.didactic-toggle .chevron.open { transform: rotate(90deg); }
-.didactic-content { animation: fadeIn 0.2s ease-in; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── Matière item ── */
 .mat-item { padding: 0.4rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; font-size: var(--font-sm); }
@@ -424,15 +966,6 @@ body {
 .mat-item .mat-syn { font-size: 0.7rem; color: var(--border); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mat-item .mat-cat { display: inline-block; font-size: var(--font-xs); padding: 0 6px; border-radius: 9px; line-height: 1.6; }
 
-/* ── KPI ── */
-.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
-.kpi-card { text-align: center; padding: 0.4rem 0.5rem; background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.kpi-value { font-size: 1.3rem; font-weight: 800; line-height: 1; }
-.kpi-unit { font-size: var(--font-xs); color: var(--color-text-muted); margin-top: 1px; }
-.kpi-label { font-size: var(--font-sm); font-weight: 500; color: var(--color-text-muted); margin-top: 0.15rem; }
-.kpi-sub { font-size: 0.62rem; color: var(--color-text-muted); }
-
-
 /* ── Panier ── */
 .panier-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--color-bg-muted); }
 .panier-item:last-child { border-bottom: none; }
@@ -442,39 +975,17 @@ body {
 /* ── Diagnostic ── */
 .diag-box { padding: 0.85rem 1rem; border-radius: 10px; border-left: 4px solid; margin-bottom: 0.5rem; }
 .reco-box { padding: 0.85rem 1rem; border-radius: 10px; background: var(--success-light); border-left: 4px solid var(--success); margin-bottom: 0.5rem; }
-.alert-box { padding: 0.6rem 0.85rem; border-radius: 8px; font-size: var(--font-sm); margin-bottom: 0.4rem; border: 1px solid; }
-.alert-danger { background: var(--danger-light); color: var(--color-danger-text); border-color: var(--danger-light); }
-.alert-warning { background: var(--card-bg)beb; color: var(--color-warning-text); border-color: var(--warning-light); }
-.alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
-.alert-info { background: var(--accent-light); color: var(--accent-dark); border-color: var(--accent-light); }
 
 /* ── Gauge C/N ── */
 .cn-gauge { height: 10px; border-radius: 5px; background: linear-gradient(to right, var(--danger) 0%, var(--warning) 35%, var(--success) 48%, var(--success) 55%, var(--warning) 65%, var(--danger) 85%, var(--color-danger-text) 100%); position: relative; margin: 0.5rem 0; }
 .cn-gauge-marker { position: absolute; top: -2px; width: 4px; height: 14px; background: var(--text); border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 4px rgba(0,0,0,0.3); }
 
-/* ── Table caractérisation ── */
-.carac-table { width: 100%; border-collapse: collapse; font-size: var(--font-sm); }
-.carac-table th { text-align: left; padding: 0.5rem 0.4rem; color: var(--color-text-muted); border-bottom: 2px solid var(--border); font-weight: 600; font-size: var(--font-sm); text-transform: uppercase; }
-.carac-table td { padding: 0.4rem; border-bottom: 1px solid var(--color-bg-muted); }
-.carac-table tr:hover { background: var(--color-bg-subtle); }
-
-/* ── Responsive ── */
-@media (max-width: 1024px) {
-  .mo-layout { flex-direction: column; padding: 0.75rem; }
-  .mo-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-@media (max-width: 640px) {
-  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .kpi-value { font-size: 1.3rem; }
-}
-
 /* ── Encart Incorporation ── */
-.encart-incorp { margin-top: 0.75rem; border: 1px solid rgba(146,64,14,0.25); border-radius: 10px; overflow: hidden; background: var(--card-bg)BEB; }
+.encart-incorp { margin-top: 0.75rem; border: 1px solid rgba(146,64,14,0.25); border-radius: 10px; overflow: hidden; background: var(--warning-light); }
 .encart-incorp-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; cursor: pointer; background: linear-gradient(135deg, var(--warning-light), rgba(253,230,138,0.25)); border-bottom: 1px solid rgba(146,64,14,0.12); transition: background 0.2s; }
 .encart-incorp-header:hover { background: linear-gradient(135deg, var(--warning-light), rgba(253,230,138,0.4)); }
 .encart-incorp-title { flex: 1; font-weight: 600; font-size: var(--font-base); color: var(--color-warning-text); }
-.encart-incorp-.encart-incorp-subtitle { font-weight: 600; font-size: var(--font-sm); color: var(--color-warning-text); margin: 0.75rem 0 0.35rem; }
+.encart-incorp-subtitle { font-weight: 600; font-size: var(--font-sm); color: var(--color-warning-text); margin: 0.75rem 0 0.35rem; }
 .encart-condition { display: flex; gap: 0.5rem; padding: 0.3rem 0; align-items: flex-start; }
 .encart-condition-check { color: var(--color-warning-text); font-size: var(--font-base); flex-shrink: 0; margin-top: 1px; }
 .encart-condition-label { font-weight: 500; font-size: var(--font-sm); color: var(--text); }
@@ -502,6 +1013,11 @@ body {
 .encart-case:last-child { border-bottom: none; }
 .encart-source { margin-top: 0.5rem; font-size: 0.7rem; color: var(--color-text-muted); font-style: italic; }
 
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .sv-kpi-value { font-size: 1.3rem; }
+}
+
 
 </style>
 </head>
@@ -511,7 +1027,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 10:04 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 14:11 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -532,38 +1048,444 @@ body {
 <script>
 const DATA = {"matieres": [{"id": 96, "categorie": "Fumier/compost", "matiere": "Compost déchets verts", "cn_min": 10.0, "cn_max": 10.0, "cn_note": null, "k1_min": 10.0, "k1_max": 10.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.35, "taux_ms": 55.0, "cout_min": 10.0, "cout_max": 20.0, "effet_autofertilite": "+", "notes": "Pas de faim d'azote"}, {"id": 34, "categorie": "Fumier/compost", "matiere": "Compost mûr (déchets verts, herbe)", "cn_min": 13.0, "cn_max": 19.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "compost vert ; compost collectif ; compost déchetterie", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 57, "categorie": "Fumier/compost", "matiere": "Composts bovins", "cn_min": 12.2, "cn_max": 12.2, "cn_note": null, "k1_min": 71.0, "k1_max": 71.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; compost", "n_kg_t": 6.7, "p2o5_kg_t": 3.6, "k2o_kg_t": 10.8, "mgo_kg_t": 2.0, "c_kg_t": 81.6, "type_matiere": "Solide", "densite": 0.85, "taux_ms": 25.0, "cout_min": 10.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 58, "categorie": "Fumier/compost", "matiere": "Composts chevaux paille", "cn_min": 12.5, "cn_max": 12.5, "cn_note": null, "k1_min": 98.0, "k1_max": 98.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; compost ; paille", "n_kg_t": 6.8, "p2o5_kg_t": 4.3, "k2o_kg_t": 10.1, "mgo_kg_t": 2.8, "c_kg_t": 85.0, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 40.0, "notes": "Compost chevaux paille — Chambres agriculture"}, {"id": 59, "categorie": "Fumier/compost", "matiere": "Composts ovins", "cn_min": 11.8, "cn_max": 11.8, "cn_note": null, "k1_min": 71.0, "k1_max": 71.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; compost", "n_kg_t": 8.4, "p2o5_kg_t": 7.0, "k2o_kg_t": 25.7, "mgo_kg_t": 2.5, "c_kg_t": 99.0, "type_matiere": "Solide", "densite": 0.6, "taux_ms": 45.0, "notes": "Compost ovins — Chambres agriculture"}, {"id": 35, "categorie": "Fumier/compost", "matiere": "Digestat (résidu biogaz de fumier)", "cn_min": 11.0, "cn_max": null, "cn_note": "11,8", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "digestat ; résidu méthanisation ; biogaz", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 49, "categorie": "Fumier/compost", "matiere": "Digestats bruts liquides (non-ruminants)", "cn_min": 2.5, "cn_max": 2.5, "cn_note": null, "k1_min": 58.0, "k1_max": 58.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; liquide ; digestat ; méthanisation", "n_kg_t": 4.72, "p2o5_kg_t": 1.79, "k2o_kg_t": 2.93, "mgo_kg_t": 0.8, "c_kg_t": 11.98, "type_matiere": "Liquide", "densite": 1.0, "taux_ms": 5.0, "notes": "Digestat liquide non-ruminants — InfoMetha/GREN"}, {"id": 50, "categorie": "Fumier/compost", "matiere": "Digestats bruts liquides (ruminants)", "cn_min": 7.0, "cn_max": 7.0, "cn_note": null, "k1_min": 76.0, "k1_max": 76.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; liquide ; digestat ; méthanisation", "n_kg_t": 4.7, "p2o5_kg_t": 2.01, "k2o_kg_t": 5.03, "mgo_kg_t": 0.8, "c_kg_t": 33.07, "type_matiere": "Liquide", "densite": 1.0, "taux_ms": 7.0, "notes": "Digestat liquide ruminants — InfoMetha 2015"}, {"id": 51, "categorie": "Fumier/compost", "matiere": "Digestats bruts liquides (végétaux/urbains)", "cn_min": 4.5, "cn_max": 4.5, "cn_note": null, "k1_min": 68.0, "k1_max": 68.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; liquide ; digestat ; méthanisation", "n_kg_t": 4.9, "p2o5_kg_t": 2.02, "k2o_kg_t": 4.18, "mgo_kg_t": 0.8, "c_kg_t": 22.2, "type_matiere": "Liquide", "densite": 1.0, "taux_ms": 5.0, "notes": "Digestat liquide végétaux/urbains — InfoMetha/GREN"}, {"id": 60, "categorie": "Fumier/compost", "matiere": "Digestats fraction solide (non-ruminants)", "cn_min": 8.7, "cn_max": 8.7, "cn_note": null, "k1_min": 68.0, "k1_max": 68.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; digestat ; méthanisation", "n_kg_t": 10.26, "p2o5_kg_t": 12.57, "k2o_kg_t": 3.82, "mgo_kg_t": 2.6, "c_kg_t": 89.32, "type_matiere": "Solide", "densite": 0.7, "taux_ms": 28.0, "notes": "Digestat solide non-ruminants — RMT Elevage"}, {"id": 61, "categorie": "Fumier/compost", "matiere": "Digestats fraction solide (ruminants)", "cn_min": 18.1, "cn_max": 18.1, "cn_note": null, "k1_min": 70.0, "k1_max": 70.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; digestat ; méthanisation", "n_kg_t": 5.89, "p2o5_kg_t": 5.16, "k2o_kg_t": 4.42, "mgo_kg_t": 2.6, "c_kg_t": 106.86, "type_matiere": "Solide", "densite": 0.7, "taux_ms": 28.0, "notes": "Digestat solide ruminants — RMT Elevage"}, {"id": 62, "categorie": "Fumier/compost", "matiere": "Digestats phase solide compostée", "cn_min": 10.4, "cn_max": 10.4, "cn_note": null, "k1_min": 83.0, "k1_max": 83.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; compost ; digestat ; méthanisation", "n_kg_t": 12.8, "p2o5_kg_t": 26.29, "k2o_kg_t": 11.01, "mgo_kg_t": 2.6, "c_kg_t": 133.62, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 48.0, "notes": "Digestat solide composté — RMT Elevage"}, {"id": 63, "categorie": "Fumier/compost", "matiere": "Digestats voie sèche", "cn_min": 10.6, "cn_max": 10.6, "cn_note": null, "k1_min": 75.0, "k1_max": 75.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; digestat ; méthanisation", "n_kg_t": 6.79, "p2o5_kg_t": 3.51, "k2o_kg_t": 8.21, "mgo_kg_t": 2.6, "c_kg_t": 72.16, "type_matiere": "Solide", "densite": 0.8, "taux_ms": 20.0, "notes": "Digestat voie sèche — RMT Elevage"}, {"id": 64, "categorie": "Fumier/compost", "matiere": "Fientes poules pondeuses (fosses profondes)", "cn_min": 7.3, "cn_max": 7.3, "cn_note": null, "k1_min": 41.0, "k1_max": 41.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fiente ; volaille", "n_kg_t": 37.0, "p2o5_kg_t": 40.7, "k2o_kg_t": 24.0, "mgo_kg_t": 9.3, "c_kg_t": 271.0, "type_matiere": "Solide", "densite": 0.6, "taux_ms": 75.0, "notes": "Fientes fosses profondes — CA Bretagne"}, {"id": 65, "categorie": "Fumier/compost", "matiere": "Fientes poules pondeuses (présèchage)", "cn_min": 7.8, "cn_max": 7.8, "cn_note": null, "k1_min": 41.0, "k1_max": 41.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fiente ; volaille", "n_kg_t": 35.0, "p2o5_kg_t": 37.0, "k2o_kg_t": 24.0, "mgo_kg_t": 9.0, "c_kg_t": 273.5, "type_matiere": "Solide", "densite": 0.7, "taux_ms": 52.0, "notes": "Fientes présèchage — CA Bretagne"}, {"id": 66, "categorie": "Fumier/compost", "matiere": "Fientes poules pondeuses (séchées)", "cn_min": 7.9, "cn_max": 7.9, "cn_note": null, "k1_min": 41.0, "k1_max": 41.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fiente ; volaille", "n_kg_t": 39.5, "p2o5_kg_t": 37.8, "k2o_kg_t": 25.7, "mgo_kg_t": 8.7, "c_kg_t": 314.0, "type_matiere": "Solide", "densite": 0.5, "taux_ms": 83.0, "notes": "Fientes séchées — CA Bretagne"}, {"id": 30, "categorie": "Fumier/compost", "matiere": "Fumier bovin", "cn_min": 16.0, "cn_max": 30.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Zanella et al. 2017 ; Silva et al. 2019", "synonymes": "fumier vache ; bouse ; fumier bovin pailleux", "densite": 0.65, "taux_ms": 25.0, "notes": "Fumier bovin générique — COMIFER 2019"}, {"id": 33, "categorie": "Fumier/compost", "matiere": "Fumier de bétail composté", "cn_min": 18.0, "cn_max": null, "cn_note": "18,8", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Kalala et al. 2020", "synonymes": "fumier composté ; fumier vieilli", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 31, "categorie": "Fumier/compost", "matiere": "Fumier de cheval", "cn_min": 20.0, "cn_max": 56.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Das 2020 ; Zanella et al. 2017", "synonymes": "fumier équin ; crottin", "densite": 0.2, "taux_ms": 40.0, "notes": "Fumier de cheval — guide MSV"}, {"id": 29, "categorie": "Fumier/compost", "matiere": "Fumier de mouton", "cn_min": 9.0, "cn_max": 29.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "fumier ovin ; crottes de mouton", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 28, "categorie": "Fumier/compost", "matiere": "Fumier de porc", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Silva et al. 2019", "synonymes": "fumier porcin ; lisier de porc", "densite": 0.55, "taux_ms": 25.0, "notes": "Fumier de porc — IFIP/COMIFER"}, {"id": 27, "categorie": "Fumier/compost", "matiere": "Fumier de poulet / litière volaille", "cn_min": 4.0, "cn_max": 22.0, "cn_note": "7–10 typique", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Zanella et al. 2017 ; Silva et al. 2019", "synonymes": "fiente ; fiente de poulet ; litière poulailler ; fumier avicole", "densite": 0.45, "taux_ms": 50.0, "notes": "Fumier poulet litière — CA Bretagne"}, {"id": 32, "categorie": "Fumier/compost", "matiere": "Fumier équin", "cn_min": 21.0, "cn_max": 25.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Silva et al. 2019", "synonymes": "fumier cheval ; crottin ; fumier équin pailleux", "densite": 0.2, "taux_ms": 40.0, "notes": "Fumier équin — guide MSV"}, {"id": 67, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (<2 mois)", "cn_min": 14.0, "cn_max": 14.0, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 5.0, "p2o5_kg_t": 2.5, "k2o_kg_t": 6.5, "mgo_kg_t": 1.5, "c_kg_t": 70.0, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 68, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (>2 mois)", "cn_min": 21.9, "cn_max": 21.9, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 5.9, "p2o5_kg_t": 2.8, "k2o_kg_t": 9.5, "mgo_kg_t": 1.6, "c_kg_t": 129.2, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 69, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (logettes, couvert, >2 mois)", "cn_min": 18.5, "cn_max": 18.5, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 4.7, "p2o5_kg_t": 2.3, "k2o_kg_t": 5.6, "mgo_kg_t": 1.7, "c_kg_t": 87.1, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 70, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (logettes, découvert, >2 mois)", "cn_min": 18.1, "cn_max": 18.1, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 3.6, "p2o5_kg_t": 2.0, "k2o_kg_t": 4.6, "mgo_kg_t": 1.5, "c_kg_t": 65.0, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 71, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (raclage, >2 mois)", "cn_min": 17.4, "cn_max": 17.4, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 4.5, "p2o5_kg_t": 2.2, "k2o_kg_t": 4.9, "mgo_kg_t": 1.2, "c_kg_t": 78.1, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 72, "categorie": "Fumier/compost", "matiere": "Fumiers bovins (sortie bâtiment)", "cn_min": 13.6, "cn_max": 13.6, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 7.0, "p2o5_kg_t": 4.0, "k2o_kg_t": 11.0, "mgo_kg_t": 1.9, "c_kg_t": 95.0, "type_matiere": "Solide", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 73, "categorie": "Fumier/compost", "matiere": "Fumiers canards", "cn_min": 11.3, "cn_max": 11.3, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 10.2, "p2o5_kg_t": 7.2, "k2o_kg_t": 7.6, "mgo_kg_t": 7.6, "c_kg_t": 115.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 60.0, "notes": "Fumier canards — CA Bretagne"}, {"id": 74, "categorie": "Fumier/compost", "matiere": "Fumiers caprins", "cn_min": 29.5, "cn_max": 29.5, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 6.1, "p2o5_kg_t": 5.2, "k2o_kg_t": 12.0, "mgo_kg_t": 1.27, "c_kg_t": 180.0, "type_matiere": "Solide", "densite": 0.55, "taux_ms": 30.0, "notes": "Fumier caprins — GREN/COMIFER"}, {"id": 75, "categorie": "Fumier/compost", "matiere": "Fumiers chevaux paille", "cn_min": 22.3, "cn_max": 22.3, "cn_note": null, "k1_min": 49.0, "k1_max": 49.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; paille", "n_kg_t": 5.8, "p2o5_kg_t": 3.2, "k2o_kg_t": 9.3, "mgo_kg_t": 1.7, "c_kg_t": 129.5, "type_matiere": "Solide", "densite": 0.2, "taux_ms": 40.0, "volume_l_par_kg": 5.0, "cout_min": -10.0, "cout_max": 0.0, "effet_autofertilite": "++"}, {"id": 76, "categorie": "Fumier/compost", "matiere": "Fumiers compostés porcs paille", "cn_min": 10.2, "cn_max": 10.2, "cn_note": null, "k1_min": 63.0, "k1_max": 63.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; compost ; paille", "n_kg_t": 13.3, "p2o5_kg_t": 18.4, "k2o_kg_t": 24.8, "mgo_kg_t": 7.1, "c_kg_t": 135.0, "type_matiere": "Solide", "densite": 0.7, "taux_ms": 30.0, "notes": "Fumier composté porcs paille — IFIP/CA"}, {"id": 77, "categorie": "Fumier/compost", "matiere": "Fumiers compostés volailles", "cn_min": 9.6, "cn_max": 9.6, "cn_note": null, "k1_min": 63.0, "k1_max": 63.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; compost", "n_kg_t": 21.6, "p2o5_kg_t": 22.0, "k2o_kg_t": 23.8, "mgo_kg_t": 11.8, "c_kg_t": 207.0, "type_matiere": "Solide", "densite": 0.5, "taux_ms": 55.0, "notes": "Fumier composté volailles — CA Bretagne"}, {"id": 78, "categorie": "Fumier/compost", "matiere": "Fumiers d'ovins", "cn_min": 17.2, "cn_max": 17.2, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 6.7, "p2o5_kg_t": 4.0, "k2o_kg_t": 12.0, "mgo_kg_t": 1.4, "c_kg_t": 115.0, "type_matiere": "Solide", "densite": 0.5, "taux_ms": 35.0, "notes": "Fumier ovins — IDELE 2013"}, {"id": 79, "categorie": "Fumier/compost", "matiere": "Fumiers dindes (après stockage)", "cn_min": 7.7, "cn_max": 7.7, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 17.4, "p2o5_kg_t": 12.5, "k2o_kg_t": 12.0, "mgo_kg_t": 3.7, "c_kg_t": 134.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 60.0, "notes": "Fumier dindes stocké — CA Bretagne"}, {"id": 80, "categorie": "Fumier/compost", "matiere": "Fumiers dindes (sortie bâtiment)", "cn_min": 7.9, "cn_max": 7.9, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 25.5, "p2o5_kg_t": 15.9, "k2o_kg_t": 16.6, "mgo_kg_t": 5.5, "c_kg_t": 202.5, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 60.0, "notes": "Fumier dindes sortie bâtiment — CA Bretagne"}, {"id": 81, "categorie": "Fumier/compost", "matiere": "Fumiers dindes label", "cn_min": 9.3, "cn_max": 9.3, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 18.1, "p2o5_kg_t": 9.9, "k2o_kg_t": 11.0, "mgo_kg_t": 3.2, "c_kg_t": 169.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 60.0, "notes": "Fumier dindes label — CA Bretagne"}, {"id": 82, "categorie": "Fumier/compost", "matiere": "Fumiers pintades label", "cn_min": 9.1, "cn_max": 9.1, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 27.0, "p2o5_kg_t": 10.6, "k2o_kg_t": 16.5, "mgo_kg_t": 7.1, "c_kg_t": 247.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 60.0, "notes": "Fumier pintades label — CA Bretagne"}, {"id": 83, "categorie": "Fumier/compost", "matiere": "Fumiers porcelets paille", "cn_min": 16.6, "cn_max": 16.6, "cn_note": null, "k1_min": 61.0, "k1_max": 61.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; paille", "n_kg_t": 8.9, "p2o5_kg_t": 6.7, "k2o_kg_t": 11.9, "mgo_kg_t": 2.3, "c_kg_t": 148.0, "type_matiere": "Solide", "densite": 0.55, "taux_ms": 28.0, "notes": "Fumier porcelets paille — IFIP"}, {"id": 84, "categorie": "Fumier/compost", "matiere": "Fumiers porcs engrais paille", "cn_min": 13.1, "cn_max": 13.1, "cn_note": null, "k1_min": 61.0, "k1_max": 61.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; paille", "n_kg_t": 9.4, "p2o5_kg_t": 7.7, "k2o_kg_t": 14.0, "mgo_kg_t": 3.4, "c_kg_t": 123.0, "type_matiere": "Solide", "densite": 0.55, "taux_ms": 25.0, "notes": "Fumier porcs engrais paille — IFIP"}, {"id": 85, "categorie": "Fumier/compost", "matiere": "Fumiers porcs évolués paille", "cn_min": 16.2, "cn_max": 16.2, "cn_note": null, "k1_min": 61.0, "k1_max": 61.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier ; paille", "n_kg_t": 11.3, "p2o5_kg_t": 12.5, "k2o_kg_t": 23.3, "mgo_kg_t": 6.7, "c_kg_t": 183.0, "type_matiere": "Solide", "densite": 0.55, "taux_ms": 28.0, "notes": "Fumier porcs évolués paille — IFIP"}, {"id": 86, "categorie": "Fumier/compost", "matiere": "Fumiers poules pondeuses", "cn_min": 9.1, "cn_max": 9.1, "cn_note": null, "k1_min": 41.0, "k1_max": 41.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 30.4, "p2o5_kg_t": 25.0, "k2o_kg_t": 26.6, "mgo_kg_t": 6.7, "c_kg_t": 277.9, "type_matiere": "Solide", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 87, "categorie": "Fumier/compost", "matiere": "Fumiers poulets chair (après stockage)", "cn_min": 9.1, "cn_max": 9.1, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 15.2, "p2o5_kg_t": 8.1, "k2o_kg_t": 10.0, "mgo_kg_t": 4.2, "c_kg_t": 138.5, "type_matiere": "Solide", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 88, "categorie": "Fumier/compost", "matiere": "Fumiers poulets chair (sortie bâtiment)", "cn_min": 12.0, "cn_max": 12.0, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 21.9, "p2o5_kg_t": 14.7, "k2o_kg_t": 19.0, "mgo_kg_t": 9.1, "c_kg_t": 263.0, "type_matiere": "Solide", "densite": 0.45, "taux_ms": 50.0, "volume_l_par_kg": 1.7, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 89, "categorie": "Fumier/compost", "matiere": "Fumiers poulets label (après stockage)", "cn_min": 8.7, "cn_max": 8.7, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 15.0, "p2o5_kg_t": 16.0, "k2o_kg_t": 12.0, "mgo_kg_t": 4.0, "c_kg_t": 130.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 70.0, "notes": "Fumier poulets label stocké — CA Bretagne"}, {"id": 90, "categorie": "Fumier/compost", "matiere": "Fumiers poulets label (sortie bâtiment)", "cn_min": 14.6, "cn_max": 14.6, "cn_note": null, "k1_min": 47.0, "k1_max": 47.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 20.6, "p2o5_kg_t": 18.4, "k2o_kg_t": 19.0, "mgo_kg_t": 7.3, "c_kg_t": 301.0, "type_matiere": "Solide", "densite": 0.4, "taux_ms": 70.0, "notes": "Fumier poulets label sortie — CA Bretagne"}, {"id": 91, "categorie": "Fumier/compost", "matiere": "Fumiers veaux", "cn_min": 27.1, "cn_max": 27.1, "cn_note": null, "k1_min": 64.0, "k1_max": 64.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; solide ; fumier", "n_kg_t": 2.4, "p2o5_kg_t": 1.0, "k2o_kg_t": 2.7, "mgo_kg_t": 0.5, "c_kg_t": 65.0, "type_matiere": "Solide", "densite": 0.6, "taux_ms": 22.0, "notes": "Fumier veaux — IDELE/GREN"}, {"id": 52, "categorie": "Fumier/compost", "matiere": "Lisiers bovins (couvert)", "cn_min": 9.1, "cn_max": 9.1, "cn_note": null, "k1_min": 45.0, "k1_max": 45.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; liquide ; lisier", "n_kg_t": 2.2, "p2o5_kg_t": 1.0, "k2o_kg_t": 1.5, "mgo_kg_t": 0.5, "c_kg_t": 20.0, "type_matiere": "Liquide", "densite": 0.7, "taux_ms": 40.0, "cout_min": 0.0, "cout_max": 4.0, "effet_autofertilite": "+"}, {"id": 53, "categorie": "Fumier/compost", "matiere": "Lisiers bovins (très dilués)", "cn_min": 9.4, "cn_max": 9.4, "cn_note": null, "k1_min": 45.0, "k1_max": 45.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; liquide ; lisier", "n_kg_t": 1.4, "p2o5_kg_t": 0.7, "k2o_kg_t": 2.1, "mgo_kg_t": 0.4, "c_kg_t": 13.2, "type_matiere": "Liquide", "densite": 0.7, "taux_ms": 40.0, "cout_min": 0.0, "cout_max": 4.0, "effet_autofertilite": "+"}, {"id": 6, "categorie": "Mélange", "matiere": "Amendement forestier lent (feuilles chêne + compost mûr, 2:1)", "cn_min": 27.0, "cn_max": 31.0, "cn_note": "~29", "k1_min": 15.0, "k1_max": 22.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "mulch forestier ; litière + compost"}, {"id": 5, "categorie": "Mélange", "matiere": "Bokashi enrichi N (fumier poulet + résidus végétaux, 1:3)", "cn_min": 24.0, "cn_max": 28.0, "cn_note": "~26", "k1_min": 20.0, "k1_max": 28.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "bokashi azoté ; bokashi fumier"}, {"id": 1, "categorie": "Mélange", "matiere": "Bokashi équilibré (drèches C/N13 + paille C/N105, ~3:1)", "cn_min": 20.0, "cn_max": 25.0, "cn_note": "~22", "k1_min": 25.0, "k1_max": 35.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "bokashi ; fermenté ; EM bokashi"}, {"id": 4, "categorie": "Mélange", "matiere": "Compost maison équilibré (déchets cuisine + copeaux, ~12:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "compost maison ; compost domestique"}, {"id": 2, "categorie": "Mélange", "matiere": "Couvert hivernal décomposable (vesce + seigle, ~2:1)", "cn_min": 22.0, "cn_max": 28.0, "cn_note": "~25", "k1_min": 20.0, "k1_max": 30.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "couvert hivernal ; vesce-seigle ; couvert légumineuse-graminée"}, {"id": 3, "categorie": "Mélange", "matiere": "Couvert mulch persistant (avoine + triticale, 1:1)", "cn_min": 45.0, "cn_max": 55.0, "cn_note": "~50", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Corpus Le Sol Vivant cet Holobionte", "synonymes": "mulch vivant ; couvert carboné"}, {"id": 39, "categorie": "Résidus", "matiere": "Boues d'épuration", "cn_min": 4.0, "cn_max": null, "cn_note": "4,85", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Brenzinger et al. 2018", "synonymes": "boues STEP ; boues station épuration", "densite": 0.7, "taux_ms": 40.0, "cout_min": 0.0, "cout_max": 4.0, "effet_autofertilite": "+"}, {"id": 40, "categorie": "Résidus", "matiere": "Carton ondulé", "cn_min": 563.0, "cn_max": null, "cn_note": "~563", "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "carton ; emballage", "densite": 0.7, "taux_ms": 40.0, "cout_min": 0.0, "cout_max": 4.0, "effet_autofertilite": "+"}, {"id": 36, "categorie": "Résidus", "matiere": "Farine d'os", "cn_min": 4.0, "cn_max": 7.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "os broyé ; phosphate organique", "densite": 0.8, "taux_ms": 95.0, "notes": "Farine d'os — donnée industrielle"}, {"id": 37, "categorie": "Résidus", "matiere": "Farine de viande et d'os", "cn_min": 6.0, "cn_max": null, "cn_note": "6,0", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "farine animale ; MBM", "densite": 0.7, "taux_ms": 93.0, "notes": "Farine viande et os — donnée industrielle"}, {"id": 41, "categorie": "Résidus", "matiere": "Journal / papier", "cn_min": 127.0, "cn_max": 178.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "papier journal ; papier recyclé", "densite": 0.1, "taux_ms": 92.0, "notes": "Papier journal — littérature"}, {"id": 105, "categorie": "Résidus", "matiere": "Jus d'orange", "cn_min": 150.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "jus d'orange pressé", "n_kg_t": 0.5, "p2o5_kg_t": 0.1, "k2o_kg_t": 2.0, "mgo_kg_t": 0.1, "c_kg_t": 40.0, "type_matiere": "liquide", "densite": 1.05, "taux_ms": 11.0}, {"id": 110, "categorie": "Résidus", "matiere": "Jus de melon", "cn_min": 80.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques + retours terrain", "synonymes": "jus de melon, melon mûr, Cucumis melo", "n_kg_t": 0.4, "p2o5_kg_t": 0.1, "k2o_kg_t": 2.3, "mgo_kg_t": 0.1, "c_kg_t": 45.0, "type_matiere": "liquide", "densite": 1.04, "taux_ms": 10.0, "notes": "Excellent pour LiFoFer : fruit très mûr (Brix 10-12), levures natives abondantes, saveur douce. Valorisation des refus de vente (melons écartés, trop mûrs, abîmés) — recyclage agricole. Saison été (juil-sept). Utiliser tout le fruit pressé (chair + graines riches en enzymes). Ratio : ~7 L jus de melon pour remplacer 1 L mélasse (650/94 g/L)."}, {"id": 103, "categorie": "Résidus", "matiere": "Jus de pomme", "cn_min": 200.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "jus de pomme, cidre doux", "n_kg_t": 0.3, "p2o5_kg_t": 0.1, "k2o_kg_t": 1.1, "mgo_kg_t": 0.05, "c_kg_t": 50.0, "type_matiere": "liquide", "densite": 1.045, "taux_ms": 12.0}, {"id": 104, "categorie": "Résidus", "matiere": "Jus de raisin", "cn_min": 100.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "jus de raisin, moût", "n_kg_t": 0.4, "p2o5_kg_t": 0.2, "k2o_kg_t": 2.5, "mgo_kg_t": 0.08, "c_kg_t": 75.0, "type_matiere": "liquide", "densite": 1.07, "taux_ms": 18.0}, {"id": 108, "categorie": "Résidus", "matiere": "Miel", "cn_min": 500.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "miel, honey", "n_kg_t": 0.3, "p2o5_kg_t": 0.1, "k2o_kg_t": 1.0, "mgo_kg_t": 0.05, "c_kg_t": 400.0, "type_matiere": "liquide", "densite": 1.42, "taux_ms": 82.0}, {"id": 109, "categorie": "Résidus", "matiere": "Mélasse de betterave", "cn_min": 100.0, "cn_max": 150.0, "cn_note": null, "k1_min": 5.0, "k1_max": 10.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "mélasse betterave, sous-produit sucrerie", "n_kg_t": 3.5, "p2o5_kg_t": 0.5, "k2o_kg_t": 40.0, "mgo_kg_t": 5.0, "c_kg_t": 360.0, "type_matiere": "amendement liquide", "densite": 1.3, "taux_ms": 77.0, "notes": "Disponible localement en France/Europe betteravière. Composition différente de la canne : bétaïne 5-7%, pH alcalin (~8), goût amer, moins de sucres réducteurs. Non utilisée dans les recettes traditionnelles LiFoFer/bokashi (toutes basées sur canne). ⚠ Retours terrain : taux d'échec de fermentation plus élevé qu'avec la canne. Si seule option disponible : ajouter plus d'inoculum LAB et surveiller pH. Acceptable pour amendement direct au sol et activation compost."}, {"id": 99, "categorie": "Résidus", "matiere": "Mélasse de canne ou betterave", "cn_min": 90.0, "cn_max": 120.0, "cn_note": null, "k1_min": 5.0, "k1_max": 10.0, "interpretation": null, "source": "Terre & Humanisme (livre LFF), tables agronomiques mélasse", "synonymes": "mélasse, melasse, molasses, sous-produit sucrerie", "n_kg_t": 3.5, "p2o5_kg_t": 0.5, "k2o_kg_t": 35.0, "mgo_kg_t": 5.0, "c_kg_t": 360.0, "type_matiere": "amendement liquide", "densite": 1.3, "taux_ms": 77.0, "notes": "Sous-produit de l'industrie sucrière. Très riche en K. Usages multiples : (1) source de sucre fermentescible pour LiFoFer, bokashi, extraits fermentés ; (2) arrosage direct du compost pour activer la fermentation (pays producteurs de canne) ; (3) application directe aux cultures pour nourrir microbiome du sol (0.5-1% dilué) ; (4) support de croissance pour Trichoderma et autres PGPR. 5% du volume dans LiFoFer (T&H livre). 1 L ≈ 1.3 kg ≈ 0.65 kg sucre fermentescible (50% m/m)."}, {"id": 54, "categorie": "Résidus", "matiere": "Paille de colza", "cn_min": 57.1, "cn_max": 57.1, "cn_note": null, "k1_min": 21.0, "k1_max": 21.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; paille ; paille", "n_kg_t": 7.0, "p2o5_kg_t": 1.7, "k2o_kg_t": 14.5, "mgo_kg_t": 0.75, "c_kg_t": 400.0, "type_matiere": "Paille", "densite": 0.07, "taux_ms": 85.0, "notes": "Paille colza — moins dense que céréales — ARVALIS"}, {"id": 55, "categorie": "Résidus", "matiere": "Paille de céréales", "cn_min": 66.7, "cn_max": 66.7, "cn_note": null, "k1_min": 21.0, "k1_max": 21.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; paille ; paille", "n_kg_t": 6.0, "p2o5_kg_t": 1.7, "k2o_kg_t": 12.3, "mgo_kg_t": 1.5, "c_kg_t": 400.0, "type_matiere": "Paille", "densite": 0.1, "taux_ms": 60.0, "volume_l_par_kg": 10.0, "cout_min": 80.0, "cout_max": 80.0, "effet_autofertilite": "++", "epaisseur_1pct_mo_cm": 30.0, "notes": "30cm=+1%MO"}, {"id": 56, "categorie": "Résidus", "matiere": "Paille de pois", "cn_min": 44.4, "cn_max": 44.4, "cn_note": null, "k1_min": 21.0, "k1_max": 21.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Arvalis paille-fumier", "synonymes": "arvalis ; paille ; paille", "n_kg_t": 9.0, "p2o5_kg_t": 2.1, "k2o_kg_t": 19.0, "mgo_kg_t": 2.05, "c_kg_t": 400.0, "type_matiere": "Paille", "densite": 0.06, "taux_ms": 85.0, "notes": "Paille pois — ARVALIS"}, {"id": 101, "categorie": "Résidus", "matiere": "Panela / Rapadura / Jaggery", "cn_min": 1000.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "panela, rapadura, jaggery, sucre de canne évaporé", "n_kg_t": 0.0, "p2o5_kg_t": 0.0, "k2o_kg_t": 1.5, "mgo_kg_t": 0.5, "c_kg_t": 380.0, "type_matiere": "amendement", "densite": 0.9, "taux_ms": 94.0}, {"id": 106, "categorie": "Résidus", "matiere": "Petit-lait (lactosérum)", "cn_min": 10.0, "cn_max": 20.0, "cn_note": null, "k1_min": 3.0, "k1_max": 8.0, "interpretation": null, "source": "Tables agronomiques fromageries", "synonymes": "petit-lait, lactosérum, whey", "n_kg_t": 7.0, "p2o5_kg_t": 3.0, "k2o_kg_t": 15.0, "mgo_kg_t": 1.5, "c_kg_t": 35.0, "type_matiere": "liquide", "densite": 1.03, "taux_ms": 6.5}, {"id": 107, "categorie": "Résidus", "matiere": "Sirop d'agave", "cn_min": 1500.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "sirop d'agave, nectar d'agave", "n_kg_t": 0.0, "p2o5_kg_t": 0.0, "k2o_kg_t": 0.2, "mgo_kg_t": 0.0, "c_kg_t": 390.0, "type_matiere": "liquide", "densite": 1.37, "taux_ms": 77.0}, {"id": 102, "categorie": "Résidus", "matiere": "Sucre blanc raffiné", "cn_min": 5000.0, "cn_max": null, "cn_note": null, "k1_min": 1.0, "k1_max": 3.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "sucre blanc, saccharose raffiné", "n_kg_t": 0.0, "p2o5_kg_t": 0.0, "k2o_kg_t": 0.0, "mgo_kg_t": 0.0, "c_kg_t": 420.0, "type_matiere": "amendement", "densite": 0.85, "taux_ms": 99.9}, {"id": 100, "categorie": "Résidus", "matiere": "Sucre roux / non raffiné", "cn_min": 2000.0, "cn_max": null, "cn_note": null, "k1_min": 2.0, "k1_max": 5.0, "interpretation": null, "source": "Tables agronomiques", "synonymes": "sucre roux, sucre brun, sucre de canne non raffiné", "n_kg_t": 0.0, "p2o5_kg_t": 0.0, "k2o_kg_t": 0.3, "mgo_kg_t": 0.0, "c_kg_t": 400.0, "type_matiere": "amendement", "densite": 0.85, "taux_ms": 99.0}, {"id": 38, "categorie": "Résidus", "matiere": "Tourteau de ricin", "cn_min": 6.0, "cn_max": 9.0, "cn_note": null, "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Silva et al. 2019", "synonymes": "tourteau ; ricin ; engrais organique du commerce", "densite": 0.55, "taux_ms": 90.0, "notes": "Tourteau de ricin — donnée industrielle"}, {"id": 98, "categorie": "Résidus", "matiere": "Urine", "cn_min": 0.8, "cn_max": 0.8, "cn_note": null, "k1_min": null, "k1_max": null, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 1.0, "taux_ms": 5.0, "cout_min": 0.0, "cout_max": 0.0, "effet_autofertilite": "+", "notes": "C/N 0,8"}, {"id": 42, "categorie": "Sol/biomasse", "matiere": "Biomasse microbienne du sol", "cn_min": 5.0, "cn_max": 12.0, "cn_note": "~8", "k1_min": 25.0, "k1_max": 40.0, "interpretation": "Minéralisation très rapide — risque lessivage N", "source": "Gleixner 2013 ; Valadares et al. 2016", "synonymes": "microbes ; biomasse sol ; microflore"}, {"id": 44, "categorie": "Sol/biomasse", "matiere": "Humus brut", "cn_min": 25.0, "cn_max": 40.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Corpus C/N data", "synonymes": "humus brut ; litière non décomposée"}, {"id": 43, "categorie": "Sol/biomasse", "matiere": "Humus stable (MAOM)", "cn_min": 12.0, "cn_max": 15.0, "cn_note": "~12", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Hedde 2006 ; Kirkby et al. 2013", "synonymes": "MAOM ; humus stable ; carbone protégé ; complexe organo-minéral"}, {"id": 45, "categorie": "Sol/biomasse", "matiere": "Matière organique en décomposition", "cn_min": 18.0, "cn_max": 22.0, "cn_note": "~20", "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Corpus C/N data", "synonymes": "MO labile ; matière en décomposition ; litière active"}, {"id": 47, "categorie": "Sol/biomasse", "matiere": "Sol Chernozem", "cn_min": 10.0, "cn_max": 12.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021", "synonymes": "tchernoziom ; terre noire ; sol steppique"}, {"id": 46, "categorie": "Sol/biomasse", "matiere": "Sol argileux agricole", "cn_min": 14.0, "cn_max": null, "cn_note": "14,76", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Brenzinger et al. 2018", "synonymes": "sol argileux ; argile ; sol lourd"}, {"id": 48, "categorie": "Sol/biomasse", "matiere": "Sol brun forestier", "cn_min": 12.0, "cn_max": 14.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Muraru et al. 2021", "synonymes": "sol forestier ; sol brun ; cambisol"}, {"id": 13, "categorie": "Végétale", "matiere": "Aiguilles de conifères", "cn_min": 40.0, "cn_max": 80.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017", "synonymes": "pin ; sapin ; épicéa ; résineux", "densite": 0.08, "taux_ms": 45.0, "notes": "Aiguilles conifères — littérature"}, {"id": 92, "categorie": "Végétale", "matiere": "BRF", "cn_min": 50.0, "cn_max": 80.0, "cn_note": null, "k1_min": 50.0, "k1_max": 50.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.3, "taux_ms": 60.0, "volume_l_par_kg": 3.3, "cout_min": 20.0, "cout_max": 40.0, "effet_autofertilite": "+++", "epaisseur_1pct_mo_cm": 5.0, "notes": "5cm=+1%MO"}, {"id": 23, "categorie": "Végétale", "matiere": "Broyat de bois", "cn_min": 100.0, "cn_max": 200.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Zanella et al. 2017", "synonymes": "broyat ; copeaux ; bois broyé", "densite": 0.4, "taux_ms": 50.0, "volume_l_par_kg": 2.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "++", "notes": "Pas de faim d'azote"}, {"id": 24, "categorie": "Végétale", "matiere": "Copeaux de bois dur", "cn_min": 451.0, "cn_max": 819.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "copeaux chêne ; copeaux hêtre ; bois dur", "densite": 0.3, "taux_ms": 55.0, "notes": "Copeaux bois dur — guide MSV"}, {"id": 25, "categorie": "Végétale", "matiere": "Copeaux de bois mou", "cn_min": 212.0, "cn_max": 1313.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "copeaux pin ; copeaux sapin ; bois tendre ; résineux", "densite": 0.2, "taux_ms": 40.0, "volume_l_par_kg": 5.0, "cout_min": -10.0, "cout_max": 0.0, "effet_autofertilite": "++"}, {"id": 22, "categorie": "Végétale", "matiere": "Drèches de brasserie", "cn_min": 12.0, "cn_max": 14.0, "cn_note": "~13", "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Kebede 2020 ; Cacace et al. 2022", "synonymes": "drèches ; résidu brasserie ; marc de bière", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 95, "categorie": "Végétale", "matiere": "Enrubannage luzerne", "cn_min": 15.0, "cn_max": 30.0, "cn_note": null, "k1_min": 25.0, "k1_max": 25.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.2, "taux_ms": 60.0, "cout_min": 80.0, "cout_max": 80.0, "effet_autofertilite": "+"}, {"id": 11, "categorie": "Végétale", "matiere": "Feuilles moins tendres (chêne, platane, hêtre)", "cn_min": 20.0, "cn_max": 40.0, "cn_note": null, "k1_min": 15.0, "k1_max": 25.0, "interpretation": "Zone neutre — équilibre minéralisation/immobilisation", "source": "Zanella et al. 2017", "synonymes": "feuilles mortes chêne ; litière forestière", "densite": 0.1, "taux_ms": 50.0, "notes": "Feuilles peu tendres — littérature"}, {"id": 12, "categorie": "Végétale", "matiere": "Feuilles persistantes (chêne vert, olivier)", "cn_min": 30.0, "cn_max": 50.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Zanella et al. 2017", "synonymes": "feuilles persistantes ; feuilles coriaces ; sclérophylles", "densite": 0.1, "taux_ms": 55.0, "notes": "Feuilles persistantes — littérature"}, {"id": 10, "categorie": "Végétale", "matiere": "Feuilles tendres (charme, frêne, cerisier, orme)", "cn_min": 10.0, "cn_max": 30.0, "cn_note": null, "k1_min": 20.0, "k1_max": 35.0, "interpretation": "Minéralisation active — N libéré pour les cultures", "source": "Zanella et al. 2017", "synonymes": "feuilles mortes ; litière ; feuillage", "densite": 0.1, "taux_ms": 75.0, "volume_l_par_kg": 10.0, "cout_min": 0.0, "cout_max": 0.0, "effet_autofertilite": "++"}, {"id": 93, "categorie": "Végétale", "matiere": "Foin", "cn_min": 40.0, "cn_max": 60.0, "cn_note": null, "k1_min": 12.0, "k1_max": 12.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.1, "taux_ms": 55.0, "volume_l_par_kg": 10.0, "cout_min": 80.0, "cout_max": 80.0, "effet_autofertilite": "++"}, {"id": 7, "categorie": "Végétale", "matiere": "Jeunes matériaux végétaux / Légumineuses", "cn_min": 8.0, "cn_max": 15.0, "cn_note": "~10", "k1_min": 20.0, "k1_max": 35.0, "interpretation": null, "source": "Seifu et al. 2022", "synonymes": "trèfle ; luzerne ; vesce ; fèverole ; pois ; haricot ; légumineuse ; tonte ; gazon ; tonte de gazon", "densite": 0.15, "taux_ms": 15.0, "notes": "Jeunes matériaux verts frais — littérature"}, {"id": 21, "categorie": "Végétale", "matiere": "Lupin", "cn_min": 19.0, "cn_max": null, "cn_note": "19,9", "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Sharma et al. 2015", "synonymes": "lupin ; lupinus ; légumineuse", "densite": 0.15, "taux_ms": 15.0, "notes": "Lupin vert frais — littérature"}, {"id": 19, "categorie": "Végétale", "matiere": "Maïs (résidus/tiges)", "cn_min": 60.0, "cn_max": 73.0, "cn_note": null, "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "résidus maïs ; cannes maïs ; tiges maïs", "densite": 0.08, "taux_ms": 80.0, "notes": "Résidus maïs — littérature"}, {"id": 18, "categorie": "Végétale", "matiere": "Orge (résidus)", "cn_min": 50.0, "cn_max": null, "cn_note": "50,1", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Sharma et al. 2015", "synonymes": "résidus orge ; paille orge", "densite": 0.65, "taux_ms": 25.0, "volume_l_par_kg": 1.5, "cout_min": 0.0, "cout_max": 20.0, "effet_autofertilite": "+"}, {"id": 16, "categorie": "Végétale", "matiere": "Paille d'avoine", "cn_min": 31.0, "cn_max": 98.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "paille avoine", "densite": 0.1, "taux_ms": 88.0, "notes": "Paille d'avoine — ARVALIS"}, {"id": 15, "categorie": "Végétale", "matiere": "Paille de blé", "cn_min": 100.0, "cn_max": 150.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Sharma et al. 2015 ; Das 2020", "synonymes": "paille blé ; chaume blé", "densite": 0.1, "taux_ms": 88.0, "notes": "Paille de blé — ARVALIS"}, {"id": 17, "categorie": "Végétale", "matiere": "Paille de riz", "cn_min": 47.0, "cn_max": null, "cn_note": "47,3", "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Sharma et al. 2015", "synonymes": "paille riz ; rizière", "densite": 0.1, "taux_ms": 88.0, "notes": "Paille de riz — ARVALIS"}, {"id": 14, "categorie": "Végétale", "matiere": "Pailles de céréales (général)", "cn_min": 48.0, "cn_max": 150.0, "cn_note": null, "k1_min": 8.0, "k1_max": 15.0, "interpretation": "Immobilisation N — apport N recommandé", "source": "Das 2020", "synonymes": "paille ; céréales ; chaume", "densite": 0.1, "taux_ms": 88.0, "notes": "Paille céréales — ARVALIS"}, {"id": 94, "categorie": "Végétale", "matiere": "Paillette (lin,miscanthus,chanvre)", "cn_min": 30.0, "cn_max": 60.0, "cn_note": null, "k1_min": 12.0, "k1_max": 12.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.1, "taux_ms": 60.0, "volume_l_par_kg": 10.0, "cout_min": 20.0, "cout_max": 80.0, "effet_autofertilite": "++"}, {"id": 9, "categorie": "Végétale", "matiere": "Plantes herbacées", "cn_min": 25.0, "cn_max": 80.0, "cn_note": null, "k1_min": 10.0, "k1_max": 20.0, "interpretation": "Début immobilisation — faim d'azote légère", "source": "Knicker 2004", "synonymes": "herbe ; pelouse ; prairie ; fauche", "densite": 0.1, "taux_ms": 25.0, "notes": "Plantes herbacées fraîches — littérature"}, {"id": 8, "categorie": "Végétale", "matiere": "Plantes supérieures (ligno-cellulosique)", "cn_min": 15.0, "cn_max": 300.0, "cn_note": null, "k1_min": 15.0, "k1_max": 30.0, "interpretation": "Équilibre — légère minéralisation nette", "source": "Gleixner 2013", "synonymes": "bois ; cellulose ; lignine ; lignocellulose", "densite": 0.2, "taux_ms": 50.0, "notes": "Ligno-cellulosique — littérature"}, {"id": 20, "categorie": "Végétale", "matiere": "Sarments de vigne", "cn_min": 60.0, "cn_max": null, "cn_note": "~60", "k1_min": 5.0, "k1_max": 12.0, "interpretation": "Immobilisation forte — apport N nécessaire", "source": "Zanella et al. 2017", "synonymes": "sarments ; vigne ; résidus viticoles", "densite": 0.12, "taux_ms": 50.0, "notes": "Sarments de vigne — littérature"}, {"id": 26, "categorie": "Végétale", "matiere": "Sciure", "cn_min": 142.0, "cn_max": 750.0, "cn_note": null, "k1_min": 2.0, "k1_max": 7.0, "interpretation": "Immobilisation très forte — décomposition très lente", "source": "Das 2020", "synonymes": "sciure bois ; sciure", "densite": 0.2, "taux_ms": 50.0, "notes": "Sciure — guide MSV"}, {"id": 97, "categorie": "Végétale", "matiere": "Tonte gazon", "cn_min": 10.0, "cn_max": 15.0, "cn_note": null, "k1_min": 25.0, "k1_max": 25.0, "interpretation": null, "source": "guide_msv_2022", "synonymes": "", "densite": 0.4, "taux_ms": 20.0, "cout_min": 0.0, "cout_max": 0.0, "effet_autofertilite": "+"}], "regles": [{"cn_min": null, "cn_max": 10.0, "label": "< 10", "comportement": "MINÉRALISATION TRÈS RAPIDE", "interpretation": "Risque de lessivage N. Amendement puissant.", "diagnostic": "Matière très azotée, décomposition quasi immédiate. L'azote est libéré massivement — risque de lessivage vers les nappes si le sol est nu. Ce type d'apport agit comme un engrais organique rapide, pas comme un amendement de fond.", "recommandation": "Utiliser uniquement en période de croissance active (printemps). Toujours associer à un couvert végétal ou une culture en place pour capter l'azote libéré. Ne jamais appliquer sur sol nu en automne/hiver. Pour un effet plus durable, mélanger avec une matière carbonée (paille, BRF) pour remonter le C/N vers 20-25.", "icone": "🔴", "note_incorporation": ""}, {"cn_min": 10.0, "cn_max": 15.0, "label": "10–15", "comportement": "MINÉRALISATION ACTIVE", "interpretation": "N libéré rapidement. Cible pour apports frais.", "diagnostic": "Matière riche en azote, minéralisation active dans les 2-4 semaines. L'azote est rapidement disponible pour les plantes. Bon pour un coup de boost en début de culture. Le fumier frais, les tontes et les légumineuses sont typiques de cette plage.", "recommandation": "Idéal en apport de surface au printemps, avant implantation ou en top-dressing. Pour construire du stock de MO à long terme, compléter avec des matières plus carbonées. Le mélange avec du BRF ou de la paille (ratio 1:2) donne un excellent compromis fertilisation/humification.", "icone": "🟠", "note_incorporation": ""}, {"cn_min": 15.0, "cn_max": 20.0, "label": "15–20", "comportement": "ÉQUILIBRE LÉGÈREMENT +", "interpretation": "Légère minéralisation. Fumiers bien maturés.", "diagnostic": "Légère minéralisation nette — le sol reçoit un peu plus d'azote qu'il n'en consomme. C'est la zone des fumiers bien maturés et des composts jeunes. Bon équilibre entre nutrition immédiate et construction de sol.", "recommandation": "Zone confortable pour la plupart des usages. Convient en toute saison sur culture en place. Pour le maraîchage, c'est la cible idéale pour les apports réguliers (compost mi-mûr, fumier composté 3-6 mois).", "icone": "🟡", "note_incorporation": ""}, {"cn_min": 20.0, "cn_max": 25.0, "label": "20–25", "comportement": "ZONE NEUTRE", "interpretation": "Ni gain ni perte nette d'N. Compost mature cible.", "diagnostic": "Zone neutre — ni minéralisation ni immobilisation nette. Le mélange ne provoque pas de faim d'azote et ne libère pas d'excédent. C'est la cible pour les composts mûrs et les mélanges équilibrés type bokashi.", "recommandation": "C'est le C/N idéal pour un amendement polyvalent applicable en toute situation. Si votre mélange tombe dans cette zone, il est prêt à l'emploi sans correction. C'est aussi la cible de la formule de Kirkby : le ratio CNPS 100:8:2:1.5 correspond à cette zone d'humification optimale.", "icone": "🟢", "note_incorporation": ""}, {"cn_min": 25.0, "cn_max": 30.0, "label": "25–30", "comportement": "DÉBUT D'IMMOBILISATION", "interpretation": "Faible faim d'azote. Surveiller les cultures.", "diagnostic": "Début d'immobilisation — les micro-organismes commencent à puiser l'azote du sol pour décomposer la matière. Effet léger et temporaire (quelques semaines). La paille broyée et les couverts végétaux mûrs sont typiques.", "recommandation": "Surveiller les cultures sensibles (salades, jeunes plants). Si vous observez un jaunissement, apporter un complément azoté rapide (purin d'ortie, fiente diluée). Sinon, laisser faire — l'azote sera restitué après décomposition. Excellent pour mulcher entre les rangs.", "icone": "🟡", "note_incorporation": ""}, {"cn_min": 30.0, "cn_max": 50.0, "label": "30–50", "comportement": "IMMOBILISATION", "interpretation": "Faim d'azote. Apport N recommandé. Pailles.", "diagnostic": "Immobilisation significative — les micro-organismes captent activement l'azote du sol. La faim d'azote peut durer plusieurs semaines à plusieurs mois. Les pailles de céréales non broyées et les feuilles mortes sont typiques.", "recommandation": "Ne pas appliquer en contact direct avec les racines des cultures en croissance. Privilégier un apport en surface (mulch). L'incorporation est une alternative documentée pour les sols dégradés, sous conditions spécifiques (décompaction, drainage). Compenser par un apport azoté : 8 kg N pour chaque tonne de C apportée (formule de Kirkby). En pratique : 1 m³ de paille → ajouter 3 kg de fiente ou 15 L de purin concentré.", "icone": "🟠", "note_incorporation": "L'incorporation est une alternative documentée par le réseau MSV sous conditions (décompaction, drainage, humidité). Voir encart ci-dessous."}, {"cn_min": 50.0, "cn_max": 100.0, "label": "50–100", "comportement": "IMMOBILISATION FORTE", "interpretation": "Apport N nécessaire. Pailles de céréales.", "diagnostic": "Immobilisation forte et prolongée. La décomposition est lente (6-18 mois). Mais c'est aussi dans cette zone que se forme le plus d'humus stable — le coefficient d'humification k₁ est maximal pour le BRF et les matières ligneuses.", "recommandation": "Appliquer en surface par défaut. Le BRF dans cette zone est un excellent constructeur de sol à long terme : il stimule les champignons lignivores et produit de l'humus stable. L'incorporation massive est cependant une technique éprouvée pour restaurer les sols dégradés (<2% MO) — voir conditions dans l'encart ci-dessous. Prévoir une source d'azote d'accompagnement la première année. À partir de la 2e année, l'effet s'inverse et le sol devient plus fertile.", "icone": "🔴", "note_incorporation": "L'incorporation massive de BRF (intrant massif 50-400 t MS/ha) est une technique éprouvée pour sols dégradés. Conditions requises : décompaction, drainage, humidité, mélange au cm. Voir encart."}, {"cn_min": 100.0, "cn_max": null, "label": "> 100", "comportement": "IMMOBILISATION TRÈS FORTE", "interpretation": "Décomposition très lente. Bois, sciure, carton.", "diagnostic": "Décomposition très lente (1-3 ans). Matière presque inerte à court terme — bois massif, sciure sèche, carton. Immobilisation maximale de l'azote. Mais rôle important pour la structure du sol et l'habitat fongique.", "recommandation": "Réserver de préférence au paillage de surface épais (chemins, allées, pied de haies) ou au BRF pré-composté. L'incorporation au sol est possible dans le cadre d'un intrant massif sur sol très dégradé — voir conditions dans l'encart ci-dessous. Pour accélérer la décomposition, pré-tremper dans du purin ou du jus de bokashi avant application.", "icone": "🔴", "note_incorporation": "L'incorporation est possible avec pré-trempage et mélange au centimètre. Résultats documentés sur sols très dégradés (<2% MO). Voir encart."}], "melanges": [{"id": 1, "nom": "Bokashi classique", "description": "Mélange fermenté anaérobie avec EM", "objectif": "Amendement humifiant, conservation maximale de la MO", "composants": [{"matiere_id": 29, "matiere": "Drèches de brasserie", "proportion": 75}, {"matiere_id": 6, "matiere": "Paille de blé / orge", "proportion": 25}], "cn_cible_min": 20.0, "cn_cible_max": 25.0, "ratio_ideal": "3:1 (azoté:carboné)", "notes": "Ratio 3:1 en masse. Ajouter EM + argile + calcaire coquillier. Fermentation 6-8 semaines."}, {"id": 2, "nom": "Compost thermophile équilibré", "description": "Compostage aérobie classique en tas retourné", "objectif": "Amendement stable, hygiénisé (>60°C)", "composants": [{"matiere_id": 6, "matiere": "Paille de blé / orge", "proportion": 60}, {"matiere_id": 1, "matiere": "Jeunes matériaux végétaux / Légumineuses", "proportion": 20}, {"matiere_id": 25, "matiere": "Fumier de bovin", "proportion": 20}], "cn_cible_min": 25.0, "cn_cible_max": 30.0, "ratio_ideal": "3:1 (carboné:azoté)", "notes": "Retourner toutes les 2 semaines. Température cible >55°C pendant 3 jours. Maturité : 3-6 mois."}, {"id": 3, "nom": "Paillage BRF", "description": "Bois raméal fragmenté en couverture du sol", "objectif": "Humification directe, stimulation fongique, couverture", "composants": [{"matiere_id": 7, "matiere": "Bois broyé BRF / rameaux frais", "proportion": 100}], "cn_cible_min": 50.0, "cn_cible_max": 80.0, "ratio_ideal": "100% BRF", "notes": "Étaler 5-10 cm en surface. Ne pas incorporer. Favorise les champignons lignivores. Faim d azote possible la 1ère année."}, {"id": 4, "nom": "Couvert vesce-seigle", "description": "Couvert hivernal légumineuse + graminée", "objectif": "Fixation N2 + biomasse carbonée, bon compromis C/N", "composants": [{"matiere_id": 38, "matiere": "Couvert hivernal décomposable (vesce + seigle, ~2:1)", "proportion": 100}], "cn_cible_min": 22.0, "cn_cible_max": 28.0, "ratio_ideal": "2:1 (vesce:seigle)", "notes": "Semis septembre-octobre. Destruction au rouleau ou gel. La vesce fixe 50-100 kg N/ha."}, {"id": 5, "nom": "Lombricompost maison", "description": "Vermicompostage de déchets de cuisine", "objectif": "Amendement riche et vivant, petit volume", "composants": [{"matiere_id": 30, "matiere": "Marc de raisin", "proportion": 30}, {"matiere_id": 1, "matiere": "Jeunes matériaux végétaux / Légumineuses", "proportion": 50}, {"matiere_id": 24, "matiere": "Fumier de bovin", "proportion": 20}], "cn_cible_min": 15.0, "cn_cible_max": 20.0, "ratio_ideal": "déchets verts + bruns", "notes": "Eisenia fetida. Température 15-25°C. Récolte tous les 3-4 mois. Perte MO 20-30%."}], "kirkby": [{"section": "formule", "titre": "La formule de Kirkby", "contenu": "Pour chaque tonne de carbone stockée dans le sol sous forme d'humus stable, le sol a besoin de fixer simultanément 80 kg d'azote, 20 kg de phosphore et 15 kg de soufre. C'est la stœchiométrie CNPS : le ratio 100:8:2:1.5 (Kirkby et al., 2011, 2016).\n\nConséquence contre-intuitive : apporter de l'azote minéral au sol AUGMENTE la séquestration de carbone, car N est souvent le facteur limitant de l'humification.", "donnees": {"C": 100, "N": 8, "P": 2, "S": 1.5}}, {"section": "implication", "titre": "Implication pratique", "contenu": "Si vous apportez 1 tonne de BRF (C/N 60, k1=50%) :\n- Carbone apporté : ~200 kg C (40% de MS × 50% C)\n- Humus potentiel : 100 kg C (k1=50%)\n- Besoin N pour humifier : 100 × 8/100 = 8 kg N\n- Besoin P : 100 × 2/100 = 2 kg P\n- Besoin S : 100 × 1.5/100 = 1.5 kg S\n\nSans cet azote, le BRF provoque une 'faim d'azote' — les microbes immobilisent le N du sol pour décomposer le bois. Solution : associer un apport azoté (tonte, légumineuse).", "donnees": null}, {"section": "curseur", "titre": "Le curseur C/N", "contenu": "Le ratio C/N détermine ce que les microorganismes font de la matière organique :\n\nC/N < 15 : MINÉRALISATION — les microbes libèrent N, P, S. Effet fertilisant rapide.\nC/N 20-25 : ZONE NEUTRE — équilibre humification/minéralisation.\nC/N > 30 : IMMOBILISATION — les microbes captent le N du sol (faim d'azote). Mais c'est aussi là que se forme l'humus stable (k1 élevé).\n\nL'objectif n'est pas de viser un C/N unique mais de comprendre le levier :\n- Besoin rapide de nutriments → matière à C/N bas (tonte, fiente)\n- Construction de sol long terme → matière à C/N élevé (BRF, paille) + apport N", "donnees": {"zones": [{"min": 0, "max": 15, "label": "Minéralisation", "color": "#DC2626"}, {"min": 15, "max": 25, "label": "Zone neutre", "color": "#10B981"}, {"min": 25, "max": 100, "label": "Immobilisation", "color": "#F59E0B"}]}}, {"section": "sol", "titre": "Influence du type de sol", "contenu": "Le type de sol modifie la vitesse de minéralisation ET la capacité de stockage :\n\n- Sol argileux : protège la MO (complexe organo-minéral). Minéralisation lente. Stock C élevé. Le ratio MO/argile doit dépasser 17% (seuil structural).\n- Sol sableux : peu de protection. Minéralisation rapide. Stock C faible. Nécessite des apports fréquents et des couverts permanents.\n- Sol limoneux : intermédiaire. Risque de battance si MO < 2%.\n\nLe modèle AMG montre que l'argile réduit le coefficient de minéralisation K de façon exponentielle. Chaque 10% d'argile en plus = ~15% de minéralisation en moins.", "donnees": {"seuils_mo_argile": {"optimal": 24, "realiste": 17, "degrade": 12}}}, {"section": "modes", "titre": "Les 4 modes de transformation", "contenu": "Selon comment vous traitez la MO avant de l'appliquer, les pertes et l'effet changent radicalement :\n\n| Mode | Perte MO | CO2 eq/t | C/N final | Humus |\n| BRF/paillage direct | 0% | 0 | conservé | maximum |\n| Bokashi (anaérobie) | 5-10% | 25 | conservé | 95% |\n| Lombricompost | 20-30% | ~80 | amélioré | 75% |\n| Compost thermophile | 40-60% | 669 | réduit | 45% |\n\nLe bokashi conserve 97% de la MO initiale vs 38% pour le compost (SPNA 2016). L'empreinte carbone est 27× plus faible par tonne de produit fini (Agriton).", "donnees": {"modes": ["brf_direct", "bokashi", "lombricompost", "thermophile"]}}], "incorporation": [{"cn_seuil_min": 25.0, "cn_seuil_max": 30.0, "niveau": "info", "titre": "Incorporation : une alternative documentée", "contenu": "Dans cette zone de C/N, l'application en surface (mulch) reste la méthode la plus simple. Cependant, pour les sols dégradés (<2% MO), l'incorporation massive est une technique éprouvée par le réseau MSV (Ver de Terre Production) qui permet de remonter rapidement les taux de matière organique.", "conditions": [], "cas_etude": [], "redox": null, "timeline": "18-24 mois de faim d'azote avant retour de fertilité", "source": "Réseau MSV / Ver de Terre Production"}, {"cn_seuil_min": 30.0, "cn_seuil_max": 100.0, "niveau": "detail", "titre": "Incorporation massive : technique MSV pour sols dégradés", "contenu": "L'incorporation de matières à C/N élevé (BRF, paille, broyats) est une technique documentée pour restaurer rapidement les sols dégradés. Contrairement à l'idée reçue, l'enfouissement n'est pas interdit — il requiert des conditions précises. Le mélange intime minéral/organique à l'échelle du centimètre stabilise les agrégats par action du mycélium saprophyte. La distinction clé est entre anaérobiose subie (sol engorgé → toxicité) et anaérobiose choisie (bokashi, LiFoFer → conservation C/N maximale).", "conditions": [{"id": "decompaction", "label": "Décompaction préalable du sol", "detail": "Le sol doit être décompacté avant incorporation pour permettre la circulation d'air et d'eau. Sans porosité, l'incorporation crée des conditions anaérobies subies."}, {"id": "drainage", "label": "Bon drainage — pas d'hydromorphie", "detail": "Éviter les sols engorgés. En anaérobie subie (sol saturé), l'incorporation produit H₂S, Fe²⁺/Mn²⁺ toxiques et émissions N₂O/CH₄. Signaux : odeurs de soufre, horizons bleutés."}, {"id": "humidite", "label": "Maintenir l'humidité du sol", "detail": "Irriguer régulièrement pour soutenir l'activité biologique. Humidité + chaleur = reprise biologique rapide (cas du Talus de Marseille : 12 mois)."}, {"id": "chaleur", "label": "Chaleur accélère la reprise", "detail": "Les saisons chaudes sont idéales. La combinaison chaleur + humidité maximise la vitesse de colonisation fongique et bactérienne."}, {"id": "melange_cm", "label": "Mélange à l'échelle du centimètre", "detail": "Le champignon saprophyte a un rayon d'action de ~1-2 cm. Le mélange intime minéral/organique à cette échelle est la clé de la stabilisation des agrégats (expériences MSV : agrégats stables 120 jours dans l'eau)."}, {"id": "patience", "label": "Accepter 18-24 mois de faim d'azote", "detail": "L'activité biologique d'humification entre en concurrence avec les rhizosphères. La fertilité revient après 18-24 mois avec retour massif des vers de terre."}], "cas_etude": [{"nom": "Talus de Marseille", "type": "permaculture urbaine", "mo_avant": "très dégradé", "mo_apres": "+7-9 points", "duree": "12-18 mois", "detail": "50+ cm de BRF incorporé au broyeur à marteau. Retour fertilité en 12 mois grâce à chaleur + irrigation. Vers de terre revenus en grande quantité."}, {"nom": "Ferme de Cagnolle", "type": "agrorecyclerie", "mo_avant": "1.4%", "mo_apres": "9%", "duree": "10 ans", "detail": "Benoît Le Baube, Dordogne. Recyclage massif de déchets carbonés locaux : balayures de scierie, broyats de déchetterie, déchets alimentaires. 90% des cultures sans irrigation."}, {"nom": "Réseau MSV", "type": "10 ans d'expérimentations", "mo_avant": "1.5%", "mo_apres": "+4 points (labo)", "duree": "6 mois (labo) / 18-24 mois (terrain)", "detail": "BRF mélangé à 1 kg de terre → agrégats stables 120 jours dans l'eau. Sans mélange, la terre fond à travers la grille. Rayon d'action fongique ~1-2 cm."}], "redox": {"zones": [{"eh_min": 300, "eh_max": null, "label": "Aérobie", "color": "#059669", "process": "Humification classique, champignons lignivores, formation humus stable"}, {"eh_min": 200, "eh_max": 300, "label": "Microaérobie", "color": "#F59E0B", "process": "Zone de transition — microsites anoxiques normaux dans les agrégats"}, {"eh_min": null, "eh_max": 200, "label": "Anaérobie", "color": "#DC2626", "process": "Fermentation — deux issues possibles (subie ou choisie)"}], "anaerobie_subie": {"label": "Anaérobiose SUBIE", "icon": "❌", "signaux": ["Odeurs H₂S (soufre)", "Horizons bleutés/gris", "Racines noires", "Sol engorgé en permanence"], "risques": "H₂S, Fe²⁺/Mn²⁺ toxiques, émissions N₂O/CH₄. Décomposition bloquée ou toxique.", "action": "STOP — drainage et décompaction d'abord, incorporation ensuite"}, "anaerobie_choisie": {"label": "Anaérobiose CHOISIE", "icon": "✓", "techniques": ["Bokashi : 95-98% rétention MO, acide 3-phényllactique, suppressivité", "LiFoFer : correction redox -100 à -200 mV, communautés fongiques forestières", "Lactofermentation : conservation C/N maximale, pH 3.5-4.5"], "avantage": "Conservation thermodynamique C/N (ΔG faible → C et N conservés dans métabolites). Complémentaire à l'incorporation, pas contradictoire.", "note": "L'anaérobiose est le berceau du vivant (3.8 Ga). Les microsites anoxiques dans les agrégats sont normaux et souhaitables."}, "microsites": "Les micro-agrégats (20-250 µm) maintiennent naturellement un cœur anaérobie. Coexistence nitrification (surface) / dénitrification (intérieur). Le gradient redox (surface 500 mV → profondeur) est normal dans un sol vivant."}, "timeline": "18-24 mois de faim d'azote. Première année : croissance inégale. À partir de la 2e année : retour massif de fertilité et des vers de terre.", "source": "Réseau MSV / Ver de Terre Production — Talus de Marseille, Ferme de Cagnolle"}, {"cn_seuil_min": 100.0, "cn_seuil_max": null, "niveau": "complet", "titre": "Incorporation de matières très carbonées : possible sous conditions strictes", "contenu": "Même les matières à C/N > 100 (bois massif, sciure sèche) peuvent être incorporées dans le cadre d'un intrant massif sur sol très dégradé. Le réseau MSV a documenté des incorporations de 50+ cm de BRF (+7-9 points MO). La clé : mélanger au centimètre, maintenir l'humidité, et accepter une période de transition longue. Le pré-trempage dans du purin ou du jus de bokashi accélère la colonisation biologique. On ne peut pas « en mettre trop » — c'est juste qu'au-delà d'un certain seuil, l'apport devient inutile plutôt que nuisible.", "conditions": [{"id": "decompaction", "label": "Décompaction préalable du sol", "detail": "Le sol doit être décompacté avant incorporation pour permettre la circulation d'air et d'eau. Sans porosité, l'incorporation crée des conditions anaérobies subies."}, {"id": "drainage", "label": "Bon drainage — pas d'hydromorphie", "detail": "Éviter les sols engorgés. En anaérobie subie (sol saturé), l'incorporation produit H₂S, Fe²⁺/Mn²⁺ toxiques et émissions N₂O/CH₄. Signaux : odeurs de soufre, horizons bleutés."}, {"id": "humidite", "label": "Maintenir l'humidité du sol", "detail": "Irriguer régulièrement pour soutenir l'activité biologique. Humidité + chaleur = reprise biologique rapide (cas du Talus de Marseille : 12 mois)."}, {"id": "chaleur", "label": "Chaleur accélère la reprise", "detail": "Les saisons chaudes sont idéales. La combinaison chaleur + humidité maximise la vitesse de colonisation fongique et bactérienne."}, {"id": "melange_cm", "label": "Mélange à l'échelle du centimètre", "detail": "Le champignon saprophyte a un rayon d'action de ~1-2 cm. Le mélange intime minéral/organique à cette échelle est la clé de la stabilisation des agrégats (expériences MSV : agrégats stables 120 jours dans l'eau)."}, {"id": "patience", "label": "Accepter 18-24 mois de faim d'azote", "detail": "L'activité biologique d'humification entre en concurrence avec les rhizosphères. La fertilité revient après 18-24 mois avec retour massif des vers de terre."}], "cas_etude": [{"nom": "Talus de Marseille", "type": "permaculture urbaine", "mo_avant": "très dégradé", "mo_apres": "+7-9 points", "duree": "12-18 mois", "detail": "50+ cm de BRF incorporé au broyeur à marteau. Retour fertilité en 12 mois grâce à chaleur + irrigation. Vers de terre revenus en grande quantité."}, {"nom": "Ferme de Cagnolle", "type": "agrorecyclerie", "mo_avant": "1.4%", "mo_apres": "9%", "duree": "10 ans", "detail": "Benoît Le Baube, Dordogne. Recyclage massif de déchets carbonés locaux : balayures de scierie, broyats de déchetterie, déchets alimentaires. 90% des cultures sans irrigation."}, {"nom": "Réseau MSV", "type": "10 ans d'expérimentations", "mo_avant": "1.5%", "mo_apres": "+4 points (labo)", "duree": "6 mois (labo) / 18-24 mois (terrain)", "detail": "BRF mélangé à 1 kg de terre → agrégats stables 120 jours dans l'eau. Sans mélange, la terre fond à travers la grille. Rayon d'action fongique ~1-2 cm."}], "redox": {"zones": [{"eh_min": 300, "eh_max": null, "label": "Aérobie", "color": "#059669", "process": "Humification classique, champignons lignivores, formation humus stable"}, {"eh_min": 200, "eh_max": 300, "label": "Microaérobie", "color": "#F59E0B", "process": "Zone de transition — microsites anoxiques normaux dans les agrégats"}, {"eh_min": null, "eh_max": 200, "label": "Anaérobie", "color": "#DC2626", "process": "Fermentation — deux issues possibles (subie ou choisie)"}], "anaerobie_subie": {"label": "Anaérobiose SUBIE", "icon": "❌", "signaux": ["Odeurs H₂S (soufre)", "Horizons bleutés/gris", "Racines noires", "Sol engorgé en permanence"], "risques": "H₂S, Fe²⁺/Mn²⁺ toxiques, émissions N₂O/CH₄. Décomposition bloquée ou toxique.", "action": "STOP — drainage et décompaction d'abord, incorporation ensuite"}, "anaerobie_choisie": {"label": "Anaérobiose CHOISIE", "icon": "✓", "techniques": ["Bokashi : 95-98% rétention MO, acide 3-phényllactique, suppressivité", "LiFoFer : correction redox -100 à -200 mV, communautés fongiques forestières", "Lactofermentation : conservation C/N maximale, pH 3.5-4.5"], "avantage": "Conservation thermodynamique C/N (ΔG faible → C et N conservés dans métabolites). Complémentaire à l'incorporation, pas contradictoire.", "note": "L'anaérobiose est le berceau du vivant (3.8 Ga). Les microsites anoxiques dans les agrégats sont normaux et souhaitables."}, "microsites": "Les micro-agrégats (20-250 µm) maintiennent naturellement un cœur anaérobie. Coexistence nitrification (surface) / dénitrification (intérieur). Le gradient redox (surface 500 mV → profondeur) est normal dans un sol vivant."}, "timeline": "24-36 mois pour les matières très ligneuses. Pré-trempage recommandé. Le Talus de Marseille (50+ cm BRF) a retrouvé sa fertilité en 18 mois grâce à chaleur + irrigation.", "source": "Réseau MSV / Ver de Terre Production — Talus de Marseille (cas extrême)"}], "cat_colors": {"Végétale": "#059669", "Fumier/compost": "#D97706", "Résidus": "#DC2626", "Mélange": "#2563EB", "Sol/biomasse": "#6B7280"}, "modes_transformation": {"brf_direct": {"min": 0, "max": 0, "label": "BRF / Paillage direct", "desc": "Humification directe in situ — pas de perte", "color": "#059669"}, "bokashi": {"min": 5, "max": 10, "label": "Bokashi", "desc": "Fermentation anaérobie lactique. 90-95% MO conservée", "color": "#2563EB"}, "lombricompost": {"min": 20, "max": 30, "label": "Lombricompost", "desc": "Vermicompostage. 70-80% MO conservée", "color": "#7C3AED"}, "thermophile": {"min": 40, "max": 60, "label": "Compost thermophile", "desc": "Compostage aérobie >60°C. 40-60% MO perdue en CO₂", "color": "#DC2626"}}, "zones_eh_fallback": [{"label": "Aérobie", "range": "> 300 mV", "desc": "Humification OK", "color": "#059669"}, {"label": "Microaérobie", "range": "200-300 mV", "desc": "Prudence", "color": "#D97706"}, {"label": "Anaérobie", "range": "< 200 mV", "desc": "Fermentation", "color": "#DC2626"}], "corpus_name": "Le Sol Vivant cet Holobionte"};
 </script>
-<script type="text/babel">
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
 
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({
+  title,
+  icon,
+  defaultOpen = false,
+  children,
+  id
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse",
+    id: id
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-collapse-header",
+    onClick: () => setOpen(!open)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-collapse-title"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
+    className: `sv-collapse-chevron ${open ? 'open' : ''}`
+  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse-body"
+  }, children));
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({
+  children,
+  source
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula"
+  }, children, source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula-source"
+  }, source));
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({
+  children,
+  title
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({
+  children,
+  title,
+  icon
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note",
+    "data-icon": icon || ''
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({
+  value,
+  unit,
+  label,
+  color,
+  detail,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi",
+    style: style
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: color ? {
+      color
+    } : undefined
+  }, value), unit && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, unit), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: color ? {
+      color
+    } : undefined
+  }, label), detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, detail));
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({
+  children,
+  cols
+}) {
+  const style = cols ? {
+    gridTemplateColumns: `repeat(${cols}, 1fr)`
+  } : undefined;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid",
+    style: style
+  }, children);
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({
+  items,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, children);
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, item.date && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, item.place), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-timeline-tag"
+  }, t))))));
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({
+  title,
+  color,
+  label,
+  stats,
+  tags,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: color || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: color || 'var(--accent)'
+    }
+  }, label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, label), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, title)), stats && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-phase-tag"
+  }, t))), children && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, children));
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({
+  good,
+  bad
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({
+  ok,
+  ko
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, ok && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({
+  terms
+}) {
+  if (!terms || !terms.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, t.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: t.badgeStyle
+  }, t.badge), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.def))));
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({
+  sources
+}) {
+  if (!sources || !sources.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, s.year && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    rel: "noopener",
+    className: "sv-source-link"
+  }, "[lien]")))));
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-tabs"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    className: `sv-tab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({
+  text,
+  label
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content"
+  }, text));
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({
+  title,
+  items,
+  note,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, title), items && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-warning-text)',
+      lineHeight: 1.45,
+      fontStyle: 'italic'
+    }
+  }, note), children);
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({
+  title,
+  children,
+  color
+}) {
+  const c = color || 'success';
+  const colors = {
+    success: {
+      bg: 'var(--success-light)',
+      border: 'var(--success)',
+      text: 'var(--color-success-text)'
+    },
+    warning: {
+      bg: 'var(--warning-light)',
+      border: 'var(--warning)',
+      text: 'var(--color-warning-text)'
+    },
+    info: {
+      bg: 'var(--info-light)',
+      border: 'var(--accent)',
+      text: 'var(--accent-dark)'
+    },
+    purple: {
+      bg: 'var(--purple-light)',
+      border: 'var(--purple)',
+      text: 'var(--purple-dark)'
+    }
+  };
+  const s = colors[c] || colors.success;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box",
+    style: {
+      background: s.bg,
+      borderLeftColor: s.border
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title",
+    style: {
+      color: s.text
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, children));
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({
+  headers,
+  rows,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, children);
+  if (!headers || !rows) return null;
+  return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: h.align ? {
+      textAlign: h.align
+    } : undefined
+  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
+    key: j,
+    style: headers[j] && headers[j].align ? {
+      textAlign: headers[j].align
+    } : undefined
+  }, cell))))));
+}
 
 // ── Helpers & Constants ──
 const ACTIVE_CATS = [...new Set(DATA.matieres.map(m => m.categorie))].filter(c => c !== 'Sol/biomasse');
 const CAT_COLORS_DEFAULT = ['var(--success)', 'var(--warning)', 'var(--danger)', 'var(--info)', 'var(--color-text-muted)', 'var(--purple, #7c3aed)', 'var(--danger)', 'var(--success)'];
 const CAT_COLORS = DATA.cat_colors || Object.fromEntries([...new Set(DATA.matieres.map(m => m.categorie))].map((c, i) => [c, CAT_COLORS_DEFAULT[i % CAT_COLORS_DEFAULT.length]]));
-
 function parseCnNote(note) {
   if (!note) return null;
   const cleaned = note.replace('~', '').replace(',', '.').trim();
   const val = parseFloat(cleaned);
   return isNaN(val) ? null : val;
 }
-
 function getCnAvg(m) {
-  const min = m.cn_min, max = m.cn_max;
+  const min = m.cn_min,
+    max = m.cn_max;
   if (min != null && max != null) return (min + max) / 2;
   if (min != null) return min;
   if (max != null) return max;
   return parseCnNote(m.cn_note);
 }
-
-
-
 function getRegle(cn) {
   if (cn == null || isNaN(cn)) return null;
-  return DATA.regles.find(r =>
-    (r.cn_min === null || cn >= r.cn_min) && (r.cn_max === null || cn <= r.cn_max)
-  );
+  return DATA.regles.find(r => (r.cn_min === null || cn >= r.cn_min) && (r.cn_max === null || cn <= r.cn_max));
 }
-
 function cnColor(cn) {
   // Dérivé des règles C/N : rouge extrêmes, vert optimal, ambre transition
   const r = getRegle(cn);
@@ -572,269 +1494,441 @@ function cnColor(cn) {
   if (r.icone === '✅' || r.icone === '🌱') return 'var(--success)';
   return 'var(--warning)';
 }
-
 function cnZone(cn) {
   if (cn == null) return null;
   const r = getRegle(cn);
-  if (!r) return { label: '?', color: 'var(--color-text-muted)' };
-  return { label: r.label, color: cnColor(cn) };
+  if (!r) return {
+    label: '?',
+    color: 'var(--color-text-muted)'
+  };
+  return {
+    label: r.label,
+    color: cnColor(cn)
+  };
 }
-
 function matchFilter(m, query) {
   if (!query) return true;
   const q = query.toLowerCase();
-  return m.matiere.toLowerCase().includes(q) ||
-    (m.synonymes || '').toLowerCase().includes(q) ||
-    m.categorie.toLowerCase().includes(q);
+  return m.matiere.toLowerCase().includes(q) || (m.synonymes || '').toLowerCase().includes(q) || m.categorie.toLowerCase().includes(q);
 }
-
 const PERTE = DATA.modes_transformation || {};
 // ── EncartIncorporation component (unchanged from live) ──
-function EncartIncorporation({ cn }) {
+function EncartIncorporation({
+  cn
+}) {
   const [expanded, setExpanded] = React.useState(cn > 30);
   if (!DATA.incorporation || DATA.incorporation.length === 0) return null;
-  const encarts = DATA.incorporation.filter(e =>
-    cn >= e.cn_seuil_min && (e.cn_seuil_max === null || cn <= e.cn_seuil_max)
-  );
+  const encarts = DATA.incorporation.filter(e => cn >= e.cn_seuil_min && (e.cn_seuil_max === null || cn <= e.cn_seuil_max));
   if (encarts.length === 0) return null;
   const encart = encarts[encarts.length - 1];
   const rdx = encart.redox;
-
-  return <div className="encart-incorp">
-    <div className="encart-incorp-header" onClick={() => setExpanded(!expanded)}>
-      <span style={{fontSize:'var(--font-lg)'}}>🌱</span>
-      <span className="encart-incorp-title">{encart.titre}</span>
-      <span className="sv-accordion-chevron" style={{transform:expanded?'rotate(90deg)':'none'}}>▸</span>
-    </div>
-    {expanded && <div className="encart-incorp-body">
-      <p style={{fontSize:'var(--font-sm)',color:'var(--text)',lineHeight:'1.5',marginBottom:'0.75rem'}}>{encart.contenu}</p>
-      {encart.conditions && encart.conditions.length > 0 && <div style={{marginBottom:'0.75rem'}}>
-        <div className="encart-incorp-subtitle">Conditions requises</div>
-        {encart.conditions.map((c, i) =>
-          <div key={i} className="encart-condition">
-            <span className="encart-condition-check">☐</span>
-            <div>
-              <div className="encart-condition-label">{c.label}</div>
-              <div className="encart-condition-detail">{c.detail}</div>
-            </div>
-          </div>
-        )}
-      </div>}
-      {rdx && <div style={{marginBottom:'0.75rem'}}>
-        <div className="encart-incorp-subtitle">Aérobie / Anaérobie — la nuance fondamentale</div>
-        <div className="encart-eh-bar">
-          {rdx.zones.map((z, i) => <div key={i} className="encart-eh-zone" style={{background: z.color+'20', borderLeft:'3px solid '+z.color}}>
-            <div style={{color:z.color,fontWeight:600,fontSize:'var(--font-sm)'}}>{z.label}</div>
-        
-
-
-    <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{z.eh_min != null ? 'Eh > '+z.eh_min+' mV' : z.eh_max != null ? 'Eh < '+z.eh_max+' mV' : ''}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',marginTop:'2px'}}>{z.process}</div>
-          </div>)}
-        </div>
-        <div className="encart-anaero-grid">
-          <div className="encart-anaero-card encart-anaero-subie">
-            <div className="encart-anaero-header-bad">{rdx.anaerobie_subie.icon} {rdx.anaerobie_subie.label}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',marginBottom:'4px'}}>{rdx.anaerobie_subie.risques}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'2px'}}>Signaux terrain :</div>
-            <ul className="encart-signal-list">
-              {rdx.anaerobie_subie.signaux.map((s, i) => <li key={i}>{s}</li>)}
-            </ul>
-            <div className="encart-anaero-action">{rdx.anaerobie_subie.action}</div>
-          </div>
-          <div className="encart-anaero-card encart-anaero-choisie">
-            <div className="encart-anaero-header-good">{rdx.anaerobie_choisie.icon} {rdx.anaerobie_choisie.label}</div>
-            <div style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',marginBottom:'4px'}}>{rdx.anaerobie_choisie.avantage}</div>
-            <ul className="encart-technique-list">
-              {rdx.anaerobie_choisie.techniques.map((t, i) => <li key={i}>{t}</li>)}
-            </ul>
-            <div className="encart-anaero-note">{rdx.anaerobie_choisie.note}</div>
-          </div>
-        </div>
-        <div className="encart-microsites">{rdx.microsites}</div>
-      </div>}
-      {!rdx && <div style={{marginBottom:'0.75rem'}}>
-        <div className="encart-incorp-subtitle">Diagnostic redox (Eh)</div>
-        <div className="encart-eh-bar">
-          {(DATA.zones_eh_fallback || [
-            {label:'Aérobie',range:'> 300 mV',desc:'Humification OK',color:'var(--success)'},
-            {label:'Microaérobie',range:'200-300 mV',desc:'Prudence',color:'var(--warning)'},
-            {label:'Anaérobie',range:'< 200 mV',desc:'Fermentation',color:'var(--danger)'}
-          ]).map((z,i) => <div key={i} className="encart-eh-zone" style={{background:z.color+'20',borderLeft:'3px solid '+z.color}}>
-            <div style={{color:z.color,fontWeight:600,fontSize:'var(--font-sm)'}}>{z.label}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>Eh {z.range}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)'}}>{z.desc}</div>
-          </div>)}
-        </div>
-      </div>}
-      {encart.timeline && <div className="encart-timeline">
-        <span style={{fontWeight:600,fontSize:'var(--font-sm)',color:'var(--color-warning-text)'}}>Période de transition : </span>
-        <span style={{fontSize:'var(--font-sm)',color:'var(--text)'}}>{encart.timeline}</span>
-      </div>}
-      {encart.cas_etude && encart.cas_etude.length > 0 && <div style={{marginTop:'0.5rem'}}>
-        <div className="encart-incorp-subtitle">Cas documentés (réseau MSV / Ver de Terre Production)</div>
-        {encart.cas_etude.map((c, i) =>
-          <div key={i} className="encart-case">
-            <div style={{fontSize:'var(--font-sm)'}}><strong>{c.nom}</strong> <span style={{color:'var(--color-text-muted)'}}>({c.type})</span></div>
-            <div style={{fontSize:'var(--font-xs)',color:'var(--text)'}}>MO : {c.mo_avant} → <strong style={{color:'var(--success)'}}>{c.mo_apres}</strong> en {c.duree}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{c.detail}</div>
-          </div>
-        )}
-      </div>}
-      {encart.source && <div className="encart-source">Source : {encart.source}</div>}
-    </div>}
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-header",
+    onClick: () => setExpanded(!expanded)
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-lg)'
+    }
+  }, "\uD83C\uDF31"), /*#__PURE__*/React.createElement("span", {
+    className: "encart-incorp-title"
+  }, encart.titre), /*#__PURE__*/React.createElement("span", {
+    className: "sv-accordion-chevron",
+    style: {
+      transform: expanded ? 'rotate(90deg)' : 'none'
+    }
+  }, "\u25B8")), expanded && /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-body"
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--text)',
+      lineHeight: '1.5',
+      marginBottom: '0.75rem'
+    }
+  }, encart.contenu), encart.conditions && encart.conditions.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-subtitle"
+  }, "Conditions requises"), encart.conditions.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "encart-condition"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "encart-condition-check"
+  }, "\u2610"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "encart-condition-label"
+  }, c.label), /*#__PURE__*/React.createElement("div", {
+    className: "encart-condition-detail"
+  }, c.detail))))), rdx && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-subtitle"
+  }, "A\xE9robie / Ana\xE9robie \u2014 la nuance fondamentale"), /*#__PURE__*/React.createElement("div", {
+    className: "encart-eh-bar"
+  }, rdx.zones.map((z, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "encart-eh-zone",
+    style: {
+      background: z.color + '20',
+      borderLeft: '3px solid ' + z.color
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: z.color,
+      fontWeight: 600,
+      fontSize: 'var(--font-sm)'
+    }
+  }, z.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)'
+    }
+  }, z.eh_min != null ? 'Eh > ' + z.eh_min + ' mV' : z.eh_max != null ? 'Eh < ' + z.eh_max + ' mV' : ''), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-secondary)',
+      marginTop: '2px'
+    }
+  }, z.process)))), /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-card encart-anaero-subie"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-header-bad"
+  }, rdx.anaerobie_subie.icon, " ", rdx.anaerobie_subie.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      marginBottom: '4px'
+    }
+  }, rdx.anaerobie_subie.risques), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-text-muted)',
+      marginBottom: '2px'
+    }
+  }, "Signaux terrain :"), /*#__PURE__*/React.createElement("ul", {
+    className: "encart-signal-list"
+  }, rdx.anaerobie_subie.signaux.map((s, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, s))), /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-action"
+  }, rdx.anaerobie_subie.action)), /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-card encart-anaero-choisie"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-header-good"
+  }, rdx.anaerobie_choisie.icon, " ", rdx.anaerobie_choisie.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      marginBottom: '4px'
+    }
+  }, rdx.anaerobie_choisie.avantage), /*#__PURE__*/React.createElement("ul", {
+    className: "encart-technique-list"
+  }, rdx.anaerobie_choisie.techniques.map((t, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, t))), /*#__PURE__*/React.createElement("div", {
+    className: "encart-anaero-note"
+  }, rdx.anaerobie_choisie.note))), /*#__PURE__*/React.createElement("div", {
+    className: "encart-microsites"
+  }, rdx.microsites)), !rdx && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-subtitle"
+  }, "Diagnostic redox (Eh)"), /*#__PURE__*/React.createElement("div", {
+    className: "encart-eh-bar"
+  }, (DATA.zones_eh_fallback || [{
+    label: 'Aérobie',
+    range: '> 300 mV',
+    desc: 'Humification OK',
+    color: 'var(--success)'
+  }, {
+    label: 'Microaérobie',
+    range: '200-300 mV',
+    desc: 'Prudence',
+    color: 'var(--warning)'
+  }, {
+    label: 'Anaérobie',
+    range: '< 200 mV',
+    desc: 'Fermentation',
+    color: 'var(--danger)'
+  }]).map((z, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "encart-eh-zone",
+    style: {
+      background: z.color + '20',
+      borderLeft: '3px solid ' + z.color
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: z.color,
+      fontWeight: 600,
+      fontSize: 'var(--font-sm)'
+    }
+  }, z.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)'
+    }
+  }, "Eh ", z.range), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-secondary)'
+    }
+  }, z.desc))))), encart.timeline && /*#__PURE__*/React.createElement("div", {
+    className: "encart-timeline"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontWeight: 600,
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-warning-text)'
+    }
+  }, "P\xE9riode de transition : "), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--text)'
+    }
+  }, encart.timeline)), encart.cas_etude && encart.cas_etude.length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '0.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "encart-incorp-subtitle"
+  }, "Cas document\xE9s (r\xE9seau MSV / Ver de Terre Production)"), encart.cas_etude.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "encart-case"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, c.nom), " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--color-text-muted)'
+    }
+  }, "(", c.type, ")")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text)'
+    }
+  }, "MO : ", c.mo_avant, " \u2192 ", /*#__PURE__*/React.createElement("strong", {
+    style: {
+      color: 'var(--success)'
+    }
+  }, c.mo_apres), " en ", c.duree), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)'
+    }
+  }, c.detail)))), encart.source && /*#__PURE__*/React.createElement("div", {
+    className: "encart-source"
+  }, "Source : ", encart.source)));
 }
 // ── App component ──
 
 function ComprendreMO() {
-  return <div style={{maxWidth:'900px',margin:'0',padding:'1rem'}}>
-    <div className="mo-card">
-      <h2>Ratio C/N — La clé de la décomposition</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        Le ratio Carbone/Azote (C/N) détermine la vitesse et le devenir de la matière organique dans le sol. 
-        Un C/N bas (&lt;15) favorise la minéralisation rapide (libération d'azote). 
-        Un C/N élevé (&gt;25) favorise l'immobilisation de l'azote par les microbes décomposeurs. 
-        La plage 20-25 est optimale pour l'humification.
-      </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--success-light)',borderRadius:'var(--radius)',fontSize:'var(--font-base)'}}>
-        <strong>Règle pratique :</strong> mélange C/N ≈ 25 = équilibre décomposition/humification.
-      </div>
-    </div>
-
-    <div className="mo-card">
-      <h2>Coefficient isohumique (k₁)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        Le k₁ exprime la fraction de matière organique apportée qui se retrouvera stabilisée sous forme d'humus 
-        (carbone stable à long terme). Il dépend de la composition lignine/cellulose/protéines, de l'humidité, 
-        de la température et du mode d'apport.
-      </p>
-      <table className="carac-table" style={{marginTop:'0.75rem'}}>
-        <thead><tr><th>Matière</th><th>k₁ typique</th></tr></thead>
-        <tbody>
-          <tr><td>Paille broyée</td><td>15-20%</td></tr>
-          <tr><td>BRF (bois raméal fragmenté)</td><td>40-60%</td></tr>
-          <tr><td>Fumier composté</td><td>30-40%</td></tr>
-          <tr><td>Compost mûr</td><td>40-60%</td></tr>
-          <tr><td>Biochar</td><td>80-95%</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div className="mo-card">
-      <h2>Formule de Kirkby (ratio stœchiométrique)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        Kirkby et al. (2016) ont montré que la formation d'humus stable nécessite un apport équilibré en 
-        nutriments (C:N:P:S). Le ratio-clé pour séquestrer 1 tonne de carbone stable :
-      </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--purple-light, #faf5ff)',borderRadius:'var(--radius)',borderLeft:'4px solid #7c3aed'}}>
-        <strong>1000 kg C</strong> nécessite <strong>83 kg N + 20 kg P + 14 kg S</strong>
-        <div style={{fontSize:'var(--font-sm)',color:'var(--purple, #7c3aed)',marginTop:'0.3rem'}}>
-          Sans ces nutriments, le C apporté est minéralisé au lieu d'être stabilisé.
-        </div>
-      </div>
-    </div>
-
-    <div className="mo-card">
-      <h2>MAOM vs POM — La nouvelle vision (2020+)</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        Depuis Cotrufo &amp; Lavallee (2019), la distinction fondamentale n'est plus labile/récalcitrant mais :
-      </p>
-      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
-        <li><strong>POM</strong> (Particulate Organic Matter) : débris végétaux libres, turnover rapide (années)</li>
-        <li><strong>MAOM</strong> (Mineral-Associated Organic Matter) : C microbien stabilisé sur les surfaces minérales (argiles), turnover long (décennies à siècles)</li>
-      </ul>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginTop:'0.5rem'}}>
-        <strong>Implication</strong> : le C stable du sol est majoritairement d'origine <em>microbienne</em> (nécromasse), 
-        pas végétale. C'est la "pompe à carbone microbienne" (MCP, Liang et al. 2017).
-      </p>
-    </div>
-
-    <div className="mo-card">
-      <h2>Modes de transformation comparés</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        Le MÊME apport de matière organique donne des résultats très différents selon le mode de transformation :
-      </p>
-      <ul style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)',marginLeft:'1.5rem',marginTop:'0.5rem'}}>
-        <li><strong>Compostage aérobie</strong> : pertes C 40-60%, humification modérée</li>
-        <li><strong>Bokashi (anaérobie)</strong> : pertes C &lt;10%, rétention quasi-totale</li>
-        <li><strong>Incorporation directe</strong> : dépend du C/N et des conditions pédoclimatiques</li>
-        <li><strong>Paillage de surface</strong> : minéralisation lente, protection du sol</li>
-      </ul>
-    </div>
-
-    <div className="mo-card">
-      <h2>Priming effect</h2>
-      <p style={{fontSize:'var(--font-base)',lineHeight:1.6,color:'var(--color-text-secondary)'}}>
-        L'apport de MO fraîche peut paradoxalement <em>accélérer</em> la décomposition du carbone stable déjà présent 
-        dans le sol. Ce "priming effect" s'explique par l'activation microbienne : les décomposeurs activés par 
-        le substrat frais attaquent ensuite les réserves de C stable.
-      </p>
-      <div style={{marginTop:'0.75rem',padding:'0.75rem',background:'var(--warning-light)',borderRadius:'var(--radius)',borderLeft:'4px solid #d97706',fontSize:'var(--font-base)'}}>
-        <strong>Conséquence agronomique</strong> : des apports réguliers et équilibrés sont plus efficaces que 
-        de gros apports ponctuels pour augmenter le stock de C du sol.
-      </div>
-    </div>
-
-    <div style={{textAlign:'center',fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'1.5rem',paddingBottom:'1rem'}}>
-      Références : Kirkby et al. (2016) · Cotrufo &amp; Lavallee (2019) · Liang et al. (2017)
-    </div>
-
-        {/* ── Caractérisation physique ── */}
-          {(() => {
-            const withPhys = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
-            return <div className="mo-card">
-              <h2>Caractérisation ({withPhys.length} matières documentées)</h2>
-              <NoteAccordion text="Données physiques, NPK et coût indicatif. Sources : Arvalis paille-fumier, guide MSV 2022. Les valeurs sont indicatives et varient selon l'origine, le stockage et la maturité des matières." />
-              <div style={{overflowX:'auto'}}>
-                <table className="carac-table">
-                  <thead><tr>
-                    <th>Matière</th><th style={{textAlign:'center'}}>Densité</th><th style={{textAlign:'center'}}>MS %</th>
-                    <th style={{textAlign:'center'}}>C/N</th><th style={{textAlign:'center'}}>k₁ %</th>
-                    <th style={{textAlign:'center'}}>N</th><th style={{textAlign:'center'}}>P₂O₅</th>
-                    <th style={{textAlign:'center'}}>K₂O</th><th style={{textAlign:'center'}}>MgO</th>
-                    <th style={{textAlign:'center'}}>Coût</th><th>Notes</th>
-                  </tr></thead>
-                  <tbody>
-                    {withPhys.map((c, i) => {
-                      const cn = (c.cn_min + (c.cn_max || c.cn_min)) / 2;
-                      const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
-                      return <tr key={i}>
-                        <td style={{fontWeight:500,color:'var(--text)',fontSize:'var(--font-sm)'}}>{c.matiere}</td>
-                        <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.densite || '—'}</td>
-                        <td style={{textAlign:'center',color:'var(--color-text-muted)'}}>{c.taux_ms || '—'}</td>
-                        <td style={{textAlign:'center',color:cnColor(cn)}}>{c.cn_min === c.cn_max ? c.cn_min : c.cn_min+'–'+c.cn_max}</td>
-                        <td style={{textAlign:'center',color:'var(--accent)'}}>{k1}</td>
-                        <td style={{textAlign:'center',color:'var(--success)'}}>{c.n_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'var(--warning)'}}>{c.p2o5_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'var(--purple, #7c3aed)'}}>{c.k2o_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'var(--info)'}}>{c.mgo_kg_t || '—'}</td>
-                        <td style={{textAlign:'center',color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>
-                          {c.cout_min != null ? (c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Négatif' : c.cout_min+'–'+c.cout_max+' €/t')) : '—'}
-                        </td>
-                        <td style={{color:'var(--color-text-muted)',fontSize:'var(--font-sm)',maxWidth:'180px'}}>
-                          {(c.notes || c.epaisseur_1pct_mo_cm) ? <NoteAccordion text={(c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' ('+c.epaisseur_1pct_mo_cm+' cm/+1%MO)' : '')} /> : '—'}
-                        </td>
-                      </tr>;
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>;
-          })()}
-    </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-cahier",
+    style: {
+      padding: '1rem'
+    }
+  }, /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Ratio C/N \u2014 La cl\xE9 de la d\xE9composition",
+    icon: "\u2697\uFE0F",
+    defaultOpen: true
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le ratio Carbone/Azote (C/N) d\xE9termine la vitesse et le devenir de la mati\xE8re organique dans le sol. Un C/N bas (<15) favorise la min\xE9ralisation rapide (lib\xE9ration d'azote). Un C/N \xE9lev\xE9 (>25) favorise l'immobilisation de l'azote par les microbes d\xE9composeurs. La plage 20-25 est optimale pour l'humification."), /*#__PURE__*/React.createElement(SvRule, {
+    title: "R\xE8gle pratique"
+  }, "M\xE9lange C/N \u2248 25 = \xE9quilibre d\xE9composition/humification.")), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Coefficient isohumique (k\u2081)",
+    icon: "\uD83D\uDCCA"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le k\u2081 exprime la fraction de mati\xE8re organique apport\xE9e qui se retrouvera stabilis\xE9e sous forme d'humus (carbone stable \xE0 long terme). Il d\xE9pend de la composition lignine/cellulose/prot\xE9ines, de l'humidit\xE9, de la temp\xE9rature et du mode d'apport."), /*#__PURE__*/React.createElement(SvDataTable, {
+    headers: [{
+      label: 'Matière'
+    }, {
+      label: 'k₁ typique',
+      align: 'center'
+    }],
+    rows: [['Paille broyée', '15-20%'], ['BRF (bois raméal fragmenté)', '40-60%'], ['Fumier composté', '30-40%'], ['Compost mûr', '40-60%'], ['Biochar', '80-95%']]
+  })), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Formule de Kirkby (ratio st\u0153chiom\xE9trique)",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Kirkby et al. (2016) ont montr\xE9 que la formation d'humus stable n\xE9cessite un apport \xE9quilibr\xE9 en nutriments (C:N:P:S). Le ratio-cl\xE9 pour s\xE9questrer 1 tonne de carbone stable :"), /*#__PURE__*/React.createElement(SvFormula, {
+    source: "Kirkby et al. (2016)"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-formula-highlight"
+  }, "1000 kg C"), " n\xE9cessite", ' ', /*#__PURE__*/React.createElement("span", {
+    className: "sv-formula-highlight"
+  }, "83 kg N"), " +", ' ', /*#__PURE__*/React.createElement("span", {
+    className: "sv-formula-highlight"
+  }, "20 kg P"), " +", ' ', /*#__PURE__*/React.createElement("span", {
+    className: "sv-formula-highlight"
+  }, "14 kg S")), /*#__PURE__*/React.createElement(SvHighlightBox, {
+    color: "purple"
+  }, "Sans ces nutriments, le C apport\xE9 est min\xE9ralis\xE9 au lieu d'\xEAtre stabilis\xE9.")), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "MAOM vs POM \u2014 La nouvelle vision (2020+)",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Depuis Cotrufo & Lavallee (2019), la distinction fondamentale n'est plus labile/r\xE9calcitrant mais :"), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-bullet-list"
+  }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "POM"), " (Particulate Organic Matter) : d\xE9bris v\xE9g\xE9taux libres, turnover rapide (ann\xE9es)"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "MAOM"), " (Mineral-Associated Organic Matter) : C microbien stabilis\xE9 sur les surfaces min\xE9rales (argiles), turnover long (d\xE9cennies \xE0 si\xE8cles)")), /*#__PURE__*/React.createElement(SvScienceNote, {
+    title: "Implication"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le C stable du sol est majoritairement d'origine ", /*#__PURE__*/React.createElement("em", null, "microbienne"), " (n\xE9cromasse), pas v\xE9g\xE9tale. C'est la \"pompe \xE0 carbone microbienne\" (MCP, Liang et al. 2017)."))), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Modes de transformation compar\xE9s",
+    icon: "\u2697\uFE0F"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le M\xCAME apport de mati\xE8re organique donne des r\xE9sultats tr\xE8s diff\xE9rents selon le mode de transformation :"), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-bullet-list"
+  }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Compostage a\xE9robie"), " : pertes C 40-60%, humification mod\xE9r\xE9e"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Bokashi (ana\xE9robie)"), " : pertes C <10%, r\xE9tention quasi-totale"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Incorporation directe"), " : d\xE9pend du C/N et des conditions p\xE9doclimatiques"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Paillage de surface"), " : min\xE9ralisation lente, protection du sol"))), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Priming effect",
+    icon: "\u26A0\uFE0F"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "L'apport de MO fra\xEEche peut paradoxalement ", /*#__PURE__*/React.createElement("em", null, "acc\xE9l\xE9rer"), " la d\xE9composition du carbone stable d\xE9j\xE0 pr\xE9sent dans le sol. Ce \"priming effect\" s'explique par l'activation microbienne : les d\xE9composeurs activ\xE9s par le substrat frais attaquent ensuite les r\xE9serves de C stable."), /*#__PURE__*/React.createElement(SvHighlightBox, {
+    color: "warning",
+    title: "Cons\xE9quence agronomique"
+  }, "Des apports r\xE9guliers et \xE9quilibr\xE9s sont plus efficaces que de gros apports ponctuels pour augmenter le stock de C du sol.")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)',
+      marginTop: '1.5rem',
+      paddingBottom: '1rem'
+    }
+  }, "R\xE9f\xE9rences : Kirkby et al. (2016) \xB7 Cotrufo & Lavallee (2019) \xB7 Liang et al. (2017)"), (() => {
+    const withPhys = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "sv-card"
+    }, /*#__PURE__*/React.createElement("h2", null, "Caract\xE9risation (", withPhys.length, " mati\xE8res document\xE9es)"), /*#__PURE__*/React.createElement(SvNoteAccordion, {
+      text: "Donn\xE9es physiques, NPK et co\xFBt indicatif. Sources : Arvalis paille-fumier, guide MSV 2022. Les valeurs sont indicatives et varient selon l'origine, le stockage et la maturit\xE9 des mati\xE8res."
+    }), /*#__PURE__*/React.createElement("div", {
+      style: {
+        overflowX: 'auto'
+      }
+    }, /*#__PURE__*/React.createElement("table", {
+      className: "sv-data-table"
+    }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Mati\xE8re"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "Densit\xE9"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "MS %"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "C/N"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "k\u2081 %"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "N"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "P\u2082O\u2085"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "K\u2082O"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "MgO"), /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: 'center'
+      }
+    }, "Co\xFBt"), /*#__PURE__*/React.createElement("th", null, "Notes"))), /*#__PURE__*/React.createElement("tbody", null, withPhys.map((c, i) => {
+      const cn = (c.cn_min + (c.cn_max || c.cn_min)) / 2;
+      const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
+      return /*#__PURE__*/React.createElement("tr", {
+        key: i
+      }, /*#__PURE__*/React.createElement("td", {
+        style: {
+          fontWeight: 500,
+          color: 'var(--text)',
+          fontSize: 'var(--font-sm)'
+        }
+      }, c.matiere), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--color-text-muted)'
+        }
+      }, c.densite || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--color-text-muted)'
+        }
+      }, c.taux_ms || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: cnColor(cn)
+        }
+      }, c.cn_min === c.cn_max ? c.cn_min : c.cn_min + '–' + c.cn_max), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--accent)'
+        }
+      }, k1), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--success)'
+        }
+      }, c.n_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--warning)'
+        }
+      }, c.p2o5_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--purple, #7c3aed)'
+        }
+      }, c.k2o_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--info)'
+        }
+      }, c.mgo_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: 'center',
+          color: 'var(--color-text-muted)',
+          fontSize: 'var(--font-sm)'
+        }
+      }, c.cout_min != null ? c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : c.cout_min < 0 ? 'Négatif' : c.cout_min + '–' + c.cout_max + ' €/t' : '—'), /*#__PURE__*/React.createElement("td", {
+        style: {
+          color: 'var(--color-text-muted)',
+          fontSize: 'var(--font-sm)',
+          maxWidth: '180px'
+        }
+      }, c.notes || c.epaisseur_1pct_mo_cm ? /*#__PURE__*/React.createElement(SvNoteAccordion, {
+        text: (c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' (' + c.epaisseur_1pct_mo_cm + ' cm/+1%MO)' : '')
+      }) : '—'));
+    })))));
+  })());
 }
 
-function NoteAccordion({ text }) {
-  const [open, setOpen] = React.useState(false);
-  if (!text) return null;
-  return <div>
-    <span onClick={() => setOpen(!open)} style={{cursor:'pointer',color:'var(--accent)',fontSize:'var(--font-xs)'}}>
-      {open ? '▾' : '▸'} {open ? '' : 'note'}
-    </span>
-    {open && <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',padding:'0.25rem 0',lineHeight:'1.4'}}>{text}</div>}
-  </div>;
-}
+// NoteAccordion → SvNoteAccordion (shared)
 
 function App() {
   const [panier, setPanier] = React.useState([]);
@@ -844,17 +1938,25 @@ function App() {
   const [showDidactic, setShowDidactic] = React.useState(false);
   const [showKirkby, setShowKirkby] = React.useState(null);
   const [tab, setTab] = React.useState('pratique');
-
-  const addMatiere = (m) => {
+  const addMatiere = m => {
     if (panier.find(p => p.id === m.id)) return;
-    setPanier([...panier, { ...m, qty: 100 }]);
+    setPanier([...panier, {
+      ...m,
+      qty: 100
+    }]);
   };
-  const updateQty = (id, qty) => setPanier(panier.map(p => p.id === id ? { ...p, qty: Math.max(0, qty) } : p));
-  const removeMatiere = (id) => setPanier(panier.filter(p => p.id !== id));
-  const loadMelange = (mel) => {
+  const updateQty = (id, qty) => setPanier(panier.map(p => p.id === id ? {
+    ...p,
+    qty: Math.max(0, qty)
+  } : p));
+  const removeMatiere = id => setPanier(panier.filter(p => p.id !== id));
+  const loadMelange = mel => {
     const items = mel.composants.map(c => {
       const m = DATA.matieres.find(x => x.id === c.matiere_id);
-      return m ? { ...m, qty: c.proportion * 10 } : null;
+      return m ? {
+        ...m,
+        qty: c.proportion * 10
+      } : null;
     }).filter(Boolean);
     setPanier(items);
   };
@@ -866,249 +1968,556 @@ function App() {
     return s + cn * p.qty;
   }, 0) / totalQty : null;
   const k1Avg = totalQty > 0 ? panier.reduce((s, p) => {
-    const k1 = (p.k1_min && p.k1_max) ? (p.k1_min + p.k1_max) / 2 : 20;
+    const k1 = p.k1_min && p.k1_max ? (p.k1_min + p.k1_max) / 2 : 20;
     return s + k1 * p.qty;
   }, 0) / totalQty : null;
-  const humusKg = (totalQty && k1Avg) ? totalQty * (k1Avg / 100) : null;
+  const humusKg = totalQty && k1Avg ? totalQty * (k1Avg / 100) : null;
 
   // ── Bilan NPK (kg/t → g/kg de mélange) ──
-  const npk = totalQty > 0 ? ['n_kg_t','p2o5_kg_t','k2o_kg_t','mgo_kg_t','c_kg_t'].reduce((acc, key) => {
+  const npk = totalQty > 0 ? ['n_kg_t', 'p2o5_kg_t', 'k2o_kg_t', 'mgo_kg_t', 'c_kg_t'].reduce((acc, key) => {
     acc[key] = panier.reduce((s, p) => s + (p[key] || 0) * p.qty, 0) / totalQty;
     return acc;
   }, {}) : null;
   const hasNpk = npk && (npk.n_kg_t > 0 || npk.p2o5_kg_t > 0);
-
   const regle = cnGlobal ? getRegle(cnGlobal) : null;
   const zone = cnGlobal ? cnZone(cnGlobal) : null;
 
   // ── Alertes ──
   const alertes = [];
   if (cnGlobal !== null && regle) {
-    if (regle.diagnostic) alertes.push({ type: cnGlobal < 15 || cnGlobal > 40 ? 'danger' : cnGlobal > 30 ? 'warning' : 'info', text: regle.diagnostic });
-    if (regle.recommandation && cnGlobal >= 20 && cnGlobal <= 25) alertes.push({ type: 'success', text: regle.recommandation });
+    if (regle.diagnostic) alertes.push({
+      type: cnGlobal < 15 || cnGlobal > 40 ? 'danger' : cnGlobal > 30 ? 'warning' : 'info',
+      text: regle.diagnostic
+    });
+    if (regle.recommandation && cnGlobal >= 20 && cnGlobal <= 25) alertes.push({
+      type: 'success',
+      text: regle.recommandation
+    });
   }
   if (k1Avg !== null && k1Avg < 10) {
-    alertes.push({ type: 'info', text: "Coefficient isohumique faible (<10%) — carbone très stable mais peu d'effet nutritif à court terme." });
+    alertes.push({
+      type: 'info',
+      text: "Coefficient isohumique faible (<10%) — carbone très stable mais peu d'effet nutritif à court terme."
+    });
   }
 
   // Kirkby ratio
   const showKirkbyRatio = cnGlobal && cnGlobal >= 15 && cnGlobal <= 30;
 
   // ── Filtrage matières ──
-  const filtered = DATA.matieres.filter(m =>
-    matchFilter(m, filter) &&
-    (!catFilter || m.categorie === catFilter) &&
-    (showSolBio || m.categorie !== 'Sol/biomasse')
-  );
-
-  return <div className="sv-page">
-    {/* ── HEADER ── */}
-    <div style={{textAlign:'center', padding:'1rem 1.5rem 0.5rem'}}>
-      
-    </div>
-
-    {/* ── TABS ── */}
-    <div className="sv-tabs">
-      <button className={`sv-tab ${tab === 'pratique' ? 'active' : ''}`} onClick={() => setTab('pratique')}>
-        🧪 Pratique
-      </button>
-      <button className={`sv-tab ${tab === 'comprendre' ? 'active' : ''}`} onClick={() => setTab('comprendre')}>
-        📚 Comprendre
-      </button>
-    </div>
-
-    {tab === 'comprendre' && <ComprendreMO />}
-    {tab === 'pratique' && <div className="mo-layout">
-      {/* ══════════ SIDEBAR GAUCHE : Matières ══════════ */}
-      <aside className="mo-sidebar">
-        <h2 style={{fontSize:'var(--font-sm)',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.04em',color:'var(--text)',marginBottom:'0.5rem'}}>
-          Matières ({filtered.length})
-        </h2>
-        <input type="text" placeholder="Rechercher : tonte, gazon, BRF..."
-          value={filter} onChange={e => setFilter(e.target.value)}
-          style={{width:'100%',padding:'0.4rem 0.6rem',border:'1px solid #cbd5e1',borderRadius:'var(--radius)',fontSize:'var(--font-sm)',marginBottom:'0.5rem',outline:'none'}} />
-        <div style={{display:'flex',flexWrap:'wrap',gap:'4px',marginBottom:'0.5rem'}}>
-          <button onClick={() => setCatFilter(null)}
-            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
-              background: !catFilter ? 'var(--color-text)' : 'var(--color-bg-muted)', color: !catFilter ? 'var(--card-bg)' : 'var(--color-text-muted)'}}>Tout</button>
-          {ACTIVE_CATS.map(c => <button key={c} onClick={() => setCatFilter(catFilter === c ? null : c)}
-            style={{fontSize:'var(--font-sm)',padding:'2px 8px',borderRadius:'var(--radius)',border:'none',cursor:'pointer',
-              background: catFilter === c ? 'var(--color-text)' : 'var(--color-bg-muted)', color: catFilter === c ? 'var(--card-bg)' : 'var(--color-text-muted)'}}>{c}</button>)}
-        </div>
-        <div style={{overflowY:'auto',flex:1}}>
-          {filtered.map(m => {
-            const inP = panier.find(p => p.id === m.id);
-            const cn = getCnAvg(m);
-            return <div key={m.id} onClick={() => !inP && addMatiere(m)}
-              className={'mat-item' + (inP ? ' in-panier' : '')}>
-              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-                <span className="mat-name">{m.matiere}</span>
-                <span className="mat-cn">C/N {cn ? cn.toFixed(0) : '?'}</span>
-              </div>
-              <div style={{display:'flex',gap:'4px',marginTop:'2px',alignItems:'center'}}>
-                <span className="mat-cat" style={{background:(CAT_COLORS[m.categorie]||'var(--color-text-muted)')+'20',color:CAT_COLORS[m.categorie]||'var(--color-text-muted)'}}>{m.categorie}</span>
-                {m.k1_min && <span style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>k₁ {m.k1_min}-{m.k1_max}%</span>}
-                {m.n_kg_t > 0 && <span style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>NPK</span>}
-              </div>
-              {m.synonymes && filter && <div className="mat-syn">{m.synonymes}</div>}
-            </div>;
-          })}
-        </div>
-        {/* Toggle Sol/biomasse */}
-        <div style={{marginTop:'0.5rem',paddingTop:'0.5rem',borderTop:'1px solid #cbd5e1'}}>
-          <button onClick={() => setShowSolBio(!showSolBio)}
-            style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',background:'none',border:'none',cursor:'pointer',textDecoration:'underline'}}>
-            {showSolBio ? 'Masquer' : 'Afficher'} Sol/biomasse ({DATA.matieres.filter(m => m.categorie === 'Sol/biomasse').length} réf.)
-          </button>
-        </div>
-      </aside>
-      {/* ══════════ MAIN CONTENT ══════════ */}
-      <main className="mo-main">
-
-        {/* ── KPI ROW ── */}
-        <div className="kpi-grid">
-          <div className="kpi-card">
-            <div className="kpi-value" style={{color: cnGlobal ? cnColor(cnGlobal) : 'var(--border)'}}>{cnGlobal ? cnGlobal.toFixed(1) : '—'}</div>
-            <div className="kpi-label">C/N global</div>
-            <div className="kpi-sub">{zone ? zone.label : 'Ajoutez des matières'}</div>
-          </div>
-          <div className="kpi-card">
-            <div className="kpi-value" style={{color: k1Avg > 25 ? 'var(--success)' : k1Avg > 15 ? 'var(--warning)' : 'var(--border)'}}>{k1Avg ? k1Avg.toFixed(0)+'%' : '—'}</div>
-            <div className="kpi-label">k₁ humification</div>
-            <div className="kpi-sub">{k1Avg ? (k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible') : ''}</div>
-          </div>
-          <div className="kpi-card">
-            <div className="kpi-value" style={{color:'var(--purple, #7c3aed)'}}>{humusKg ? humusKg.toFixed(0) : '—'}</div>
-            <div className="kpi-unit">kg humus</div>
-            <div className="kpi-label">par {totalQty || 0} kg</div>
-          </div>
-          <div className="kpi-card">
-            <div className="kpi-value" style={{color:'var(--color-text)'}}>{totalQty || '—'}</div>
-            <div className="kpi-unit">kg</div>
-            <div className="kpi-label">Masse totale</div>
-            <div className="kpi-sub">{panier.length} matière{panier.length !== 1 ? 's' : ''}</div>
-          </div>
-        </div>
-
-        {/* ── Bilan NPK ── */}
-        {hasNpk && <div style={{display:'flex',gap:'8px',marginBottom:'0.75rem',flexWrap:'wrap'}}>
-          {[
-            {label:'N', val:npk.n_kg_t, unit:'kg/t', color:'var(--success)'},
-            {label:'P₂O₅', val:npk.p2o5_kg_t, unit:'kg/t', color:'var(--warning)'},
-            {label:'K₂O', val:npk.k2o_kg_t, unit:'kg/t', color:'var(--purple, #7c3aed)'},
-            {label:'MgO', val:npk.mgo_kg_t, unit:'kg/t', color:'var(--info)'},
-            {label:'C org', val:npk.c_kg_t, unit:'kg/t', color:'var(--color-text-muted)'},
-          ].map(({label, val, unit, color}) => val > 0 && <div key={label} style={{
-            flex:'1',minWidth:'80px',background:'var(--color-bg-subtle)',border:'1px solid #cbd5e1',borderRadius:'var(--radius)',
-            padding:'0.5rem 0.75rem',textAlign:'center'}}>
-            <div style={{fontSize:'var(--font-lg)',fontWeight:700,color}}>{val.toFixed(1)}</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>{label} {unit}</div>
-          </div>)}
-        </div>}
-
-        {/* ── Jauge C/N ── */}
-        {cnGlobal && <div style={{marginBottom:'1rem'}}>
-          <div className="cn-gauge">
-            <div className="cn-gauge-marker" style={{left: Math.min(95, Math.max(2, Math.log(Math.max(1, cnGlobal)) / Math.log(500) * 100))+'%'}} />
-          </div>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginTop:'2px',padding:'0 2px'}}>
-            <span>Minéralisation très forte</span><span>Équilibre</span><span>Immobilisation très forte</span>
-          </div>
-        </div>}
-
-                {/* ── Panier ── */}
-        <div className="mo-card">
-          <h2>Mélange ({panier.length} matière{panier.length !== 1 ? 's' : ''} · {totalQty} kg)</h2>
-          {panier.length === 0 && <p style={{color:'var(--color-text-muted)',fontSize:'var(--font-base)',fontStyle:'italic'}}>
-            Cliquez sur une matière à gauche ou choisissez un mélange prédéfini
-          </p>}
-          {panier.map(p => {
-            const cn = getCnAvg(p) || 0;
-            const pct = totalQty > 0 ? (p.qty / totalQty * 100).toFixed(0) : 0;
-            return <div key={p.id} className="panier-item">
-              <button className="panier-remove" onClick={() => removeMatiere(p.id)}>✕</button>
-              <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:'var(--font-base)',fontWeight:500,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{p.matiere}</div>
-                <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)'}}>C/N {cn.toFixed(0)} · k₁ {p.k1_min||'?'}-{p.k1_max||'?'}% · {pct}%</div>
-                {p.n_kg_t > 0 && <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>N={p.n_kg_t} P={p.p2o5_kg_t} K={p.k2o_kg_t} Mg={p.mgo_kg_t} kg/t</div>}
-              </div>
-              <input type="range" min="0" max="1000" step="10" value={p.qty}
-                onChange={e => updateQty(p.id, parseInt(e.target.value))}
-                style={{width:'80px'}} />
-              <input type="number" min="0" max="10000" value={p.qty}
-                onChange={e => updateQty(p.id, parseInt(e.target.value) || 0)}
-                style={{width:'60px',textAlign:'right',fontSize:'var(--font-sm)',border:'1px solid #cbd5e1',borderRadius:'6px',padding:'3px 6px'}} />
-              <span style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',width:'20px'}}>kg</span>
-            </div>;
-          })}
-        </div>
-
-        {/* ── Diagnostic + Recommandation ── */}
-        {cnGlobal && regle && <div className="mo-card">
-          <h2>Diagnostic</h2>
-          <div className="diag-box" style={{borderLeftColor: zone.color, background: zone.color+'10'}}>
-            <div style={{display:'flex',alignItems:'center',gap:'0.5rem',marginBottom:'0.35rem'}}>
-              <span style={{fontSize:'var(--font-lg)'}}>{regle.icone}</span>
-              <span style={{fontWeight:700,fontSize:'var(--font-base)',color:zone.color}}>{regle.label} — {regle.comportement}</span>
-            </div>
-            {regle.interpretation && <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',lineHeight:1.5,margin:0}}>{regle.interpretation}</p>}
-            {regle.diagnostic && <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',lineHeight:1.5,marginTop:'0.35rem'}}>{regle.diagnostic}</p>}
-          </div>
-          {regle.recommandation && <div className="reco-box">
-            <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--color-success-text)',marginBottom:'0.25rem'}}>Recommandation</div>
-            <p style={{fontSize:'var(--font-sm)',color:'var(--color-text-secondary)',lineHeight:1.5,margin:0}}>{regle.recommandation}</p>
-          </div>}
-
-          {/* Kirkby ratio */}
-          {showKirkbyRatio && <div style={{padding:'0.7rem 1rem',borderRadius:'var(--radius)',background:'var(--purple-light, #faf5ff)',borderLeft:'4px solid #7c3aed',marginBottom:'0.5rem'}}>
-            <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:'var(--purple-dark, #6d28d9)',marginBottom:'0.25rem'}}>Ratio de Kirkby</div>
-            <div style={{fontSize:'var(--font-sm)',color:'var(--purple-dark, #6b21a8)'}}>Pour 1 tonne de C stabilisé : 83 kg N + 20 kg P + 14 kg S nécessaires.</div>
-          </div>}
-
-          {/* Alertes */}
-          {alertes.map((a, i) => <div key={i} className={'alert-box alert-' + a.type}>
-            {a.type === 'danger' ? '⚠' : a.type === 'warning' ? '⚡' : a.type === 'success' ? '✓' : 'ℹ'} {a.text}
-          </div>)}
-
-          {/* Encart incorporation (UNE SEULE FOIS — fix du doublon) */}
-          {cnGlobal > 25 && <EncartIncorporation cn={cnGlobal} />}
-        </div>}
-        {/* ── Modes de transformation ── */}
-        {panier.length > 0 && <div className="mo-card">
-          <h2>Modes de transformation — Comparaison</h2>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(4, 1fr)',gap:'0.75rem'}}>
-            {Object.entries(PERTE).map(([key, mode]) => {
-              const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
-              const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
-              return <div key={key} style={{padding:'0.75rem',borderRadius:'var(--radius)',border:'2px solid '+mode.color+'40'}}>
-                <div style={{fontWeight:600,fontSize:'var(--font-sm)',color:mode.color,marginBottom:'0.25rem'}}>{mode.label}</div>
-                <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginBottom:'0.5rem'}}>{mode.desc}</div>
-                <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-sm)'}}>
-                  <span style={{color:'var(--color-text-muted)'}}>Perte MO</span>
-                  <span style={{fontWeight:600}}>{mode.min === mode.max ? mode.min+'%' : mode.min+'-'+mode.max+'%'}</span>
-                </div>
-                {humusMin != null && <div style={{display:'flex',justifyContent:'space-between',fontSize:'var(--font-sm)',marginTop:'2px'}}>
-                  <span style={{color:'var(--color-text-muted)'}}>Humus</span>
-                  <span style={{fontWeight:700,color:mode.color}}>{humusMin.toFixed(0)}-{humusMax.toFixed(0)} kg</span>
-                </div>}
-                <div style={{height:'6px',borderRadius:'3px',background:'var(--border)',overflow:'hidden',marginTop:'0.4rem'}}>
-                  <div style={{height:'100%',borderRadius:'3px',background:mode.color,width:(100-mode.max)+'%',transition:'width 0.3s'}} />
-                </div>
-              </div>;
-            })}
-          </div>
-        </div>}
-
-
-        <div style={{fontSize:'var(--font-sm)',color:'var(--color-text-muted)',marginTop:'1rem'}}>Calculateur MO · Formule de Kirkby (2016)</div>
-      </main>
-    </div>}
-  </div>;
+  const filtered = DATA.matieres.filter(m => matchFilter(m, filter) && (!catFilter || m.categorie === catFilter) && (showSolBio || m.categorie !== 'Sol/biomasse'));
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-page"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: 'center',
+      padding: '1rem 1.5rem 0.5rem'
+    }
+  }), /*#__PURE__*/React.createElement(SvTabs, {
+    tabs: [{
+      id: 'pratique',
+      icon: '🧪',
+      label: 'Pratique'
+    }, {
+      id: 'comprendre',
+      icon: '📚',
+      label: 'Comprendre'
+    }],
+    active: tab,
+    onChange: setTab
+  }), tab === 'comprendre' && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-content"
+  }, /*#__PURE__*/React.createElement(ComprendreMO, null)), tab === 'pratique' && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-sidebar-layout"
+  }, /*#__PURE__*/React.createElement("aside", {
+    className: "sv-sidebar"
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      fontWeight: 700,
+      textTransform: 'uppercase',
+      letterSpacing: '0.04em',
+      color: 'var(--text)',
+      marginBottom: '0.5rem'
+    }
+  }, "Mati\xE8res (", filtered.length, ")"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    placeholder: "Rechercher : tonte, gazon, BRF...",
+    value: filter,
+    onChange: e => setFilter(e.target.value),
+    style: {
+      width: '100%',
+      padding: '0.4rem 0.6rem',
+      border: '1px solid #cbd5e1',
+      borderRadius: 'var(--radius)',
+      fontSize: 'var(--font-sm)',
+      marginBottom: '0.5rem',
+      outline: 'none'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px',
+      marginBottom: '0.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setCatFilter(null),
+    style: {
+      fontSize: 'var(--font-sm)',
+      padding: '2px 8px',
+      borderRadius: 'var(--radius)',
+      border: 'none',
+      cursor: 'pointer',
+      background: !catFilter ? 'var(--color-text)' : 'var(--color-bg-muted)',
+      color: !catFilter ? 'var(--card-bg)' : 'var(--color-text-muted)'
+    }
+  }, "Tout"), ACTIVE_CATS.map(c => /*#__PURE__*/React.createElement("button", {
+    key: c,
+    onClick: () => setCatFilter(catFilter === c ? null : c),
+    style: {
+      fontSize: 'var(--font-sm)',
+      padding: '2px 8px',
+      borderRadius: 'var(--radius)',
+      border: 'none',
+      cursor: 'pointer',
+      background: catFilter === c ? 'var(--color-text)' : 'var(--color-bg-muted)',
+      color: catFilter === c ? 'var(--card-bg)' : 'var(--color-text-muted)'
+    }
+  }, c))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowY: 'auto',
+      flex: 1
+    }
+  }, filtered.map(m => {
+    const inP = panier.find(p => p.id === m.id);
+    const cn = getCnAvg(m);
+    return /*#__PURE__*/React.createElement("div", {
+      key: m.id,
+      onClick: () => !inP && addMatiere(m),
+      className: 'mat-item' + (inP ? ' in-panier' : '')
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "mat-name"
+    }, m.matiere), /*#__PURE__*/React.createElement("span", {
+      className: "mat-cn"
+    }, "C/N ", cn ? cn.toFixed(0) : '?')), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: '4px',
+        marginTop: '2px',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "mat-cat",
+      style: {
+        background: (CAT_COLORS[m.categorie] || 'var(--color-text-muted)') + '20',
+        color: CAT_COLORS[m.categorie] || 'var(--color-text-muted)'
+      }
+    }, m.categorie), m.k1_min && /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 'var(--font-sm)',
+        color: 'var(--color-text-muted)'
+      }
+    }, "k\u2081 ", m.k1_min, "-", m.k1_max, "%"), m.n_kg_t > 0 && /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 'var(--font-xs)',
+        color: 'var(--color-text-muted)'
+      }
+    }, "NPK")), m.synonymes && filter && /*#__PURE__*/React.createElement("div", {
+      className: "mat-syn"
+    }, m.synonymes));
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '0.5rem',
+      paddingTop: '0.5rem',
+      borderTop: '1px solid #cbd5e1'
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowSolBio(!showSolBio),
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)',
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      textDecoration: 'underline'
+    }
+  }, showSolBio ? 'Masquer' : 'Afficher', " Sol/biomasse (", DATA.matieres.filter(m => m.categorie === 'Sol/biomasse').length, " r\xE9f.)"))), /*#__PURE__*/React.createElement("main", {
+    className: "sv-main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: {
+      color: cnGlobal ? cnColor(cnGlobal) : 'var(--border)'
+    }
+  }, cnGlobal ? cnGlobal.toFixed(1) : '—'), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label"
+  }, "C/N global"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, zone ? zone.label : 'Ajoutez des matières')), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: {
+      color: k1Avg > 25 ? 'var(--success)' : k1Avg > 15 ? 'var(--warning)' : 'var(--border)'
+    }
+  }, k1Avg ? k1Avg.toFixed(0) + '%' : '—'), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label"
+  }, "k\u2081 humification"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, k1Avg ? k1Avg > 30 ? 'Très humifiant' : k1Avg > 20 ? 'Bon' : 'Faible' : '')), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: {
+      color: 'var(--purple, #7c3aed)'
+    }
+  }, humusKg ? humusKg.toFixed(0) : '—'), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, "kg humus"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label"
+  }, "par ", totalQty || 0, " kg")), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: {
+      color: 'var(--color-text)'
+    }
+  }, totalQty || '—'), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, "kg"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label"
+  }, "Masse totale"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, panier.length, " mati\xE8re", panier.length !== 1 ? 's' : ''))), hasNpk && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: '8px',
+      marginBottom: '0.75rem',
+      flexWrap: 'wrap'
+    }
+  }, [{
+    label: 'N',
+    val: npk.n_kg_t,
+    unit: 'kg/t',
+    color: 'var(--success)'
+  }, {
+    label: 'P₂O₅',
+    val: npk.p2o5_kg_t,
+    unit: 'kg/t',
+    color: 'var(--warning)'
+  }, {
+    label: 'K₂O',
+    val: npk.k2o_kg_t,
+    unit: 'kg/t',
+    color: 'var(--purple, #7c3aed)'
+  }, {
+    label: 'MgO',
+    val: npk.mgo_kg_t,
+    unit: 'kg/t',
+    color: 'var(--info)'
+  }, {
+    label: 'C org',
+    val: npk.c_kg_t,
+    unit: 'kg/t',
+    color: 'var(--color-text-muted)'
+  }].map(({
+    label,
+    val,
+    unit,
+    color
+  }) => val > 0 && /*#__PURE__*/React.createElement("div", {
+    key: label,
+    style: {
+      flex: '1',
+      minWidth: '80px',
+      background: 'var(--color-bg-subtle)',
+      border: '1px solid #cbd5e1',
+      borderRadius: 'var(--radius)',
+      padding: '0.5rem 0.75rem',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-lg)',
+      fontWeight: 700,
+      color
+    }
+  }, val.toFixed(1)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)'
+    }
+  }, label, " ", unit)))), cnGlobal && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '1rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cn-gauge"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cn-gauge-marker",
+    style: {
+      left: Math.min(95, Math.max(2, Math.log(Math.max(1, cnGlobal)) / Math.log(500) * 100)) + '%'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-text-muted)',
+      marginTop: '2px',
+      padding: '0 2px'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Min\xE9ralisation tr\xE8s forte"), /*#__PURE__*/React.createElement("span", null, "\xC9quilibre"), /*#__PURE__*/React.createElement("span", null, "Immobilisation tr\xE8s forte"))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "M\xE9lange (", panier.length, " mati\xE8re", panier.length !== 1 ? 's' : '', " \xB7 ", totalQty, " kg)"), panier.length === 0 && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: 'var(--color-text-muted)',
+      fontSize: 'var(--font-base)',
+      fontStyle: 'italic'
+    }
+  }, "Cliquez sur une mati\xE8re \xE0 gauche ou choisissez un m\xE9lange pr\xE9d\xE9fini"), panier.map(p => {
+    const cn = getCnAvg(p) || 0;
+    const pct = totalQty > 0 ? (p.qty / totalQty * 100).toFixed(0) : 0;
+    return /*#__PURE__*/React.createElement("div", {
+      key: p.id,
+      className: "panier-item"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "panier-remove",
+      onClick: () => removeMatiere(p.id)
+    }, "\u2715"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        minWidth: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 'var(--font-base)',
+        fontWeight: 500,
+        color: 'var(--text)',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      }
+    }, p.matiere), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 'var(--font-sm)',
+        color: 'var(--color-text-muted)'
+      }
+    }, "C/N ", cn.toFixed(0), " \xB7 k\u2081 ", p.k1_min || '?', "-", p.k1_max || '?', "% \xB7 ", pct, "%"), p.n_kg_t > 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 'var(--font-xs)',
+        color: 'var(--color-text-muted)'
+      }
+    }, "N=", p.n_kg_t, " P=", p.p2o5_kg_t, " K=", p.k2o_kg_t, " Mg=", p.mgo_kg_t, " kg/t")), /*#__PURE__*/React.createElement("input", {
+      type: "range",
+      min: "0",
+      max: "1000",
+      step: "10",
+      value: p.qty,
+      onChange: e => updateQty(p.id, parseInt(e.target.value)),
+      style: {
+        width: '80px'
+      }
+    }), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      min: "0",
+      max: "10000",
+      value: p.qty,
+      onChange: e => updateQty(p.id, parseInt(e.target.value) || 0),
+      style: {
+        width: '60px',
+        textAlign: 'right',
+        fontSize: 'var(--font-sm)',
+        border: '1px solid #cbd5e1',
+        borderRadius: '6px',
+        padding: '3px 6px'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 'var(--font-sm)',
+        color: 'var(--color-text-muted)',
+        width: '20px'
+      }
+    }, "kg"));
+  })), cnGlobal && regle && /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Diagnostic"), /*#__PURE__*/React.createElement("div", {
+    className: "diag-box",
+    style: {
+      borderLeftColor: zone.color,
+      background: zone.color + '10'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      marginBottom: '0.35rem'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-lg)'
+    }
+  }, regle.icone), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontWeight: 700,
+      fontSize: 'var(--font-base)',
+      color: zone.color
+    }
+  }, regle.label, " \u2014 ", regle.comportement)), regle.interpretation && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-secondary)',
+      lineHeight: 1.5,
+      margin: 0
+    }
+  }, regle.interpretation), regle.diagnostic && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)',
+      lineHeight: 1.5,
+      marginTop: '0.35rem'
+    }
+  }, regle.diagnostic)), regle.recommandation && /*#__PURE__*/React.createElement("div", {
+    className: "reco-box"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      fontWeight: 600,
+      color: 'var(--color-success-text)',
+      marginBottom: '0.25rem'
+    }
+  }, "Recommandation"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-secondary)',
+      lineHeight: 1.5,
+      margin: 0
+    }
+  }, regle.recommandation)), showKirkbyRatio && /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '0.7rem 1rem',
+      borderRadius: 'var(--radius)',
+      background: 'var(--purple-light, #faf5ff)',
+      borderLeft: '4px solid #7c3aed',
+      marginBottom: '0.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      fontSize: 'var(--font-sm)',
+      color: 'var(--purple-dark, #6d28d9)',
+      marginBottom: '0.25rem'
+    }
+  }, "Ratio de Kirkby"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--purple-dark, #6b21a8)'
+    }
+  }, "Pour 1 tonne de C stabilis\xE9 : 83 kg N + 20 kg P + 14 kg S n\xE9cessaires.")), alertes.map((a, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: 'alert-box alert-' + a.type
+  }, a.type === 'danger' ? '⚠' : a.type === 'warning' ? '⚡' : a.type === 'success' ? '✓' : 'ℹ', " ", a.text)), cnGlobal > 25 && /*#__PURE__*/React.createElement(EncartIncorporation, {
+    cn: cnGlobal
+  })), panier.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Modes de transformation \u2014 Comparaison"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gap: '0.75rem'
+    }
+  }, Object.entries(PERTE).map(([key, mode]) => {
+    const humusMin = humusKg ? humusKg * (100 - mode.max) / 100 : null;
+    const humusMax = humusKg ? humusKg * (100 - mode.min) / 100 : null;
+    return /*#__PURE__*/React.createElement("div", {
+      key: key,
+      style: {
+        padding: '0.75rem',
+        borderRadius: 'var(--radius)',
+        border: '2px solid ' + mode.color + '40'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 600,
+        fontSize: 'var(--font-sm)',
+        color: mode.color,
+        marginBottom: '0.25rem'
+      }
+    }, mode.label), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 'var(--font-sm)',
+        color: 'var(--color-text-muted)',
+        marginBottom: '0.5rem'
+      }
+    }, mode.desc), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: 'var(--font-sm)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--color-text-muted)'
+      }
+    }, "Perte MO"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 600
+      }
+    }, mode.min === mode.max ? mode.min + '%' : mode.min + '-' + mode.max + '%')), humusMin != null && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: 'var(--font-sm)',
+        marginTop: '2px'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--color-text-muted)'
+      }
+    }, "Humus"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 700,
+        color: mode.color
+      }
+    }, humusMin.toFixed(0), "-", humusMax.toFixed(0), " kg")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: '6px',
+        borderRadius: '3px',
+        background: 'var(--border)',
+        overflow: 'hidden',
+        marginTop: '0.4rem'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: '100%',
+        borderRadius: '3px',
+        background: mode.color,
+        width: 100 - mode.max + '%',
+        transition: 'width 0.3s'
+      }
+    })));
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-sm)',
+      color: 'var(--color-text-muted)',
+      marginTop: '1rem'
+    }
+  }, "Calculateur MO \xB7 Formule de Kirkby (2016)")))));
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-
-
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>
 
 

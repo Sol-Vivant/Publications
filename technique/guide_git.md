@@ -4,16 +4,16 @@
 
 ```bash
 # Cloner le depot
-git clone https://github.com/Sol-Vivant/Tools.git
+git clone {GITHUB_TOOLS_URL}.git
 cd Tools
 
 # Cloner Publications dedans (depot separe pour le site web)
-git clone https://github.com/Sol-Vivant/Publications.git
+git clone {GITHUB_PUB_URL}.git
 ```
 
 ## Commandes quotidiennes
 
-### Recuperer les dernières modifications
+### Recuperer les dernieres modifications
 
 ```bash
 cd ~/Documents/Sol_Vivant/GitHub/Tools
@@ -80,8 +80,14 @@ git branch -d test-nouveau-truc
 ```bash
 # Generer les fichiers dans Publications/
 cd ~/Documents/Sol_Vivant/GitHub/Tools
-python3 tools/docs/gen_cartography.py --db sol_vivant.db --technique
-python3 tools/docs/gen_html_solvivant.py --db sol_vivant.db
+python3 tools/docs/gen_archive.py --db sol_vivant.db
+python3 tools/docs/gen_explorer.py --db sol_vivant.db
+python3 tools/docs/gen_lifofer.py --db sol_vivant.db
+python3 tools/docs/gen_mo_calc.py --db sol_vivant.db
+python3 tools/docs/gen_readme.py --db sol_vivant.db
+python3 tools/docs/gen_reports.py --db sol_vivant.db
+python3 tools/docs/gen_triangle_textures.py --db sol_vivant.db
+python3 tools/docs/gen_web.py --db sol_vivant.db
 python3 tools/docs/gen_workflows.py --db sol_vivant.db
 python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --all
 

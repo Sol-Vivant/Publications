@@ -1,81 +1,107 @@
 # Reproduire le patron pour un autre corpus
 
-## Principe
+## L'idee
 
-L'architecture Sol Vivant est un **patron generique** pour la production de corpus scientifiques structures. Elle s'appuie sur 3 outils :
+L'architecture Sol Vivant est un **patron generique** pour construire un corpus de connaissances structure. Elle n'est pas limitee a l'agriculture : tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser.
 
-- **Zotero** : gestion bibliographique (sources academiques)
-- **Jenni AI** : redaction par assemblage de citations (moteur de recherche academique deguise en redacteur)
-- **Claude** (Anthropic) : analyse, coherence terminologique, connexions inter-documents
+Le patron Sol Vivant gere actuellement 629 termes, 191 prompts, 9 chaines causales, 118 renvois inter-documents et 4 pages web interactives, avec 34 scripts Python.
 
-La **base SQLite** est la source unique de verite : thesaurus, structure des documents, parametres, historique.
+## Architecture modulaire
 
-## Exemple : assistant psychiatrie TDAH enfants/adolescents
+Le systeme est compose de **couches independantes**. On peut n'en utiliser qu'une partie selon le projet :
 
-### Etape 1 — Definir le corpus
+### Le noyau — Claude Code + SQLite
 
-| Strate | Documents |
-|--------|-----------|
-| Fondements | Histoire du TDAH, neurobiologie |
-| Diagnostic | Criteres DSM-5, diagnostic differentiel, comorbidites |
-| Traitements | Pharmacologie, TCC, remediations cognitives |
-| Famille | Guidance parentale, amenagements scolaires |
-| Outils | Fiches FALC, supports visuels, echelles |
+C'est le minimum pour demarrer. Il suffit de :
 
-### Etape 2 — Creer la base
+1. Creer une base SQLite avec les tables de base
+2. Lancer Claude Code dans le dossier du projet
+3. Construire le corpus en conversation : documents, termes, pages web
+
+Claude gere la redaction, l'analyse de coherence, la generation de code, la maintenance des scripts et la creation des pages web interactives. **Pas besoin d'autre outil.**
+
+### Couches optionnelles
+
+| Couche | Apport | Quand l'activer |
+|--------|--------|-----------------|
+| **Jenni AI** | Redaction longue avec citations integrees | Corpus academique avec bibliographie dense |
+| **Zotero** | Gestion bibliographique (RIS, attribution) | Quand on cite des publications scientifiques |
+| **API Anthropic** (batch) | Analyse en masse (audit, attribution) | Gros volumes de traitement automatise |
+| **GitHub Pages** | Publication web publique | Quand on veut partager les pages interactives |
+
+## Exemples de projets possibles
+
+| Projet | Strates possibles | Outils web |
+|--------|-------------------|------------|
+| **Solutions low-tech** | Materiaux, Energie, Eau, Alimentation, Habitat | Calculateurs, fiches techniques |
+| **Guide de permaculture** | Sol, Plantes, Eau, Design, Animaux | Calendrier, associations, diagnostic sol |
+| **Base medicale TDAH** | Fondements, Diagnostic, Traitements, Famille, Outils | Fiches FALC, echelles, arbres decisionnels |
+| **Patrimoine architectural** | Epoques, Materiaux, Techniques, Reglementations | Cartographie, fiches batiment |
+| **Cuisine et nutrition** | Ingredients, Techniques, Nutrition, Recettes | Calculateur nutritionnel, saisonnalite |
+
+Dans tous les cas, le workflow est le meme : une DB unique + Claude Code pour tout orchestrer. Les scripts de generation web, README et outils interactifs sont reutilisables directement.
+
+## Demarrage en 4 etapes
+
+### 1. Creer la base
 
 ```sql
-CREATE TABLE documents (code TEXT PRIMARY KEY, strate TEXT, titre TEXT);
+-- Les 4 tables essentielles
+CREATE TABLE documents (code TEXT PRIMARY KEY, strate TEXT, titre TEXT, note TEXT);
 CREATE TABLE terms (id INTEGER PRIMARY KEY, fr TEXT, en TEXT, definition TEXT, doc_code TEXT);
-CREATE TABLE prompts (id INTEGER PRIMARY KEY, doc_code TEXT, type TEXT, chapitre INTEGER,
-    section INTEGER, titre_h1 TEXT, titre_h2 TEXT, contexte_sci TEXT, instructions TEXT, ordre INTEGER);
-CREATE TABLE config (categorie TEXT, cle TEXT, valeur TEXT, type TEXT, description TEXT,
-    PRIMARY KEY (categorie, cle));
+CREATE TABLE config (categorie TEXT, cle TEXT, valeur TEXT, type TEXT DEFAULT 'text',
+    description TEXT, PRIMARY KEY (categorie, cle));
+CREATE TABLE scripts (id INTEGER PRIMARY KEY, nom TEXT, description TEXT,
+    contenu TEXT, version TEXT, folder TEXT, updated_at TEXT);
 ```
 
-### Etape 3 — Peupler le thesaurus
+Pour les pages web interactives, ajouter `web_pages` et `html_templates` (Claude Code les cree automatiquement quand on lui demande une page).
 
-Le thesaurus est la cle de voute. Pour le TDAH :
+### 2. Definir le projet dans config
 
-| Terme FR | Terme EN | Definition |
-|----------|----------|------------|
-| deficit attentionnel | attention deficit | Difficulte persistante a maintenir l'attention... |
-| hyperactivite motrice | motor hyperactivity | Agitation motrice excessive... |
-| fonctions executives | executive functions | Ensemble des processus cognitifs de haut niveau... |
-| amenagement raisonnable | reasonable accommodation | Adaptation de l'environnement scolaire... |
-
-### Etape 4 — Ecrire les prompts
-
-Chaque section du corpus a un prompt avec :
-- `contexte_sci` : pourquoi cette section existe
-- `instructions` : quoi chercher, quels termes utiliser
-- Les termes canoniques sont injectes automatiquement
-
-### Etape 5 — Fiches FALC
-
-Le FALC (Facile a Lire et a Comprendre) impose des regles specifiques :
-- Phrases courtes (12-15 mots max)
-- Un mot = un sens
-- Pas de jargon, pas de metaphores
-- Illustrations associees au texte
-- Mise en page aeree
-
-Le prompt Jenni pour une fiche FALC :
-
-```
-Redige une fiche FALC (Facile a Lire et a Comprendre) sur [sujet].
-Regles FALC :
-- Phrases de 12 mots maximum
-- Mots simples, pas de jargon medical
-- Une idee par phrase
-- Utilise des exemples concrets du quotidien
-- Le texte doit etre compris par un enfant de 10 ans
+```sql
+INSERT INTO config VALUES ('corpus', 'nom', 'Mon Projet', 'text', 'Nom du corpus');
+INSERT INTO config VALUES ('corpus', 'auteur', 'Prenom Nom', 'text', 'Auteur principal');
+INSERT INTO config VALUES ('strates', 'noms', '{"S":"Sol","V":"Vivant"}', 'json', 'Noms des strates');
+INSERT INTO config VALUES ('strates', 'ordre', 'S,V', 'text', 'Ordre d affichage');
 ```
 
-### Etape 6 — Workflow identique
+### 3. Travailler avec Claude Code
 
-```
-base_tdah.db → export_prompts.py → Jenni → .docx → Claude (analyse) → contenu valide
+Ouvrir Claude Code dans le dossier du projet. Claude a acces a la DB et aux scripts. En conversation, on peut :
+
+- Creer des documents et alimenter le thesaurus
+- Generer des pages web interactives (calculateurs, cartographie)
+- Ecrire et maintenir les scripts Python
+- Analyser la coherence du corpus (termes orphelins, connexions manquantes)
+- Generer les README et le MANIFEST automatiquement
+
+Le fichier `CLAUDE.md` a la racine du projet donne le contexte permanent a Claude Code (regles, architecture, conventions).
+
+### Pourquoi SQLite + Git
+
+**SQLite** est le format ideal pour ce type de projet : c'est un fichier unique, portable, qui fonctionne partout sans serveur. On peut travailler dans un train, sur un vieux portable sous Linux, dans un avion — aucune connexion necessaire. Claude lit et ecrit directement dans la base, ce que peu de gens imaginent possible.
+
+**Git** est fortement recommande pour versionner le projet. Il permet de :
+
+- Garder l'historique complet de chaque modification
+- Revenir en arriere en cas d'erreur
+- Synchroniser entre plusieurs machines
+- Collaborer (meme si le fichier .db est binaire et ne se merge pas)
+
+**Sans Git**, le patron fonctionne aussi : on peut travailler dans une session Claude (CLI, web ou desktop) en echangeant le fichier `.db` entre l'utilisateur et Claude. Mais Git apporte la securite du versionnement — on ne perd jamais rien.
+
+### 4. Publier (optionnel)
+
+```bash
+# Generer les pages web
+python3 tools/docs/gen_web.py --db ma_base.db
+
+# Archive hors-ligne
+python3 tools/docs/gen_archive.py --db ma_base.db --regenerate
+
+# Deployer sur GitHub Pages
+rsync -av Publications/web/ /chemin/vers/depot-pages/
 ```
 
-Les scripts sont reutilisables tels quels — seul le contenu de la DB change.
+L'architecture est independante du domaine. Seul le contenu de la DB change — les scripts et la charte web sont reutilisables tels quels.

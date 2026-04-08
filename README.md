@@ -1,17 +1,94 @@
-Le Sol Vivant cet Holobionte
-Corpus scientifique francophone sur l'agriculture régénératrice et la biologie des sols.
+# Le Sol Vivant cet Holobionte — Tools
 
-18 documents organisés en 5 strates — du minéral au vivant, du sol à l'humain :
+Outils de production du corpus scientifique francophone sur l'agriculture régénératrice et la biologie des sols.
 
-Fondements (F) — Le temps long de l'évolution et l'économie du vivant
-Sol (S) — Eau, architecture, microbiome bactérien et fongique, cycles du carbone
-Vivant (V) — Faune du sol, holobionte plante-microbiome, fermentations microbiennes
-Pratiques (P) — Diagnostic, agriculture de conservation, biostimulants, agroforesterie, transition
-Humain (H) — Alimentation et santé, microbiome intestinal, résistance antimicrobienne
-Le corpus s'appuie sur un thésaurus de 346 termes canoniques (français/anglais avec définitions), une cascade de prérequis en 6 niveaux (N0 Eau → N5 Plante saine) et un réseau de chaînes causales reliant les documents entre eux.
+**Auteur** : Jean-Michel Juzan
+**Licence** : CC BY-SA 4.0
 
-Chaque document est rédigé à partir de la littérature scientifique récente (2018-2025), assemblé via Jenni AI et Zotero, et analysé par Claude (Anthropic) comme co-auteur pour la cohérence terminologique et les connexions inter-documents.
+## Le projet
 
-L'ensemble est piloté depuis une base SQLite unique (sol_vivant.db) qui centralise les termes, les sections, les spécifications de rédaction et les scripts de génération. La documentation interactive est consultable hors réseau.
+Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la biologie des sols, organisé en 5 strates thématiques (Fondements, Sol, Vivant, Pratiques, Humain).
 
-Auteur : Jean-Michel Juzan · Licence : CC BY-SA 4.0 — Partage libre avec attribution et partage dans les mêmes conditions
+**L'originalité** : une base de données unique (`sol_vivant.db`) orchestre tout le projet — du thésaurus terminologique aux pages web interactives, en passant par la rédaction assistée. Claude (Anthropic) assure la cohérence scientifique, les connexions inter-documents et la maintenance du code. Jenni AI assemble les citations depuis Zotero.
+
+### Le corpus en chiffres
+
+- **18 documents** répartis en 5 strates
+- **629 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **9 chaînes causales** et **118 renvois** inter-documents
+- **52 fiches conceptuelles** et **191 prompts** structurés
+- **4 pages web** interactives (calculateurs, cartographie, triangle des textures)
+- **48 tables** SQLite, 34 scripts Python
+
+### Les forces de cette architecture
+
+- **Source unique de vérité** : tout est dans `sol_vivant.db` — pas de fichiers éparpillés, pas de doublons
+- **Zéro hardcodage** : les textes, formules et données des pages web viennent de la DB, pas du code
+- **Claude Code intégré** : développement, audit, analyse et maintenance du corpus en conversation directe
+- **Hors-ligne natif** : toutes les pages fonctionnent sans internet (vendor local)
+- **Reproductible** : l'architecture est indépendante du domaine — seul le contenu change
+
+## Démarrage rapide
+
+```bash
+git clone {GITHUB_TOOLS_URL}.git
+cd Tools
+python3 tools/admin/session_start.py --db sol_vivant.db
+```
+
+Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie, workflows, journal).
+
+## Architecture
+
+```
+Tools/
+├── sol_vivant.db              Source unique de vérité (SQLite)
+├── tools/
+│   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
+│   ├── batch/                  analyse_corpus
+│   ├── docs/                   gen_archive, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  export_fiche, export_jenni_doc, gen_prompt_enrichissement, import_enrichissement
+│   ├── zotero/                 attribution, normalise_ris, validate_ris
+│   ├── lib/                    anthropic_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
+├── docx/                      Documents .docx et .ris
+├── jmj/                       Documents de travail
+└── Publications/web/           Pages web (→ rsync vers dépôt Pages)
+    ├── vendor/                Dépendances JS/CSS (hors-ligne)
+    └── img/                   Images et previews
+```
+
+## Le workflow
+
+```
+sol_vivant.db → export_jenni_doc.py → prompts/
+                                        ↓
+                               Jenni AI (Zotero) → .docx
+                                        ↓
+                               Claude (analyse) → prompt_contenus
+                                        ↓
+                               Publications/ (contenu accessible)
+```
+
+## Les strates
+
+| Strate | Code | Documents | Description |
+|--------|------|-----------|-------------|
+| **Fondements** | F | F1, F2 | Les Fondements posent le cadre historique et économique du corpus. |
+| **Sol** | S | S0, S1, S2, S3, S4 | La strate Sol décrit la matrice physique, chimique et biologique. |
+| **Vivant** | V | V1, V2, V3 | La strate Vivant couvre la faune du sol, l'holobionte plante-microbiome et les fermentations microbiennes. |
+| **Pratiques** | P | P1, P2, P3, P4, P5 | La strate Pratiques traduit la science en action : diagnostic terrain, agriculture de conservation (3 piliers ACS), biostimulants, agroforesterie, et la trajectoire de transition vers un sol vivant. |
+| **Humain** | H | H1, H2, H3 | La strate Humain relie le sol à la santé. |
+
+## Réutiliser cette architecture
+
+L'architecture est **modulaire** et **indépendante du domaine**. Le cœur du système — une base SQLite pilotée par Claude Code — fonctionne de manière autonome.
+
+**Le noyau** (suffisant seul) : Claude Code + une DB SQLite. On peut construire un corpus complet en conversation directe : documents, thésaurus, pages web interactives, scripts de génération.
+
+**Les couches optionnelles** : Jenni AI (rédaction académique), Zotero (bibliographie), API Anthropic batch (traitement en masse). On les active selon le projet.
+
+**Exemples** : solutions low-tech, guide de permaculture, base médicale, patrimoine architectural... le patron fonctionne pour tout domaine ayant besoin de structurer des connaissances avec un vocabulaire technique.
+
+**SQLite + Git** : la base SQLite est un fichier unique, portable, qui fonctionne partout sans serveur — idéal pour des projets embarqués ou isolés de toute connexion. Git versionne le projet (recommandé), mais on peut aussi simplement échanger le fichier `.db` avec Claude dans une session web ou desktop.
+
+Voir [Reproduire le patron]({GITHUB_PUB_URL}) pour le guide complet.

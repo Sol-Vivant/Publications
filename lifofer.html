@@ -17,10 +17,9 @@
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
 <link rel="apple-touch-icon" href="https://sol-vivant.github.io/Publications/img/lifofer-img.png">
 
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4/dist/tailwind.min.css" rel="stylesheet">
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+
 
 
 <style>
@@ -358,26 +357,608 @@ body {
   .sv-section { padding: 0 1rem; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '¹3 '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '2 '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: 'A';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   LiFoFer v2 — CSS spécifique page
+   Layout/KPI/timeline/phase/diag/compare/term/source migrés vers CHARTER_CSS (sv-*)
+   ═══════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════
    LiFoFer v2 — Layout Recettes + Comprendre
    Extension de la charte Sol Vivant
    ═══════════════════════════════════════════════════════════════════ */
 
-.lf-app { /* extends .sv-page (shared charte) */ }
-
 
 /* ── Layout Recettes ──────────────────────────────────────────────── */
-.lf-layout { display: flex; gap: 1.25rem; }
-.lf-sidebar {
-  width: 300px; flex-shrink: 0; position: sticky; top: 4rem;
-  height: calc(100vh - 5rem); overflow-y: auto;
-  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1rem;
-}
-.lf-sidebar::-webkit-scrollbar { width: 4px; }
-.lf-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-.lf-main { flex: 1; min-width: 0; }
 
 .lf-sidebar-section { margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-bg-muted); }
 .lf-sidebar-section:last-child { border-bottom: none; }
@@ -428,25 +1009,8 @@ body {
 .lf-num-input:focus { outline: none; border-color: var(--success); }
 
 /* ── Cards ────────────────────────────────────────────────────────── */
-.lf-card {
-  background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1rem 1.25rem; margin-bottom: 1rem;
-}
-.lf-card h2 {
-  font-size: var(--font-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: var(--text); margin: 0 0 0.75rem;
-}
-.lf-card-highlight {
-  background: linear-gradient(135deg, var(--success-light), var(--info-light)); border-color: var(--success-light);
-}
-.lf-prose { font-size: var(--font-base); color: var(--text-secondary); line-height: 1.55; margin: 0 0 0.5rem; }
 
 /* Collapse button */
-.lf-collapse-btn {
-  display: flex; justify-content: space-between; align-items: center;
-  width: 100%; background: none; border: none; cursor: pointer; padding: 0; text-align: left;
-}
-.lf-chevron { color: var(--color-text-muted); font-size: var(--font-base); }
 
 /* ── Recette Header ───────────────────────────────────────────────── */
 .lf-recette-header {
@@ -458,20 +1022,6 @@ body {
 .lf-recette-header p { font-size: var(--font-sm); color: var(--color-text-muted); line-height: 1.5; margin: 0.35rem 0 0; }
 
 /* ── KPI Grid ─────────────────────────────────────────────────────── */
-.lf-kpi-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.6rem; margin-bottom: 1rem;
-}
-.lf-kpi {
-  padding: 0.6rem 0.75rem; border-radius: 10px; border: 1px solid var(--border);
-  text-align: center;
-}
-.lf-kpi-label {
-  font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
-}
-.lf-kpi-value { font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
-.lf-kpi-detail { font-size: 0.68rem; color: var(--color-text-muted); margin-top: 0.25rem; line-height: 1.3; }
 
 /* ── Ingredients ──────────────────────────────────────────────────── */
 .lf-ingredients { display: flex; flex-direction: column; }
@@ -509,17 +1059,6 @@ body {
 .lf-contenant { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; }
 
 /* ── Diagnostic ───────────────────────────────────────────────────── */
-.lf-diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-.lf-diag-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
-.lf-diag-ok { background: var(--success-light); border-color: var(--success-light); }
-.lf-diag-ko { background: var(--danger-light); border-color: var(--danger-light); }
-.lf-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.5rem; }
-.lf-diag-ok .lf-diag-title { color: var(--color-success-text); }
-.lf-diag-ko .lf-diag-title { color: var(--color-danger-text); }
-.lf-diag-list { list-style: none; padding: 0; margin: 0; }
-.lf-diag-list li { font-size: var(--font-sm); line-height: 1.45; padding: 0.25rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
-.lf-diag-list li:last-child { border-bottom: none; }
-.lf-diag-list strong { color: var(--text); }
 .lf-diag-detail { color: var(--color-text-muted); }
 .lf-diag-action {
   font-size: 0.72rem; color: var(--color-warning-text); margin-top: 0.25rem;
@@ -527,21 +1066,8 @@ body {
 }
 
 /* ── Comprendre View ──────────────────────────────────────────────── */
-.lf-comprendre-wrap { max-width: 900px; margin: 0; padding: 0; }
 
 /* Succession microbienne */
-.lf-phases { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
-.lf-phase-card { padding: 0.75rem 0.9rem; border-radius: 10px; border-left: 4px solid; background: var(--color-bg-subtle); }
-.lf-phase-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
-.lf-phase-days { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-.lf-phase-name { font-size: 0.92rem; font-weight: 700; }
-.lf-phase-stats { display: flex; gap: 1rem; font-size: var(--font-xs); color: var(--text-secondary); margin-bottom: 0.4rem; }
-.lf-phase-organismes { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.4rem; }
-.lf-phase-org {
-  font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 999px;
-  background: var(--card-bg); border: 1px solid var(--border); color: var(--text-secondary); font-style: italic;
-}
-.lf-phase-role { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; }
 
 /* Redox zones */
 .lf-redox-zones {
@@ -554,47 +1080,16 @@ body {
 .lf-redox-process { font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.4; }
 
 /* Anaérobie grid */
-.lf-anaero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
-.lf-anaero-card { padding: 0.75rem 0.9rem; border-radius: 10px; border: 1px solid; }
-.lf-anaero-good { background: var(--success-light); border-color: var(--success-light); }
-.lf-anaero-bad { background: var(--danger-light); border-color: var(--danger-light); }
-.lf-anaero-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
-.lf-anaero-good .lf-anaero-title { color: var(--color-success-text); }
-.lf-anaero-bad .lf-anaero-title { color: var(--color-danger-text); }
-.lf-anaero-text { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.45; margin-bottom: 0.4rem; }
-.lf-anaero-list { list-style: none; padding: 0; margin: 0; }
-.lf-anaero-list li { font-size: var(--font-xs); padding: 2px 0; color: var(--text-secondary); }
-.lf-anaero-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
 .lf-anaero-signals li::before { content: '• '; color: var(--danger); }
 
 /* Bullet list */
-.lf-bullet-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
-.lf-bullet-list li {
-  font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.55; padding: 0.3rem 0 0.3rem 1.2rem;
-  position: relative; border-bottom: 1px solid var(--color-bg-muted);
-}
-.lf-bullet-list li:last-child { border-bottom: none; }
-.lf-bullet-list li::before { content: '›'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
 
 /* Règle conversion référence */
-.lf-ref-box {
-  background: var(--card-bg); border: 1px solid var(--warning); border-radius: 10px;
-  padding: 0.85rem 1rem; margin: 0.75rem 0;
-}
-.lf-ref-box-title {
-  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  color: var(--color-warning-text); margin-bottom: 0.5rem;
-}
-.lf-ref-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.5rem; }
-.lf-ref-item { text-align: center; padding: 0.4rem; background: var(--warning-light); border-radius: 6px; }
-.lf-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
-.lf-ref-lbl { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
 .lf-ref-note { font-size: var(--font-xs); color: var(--color-warning-text); line-height: 1.45; font-style: italic; }
 .lf-ref-enonce {
   margin-top: 0.75rem; padding: 0.6rem 0.85rem; background: var(--card-bg); border-radius: 8px;
   border-left: 3px solid var(--warning); font-size: var(--font-sm); color: var(--text); font-weight: 500;
 }
-.lf-note-editoriale { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; margin-top: 0.75rem; font-style: italic; }
 
 /* Convertisseur */
 .lf-converter-input {
@@ -657,22 +1152,8 @@ body {
 .lf-dil-freq, .lf-dil-dose { font-size: var(--font-xs); color: var(--text-secondary); }
 
 /* Termes */
-.lf-termes-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-.lf-terme { padding: 0.5rem 0.65rem; background: var(--color-bg-subtle); border-radius: 8px; border: 1px solid var(--border); }
-.lf-terme-head { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.2rem; }
-.lf-terme-strate {
-  font-size: 0.62rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 999px;
-  text-transform: uppercase; letter-spacing: 0.04em;
-}
-.lf-terme-fr { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
-.lf-terme-en { font-size: var(--font-xs); color: var(--color-text-muted); font-style: italic; }
-.lf-terme-def { font-size: var(--font-xs); color: var(--text-secondary); line-height: 1.45; }
 
 /* Sources biblio */
-.lf-source-item { font-size: var(--font-sm); color: var(--text-secondary); line-height: 1.5; padding: 0.25rem 0; }
-.lf-source-year { color: var(--color-text-muted); }
-.lf-source-title { color: var(--color-text-muted); }
-.lf-source-link { color: var(--success); text-decoration: underline; font-size: 0.72rem; }
 
 /* Footer */
 .lf-footer {
@@ -703,34 +1184,6 @@ body {
 .lf-preset-input:focus { outline: none; border-color: var(--success); color: var(--success); }
 
 /* ── Timeline lignée historique ─────────────────────────────────── */
-.lf-timeline {
-  position: relative; margin: 1rem 0; padding-left: 1.5rem;
-  border-left: 2px solid var(--border);
-}
-.lf-jalon {
-  position: relative; padding: 0.5rem 0 0.75rem 1rem; margin-bottom: 0.25rem;
-}
-.lf-jalon::before {
-  content: ''; position: absolute; left: -1.9rem; top: 0.8rem;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--success); border: 2px solid var(--card-bg); box-shadow: 0 0 0 2px var(--success);
-}
-.lf-jalon-epoque {
-  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
-  color: var(--success); margin-bottom: 0.2rem;
-}
-.lf-jalon-lieu { font-size: 0.72rem; color: var(--color-text-muted); font-style: italic; margin-bottom: 0.15rem; }
-.lf-jalon-evenement { font-size: var(--font-sm); color: var(--text); line-height: 1.45; }
-.lf-jalon-sources { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
-.lf-jalon-src {
-  font-size: 0.65rem; padding: 0.1rem 0.45rem; border-radius: 4px;
-  background: var(--color-bg-muted); color: var(--color-text-muted);
-}
-.lf-filiation {
-  margin-top: 1rem; padding: 0.85rem 1rem; background: var(--success-light);
-  border-radius: 10px; border-left: 4px solid var(--success);
-}
-.lf-filiation-title { font-weight: 700; font-size: var(--font-sm); color: var(--color-success-text); margin-bottom: 0.35rem; }
 
 
 </style>
@@ -741,7 +1194,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur LiFoFer — Litière Forestière Fermentée — Préparation interactive</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 02:17 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 14:21 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🌿 Calculateur LiFoFer</span>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -762,8 +1215,421 @@ body {
 <script>
 const DATA = {"version": 3, "recettes": {"mere_solide": {"slug": "mere_solide", "nom": "LiFoFer — Phase solide", "icone": "🌿", "couleur": "#059669", "tagline": "Mère solide : fermentation d'une litière forestière avec son et petit-lait", "description": "Cortège de bactéries, levures et champignons multipliés par fermentation anaérobie de litière de forêt mélangée à du son, du petit-lait et de la mélasse. Utilisable directement comme amendement ou servant de base à la phase liquide activée.", "volume_ref_L": 60, "volume_min_L": 10, "volume_max_L": 220, "volume_note": "Source : Terre & Humanisme, livre. Table pour fûts 60/120/200 L. Ratios linéaires.", "source_ref": "Guide T&H 2018 (Reyes Ayala, Dantinne) — Ardèche", "ordre": 1, "id": "mere_solide", "ingredients": [{"id": 1, "recette_slug": "mere_solide", "ordre": 1, "slug": "litiere", "nom": "Litière forestière", "qty_ref": 15.0, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 25.0, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Inoculum microbien — bactéries, levures, champignons indigènes", "notes": "Récupérer en forêt préservée. Ratio : 0.25 kg/L de récipient (T&H livre).", "obligatoire": 1, "couleur": "#059669", "ressource": null}, {"id": 2, "recette_slug": "mere_solide", "ordre": 2, "slug": "son", "nom": "Son de blé (ou maïs, sorgho)", "qty_ref": 20.0, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 33.333, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Amidon + fibres — substrat de fermentation", "notes": "Son de blé, riz ou orge. Peut varier 40-60 kg pour 120L selon préparateur. 0.333 kg/L.", "obligatoire": 1, "couleur": "#D97706", "ressource": null}, {"id": 3, "recette_slug": "mere_solide", "ordre": 3, "slug": "petit_lait", "nom": "Petit-lait (lactosérum)", "qty_ref": 5.0, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 8.333, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "L", "role": "Source de bactéries lactiques (LAB)", "notes": "Petit-lait de fromagerie frais. Peut varier 8-10 L pour 120L selon préparateur. 0.083 L/L.", "obligatoire": 1, "couleur": "#2563EB", "ressource": null}, {"id": 4, "recette_slug": "mere_solide", "ordre": 4, "slug": "melasse", "nom": "Mélasse (ou sucre)", "qty_ref": 5.0, "qty_ref_alt": 2.5, "qty_ref_alt_unite": "kg sucre équivalent", "qty_ratio_pct": 8.333, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Source de sucres rapides pour amorcer la fermentation", "notes": "T&H livre : 5 kg mélasse OU 2.5 kg sucre (ratio 2:1). Peut varier 8-10 kg pour 120L. 0.083 kg/L.", "obligatoire": 1, "couleur": "#7C3AED", "ressource": "sucre", "qty_ref_g": 2500}, {"id": 10, "recette_slug": "mere_solide", "ordre": 5, "slug": "farines_roches", "nom": "Farines de roches", "qty_ref": 0.5, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 0.833, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Apport minéral (Ca, Mg, oligo-éléments)", "notes": "Basalte broyé, lithothamne, ou autre poudre de roche. Ratio : 0.0083 kg/L (T&H livre).", "obligatoire": 0, "couleur": "#78716c", "ressource": null}, {"id": 5, "recette_slug": "mere_solide", "ordre": 6, "slug": "eau", "nom": "Eau de source ou de pluie", "qty_ref": null, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": null, "qty_ratio_g_par_L": null, "qty_range_min": 3.0, "qty_range_max": 10.0, "unite": "L", "role": "Humidification — ajuster au test du poing", "notes": "Humidification, test du poing. 3-10 L pour 60L (T&H livre). 0.05-0.167 L/L.", "obligatoire": 1, "couleur": "#64748b", "ressource": null, "qty_range": [3.0, 10.0]}], "conditions": {"duree": {"valeur": "1 mois", "detail": "Temps de fermentation avant ouverture"}, "temperature": {"valeur": "25-30°C", "detail": "Stocker le bidon hermétique à cette plage"}, "humidite_cible": {"valeur": "50-60%", "detail": "Contrôlée par le test du poing"}, "contenant": {"valeur": "Bidon hermétique 60L", "detail": "Tasser régulièrement au remplissage pour chasser l'air (anaérobie). Poser une feuille de plastique recouverte de sable pour tasser. Fermer hermétiquement."}, "conservation": {"valeur": "2 ans", "detail": "Si l'anaérobie est maintenue dans le bidon fermé"}, "test_poing": {"valeur": "Prendre une poignée de mélange et la serrer fortement dans une main", "detail": "Si l'eau coule : ajouter du son. Si c'est encore sec : ajouter de l'eau sucrée."}, "ph_cible": {"valeur": "3.5-4.5", "detail": "Mesurer avec bandelettes pH"}}, "signes_reussite": [{"obs": "Odeur aigre-douce", "detail": "Signe principal de fermentation réussie", "cause": "Signe principal de fermentation réussie", "action": null}], "signes_echec": [{"obs": "Odeur de putréfaction", "detail": "Fermentation échouée (putréfaction aérobie)", "cause": "Fermentation échouée (putréfaction aérobie)", "action": "Jeter le produit, ne pas utiliser"}, {"obs": "Odeur de vinaigre", "detail": "Fermentation acétique (trop d'oxygène)", "cause": "Fermentation acétique (trop d'oxygène)", "action": "Jeter le produit, revoir étanchéité du bidon"}], "test_poing": "Si l'eau coule : ajouter du son. Si c'est encore sec : ajouter de l'eau sucrée.", "contenant": "Tasser régulièrement au remplissage pour chasser l'air (anaérobie). Poser une feuille de plastique recouverte de sable pour tasser. Fermer hermétiquement.", "humidite_cible": "50-60%"}, "activation_liquide": {"slug": "activation_liquide", "nom": "LiFoFer — Phase liquide activée", "icone": "💧", "couleur": "#2563EB", "tagline": "Activation liquide : multiplication microbienne prête à l'emploi", "description": "Activation à partir de 5% de mère solide + 5% petit-lait + 5% mélasse + 85% eau. Fermentation d'une semaine. Produit fini prêt à pulvériser après dilution (1-5%).", "volume_ref_L": 60, "volume_min_L": 10, "volume_max_L": 1000, "volume_note": "Source : Terre & Humanisme, livre. Table activation 10/30/60/120/200 L. Formule : 5% mère + 5% mélasse + 5% petit-lait + ~85% eau. Variations possibles (cf. préparateurs MM cubains).", "source_ref": "Guide T&H 2018 (Reyes Ayala, Dantinne) — Ardèche", "ordre": 2, "id": "activation_liquide", "ingredients": [{"id": 6, "recette_slug": "activation_liquide", "ordre": 1, "slug": "mere", "nom": "LiFoFer phase solide (mère)", "qty_ref": 3.0, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 5.0, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Inoculum concentré — consortia microbiens de la mère", "notes": "LFF solide (mère). 5% du volume. T&H livre table activation.", "obligatoire": 1, "couleur": "#059669", "ressource": null}, {"id": 7, "recette_slug": "activation_liquide", "ordre": 2, "slug": "petit_lait", "nom": "Petit-lait (lactosérum)", "qty_ref": 3.0, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": 5.0, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "L", "role": "Apport LAB complémentaire", "notes": "Petit-lait vache/chèvre ou yaourt. 5% du volume (optionnel si LFF solide riche en LAB).", "obligatoire": 1, "couleur": "#2563EB", "ressource": null}, {"id": 8, "recette_slug": "activation_liquide", "ordre": 3, "slug": "melasse", "nom": "Mélasse (ou sucre)", "qty_ref": 3.0, "qty_ref_alt": 1.5, "qty_ref_alt_unite": "kg sucre équivalent (= 3 kg × 50%)", "qty_ratio_pct": 5.0, "qty_ratio_g_par_L": null, "qty_range_min": null, "qty_range_max": null, "unite": "kg", "role": "Source de sucres pour relancer la fermentation", "notes": "Mélasse ou sucre. 5% du volume. 3 kg mélasse ≈ 1.5 kg sucre (ratio 2:1).", "obligatoire": 1, "couleur": "#7C3AED", "ressource": "sucre", "qty_ref_g": 1500}, {"id": 9, "recette_slug": "activation_liquide", "ordre": 4, "slug": "eau", "nom": "Eau de source ou de pluie (30°C)", "qty_ref": null, "qty_ref_alt": null, "qty_ref_alt_unite": null, "qty_ratio_pct": null, "qty_ratio_g_par_L": null, "qty_range_min": 55.0, "qty_range_max": 58.0, "unite": "L", "role": "Milieu de culture — compléter à volume", "notes": "Remplir jusqu'à 10 cm du bord. ~92% du volume pour 60L (varie selon taille contenant).", "obligatoire": 1, "couleur": "#64748b", "ressource": null, "qty_range": [55.0, 58.0]}], "conditions": {"duree": {"valeur": "7 jours", "detail": "Fermentation totale"}, "temperature": {"valeur": "25°C puis 15-20°C", "detail": "25°C pendant 2 jours pour lancer la fermentation, puis 15-20°C pendant 5 jours"}, "ph_cible": {"valeur": "3.5-4.0", "detail": "En cas de pH inférieur ou supérieur, ne pas utiliser"}, "contenant": {"valeur": "Bidon hermétique 60L avec bonde", "detail": "Bonde (barboteur) pour permettre sortie des gaz sans entrée d'air"}, "conservation": {"valeur": "2 mois maximum", "detail": "Meilleurs résultats les 3 premières semaines. Stocker dans récipients hermétiques remplis à ras-bord (poches à vin indiquées). Réactivable avec sucre+eau+petit-lait."}, "rendement": {"valeur": "1200-2000 L par 60 kg de mère solide", "detail": "Rendement de multiplication microbienne exponentielle"}}, "signes_reussite": [{"obs": "pH entre 3.5 et 4.0", "detail": "Mesuré avec bandelettes ou pH-mètre", "cause": "Mesuré avec bandelettes ou pH-mètre", "action": null}, {"obs": "Odeur aigre-douce", "detail": "Même diagnostic olfactif que la phase solide", "cause": "Même diagnostic olfactif que la phase solide", "action": null}], "signes_echec": [{"obs": "pH < 3.5 ou > 4.0", "detail": "Fermentation déviée", "cause": "Fermentation déviée", "action": "Ne pas utiliser le produit"}, {"obs": "Odeur putride ou vinaigrée", "detail": "Fermentation incorrecte", "cause": "Fermentation incorrecte", "action": "Jeter, revoir hermétisme et petit-lait (doit être frais)"}], "contenant": "Bonde (barboteur) pour permettre sortie des gaz sans entrée d'air"}}, "usages": [{"id": 1, "categorie": "Cultures", "usage": "Maraîchage", "dosage_pct": "2-10%", "application": "40 L pur/ha", "frequence": "4 à 15 jours", "notes": "Arrosoir ou pulvérisateur (< 3 bars)", "ordre": 1}, {"id": 2, "categorie": "Cultures", "usage": "Grandes cultures", "dosage_pct": "1-5%", "application": "20 L pur/ha", "frequence": "15 à 60 jours", "notes": null, "ordre": 2}, {"id": 3, "categorie": "Cultures", "usage": "Fruitiers", "dosage_pct": "2-10%", "application": "30 L pur/ha", "frequence": "30 à 60 jours", "notes": null, "ordre": 3}, {"id": 4, "categorie": "Cultures", "usage": "Préparation des sols", "dosage_pct": "5%", "application": "5 à 100 L/ha selon sols", "frequence": "Selon cultures", "notes": null, "ordre": 4}, {"id": 5, "categorie": "Cultures", "usage": "Ornemental, vivaces", "dosage_pct": "3%", "application": "10 L pur/ha", "frequence": "30 à 60 jours", "notes": null, "ordre": 5}, {"id": 6, "categorie": "Pépinière", "usage": "Germination", "dosage_pct": "5%", "application": "Au substrat de plantation", "frequence": "1 à 7 jours avant semis", "notes": null, "ordre": 6}, {"id": 7, "categorie": "Pépinière", "usage": "Croissance des plants", "dosage_pct": "3%", "application": "Aux feuilles (foliaire)", "frequence": "1x/semaine pendant 15 j puis 1x/2 semaines", "notes": "Jusqu'à la transplantation", "ordre": 7}, {"id": 8, "categorie": "Pépinière", "usage": "Bouturage", "dosage_pct": "3%", "application": "Sur tige", "frequence": "Tremper les boutures 15 min", "notes": null, "ordre": 8}, {"id": 9, "categorie": "Pépinière", "usage": "Vivaces", "dosage_pct": "3%", "application": "Aspersion", "frequence": "1 fois/mois", "notes": null, "ordre": 9}, {"id": 10, "categorie": "Soin cultures", "usage": "Préventif maladies", "dosage_pct": "3%", "application": "Foliaire", "frequence": "1x toutes les 2-3 semaines", "notes": null, "ordre": 10}, {"id": 11, "categorie": "Soin cultures", "usage": "Curatif maladies", "dosage_pct": "5%", "application": "Foliaire", "frequence": "1 fois/semaine", "notes": null, "ordre": 11}, {"id": 12, "categorie": "Soin cultures", "usage": "Stockage fruits", "dosage_pct": "1%", "application": "Au stockage", "frequence": "1 fois", "notes": null, "ordre": 12}, {"id": 13, "categorie": "Arbres fruitiers", "usage": "Pralinage des racines", "dosage_pct": "5%", "application": "À la plantation", "frequence": "1 fois", "notes": null, "ordre": 13}, {"id": 14, "categorie": "Arbres fruitiers", "usage": "Prévention maladies", "dosage_pct": "3%", "application": "Au débourrement + soin des arbres", "frequence": "1 fois/mois", "notes": null, "ordre": 14}, {"id": 15, "categorie": "Arbres fruitiers", "usage": "Arbre en fruits", "dosage_pct": "1%", "application": "Pulvérisation sur la récolte", "frequence": "1 fois", "notes": null, "ordre": 15}, {"id": 16, "categorie": "Élevage", "usage": "Volailles", "dosage_pct": "1-3%", "application": "Boisson", "frequence": "1 fois/jour", "notes": null, "ordre": 16}, {"id": 17, "categorie": "Élevage", "usage": "Vaches / porcs / chèvres / moutons", "dosage_pct": "1-5%", "application": "Boisson ou enlisage", "frequence": "1 fois/jour", "notes": "Améliore digestion, réduit diarrhées et besoin antibiotiques", "ordre": 17}, {"id": 18, "categorie": "Élevage", "usage": "Poulailler / étable / porcherie / chèvrerie", "dosage_pct": "3-5%", "application": "Pulvériser sols et murs", "frequence": "1 fois tous les 7-10 jours", "notes": "Contre les odeurs et mouches", "ordre": 18}, {"id": 19, "categorie": "Eau", "usage": "Réserve d'eau", "dosage_pct": "0.03%", "application": "Directement dans le contenant", "frequence": "1 fois/15 jours", "notes": null, "ordre": 19}, {"id": 20, "categorie": "Eau", "usage": "Mare", "dosage_pct": "0.03%", "application": "En arrosage sur la mare", "frequence": "1 fois/15 jours", "notes": "Algues mangées par microorganismes", "ordre": 20}, {"id": 21, "categorie": "Eau", "usage": "Phytoépuration", "dosage_pct": "0.01%", "application": "À un point d'évacuation relié à la phyto", "frequence": "1x/semaine pendant 1 mois puis 1 fois/mois", "notes": null, "ordre": 21}, {"id": 22, "categorie": "Maison", "usage": "Nettoyage", "dosage_pct": "3%", "application": "Pulvérisation", "frequence": "1 fois/15 jours", "notes": null, "ordre": 22}, {"id": 23, "categorie": "Maison", "usage": "Toilettes sèches", "dosage_pct": "3%", "application": "Pulvérisation", "frequence": "Chaque fois que nécessaire", "notes": null, "ordre": 23}, {"id": 24, "categorie": "Maison", "usage": "Compost toilettes sèches", "dosage_pct": "5%", "application": "Arrosoir", "frequence": "1 fois/15 jours", "notes": null, "ordre": 24}, {"id": 25, "categorie": "Irrigation", "usage": "Irrigation continue (goutte-à-goutte)", "dosage_pct": "0.1-0.3%", "application": "Via injecteur d'engrais ou effet venturi", "frequence": "En continu", "notes": null, "ordre": 25}], "dilutions": [{"usage": "Cultures — Maraîchage", "dilution": "2-10%", "frequence": "4 à 15 jours", "dose": "40 L pur/ha", "notes": "Arrosoir ou pulvérisateur (< 3 bars)"}, {"usage": "Cultures — Grandes cultures", "dilution": "1-5%", "frequence": "15 à 60 jours", "dose": "20 L pur/ha", "notes": ""}, {"usage": "Cultures — Fruitiers", "dilution": "2-10%", "frequence": "30 à 60 jours", "dose": "30 L pur/ha", "notes": ""}, {"usage": "Cultures — Préparation des sols", "dilution": "5%", "frequence": "Selon cultures", "dose": "5 à 100 L/ha selon sols", "notes": ""}, {"usage": "Cultures — Ornemental, vivaces", "dilution": "3%", "frequence": "30 à 60 jours", "dose": "10 L pur/ha", "notes": ""}, {"usage": "Pépinière — Germination", "dilution": "5%", "frequence": "1 à 7 jours avant semis", "dose": "Au substrat de plantation", "notes": ""}, {"usage": "Pépinière — Croissance des plants", "dilution": "3%", "frequence": "1x/semaine pendant 15 j puis 1x/2 semaines", "dose": "Aux feuilles (foliaire)", "notes": "Jusqu'à la transplantation"}, {"usage": "Pépinière — Bouturage", "dilution": "3%", "frequence": "Tremper les boutures 15 min", "dose": "Sur tige", "notes": ""}, {"usage": "Pépinière — Vivaces", "dilution": "3%", "frequence": "1 fois/mois", "dose": "Aspersion", "notes": ""}, {"usage": "Soin cultures — Préventif maladies", "dilution": "3%", "frequence": "1x toutes les 2-3 semaines", "dose": "Foliaire", "notes": ""}, {"usage": "Soin cultures — Curatif maladies", "dilution": "5%", "frequence": "1 fois/semaine", "dose": "Foliaire", "notes": ""}, {"usage": "Soin cultures — Stockage fruits", "dilution": "1%", "frequence": "1 fois", "dose": "Au stockage", "notes": ""}, {"usage": "Arbres fruitiers — Pralinage des racines", "dilution": "5%", "frequence": "1 fois", "dose": "À la plantation", "notes": ""}, {"usage": "Arbres fruitiers — Prévention maladies", "dilution": "3%", "frequence": "1 fois/mois", "dose": "Au débourrement + soin des arbres", "notes": ""}, {"usage": "Arbres fruitiers — Arbre en fruits", "dilution": "1%", "frequence": "1 fois", "dose": "Pulvérisation sur la récolte", "notes": ""}, {"usage": "Élevage — Volailles", "dilution": "1-3%", "frequence": "1 fois/jour", "dose": "Boisson", "notes": ""}, {"usage": "Élevage — Vaches / porcs / chèvres / moutons", "dilution": "1-5%", "frequence": "1 fois/jour", "dose": "Boisson ou enlisage", "notes": "Améliore digestion, réduit diarrhées et besoin antibiotiques"}, {"usage": "Élevage — Poulailler / étable / porcherie / chèvrerie", "dilution": "3-5%", "frequence": "1 fois tous les 7-10 jours", "dose": "Pulvériser sols et murs", "notes": "Contre les odeurs et mouches"}, {"usage": "Eau — Réserve d'eau", "dilution": "0.03%", "frequence": "1 fois/15 jours", "dose": "Directement dans le contenant", "notes": ""}, {"usage": "Eau — Mare", "dilution": "0.03%", "frequence": "1 fois/15 jours", "dose": "En arrosage sur la mare", "notes": "Algues mangées par microorganismes"}, {"usage": "Eau — Phytoépuration", "dilution": "0.01%", "frequence": "1x/semaine pendant 1 mois puis 1 fois/mois", "dose": "À un point d'évacuation relié à la phyto", "notes": ""}, {"usage": "Maison — Nettoyage", "dilution": "3%", "frequence": "1 fois/15 jours", "dose": "Pulvérisation", "notes": ""}, {"usage": "Maison — Toilettes sèches", "dilution": "3%", "frequence": "Chaque fois que nécessaire", "dose": "Pulvérisation", "notes": ""}, {"usage": "Maison — Compost toilettes sèches", "dilution": "5%", "frequence": "1 fois/15 jours", "dose": "Arrosoir", "notes": ""}, {"usage": "Irrigation — Irrigation continue (goutte-à-goutte)", "dilution": "0.1-0.3%", "frequence": "En continu", "dose": "Via injecteur d'engrais ou effet venturi", "notes": ""}], "sources_sucre": {"sources": [{"nom": "Mélasse de canne ou betterave", "slug": "melasse_canne", "type": "sous-produit", "densite_kg_par_L": 1.3, "sucre_pct_masse": 50.0, "sucre_g_par_L": 650, "brix": 80.0, "est_reference": true, "avantages": "Minéraux (K, Ca, Mg, Fe), vitamines B, acides aminés, microbiome fermentaire natif", "notes": "Sous-produit de l'industrie sucrière. Très riche en K. Usages multiples : (1) source de sucre fermentescible pour LiFoFer, bokashi, extraits fermentés ; (2) arrosage direct du compost pour activer la fermentation (pays producteurs de canne) ; (3) application directe aux cultures pour nourrir microbiome du sol (0.5-1% dilué) ; (4) support de croissance pour Trichoderma et autres PGPR. 5% du volume dans LiFoFer (T&H livre). 1 L ≈ 1.3 kg ≈ 0.65 kg sucre fermentescible (50% m/m)."}, {"nom": "Jus d'orange", "slug": "jus_orange", "type": "jus", "densite_kg_par_L": 1.05, "sucre_pct_masse": 9.0, "sucre_g_par_L": 95, "brix": 11.0, "est_reference": false, "avantages": "Vitamine C, acides organiques, huiles essentielles. Valorise les refus (fruits écartés, trop mûrs)", "notes": ""}, {"nom": "Jus de melon", "slug": "jus_melon", "type": "jus", "densite_kg_par_L": 1.04, "sucre_pct_masse": 9.0, "sucre_g_par_L": 94, "brix": 11.0, "est_reference": false, "avantages": "Fructose/glucose, enzymes, levures sauvages, cucurbitacines douces, potassium. Valorise les refus (fruits trop mûrs, écart de tri)", "notes": "Excellent pour LiFoFer : fruit très mûr (Brix 10-12), levures natives abondantes, saveur douce. Valorisation des refus de vente (melons écartés, trop mûrs, abîmés) — recyclage agricole. Saison été (juil-sept). Utiliser tout le fruit pressé (chair + graines riches en enzymes). Ratio : ~7 L jus de melon pour remplacer 1 L mélasse (650/94 g/L)."}, {"nom": "Jus de pomme", "slug": "jus_pomme", "type": "jus", "densite_kg_par_L": 1.045, "sucre_pct_masse": 11.0, "sucre_g_par_L": 115, "brix": 12.0, "est_reference": false, "avantages": "Enzymes, levures sauvages, vitamines, acides organiques. Valorise les refus (fruits écartés, trop mûrs)", "notes": ""}, {"nom": "Jus de raisin", "slug": "jus_raisin", "type": "jus", "densite_kg_par_L": 1.07, "sucre_pct_masse": 17.0, "sucre_g_par_L": 182, "brix": 18.0, "est_reference": false, "avantages": "Levures sauvages (bloom), polyphénols, sucres équilibrés. Valorise les refus (fruits écartés, trop mûrs)", "notes": ""}, {"nom": "Miel", "slug": "miel", "type": "sucre", "densite_kg_par_L": 1.42, "sucre_pct_masse": 80.0, "sucre_g_par_L": 1136, "brix": 82.0, "est_reference": false, "avantages": "Enzymes (invertase, glucose oxydase), antimicrobiens naturels", "notes": ""}, {"nom": "Mélasse de betterave", "slug": "melasse_betterave", "type": "sous-produit", "densite_kg_par_L": 1.3, "sucre_pct_masse": 50.0, "sucre_g_par_L": 650, "brix": 79.0, "est_reference": false, "avantages": "Disponibilité locale Europe (mais qualité inférieure à mélasse de canne pour fermentation)", "notes": "Disponible localement en France/Europe betteravière. Composition différente de la canne : bétaïne 5-7%, pH alcalin (~8), goût amer, moins de sucres réducteurs. Non utilisée dans les recettes traditionnelles LiFoFer/bokashi (toutes basées sur canne). ⚠ Retours terrain : taux d'échec de fermentation plus élevé qu'avec la canne. Si seule option disponible : ajouter plus d'inoculum LAB et surveiller pH. Acceptable pour amendement direct au sol et activation compost."}, {"nom": "Panela / Rapadura / Jaggery", "slug": "panela", "type": "sucre", "densite_kg_par_L": 0.9, "sucre_pct_masse": 85.0, "sucre_g_par_L": 765, "brix": 90.0, "est_reference": false, "avantages": "Mélasse naturelle conservée, minéraux, léger microbiome", "notes": ""}, {"nom": "Petit-lait (lactosérum)", "slug": "lactoserum", "type": "lactose", "densite_kg_par_L": 1.03, "sucre_pct_masse": 5.0, "sucre_g_par_L": 52, "brix": 6.0, "est_reference": false, "avantages": "Lactose + bactéries lactiques natives + protéines + calcium", "notes": ""}, {"nom": "Sirop d'agave", "slug": "sirop_agave", "type": "sirop", "densite_kg_par_L": 1.37, "sucre_pct_masse": 76.0, "sucre_g_par_L": 1041, "brix": 77.0, "est_reference": false, "avantages": "Fructose dominant, rapidement fermentescible", "notes": ""}, {"nom": "Sucre blanc raffiné", "slug": "sucre_blanc", "type": "sucre", "densite_kg_par_L": 0.85, "sucre_pct_masse": 99.5, "sucre_g_par_L": 846, "brix": 99.5, "est_reference": false, "avantages": "Pur saccharose, rapidement fermentescible", "notes": ""}, {"nom": "Sucre roux / non raffiné", "slug": "sucre_roux", "type": "sucre", "densite_kg_par_L": 0.85, "sucre_pct_masse": 95.0, "sucre_g_par_L": 807, "brix": 99.0, "est_reference": false, "avantages": "Traces de minéraux issus de la canne", "notes": ""}], "ref_expliquee": {"principe": "Toutes les conversions se basent sur les grammes de sucre fermentescible réellement apportés (saccharose + glucose + fructose).", "melasse_ref": {"densite_kg_par_L": 1.3, "sucre_pct_masse": 50, "sucre_g_par_L": 650, "sucre_g_par_kg": 500, "explication": "1 L de mélasse pèse 1.3 kg (T&H livre) et contient 50% de sucres fermentescibles en masse, soit 650 g de sucre par L (ou 500 g par kg)."}}, "regle_conversion": {"enonce": "Mélasse de canne : densité 1.4 kg/L, 50% de sucre fermentescible en masse. Donc 1 L mélasse ≈ 1.4 kg × 50% = 700 g de sucre. Pour remplacer 1 L de mélasse : apporter 700 g de sucre fermentescible via la source alternative (soit ~737 g de sucre roux non raffiné qui titre 95% de sucre).", "formule": "qty_source(kg ou L) = (volume_melasse × 1.4 × 0.50) ÷ (sucre_pct_source × densite_source)"}, "note_editoriale": "PRINCIPE FONDATEUR : utiliser les ressources locales équivalentes. La LiFoFer/MM/KNF repose sur la valorisation des ressources disponibles sur place : mélasse là où il y a des sucreries, jus de fruits (pomme, raisin, orange, melon, poire, figue...) selon la saison et le terroir, lactosérum en zone d'élevage laitier, sirops traditionnels locaux. Les REFUS de vente (fruits trop mûrs, écart de tri, surproductions non commercialisables) sont particulièrement pertinents : ils offrent une double fonction — apport sucre fermentescible + recyclage agricole circulaire. Le sucre raffiné est un dernier recours (nourrit sans enrichir). La mélasse reste la référence technique car elle apporte AUSSI minéraux, vitamines et microbiome natif.", "methode_fpj": {"nom": "FPJ (Fermented Plant Juice)", "description": "Jus de jeunes pousses (pointes en croissance) fermenté avec sucre brun au ratio masse 1:1 pendant 7 jours.", "ratio": "1:1 (plante:sucre)", "dilution": "1:1000 au champ", "notes": "KNF — Cho Han-kyu. Capture enzymes et micro-organismes de la phase de croissance végétale."}, "methode_ffj": {"nom": "FFJ (Fermented Fruit Juice)", "description": "Jus de fruits mûrs fermenté avec sucre brun au ratio masse 1:1 pendant 7 jours.", "ratio": "1:1 (fruit:sucre)", "dilution": "1:500 à 1:1000 au champ", "notes": "KNF — source de levures sauvages, acides organiques et flavonoïdes. Favorise floraison/fructification."}}, "ui": {"default_sucre_source": "melasse_canne", "volume_presets_by_recette": {"mere_solide": [20, 60, 120, 220], "activation_liquide": [20, 60, 120, 220, 1000]}, "source_type_colors": {"sous-produit": "#D97706", "sucre": "#7C3AED", "jus": "#059669", "lactose": "#EC4899", "sirop": "#2563EB"}, "source_type_labels": {"sous-produit": "Sous-produit", "sucre": "Sucre", "jus": "Jus", "lactose": "Lactosérum", "sirop": "Sirop"}}, "pedagogie": {"ce_que_cest": {"titre": "LiFoFer, bokashi, choucroute : même principe", "texte": "La LiFoFer n'est pas une recette exotique. C'est une lacto-fermentation anaérobie — exactement comme la choucroute, le kimchi, le bokashi ou le silage agricole. Le principe est universel : un substrat + de l'eau + des bactéries lactiques + de l'anaérobie → chute de pH → éviction des pathogènes → produit stable, vivant et riche.\n\nCe qui change d'une préparation à l'autre : le substrat (légumes pour la choucroute, litière forestière pour la LiFoFer, son pour le bokashi) et l'échelle. La microbiologie, elle, obéit toujours à la même succession."}, "succession_microbienne": {"titre": "Succession microbienne en 3 phases", "intro": "Dans une lacto-fermentation anaérobie dirigée, les populations microbiennes se succèdent dans un ordre prévisible, conditionné par la chute de pH et du potentiel redox (Eh).", "phases": [{"nom": "Phase LAB — Lactobacilles pionniers", "jours": "J0 — J3", "ph": "6.5 → 4.0", "eh_mv": "+100 → -50", "organismes": ["Lactobacillus plantarum", "L. brevis", "Pediococcus spp.", "Leuconostoc mesenteroides"], "role": "Acidification rapide par production d'acide lactique. La chute de pH sous 4.5 évince les pathogènes (E. coli, Salmonella, Clostridium pathogènes) et verrouille le milieu.", "couleur": "#2563EB"}, {"nom": "Phase Levures & Bacillus", "jours": "J3 — J7", "ph": "4.0 → 3.8", "eh_mv": "-50 → -150", "organismes": ["Saccharomyces cerevisiae", "Candida spp.", "Bacillus subtilis", "B. amyloliquefaciens"], "role": "Production d'éthanol, d'esters aromatiques, d'enzymes (protéases, cellulases) et de bactériocines. Les Bacillus synthétisent des antibiotiques naturels (iturine, fengycine) qui suppriment les pathogènes fongiques.", "couleur": "#D97706"}, {"nom": "Phase PNSB & Actinomycètes", "jours": "J7 — J21+", "ph": "3.8 stable", "eh_mv": "-150 → -250", "organismes": ["Rhodopseudomonas palustris", "Rhodobacter spp.", "Streptomyces spp."], "role": "Les PNSB (Purple Non-Sulfur Bacteria) fixent l'azote atmosphérique, synthétisent vitamines B12, coenzyme Q10, et métabolites bioactifs. Les Actinomycètes produisent les antibiotiques du sol (streptomycine, tétracyclines naturelles) et métabolisent la lignine.", "couleur": "#7C3AED"}]}, "redox_anaerobie": {"titre": "Eh (redox) : la clé de la qualité", "intro": "Le potentiel redox (Eh, en mV) mesure la disponibilité en oxygène et accepteurs d'électrons. C'est lui qui détermine quelles voies métaboliques sont actives — et donc quels micro-organismes prolifèrent.", "zones": [{"label": "Aérobie", "eh_min": 300, "eh_max": null, "couleur": "#059669", "process": "Respiration O2 — compostage, nitrification"}, {"label": "Microaérobie", "eh_min": 100, "eh_max": 300, "couleur": "#D97706", "process": "Transition — dénitrification, nitrates"}, {"label": "Anaérobie fermentaire", "eh_min": -200, "eh_max": 100, "couleur": "#7C3AED", "process": "Fermentation LAB/levures — zone LiFoFer, choucroute, bokashi"}, {"label": "Anaérobie réductrice", "eh_min": null, "eh_max": -200, "couleur": "#2563EB", "process": "Méthanogenèse, sulfato-réduction (anaérobie subie)"}], "anaerobie_choisie": {"titre": "Anaérobie CHOISIE (LiFoFer, choucroute)", "avantage": "Contrôlée, sans oxygène dès le départ. LAB dominent, pH chute vite, pathogènes évincés en <48h.", "techniques": ["Contenant hermétique", "Tassement pour chasser l'air", "Sucre rapide pour démarrer", "Inoculum LAB abondant"]}, "anaerobie_subie": {"titre": "Anaérobie SUBIE (sol hydromorphe, tas de fumier écrasé)", "risques": "Putréfaction, sulfato-réduction (H2S), méthanogenèse. Toxicité racinaire.", "signaux": ["Odeur de soufre", "Couleur bleu-gris", "Accumulation de nitrites", "Décroissance racinaire"]}}, "pourquoi_ferment_anaerobie": {"titre": "Pourquoi l'anaérobie ?", "points": ["Les bactéries lactiques sont anaérobies facultatives : elles prospèrent sans oxygène et acidifient le milieu.", "Sans O2, les pathogènes aérobies (moisissures, Pseudomonas) sont bloqués.", "Les voies fermentaires économisent le carbone : ~90% du C est préservé (contre 50% en compostage aérobie).", "Les métabolites produits (acides organiques, vitamines, antibiotiques) sont stables et bioactifs."]}, "lignee_historique": {"titre": "Lignée des préparations microbiennes paysannes", "intro": "La LiFoFer n'est pas une invention moderne isolée. C'est le maillon contemporain d'une chaîne de savoirs paysans de plus de 10 000 ans, qui relie les premières poteries néolithiques aux techniques des jardiniers-maraîchers d'aujourd'hui. Toutes reposent sur le même principe microbiologique : la lacto-fermentation anaérobie.", "jalons": [{"epoque": "~10 000 ans avant J.-C.", "lieu": "Mésopotamie, Égypte, Chine", "evenement": "Premières fermentations humaines contrôlées avec l'invention de la poterie", "sources": ["Lee et al., 2024", "Sakandar & Zhang, 2022"]}, {"epoque": "~7 200 ans avant J.-C.", "lieu": "Pologne, Moyen-Orient", "evenement": "Fromage attesté, yaourt (Moyen-Orient), choucroute ancestrale (Chine)", "sources": ["Rémond, 2017", "McClure et al., 2018"]}, {"epoque": "XIXe siècle", "lieu": "Japon", "evenement": "Bokashi traditionnel : amendement de sol fermenté en anaérobie (son + inoculum microbien local)", "sources": ["Yadav et al., 2020", "Scotton et al., 2017"]}, {"epoque": "Années 1960", "lieu": "Corée du Sud", "evenement": "Cho Han-kyu fonde le KNF (Korean Natural Farming) et codifie les IMO (Indigenous Micro-Organisms) en 5 étapes", "sources": ["Keliikuli, 2018"]}, {"epoque": "Années 1980", "lieu": "Okinawa, Japon", "evenement": "Teruo Higa (Université des Ryukyus) popularise le Bokashi moderne et les EM (Effective Microorganisms)", "sources": ["Lew et al., 2021", "AGRITON"]}, {"epoque": "Fin 1980s", "lieu": "Brésil, Amérique Latine", "evenement": "Immigrants japonais introduisent le Bokashi : devient \"Fermento da Vida\" puis se diffuse", "sources": ["Vicente et al., 2020", "Houenou, 2019"]}, {"epoque": "Années 1990-2000", "lieu": "Costa Rica, Colombie, Amérique centrale", "evenement": "Adaptation locale : les \"Microorganismos de Montaña\" (MM) capturent les microbiomes des forêts de montagne", "sources": ["Barquero & Acuña, 2021", "Martinez et al., 2014"]}, {"epoque": "Années 2010-2020", "lieu": "Europe francophone", "evenement": "La LiFoFer (Litière Forestière Fermentée) s'impose comme équivalent technique direct des MM, adaptée aux forêts feuillues tempérées", "sources": ["Marois et al., 2023", "Terre & Humanisme"]}], "note_filiation": "KNF (Corée) → IMO · Bokashi moderne (Higa, Japon) → EM · Les deux lignées convergent en Amérique latine sous le nom de Microorganismos de Montaña (MM), puis arrivent en Europe sous le nom de LiFoFer. Même principe (lacto-fermentation anaérobie), mêmes substrats (litière de forêt préservée), mêmes fonctions (suppression maladies telluriques + minéralisation MO).", "sources_biblio": [{"ref": "Juzan, J.-M.", "titre": "Histoire des lactofermentations (CC BY-SA 4.0)", "annee": 2026, "contexte": "Synthèse des sources bibliographiques"}, {"ref": "Barquero & Acuña", "titre": "Factores relacionados con la activación líquida de microorganismos de montaña (MM)", "annee": 2021, "url": "https://doi.org/10.15517/rac.v45i1.45703"}, {"ref": "Martinez et al.", "titre": "Evaluación de microorganismos de montaña (mm) en la producción de acelga", "annee": 2014}, {"ref": "Marois et al.", "titre": "Chemical and Microbial Characterization of Fermented Forest Litters Used as Biofertilizers", "annee": 2023, "url": "https://doi.org/10.3390/microorganisms11020306"}]}}, "termes_corpus_slugs": ["LiFoFer", "bokashi", "lactofermentation", "IMO", "bactéries lactiques", "PNSB", "acide lactique (dans les fermentations)", "anaérobiose", "potentiel redox", "succession microbienne", "fermentation", "fermentation anaérobie", "Korean Natural Farming (KNF)", "JADAM", "EM (micro-organismes efficaces)", "inoculum mycorhizien", "Inoculum microbien indigène (IMO / LiFoFer)", "Microorganismos de Montaña (MM)"], "sources": [{"ref": "Terre & Humanisme", "titre": "Manuel de la litière forestière fermentée", "annee": 2021, "url": "https://terre-humanisme.org/project/lff/"}, {"ref": "Rézomes", "titre": "Guide complet LiFoFer", "annee": 2025, "url": "https://shop.rezomes.com/blogs/infos/litiere-forestiere-fermentee-lifofer-guide-complet"}, {"ref": "Triple Performance", "titre": "Litière forestière fermentée", "url": "https://wiki.tripleperformance.fr/wiki/Litière_forestière_fermentée"}, {"ref": "Higa, T.", "titre": "Effective Microorganisms — A new dimension for nature farming", "annee": 1994}, {"ref": "Cho, H.K.", "titre": "Natural Farming — Agriculture materials (KNF)", "annee": 2010}], "strates": {"noms": {"F": "Fondements", "S": "Sol", "V": "Vivant", "P": "Pratiques", "H": "Humain"}, "couleurs": {"F": "#8B5CF6", "S": "#3B82F6", "V": "#10B981", "P": "#F59E0B", "H": "#EF4444"}}, "terms": [{"fr": "EM (micro-organismes efficaces)", "en": "effective microorganisms (EM)", "definition": "Consortium de micro-organismes sélectionnés : bactéries lactiques (LAB), levures, bactéries photosynthétiques (PNSB). Utilisés pour la fermentation du bokashi, les pulvérisations foliaires et l'inoculation des composts. Concept développé par Teruo Higa.", "strate": "P"}, {"fr": "IMO", "en": "indigenous microorganisms", "definition": "Micro-organismes indigènes collectés localement (litière forestière, sols riches) et multipliés à la ferme selon le protocole KNF en 5 étapes : IMO1 (capture sur riz cuit en forêt, 3-5 jours), IMO2 (multiplication en sucre brun 1:1), IMO3 (mélange son de riz + terre locale), IMO4 (acclimatation au sol de la parcelle). Adaptés aux conditions pédoclimatiques locales. Utilisés pour restaurer la diversité microbienne en sols intensifs. NUANCE SCIENTIFIQUE : Thompson et al. (2025, bioRxiv) montrent que le processus IMO sélectionne un nombre limité de taxons bactériens et RÉDUIT la diversité fongique, contrairement à l'objectif affiché. La diversité bactérienne est mieux préservée que la diversité fongique. L'efficacité dépend fortement du site de collecte (UH-CTAHR SA-19).", "strate": "P"}, {"fr": "JADAM", "en": "JADAM (Jadam Organic Farming)", "definition": "Système d'agriculture biologique ultra-low-cost développé par Youngsang Cho (fils de Han-kyu Cho, fondateur du KNF). Acronyme de jayeon-eul dalm-eun salamdeul ('personnes qui ressemblent à la nature'). Préparation clé : JMS (JADAM Microbial Solution) = pomme de terre cuite + litière forestière + eau non chlorée, PAS de sucre (contrairement au KNF). Fermentation active 3-7 jours, utiliser dans les 12h après le pic d'activité (ne se conserve pas). Coût quasi nul (500 L pour le prix d'1 kg de pommes de terre). Plus simple que le KNF : principe SESE (Simple, Easy, Scientific, Effective). Open source (pas de brevet, 100 000 membres, jadam.kr). Inclut aussi le JNP (JADAM Natural Pesticide) et le JLF (JADAM Liquid Fertilizer).", "strate": "P"}, {"fr": "inoculum mycorhizien", "en": "mycorrhizal inoculum", "definition": "Préparation contenant des propagules viables de CMA (spores, fragments d hyphes, racines colonisées). Efficace uniquement si : sol pauvre en CMA indigènes (< 10 spores/100g), plante mycotrophe, absence d excès de P.", "strate": "P"}, {"fr": "anaérobiose", "en": "anaerobiosis", "definition": "Conditions sans O₂. Présentes dans les microsites anoxiques des agrégats, les sols engorgés, les biofilms. Activent les voies fermentaires ancestrales.", "strate": "S"}, {"fr": "fermentation", "en": "fermentation", "definition": "Voie métabolique anaérobie produisant de l'énergie sans O₂ comme accepteur terminal d'électrons. ΔG faible mais conservation maximale du C et N.", "strate": "S"}, {"fr": "potentiel redox", "en": "redox potential", "definition": "Mesure du pouvoir oxydant ou réducteur du sol (Eh en mV). Détermine les voies métaboliques actives : aérobie (Eh > 300 mV), anaérobie (Eh < 0 mV). La chaîne de performance sol : Structure → O₂ → Redox → Biologie → Nutrition → Rendement. Red flags : mauvaise réponse aux engrais, Fe/Mn toxiques en foliaire, Ca bas malgré adéquation sol. Ratio Ca:Mg ~7:1 favorise l'aération (BCSR). Humates et basalte = tampons redox.", "strate": "S"}, {"fr": "Inoculum microbien indigène (IMO / LiFoFer)", "en": "Indigenous Microbial Inoculum (IMO / LiFoFer)", "definition": "Prélèvement de micro-organismes locaux (souvent en forêt) pour les multiplier et les réintroduire dans les sols cultivés (Mayer, 2019).\n\nEnjeu : Garantit que les microbes introduits sont adaptés au climat et à la géologie locale(Zanella et al., 2017), contrairement aux souches commerciales de laboratoire.\n\nLevier de décision : Utiliser la technique LiFoFer pour restaurer la signature fongique des parcelles après une période de culture intensive ou de travail du sol (Hartmann et al., 2014).", "strate": "V"}, {"fr": "Korean Natural Farming (KNF)", "en": "Korean Natural Farming (KNF)", "definition": "Système d'agriculture naturelle coréen développé par Cho Han-kyu (années 1960). Repose sur 5 piliers : (1) LAB — bactéries lactiques (fermentation riz-lait), (2) FPJ — Fermented Plant Juice (extraction osmotique de pousses végétatives avant le lever du soleil, sucre brun 1:1, 7 jours), (3) FAA — Fish Amino Acid (décomposition enzymatique par pression osmotique, PAS une fermentation), (4) OHN — Oriental Herbal Nutrient (extraction alcoolique d'ail/gingembre/cannelle/réglisse, immunostimulant), (5) WCA — Water Soluble Calcium (vinaigre + coquilles d'oeuf). Intègre aussi les IMO (Indigenous Micro-Organisms) et le FFJ (Fermented Fruit Juice, phase reproductive). Philosophie : mobiliser la biologie locale plutôt qu'importer des souches standardisées. Dilutions typiques 1:500-1:1000. Publications scientifiques limitées (UH-CTAHR SA-7, SA-12, SA-19). Extensions avancées au-delà du KNF classique : IPMO (Indigenous Predatory Microorganisms, Chris Trump), JAKOBA (champignon aquatique indonésien anti-Fusarium/Pythium/Botrytis), Jiuqu/Qu (culture de fermentation chinoise, enzymes amylase/protéase/lipase/cellulase), Super LABs (LAB + Spirulina, phycocyanine = précurseur chlorophylle).", "strate": "V"}, {"fr": "LiFoFer", "en": "LiFoFer (fermented forest litter)", "definition": "Préparation fermentaire à base de litière forestière diversifiée, obtenue par fermentation contrôlée anaérobie-aérobie sur 3-6 mois. Contient une communauté fongique et bactérienne complexe adaptée aux conditions forestières. Reproduit l'ambiance microbiologique d'un sol forestier mature. Restaure les communautés fongiques dans les sols agricoles dégradés.", "strate": "V"}, {"fr": "Microorganismos de Montaña (MM)", "en": "Mountain Microorganisms (MM)", "definition": "Inoculum microbien développé en Amérique latine à partir des années 1980-1990, consistant à collecter la litière des forêts de montagne (habitat préservé, microbiome diversifié) pour la multiplier à la ferme par lacto-fermentation anaérobie. Technique cousine de l'IMO du KNF coréen (Cho Han-kyu) et directement inspirée du Bokashi japonais moderne popularisé par Teruo Higa. Les MM capturés localement ont montré une meilleure efficacité sur le rendement des cultures que les solutions d'EM commerciales (Martinez et al., 2014). Fonctions documentées : suppression des maladies telluriques et minéralisation de la matière organique (Barquero & Acuña, 2021). La LiFoFer (Litière Forestière Fermentée) est l'équivalent technique direct en français/européen des MM latino-américains — même principe, même substrat (litière forestière), mêmes fonctions agronomiques.", "strate": "V"}, {"fr": "PNSB", "en": "purple non-sulfur bacteria (PNSB)", "definition": "Bactéries photosynthétiques anoxygéniques utilisant la lumière, la chaleur et les composés organiques comme sources d'énergie en conditions anaérobies. Clés du bokashi et des EM : produisent des acides aminés, acides nucléiques et hormones de croissance dans les fermentations. Indicateur de la qualité d'une préparation EM. Rhodopseudomonas palustris est la PNSB la mieux documentée (15+ DOI) : fixation N₂, solubilisation P, production 5-ALA (précurseur chlorophylle), détoxification H₂S. Culture DIY farmer-scale en bouteilles au soleil, 15-30 jours.", "strate": "V"}, {"fr": "acide lactique (dans les fermentations)", "en": "lactic acid (in fermented preparations)", "definition": "Métabolite principal des bactéries lactiques lors de la fermentation anaérobie des sucres. Abaisse le pH (pH 3,5-4,5 dans le Bokashi) créant des conditions défavorables aux pathogènes. Acidifie localement le sol au point d'application, solubilisant les minéraux bloqués. Précurseur de l'acide 3-phényllactique lors des fermentations plus longues.", "strate": "V"}, {"fr": "bactéries lactiques", "en": "lactic acid bacteria", "definition": "Groupe fonctionnel bactérien produisant l'acide lactique comme métabolite principal de la fermentation des sucres. Genres principaux : Lactobacillus, Lactococcus, Leuconostoc, Pediococcus, Streptococcus. Rôle dans les fermentations agricoles : préservation des nutriments, production d'acide 3-phényllactique (Jaffar et al., 2023), d'acides organiques suppresseurs, et de métabolites stimulant l'enracinement et l'immunité végétale.", "strate": "V"}, {"fr": "bokashi", "en": "bokashi", "definition": "Technique de fermentation anaérobie de MO (son de riz inoculé avec EM) d'origine japonaise. Produit des métabolites bioactifs incluant l'acide 3-phényllactique (promoteur d'enracinement latéral, Maki et al., 2021), des acides organiques abaissant le pH et des enzymes extracellulaires. Conservation thermodynamique optimale du C et N vs compostage aérobie. Risque applicatif : le carbone labile peut déclencher un Priming Effect sur les sols riches en COS — fractionner les doses. La chélation in-biol : le basalte/granite fournit des minéraux qui sont chélatés par les molécules organiques et encapsulés dans les cellules microbiennes pendant la fermentation = « lunch boxes » biodisponibles. ATTENTION : calcaire ≠ basalte (99% CaCO₃ vs. spectre minéral large).", "strate": "V"}, {"fr": "fermentation anaérobie", "en": "anaerobic fermentation", "definition": "Décomposition de matière organique sans oxygène, préservant énergie et nutriments. Bokashi : 95-98% de rétention MO vs 48-51% en compostage aérobie.", "strate": "V"}, {"fr": "lactofermentation", "en": "lactic acid fermentation", "definition": "Fermentation par bactéries lactiques (LAB), abaissant le pH par production d'acide lactique et conservant les nutriments dans les métabolites. Voie fermentaire la plus ancienne et la plus répandue, conservée depuis 3,8 Ga. Base du Bokashi, des EM, du Jeevamrit et des aliments fermentés humains.", "strate": "V"}, {"fr": "succession microbienne", "en": "microbial succession", "definition": "Séquence temporelle de communautés microbiennes se succédant dans un substrat fermenté ou un sol en régénération : phases pionnières copiotrophes (fermentaires, dégradant les sucres simples) → phases intermédiaires (dégradant la cellulose, l'amidon) → phases climaciques oligotrophes/fongiques (dégradant la lignine, l'humus). Dans un Bokashi : succession LAB → PNSB → Actinobactéries.", "strate": "V"}], "corpus_name": "Le Sol Vivant cet Holobionte"};
 </script>
-<script type="text/babel">
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
 
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({
+  title,
+  icon,
+  defaultOpen = false,
+  children,
+  id
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse",
+    id: id
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-collapse-header",
+    onClick: () => setOpen(!open)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-collapse-title"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
+    className: `sv-collapse-chevron ${open ? 'open' : ''}`
+  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse-body"
+  }, children));
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({
+  children,
+  source
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula"
+  }, children, source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula-source"
+  }, source));
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({
+  children,
+  title
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({
+  children,
+  title,
+  icon
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note",
+    "data-icon": icon || ''
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({
+  value,
+  unit,
+  label,
+  color,
+  detail,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi",
+    style: style
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: color ? {
+      color
+    } : undefined
+  }, value), unit && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, unit), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: color ? {
+      color
+    } : undefined
+  }, label), detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, detail));
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({
+  children,
+  cols
+}) {
+  const style = cols ? {
+    gridTemplateColumns: `repeat(${cols}, 1fr)`
+  } : undefined;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid",
+    style: style
+  }, children);
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({
+  items,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, children);
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, item.date && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, item.place), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-timeline-tag"
+  }, t))))));
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({
+  title,
+  color,
+  label,
+  stats,
+  tags,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: color || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: color || 'var(--accent)'
+    }
+  }, label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, label), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, title)), stats && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-phase-tag"
+  }, t))), children && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, children));
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({
+  good,
+  bad
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({
+  ok,
+  ko
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, ok && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({
+  terms
+}) {
+  if (!terms || !terms.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, t.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: t.badgeStyle
+  }, t.badge), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.def))));
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({
+  sources
+}) {
+  if (!sources || !sources.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, s.year && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    rel: "noopener",
+    className: "sv-source-link"
+  }, "[lien]")))));
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-tabs"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    className: `sv-tab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({
+  text,
+  label
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content"
+  }, text));
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({
+  title,
+  items,
+  note,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, title), items && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-warning-text)',
+      lineHeight: 1.45,
+      fontStyle: 'italic'
+    }
+  }, note), children);
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({
+  title,
+  children,
+  color
+}) {
+  const c = color || 'success';
+  const colors = {
+    success: {
+      bg: 'var(--success-light)',
+      border: 'var(--success)',
+      text: 'var(--color-success-text)'
+    },
+    warning: {
+      bg: 'var(--warning-light)',
+      border: 'var(--warning)',
+      text: 'var(--color-warning-text)'
+    },
+    info: {
+      bg: 'var(--info-light)',
+      border: 'var(--accent)',
+      text: 'var(--accent-dark)'
+    },
+    purple: {
+      bg: 'var(--purple-light)',
+      border: 'var(--purple)',
+      text: 'var(--purple-dark)'
+    }
+  };
+  const s = colors[c] || colors.success;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box",
+    style: {
+      background: s.bg,
+      borderLeftColor: s.border
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title",
+    style: {
+      color: s.text
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, children));
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({
+  headers,
+  rows,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, children);
+  if (!headers || !rows) return null;
+  return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: h.align ? {
+      textAlign: h.align
+    } : undefined
+  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
+    key: j,
+    style: headers[j] && headers[j].align ? {
+      textAlign: headers[j].align
+    } : undefined
+  }, cell))))));
+}
 
 // ═══════════════════════════════════════════════════════════════════
 // LiFoFer v2 — Calculateur + Pédagogie
@@ -777,192 +1643,263 @@ const STRATES = DATA.strates || {};
 
 // ── Helpers ───────────────────────────────────────────────────────
 function scaleQty(qtyRef, volumeRef, volume) {
-  return (qtyRef * volume) / volumeRef;
+  return qtyRef * volume / volumeRef;
 }
-
 function formatQty(v, decimals) {
   if (v == null || isNaN(v)) return '—';
-  const d = decimals != null ? decimals : (v < 1 ? 2 : v < 10 ? 1 : 0);
+  const d = decimals != null ? decimals : v < 1 ? 2 : v < 10 ? 1 : 0;
   return v.toFixed(d);
 }
-
 function convertSucreFromSource(gramsSucre, sourceSlug) {
   // Retourne { qty_L, qty_kg, source } — null si pas trouvé
   const src = SS.sources.find(s => s.slug === sourceSlug);
   if (!src) return null;
   const qty_L = gramsSucre / src.sucre_g_par_L;
   const qty_kg = qty_L * src.densite_kg_par_L;
-  return { qty_L, qty_kg, source: src };
+  return {
+    qty_L,
+    qty_kg,
+    source: src
+  };
 }
 
 // ── KPI Row (durée, temp, pH, conservation) ───────────────────────
-function KPIRow({ conditions }) {
-  const items = [
-    { label: "Durée", value: conditions.duree.valeur, detail: conditions.duree.detail, color: "var(--success)", bg: "#f0fdf4" },
-    { label: "Température", value: conditions.temperature.valeur, detail: `Optimum ${conditions.temperature.optimum}°C`, color: "var(--warning)", bg: "#fff7ed" },
-    { label: "pH cible", value: conditions.ph_cible.valeur, detail: conditions.ph_cible.detail, color: "#7C3AED", bg: "#faf5ff" },
-    { label: "Conservation", value: conditions.conservation.valeur, detail: conditions.conservation.detail, color: "var(--info)", bg: "#eff6ff" }
-  ];
+function KPIRow({
+  conditions
+}) {
+  const items = [{
+    label: "Durée",
+    value: conditions.duree.valeur,
+    detail: conditions.duree.detail,
+    color: "var(--success)",
+    bg: "#f0fdf4"
+  }, {
+    label: "Température",
+    value: conditions.temperature.valeur,
+    detail: `Optimum ${conditions.temperature.optimum}°C`,
+    color: "var(--warning)",
+    bg: "#fff7ed"
+  }, {
+    label: "pH cible",
+    value: conditions.ph_cible.valeur,
+    detail: conditions.ph_cible.detail,
+    color: "#7C3AED",
+    bg: "#faf5ff"
+  }, {
+    label: "Conservation",
+    value: conditions.conservation.valeur,
+    detail: conditions.conservation.detail,
+    color: "var(--info)",
+    bg: "#eff6ff"
+  }];
   if (conditions.eh_cible) {
-    items.splice(3, 0, { label: "Eh redox", value: conditions.eh_cible.valeur, detail: conditions.eh_cible.detail, color: "#4338CA", bg: "#eef2ff" });
+    items.splice(3, 0, {
+      label: "Eh redox",
+      value: conditions.eh_cible.valeur,
+      detail: conditions.eh_cible.detail,
+      color: "#4338CA",
+      bg: "#eef2ff"
+    });
   }
-  return <div className="lf-kpi-grid">
-    {items.map((it, i) => <div key={i} className="lf-kpi" style={{ background: it.bg }}>
-      <div className="lf-kpi-label" style={{ color: it.color }}>{it.label}</div>
-      <div className="lf-kpi-value" style={{ color: it.color }}>{it.value}</div>
-      <div className="lf-kpi-detail">{it.detail}</div>
-    </div>)}
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-kpi",
+    style: {
+      background: it.bg
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: {
+      color: it.color
+    }
+  }, it.label), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: {
+      color: it.color
+    }
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, it.detail))));
 }
 
 // ── Ingredients Table ─────────────────────────────────────────────
-function IngredientsTable({ recette, volume, sucreSource }) {
+function IngredientsTable({
+  recette,
+  volume,
+  sucreSource
+}) {
   const volRef = recette.volume_ref_L;
-  return <div className="lf-ingredients">
-    {recette.ingredients.map((ing, i) => {
-      let displayQty = null;
-      let displayUnit = ing.unite;
-      let extraLine = null;
-
-      if (ing.ressource === 'sucre') {
-        // Calcul en g de sucre fermentescible puis conversion
-        const gramsSucre = scaleQty(ing.qty_ref_g, volRef, volume);
-        const conv = convertSucreFromSource(gramsSucre, sucreSource);
-        if (conv) {
-          const s = conv.source;
-          if (s.type === 'sucre' || s.type === 'sous-produit' || s.type === 'sirop') {
-            // Affiche L (kg) pour les liquides, kg pour les solides
-            if (s.densite_kg_par_L >= 1.1) {
-              displayQty = `${formatQty(conv.qty_L)} L`;
-              displayUnit = `(${formatQty(conv.qty_kg)} kg)`;
-            } else {
-              displayQty = `${formatQty(conv.qty_kg)} kg`;
-              displayUnit = `(${formatQty(conv.qty_L)} L)`;
-            }
-          } else {
-            // jus, lactose
+  return /*#__PURE__*/React.createElement("div", {
+    className: "lf-ingredients"
+  }, recette.ingredients.map((ing, i) => {
+    let displayQty = null;
+    let displayUnit = ing.unite;
+    let extraLine = null;
+    if (ing.ressource === 'sucre') {
+      // Calcul en g de sucre fermentescible puis conversion
+      const gramsSucre = scaleQty(ing.qty_ref_g, volRef, volume);
+      const conv = convertSucreFromSource(gramsSucre, sucreSource);
+      if (conv) {
+        const s = conv.source;
+        if (s.type === 'sucre' || s.type === 'sous-produit' || s.type === 'sirop') {
+          // Affiche L (kg) pour les liquides, kg pour les solides
+          if (s.densite_kg_par_L >= 1.1) {
             displayQty = `${formatQty(conv.qty_L)} L`;
             displayUnit = `(${formatQty(conv.qty_kg)} kg)`;
+          } else {
+            displayQty = `${formatQty(conv.qty_kg)} kg`;
+            displayUnit = `(${formatQty(conv.qty_L)} L)`;
           }
-          extraLine = `${s.nom} · ${formatQty(gramsSucre, 0)} g sucre fermentescible équivalent`;
         } else {
-          displayQty = `${formatQty(gramsSucre, 0)} g`;
-          displayUnit = 'sucre';
+          // jus, lactose
+          displayQty = `${formatQty(conv.qty_L)} L`;
+          displayUnit = `(${formatQty(conv.qty_kg)} kg)`;
         }
-      } else if (ing.qty_ratio_pct != null) {
-        const q = volume * ing.qty_ratio_pct / 100;
-        displayQty = formatQty(q);
-      } else if (ing.qty_ratio_g_par_L != null) {
-        displayQty = formatQty(volume * ing.qty_ratio_g_par_L, 0);
-      } else if (ing.qty_range) {
-        const factor = volume / volRef;
-        displayQty = `${formatQty(ing.qty_range[0] * factor)}–${formatQty(ing.qty_range[1] * factor)}`;
+        extraLine = `${s.nom} · ${formatQty(gramsSucre, 0)} g sucre fermentescible équivalent`;
       } else {
-        displayQty = formatQty(scaleQty(ing.qty_ref, volRef, volume));
+        displayQty = `${formatQty(gramsSucre, 0)} g`;
+        displayUnit = 'sucre';
       }
-
-      return <div key={i} className="lf-ing-row">
-        <div className="lf-ing-name" style={{ color: ing.couleur }}>
-          {ing.nom}
-          {ing.obligatoire
-            ? <span className="lf-badge lf-badge-req">requis</span>
-            : <span className="lf-badge lf-badge-opt">optionnel</span>}
-        </div>
-        <div className="lf-ing-qty" style={{ color: ing.couleur }}>
-          <span className="lf-ing-value">{displayQty}</span>
-          <span className="lf-ing-unit">{displayUnit}</span>
-        </div>
-        <div className="lf-ing-role">
-          {ing.role}
-          {extraLine && <div className="lf-ing-extra">{extraLine}</div>}
-        </div>
-      </div>;
-    })}
-  </div>;
+    } else if (ing.qty_ratio_pct != null) {
+      const q = volume * ing.qty_ratio_pct / 100;
+      displayQty = formatQty(q);
+    } else if (ing.qty_ratio_g_par_L != null) {
+      displayQty = formatQty(volume * ing.qty_ratio_g_par_L, 0);
+    } else if (ing.qty_range) {
+      const factor = volume / volRef;
+      displayQty = `${formatQty(ing.qty_range[0] * factor)}–${formatQty(ing.qty_range[1] * factor)}`;
+    } else {
+      displayQty = formatQty(scaleQty(ing.qty_ref, volRef, volume));
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "lf-ing-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "lf-ing-name",
+      style: {
+        color: ing.couleur
+      }
+    }, ing.nom, ing.obligatoire ? /*#__PURE__*/React.createElement("span", {
+      className: "lf-badge lf-badge-req"
+    }, "requis") : /*#__PURE__*/React.createElement("span", {
+      className: "lf-badge lf-badge-opt"
+    }, "optionnel")), /*#__PURE__*/React.createElement("div", {
+      className: "lf-ing-qty",
+      style: {
+        color: ing.couleur
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "lf-ing-value"
+    }, displayQty), /*#__PURE__*/React.createElement("span", {
+      className: "lf-ing-unit"
+    }, displayUnit)), /*#__PURE__*/React.createElement("div", {
+      className: "lf-ing-role"
+    }, ing.role, extraLine && /*#__PURE__*/React.createElement("div", {
+      className: "lf-ing-extra"
+    }, extraLine)));
+  }));
 }
 
 // ── Diagnostic (signes réussite / échec) ──────────────────────────
-function DiagnosticPanel({ recette }) {
-  return <div className="lf-diag-grid">
-    <div className="lf-diag-card lf-diag-ok">
-      <div className="lf-diag-title">✓ Signes de réussite</div>
-      <ul className="lf-diag-list">
-        {recette.signes_reussite.map((s, i) => <li key={i}>
-          <strong>{s.obs}</strong>
-          <span className="lf-diag-detail"> — {s.detail}</span>
-        </li>)}
-      </ul>
-    </div>
-    <div className="lf-diag-card lf-diag-ko">
-      <div className="lf-diag-title">⚠ Signes d'échec</div>
-      <ul className="lf-diag-list">
-        {recette.signes_echec.map((s, i) => <li key={i}>
-          <strong>{s.obs}</strong>
-          <span className="lf-diag-detail"> — {s.cause}</span>
-          <div className="lf-diag-action">→ {s.action}</div>
-        </li>)}
-      </ul>
-    </div>
-  </div>;
+function DiagnosticPanel({
+  recette
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, "\u2713 Signes de r\xE9ussite"), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, recette.signes_reussite.map((s, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.obs), /*#__PURE__*/React.createElement("span", {
+    className: "lf-diag-detail"
+  }, " \u2014 ", s.detail))))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, "\u26A0 Signes d'\xE9chec"), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, recette.signes_echec.map((s, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.obs), /*#__PURE__*/React.createElement("span", {
+    className: "lf-diag-detail"
+  }, " \u2014 ", s.cause), /*#__PURE__*/React.createElement("div", {
+    className: "lf-diag-action"
+  }, "\u2192 ", s.action))))));
 }
 
 // ── Sidebar Recettes ──────────────────────────────────────────────
-function RecetteSidebar({ selectedId, setSelectedId, volume, setVolume, sucreSource, setSucreSource, recette }) {
+function RecetteSidebar({
+  selectedId,
+  setSelectedId,
+  volume,
+  setVolume,
+  sucreSource,
+  setSucreSource,
+  recette
+}) {
   const recettes = Object.values(RECETTES);
-  const presets = (UI.volume_presets_by_recette && UI.volume_presets_by_recette[recette.id])
-    || [20, 60, 120, 220, 500, 1000].filter(v => v >= recette.volume_min_L && v <= recette.volume_max_L);
-  return <aside className="lf-sidebar">
-    {/* Sélecteur recette */}
-    <div className="lf-sidebar-section">
-      <div className="lf-sidebar-label">Recette</div>
-      {recettes.map(r => <button key={r.id}
-        onClick={() => setSelectedId(r.id)}
-        className={`lf-recette-btn ${selectedId === r.id ? 'active' : ''}`}
-        style={{ borderLeftColor: r.couleur }}>
-        <span className="lf-recette-icon">{r.icone}</span>
-        <div className="lf-recette-meta">
-          <div className="lf-recette-name">{r.nom}</div>
-          <div className="lf-recette-tagline">{r.tagline}</div>
-        </div>
-      </button>)}
-    </div>
-
-    {/* Volume */}
-    <div className="lf-sidebar-section">
-      <div className="lf-sidebar-label">Volume du fût ({volume} L)</div>
-      <input type="range" min={recette.volume_min_L} max={recette.volume_max_L}
-        step={recette.volume_max_L > 500 ? 20 : 5} value={volume}
-        onChange={e => setVolume(parseInt(e.target.value))}
-        className="lf-slider" />
-      <div className="lf-presets">
-        {presets.map(v => <button key={v}
-          onClick={() => setVolume(v)}
-          className={`lf-preset-btn ${volume === v ? 'active' : ''}`}>{v} L</button>)}
-        <input type="number" key={volume} min={recette.volume_min_L} max={recette.volume_max_L}
-          defaultValue={volume}
-          onBlur={e => {
-            const v = parseInt(e.target.value);
-            if (isNaN(v) || v < recette.volume_min_L) setVolume(recette.volume_min_L);
-            else if (v > recette.volume_max_L) setVolume(recette.volume_max_L);
-            else setVolume(v);
-          }}
-          onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
-          className="lf-preset-input" placeholder="libre" />
-      </div>
-      {recette.volume_note && <div className="lf-note">{recette.volume_note}</div>}
-    </div>
-
-    {/* Source de sucre */}
-    <div className="lf-sidebar-section">
-      <div className="lf-sidebar-label">Source de sucre</div>
-      <select value={sucreSource} onChange={e => setSucreSource(e.target.value)} className="lf-select">
-        {SS.sources.map(s => <option key={s.slug} value={s.slug}>
-          {s.nom} ({s.sucre_g_par_L} g/L)
-        </option>)}
-      </select>
-      <div className="lf-note">1 L mélasse ≈ 650 g sucre fermentescible (d=1.3 kg/L, 50% m/m)</div>
-    </div>
-  </aside>;
+  const presets = UI.volume_presets_by_recette && UI.volume_presets_by_recette[recette.id] || [20, 60, 120, 220, 500, 1000].filter(v => v >= recette.volume_min_L && v <= recette.volume_max_L);
+  return /*#__PURE__*/React.createElement("aside", {
+    className: "sv-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-label"
+  }, "Recette"), recettes.map(r => /*#__PURE__*/React.createElement("button", {
+    key: r.id,
+    onClick: () => setSelectedId(r.id),
+    className: `lf-recette-btn ${selectedId === r.id ? 'active' : ''}`,
+    style: {
+      borderLeftColor: r.couleur
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "lf-recette-icon"
+  }, r.icone), /*#__PURE__*/React.createElement("div", {
+    className: "lf-recette-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-recette-name"
+  }, r.nom), /*#__PURE__*/React.createElement("div", {
+    className: "lf-recette-tagline"
+  }, r.tagline))))), /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-label"
+  }, "Volume du f\xFBt (", volume, " L)"), /*#__PURE__*/React.createElement("input", {
+    type: "range",
+    min: recette.volume_min_L,
+    max: recette.volume_max_L,
+    step: recette.volume_max_L > 500 ? 20 : 5,
+    value: volume,
+    onChange: e => setVolume(parseInt(e.target.value)),
+    className: "lf-slider"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lf-presets"
+  }, presets.map(v => /*#__PURE__*/React.createElement("button", {
+    key: v,
+    onClick: () => setVolume(v),
+    className: `lf-preset-btn ${volume === v ? 'active' : ''}`
+  }, v, " L"))), recette.volume_note && /*#__PURE__*/React.createElement("div", {
+    className: "lf-note"
+  }, recette.volume_note)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sidebar-label"
+  }, "Source de sucre"), /*#__PURE__*/React.createElement("select", {
+    value: sucreSource,
+    onChange: e => setSucreSource(e.target.value),
+    className: "lf-select"
+  }, SS.sources.map(s => /*#__PURE__*/React.createElement("option", {
+    key: s.slug,
+    value: s.slug
+  }, s.nom, " (", s.sucre_g_par_L, " g/L)"))), /*#__PURE__*/React.createElement("div", {
+    className: "lf-note"
+  }, "1 L m\xE9lasse \u2248 650 g sucre fermentescible (d=1.3 kg/L, 50% m/m)")));
 }
 
 // ── Vue Recettes ──────────────────────────────────────────────────
@@ -971,385 +1908,530 @@ function RecettesView() {
   const recette = RECETTES[selectedId];
   const [volume, setVolume] = React.useState(recette.volume_ref_L);
   const [sucreSource, setSucreSource] = React.useState(UI.default_sucre_source || 'melasse_canne');
-
   React.useEffect(() => {
     // clamp volume quand on change de recette
     if (volume < recette.volume_min_L) setVolume(recette.volume_min_L);
     if (volume > recette.volume_max_L) setVolume(recette.volume_max_L);
   }, [selectedId]);
-
-  return <div className="lf-layout">
-    <RecetteSidebar selectedId={selectedId} setSelectedId={setSelectedId}
-      volume={volume} setVolume={setVolume}
-      sucreSource={sucreSource} setSucreSource={setSucreSource}
-      recette={recette} />
-    <main className="lf-main">
-      {/* En-tête recette */}
-      <div className="lf-recette-header" style={{ borderLeftColor: recette.couleur }}>
-        <div className="lf-recette-header-title">
-          <span style={{ fontSize:'var(--font-2xl)' }}>{recette.icone}</span>
-          <div>
-            <h1>{recette.nom}</h1>
-            <p>{recette.description}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* KPI */}
-      <KPIRow conditions={recette.conditions} />
-
-      {/* Ingrédients */}
-      <div className="lf-card">
-        <h2>Ingrédients pour {volume} L</h2>
-        <IngredientsTable recette={recette} volume={volume} sucreSource={sucreSource} />
-      </div>
-
-      {/* Mise en œuvre */}
-      <div className="lf-card">
-        <h2>Mise en œuvre</h2>
-        {recette.test_poing && <div className="lf-test-poing">
-          <div className="lf-test-poing-title">✊ Test du poing — humidité {recette.humidite_cible}</div>
-          <div className="lf-test-poing-text">{recette.test_poing}</div>
-        </div>}
-        <div className="lf-contenant"><strong>Contenant :</strong> {recette.contenant}</div>
-      </div>
-
-      {/* Diagnostic */}
-      <div className="lf-card">
-        <h2>Diagnostic — Ce qu'il faut observer</h2>
-        <DiagnosticPanel recette={recette} />
-      </div>
-    </main>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-sidebar-layout"
+  }, /*#__PURE__*/React.createElement(RecetteSidebar, {
+    selectedId: selectedId,
+    setSelectedId: setSelectedId,
+    volume: volume,
+    setVolume: setVolume,
+    sucreSource: sucreSource,
+    setSucreSource: setSucreSource,
+    recette: recette
+  }), /*#__PURE__*/React.createElement("main", {
+    className: "sv-main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-recette-header",
+    style: {
+      borderLeftColor: recette.couleur
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-recette-header-title"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-2xl)'
+    }
+  }, recette.icone), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, recette.nom), /*#__PURE__*/React.createElement("p", null, recette.description)))), /*#__PURE__*/React.createElement(KPIRow, {
+    conditions: recette.conditions
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Ingr\xE9dients pour ", volume, " L"), /*#__PURE__*/React.createElement(IngredientsTable, {
+    recette: recette,
+    volume: volume,
+    sucreSource: sucreSource
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Mise en \u0153uvre"), recette.test_poing && /*#__PURE__*/React.createElement("div", {
+    className: "lf-test-poing"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-test-poing-title"
+  }, "\u270A Test du poing \u2014 humidit\xE9 ", recette.humidite_cible), /*#__PURE__*/React.createElement("div", {
+    className: "lf-test-poing-text"
+  }, recette.test_poing)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-contenant"
+  }, /*#__PURE__*/React.createElement("strong", null, "Contenant :"), " ", recette.contenant)), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Diagnostic \u2014 Ce qu'il faut observer"), /*#__PURE__*/React.createElement(DiagnosticPanel, {
+    recette: recette
+  }))));
 }
 
 // ── Vue Comprendre ────────────────────────────────────────────────
 function CeQueCest() {
-  return <div className="lf-card lf-card-highlight">
-    <h2>{PEDA.ce_que_cest.titre}</h2>
-    <p className="lf-prose">{PEDA.ce_que_cest.texte.split('\n\n').map((p, i) => <span key={i}>{i > 0 && <><br/><br/></>}{p}</span>)}</p>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card",
+    style: {
+      background: "linear-gradient(135deg, var(--success-light), var(--info-light))",
+      borderColor: "var(--success-light)"
+    }
+  }, /*#__PURE__*/React.createElement("h2", null, PEDA.ce_que_cest.titre), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, PEDA.ce_que_cest.texte.split('\n\n').map((p, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, i > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null)), p))));
 }
-
 function LigneeHistorique() {
   const L = PEDA.lignee_historique;
   if (!L) return null;
-  return <div className="lf-card">
-    <h2>{L.titre}</h2>
-    <p className="lf-prose">{L.intro}</p>
-    <div className="lf-timeline">
-      {L.jalons.map((j, i) => <div key={i} className="lf-jalon">
-        <div className="lf-jalon-epoque">{j.epoque}</div>
-        <div className="lf-jalon-body">
-          <div className="lf-jalon-lieu">{j.lieu}</div>
-          <div className="lf-jalon-evenement">{j.evenement}</div>
-          {j.sources && <div className="lf-jalon-sources">
-            {j.sources.map((s, k) => <span key={k} className="lf-jalon-src">{s}</span>)}
-          </div>}
-        </div>
-      </div>)}
-    </div>
-    <div className="lf-filiation">
-      <div className="lf-filiation-title">Filiation technique</div>
-      <p className="lf-prose">{L.note_filiation}</p>
-    </div>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, L.titre), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, L.intro), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, L.jalons.map((j, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, j.epoque), /*#__PURE__*/React.createElement("div", {
+    className: "lf-jalon-body"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, j.lieu), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, j.evenement), j.sources && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, j.sources.map((s, k) => /*#__PURE__*/React.createElement("span", {
+    key: k,
+    className: "sv-timeline-tag"
+  }, s))))))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title"
+  }, "Filiation technique"), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, L.note_filiation)));
 }
-
 function SuccessionMicrobienne() {
   const s = PEDA.succession_microbienne;
-  return <div className="lf-card">
-    <h2>{s.titre}</h2>
-    <p className="lf-prose">{s.intro}</p>
-    <div className="lf-phases">
-      {s.phases.map((ph, i) => <div key={i} className="lf-phase-card" style={{ borderLeftColor: ph.couleur }}>
-        <div className="lf-phase-header" style={{ color: ph.couleur }}>
-          <span className="lf-phase-days">{ph.jours}</span>
-          <span className="lf-phase-name">{ph.nom}</span>
-        </div>
-        <div className="lf-phase-stats">
-          <span><strong>pH</strong> {ph.ph}</span>
-          <span><strong>Eh</strong> {ph.eh_mv} mV</span>
-        </div>
-        <div className="lf-phase-organismes">
-          {ph.organismes.map((o, j) => <span key={j} className="lf-phase-org">{o}</span>)}
-        </div>
-        <div className="lf-phase-role">{ph.role}</div>
-      </div>)}
-    </div>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, s.titre), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, s.intro), /*#__PURE__*/React.createElement("div", {
+    className: "lf-phases"
+  }, s.phases.map((ph, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: ph.couleur
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: ph.couleur
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, ph.jours), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, ph.nom)), /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "pH"), " ", ph.ph), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "Eh"), " ", ph.eh_mv, " mV")), /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, ph.organismes.map((o, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-phase-tag"
+  }, o))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, ph.role)))));
 }
-
 function RedoxAnaerobie() {
   const r = PEDA.redox_anaerobie;
-  return <div className="lf-card">
-    <h2>{r.titre}</h2>
-    <p className="lf-prose">{r.intro}</p>
-    <div className="lf-redox-zones">
-      {r.zones.map((z, i) => <div key={i} className="lf-redox-zone" style={{ borderTopColor: z.couleur, background: z.couleur + '10' }}>
-        <div className="lf-redox-label" style={{ color: z.couleur }}>{z.label}</div>
-        <div className="lf-redox-eh">
-          {z.eh_min != null && z.eh_max != null ? `${z.eh_min} à ${z.eh_max} mV` :
-           z.eh_min != null ? `> ${z.eh_min} mV` : `< ${z.eh_max} mV`}
-        </div>
-        <div className="lf-redox-process">{z.process}</div>
-      </div>)}
-    </div>
-    <div className="lf-anaero-grid">
-      <div className="lf-anaero-card lf-anaero-good">
-        <div className="lf-anaero-title">✓ {r.anaerobie_choisie.titre}</div>
-        <div className="lf-anaero-text">{r.anaerobie_choisie.avantage}</div>
-        <ul className="lf-anaero-list">
-          {r.anaerobie_choisie.techniques.map((t, i) => <li key={i}>{t}</li>)}
-        </ul>
-      </div>
-      <div className="lf-anaero-card lf-anaero-bad">
-        <div className="lf-anaero-title">⚠ {r.anaerobie_subie.titre}</div>
-        <div className="lf-anaero-text">{r.anaerobie_subie.risques}</div>
-        <ul className="lf-anaero-list lf-anaero-signals">
-          {r.anaerobie_subie.signaux.map((s, i) => <li key={i}>{s}</li>)}
-        </ul>
-      </div>
-    </div>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, r.titre), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, r.intro), /*#__PURE__*/React.createElement("div", {
+    className: "lf-redox-zones"
+  }, r.zones.map((z, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "lf-redox-zone",
+    style: {
+      borderTopColor: z.couleur,
+      background: z.couleur + '10'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-redox-label",
+    style: {
+      color: z.couleur
+    }
+  }, z.label), /*#__PURE__*/React.createElement("div", {
+    className: "lf-redox-eh"
+  }, z.eh_min != null && z.eh_max != null ? `${z.eh_min} à ${z.eh_max} mV` : z.eh_min != null ? `> ${z.eh_min} mV` : `< ${z.eh_max} mV`), /*#__PURE__*/React.createElement("div", {
+    className: "lf-redox-process"
+  }, z.process)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, "\u2713 ", r.anaerobie_choisie.titre), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: "var(--font-sm)"
+    }
+  }, r.anaerobie_choisie.avantage), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, r.anaerobie_choisie.techniques.map((t, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, t)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, "\u26A0 ", r.anaerobie_subie.titre), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: "var(--font-sm)"
+    }
+  }, r.anaerobie_subie.risques), /*#__PURE__*/React.createElement("ul", {
+    className: "lf-anaero-list lf-anaero-signals"
+  }, r.anaerobie_subie.signaux.map((s, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, s))))));
 }
-
 function PourquoiAnaerobie() {
   const p = PEDA.pourquoi_ferment_anaerobie;
-  return <div className="lf-card">
-    <h2>{p.titre}</h2>
-    <ul className="lf-bullet-list">
-      {p.points.map((pt, i) => <li key={i}>{pt}</li>)}
-    </ul>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, p.titre), /*#__PURE__*/React.createElement("ul", {
+    className: "sv-bullet-list"
+  }, p.points.map((pt, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, pt))));
 }
-
 function ExplicationSucre() {
   const E = SS.explication_sucre;
   if (!E) return null;
-  return <div className="lf-card">
-    <h2>{E.titre}</h2>
-    <p className="lf-prose">{E.role}</p>
-    <p className="lf-prose"><strong>Mécanisme :</strong> {E.mecanisme}</p>
-    {E.types_sucres && <div className="lf-sources-table" style={{marginTop:'0.75rem'}}>
-      <div className="lf-sources-header">
-        <div>Type</div><div>Exemples</div><div>Rôle</div><div>Sources</div>
-      </div>
-      {E.types_sucres.map((t, i) => <div key={i} className="lf-sources-row">
-        <div style={{fontWeight:600}}>{t.type}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',fontStyle:'italic'}}>{t.exemples}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-secondary)'}}>{t.role}</div>
-        <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)'}}>{t.sources}</div>
-      </div>)}
-    </div>}
-    <div className="lf-ref-enonce" style={{marginTop:'0.75rem'}}><strong>Dosage :</strong> {E.dosage}</div>
-    <p className="lf-note-editoriale">{E.regle_pratique}</p>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, E.titre), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, E.role), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, /*#__PURE__*/React.createElement("strong", null, "M\xE9canisme :"), " ", E.mecanisme), E.types_sucres && /*#__PURE__*/React.createElement("div", {
+    className: "lf-sources-table",
+    style: {
+      marginTop: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sources-header"
+  }, /*#__PURE__*/React.createElement("div", null, "Type"), /*#__PURE__*/React.createElement("div", null, "Exemples"), /*#__PURE__*/React.createElement("div", null, "R\xF4le"), /*#__PURE__*/React.createElement("div", null, "Sources")), E.types_sucres.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "lf-sources-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600
+    }
+  }, t.type), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-text-muted)',
+      fontStyle: 'italic'
+    }
+  }, t.exemples), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-text-secondary)'
+    }
+  }, t.role), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-text-muted)'
+    }
+  }, t.sources)))), /*#__PURE__*/React.createElement("div", {
+    className: "lf-ref-enonce",
+    style: {
+      marginTop: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("strong", null, "Dosage :"), " ", E.dosage), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose",
+    style: {
+      fontStyle: "italic"
+    }
+  }, E.regle_pratique));
 }
-
 function SourcesSucreTable() {
   const [melasseQty, setMelasseQty] = React.useState(1);
   const refSucreGparL = SS.ref_expliquee?.melasse_ref?.sucre_g_par_L || 650;
   const gramsSucre = melasseQty * refSucreGparL;
   const TYPE_COLORS = UI.source_type_colors || {};
   const TYPE_LABELS = UI.source_type_labels || {};
-
-  return <div>
-    {/* Explication sucre (rôle + types rapides/lents) */}
-    <ExplicationSucre />
-    {/* Règle de conversion */}
-    <div className="lf-card lf-card-highlight">
-      <h2>🍯 Règle de conversion mélasse ↔ sucre</h2>
-      <p className="lf-prose">{SS.ref_expliquee.principe}</p>
-      <div className="lf-ref-box">
-        <div className="lf-ref-box-title">Référence — 1 L de mélasse de canne</div>
-        <div className="lf-ref-grid">
-          <div className="lf-ref-item"><div className="lf-ref-num">{SS.ref_expliquee?.melasse_ref?.densite_kg_par_L || 1.3} kg</div><div className="lf-ref-lbl">densité</div></div>
-          <div className="lf-ref-item"><div className="lf-ref-num">{SS.ref_expliquee?.melasse_ref?.sucre_pct_masse || 50} %</div><div className="lf-ref-lbl">sucre (m/m)</div></div>
-          <div className="lf-ref-item"><div className="lf-ref-num">{SS.ref_expliquee?.melasse_ref?.sucre_g_par_L || 650} g</div><div className="lf-ref-lbl">sucre / L</div></div>
-          <div className="lf-ref-item"><div className="lf-ref-num">{SS.ref_expliquee?.melasse_ref?.sucre_g_par_kg || 500} g</div><div className="lf-ref-lbl">sucre / kg</div></div>
-        </div>
-        <div className="lf-ref-note">{SS.ref_expliquee.melasse_ref.explication}</div>
-      </div>
-      <div className="lf-ref-enonce">{SS.regle_conversion.enonce}</div>
-      <p className="lf-note-editoriale">{SS.note_editoriale}</p>
-    </div>
-
-    {/* Convertisseur */}
-    <div className="lf-card">
-      <h2>Convertisseur — Remplacer X L de mélasse</h2>
-      <div className="lf-converter-input">
-        <span>Remplacer</span>
-        <input type="number" min="0.1" max="100" step="0.1" value={melasseQty}
-          onChange={e => setMelasseQty(parseFloat(e.target.value) || 1)}
-          className="lf-num-input" />
-        <span>L de mélasse ({formatQty(gramsSucre, 0)} g sucre) par :</span>
-      </div>
-      <div className="lf-converter-grid">
-        {SS.sources.filter(s => !s.est_reference && s.sucre_g_par_L > 0).map((s, i) => {
-          const qty_L = gramsSucre / s.sucre_g_par_L;
-          const qty_kg = qty_L * s.densite_kg_par_L;
-          const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
-          return <div key={i} className="lf-conv-card" style={{ borderColor: color }}>
-            <div className="lf-conv-name" style={{ color }}>{s.nom}</div>
-            <div className="lf-conv-main">
-              <span className="lf-conv-val">{formatQty(qty_kg)} kg</span>
-              <span className="lf-conv-alt">ou {formatQty(qty_L)} L</span>
-            </div>
-            <div className="lf-conv-meta">{s.sucre_pct_masse}% sucre · {TYPE_LABELS[s.type] || s.type}</div>
-          </div>;
-        })}
-      </div>
-    </div>
-
-    {/* Table comparative */}
-    <div className="lf-card">
-      <h2>Référence — {SS.sources.length} sources de sucre</h2>
-      <div className="lf-sources-table">
-        <div className="lf-sources-header">
-          <div>Source</div>
-          <div className="lf-num-col">Densité</div>
-          <div className="lf-num-col">% sucre</div>
-          <div className="lf-num-col">g/L</div>
-          <div>Avantages</div>
-        </div>
-        {SS.sources.map((s, i) => {
-          const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
-          return <div key={i} className="lf-sources-row">
-            <div>
-              <div className="lf-src-name" style={{ color }}>{s.nom}</div>
-              <div className="lf-src-notes">{s.notes}</div>
-            </div>
-            <div className="lf-num-col">{s.densite_kg_par_L} kg/L</div>
-            <div className="lf-num-col">{s.sucre_pct_masse}%</div>
-            <div className="lf-num-col"><strong>{s.sucre_g_par_L}</strong></div>
-            <div className="lf-src-adv">{s.avantages}</div>
-          </div>;
-        })}
-      </div>
-    </div>
-
-    {/* FPJ/FFJ */}
-    {SS.methode_fpj && <div className="lf-card">
-      <h2>Variantes KNF — FPJ / FFJ</h2>
-      <div className="lf-fpj-grid">
-        <div className="lf-fpj-card" style={{ borderLeftColor: 'var(--success)' }}>
-          <div className="lf-fpj-title" style={{ color: 'var(--success)' }}>{SS.methode_fpj.nom}</div>
-          <p className="lf-fpj-desc">{SS.methode_fpj.description}</p>
-          <div className="lf-fpj-meta">
-            <span><strong>Ratio</strong> {SS.methode_fpj.ratio}</span>
-            <span><strong>Dilution</strong> {SS.methode_fpj.dilution}</span>
-          </div>
-          <div className="lf-fpj-notes">{SS.methode_fpj.notes}</div>
-        </div>
-        <div className="lf-fpj-card" style={{ borderLeftColor: 'var(--danger)' }}>
-          <div className="lf-fpj-title" style={{ color: 'var(--danger)' }}>{SS.methode_ffj.nom}</div>
-          <p className="lf-fpj-desc">{SS.methode_ffj.description}</p>
-          <div className="lf-fpj-meta">
-            <span><strong>Ratio</strong> {SS.methode_ffj.ratio}</span>
-            <span><strong>Dilution</strong> {SS.methode_ffj.dilution}</span>
-          </div>
-          <div className="lf-fpj-notes">{SS.methode_ffj.notes}</div>
-        </div>
-      </div>
-    </div>}
-  </div>;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(ExplicationSucre, null), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card",
+    style: {
+      background: "linear-gradient(135deg, var(--success-light), var(--info-light))",
+      borderColor: "var(--success-light)"
+    }
+  }, /*#__PURE__*/React.createElement("h2", null, "\uD83C\uDF6F R\xE8gle de conversion m\xE9lasse \u2194 sucre"), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, SS.ref_expliquee.principe), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, "R\xE9f\xE9rence \u2014 1 L de m\xE9lasse de canne"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, SS.ref_expliquee?.melasse_ref?.densite_kg_par_L || 1.3, " kg"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, "densit\xE9")), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, SS.ref_expliquee?.melasse_ref?.sucre_pct_masse || 50, " %"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, "sucre (m/m)")), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, SS.ref_expliquee?.melasse_ref?.sucre_g_par_L || 650, " g"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, "sucre / L")), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, SS.ref_expliquee?.melasse_ref?.sucre_g_par_kg || 500, " g"), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, "sucre / kg"))), /*#__PURE__*/React.createElement("div", {
+    className: "lf-ref-note"
+  }, SS.ref_expliquee.melasse_ref.explication)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-ref-enonce"
+  }, SS.regle_conversion.enonce), /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose",
+    style: {
+      fontStyle: "italic"
+    }
+  }, SS.note_editoriale)), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Convertisseur \u2014 Remplacer X L de m\xE9lasse"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-converter-input"
+  }, /*#__PURE__*/React.createElement("span", null, "Remplacer"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    min: "0.1",
+    max: "100",
+    step: "0.1",
+    value: melasseQty,
+    onChange: e => setMelasseQty(parseFloat(e.target.value) || 1),
+    className: "lf-num-input"
+  }), /*#__PURE__*/React.createElement("span", null, "L de m\xE9lasse (", formatQty(gramsSucre, 0), " g sucre) par :")), /*#__PURE__*/React.createElement("div", {
+    className: "lf-converter-grid"
+  }, SS.sources.filter(s => !s.est_reference && s.sucre_g_par_L > 0).map((s, i) => {
+    const qty_L = gramsSucre / s.sucre_g_par_L;
+    const qty_kg = qty_L * s.densite_kg_par_L;
+    const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "lf-conv-card",
+      style: {
+        borderColor: color
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "lf-conv-name",
+      style: {
+        color
+      }
+    }, s.nom), /*#__PURE__*/React.createElement("div", {
+      className: "lf-conv-main"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "lf-conv-val"
+    }, formatQty(qty_kg), " kg"), /*#__PURE__*/React.createElement("span", {
+      className: "lf-conv-alt"
+    }, "ou ", formatQty(qty_L), " L")), /*#__PURE__*/React.createElement("div", {
+      className: "lf-conv-meta"
+    }, s.sucre_pct_masse, "% sucre \xB7 ", TYPE_LABELS[s.type] || s.type));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "R\xE9f\xE9rence \u2014 ", SS.sources.length, " sources de sucre"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-sources-table"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-sources-header"
+  }, /*#__PURE__*/React.createElement("div", null, "Source"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-num-col"
+  }, "Densit\xE9"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-num-col"
+  }, "% sucre"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-num-col"
+  }, "g/L"), /*#__PURE__*/React.createElement("div", null, "Avantages")), SS.sources.map((s, i) => {
+    const color = TYPE_COLORS[s.type] || 'var(--color-text-muted)';
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "lf-sources-row"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "lf-src-name",
+      style: {
+        color
+      }
+    }, s.nom), /*#__PURE__*/React.createElement("div", {
+      className: "lf-src-notes"
+    }, s.notes)), /*#__PURE__*/React.createElement("div", {
+      className: "lf-num-col"
+    }, s.densite_kg_par_L, " kg/L"), /*#__PURE__*/React.createElement("div", {
+      className: "lf-num-col"
+    }, s.sucre_pct_masse, "%"), /*#__PURE__*/React.createElement("div", {
+      className: "lf-num-col"
+    }, /*#__PURE__*/React.createElement("strong", null, s.sucre_g_par_L)), /*#__PURE__*/React.createElement("div", {
+      className: "lf-src-adv"
+    }, s.avantages));
+  }))), SS.methode_fpj && /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Variantes KNF \u2014 FPJ / FFJ"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-card",
+    style: {
+      borderLeftColor: 'var(--success)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-title",
+    style: {
+      color: 'var(--success)'
+    }
+  }, SS.methode_fpj.nom), /*#__PURE__*/React.createElement("p", {
+    className: "lf-fpj-desc"
+  }, SS.methode_fpj.description), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-meta"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "Ratio"), " ", SS.methode_fpj.ratio), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "Dilution"), " ", SS.methode_fpj.dilution)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-notes"
+  }, SS.methode_fpj.notes)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-card",
+    style: {
+      borderLeftColor: 'var(--danger)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-title",
+    style: {
+      color: 'var(--danger)'
+    }
+  }, SS.methode_ffj.nom), /*#__PURE__*/React.createElement("p", {
+    className: "lf-fpj-desc"
+  }, SS.methode_ffj.description), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-meta"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "Ratio"), " ", SS.methode_ffj.ratio), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("strong", null, "Dilution"), " ", SS.methode_ffj.dilution)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-fpj-notes"
+  }, SS.methode_ffj.notes)))));
 }
-
 function DilutionsTable() {
-  return <div className="lf-card">
-    <h2>Dilutions d'application</h2>
-    <div className="lf-dilutions-table">
-      <div className="lf-dilutions-header">
-        <div>Usage</div>
-        <div>Dilution</div>
-        <div>Fréquence</div>
-        <div>Dose</div>
-      </div>
-      {DATA.dilutions.map((d, i) => <div key={i} className="lf-dilutions-row">
-        <div>
-          <div className="lf-dil-usage">{d.usage}</div>
-          <div className="lf-dil-notes">{d.notes}</div>
-        </div>
-        <div className="lf-dil-ratio">{d.dilution}</div>
-        <div className="lf-dil-freq">{d.frequence}</div>
-        <div className="lf-dil-dose">{d.dose}</div>
-      </div>)}
-    </div>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Dilutions d'application"), /*#__PURE__*/React.createElement("div", {
+    className: "lf-dilutions-table"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lf-dilutions-header"
+  }, /*#__PURE__*/React.createElement("div", null, "Usage"), /*#__PURE__*/React.createElement("div", null, "Dilution"), /*#__PURE__*/React.createElement("div", null, "Fr\xE9quence"), /*#__PURE__*/React.createElement("div", null, "Dose")), DATA.dilutions.map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "lf-dilutions-row"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "lf-dil-usage"
+  }, d.usage), /*#__PURE__*/React.createElement("div", {
+    className: "lf-dil-notes"
+  }, d.notes)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-dil-ratio"
+  }, d.dilution), /*#__PURE__*/React.createElement("div", {
+    className: "lf-dil-freq"
+  }, d.frequence), /*#__PURE__*/React.createElement("div", {
+    className: "lf-dil-dose"
+  }, d.dose)))));
 }
-
 function TermesCurated() {
   if (!DATA.terms || DATA.terms.length === 0) return null;
   const [expanded, setExpanded] = React.useState(false);
   const strateColors = STRATES.couleurs || {};
   const strateLabels = STRATES.noms || {};
-  return <div className="lf-card">
-    <button className="sv-accordion-header" style={{border:"none",background:"none",padding:0}} onClick={() => setExpanded(!expanded)}>
-      <h2 style={{ margin: 0 }}>Termes du corpus ({DATA.terms.length})</h2>
-      <span className="sv-accordion-chevron">{expanded ? '▾' : '▸'}</span>
-    </button>
-    {expanded && <div className="lf-termes-list">
-      {DATA.terms.map((t, i) => <div key={i} className="lf-terme">
-        <div className="lf-terme-head">
-          <span className="lf-terme-strate" style={{ background: (strateColors[t.strate] || 'var(--color-text-muted)') + '20', color: strateColors[t.strate] || 'var(--color-text-muted)' }}>{strateLabels[t.strate] || t.strate}</span>
-          <span className="lf-terme-fr">{t.fr}</span>
-          {t.en && <span className="lf-terme-en">· {t.en}</span>}
-        </div>
-        {t.definition && <div className="lf-terme-def">{t.definition}</div>}
-      </div>)}
-    </div>}
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-accordion-header",
+    style: {
+      border: "none",
+      background: "none",
+      padding: 0
+    },
+    onClick: () => setExpanded(!expanded)
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: 0
+    }
+  }, "Termes du corpus (", DATA.terms.length, ")"), /*#__PURE__*/React.createElement("span", {
+    className: "sv-accordion-chevron"
+  }, expanded ? '▾' : '▸')), expanded && /*#__PURE__*/React.createElement("div", {
+    className: "sv-terms-list"
+  }, DATA.terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: {
+      background: (strateColors[t.strate] || 'var(--color-text-muted)') + '20',
+      color: strateColors[t.strate] || 'var(--color-text-muted)'
+    }
+  }, strateLabels[t.strate] || t.strate), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.fr), t.en && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, "\xB7 ", t.en)), t.definition && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.definition)))));
 }
-
 function SourcesBiblio() {
   if (!DATA.sources || DATA.sources.length === 0) return null;
-  return <div className="lf-card">
-    <h2>Sources bibliographiques</h2>
-    {DATA.sources.map((s, i) => <div key={i} className="lf-source-item">
-      <strong>{s.ref}</strong>
-      {s.annee && <span className="lf-source-year"> ({s.annee})</span>}
-      <span className="lf-source-title"> — {s.titre}</span>
-      {s.url && <> · <a href={s.url} target="_blank" className="lf-source-link">Lien</a></>}
-    </div>)}
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card"
+  }, /*#__PURE__*/React.createElement("h2", null, "Sources bibliographiques"), DATA.sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, /*#__PURE__*/React.createElement("strong", null, s.ref), s.annee && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, " (", s.annee, ")"), /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, " \u2014 ", s.titre), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " \xB7 ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    className: "sv-source-link"
+  }, "Lien")))));
 }
-
 function ComprendreView() {
-  return <div className="lf-comprendre">
-    <CeQueCest />
-    <LigneeHistorique />
-    <PourquoiAnaerobie />
-    <SuccessionMicrobienne />
-    <RedoxAnaerobie />
-    <SourcesSucreTable />
-    <DilutionsTable />
-    <TermesCurated />
-    <SourcesBiblio />
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "lf-comprendre"
+  }, /*#__PURE__*/React.createElement(CeQueCest, null), /*#__PURE__*/React.createElement(LigneeHistorique, null), /*#__PURE__*/React.createElement(PourquoiAnaerobie, null), /*#__PURE__*/React.createElement(SuccessionMicrobienne, null), /*#__PURE__*/React.createElement(RedoxAnaerobie, null), /*#__PURE__*/React.createElement(SourcesSucreTable, null), /*#__PURE__*/React.createElement(DilutionsTable, null), /*#__PURE__*/React.createElement(TermesCurated, null), /*#__PURE__*/React.createElement(SourcesBiblio, null));
 }
 
 // ── App ───────────────────────────────────────────────────────────
 function App() {
   const [tab, setTab] = React.useState('recettes');
-  return <div className="sv-page lf-app">
-    <div className="sv-tabs">
-      <button className={`sv-tab ${tab === 'recettes' ? 'active' : ''}`} onClick={() => setTab('recettes')}>
-        📋 Recettes
-      </button>
-      <button className={`sv-tab ${tab === 'comprendre' ? 'active' : ''}`} onClick={() => setTab('comprendre')}>
-        📚 Comprendre
-      </button>
-    </div>
-    {tab === 'recettes' && <RecettesView />}
-    {tab === 'comprendre' && <div className="lf-comprendre-wrap"><ComprendreView /></div>}
-    <div className="lf-footer">LiFoFer · Source : Terre &amp; Humanisme</div>
-  </div>;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-page lf-app"
+  }, /*#__PURE__*/React.createElement(SvTabs, {
+    tabs: [{
+      id: 'recettes',
+      icon: '📋',
+      label: 'Recettes'
+    }, {
+      id: 'comprendre',
+      icon: '📚',
+      label: 'Comprendre'
+    }],
+    active: tab,
+    onChange: setTab
+  }), tab === 'recettes' && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-content"
+  }, /*#__PURE__*/React.createElement(RecettesView, null)), tab === 'comprendre' && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-content sv-cahier"
+  }, /*#__PURE__*/React.createElement(ComprendreView, null)), /*#__PURE__*/React.createElement("div", {
+    className: "lf-footer"
+  }, "LiFoFer \xB7 Source : Terre & Humanisme"));
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-
-
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>
 
 
