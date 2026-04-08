@@ -370,7 +370,7 @@ body {
   min-height: calc(100vh - 80px);
 }
 .mo-sidebar {
-  width: 280px;
+  width: 320px;
   flex-shrink: 0;
   position: sticky;
   top: 1rem;
@@ -416,10 +416,10 @@ body {
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ── Matière item ── */
-.mat-item { padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; font-size: var(--font-base); }
+.mat-item { padding: 0.4rem 0.6rem; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; font-size: var(--font-sm); }
 .mat-item:hover { background: var(--color-bg-subtle); }
 .mat-item.in-panier { background: var(--success-light); border-color: var(--success-light); }
-.mat-item .mat-name { font-weight: 500; color: var(--text); }
+.mat-item .mat-name { font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; display: inline-block; }
 .mat-item .mat-cn { font-size: var(--font-xs); color: var(--color-text-muted); }
 .mat-item .mat-syn { font-size: 0.7rem; color: var(--border); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mat-item .mat-cat { display: inline-block; font-size: var(--font-xs); padding: 0 6px; border-radius: 9px; line-height: 1.6; }
@@ -511,7 +511,7 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 08:38 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-08 10:04 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
@@ -785,7 +785,7 @@ function ComprendreMO() {
             const withPhys = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
             return <div className="mo-card">
               <h2>Caractérisation ({withPhys.length} matières documentées)</h2>
-              <p style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem'}}>Données physiques, NPK et coût indicatif. Sources : Arvalis paille-fumier, guide MSV 2022.</p>
+              <NoteAccordion text="Données physiques, NPK et coût indicatif. Sources : Arvalis paille-fumier, guide MSV 2022. Les valeurs sont indicatives et varient selon l'origine, le stockage et la maturité des matières." />
               <div style={{overflowX:'auto'}}>
                 <table className="carac-table">
                   <thead><tr>
@@ -812,7 +812,9 @@ function ComprendreMO() {
                         <td style={{textAlign:'center',color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>
                           {c.cout_min != null ? (c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : (c.cout_min < 0 ? 'Négatif' : c.cout_min+'–'+c.cout_max+' €/t')) : '—'}
                         </td>
-                        <td style={{color:'var(--color-text-muted)',fontSize:'var(--font-sm)'}}>{c.notes || ''}{c.epaisseur_1pct_mo_cm ? ' ('+c.epaisseur_1pct_mo_cm+' cm/+1%MO)' : ''}</td>
+                        <td style={{color:'var(--color-text-muted)',fontSize:'var(--font-sm)',maxWidth:'180px'}}>
+                          {(c.notes || c.epaisseur_1pct_mo_cm) ? <NoteAccordion text={(c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' ('+c.epaisseur_1pct_mo_cm+' cm/+1%MO)' : '')} /> : '—'}
+                        </td>
                       </tr>;
                     })}
                   </tbody>
@@ -821,6 +823,17 @@ function ComprendreMO() {
             </div>;
           })()}
     </div>;
+}
+
+function NoteAccordion({ text }) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return <div>
+    <span onClick={() => setOpen(!open)} style={{cursor:'pointer',color:'var(--accent)',fontSize:'var(--font-xs)'}}>
+      {open ? '▾' : '▸'} {open ? '' : 'note'}
+    </span>
+    {open && <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',padding:'0.25rem 0',lineHeight:'1.4'}}>{text}</div>}
+  </div>;
 }
 
 function App() {
