@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source unique de verite. SQLite, 48 tables, 6 vues.
+Source unique de verite. SQLite, 51 tables, 8 vues.
 
 ### Tables principales
 
@@ -11,16 +11,16 @@ Source unique de verite. SQLite, 48 tables, 6 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 629 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 864 |
 | `term_relations` | Relations entre termes (BT, NT, RT) | 1175 |
-| `chains_causales` | 9 chaines causales reliant les documents | 9 |
-| `chain_etapes` | Etapes des chaines | 64 |
+| `chains_causales` | 16 chaines causales reliant les documents | 16 |
+| `chain_etapes` | Etapes des chaines | 120 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
 | `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 79 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 34 |
+| `scripts` | Registre des scripts avec versions | 37 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 434 |
+| `audit_log` | Journal des operations | 521 |
 
 ### Tables web et outils interactifs
 
@@ -90,7 +90,10 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_workflows.py` | docs | Génération des workflows horodatés par module. |
 | `export_fiche.py` | jenni | Export prompts fiches transversales depuis la DB. |
 | `export_jenni_doc.py` | jenni | Génération prompts Jenni v3.1. |
+| `export_validation.py` | jenni | Génération des prompts de validations depuis validation_sections. |
+| `gen_prompt_completion.py` | jenni | Génère un prompt Jenni pour compléter les champs manquants (BT, RT, SYN_FR, SYN_EN) de termes déjà existants dans le thésaurus. |
 | `gen_prompt_enrichissement.py` | jenni | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
+| `gen_prompt_thesaurus.py` | jenni | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | jenni | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
 | `anthropic_runner.py` | lib | Module partagé : run_session() et run_batch() pour les scripts API Anthropic. |
 | `cli.py` | lib | Helpers CLI partagés (add_db_arg, check_db) |

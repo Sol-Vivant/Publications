@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 48 tables, 6 vues, 34 scripts
+- 51 tables, 8 vues, 37 scripts
 
 ## Scripts
 
@@ -29,7 +29,10 @@
 | `gen_workflows.py` | v2.0 | `tools/docs/` | Génération des workflows horodatés par module. |
 | `export_fiche.py` | v1.0 | `tools/jenni/` | Export prompts fiches transversales depuis la DB. |
 | `export_jenni_doc.py` | v3.1 | `tools/jenni/` | Génération prompts Jenni v3.1. |
+| `export_validation.py` | v1.0 | `tools/jenni/` | Génération des prompts de validations depuis validation_sections. |
+| `gen_prompt_completion.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni pour compléter les champs manquants (BT, RT, SYN_FR, SYN_EN) de termes déjà existants dans le thésaurus. |
 | `gen_prompt_enrichissement.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
+| `gen_prompt_thesaurus.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | v1.0 | `tools/jenni/` | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
 | `anthropic_runner.py` | v1.0 | `tools/lib/` | Module partagé : run_session() et run_batch() pour les scripts API Anthropic. |
 | `cli.py` | v1.0 | `tools/lib/` | Helpers CLI partagés (add_db_arg, check_db) |
@@ -55,7 +58,7 @@ projet/
 │   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, gen_prompt_enrichissement, import_enrichissement
+│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
 │   ├── lib/                    anthropic_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 │   ├── zotero/                 attribution, normalise_ris, validate_ris
 ├── docx/                      Documents .docx et .ris
