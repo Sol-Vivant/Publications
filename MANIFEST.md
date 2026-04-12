@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 51 tables, 8 vues, 37 scripts
+- 52 tables, 8 vues, 38 scripts
 
 ## Scripts
 
@@ -34,7 +34,8 @@
 | `gen_prompt_enrichissement.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
 | `gen_prompt_thesaurus.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | v1.0 | `tools/jenni/` | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
-| `anthropic_runner.py` | v1.0 | `tools/lib/` | Module partagé : run_session() et run_batch() pour les scripts API Anthropic. |
+| `reformat_fiches_ris.py` | v1.0 | `tools/jenni/` | Reformate les citations Auteur-année des fiches historiques au format [N] en matchant contre biblio_norm.ris (source unique Zotero) |
+| `agent_runner.py` | v1.0 | `tools/lib/` | Pattern préparateur → agents Task → consolidateur. |
 | `cli.py` | v1.0 | `tools/lib/` | Helpers CLI partagés (add_db_arg, check_db) |
 | `config.py` | v1.0 | `tools/lib/` | Accès centralisé à la table config (get, get_json) |
 | `db.py` | v1.0 | `tools/lib/` | Connexion DB centralisée (get_connection) |
@@ -58,8 +59,8 @@ projet/
 │   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
-│   ├── lib/                    anthropic_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
+│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, reformat_fiches_ris
+│   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 │   ├── zotero/                 attribution, normalise_ris, validate_ris
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
@@ -75,10 +76,11 @@ projet/
 
 ## Pages web interactives
 
-4 pages, 13 templates (1 partagés), vendor local (hors-ligne).
+5 pages, 16 templates (1 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
+| Concept Cards | `concept_cards` | `concept_cards.html` |
 | Cartographie interactive | `index` | `index.html` |
 | Calculateur LiFoFer | `lifofer` | `lifofer.html` |
 | Calculateur Matière Organique | `mo_calculateur` | `mo_calculateur.html` |
@@ -120,4 +122,4 @@ python3 tools/admin/audit_opus.py --db sol_vivant.db --dry-run
 python3 tools/admin/session_start.py --db sol_vivant.db
 ```
 
-Tous les scripts API supportent `--mode session` (defaut) et `--mode batch` (-50%).
+Les scripts d'inférence (`attribution.py`, `analyse_corpus.py`, `audit_opus.py`) suivent le workflow en 3 phases via `agent_runner.py` : `--prepare` → agents Task dans une session Claude Code → `--consolidate`. Plus d'API Anthropic externe depuis v4.

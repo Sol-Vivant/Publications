@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source unique de verite. SQLite, 51 tables, 8 vues.
+Source unique de verite. SQLite, 52 tables, 8 vues.
 
 ### Tables principales
 
@@ -11,24 +11,24 @@ Source unique de verite. SQLite, 51 tables, 8 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 864 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 881 |
 | `term_relations` | Relations entre termes (BT, NT, RT) | 1175 |
 | `chains_causales` | 16 chaines causales reliant les documents | 16 |
 | `chain_etapes` | Etapes des chaines | 120 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 79 |
+| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 76 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 37 |
+| `scripts` | Registre des scripts avec versions | 38 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 521 |
+| `audit_log` | Journal des operations | 612 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `web_pages` | Pages web (slug, titre, OG tags) | 5 |
-| `html_templates` | Templates CSS/JS par page + partagés | 13 (1 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 52 |
+| `web_pages` | Pages web (slug, titre, OG tags) | 6 |
+| `html_templates` | Templates CSS/JS par page + partagés | 16 (1 partagés) |
+| `concept_cards` | Fiches conceptuelles synthétiques | 56 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 14 |
@@ -52,8 +52,9 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | Categorie | Cles |
 |-----------|------|
 | `analyse` | groupes, passes, template_passe2 |
-| `api` | backoff_base_seconds, inter_request_sleep, max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_retries_session, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model, prix_input_session, prix_output_session, retry_sleep_seconds |
+| `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
+| `claude_rules` | audit_cards_first, bq_access |
 | `corpus` | auteur, nom, regle_jenni |
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
@@ -62,7 +63,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `projet` | base_url_publications, github_org_url, github_pages_url, github_publications_url, github_repo_url, github_tools_url |
 | `strates` | couleurs, couleurs_cascade, couleurs_light, descriptions, noms, ordre |
 | `triangle` | sections_didactiques, test_bocal, test_boudin |
-| `web` | index_description_template |
+| `web` | icon_library, index_description_template |
 | `zotero` | batch_size_avec_resume, batch_size_sans_resume, batch_version, est_tokens_in_ab, est_tokens_in_no, est_tokens_out_ab, est_tokens_out_no, max_abstract_chars, max_entry_chars, max_field_chars, max_ris_abstract_chars, max_ris_size_mb, min_abstract_len, min_bigram_chars, opus_doubt_threshold_pct, opus_error_threshold_pct, opus_sample_size, statuts, warn_entry_chars, warn_field_chars, warn_sans_doi_count |
 
 ## Scripts (tools/)
@@ -95,7 +96,8 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_prompt_enrichissement.py` | jenni | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
 | `gen_prompt_thesaurus.py` | jenni | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | jenni | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
-| `anthropic_runner.py` | lib | Module partagé : run_session() et run_batch() pour les scripts API Anthropic. |
+| `reformat_fiches_ris.py` | jenni | Reformate les citations Auteur-année des fiches historiques au format [N] en matchant contre biblio_norm.ris (source unique Zotero) |
+| `agent_runner.py` | lib | Pattern préparateur → agents Task → consolidateur. |
 | `cli.py` | lib | Helpers CLI partagés (add_db_arg, check_db) |
 | `config.py` | lib | Accès centralisé à la table config (get, get_json) |
 | `db.py` | lib | Connexion DB centralisée (get_connection) |

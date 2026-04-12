@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept Cards — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Concept Cards — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="56 cartes conceptuelles en 12 dimensions." />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Concept Cards — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="56 cartes conceptuelles en 12 dimensions." />
+<link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
+
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/babel.min.js"></script>
+
+<style>
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #cbd5e1;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Échelle typographique (source unique pour toutes les pages) */
+  --font-xs: 0.75rem;
+  --font-sm: 0.82rem;
+  --font-base: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.15rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: var(--font-base);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: var(--font-xs);
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Navigation inter-pages ── */
+.sv-nav-pages {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.sv-nav-pages a {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.sv-nav-pages a:hover {
+  background: var(--accent-light);
+  text-decoration: none;
+}
+.sv-nav-current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: #f1f5f9; }
+.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Onglets (pattern Pratique / Comprendre) ── */
+.sv-tabs {
+  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+}
+.sv-tab {
+  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
+  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.sv-tab:hover { color: var(--text); }
+.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
+@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--font-base);
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--font-base);
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem 0;
+  padding: 0 1.25rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+.cc-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.cc-stat { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; text-align: center; min-width: 100px; }
+.cc-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.cc-stat-label { font-size: var(--font-xs); color: var(--text-secondary); margin-top: 2px; }
+.cc-filters { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center; }
+.cc-search { flex: 1; min-width: 200px; }
+.cc-dim-header { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; border-radius: var(--radius); margin-bottom: 0.5rem; }
+.cc-dim-header:hover { background: var(--accent-light); }
+.cc-dim-badge { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.cc-dim-name { font-weight: 600; font-size: var(--font-base); }
+.cc-dim-count { font-size: var(--font-xs); color: var(--text-secondary); margin-left: auto; }
+.cc-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 0.75rem; margin-left: 1.5rem; }
+.cc-card-title { font-weight: 600; font-size: var(--font-sm); margin-bottom: 0.5rem; }
+.cc-card-cat { display: inline-block; font-size: var(--font-xs); padding: 1px 6px; border-radius: 4px; background: var(--accent-light); color: var(--accent); margin-right: 0.5rem; }
+.cc-card-desc { font-size: var(--font-xs); color: var(--text-secondary); line-height: 1.5; white-space: pre-line; max-height: 200px; overflow-y: auto; }
+.cc-card-desc.expanded { max-height: none; }
+.cc-links { margin-top: 0.75rem; }
+.cc-link { font-size: var(--font-xs); padding: 2px 0; color: var(--text-secondary); }
+.cc-link-type { display: inline-block; width: 90px; font-weight: 500; color: var(--accent); }
+.cc-link-target { cursor: pointer; text-decoration: underline; }
+.cc-link-target:hover { color: var(--accent); }
+.cc-tests { margin-top: 0.5rem; }
+.cc-test { font-size: var(--font-xs); color: var(--text-secondary); margin-right: 0.5rem; }
+.cc-expand-btn { font-size: var(--font-xs); color: var(--accent); cursor: pointer; background: none; border: none; padding: 0; margin-top: 4px; }
+@media (max-width: 640px) { .cc-stats { flex-direction: column; } .cc-filters { flex-direction: column; } .cc-card { margin-left: 0.5rem; } }
+
+/* Category color badges */
+.cc-card-cat[data-cat="symptome"] { background: var(--danger-light); color: var(--danger); }
+.cc-card-cat[data-cat="cadre"] { background: var(--accent-light); color: var(--accent); }
+.cc-card-cat[data-cat="pratique"] { background: var(--success-light); color: var(--success); }
+.cc-card-cat[data-cat="profil_sol"] { background: #FEF3C7; color: #D97706; }
+.cc-card-cat[data-cat="mecanisme"] { background: #F3E8FF; color: #7C3AED; }
+.cc-card-cat[data-cat="cycle"] { background: var(--info-light); color: var(--info); }
+.cc-card-cat[data-cat="faune"] { background: #ECFDF5; color: #059669; }
+.cc-card-cat[data-cat="continuum"] { background: #E0F2FE; color: #0891B2; }
+.cc-card-cat[data-cat="histoire"] { background: #FEF3C7; color: #78350F; }
+
+/* Orphan indicator */
+.cc-card.cc-orphan { border-style: dashed; border-color: var(--border); opacity: 0.85; }
+
+/* Doc tags */
+.cc-docs { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 4px; }
+.cc-doc-tag { font-size: 0.65rem; padding: 1px 5px; border-radius: 3px;
+              background: var(--card-bg); border: 1px solid var(--border); color: var(--text-secondary); }
+
+/* Card meta line */
+.cc-card-meta { display: flex; gap: 0.75rem; font-size: var(--font-xs); color: var(--text-secondary);
+                margin-top: 0.25rem; margin-bottom: 0.5rem; }
+
+/* Toggle all button */
+.cc-toggle-all { font-size: var(--font-xs); color: var(--accent); cursor: pointer;
+                 background: none; border: 1px solid var(--border); border-radius: var(--radius);
+                 padding: 4px 10px; }
+.cc-toggle-all:hover { background: var(--accent-light); }
+
+/* Doc tags with strate colors */
+.cc-doc-tag[data-strate="F"] { background: #EDE9FE; color: #6D28D9; border-color: #EDE9FE; }
+.cc-doc-tag[data-strate="S"] { background: #DBEAFE; color: #1D4ED8; border-color: #DBEAFE; }
+.cc-doc-tag[data-strate="V"] { background: #D1FAE5; color: #047857; border-color: #D1FAE5; }
+.cc-doc-tag[data-strate="P"] { background: #FEF3C7; color: #B45309; border-color: #FEF3C7; }
+.cc-doc-tag[data-strate="H"] { background: #FEE2E2; color: #B91C1C; border-color: #FEE2E2; }
+
+
+</style>
+</head>
+<body>
+
+
+<header class="sv-header">
+  <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
+  <div class="sv-subtitle">Concept Cards — Filtre de rigueur du corpus Sol Vivant</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-12 17:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+</header>
+
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <span class="sv-nav-current">📋 Concept Cards</span></nav>
+
+
+<div id="root"></div>
+
+
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
+  · Données depuis sol_vivant.db
+</footer>
+
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
+
+
+<script>
+const DATA = {"dimensions": [{"id": 1, "nom": "Cadre — Eau", "description": "Eau facteur limitant, modes d'application", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "description": "Gradients redox, microzones, redox ladder", "couleur": "#7c3aed", "ordre": 2}, {"id": 3, "nom": "Cadre — Économique", "description": "Coûts réels, énergie, filières", "couleur": "#d97706", "ordre": 3}, {"id": 4, "nom": "Cadre — Socio-économique", "description": "Travail, filières, risques", "couleur": "#f59e0b", "ordre": 4}, {"id": 5, "nom": "Cadre — Évolutif", "description": "Temporalité, évolution anaérobie→aérobie", "couleur": "#4338ca", "ordre": 5}, {"id": 6, "nom": "Types de sols", "description": "Comportements différenciés par texture", "couleur": "#ea580c", "ordre": 6}, {"id": 7, "nom": "Histoire", "description": "Histoire des sols : désastres et réussites", "couleur": "#78350f", "ordre": 7}, {"id": 9, "nom": "Symptôme — MO/Hydrique", "description": "Stress MO, redox, stratégies adaptatives", "couleur": "#be185d", "ordre": 9}, {"id": 10, "nom": "Symptôme — Structure", "description": "Compaction, asphyxie, diagnostic", "couleur": "#dc2626", "ordre": 10}, {"id": 11, "nom": "Pratique", "description": "ACS, diagnostic terrain, interventions", "couleur": "#059669", "ordre": 11}, {"id": 12, "nom": "Cycle", "description": "Cycles biogéochimiques (N, P, C, S...)", "couleur": "#2563EB", "ordre": 12}, {"id": 13, "nom": "Continuum", "description": "Continuum sol-plante-humain, résistome", "couleur": "#0891b2", "ordre": 13}], "cards": [{"id": 6, "dimension_id": 1, "title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz", "description": "Cadre : l’eau (teneur, potentiel, continuité) gouverne diffusion O2/CO2, mobilité des solutés, activité microbienne/racinaire et stabilité structurale. Les diagnostics doivent partir de l’hydrologie du sol avant de conclure à une 'carence' ou une 'recette'.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Eau", "dim_couleur": "#0ea5e9"}, {"id": 5, "dimension_id": 2, "title": "Redox central : gradients, microzones et 'redox ladder'", "description": "Cadre : raisonner par gradients Eh/O2 et microzones. Les voies microbiennes (respiration, dénitrification, fermentation, méthanogenèse…) dépendent du redox, qui est piloté par l’eau, la structure (biofilms/agrégats) et les apports (surface vs enfouissement).", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S4\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Redox", "dim_couleur": "#7c3aed"}, {"id": 1, "dimension_id": 3, "title": "Coût réel de l’énergie fossile et 'esclaves énergétiques'", "description": "Cadre de comparaison : comptabiliser énergie externe, travail, exergie, externalités. Permet d’éviter les comparaisons faussées entre systèmes (conventionnel vs MSV/ACS).\n\n[Complément fusionné] Cadre de comparaison : intégrer l’énergie externe (pétrole), l’exergie, et les externalités (dette écologique). Évite les comparaisons faussées entre systèmes (conventionnel vs MSV/ACS) quand le 'bilan' ignore le coût énergétique réel.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F2\"]", "notes": "Fusionné avec card 7 ('Thermodynamique : énergie externe, exergie et coût réel des intrants fossiles')\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Économique", "dim_couleur": "#d97706"}, {"id": 8, "dimension_id": 4, "title": "Socio-économique : travail, filières, risques et dépendances", "description": "Cadre : une pratique n’est pas seulement biophysique. Les contraintes (main d’œuvre, équipements, filières, risques, réglementation, capital) conditionnent l’adoption. À utiliser pour comparer des systèmes sans idéologie.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F2\", \"P5\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Socio-économique", "dim_couleur": "#f59e0b"}, {"id": 2, "dimension_id": 5, "title": "Temporalité, irréversibilités et entropie des pratiques humaines", "description": "Cadre : expliciter l’échelle de temps et le sens matériel. Exemple : transformer une forêt en broyat peut être incohérent selon objectif et bilan matière/énergie.\n\n[Complément fusionné] Cadre : expliciter les échelles de temps, les irréversibilités (érosion, perte de structure, minéralisation accélérée) et le sens matériel des pratiques (ex. raser une forêt pour broyat). Les bilans doivent intégrer pertes/temps de reconstruction.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F1\", \"F2\"]", "notes": "Fusionné avec card 9 ('Temporalité & entropie : irréversibilités et sens des pratiques')\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Évolutif", "dim_couleur": "#4338ca"}, {"id": 19, "dimension_id": 5, "title": "Stratégies microbiennes : r/K et Y-A-S (rendement, acquisition, stress) le long de la succession", "description": "Cadre : interpréter les effets des apports et pratiques selon les stratégies dominantes : r (opportunistes), K (efficience/stabilité), et Y-A-S (rendement/acquisition/stress). Indispensable pour lire sol nu → climax et éviter d’attribuer une 'recette' hors contexte.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S2\", \"S3\"]", "notes": "Fusionné avec card 28 ('Y-A-S') le 2026-03-28\n[2026-04-12] Migration v2 : dim 1→5. Raison : Stratégies microbiennes r/K Y-A-S = Cadre Évolutif (succession)\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Évolutif", "dim_couleur": "#4338ca"}, {"id": 22, "dimension_id": 5, "title": "Évolution du vivant : monde anaérobie → photosynthèse → oxygénation → respiration (cadre redox)", "description": "Objectif : fournir un contexte 'histoire du vivant' utilisable en diagnostic et en comparaison de systèmes.\nIdée centrale : la biosphère démarre majoritairement anaérobie ; l’arrivée de la photosynthèse oxygénique modifie les gradients (O2/Eh) et ouvre les métabolismes aérobie.\nUsage éditorial : éviter d’exiger des 'preuves' pour des concepts fondamentaux déjà admis (ex. chimie/biologie de base) et replacer les mécanismes micro-biogéochimiques dans une trajectoire temporelle.", "category": "mecanisme", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Évolutif", "dim_couleur": "#4338ca"}, {"id": 23, "dimension_id": 5, "title": "Évolution des plantes et construction du sol : racines, mycorhizes, rhizosphère, boucles plante–microbiome", "description": "Objectif : relier l’évolution des plantes (et de leurs interfaces) à la formation/organisation du sol.\nPivot : racines + exsudats + mycorhizes → rhizosphère → réseaux trophiques → structure/agrégation.\nUsage : comparer des systèmes (prairie/forêt/couverts) sans analogies bancales, en explicitant les mécanismes (flux carbone, redox local, réseaux mycorhiziens).", "category": "mecanisme", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S3\", \"V2\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→5. Raison : Évolution plantes + construction sol = Cadre Évolutif\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Évolutif", "dim_couleur": "#4338ca"}, {"id": 26, "dimension_id": 5, "title": "Évolution écologique du sol : sol nu → climax, stratégies microbiennes r/K et Y‑A‑S (cadre diagnostique)", "description": "Objectif : caler les diagnostics et comparaisons sur une trajectoire écologique, plutôt que sur des recettes.\nAxe : sol nu → stades pionniers → systèmes structurés → climax. Les stratégies microbiennes (r/K, Y‑A‑S) changent avec ressources, stress, redox, eau, couverture et continuité racinaire.\nUsage : relier pratiques (couvert, mulch, non-labour, compost/fermentation) aux mécanismes (flux C, agrégation, redox) et aux indicateurs de dynamique de MO (K1/K2).", "category": "mecanisme", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F1\", \"P1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cadre — Évolutif", "dim_couleur": "#4338ca"}, {"id": 3, "dimension_id": 6, "title": "Types de sols et comportements différenciés", "description": "Cadre : mêmes apports et mêmes pratiques → effets différents selon texture (sable/limon/argile), minéralogie, calcaire, hydromorphie. Les règles de diagnostic doivent être filtrées par type de sol.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\"]", "notes": "Fusionné avec card 10 ('Pédologie : types de sols et comportemen') le 2026-03-28\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 11, "dimension_id": 6, "title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique", "description": "Sol sableux : faible CEC et faible réserve utile ; aération forte ; plafond MAOM bas en absolu mais stock initial très éloigné du plafond → bénéfice marginal maximal par tonne de C apportée. Priming effect structurellement désamorcé (peu de C stable à amorcer).\n\nCOMPATIBILITÉS MAJEURES (à différence de l'ancienne formulation \"apports fractionnés\") :\n• Chantier de reconstruction massif en incorporation 0-30 cm validé (voir Card #17 Mode d'application — cas Cagnolle, Marseille, MSV/VdT 50-400 t MS/ha)\n• Légumineuses nodulées en couverture immédiate (Card #50) pour esquiver la faim d'azote\n• Faim d'azote comme outil de sélection contre adventices nitrophiles r-stratégistes\n\nRÉGIME MÉTASTABLE (point critique) :\n• k₂ élevé (0,03-0,05 an⁻¹) impose une ration d'entretien élevée (terme `ration du sol`)\n• Sans marnage pour relever durablement le plafond MAOM (chantier minéral structurant), le système reste sous perfusion\n• Équation Hénin-Dupuis : stock_eq = (apport × k1) / k2 — sur sableux la ration annuelle requise est 3-10× supérieure à un limon équivalent\n• Effet éponge biologique (EPS, hyphes, biopores) particulièrement visible car baseline quasi nulle\n\nCORRECTION HISTORIQUE : ancienne formulation \"apports fermentés si fractionnés ; minéralisation rapide\" retirée car contradictoire avec Card #17 qui documente l'incorporation massive comme validée sur sableux dégradé.\n\nALTERNATIVE MODERNE AU MARNAGE — BASALTE :\n• Basalte broye 6-10 t/ha : C organique +69 a 135% dans les 20 premiers cm (Richardson, 2024)\n• Sequestration 2-4 t CO2/ha sous forme de carbonates stables (Kelland et al., 2020)\n• Augmente stabilite agregats (+15 a +25%), MAOM +22% (Buss et al., 2023)\n• Technologie emission negative GIEC (enhanced weathering)\n• Plus accessible que le marnage traditionnel (pas besoin de gisement local de marne)", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S0\"]", "notes": "\n[2026-04-12] Réécriture session sol sableux : résout contradiction avec Card #17 (ancien texte 'apports fractionnés' vs Card #17 'intrant massif 50-400 t MS/ha'). Ajoute métastabilité biologique, équation Hénin-Dupuis, mention marnage.\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.\n[2026-04-12] Enrichi avec donnees Jenni fiche #25 validee (7 revisions). Ajout basalte comme alternative marnage.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 12, "dimension_id": 6, "title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau", "description": "Sol argileux : potentiel d’agrégation élevé (Ca + biofilms/EPS), mais risque de réduction profonde/anoxie si enfouissement + excès matière réduite + saturation.", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S4\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 13, "dimension_id": 6, "title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface", "description": "Sol limoneux : structure fragile ; battance/ruissellement si sol nu. Priorité à couverture permanente, apports de surface et consolidation biologique.", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 14, "dimension_id": 6, "title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo", "description": "Sol calcaire / argilo-calcaire : calcium structurant (floculation), porosité durable, CAH robuste. Plafond MAOM élevé, stabilité par la minéralogie.\n\nRISQUES DE BLOCAGES :\n• Phosphore : blocage par Ca en sol calcaire actif (pH > 7,5) — mécanisme symétrique à Fe/Al en sol acide\n• Soufre, Bore, Zinc, Fer, Manganèse : biodisponibilité réduite par pH élevé et effet calcaire actif\n• Impact sur métabolismes et symbioses (nitrogénase Co-dépendante, PSB, mycorhizes)\n\nAMENDEMENTS À NE PAS APPLIQUER :\n• Chaulage contre-productif (augmenterait encore le pH et aggraverait les blocages)\n• Marnage sans intérêt (la CEC minérale est déjà suffisante)\n\nLEVIERS APPROPRIÉS :\n• Gypse agricole (CaSO₄) : apporte S sans effet pH, corrige Mg/K si ratio Ca:Mg déséquilibré\n• Soufre élémentaire (S⁰) en localisation racinaire pour acidification micro-locale contre blocages P\n• Chélates de micro-éléments (foliaire ou radiculaire)\n• Matière organique fraîche pour stimulation phosphatase microbienne et acidification rhizosphérique\n• Couverts végétaux mobilisateurs (légumineuses, crucifères Brassicaceae à acides organiques)\n\nVIGILANCE RATIO Ca/Mg (Jenni fiche #25, Shirolkar et al. 2020) :\n• Rayon ionique Mg (0,066 nm) vs Ca (0,099 nm) → sphere hydratation Mg ~50% plus grande\n• Mg en exces provoque DISPERSION des argiles au lieu de floculation (effet inverse du Ca)\n• Un ratio Ca/Mg trop faible degrade la conductivite hydraulique meme si pH correct\n• Diagnostic avance : Charge Dispersive Nette (CDN, Rengasamy et al. 2016) integre Na+Mg+K", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S4\"]", "notes": "\n[2026-04-12] Enrichissement session sol sableux : ajout leviers (gypse, S⁰, chélates), contre-indications (chaulage, marnage).\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.\n[2026-04-12] Enrichi fiche #25. Ajout antagonisme Ca/Mg (Shirolkar 2020) et CDN (Rengasamy 2016).", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 15, "dimension_id": 6, "title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale", "description": "Sol hydromorphe/organique : redox bas fréquent ; risques N2O/CH4 et toxicités (Fe/Mn réduits). Éviter apports réduits enfouis ; gérer l’eau et la continuité racinaire.", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S0\", \"S4\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 16, "dimension_id": 6, "title": "Profil sol 'franc' (loam) : effets intermédiaires, sensibilité au travail du sol", "description": "Sol loam : bon compromis texture ; répond bien aux apports réguliers et couverts ; sensible aux perturbations mécaniques qui cassent habitats/biofilms.", "category": "profil_sol", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Types de sols", "dim_couleur": "#ea580c"}, {"id": 4, "dimension_id": 7, "title": "Histoire des sols : désastres et réussites (Croissant fertile, Nil, Terra Preta, Milpa)", "description": "Objectif : fournir un contexte historique pour valider/illustrer des mécanismes du corpus.\nOn ne compare pas des systèmes agricoles sans intégrer : érosion, salinisation, irrigation mal gérée, déboisement, perte de structure, baisse de fertilité, désertification.\nUsage : ancrer les diagnostics (pédologie + eau + redox + pratiques) dans des trajectoires historiques.\n\n[Complément fusionné] Objectif : documenter des systèmes qui réussissent à maintenir/accroître la fertilité, la structure et la résilience.\nUsage : comparer sans idéologie, en identifiant les invariants mécanistiques : continuité de couverture, flux de carbone, diversité, biochar/MAOM, polyculture/agroforesterie.", "category": "histoire", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"F1\"]", "notes": "Fusionné avec card 20 ('Histoire des sols : désertification, érosion, salinisation — et réussites (Terra Preta)') | Fusionné avec card 24 ('Histoire de l’humanité et systèmes agric') le 2026-03-28\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Histoire", "dim_couleur": "#78350f"}, {"id": 29, "dimension_id": 9, "title": "MO–argile → transition stœchiométrique → stratégies microbiennes", "description": "Carte passerelle : trajectoire écologique + MO (SOC) + taux d’argile → disponibilité/qualité du C + transitions stœchiométriques (C:N:P) → bascules de stratégies microbiennes (r/K, copio/oligo, Y-A-S). Outil d’audit + set de recherche.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S2\", \"S4\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — MO/Hydrique", "dim_couleur": "#be185d"}, {"id": 30, "dimension_id": 9, "title": "Hydrique & redox → stress / microzones → stratégies", "description": "Passerelle : régime hydrique (sécheresse/réhumectation), microzones redox, diffusion dans agrégats → stress + opportunisme → déplacements Y-A-S, dormance, syntrophie.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S0\", \"S4\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — MO/Hydrique", "dim_couleur": "#be185d"}, {"id": 31, "dimension_id": 9, "title": "Azote (formes, pertes) → stœchiométrie → stratégies microbiennes", "description": "Passerelle : formes d’azote, minéralisation/immobilisation, nitrification/dénitrification, pertes (N2O) → bascules de limitation et d’investissement A/Y/S.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S2\", \"S4\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — MO/Hydrique", "dim_couleur": "#be185d"}, {"id": 32, "dimension_id": 9, "title": "Structure du sol (agrégats/EPS) → habitats → stabilité/résilience", "description": "Passerelle : structure, agrégats, EPS/biofilms, porosité → habitats et protection → stabilité/résilience, trajectoires microbiennes.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S1\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — MO/Hydrique", "dim_couleur": "#be185d"}, {"id": 44, "dimension_id": 9, "title": "Thermotolérance microbienne : 7 mécanismes", "description": "ACC déaminase, EPS, osmolytes, HSFA2, redistribution hydraulique, MO, mixotrophie. Asymétrie thermique.", "category": "mecanisme", "status": "active", "adapted": 1, "source": "analyse_fiches", "docs_codes": "[\"S2\",\"S3\",\"V2\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→9. Raison : Thermotolérance microbienne = Symptôme MO/Hydrique (stress)", "dim_nom": "Symptôme — MO/Hydrique", "dim_couleur": "#be185d"}, {"id": 33, "dimension_id": 10, "title": "Compaction / semelle / faible porosité", "description": "Diagnostic terrain : compaction, semelle, limitation racinaire, infiltration faible. Objectif : discriminer structure vs hydrique vs MO/stœchio.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 34, "dimension_id": 10, "title": "Asphyxie / anaérobie locale (odeurs, horizons réduits)", "description": "Diagnostic terrain : signaux redox/anoxie, odeurs, racines stressées. Objectif : relier hydrique, structure, C labile, microzones.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S4\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 35, "dimension_id": 10, "title": "Battance / croûte / ruissellement (surface)", "description": "Diagnostic terrain : croûte, ruissellement, éclaboussures, infiltration de surface faible. Objectif : structure, MO de surface, agrégation.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 36, "dimension_id": 10, "title": "Infiltration lente / engorgement (profil)", "description": "Diagnostic terrain : infiltration lente, engorgement, stagnation. Objectif : distinguer hydrique (nappe), structure, texture/argile.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 37, "dimension_id": 10, "title": "Hydrophobie / infiltration hétérogène (spots secs)", "description": "Diagnostic terrain : zones qui refusent l’eau, infiltration patchy. Objectif : MO, hydrique, structure, biofilms/EPS.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 38, "dimension_id": 10, "title": "‘Faim d’azote’ après apport carboné (immobilisation)", "description": "Diagnostic terrain : jaunissement post-apport C, ralentissement croissance. Objectif : stœchiométrie, immobilisation microbienne N minéral, C labile.\n\nMÉCANISME : apport C haut C/N → microbes copiotrophes immobilisent N minéral → compétition directe avec la plante → carence N apparente sans déficit réel.\n\nPARADE CLASSIQUE — stœchiométrie Kirkby 100 C : 8 N : 2 P : 1,5 S :\n• Compléter l'apport C avec N minéral au bon ratio\n• Ou compost pré-décomposé C/N < 20\n\nPARADE ÉLÉGANTE — légumineuses nodulées (voir Card #50) :\n• Les plantes fixatrices sont indifférentes à la carence N minérale\n• Rhizobium/Bradyrhizobium fixent N₂ atmosphérique → plante N-autonome\n• Pas besoin d'apport N minéral externe\n• Pré-requis : inoculation rhizobium si sol vierge de la symbiose\n\nINVERSION — FAIM D'AZOTE COMME OUTIL AGRONOMIQUE :\nLa faim d'azote peut être utilisée comme **levier de sélection végétale**, pas seulement subie comme symptôme. Sur un chantier haut C/N (BRF, broyat, paille longue) avec couvert légumineux inoculé :\n• Adventices nitrophiles r-stratégistes (chénopode, amarante, morelle, mouron, digitaire, sétaire, renouée) : germination retardée, levée faible, croissance stoppée pendant 12-24 mois\n• Légumineuses N-autonomes : indifférentes, croissance normale, effet canopée compétitive\n• Résultat : cortège végétal installé au lieu de cortège subi\n\nVoir Card \"Faim d'azote comme outil agronomique\" pour le mécanisme détaillé et les conditions de validité.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S2\", \"S4\"]", "notes": "\n[2026-04-12] Session sol sableux : ajout de l'inversion outil (faim d'azote comme levier de sélection). Card renvoie vers nouvelle carte dédiée.\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 39, "dimension_id": 10, "title": "Excès de C très fermentescible (odeurs, chauffe, instabilités)", "description": "Diagnostic terrain : odeurs, chaleur, instabilités post-apports. Objectif : bascules redox, microzones, trajectoires.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S4\", \"V3\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 40, "dimension_id": 10, "title": "Sol ‘inerte’ / faible activité apparente", "description": "Diagnostic terrain : faible faune visible, agrégats pauvres, racines superficielles. Objectif : éviter faux diagnostic (saison/hydrique), cibler drivers.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 41, "dimension_id": 10, "title": "Racines superficielles / enracinement bloqué", "description": "Diagnostic terrain : racines en surface, peu profondes, déviation. Objectif : compaction, anoxie, sécheresse, stœchio.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 42, "dimension_id": 10, "title": "Stabilité d’agrégats faible / désagrégation rapide", "description": "Diagnostic terrain : slaking, agrégats qui se défont. Objectif : EPS, MO, structure, hydrique.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"S1\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Symptôme — Structure", "dim_couleur": "#dc2626"}, {"id": 17, "dimension_id": 11, "title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic", "description": "Cadre : par défaut, beaucoup de raisonnements supposent des apports en surface (mulch/compost de surface). Si incorporation/enfouissement, le redox, la cinétique et les risques (anoxie, faim d'azote, pertes) changent radicalement. Toute analyse doit déclarer la profondeur d'application.\n\nDEUX VOIES DISTINCTES :\n• Surface (aérobie, Eh 300-500 mV) : humification lente, mimétisme forestier (litière → faune → incorporation biotique). Champignons lignivores, préservation de la macroporosité biologique. Recommandation par défaut.\n• Incorporation (mixtion minéral/organique) : humification rapide SI conditions aérobies maintenues. Le mélange intime à l'échelle du cm stabilise les agrégats par action du mycélium saprophyte (rayon d'action ~1-2 cm). Technique d'intrant massif (50-400 t MS/ha) documentée par le réseau MSV / Ver de Terre Production sur 10 ans.\n\nCONDITIONS DE SUCCÈS DE L'INCORPORATION :\n1. Décompaction préalable du sol\n2. Bon drainage (pas d'hydromorphie — sinon bascule anaérobie)\n3. Maintien de l'humidité (irrigation si nécessaire)\n4. Chaleur accélère la reprise biologique\n5. Mélange à l'échelle du centimètre\n6. Accepter 18-24 mois de faim d'azote → retour fertilité + vers de terre\n\nDIMENSION REDOX (Eh/pH) :\nL'incorporation change le contexte redox. Eh > 200 mV = aérobie → humification OK. Eh < 200 mV = anaérobie → fermentation → production H₂S, Fe²⁺/Mn²⁺ toxiques, émissions N₂O/CH₄.\nSignaux terrain anaérobie : odeurs de soufre, horizons bleutés/gris, racines noires.\nEn sol argileux/hydromorphe, l'enfouissement de MO fraîche peut basculer en anaérobie : drainage d'abord, incorporation ensuite.\n\nCAS DOCUMENTÉS :\n• Talus de Marseille : sol très dégradé → +7-9 pts MO en 12-18 mois (50+ cm BRF, broyeur à marteau, chaleur + irrigation).\n• Ferme de Cagnolle (B. Le Baube, Dordogne) : 1.4% → 9% MO en 10 ans par agrorecyclerie.\n• Réseau MSV : BRF mélangé au sol → agrégats stables à 120 jours dans l'eau. Sans mélange, le sol fond à travers la grille.", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P1\", \"P2\", \"P3\", \"F1\", \"S4\", \"V3\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→11. Raison : Mode d'application surface/incorporation relève de la Pratique, pas de l'Eau\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 18, "dimension_id": 11, "title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies", "description": "Cadre : comparer des apports par (matière × procédé × état × usage), pas par mots. Compost thermophile (aérobie chaud), compostage en pile statique, compost 'de surface', compost réductif, compost fermenté… n’ont pas les mêmes processus ni les mêmes effets (redox, pertes de masse, stimulation vs stabilisation).", "category": "symptome", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"P3\", \"V3\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→11. Raison : Amendements organiques = famille de Pratiques\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 46, "dimension_id": 11, "title": "Biostimulation indigène KNF/JADAM et thermodynamique redox", "description": "FAA N 1.41-2.04%. Bokashi 1:27 CO2. Capacité redox. Pourbaix. Eh/pH boussole.", "category": "mecanisme", "status": "active", "adapted": 1, "source": "analyse_fiches", "docs_codes": "[\"V3\",\"P3\",\"P5\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→11. Raison : Biostimulation KNF/JADAM = Pratique appliquée", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 47, "dimension_id": 11, "title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)", "description": "Card intégratrice des pratiques d'Agriculture de Conservation des Sols. Les 3 piliers agissent en synergie : le non-labour préserve la structure et les réseaux mycorhiziens, la couverture permanente protège la surface et alimente la pompe à carbone, la rotation diversifiée maintient la diversité microbienne et rompt les cycles de pathogènes.", "category": "pratique", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"P2\", \"S1\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 48, "dimension_id": 11, "title": "Diagnostic terrain intégré : du profil bêché au tableau de bord biologique", "description": "Card structurant la démarche diagnostique en 3 niveaux : (1) terrain — VESS, test bêche, infiltration, odeurs ; (2) biologique — PLFA, Solvita, Baermann, Bongers ; (3) avancé — métabarcoding, Eh, métagénomique. L'arbre de décision croise ces indicateurs pour positionner l'exploitation sur la chronoséquence.", "category": "pratique", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"P1\", \"S2\", \"V1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 49, "dimension_id": 11, "title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer", "description": "Card comparant les 5 systèmes de fermentation à la ferme. Point commun : reproduction des conditions anaérobies de la litière forestière. Différences : philosophie (KNF=indigène, EM=commercial), coût (JADAM≈0, EM=élevé), base thermodynamique commune (conservation 93% énergie). Risque ARG à surveiller.", "category": "pratique", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"V3\", \"P3\", \"P5\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 50, "dimension_id": 11, "title": "Couverts végétaux : design, biomasse et services rendus", "description": "Card pratique sur la conception des couverts multi-espèces : choix des espèces (légumineuses + graminées + crucifères), objectif LAI > 3, biomasse > 4 tMS/ha, C/N adapté. Services : fixation N₂, structuration, piège à nitrates, habitat auxiliaires. Destruction par roulage-crimpage ou gel.", "category": "pratique", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"P2\", \"S4\", \"V2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 51, "dimension_id": 11, "title": "Transition : chronoséquence 4 phases et indicateurs de suivi", "description": "Card structurant les 4 phases : Phase 1 Sevrage (0-3 ans, risque priming), Phase 2 Réorganisation (3-7 ans), Phase 3 Maturation (7-15 ans, suppressivité), Phase 4 Résilience (15+ ans, antifragilité). Indicateurs par phase : VESS, PLFA, ratio F/B, Bongers, COS.", "category": "pratique", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"P5\", \"F2\", \"P1\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 60, "dimension_id": 11, "title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège", "description": "Inversion de Card #38 : la faim d'azote post-apport C n'est pas seulement un symptôme à éviter mais un levier actif de sélection végétale.\n\nMÉCANISME — CHAÎNE À 3 ÉTAGES :\n1. Apport C haut C/N incorporé (BRF, broyat, paille longue — Card #17)\n2. Immobilisation microbienne de l'azote minéral (Card #38)\n3. Sélection différentielle au niveau plante :\n   → Adventices nitrophiles r-stratégistes (chénopode, amarante, morelle, mouron, digitaire, sétaire, renouée) : germination retardée, levée faible, croissance stoppée\n   → Plantes N-autonomes (légumineuses nodulées, Card #50) : indifférentes, croissance normale\n\nTRANSPOSITION r/K DU MICROBE À LA PLANTE :\nCard #26 et terme `succession écologique` montrent que l'N minéral favorise les copiotrophes microbiens. Par symétrie, l'N minéral favorise les adventices nitrophiles. Inversement, une faim d'azote sélectionne les oligotrophes ET les plantes N-autonomes.\n\nCONDITIONS DE VALIDITÉ :\n1. Adventice visée nitrophile r-stratégiste (inefficace sur vivaces rhizomateuses)\n2. Fenêtre d'immobilisation doit couvrir la période de levée critique\n3. Couvert légumineux effectivement nodulé (inoculation rhizobium si sol vierge)\n4. P et S doivent rester disponibles (Kirkby CNPS sur ces deux éléments)\n5. Effet transitoire 12-24 mois — cortège installé doit être auto-entretenu avant rebond\n\nPARENTÉ DOCTRINALE : cohérent avec `agriculture syntropic` (Götsch), Card #47 (couverture permanente), Card #50 (design couverts).", "category": "pratique", "status": "active", "adapted": 1, "source": "session_2026-04-11_sol_sableux", "docs_codes": "[\"P1\",\"P2\",\"P3\"]", "notes": "[2026-04-12] Créée session sol sableux. Vision JMJ : la faim d'azote est un outil, pas seulement un symptôme.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 62, "dimension_id": 11, "title": "Amendements minéraux structurants : levier minéral vs levier organique", "description": "Cadre : la régénération agit sur deux fractions distinctes du sol via deux familles de leviers complémentaires, ni substituables ni équivalentes.\n\nLEVIER ORGANIQUE — côté \"flux\" de l'équation Hénin-Dupuis :\n• Objet : alimenter la pompe à carbone, nourrir le microbiome, construire MAOM/POC\n• Cartes : #17 (mode application), #47 (ACS), #50 (couverts), terme `ration du sol`, terme `stœchiométrie de Kirkby`\n• Temporalité : annuelle → décennale. Réversible en quelques années si arrêt.\n\nLEVIER MINÉRAL — côté \"plafond\" et \"structure chimique\" :\n• Objet : modifier la fraction minérale elle-même (texture, pH, bases échangeables, plafond MAOM)\n• Pratiques : marnage, chaulage (CaCO₃/CaO/dolomie), gypse (CaSO₄), poudres de roche (basalte, phonolite), phosphate naturel, soufre élémentaire, bentonite, zéolite\n• Temporalité : semi-permanente (30-100 ans marnage, 5-15 ans chaulage). Rarement réversible.\n\nCOMPLÉMENTARITÉ :\n• Sableux : levier minéral indispensable pour sortir de la métastabilité (Card \"Chantier sableux\"). Sans lui, levier organique seul tient mais ration élevée à vie.\n• Limon/argile : levier organique domine, minéral rarement nécessaire (texture et CEC suffisantes)\n• Calcaire : levier minéral porte sur Mg/S/Zn/B/Fe (corrections blocages Card #14), PAS sur Ca déjà en excès\n\nDONNEES CHIFFREES (source Jenni fiche #25, 7 revisions) :\n• Basalte 6,7 t/ha → C organique +69 a 135%, agregats +15-25% (Richardson, 2024)\n• Enhanced weathering : sequestration 2-4 t CO2/ha + lutte acidification oceans via bicarbonates (Lehmann et al., 2023)\n• Chaulage brutal → priming effect (risque) vs basalte → stockage durable (Mollier, 2018)\n• CMA accelerent la dissolution des silicates par acides organiques (Wu et al., 2023) → le levier mineral est demultiplie par une biologie active\n• Le \"mineral seul\" sans biologie est une impasse (VII.4 fiche Jenni) — les deux leviers sont synergiques, pas substituables", "category": "cadre", "status": "active", "adapted": 1, "source": "session_2026-04-11_sol_sableux", "docs_codes": "[\"S1\",\"S4\",\"P1\",\"P2\"]", "notes": "[2026-04-12] Créée session sol sableux. Lacune identifiée : 13 termes manquants dans le corpus (marnage, gypse, dolomie, bentonite, basalte, phosphate naturel, S⁰, zéolite, calcaire actif, V%, amendement vs fertilisation).\n[2026-04-12] Enrichi fiche #25. Donnees chiffrees basalte, enhanced weathering, synergie CMA x silicates.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 63, "dimension_id": 11, "title": "Quand amender la fraction minérale d'un sol ? — arbre de décision", "description": "À consulter quand :\n• Tu prépares un chantier de reconstruction (Card \"Chantier sableux\")\n• Ton diagnostic MO/argile est en Zone 3-4 (Husson-Boivin)\n• Tu te demandes s'il faut travailler sur la MO, sur le minéral, ou les deux\n\nQUESTION 1 — TEXTURE (triangle GEPPA) :\n→ Sableux pur (S, SS) : levier minéral prioritaire (marnage) + levier organique\n→ Sablo-limoneux (SL, LS) : levier organique prioritaire, marnage si plafond bloquant\n→ Limoneux (L) : levier organique seul suffit, chaulage si pH < 6\n→ Argileux (A, AL, LAS) : levier organique, chaulage si pH < 5,5\n→ Calcaire (> 15% CaCO₃) : ne PAS chauler. Corrections Mg/S/Bo/Zn (Card #14)\n\nQUESTION 2 — pH :\n→ < 5,5 : chaulage Ca ou dolomie (si carence Mg documentée)\n→ 5,5 – 6,5 : option ouverte selon textures et objectifs\n→ 6,5 – 7,5 : pas d'amendement pH, gypse éventuel pour Ca/S\n→ > 7,5 : acidification locale (S⁰) si blocage P/micro documenté\n\nQUESTION 3 — RATION SOUTENABLE ? (test Hénin-Dupuis) :\n→ Calcul : stock_cible × k₂ / k₁ = ration annuelle requise\n→ Si ration > 10 t MS/ha/an → envisager marnage pour baisser k₂ effectif\n→ Si ration < 5 t MS/ha/an → régime ACS seul tenable\n\nQUESTION 4 — PROFONDEUR DU CHANTIER (Card #17) :\n→ Mulch de surface : ok si sol déjà structuré (phase 2+ chronoséquence)\n→ Incorporation 20-30 cm : ok si sol structurellement mort (phase 0), aération correcte, conditions #17 réunies\n\nRED FLAGS :\n• Hydromorphie : STOP, drainage d'abord (Card #15, Card #36)\n• Sur-chaulage : ne PAS dépasser pH 7,0 sur sol non calcaire\n• Marnage sur sol argileux : inutile et risque de compaction\n\nOUTILS DE DIAGNOSTIC AVANCES (fiche #25) :\n• Charge Dispersive Nette (CDN) : integre Na+Mg+K, plus precis que Ca/Mg seul pour predire la dispersion des argiles (Rengasamy et al., 2016)\n• CEC effective (au pH reel du sol) vs CEC potentielle (a pH 7) : la CEC effective est l'indicateur fiable en agriculture regeneratrice\n• Vigilance analytique post-amendement : les roches broyees non alterees peuvent fausser les analyses (dissolution des particules par les extractants de laboratoire)\n\nBASALTE DANS L'ARBRE :\n→ Sableux (S, SS) : basalte 6-10 t/ha en complement ou alternative au marnage — meilleure accessibilite, double benefice structure + sequestration C", "category": "pratique", "status": "active", "adapted": 1, "source": "session_2026-04-11_sol_sableux", "docs_codes": "[\"P1\",\"P2\"]", "notes": "[2026-04-12] Créée session sol sableux. Carte outil terrain — arbre de décision orienté praticien.\n[2026-04-12] Enrichi fiche #25. Ajout CDN, vigilance analytique, basalte dans arbre decision.", "dim_nom": "Pratique", "dim_couleur": "#059669"}, {"id": 27, "dimension_id": 12, "title": "Carbonates pédogéniques – cadre intégré", "description": "Cadre intégré thermodynamique, cinétique, biologique et hydrologique des carbonates pédogéniques.", "category": "cadre", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"S4\", \"S1\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→12. Raison : Carbonates pédogéniques = Cycle biogéochimique\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 45, "dimension_id": 12, "title": "Stœchiométrie CNPS et modèle AMG", "description": "Kirkby 100:8:2:1.5. AMG bi-compartimental validé 60 sites. Priming Effect. 4p1000.", "category": "cadre", "status": "active", "adapted": 1, "source": "analyse_fiches", "docs_codes": "[\"S4\",\"S1\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→12. Raison : Stœchiométrie CNPS/AMG = Cycle (du C)", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 52, "dimension_id": 12, "title": "Cycle de l'azote : fixation, minéralisation, nitrification, pertes", "description": "Card intégrant les transformations de N : fixation biologique (BNF, Rhizobium, nifH) → ammonification → nitrification (AOA, Nitrosomonas) → absorption ou pertes (dénitrification N₂O, lixiviation NO₃⁻, volatilisation NH₃). L'immobilisation microbienne (C/N > 25) est un tampon clé. Stœchiométrie CNPS de Kirkby couple N au stockage C.", "category": "cycle", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"S4\", \"S2\", \"P2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 53, "dimension_id": 12, "title": "Cycle du phosphore : fixation, solubilisation biologique, mycorhizes", "description": "Card structurant la dynamique du P : fixation sur oxydes Fe/Al ↔ solubilisation par PSB (phosphatases) et CMA (hyphes). La mycorhize est le principal vecteur de P. pH, Eh et MO contrôlent la biodisponibilité. Le priming effect peut libérer du P organique.\n\nPHOSPHATE NATUREL ET DISSOLUTION BIOLOGIQUE (fiche #25) :\n• Phosphorite, apatite, guano : sources P a liberation lente, solubilisation pH-dependante\n• CMA : principal vecteur de P, mais aussi acteurs de l'alteration des silicates par acides organiques (Wu et al., 2023)\n• En sol calcaire : blocage P par Ca → correction par S0 en localisation racinaire ou stimulation PSB via MO fraiche", "category": "cycle", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"S4\", \"S3\", \"V2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.\n[2026-04-12] Enrichi fiche #25. Phosphate naturel, CMA x dissolution silicates.", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 54, "dimension_id": 12, "title": "Cycle du carbone : de la photosynthèse à la MAOM", "description": "Card traçant le parcours du C : photosynthèse → exsudats racinaires (10-40%) → pompe microbienne → nécromasse → MAOM ou POC. Le CUE détermine l'efficience. Le priming effect peut déstabiliser le C stable. Modèles AMG et RothC. Chaîne C1 en est la traduction agronomique.\n\nPONTAGE CATIONIQUE ET MAOM (fiche #25, Basile-Doelsch et al. 2020) :\n• Le Ca2+ forme des ponts entre surfaces minerales et molecules organiques → micro-agregats protegeant le C de la mineralisation\n• Poussiere de roche basaltique : MAOM +22% (Buss et al., 2023)\n• Le calcium extractible est l'un des meilleurs predicteurs du stock de C stable dans le sol\n• Neo-formation d'argiles en presence de MO en decomposition → augmente les sites d'adsorption pour le C", "category": "cycle", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"S4\", \"S1\", \"S2\", \"V2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.\n[2026-04-12] Enrichi fiche #25. Pontage cationique Ca-MAOM, neo-formation argiles.", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 55, "dimension_id": 12, "title": "Cycle de l'eau : potentiel hydrique, flux, résilience biologique", "description": "Card intégrant la physique de l'eau dans le sol vivant : potentiel hydrique, Darcy, courbe de rétention → macroporosité biologique → films d'eau habitat microbien → hydraulic lift → résilience hydrique émergente. La biologie construit l'architecture hydraulique. Chaîne C8.", "category": "cycle", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"S0\", \"S1\", \"P4\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Cycle", "dim_couleur": "#2563EB"}, {"id": 21, "dimension_id": 13, "title": "Lombriciens : catégories écologiques, drilosphère, turricules, biopores et interactions racines", "description": "Cadre : structurer l’analyse des vers de terre par catégories (épigés/endogés/anéciques) et par fonctions. Relier digestion (mucus/microbiote), ingénierie (drilosphère, bioturbation, turricules, biopores) et interactions avec racines (chemins préférentiels, aération locale). Évite l’abus 'lombricompostage' : le vermicompostage concerne surtout des vers épigés.", "category": "faune", "status": "active", "adapted": 1, "source": "legacy_v1_to_review", "docs_codes": "[\"V1\", \"S0\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→13. Raison : Lombriciens = agent biologique transversal, Continuum (faute de dim Faune)\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 43, "dimension_id": 13, "title": "CEP : double identité entomopathogène/endophyte et CBC", "description": "Transfert N insecte→plante. CBC vs inondation spores. Indicateur santé sols.", "category": "mecanisme", "status": "active", "adapted": 1, "source": "analyse_fiches", "docs_codes": "[\"S3\",\"V2\",\"P3\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→13. Raison : CEP entomopathogène/endophyte = Continuum sol-plante-insecte", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 56, "dimension_id": 13, "title": "Continuum sol-plante-humain : le fil rouge du corpus", "description": "Card transversale 5 strates : sol vivant (S) → microbiome colonise la plante (V) via rhizophagie et endophytisme → pratiques régénératrices (P) maximisent les transferts → métabolites transitent du sol à l'assiette → microbiome intestinal (H). L'axe SPG est le mécanisme central. Chaînes C1, C4 et C6.", "category": "continuum", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"V2\", \"H1\", \"H2\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 57, "dimension_id": 13, "title": "Résistome et transfert horizontal : la face sombre du continuum", "description": "Card d'alerte : les ARG circulent par transfert horizontal entre bactéries du sol, endophytes et microbiome intestinal. Les biostimulants fermentés peuvent être vecteurs. La diversité microbienne est la première barrière. Chaîne C2 en est la traduction négative.", "category": "continuum", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"H3\", \"H2\", \"S2\", \"V3\"]", "notes": "\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 58, "dimension_id": 13, "title": "Nématodes : guildes trophiques, indice de Bongers et diagnostic", "description": "Card diagnostique : 5 guildes trophiques (bactérivores, fongivores, omnivores, prédateurs, phytoparasites). L'indice de Bongers (ratio persistants/colonisateurs) est un proxy de la maturité écologique. Extraction par entonnoir de Baermann. Régulation top-down du microbiome.", "category": "faune", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"V1\", \"P1\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→13. Raison : Nématodes trophiques = Continuum biologique\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 59, "dimension_id": 13, "title": "Mésofaune : collemboles et acariens, régulateurs des micro-habitats", "description": "Card sur le rôle de la mésofaune dans la régulation des communautés fongiques et bactériennes. Les collemboles fragmentent la litière et contrôlent les populations fongiques. Les acariens oribates participent à l'humification. Leur diversité corrèle avec la stabilité des agrégats.", "category": "faune", "status": "active", "adapted": 1, "source": "base_obsolete_v1", "docs_codes": "[\"V1\", \"S1\", \"S2\"]", "notes": "\n[2026-04-12] Migration v2 : dim 1→13. Raison : Mésofaune = Continuum biologique\n[2026-04-12] Migration v2 massive : status archive→active, adapted=1. Source originale session_2026-04-11_sol_sableux.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}, {"id": 61, "dimension_id": 13, "title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "description": "Trajectoire articulant les leviers disponibles pour la régénération d'un sol sableux en phase 0 (MO/argile < 12%, Zone 4 Husson-Boivin).\n\nÉTAPE 0 — DIAGNOSTIC DE DÉCLENCHEMENT :\n• Ratio MO/argile < 12% (Zone 4) → régime chantier, pas régime ACS\n• VESS ≤ 2, absence macroporosité biologique, faible densité lombricienne\n\nÉTAPE 1 — RELEVER LE PLAFOND (marnage) :\n• Apport minéral argileux/calcaire (50-300 t/ha historiquement)\n• Effet : bascule S → SL du triangle → plafond MAOM ×2 à ×3\n• Voir Card \"Amendements minéraux structurants\"\n\nÉTAPE 2 — REMPLIR LE PLAFOND (incorporation massive) :\n• 50-400 t MS/ha, mélange intime sur 20-30 cm (Card #17, 6 conditions de succès)\n• BRF k1≈0.5 vs compost k1≈0.1 — choix selon objectif vitesse/stabilité\n\nÉTAPE 3 — ÉQUILIBRER LA STŒCHIOMÉTRIE (Kirkby) :\n• P + S minéraux au ratio 100:2:1,5 (Card #45, fiche 4)\n• N NON apporté en minéral → substitué par légumineuses nodulées (étape 4)\n\nÉTAPE 4 — CORTÈGE N-AUTONOME + FAIM D'AZOTE COMME OUTIL :\n• Mix légumineuse × non-légumineuse, inoculation rhizobium\n• Fenêtre 12-24 mois d'immobilisation N → déprise adventices nitrophiles\n• Card #50 pour design mix, Card \"Faim d'azote outil\" pour le mécanisme\n\nÉTAPE 5 — ENTRETIEN DIMENSIONNÉ AU k₂ TEXTURAL :\n• Ration minimale = stock × k₂ / k₁ (terme `ration du sol`)\n• Sans marnage : ~11 t MS/ha/an BRF pour 3% MO → non soutenable\n• Avec marnage : 4-5 t/ha/an → compatible couverts + résidus\n\nÉTAPE 6 — BASCULE VERS RÉGIME ACS :\n• Déclencheur : MO/argile > 17% (Zone 2 Husson-Boivin)\n• La règle ACS \"ne pas travailler le sol\" s'active : préserver biopores, mycorhizes, agrégats\n• Card #47, Card #51\n\nCAS DOCUMENTÉS : Cagnolle (Dordogne) 1,4%→9% MO/10 ans ; Talus Marseille +7-9 pts/12-18 mois.\n\nPIÈGES :\n• Omission marnage → chantier réussi mais non soutenable (perfusion)\n• Omission inoculation → faim d'azote subie 18-24 mois\n• Application prématurée règle ACS à un sol sans structure\n\nOPTION BASALTE EN ETAPE 1 (fiche #25, Richardson 2024, Kelland 2020) :\nLe basalte broye (6-10 t/ha) constitue une alternative au marnage traditionnel pour l'etape 1 (relever le plafond) :\n• Plus accessible (pas besoin de gisement local de marne)\n• Double benefice : structure + sequestration CO2 (emission negative)\n• Synergie avec la biologie active (CMA accelerent la dissolution, Wu et al. 2023)\n• Limite : ne modifie pas la texture aussi radicalement que le marnage (pas d'ajout d'argile)\n• Combinaison possible : basalte + bentonite pour les deux effets", "category": "pratique", "status": "active", "adapted": 1, "source": "session_2026-04-11_sol_sableux", "docs_codes": "[\"P1\",\"P2\",\"S1\",\"S4\"]", "notes": "[2026-04-12] Créée session sol sableux. Doctrine intégrée JMJ testée sur filtre concept_cards (11/12 affirmations supportées, 1 lacune = marnage).\n[2026-04-12] Enrichi fiche #25. Basalte comme alternative etape 1, combinaison basalte+bentonite.", "dim_nom": "Continuum", "dim_couleur": "#0891b2"}], "links": [{"from_id": 1, "to_id": 8, "link_type": "related_to", "notes": "Energie fossile et socio-economique sont lies", "from_title": "Coût réel de l’énergie fossile et 'esclaves énergétiques'", "to_title": "Socio-économique : travail, filières, risques et dépendances"}, {"from_id": 1, "to_id": 51, "link_type": "related_to", "notes": "Cout reel de la transition (chronosequence)", "from_title": "Coût réel de l’énergie fossile et 'esclaves énergétiques'", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 2, "to_id": 51, "link_type": "related_to", "notes": "Temporalite et chronosequence de transition", "from_title": "Temporalité, irréversibilités et entropie des pratiques humaines", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 2, "to_id": 4, "link_type": "related_to", "notes": "Echelles de temps et histoire des sols", "from_title": "Temporalité, irréversibilités et entropie des pratiques humaines", "to_title": "Histoire des sols : désastres et réussites (Croissant fertile, Nil, Terra Preta, Milpa)"}, {"from_id": 3, "to_id": 11, "link_type": "completes", "notes": "Card cadre textures complete par profil sableux", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique"}, {"from_id": 3, "to_id": 12, "link_type": "completes", "notes": "Card cadre textures complete par profil argileux", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau"}, {"from_id": 3, "to_id": 13, "link_type": "completes", "notes": "Card cadre textures complete par profil limoneux", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface"}, {"from_id": 3, "to_id": 14, "link_type": "completes", "notes": "Card cadre textures complete par profil calcaire", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo"}, {"from_id": 3, "to_id": 15, "link_type": "completes", "notes": "Card cadre textures complete par profil hydromorphe", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale"}, {"from_id": 3, "to_id": 16, "link_type": "completes", "notes": "Card cadre textures complete par profil franc", "from_title": "Types de sols et comportements différenciés", "to_title": "Profil sol 'franc' (loam) : effets intermédiaires, sensibilité au travail du sol"}, {"from_id": 4, "to_id": 61, "link_type": "related_to", "notes": "Terra Preta et reconstruction sols (chantier sableux)", "from_title": "Histoire des sols : désastres et réussites (Croissant fertile, Nil, Terra Preta, Milpa)", "to_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée"}, {"from_id": 4, "to_id": 22, "link_type": "related_to", "notes": "Histoire des sols et evolution du vivant", "from_title": "Histoire des sols : désastres et réussites (Croissant fertile, Nil, Terra Preta, Milpa)", "to_title": "Évolution du vivant : monde anaérobie → photosynthèse → oxygénation → respiration (cadre redox)"}, {"from_id": 5, "to_id": 17, "link_type": "related_to", "notes": "Redox central et mode application sont couplés", "from_title": "Redox central : gradients, microzones et 'redox ladder'", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 6, "to_id": 55, "link_type": "related_to", "notes": "Eau facteur limitant et cycle de l eau", "from_title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz", "to_title": "Cycle de l'eau : potentiel hydrique, flux, résilience biologique"}, {"from_id": 6, "to_id": 17, "link_type": "related_to", "notes": "Mode application depend de l eau (infiltration, drainage)", "from_title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 8, "to_id": 47, "link_type": "related_to", "notes": "Contraintes socio-eco conditionnent adoption ACS", "from_title": "Socio-économique : travail, filières, risques et dépendances", "to_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)"}, {"from_id": 8, "to_id": 51, "link_type": "related_to", "notes": "Risques economiques pendant la transition", "from_title": "Socio-économique : travail, filières, risques et dépendances", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 11, "to_id": 17, "link_type": "related_to", "notes": "Sableux compatible avec incorporation massive (Card #17)", "from_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 11, "to_id": 50, "link_type": "related_to", "notes": "Couverts légumineuses pour esquive faim azote", "from_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 11, "to_id": 61, "link_type": "related_to", "notes": "Chantier reconstruction sableux (doctrine intégrée)", "from_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique", "to_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée"}, {"from_id": 11, "to_id": 62, "link_type": "related_to", "notes": "Levier minéral (marnage) pour sortir métastabilité", "from_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique", "to_title": "Amendements minéraux structurants : levier minéral vs levier organique"}, {"from_id": 12, "to_id": 5, "link_type": "related_to", "notes": "Argileux et risques redox", "from_title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau", "to_title": "Redox central : gradients, microzones et 'redox ladder'"}, {"from_id": 12, "to_id": 62, "link_type": "related_to", "notes": "Levier mineral sur sol argileux (chaulage)", "from_title": "Profil sol argileux : potentiel élevé mais risques redox si enfouissement et excès d'eau", "to_title": "Amendements minéraux structurants : levier minéral vs levier organique"}, {"from_id": 13, "to_id": 35, "link_type": "related_to", "notes": "Limoneux et battance", "from_title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface", "to_title": "Battance / croûte / ruissellement (surface)"}, {"from_id": 13, "to_id": 50, "link_type": "related_to", "notes": "Limoneux necessite couverture permanente", "from_title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 16, "to_id": 47, "link_type": "related_to", "notes": "Loam repond bien aux pratiques ACS", "from_title": "Profil sol 'franc' (loam) : effets intermédiaires, sensibilité au travail du sol", "to_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)"}, {"from_id": 17, "to_id": 47, "link_type": "completes", "notes": "#17 précise le mode application que #47 ACS laisse implicite", "from_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic", "to_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)"}, {"from_id": 17, "to_id": 51, "link_type": "related_to", "notes": "Mode application change selon phase chronoséquence", "from_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 18, "to_id": 17, "link_type": "related_to", "notes": "Amendements organiques et mode application", "from_title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 18, "to_id": 49, "link_type": "related_to", "notes": "Amendements organiques et fermentations", "from_title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies", "to_title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer"}, {"from_id": 18, "to_id": 62, "link_type": "completes", "notes": "Amendements organiques completent levier mineral", "from_title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies", "to_title": "Amendements minéraux structurants : levier minéral vs levier organique"}, {"from_id": 19, "to_id": 26, "link_type": "related_to", "notes": "Y-A-S et evolution ecologique sol nu vers climax", "from_title": "Stratégies microbiennes : r/K et Y-A-S (rendement, acquisition, stress) le long de la succession", "to_title": "Évolution écologique du sol : sol nu → climax, stratégies microbiennes r/K et Y‑A‑S (cadre diagnostique)"}, {"from_id": 19, "to_id": 29, "link_type": "related_to", "notes": "Strategies microbiennes et transition MO-argile", "from_title": "Stratégies microbiennes : r/K et Y-A-S (rendement, acquisition, stress) le long de la succession", "to_title": "MO–argile → transition stœchiométrique → stratégies microbiennes"}, {"from_id": 19, "to_id": 60, "link_type": "related_to", "notes": "r/K et selection vegetale par faim azote", "from_title": "Stratégies microbiennes : r/K et Y-A-S (rendement, acquisition, stress) le long de la succession", "to_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège"}, {"from_id": 21, "to_id": 33, "link_type": "related_to", "notes": "Lombriciens et biopores (anti-compaction)", "from_title": "Lombriciens : catégories écologiques, drilosphère, turricules, biopores et interactions racines", "to_title": "Compaction / semelle / faible porosité"}, {"from_id": 21, "to_id": 58, "link_type": "related_to", "notes": "Lombriciens et nematodes (faune du sol)", "from_title": "Lombriciens : catégories écologiques, drilosphère, turricules, biopores et interactions racines", "to_title": "Nématodes : guildes trophiques, indice de Bongers et diagnostic"}, {"from_id": 21, "to_id": 59, "link_type": "related_to", "notes": "Lombriciens et mesofaune", "from_title": "Lombriciens : catégories écologiques, drilosphère, turricules, biopores et interactions racines", "to_title": "Mésofaune : collemboles et acariens, régulateurs des micro-habitats"}, {"from_id": 22, "to_id": 5, "link_type": "related_to", "notes": "Evolution redox et redox central", "from_title": "Évolution du vivant : monde anaérobie → photosynthèse → oxygénation → respiration (cadre redox)", "to_title": "Redox central : gradients, microzones et 'redox ladder'"}, {"from_id": 22, "to_id": 2, "link_type": "related_to", "notes": "Temporalite evolutive", "from_title": "Évolution du vivant : monde anaérobie → photosynthèse → oxygénation → respiration (cadre redox)", "to_title": "Temporalité, irréversibilités et entropie des pratiques humaines"}, {"from_id": 23, "to_id": 50, "link_type": "related_to", "notes": "Couverts vegetaux et construction du sol par les racines", "from_title": "Évolution des plantes et construction du sol : racines, mycorhizes, rhizosphère, boucles plante–microbiome", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 23, "to_id": 21, "link_type": "related_to", "notes": "Plantes et lombriciens co-construisent le sol", "from_title": "Évolution des plantes et construction du sol : racines, mycorhizes, rhizosphère, boucles plante–microbiome", "to_title": "Lombriciens : catégories écologiques, drilosphère, turricules, biopores et interactions racines"}, {"from_id": 27, "to_id": 14, "link_type": "related_to", "notes": "Carbonates pedogeniques et sol calcaire", "from_title": "Carbonates pédogéniques – cadre intégré", "to_title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo"}, {"from_id": 27, "to_id": 54, "link_type": "related_to", "notes": "Carbonates et cycle du carbone", "from_title": "Carbonates pédogéniques – cadre intégré", "to_title": "Cycle du carbone : de la photosynthèse à la MAOM"}, {"from_id": 29, "to_id": 11, "link_type": "related_to", "notes": "MO-argile trajectoire → profil sableux cas spécifique", "from_title": "MO–argile → transition stœchiométrique → stratégies microbiennes", "to_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique"}, {"from_id": 30, "to_id": 5, "link_type": "related_to", "notes": "Hydrique-redox et redox central", "from_title": "Hydrique & redox → stress / microzones → stratégies", "to_title": "Redox central : gradients, microzones et 'redox ladder'"}, {"from_id": 30, "to_id": 6, "link_type": "related_to", "notes": "Stress hydrique et eau facteur limitant", "from_title": "Hydrique & redox → stress / microzones → stratégies", "to_title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz"}, {"from_id": 31, "to_id": 38, "link_type": "related_to", "notes": "Azote et faim azote", "from_title": "Azote (formes, pertes) → stœchiométrie → stratégies microbiennes", "to_title": "‘Faim d’azote’ après apport carboné (immobilisation)"}, {"from_id": 31, "to_id": 52, "link_type": "related_to", "notes": "Azote et cycle de l azote", "from_title": "Azote (formes, pertes) → stœchiométrie → stratégies microbiennes", "to_title": "Cycle de l'azote : fixation, minéralisation, nitrification, pertes"}, {"from_id": 31, "to_id": 60, "link_type": "related_to", "notes": "Formes azote et faim azote comme outil", "from_title": "Azote (formes, pertes) → stœchiométrie → stratégies microbiennes", "to_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège"}, {"from_id": 32, "to_id": 42, "link_type": "related_to", "notes": "Structure EPS et stabilite agregats", "from_title": "Structure du sol (agrégats/EPS) → habitats → stabilité/résilience", "to_title": "Stabilité d’agrégats faible / désagrégation rapide"}, {"from_id": 32, "to_id": 33, "link_type": "related_to", "notes": "Structure et compaction", "from_title": "Structure du sol (agrégats/EPS) → habitats → stabilité/résilience", "to_title": "Compaction / semelle / faible porosité"}, {"from_id": 34, "to_id": 5, "link_type": "related_to", "notes": "Asphyxie et redox central", "from_title": "Asphyxie / anaérobie locale (odeurs, horizons réduits)", "to_title": "Redox central : gradients, microzones et 'redox ladder'"}, {"from_id": 34, "to_id": 15, "link_type": "related_to", "notes": "Asphyxie et sol hydromorphe", "from_title": "Asphyxie / anaérobie locale (odeurs, horizons réduits)", "to_title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale"}, {"from_id": 35, "to_id": 13, "link_type": "related_to", "notes": "Battance et sol limoneux", "from_title": "Battance / croûte / ruissellement (surface)", "to_title": "Profil sol limoneux : battance/érosion, priorité couverture et biofilms de surface"}, {"from_id": 37, "to_id": 6, "link_type": "related_to", "notes": "Hydrophobie et dynamique eau", "from_title": "Hydrophobie / infiltration hétérogène (spots secs)", "to_title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz"}, {"from_id": 39, "to_id": 17, "link_type": "related_to", "notes": "Exces C fermentescible et mode application", "from_title": "Excès de C très fermentescible (odeurs, chauffe, instabilités)", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 39, "to_id": 18, "link_type": "related_to", "notes": "Exces C et type amendement organique", "from_title": "Excès de C très fermentescible (odeurs, chauffe, instabilités)", "to_title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies"}, {"from_id": 40, "to_id": 48, "link_type": "related_to", "notes": "Sol inerte necessite diagnostic integre", "from_title": "Sol ‘inerte’ / faible activité apparente", "to_title": "Diagnostic terrain intégré : du profil bêché au tableau de bord biologique"}, {"from_id": 40, "to_id": 51, "link_type": "related_to", "notes": "Sol inerte = debut chronosequence phase 1", "from_title": "Sol ‘inerte’ / faible activité apparente", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 41, "to_id": 33, "link_type": "related_to", "notes": "Racines superficielles souvent liees a compaction", "from_title": "Racines superficielles / enracinement bloqué", "to_title": "Compaction / semelle / faible porosité"}, {"from_id": 42, "to_id": 32, "link_type": "related_to", "notes": "Desagregation et structure EPS", "from_title": "Stabilité d’agrégats faible / désagrégation rapide", "to_title": "Structure du sol (agrégats/EPS) → habitats → stabilité/résilience"}, {"from_id": 43, "to_id": 44, "link_type": "related_to", "notes": "CEP et thermotolerance", "from_title": "CEP : double identité entomopathogène/endophyte et CBC", "to_title": "Thermotolérance microbienne : 7 mécanismes"}, {"from_id": 43, "to_id": 56, "link_type": "related_to", "notes": "CEP et continuum sol-plante", "from_title": "CEP : double identité entomopathogène/endophyte et CBC", "to_title": "Continuum sol-plante-humain : le fil rouge du corpus"}, {"from_id": 44, "to_id": 43, "link_type": "related_to", "notes": "Thermotolerance et CEP (stress thermique)", "from_title": "Thermotolérance microbienne : 7 mécanismes", "to_title": "CEP : double identité entomopathogène/endophyte et CBC"}, {"from_id": 44, "to_id": 50, "link_type": "related_to", "notes": "Couverts et regulation thermique", "from_title": "Thermotolérance microbienne : 7 mécanismes", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 46, "to_id": 49, "link_type": "related_to", "notes": "KNF/JADAM et fermentations appliquees", "from_title": "Biostimulation indigène KNF/JADAM et thermodynamique redox", "to_title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer"}, {"from_id": 46, "to_id": 43, "link_type": "related_to", "notes": "Biostimulation et CEP (endophytes)", "from_title": "Biostimulation indigène KNF/JADAM et thermodynamique redox", "to_title": "CEP : double identité entomopathogène/endophyte et CBC"}, {"from_id": 47, "to_id": 50, "link_type": "completes", "notes": "Couverts (#50) = pilier couverture permanente de ACS (#47)", "from_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 47, "to_id": 51, "link_type": "completes", "notes": "Chronoséquence (#51) = trajectoire de transition ACS (#47)", "from_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 48, "to_id": 33, "link_type": "related_to", "notes": "Diagnostic intégré utilise compaction comme entrée", "from_title": "Diagnostic terrain intégré : du profil bêché au tableau de bord biologique", "to_title": "Compaction / semelle / faible porosité"}, {"from_id": 48, "to_id": 38, "link_type": "related_to", "notes": "Diagnostic intégré utilise faim azote comme entrée", "from_title": "Diagnostic terrain intégré : du profil bêché au tableau de bord biologique", "to_title": "‘Faim d’azote’ après apport carboné (immobilisation)"}, {"from_id": 49, "to_id": 18, "link_type": "related_to", "notes": "Fermentations et amendements organiques", "from_title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer", "to_title": "Amendements organiques : compostage aérobie thermophile vs fermentations vs autres voies"}, {"from_id": 49, "to_id": 46, "link_type": "related_to", "notes": "Fermentations et biostimulation KNF/JADAM", "from_title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer", "to_title": "Biostimulation indigène KNF/JADAM et thermodynamique redox"}, {"from_id": 52, "to_id": 45, "link_type": "related_to", "notes": "Cycle N et stœchiométrie CNPS sont couplés", "from_title": "Cycle de l'azote : fixation, minéralisation, nitrification, pertes", "to_title": "Stœchiométrie CNPS et modèle AMG"}, {"from_id": 53, "to_id": 54, "link_type": "related_to", "notes": "Cycle P et cycle C couples", "from_title": "Cycle du phosphore : fixation, solubilisation biologique, mycorhizes", "to_title": "Cycle du carbone : de la photosynthèse à la MAOM"}, {"from_id": 54, "to_id": 45, "link_type": "related_to", "notes": "Cycle C et modèle AMG sont couplés", "from_title": "Cycle du carbone : de la photosynthèse à la MAOM", "to_title": "Stœchiométrie CNPS et modèle AMG"}, {"from_id": 55, "to_id": 6, "link_type": "related_to", "notes": "Cycle eau et eau facteur limitant", "from_title": "Cycle de l'eau : potentiel hydrique, flux, résilience biologique", "to_title": "Eau facteur limitant : potentiel, continuité hydraulique, diffusion des gaz"}, {"from_id": 55, "to_id": 30, "link_type": "related_to", "notes": "Cycle eau et stress hydrique", "from_title": "Cycle de l'eau : potentiel hydrique, flux, résilience biologique", "to_title": "Hydrique & redox → stress / microzones → stratégies"}, {"from_id": 56, "to_id": 57, "link_type": "related_to", "notes": "Continuum positif et face sombre (resistome)", "from_title": "Continuum sol-plante-humain : le fil rouge du corpus", "to_title": "Résistome et transfert horizontal : la face sombre du continuum"}, {"from_id": 56, "to_id": 23, "link_type": "related_to", "notes": "Continuum et evolution plantes", "from_title": "Continuum sol-plante-humain : le fil rouge du corpus", "to_title": "Évolution des plantes et construction du sol : racines, mycorhizes, rhizosphère, boucles plante–microbiome"}, {"from_id": 57, "to_id": 49, "link_type": "related_to", "notes": "Resistome et fermentations (vecteurs potentiels)", "from_title": "Résistome et transfert horizontal : la face sombre du continuum", "to_title": "Fermentations appliquées : bokashi, EM, KNF, JADAM, LiFoFer"}, {"from_id": 58, "to_id": 48, "link_type": "related_to", "notes": "Nematodes et diagnostic terrain (Bongers, Baermann)", "from_title": "Nématodes : guildes trophiques, indice de Bongers et diagnostic", "to_title": "Diagnostic terrain intégré : du profil bêché au tableau de bord biologique"}, {"from_id": 58, "to_id": 59, "link_type": "related_to", "notes": "Nematodes et mesofaune", "from_title": "Nématodes : guildes trophiques, indice de Bongers et diagnostic", "to_title": "Mésofaune : collemboles et acariens, régulateurs des micro-habitats"}, {"from_id": 59, "to_id": 32, "link_type": "related_to", "notes": "Mesofaune et structure-agregats", "from_title": "Mésofaune : collemboles et acariens, régulateurs des micro-habitats", "to_title": "Structure du sol (agrégats/EPS) → habitats → stabilité/résilience"}, {"from_id": 60, "to_id": 38, "link_type": "derives_from", "notes": "L'outil (#60) est l'inversion du symptôme (#38)", "from_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège", "to_title": "‘Faim d’azote’ après apport carboné (immobilisation)"}, {"from_id": 60, "to_id": 50, "link_type": "related_to", "notes": "Design couverts légumineuses pour exploiter la fenêtre", "from_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 60, "to_id": 26, "link_type": "derives_from", "notes": "Transposition du cadre r/K microbien au niveau plante", "from_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège", "to_title": "Évolution écologique du sol : sol nu → climax, stratégies microbiennes r/K et Y‑A‑S (cadre diagnostique)"}, {"from_id": 61, "to_id": 11, "link_type": "completes", "notes": "Chantier = trajectoire pratique pour le profil sableux", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique"}, {"from_id": 61, "to_id": 17, "link_type": "prerequisite", "notes": "Mode application: condition #17 requise pour incorporation", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Mode d’application : surface vs incorporation (profondeur) change le diagnostic"}, {"from_id": 61, "to_id": 45, "link_type": "prerequisite", "notes": "Stœchiométrie Kirkby CNPS nécessaire en étape 3", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Stœchiométrie CNPS et modèle AMG"}, {"from_id": 61, "to_id": 47, "link_type": "related_to", "notes": "Bascule vers ACS en étape 6", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "ACS : les 3 piliers (non-labour, couverture permanente, rotation diversifiée)"}, {"from_id": 61, "to_id": 50, "link_type": "related_to", "notes": "Design couverts en étape 4", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Couverts végétaux : design, biomasse et services rendus"}, {"from_id": 61, "to_id": 51, "link_type": "related_to", "notes": "Chronoséquence 4 phases = cadre temporel", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Transition : chronoséquence 4 phases et indicateurs de suivi"}, {"from_id": 61, "to_id": 60, "link_type": "completes", "notes": "Faim azote outil intégrée en étape 4", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège"}, {"from_id": 61, "to_id": 62, "link_type": "prerequisite", "notes": "Levier minéral (marnage) en étape 1", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Amendements minéraux structurants : levier minéral vs levier organique"}, {"from_id": 61, "to_id": 63, "link_type": "related_to", "notes": "Arbre de décision amendement pour choix étape 1", "from_title": "Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée", "to_title": "Quand amender la fraction minérale d'un sol ? — arbre de décision"}, {"from_id": 62, "to_id": 11, "link_type": "related_to", "notes": "Sableux = cas critique du levier minéral", "from_title": "Amendements minéraux structurants : levier minéral vs levier organique", "to_title": "Profil sol sableux : plafond MAOM bas, marge structurale maximale, métastabilité biologique"}, {"from_id": 62, "to_id": 14, "link_type": "related_to", "notes": "Calcaire = cas où levier minéral porte sur Mg/S/Zn, pas Ca", "from_title": "Amendements minéraux structurants : levier minéral vs levier organique", "to_title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo"}, {"from_id": 62, "to_id": 63, "link_type": "completes", "notes": "L'arbre de décision (#63) opérationnalise le cadre (#62)", "from_title": "Amendements minéraux structurants : levier minéral vs levier organique", "to_title": "Quand amender la fraction minérale d'un sol ? — arbre de décision"}, {"from_id": 63, "to_id": 14, "link_type": "related_to", "notes": "Calcaire : ne pas chauler (red flag)", "from_title": "Quand amender la fraction minérale d'un sol ? — arbre de décision", "to_title": "Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo"}, {"from_id": 63, "to_id": 15, "link_type": "related_to", "notes": "Hydromorphie : stop, drainage d abord", "from_title": "Quand amender la fraction minérale d'un sol ? — arbre de décision", "to_title": "Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale"}, {"from_id": 63, "to_id": 36, "link_type": "related_to", "notes": "Engorgement = red flag avant amendement", "from_title": "Quand amender la fraction minérale d'un sol ? — arbre de décision", "to_title": "Infiltration lente / engorgement (profil)"}], "tests": [{"card_id": 33, "test_id": 1, "relevance": 1.0, "usage": "recommended", "code": "t01_test_beche", "test_title": "Test bêche"}, {"card_id": 33, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 33, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 33, "test_id": 8, "relevance": 1.0, "usage": "recommended", "code": "t08_test_racinaire", "test_title": "Test racinaire"}, {"card_id": 34, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 34, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 34, "test_id": 5, "relevance": 1.0, "usage": "recommended", "code": "t05_test_de_stabilite_des_agregats", "test_title": "Test de stabilité des agrégats"}, {"card_id": 34, "test_id": 9, "relevance": 1.0, "usage": "recommended", "code": "t09_test_olfactif_du_sol", "test_title": "Test olfactif du sol"}, {"card_id": 35, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 35, "test_id": 5, "relevance": 1.0, "usage": "recommended", "code": "t05_test_de_stabilite_des_agregats", "test_title": "Test de stabilité des agrégats"}, {"card_id": 35, "test_id": 13, "relevance": 1.0, "usage": "recommended", "code": "t13_test_de_croute_de_surface", "test_title": "Test de croûte de surface"}, {"card_id": 35, "test_id": 16, "relevance": 1.0, "usage": "recommended", "code": "t16_test_de_decomposition_des_residus", "test_title": "Test de décomposition des résidus"}, {"card_id": 35, "test_id": 17, "relevance": 1.0, "usage": "recommended", "code": "t17_test_de_couverture_du_sol", "test_title": "Test de couverture du sol"}, {"card_id": 36, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 36, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 36, "test_id": 13, "relevance": 1.0, "usage": "recommended", "code": "t13_test_de_croute_de_surface", "test_title": "Test de croûte de surface"}, {"card_id": 37, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 37, "test_id": 16, "relevance": 1.0, "usage": "recommended", "code": "t16_test_de_decomposition_des_residus", "test_title": "Test de décomposition des résidus"}, {"card_id": 38, "test_id": 16, "relevance": 1.0, "usage": "recommended", "code": "t16_test_de_decomposition_des_residus", "test_title": "Test de décomposition des résidus"}, {"card_id": 39, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 39, "test_id": 9, "relevance": 1.0, "usage": "recommended", "code": "t09_test_olfactif_du_sol", "test_title": "Test olfactif du sol"}, {"card_id": 40, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 40, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 40, "test_id": 5, "relevance": 1.0, "usage": "recommended", "code": "t05_test_de_stabilite_des_agregats", "test_title": "Test de stabilité des agrégats"}, {"card_id": 40, "test_id": 8, "relevance": 1.0, "usage": "recommended", "code": "t08_test_racinaire", "test_title": "Test racinaire"}, {"card_id": 40, "test_id": 14, "relevance": 1.0, "usage": "recommended", "code": "t14_test_dhumidite_au_toucher", "test_title": "Test d’humidité au toucher"}, {"card_id": 40, "test_id": 17, "relevance": 1.0, "usage": "recommended", "code": "t17_test_de_couverture_du_sol", "test_title": "Test de couverture du sol"}, {"card_id": 41, "test_id": 2, "relevance": 1.0, "usage": "recommended", "code": "t02_profil_cultural", "test_title": "Profil cultural"}, {"card_id": 41, "test_id": 8, "relevance": 1.0, "usage": "recommended", "code": "t08_test_racinaire", "test_title": "Test racinaire"}, {"card_id": 41, "test_id": 14, "relevance": 1.0, "usage": "recommended", "code": "t14_test_dhumidite_au_toucher", "test_title": "Test d’humidité au toucher"}, {"card_id": 42, "test_id": 4, "relevance": 1.0, "usage": "recommended", "code": "t04_test_dinfiltration", "test_title": "Test d’infiltration"}, {"card_id": 42, "test_id": 5, "relevance": 1.0, "usage": "recommended", "code": "t05_test_de_stabilite_des_agregats", "test_title": "Test de stabilité des agrégats"}, {"card_id": 42, "test_id": 17, "relevance": 1.0, "usage": "recommended", "code": "t17_test_de_couverture_du_sol", "test_title": "Test de couverture du sol"}], "strate_colors": {"F": "#8B5CF6", "S": "#3B82F6", "V": "#10B981", "P": "#F59E0B", "H": "#EF4444"}, "strate_colors_light": {"F": {"bg": "#EDE9FE", "text": "#6D28D9"}, "S": {"bg": "#DBEAFE", "text": "#1D4ED8"}, "V": {"bg": "#D1FAE5", "text": "#047857"}, "P": {"bg": "#FEF3C7", "text": "#B45309"}, "H": {"bg": "#FEE2E2", "text": "#B91C1C"}}, "stats": {"total_cards": 56, "total_links": 102, "total_tests": 33, "categories": ["histoire", "cadre", "mecanisme", "symptome", "pratique", "cycle", "profil_sol", "continuum", "faune"]}};
+</script>
+<script type="text/babel">
+
+<script type="text/babel">
+
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({ title, icon, defaultOpen = false, children, id }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return <div className="sv-collapse" id={id}>
+    <button className="sv-collapse-header" onClick={() => setOpen(!open)}>
+      <span className="sv-collapse-title">{icon && <span>{icon}</span>}{title}</span>
+      <span className={`sv-collapse-chevron ${open ? 'open' : ''}`}>▸</span>
+    </button>
+    {open && <div className="sv-collapse-body">{children}</div>}
+  </div>;
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({ children, source }) {
+  return <div className="sv-formula">
+    {children}
+    {source && <div className="sv-formula-source">{source}</div>}
+  </div>;
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({ children, title }) {
+  return <div className="sv-rule">
+    {title && <div className="sv-rule-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({ children, title, icon }) {
+  return <div className="sv-science-note" data-icon={icon || ''}>
+    {title && <div className="sv-science-note-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({ value, unit, label, color, detail, style }) {
+  return <div className="sv-kpi" style={style}>
+    <div className="sv-kpi-value" style={color ? {color} : undefined}>{value}</div>
+    {unit && <div className="sv-kpi-unit">{unit}</div>}
+    <div className="sv-kpi-label" style={color ? {color} : undefined}>{label}</div>
+    {detail && <div className="sv-kpi-detail">{detail}</div>}
+  </div>;
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({ children, cols }) {
+  const style = cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined;
+  return <div className="sv-kpi-grid" style={style}>{children}</div>;
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({ items, children }) {
+  if (children) return <div className="sv-timeline">{children}</div>;
+  if (!items || !items.length) return null;
+  return <div className="sv-timeline">
+    {items.map((item, i) => <div key={i} className="sv-timeline-item">
+      {item.date && <div className="sv-timeline-date">{item.date}</div>}
+      {item.place && <div className="sv-timeline-place">{item.place}</div>}
+      <div className="sv-timeline-text">{item.text}</div>
+      {item.tags && <div className="sv-timeline-tags">
+        {item.tags.map((t, j) => <span key={j} className="sv-timeline-tag">{t}</span>)}
+      </div>}
+    </div>)}
+  </div>;
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({ title, color, label, stats, tags, children }) {
+  return <div className="sv-phase-card" style={{ borderLeftColor: color || 'var(--accent)' }}>
+    <div className="sv-phase-header" style={{ color: color || 'var(--accent)' }}>
+      {label && <span className="sv-phase-label">{label}</span>}
+      <span className="sv-phase-name">{title}</span>
+    </div>
+    {stats && <div className="sv-phase-stats">{stats.map((s, i) =>
+      <span key={i}><strong>{s.label}</strong> {s.value}</span>
+    )}</div>}
+    {tags && <div className="sv-phase-tags">{tags.map((t, i) =>
+      <span key={i} className="sv-phase-tag">{t}</span>
+    )}</div>}
+    {children && <div className="sv-phase-text">{children}</div>}
+  </div>;
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({ good, bad }) {
+  return <div className="sv-compare">
+    <div className="sv-compare-good">
+      <div className="sv-compare-title">{good.title}</div>
+      {good.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{good.text}</div>}
+      {good.items && <ul className="sv-compare-list">
+        {good.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+    <div className="sv-compare-bad">
+      <div className="sv-compare-title">{bad.title}</div>
+      {bad.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{bad.text}</div>}
+      {bad.items && <ul className="sv-compare-list">
+        {bad.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+  </div>;
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({ ok, ko }) {
+  return <div className="sv-diag-grid">
+    {ok && <div className="sv-diag-card sv-diag-ok">
+      <div className="sv-diag-title">{ok.title}</div>
+      {ok.items && <ul className="sv-diag-list">
+        {ok.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+    {ko && <div className="sv-diag-card sv-diag-ko">
+      <div className="sv-diag-title">{ko.title}</div>
+      {ko.items && <ul className="sv-diag-list">
+        {ko.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+  </div>;
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({ terms }) {
+  if (!terms || !terms.length) return null;
+  return <div>
+    {terms.map((t, i) => <div key={i} className="sv-term">
+      <div className="sv-term-head">
+        {t.badge && <span className="sv-term-badge" style={t.badgeStyle}>{t.badge}</span>}
+        <span className="sv-term-name">{t.name}</span>
+        {t.alt && <span className="sv-term-alt">{t.alt}</span>}
+      </div>
+      {t.def && <div className="sv-term-def">{t.def}</div>}
+    </div>)}
+  </div>;
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({ sources }) {
+  if (!sources || !sources.length) return null;
+  return <div>
+    {sources.map((s, i) => <div key={i} className="sv-source">
+      {s.year && <span className="sv-source-year">{s.year} — </span>}
+      {s.authors && <strong>{s.authors}</strong>}{s.authors && ' '}
+      {s.title && <span className="sv-source-title">{s.title}</span>}
+      {s.url && <> <a href={s.url} target="_blank" rel="noopener" className="sv-source-link">[lien]</a></>}
+    </div>)}
+  </div>;
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({ tabs, active, onChange }) {
+  return <div className="sv-tabs">
+    {tabs.map(t => <button key={t.id}
+      className={`sv-tab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({ text, label }) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return <div>
+    <span className="sv-note-toggle" onClick={() => setOpen(!open)}>
+      {open ? '\u25BE' : '\u25B8'} {open ? '' : (label || 'note')}
+    </span>
+    {open && <div className="sv-note-content">{text}</div>}
+  </div>;
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({ title, items, note, children }) {
+  return <div className="sv-ref-box">
+    {title && <div className="sv-ref-box-title">{title}</div>}
+    {items && <div className="sv-ref-grid">
+      {items.map((it, i) => <div key={i} className="sv-ref-item">
+        <div className="sv-ref-num">{it.value}</div>
+        <div className="sv-ref-label">{it.label}</div>
+      </div>)}
+    </div>}
+    {note && <div style={{fontSize:'var(--font-xs)',color:'var(--color-warning-text)',lineHeight:1.45,fontStyle:'italic'}}>{note}</div>}
+    {children}
+  </div>;
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({ title, children, color }) {
+  const c = color || 'success';
+  const colors = {
+    success: { bg: 'var(--success-light)', border: 'var(--success)', text: 'var(--color-success-text)' },
+    warning: { bg: 'var(--warning-light)', border: 'var(--warning)', text: 'var(--color-warning-text)' },
+    info:    { bg: 'var(--info-light)',    border: 'var(--accent)',  text: 'var(--accent-dark)' },
+    purple:  { bg: 'var(--purple-light)',  border: 'var(--purple)',  text: 'var(--purple-dark)' },
+  };
+  const s = colors[c] || colors.success;
+  return <div className="sv-highlight-box" style={{background: s.bg, borderLeftColor: s.border}}>
+    {title && <div className="sv-highlight-box-title" style={{color: s.text}}>{title}</div>}
+    <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{children}</div>
+  </div>;
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({ headers, rows, children }) {
+  if (children) return <table className="sv-data-table">{children}</table>;
+  if (!headers || !rows) return null;
+  return <table className="sv-data-table">
+    <thead><tr>{headers.map((h, i) => <th key={i} style={h.align ? {textAlign: h.align} : undefined}>{h.label || h}</th>)}</tr></thead>
+    <tbody>{rows.map((row, i) => <tr key={i}>
+      {row.map((cell, j) => <td key={j} style={headers[j] && headers[j].align ? {textAlign: headers[j].align} : undefined}>{cell}</td>)}
+    </tr>)}</tbody>
+  </table>;
+}
+
+</script>
+<script>
+function formatDesc(text, scrollToCard) {
+  if (!text) return null;
+  // Remove migration/internal note lines
+  const lines = text.split('\n').filter(l => !l.trim().startsWith('[2026-'));
+  const cleaned = lines.join('\n');
+
+  // Split into parts for React rendering
+  const parts = [];
+  let remaining = cleaned;
+  const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|terme `([^`]+)`|fiche (\d+)/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = regex.exec(remaining)) !== null) {
+    // Text before match
+    if (match.index > lastIndex) {
+      parts.push({
+        type: 'text',
+        value: remaining.substring(lastIndex, match.index)
+      });
+    }
+    if (match[1]) {
+      // Card #XX
+      parts.push({
+        type: 'card_ref',
+        id: parseInt(match[1]),
+        label: match[0]
+      });
+    } else if (match[2]) {
+      // Card "Title"
+      const found = DATA.cards.find(c => c.title.includes(match[2]));
+      parts.push({
+        type: 'card_ref',
+        id: found ? found.id : null,
+        label: match[2]
+      });
+    } else if (match[3]) {
+      // terme `xxx`
+      parts.push({
+        type: 'term',
+        value: match[3]
+      });
+    } else if (match[4]) {
+      // fiche N
+      parts.push({
+        type: 'text',
+        value: match[0]
+      });
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < remaining.length) {
+    parts.push({
+      type: 'text',
+      value: remaining.substring(lastIndex)
+    });
+  }
+  return parts.map((p, i) => {
+    if (p.type === 'card_ref' && p.id) {
+      return React.createElement('a', {
+        key: i,
+        onClick: () => scrollToCard(p.id),
+        style: {
+          color: 'var(--accent)',
+          cursor: 'pointer',
+          textDecoration: 'underline'
+        }
+      }, '#' + p.id);
+    }
+    if (p.type === 'term') {
+      return React.createElement('span', {
+        key: i,
+        className: 'sv-tag sv-tag-term',
+        style: {
+          fontSize: 'inherit',
+          padding: '0 4px'
+        }
+      }, p.value);
+    }
+    return React.createElement('span', {
+      key: i
+    }, p.value);
+  });
+}
+function App() {
+  const [search, setSearch] = React.useState('');
+  const [dimFilter, setDimFilter] = React.useState(null);
+  const [catFilter, setCatFilter] = React.useState(null);
+  const [openDims, setOpenDims] = React.useState({});
+  const [expandedCards, setExpandedCards] = React.useState({});
+  const dims = DATA.dimensions;
+  const cats = DATA.stats.categories.sort();
+  const filteredCards = DATA.cards.filter(card => {
+    if (dimFilter && card.dimension_id !== dimFilter) return false;
+    if (catFilter && card.category !== catFilter) return false;
+    if (search) {
+      const s = search.toLowerCase();
+      return (card.title || '').toLowerCase().includes(s) || (card.description || '').toLowerCase().includes(s) || (card.notes || '').toLowerCase().includes(s);
+    }
+    return true;
+  });
+  const cardsByDim = {};
+  filteredCards.forEach(c => {
+    if (!cardsByDim[c.dimension_id]) cardsByDim[c.dimension_id] = [];
+    cardsByDim[c.dimension_id].push(c);
+  });
+  const linksFor = cardId => DATA.links.filter(l => l.from_id === cardId || l.to_id === cardId);
+  const testsFor = cardId => DATA.tests.filter(t => t.card_id === cardId);
+  const scrollToCard = id => {
+    // Open the dimension first, then scroll after React re-render
+    const card = DATA.cards.find(c => c.id === id);
+    if (card) setOpenDims(prev => ({
+      ...prev,
+      [card.dimension_id]: true
+    }));
+    setExpandedCards(prev => ({
+      ...prev,
+      [id]: true
+    }));
+    // Wait for DOM update then scroll
+    setTimeout(() => {
+      const el = document.getElementById('card-' + id);
+      if (el) {
+        el.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        el.style.boxShadow = '0 0 0 3px var(--accent)';
+        setTimeout(() => {
+          el.style.boxShadow = '';
+        }, 2000);
+      }
+    }, 100);
+  };
+  const toggleDim = dimId => setOpenDims(prev => ({
+    ...prev,
+    [dimId]: !prev[dimId]
+  }));
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '900px',
+      margin: '0 auto',
+      padding: '1rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stats"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-value"
+  }, DATA.stats.total_cards), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-label"
+  }, "cartes actives")), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-value"
+  }, dims.length), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-label"
+  }, "dimensions")), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-value"
+  }, DATA.stats.total_links), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-label"
+  }, "liens")), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-value"
+  }, DATA.stats.total_tests), /*#__PURE__*/React.createElement("div", {
+    className: "cc-stat-label"
+  }, "tests terrain"))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '0.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)'
+    }
+  }, filteredCards.length, " carte", filteredCards.length > 1 ? 's' : ''), /*#__PURE__*/React.createElement("button", {
+    className: "cc-toggle-all",
+    onClick: () => {
+      const allOpen = dims.every(d => openDims[d.id] !== false);
+      const newState = {};
+      dims.forEach(d => newState[d.id] = !allOpen);
+      setOpenDims(newState);
+    }
+  }, dims.every(d => openDims[d.id] !== false) ? 'Tout fermer' : 'Tout ouvrir')), /*#__PURE__*/React.createElement("div", {
+    className: "cc-filters"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "sv-input cc-search",
+    placeholder: "Rechercher dans les cartes...",
+    value: search,
+    onChange: e => setSearch(e.target.value)
+  }), /*#__PURE__*/React.createElement("select", {
+    className: "sv-input",
+    value: dimFilter || '',
+    onChange: e => setDimFilter(e.target.value ? parseInt(e.target.value) : null)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Filtrer par dimension"), dims.map(d => /*#__PURE__*/React.createElement("option", {
+    key: d.id,
+    value: d.id
+  }, d.nom))), /*#__PURE__*/React.createElement("select", {
+    className: "sv-input",
+    value: catFilter || '',
+    onChange: e => setCatFilter(e.target.value || null)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Filtrer par type"), cats.map(cat => /*#__PURE__*/React.createElement("option", {
+    key: cat,
+    value: cat
+  }, cat)))), dims.filter(d => cardsByDim[d.id] && cardsByDim[d.id].length > 0).map(dim => {
+    const dimCards = cardsByDim[dim.id] || [];
+    const isOpen = openDims[dim.id] !== false;
+    return /*#__PURE__*/React.createElement("div", {
+      key: dim.id,
+      style: {
+        marginBottom: '0.5rem'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cc-dim-header",
+      onClick: () => toggleDim(dim.id)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "cc-dim-badge",
+      style: {
+        background: dim.couleur || 'var(--accent)'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "cc-dim-name"
+    }, dim.nom), /*#__PURE__*/React.createElement("span", {
+      className: "cc-dim-count"
+    }, dimCards.length), /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-secondary)'
+      }
+    }, isOpen ? '\u25BE' : '\u25B8')), isOpen && dimCards.map(card => {
+      const links = linksFor(card.id);
+      const tests = testsFor(card.id);
+      const isExp = expandedCards[card.id];
+      const descLen = (card.description || '').length;
+      return /*#__PURE__*/React.createElement("div", {
+        key: card.id,
+        id: 'card-' + card.id,
+        className: 'cc-card' + (links.length === 0 ? ' cc-orphan' : '')
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "cc-card-title"
+      }, /*#__PURE__*/React.createElement("span", {
+        className: "cc-card-cat",
+        "data-cat": card.category || ''
+      }, card.category || '?'), "#", card.id, " ", card.title), /*#__PURE__*/React.createElement("div", {
+        className: "cc-card-meta"
+      }, links.length > 0 && /*#__PURE__*/React.createElement("span", null, links.length, " lien", links.length > 1 ? 's' : ''), tests.length > 0 && /*#__PURE__*/React.createElement("span", null, tests.length, " test", tests.length > 1 ? 's' : ''), links.length === 0 && tests.length === 0 && /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontStyle: 'italic'
+        }
+      }, "orpheline")), card.docs_codes && (() => {
+        try {
+          const docs = JSON.parse(card.docs_codes);
+          return docs.length > 0 && /*#__PURE__*/React.createElement("div", {
+            className: "cc-docs"
+          }, docs.map((d, i) => /*#__PURE__*/React.createElement("span", {
+            key: i,
+            className: "cc-doc-tag",
+            "data-strate": d.charAt(0)
+          }, d)));
+        } catch (e) {
+          return null;
+        }
+      })(), card.description && /*#__PURE__*/React.createElement("div", {
+        className: 'cc-card-desc' + (isExp ? ' expanded' : '')
+      }, formatDesc(isExp ? card.description : card.description.substring(0, 400), scrollToCard), !isExp && descLen > 400 && '...'), descLen > 400 && /*#__PURE__*/React.createElement("button", {
+        className: "cc-expand-btn",
+        onClick: () => setExpandedCards(p => ({
+          ...p,
+          [card.id]: !p[card.id]
+        }))
+      }, isExp ? 'Reduire' : 'Voir tout'), links.length > 0 && /*#__PURE__*/React.createElement("div", {
+        className: "cc-links"
+      }, links.map((l, i) => {
+        const isFrom = l.from_id === card.id;
+        const otherId = isFrom ? l.to_id : l.from_id;
+        const otherTitle = isFrom ? l.to_title : l.from_title;
+        return /*#__PURE__*/React.createElement("div", {
+          key: i,
+          className: "cc-link"
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "cc-link-type"
+        }, l.link_type), /*#__PURE__*/React.createElement("span", {
+          className: "cc-link-target",
+          onClick: () => scrollToCard(otherId)
+        }, "#", otherId, " ", otherTitle || ''));
+      })), tests.length > 0 && /*#__PURE__*/React.createElement("div", {
+        className: "cc-tests"
+      }, tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
+        key: i,
+        className: "cc-test",
+        title: t.usage || ''
+      }, t.test_title))));
+    }));
+  }));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+</script>
+</script>
+
+
+</body>
+</html>

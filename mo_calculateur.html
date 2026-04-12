@@ -767,8 +767,8 @@ body {
   padding: 2px 0;
   color: var(--text-secondary);
 }
-.sv-compare-good .sv-compare-list li::before { content: '¹3 '; color: var(--success); font-weight: 700; }
-.sv-compare-bad .sv-compare-list li::before  { content: '2 '; color: var(--danger); }
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
 @media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
 
 /* ── Terme glossaire ── */
@@ -915,7 +915,7 @@ body {
 }
 .sv-bullet-list li:last-child { border-bottom: none; }
 .sv-bullet-list li::before {
-  content: 'A';
+  content: '▸';
   position: absolute;
   left: 0;
   color: var(--success);
@@ -1023,10 +1023,10 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-11 14:56 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-12 17:05 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1736,7 +1736,7 @@ function ComprendreMO() {
     }
   }, /*#__PURE__*/React.createElement(SvCollapse, {
     title: "Ratio C/N \u2014 La cl\xE9 de la d\xE9composition",
-    icon: "\u2697\uFE0F",
+    icon: "\uD83D\uDD2C",
     defaultOpen: true
   }, /*#__PURE__*/React.createElement("p", {
     className: "sv-prose"
@@ -1744,7 +1744,7 @@ function ComprendreMO() {
     title: "R\xE8gle pratique"
   }, "M\xE9lange C/N \u2248 25 = \xE9quilibre d\xE9composition/humification.")), /*#__PURE__*/React.createElement(SvCollapse, {
     title: "Coefficient isohumique (k\u2081)",
-    icon: "\uD83D\uDCCA"
+    icon: "\uD83D\uDD2C"
   }, /*#__PURE__*/React.createElement("p", {
     className: "sv-prose"
   }, "Le k\u2081 exprime la fraction de mati\xE8re organique apport\xE9e qui se retrouvera stabilis\xE9e sous forme d'humus (carbone stable \xE0 long terme). Il d\xE9pend de la composition lignine/cellulose/prot\xE9ines, de l'humidit\xE9, de la temp\xE9rature et du mode d'apport."), /*#__PURE__*/React.createElement(SvDataTable, {
@@ -1785,14 +1785,14 @@ function ComprendreMO() {
     className: "sv-prose"
   }, "Le C stable du sol est majoritairement d'origine ", /*#__PURE__*/React.createElement("em", null, "microbienne"), " (n\xE9cromasse), pas v\xE9g\xE9tale. C'est la \"pompe \xE0 carbone microbienne\" (MCP, Liang et al. 2017)."))), /*#__PURE__*/React.createElement(SvCollapse, {
     title: "Modes de transformation compar\xE9s",
-    icon: "\u2697\uFE0F"
+    icon: "\uD83D\uDD2C"
   }, /*#__PURE__*/React.createElement("p", {
     className: "sv-prose"
   }, "Le M\xCAME apport de mati\xE8re organique donne des r\xE9sultats tr\xE8s diff\xE9rents selon le mode de transformation :"), /*#__PURE__*/React.createElement("ul", {
     className: "sv-bullet-list"
   }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Compostage a\xE9robie"), " : pertes C 40-60%, humification mod\xE9r\xE9e"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Bokashi (ana\xE9robie)"), " : pertes C <10%, r\xE9tention quasi-totale"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Incorporation directe"), " : d\xE9pend du C/N et des conditions p\xE9doclimatiques"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Paillage de surface"), " : min\xE9ralisation lente, protection du sol"))), /*#__PURE__*/React.createElement(SvCollapse, {
     title: "Priming effect",
-    icon: "\u26A0\uFE0F"
+    icon: "\uD83D\uDD2C"
   }, /*#__PURE__*/React.createElement("p", {
     className: "sv-prose"
   }, "L'apport de MO fra\xEEche peut paradoxalement ", /*#__PURE__*/React.createElement("em", null, "acc\xE9l\xE9rer"), " la d\xE9composition du carbone stable d\xE9j\xE0 pr\xE9sent dans le sol. Ce \"priming effect\" s'explique par l'activation microbienne : les d\xE9composeurs activ\xE9s par le substrat frais attaquent ensuite les r\xE9serves de C stable."), /*#__PURE__*/React.createElement(SvHighlightBox, {
@@ -1921,7 +1921,43 @@ function ComprendreMO() {
         text: (c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' (' + c.epaisseur_1pct_mo_cm + ' cm/+1%MO)' : '')
       }) : '—'));
     })))));
-  })());
+  })(), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Modele Henin-Dupuis",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le stock de MO tend vers un equilibre : ", /*#__PURE__*/React.createElement("strong", null, "Stock = (apport x k1) / k2"), ". k1 = coefficient d'humification (fraction qui devient humus). k2 = coefficient de mineralisation (fraction du stock qui disparait chaque annee). Les amendements mineraux agissent sur k2 en protegeant la MO par adsorption sur les surfaces argileuses.")), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "k2 depend de la texture",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement(SvDataTable, {
+    headers: [{
+      label: 'Texture'
+    }, {
+      label: 'k2 (/an)',
+      align: 'center'
+    }, {
+      label: 'Demi-vie',
+      align: 'center'
+    }, {
+      label: 'Ration BRF 3% MO',
+      align: 'center'
+    }],
+    rows: [['Sableux chaud', '0,03-0,05', '14-23 ans', '11 t/ha/an'], ['Limon tempere', '0,01-0,02', '35-70 ans', '4 t/ha/an'], ['Argileux froid', '0,005', '140 ans', '2 t/ha/an']]
+  }), /*#__PURE__*/React.createElement(SvHighlightBox, {
+    color: "warning"
+  }, "Le sableux exige 3 a 10x plus d'apports que le limon pour le meme stock.")), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "La ration du sol",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "La ration du sol est l'apport annuel de carbone necessaire au maintien du stock. Sans la ration, le stock decline exponentiellement. Sur sableux : perte visible en 2-3 ans. Sur limon : 5-10 ans. Sur argileux : stable des decennies.")), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Plafond MAOM et amendements mineraux",
+    icon: "\uD83D\uDD2C"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "sv-prose"
+  }, "Le carbone stable (MAOM) s'adsorbe sur les surfaces minerales. Le marnage (100-300 t/ha, effet 30-100 ans) ou le basalte broye (6-10 t/ha, Richardson 2024 : C organique +69 a 135%) augmentent les surfaces et relevent le plafond MAOM."), /*#__PURE__*/React.createElement(SvHighlightBox, {
+    color: "info"
+  }, "Le basalte sequestre aussi 2-4 t CO2/ha sous forme de carbonates stables (Kelland 2020).")));
 }
 
 // NoteAccordion → SvNoteAccordion (shared)
