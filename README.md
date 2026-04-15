@@ -14,11 +14,11 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **881 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **874 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
 - **16 chaînes causales** et **118 renvois** inter-documents
-- **56 fiches conceptuelles** et **191 prompts** structurés
-- **5 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **52 tables** SQLite, 38 scripts Python
+- **69 fiches conceptuelles** et **191 prompts** structurés
+- **6 pages web** interactives (calculateurs, cartographie, triangle des textures)
+- **56 tables** SQLite, 40 scripts Python
 
 ### Les forces de cette architecture
 
@@ -46,8 +46,8 @@ Tools/
 ├── tools/
 │   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, reformat_fiches_ris
+│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, integrate_fiche_retour, reformat_fiches_ris
 │   ├── zotero/                 attribution, normalise_ris, validate_ris
 │   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 ├── docx/                      Documents .docx et .ris

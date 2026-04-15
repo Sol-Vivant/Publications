@@ -921,6 +921,87 @@ body {
   color: var(--success);
   font-weight: 700;
 }
+.sv-bullet-list-dense li {
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  font-size: var(--font-xs);
+}
+
+/* ── Inline emphasis / highlight unifiés ── */
+.sv-mark {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.sv-emphasis {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Passerelle Outil → Cahier de Science ── */
+.sv-cahier-link {
+  margin: 1.5rem auto 0.5rem;
+  padding: 0.85rem 1.25rem;
+  max-width: 720px;
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+.sv-cahier-link-icon { font-size: 1.2rem; line-height: 1; }
+.sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
+.sv-cahier-link a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sv-cahier-link a:hover { text-decoration: underline; }
+
+/* ── Bloc texte riche (SvRichText) ── */
+.sv-richtext { line-height: 1.55; }
+.sv-richtext p.sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-richtext .sv-section-label {
+  font-size: 0.7rem;
+  margin-bottom: 0.35rem;
+  color: var(--accent-dark);
+}
+.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+
+/* ── Bloc de section unifié (SvSection) ── */
+.sv-section-block {
+  margin: 1.25rem 0 1.5rem;
+}
+.sv-section-block + .sv-section-block {
+  margin-top: 2rem;
+}
+.sv-section-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-section-title-h2 { font-size: 1.35rem; }
+.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+.sv-section-block .sv-section-label + .sv-section-title {
+  margin-top: 0;
+}
 
 /* ── Note inline mini-accordion ── */
 .sv-note-toggle {
@@ -1023,10 +1104,10 @@ body {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-12 17:05 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 01:07 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1460,6 +1541,243 @@ function SvDataTable({
   }, cell))))));
 }
 
+// ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
+// Usage: <SvBulletList items={["plain string", {text:"foo", emphasis:"bar"}, ...]} />
+// - Chaîne simple : rendue telle quelle
+// - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
+//   `strong` met en gras inline avec .sv-emphasis
+function SvBulletList({
+  items,
+  dense
+}) {
+  if (!items || !items.length) return null;
+  const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
+  return /*#__PURE__*/React.createElement("ul", {
+    className: cls
+  }, items.map((it, i) => {
+    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, it);
+    if (it && typeof it === 'object') {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
+        className: "sv-mark"
+      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
+        className: "sv-emphasis"
+      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
+    }
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, String(it));
+  }));
+}
+
+// ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
+// Usage: <SvSection title="Pourquoi l'anaérobie" label="Fermentation" level={2}>…</SvSection>
+// - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
+// - `level` : 2 (défaut) ou 3
+// - `icon` (optionnel) : emoji en préfixe du titre
+function SvSection({
+  title,
+  label,
+  level,
+  icon,
+  id,
+  children
+}) {
+  const H = level === 3 ? 'h3' : 'h2';
+  return /*#__PURE__*/React.createElement("section", {
+    className: "sv-section-block",
+    id: id
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "sv-section-label"
+  }, label), title && /*#__PURE__*/React.createElement(H, {
+    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-section-icon"
+  }, icon), title), children);
+}
+
+// ── SvRichText : rendu pédagogique de texte semi-structuré ──
+// Input : chaîne brute avec paragraphes (\n\n), bullets (• ...),
+//         sections en MAJUSCULES terminées par ':', refs "Card #N" et
+//         termes entre backticks `...`.
+// Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
+// Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+function SvRichText({
+  text,
+  onCardRef,
+  skipPrefixes
+}) {
+  if (!text) return null;
+  const skips = skipPrefixes || ['[2026-'];
+  const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
+
+  // Regroupement en blocs : paragraphes / bullets / section-labels
+  const blocks = [];
+  let i = 0;
+  while (i < rawLines.length) {
+    const line = rawLines[i];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    // Section MAJUSCULES suivie de ':' — ex : "COMPATIBILITÉS MAJEURES :"
+    // (au moins 2 mots, lettres accentuées, ratio majuscules ≥ 80%)
+    const isSectionLabel = (() => {
+      if (!trimmed.endsWith(':') && !trimmed.endsWith(' :')) return false;
+      const t = trimmed.replace(/:$/, '').trim();
+      if (t.length < 4 || t.length > 80) return false;
+      const letters = t.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+      if (letters.length < 4) return false;
+      const uppers = letters.filter(ch => ch === ch.toUpperCase());
+      return uppers.length / letters.length >= 0.8;
+    })();
+    if (isSectionLabel) {
+      blocks.push({
+        type: 'label',
+        text: trimmed.replace(/:$/, '').trim()
+      });
+      i++;
+      continue;
+    }
+    // Bullets contigus
+    if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
+      const items = [];
+      while (i < rawLines.length && (rawLines[i].trim().startsWith('• ') || rawLines[i].trim().startsWith('- '))) {
+        items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
+        i++;
+      }
+      blocks.push({
+        type: 'bullets',
+        items
+      });
+      continue;
+    }
+    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label)
+    const paraLines = [];
+    while (i < rawLines.length) {
+      const t = rawLines[i].trim();
+      if (!t) break;
+      if (t.startsWith('• ') || t.startsWith('- ')) break;
+      // nouvelle section-label → stop avant
+      const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
+        const x = t.replace(/:$/, '').trim();
+        const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+        if (letters.length < 4) return false;
+        const uppers = letters.filter(ch => ch === ch.toUpperCase());
+        return uppers.length / letters.length >= 0.8 && x.length < 80;
+      })();
+      if (isLabel && paraLines.length > 0) break;
+      paraLines.push(rawLines[i]);
+      i++;
+    }
+    if (paraLines.length) blocks.push({
+      type: 'para',
+      text: paraLines.join(' ')
+    });
+  }
+
+  // Rendu inline d'un texte : transforme "Card #11", "terme `foo`", "fiche 3"
+  const renderInline = (s, keyPrefix) => {
+    if (!s) return null;
+    const out = [];
+    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|fiche (\d+)/g;
+    let last = 0,
+      m,
+      n = 0;
+    while ((m = regex.exec(s)) !== null) {
+      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m[1]) {
+        const id = parseInt(m[1]);
+        out.push(/*#__PURE__*/React.createElement("a", {
+          key: keyPrefix + '-ref-' + n++,
+          onClick: () => onCardRef && onCardRef(id),
+          style: {
+            color: 'var(--accent)',
+            cursor: 'pointer',
+            textDecoration: 'underline'
+          }
+        }, "#", id));
+      } else if (m[2]) {
+        const title = m[2];
+        const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
+        if (found) {
+          out.push(/*#__PURE__*/React.createElement("a", {
+            key: keyPrefix + '-ref-' + n++,
+            onClick: () => onCardRef && onCardRef(found.id),
+            style: {
+              color: 'var(--accent)',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }
+          }, title));
+        } else {
+          out.push(title);
+        }
+      } else if (m[3]) {
+        out.push(/*#__PURE__*/React.createElement("span", {
+          key: keyPrefix + '-term-' + n++,
+          className: "sv-mark"
+        }, m[3]));
+      } else if (m[4]) {
+        out.push(m[0]);
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < s.length) out.push(s.substring(last));
+    return out;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, blocks.map((b, idx) => {
+    if (b.type === 'label') {
+      return /*#__PURE__*/React.createElement("div", {
+        key: idx,
+        className: "sv-section-label",
+        style: {
+          marginTop: idx > 0 ? '0.75rem' : 0
+        }
+      }, b.text);
+    }
+    if (b.type === 'bullets') {
+      return /*#__PURE__*/React.createElement("ul", {
+        key: idx,
+        className: "sv-bullet-list"
+      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
+        key: j
+      }, renderInline(it, idx + '-' + j))));
+    }
+    return /*#__PURE__*/React.createElement("p", {
+      key: idx,
+      className: "sv-prose",
+      style: {
+        margin: '0.35rem 0'
+      }
+    }, renderInline(b.text, 'p' + idx));
+  }));
+}
+
+// ── SvCahierLink : passerelle outil → Cahier de Science ──
+// Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
+// Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
+function SvCahierLink({
+  chapitre,
+  titre
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-cahier-link"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-cahier-link-icon"
+  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
+    className: "sv-cahier-link-text"
+  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
+    href: 'cahier.html#chap-' + chapitre
+  }, "Cahier de Science \u2192 ", titre));
+}
+
 // ── Helpers & Constants ──
 const ACTIVE_CATS = [...new Set(DATA.matieres.map(m => m.categorie))].filter(c => c !== 'Sol/biomasse');
 const CAT_COLORS_DEFAULT = ['var(--success)', 'var(--warning)', 'var(--danger)', 'var(--info)', 'var(--color-text-muted)', 'var(--purple, #7c3aed)', 'var(--danger)', 'var(--success)'];
@@ -1609,7 +1927,7 @@ function EncartIncorporation({
       marginBottom: '2px'
     }
   }, "Signaux terrain :"), /*#__PURE__*/React.createElement("ul", {
-    className: "encart-signal-list"
+    className: "sv-bullet-list"
   }, rdx.anaerobie_subie.signaux.map((s, i) => /*#__PURE__*/React.createElement("li", {
     key: i
   }, s))), /*#__PURE__*/React.createElement("div", {
@@ -1625,7 +1943,7 @@ function EncartIncorporation({
       marginBottom: '4px'
     }
   }, rdx.anaerobie_choisie.avantage), /*#__PURE__*/React.createElement("ul", {
-    className: "encart-technique-list"
+    className: "sv-bullet-list"
   }, rdx.anaerobie_choisie.techniques.map((t, i) => /*#__PURE__*/React.createElement("li", {
     key: i
   }, t))), /*#__PURE__*/React.createElement("div", {
@@ -1728,240 +2046,222 @@ function EncartIncorporation({
 }
 // ── App component ──
 
-function ComprendreMO() {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cahier",
-    style: {
-      padding: '1rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Ratio C/N \u2014 La cl\xE9 de la d\xE9composition",
-    icon: "\uD83D\uDD2C",
-    defaultOpen: true
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le ratio Carbone/Azote (C/N) d\xE9termine la vitesse et le devenir de la mati\xE8re organique dans le sol. Un C/N bas (<15) favorise la min\xE9ralisation rapide (lib\xE9ration d'azote). Un C/N \xE9lev\xE9 (>25) favorise l'immobilisation de l'azote par les microbes d\xE9composeurs. La plage 20-25 est optimale pour l'humification."), /*#__PURE__*/React.createElement(SvRule, {
-    title: "R\xE8gle pratique"
-  }, "M\xE9lange C/N \u2248 25 = \xE9quilibre d\xE9composition/humification.")), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Coefficient isohumique (k\u2081)",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le k\u2081 exprime la fraction de mati\xE8re organique apport\xE9e qui se retrouvera stabilis\xE9e sous forme d'humus (carbone stable \xE0 long terme). Il d\xE9pend de la composition lignine/cellulose/prot\xE9ines, de l'humidit\xE9, de la temp\xE9rature et du mode d'apport."), /*#__PURE__*/React.createElement(SvDataTable, {
-    headers: [{
-      label: 'Matière'
-    }, {
-      label: 'k₁ typique',
-      align: 'center'
-    }],
-    rows: [['Paille broyée', '15-20%'], ['BRF (bois raméal fragmenté)', '40-60%'], ['Fumier composté', '30-40%'], ['Compost mûr', '40-60%'], ['Biochar', '80-95%']]
-  })), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Formule de Kirkby (ratio st\u0153chiom\xE9trique)",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Kirkby et al. (2016) ont montr\xE9 que la formation d'humus stable n\xE9cessite un apport \xE9quilibr\xE9 en nutriments (C:N:P:S). Le ratio-cl\xE9 pour s\xE9questrer 1 tonne de carbone stable :"), /*#__PURE__*/React.createElement(SvFormula, {
-    source: "Kirkby et al. (2016)"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-formula-highlight"
-  }, "1000 kg C"), " n\xE9cessite", ' ', /*#__PURE__*/React.createElement("span", {
-    className: "sv-formula-highlight"
-  }, "83 kg N"), " +", ' ', /*#__PURE__*/React.createElement("span", {
-    className: "sv-formula-highlight"
-  }, "20 kg P"), " +", ' ', /*#__PURE__*/React.createElement("span", {
-    className: "sv-formula-highlight"
-  }, "14 kg S")), /*#__PURE__*/React.createElement(SvHighlightBox, {
-    color: "purple"
-  }, "Sans ces nutriments, le C apport\xE9 est min\xE9ralis\xE9 au lieu d'\xEAtre stabilis\xE9.")), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "MAOM vs POM \u2014 La nouvelle vision (2020+)",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Depuis Cotrufo & Lavallee (2019), la distinction fondamentale n'est plus labile/r\xE9calcitrant mais :"), /*#__PURE__*/React.createElement("ul", {
-    className: "sv-bullet-list"
-  }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "POM"), " (Particulate Organic Matter) : d\xE9bris v\xE9g\xE9taux libres, turnover rapide (ann\xE9es)"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "MAOM"), " (Mineral-Associated Organic Matter) : C microbien stabilis\xE9 sur les surfaces min\xE9rales (argiles), turnover long (d\xE9cennies \xE0 si\xE8cles)")), /*#__PURE__*/React.createElement(SvScienceNote, {
-    title: "Implication"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le C stable du sol est majoritairement d'origine ", /*#__PURE__*/React.createElement("em", null, "microbienne"), " (n\xE9cromasse), pas v\xE9g\xE9tale. C'est la \"pompe \xE0 carbone microbienne\" (MCP, Liang et al. 2017)."))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Modes de transformation compar\xE9s",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le M\xCAME apport de mati\xE8re organique donne des r\xE9sultats tr\xE8s diff\xE9rents selon le mode de transformation :"), /*#__PURE__*/React.createElement("ul", {
-    className: "sv-bullet-list"
-  }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Compostage a\xE9robie"), " : pertes C 40-60%, humification mod\xE9r\xE9e"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Bokashi (ana\xE9robie)"), " : pertes C <10%, r\xE9tention quasi-totale"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Incorporation directe"), " : d\xE9pend du C/N et des conditions p\xE9doclimatiques"), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("strong", null, "Paillage de surface"), " : min\xE9ralisation lente, protection du sol"))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Priming effect",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "L'apport de MO fra\xEEche peut paradoxalement ", /*#__PURE__*/React.createElement("em", null, "acc\xE9l\xE9rer"), " la d\xE9composition du carbone stable d\xE9j\xE0 pr\xE9sent dans le sol. Ce \"priming effect\" s'explique par l'activation microbienne : les d\xE9composeurs activ\xE9s par le substrat frais attaquent ensuite les r\xE9serves de C stable."), /*#__PURE__*/React.createElement(SvHighlightBox, {
-    color: "warning",
-    title: "Cons\xE9quence agronomique"
-  }, "Des apports r\xE9guliers et \xE9quilibr\xE9s sont plus efficaces que de gros apports ponctuels pour augmenter le stock de C du sol.")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'center',
-      fontSize: 'var(--font-sm)',
-      color: 'var(--color-text-muted)',
-      marginTop: '1.5rem',
-      paddingBottom: '1rem'
-    }
-  }, "R\xE9f\xE9rences : Kirkby et al. (2016) \xB7 Cotrufo & Lavallee (2019) \xB7 Liang et al. (2017)"), (() => {
-    const withPhys = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
-    return /*#__PURE__*/React.createElement("div", {
-      className: "sv-card"
-    }, /*#__PURE__*/React.createElement("h2", null, "Caract\xE9risation (", withPhys.length, " mati\xE8res document\xE9es)"), /*#__PURE__*/React.createElement(SvNoteAccordion, {
-      text: "Donn\xE9es physiques, NPK et co\xFBt indicatif. Sources : Arvalis paille-fumier, guide MSV 2022. Les valeurs sont indicatives et varient selon l'origine, le stockage et la maturit\xE9 des mati\xE8res."
-    }), /*#__PURE__*/React.createElement("div", {
-      style: {
-        overflowX: 'auto'
-      }
-    }, /*#__PURE__*/React.createElement("table", {
-      className: "sv-data-table"
-    }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Mati\xE8re"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "Densit\xE9"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "MS %"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "C/N"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "k\u2081 %"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "N"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "P\u2082O\u2085"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "K\u2082O"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "MgO"), /*#__PURE__*/React.createElement("th", {
-      style: {
-        textAlign: 'center'
-      }
-    }, "Co\xFBt"), /*#__PURE__*/React.createElement("th", null, "Notes"))), /*#__PURE__*/React.createElement("tbody", null, withPhys.map((c, i) => {
-      const cn = (c.cn_min + (c.cn_max || c.cn_min)) / 2;
-      const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
-      return /*#__PURE__*/React.createElement("tr", {
-        key: i
-      }, /*#__PURE__*/React.createElement("td", {
-        style: {
-          fontWeight: 500,
-          color: 'var(--text)',
-          fontSize: 'var(--font-sm)'
-        }
-      }, c.matiere), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--color-text-muted)'
-        }
-      }, c.densite || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--color-text-muted)'
-        }
-      }, c.taux_ms || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: cnColor(cn)
-        }
-      }, c.cn_min === c.cn_max ? c.cn_min : c.cn_min + '–' + c.cn_max), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--accent)'
-        }
-      }, k1), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--success)'
-        }
-      }, c.n_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--warning)'
-        }
-      }, c.p2o5_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--purple, #7c3aed)'
-        }
-      }, c.k2o_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--info)'
-        }
-      }, c.mgo_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          textAlign: 'center',
-          color: 'var(--color-text-muted)',
-          fontSize: 'var(--font-sm)'
-        }
-      }, c.cout_min != null ? c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : c.cout_min < 0 ? 'Négatif' : c.cout_min + '–' + c.cout_max + ' €/t' : '—'), /*#__PURE__*/React.createElement("td", {
-        style: {
-          color: 'var(--color-text-muted)',
-          fontSize: 'var(--font-sm)',
-          maxWidth: '180px'
-        }
-      }, c.notes || c.epaisseur_1pct_mo_cm ? /*#__PURE__*/React.createElement(SvNoteAccordion, {
-        text: (c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' (' + c.epaisseur_1pct_mo_cm + ' cm/+1%MO)' : '')
-      }) : '—'));
-    })))));
-  })(), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Modele Henin-Dupuis",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le stock de MO tend vers un equilibre : ", /*#__PURE__*/React.createElement("strong", null, "Stock = (apport x k1) / k2"), ". k1 = coefficient d'humification (fraction qui devient humus). k2 = coefficient de mineralisation (fraction du stock qui disparait chaque annee). Les amendements mineraux agissent sur k2 en protegeant la MO par adsorption sur les surfaces argileuses.")), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "k2 depend de la texture",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement(SvDataTable, {
-    headers: [{
-      label: 'Texture'
-    }, {
-      label: 'k2 (/an)',
-      align: 'center'
-    }, {
-      label: 'Demi-vie',
-      align: 'center'
-    }, {
-      label: 'Ration BRF 3% MO',
-      align: 'center'
-    }],
-    rows: [['Sableux chaud', '0,03-0,05', '14-23 ans', '11 t/ha/an'], ['Limon tempere', '0,01-0,02', '35-70 ans', '4 t/ha/an'], ['Argileux froid', '0,005', '140 ans', '2 t/ha/an']]
-  }), /*#__PURE__*/React.createElement(SvHighlightBox, {
-    color: "warning"
-  }, "Le sableux exige 3 a 10x plus d'apports que le limon pour le meme stock.")), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "La ration du sol",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "La ration du sol est l'apport annuel de carbone necessaire au maintien du stock. Sans la ration, le stock decline exponentiellement. Sur sableux : perte visible en 2-3 ans. Sur limon : 5-10 ans. Sur argileux : stable des decennies.")), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Plafond MAOM et amendements mineraux",
-    icon: "\uD83D\uDD2C"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Le carbone stable (MAOM) s'adsorbe sur les surfaces minerales. Le marnage (100-300 t/ha, effet 30-100 ans) ou le basalte broye (6-10 t/ha, Richardson 2024 : C organique +69 a 135%) augmentent les surfaces et relevent le plafond MAOM."), /*#__PURE__*/React.createElement(SvHighlightBox, {
-    color: "info"
-  }, "Le basalte sequestre aussi 2-4 t CO2/ha sous forme de carbonates stables (Kelland 2020).")));
-}
-
 // NoteAccordion → SvNoteAccordion (shared)
 
+// ── Tableau dynamique des matières (recherche + tri par colonne) ──
+function MatieresTable() {
+  const [search, setSearch] = React.useState('');
+  const [sortKey, setSortKey] = React.useState('matiere');
+  const [sortDir, setSortDir] = React.useState('asc');
+  const [catFilter, setCatFilter] = React.useState('');
+  const all = DATA.matieres.filter(m => m.densite != null || m.n_kg_t > 0);
+  const cats = [...new Set(all.map(m => m.categorie))].filter(Boolean).sort();
+  const s = search.toLowerCase();
+  const filtered = all.filter(m => {
+    if (catFilter && m.categorie !== catFilter) return false;
+    if (!s) return true;
+    return (m.matiere || '').toLowerCase().includes(s) || (m.categorie || '').toLowerCase().includes(s) || (m.notes || '').toLowerCase().includes(s);
+  });
+  const sorted = [...filtered].sort((a, b) => {
+    const dir = sortDir === 'asc' ? 1 : -1;
+    const va = a[sortKey],
+      vb = b[sortKey];
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (typeof va === 'number' && typeof vb === 'number') return (va - vb) * dir;
+    return String(va).localeCompare(String(vb), 'fr', {
+      numeric: true
+    }) * dir;
+  });
+  const setSort = key => {
+    if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc');else {
+      setSortKey(key);
+      setSortDir('asc');
+    }
+  };
+  const SortHeader = ({
+    label,
+    sortBy,
+    align
+  }) => /*#__PURE__*/React.createElement("th", {
+    style: {
+      textAlign: align || 'left',
+      cursor: 'pointer',
+      userSelect: 'none'
+    },
+    onClick: () => setSort(sortBy)
+  }, label, " ", sortKey === sortBy ? sortDir === 'asc' ? '▴' : '▾' : /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: 0.3
+    }
+  }, "\u2195"));
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-card",
+    style: {
+      marginTop: '1.5rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      flexWrap: 'wrap',
+      marginBottom: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "sv-section-label",
+    style: {
+      margin: 0
+    }
+  }, "Caract\xE9risation (", sorted.length, " / ", all.length, " mati\xE8res)"), /*#__PURE__*/React.createElement("input", {
+    className: "sv-input",
+    type: "text",
+    placeholder: "Rechercher : compost, BRF, fumier...",
+    value: search,
+    onChange: e => setSearch(e.target.value),
+    style: {
+      flex: 1,
+      minWidth: '220px',
+      padding: '0.4rem 0.65rem',
+      fontSize: 'var(--font-sm)'
+    }
+  }), /*#__PURE__*/React.createElement("select", {
+    className: "sv-input",
+    value: catFilter,
+    onChange: e => setCatFilter(e.target.value),
+    style: {
+      padding: '0.4rem 0.65rem',
+      fontSize: 'var(--font-sm)'
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Toutes cat\xE9gories"), cats.map(c => /*#__PURE__*/React.createElement("option", {
+    key: c,
+    value: c
+  }, c)))), /*#__PURE__*/React.createElement(SvNoteAccordion, {
+    text: "Donn\xE9es physiques, NPK et co\xFBt indicatif. Sources : Arvalis paille-fumier, guide MSV 2022. Les valeurs sont indicatives et varient selon l'origine, le stockage et la maturit\xE9 des mati\xE8res."
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      overflowX: 'auto'
+    }
+  }, /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement(SortHeader, {
+    label: "Mati\xE8re",
+    sortBy: "matiere"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "Cat\xE9gorie",
+    sortBy: "categorie"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "Densit\xE9",
+    sortBy: "densite",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "MS %",
+    sortBy: "taux_ms",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "C/N",
+    sortBy: "cn_min",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "k\u2081 %",
+    sortBy: "k1_min",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "N",
+    sortBy: "n_kg_t",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "P\u2082O\u2085",
+    sortBy: "p2o5_kg_t",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "K\u2082O",
+    sortBy: "k2o_kg_t",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "MgO",
+    sortBy: "mgo_kg_t",
+    align: "center"
+  }), /*#__PURE__*/React.createElement(SortHeader, {
+    label: "Co\xFBt",
+    sortBy: "cout_min",
+    align: "center"
+  }), /*#__PURE__*/React.createElement("th", null, "Notes"))), /*#__PURE__*/React.createElement("tbody", null, sorted.map((c, i) => {
+    const cn = (c.cn_min + (c.cn_max || c.cn_min)) / 2;
+    const k1 = c.k1_min ? ((c.k1_min + (c.k1_max || c.k1_min)) / 2).toFixed(0) : '—';
+    return /*#__PURE__*/React.createElement("tr", {
+      key: i
+    }, /*#__PURE__*/React.createElement("td", {
+      style: {
+        fontWeight: 500,
+        color: 'var(--text)',
+        fontSize: 'var(--font-sm)'
+      }
+    }, c.matiere), /*#__PURE__*/React.createElement("td", {
+      style: {
+        color: 'var(--color-text-muted)',
+        fontSize: 'var(--font-xs)'
+      }
+    }, c.categorie || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--color-text-muted)'
+      }
+    }, c.densite || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--color-text-muted)'
+      }
+    }, c.taux_ms || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: cnColor(cn)
+      }
+    }, c.cn_min === c.cn_max ? c.cn_min : c.cn_min + '–' + c.cn_max), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--accent)'
+      }
+    }, k1), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--success)'
+      }
+    }, c.n_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--warning)'
+      }
+    }, c.p2o5_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--purple, #7c3aed)'
+      }
+    }, c.k2o_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--info)'
+      }
+    }, c.mgo_kg_t || '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        textAlign: 'center',
+        color: 'var(--color-text-muted)',
+        fontSize: 'var(--font-sm)'
+      }
+    }, c.cout_min != null ? c.cout_min === 0 && c.cout_max === 0 ? 'Gratuit' : c.cout_min < 0 ? 'Négatif' : c.cout_min + '–' + c.cout_max + ' €/t' : '—'), /*#__PURE__*/React.createElement("td", {
+      style: {
+        color: 'var(--color-text-muted)',
+        fontSize: 'var(--font-sm)',
+        maxWidth: '180px'
+      }
+    }, c.notes || c.epaisseur_1pct_mo_cm ? /*#__PURE__*/React.createElement(SvNoteAccordion, {
+      text: (c.notes || '') + (c.epaisseur_1pct_mo_cm ? ' (' + c.epaisseur_1pct_mo_cm + ' cm/+1%MO)' : '')
+    }) : '—'));
+  })))));
+}
 function App() {
   const [panier, setPanier] = React.useState([]);
   const [filter, setFilter] = React.useState('');
@@ -1969,7 +2269,6 @@ function App() {
   const [showSolBio, setShowSolBio] = React.useState(false);
   const [showDidactic, setShowDidactic] = React.useState(false);
   const [showKirkby, setShowKirkby] = React.useState(null);
-  const [tab, setTab] = React.useState('pratique');
   const addMatiere = m => {
     if (panier.find(p => p.id === m.id)) return;
     setPanier([...panier, {
@@ -2045,21 +2344,7 @@ function App() {
       textAlign: 'center',
       padding: '1rem 1.5rem 0.5rem'
     }
-  }), /*#__PURE__*/React.createElement(SvTabs, {
-    tabs: [{
-      id: 'pratique',
-      icon: '🧪',
-      label: 'Pratique'
-    }, {
-      id: 'comprendre',
-      icon: '📚',
-      label: 'Comprendre'
-    }],
-    active: tab,
-    onChange: setTab
-  }), tab === 'comprendre' && /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, /*#__PURE__*/React.createElement(ComprendreMO, null)), tab === 'pratique' && /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "sv-tab-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "sv-sidebar-layout"
@@ -2547,7 +2832,10 @@ function App() {
       color: 'var(--color-text-muted)',
       marginTop: '1rem'
     }
-  }, "Calculateur MO \xB7 Formule de Kirkby (2016)")))));
+  }, "Calculateur MO \xB7 Formule de Kirkby (2016)")))), /*#__PURE__*/React.createElement(MatieresTable, null), /*#__PURE__*/React.createElement(SvCahierLink, {
+    chapitre: "mo",
+    titre: "Mati\xE8re Organique"
+  }));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>

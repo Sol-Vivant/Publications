@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cahier de Science — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Cahier de Science — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="Livre pédagogique multi-chapitres : Matière Organique, Textures, Fermentations. Fondations scientifiques pour dialoguer avec les calculateurs du corpus." />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Cahier de Science — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Livre pédagogique multi-chapitres : Matière Organique, Textures, Fermentations. Fondations scientifiques pour dialoguer avec les calculateurs du corpus." />
+<link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
+
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<style>
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #cbd5e1;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Échelle typographique (source unique pour toutes les pages) */
+  --font-xs: 0.75rem;
+  --font-sm: 0.82rem;
+  --font-base: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.15rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: var(--font-base);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: var(--font-xs);
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Navigation inter-pages ── */
+.sv-nav-pages {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.sv-nav-pages a {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.sv-nav-pages a:hover {
+  background: var(--accent-light);
+  text-decoration: none;
+}
+.sv-nav-current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: #f1f5f9; }
+.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Onglets (pattern Pratique / Comprendre) ── */
+.sv-tabs {
+  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+}
+.sv-tab {
+  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
+  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.sv-tab:hover { color: var(--text); }
+.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
+@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--font-base);
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--font-base);
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem 0;
+  padding: 0 1.25rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+.sv-bullet-list-dense li {
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  font-size: var(--font-xs);
+}
+
+/* ── Inline emphasis / highlight unifiés ── */
+.sv-mark {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.sv-emphasis {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Bloc texte riche (SvRichText) ── */
+.sv-richtext { line-height: 1.55; }
+.sv-richtext p.sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-richtext .sv-section-label {
+  font-size: 0.7rem;
+  margin-bottom: 0.35rem;
+  color: var(--accent-dark);
+}
+.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+
+/* ── Bloc de section unifié (SvSection) ── */
+.sv-section-block {
+  margin: 1.25rem 0 1.5rem;
+}
+.sv-section-block + .sv-section-block {
+  margin-top: 2rem;
+}
+.sv-section-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-section-title-h2 { font-size: 1.35rem; }
+.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+.sv-section-block .sv-section-label + .sv-section-title {
+  margin-top: 0;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+/* ═══ Cahier de Science — layout livre ═══ */
+
+.cah-root {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+/* Layout 2-cols : sommaire sticky + contenu */
+.cah-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2rem;
+  margin-top: 1.25rem;
+}
+@media (max-width: 900px) {
+  .cah-layout { grid-template-columns: 1fr; }
+}
+
+/* Sidebar sommaire */
+.cah-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.cah-toc-title {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.cah-toc-chapter {
+  display: block;
+  padding: 0.45rem 0.5rem;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.cah-toc-chapter:hover { background: var(--accent-light); color: var(--accent-dark); }
+.cah-toc-sections {
+  margin: 0.15rem 0 0.35rem 0.35rem;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid var(--border);
+}
+.cah-toc-section {
+  display: block;
+  padding: 0.25rem 0.6rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.35;
+}
+.cah-toc-section:hover { color: var(--accent); }
+
+/* Main content — ambiance cahier */
+.cah-main {
+  min-width: 0;
+}
+.cah-intro {
+  background: var(--card-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Chapitre */
+.cah-chapter {
+  margin-bottom: 3rem;
+  scroll-margin-top: 1rem;
+}
+.cah-chapter-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+.cah-chapter-num {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.cah-chapter-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+.cah-chapter-titles { flex: 1; min-width: 0; }
+.cah-chapter-label {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.cah-chapter-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin: 0;
+}
+.cah-chapter-intro {
+  font-size: var(--font-sm);
+  line-height: 1.55;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--accent-light);
+  border-radius: 6px;
+  font-style: italic;
+}
+
+/* Section (SvCollapse styling étendu) */
+.cah-section {
+  scroll-margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Bloc passerelle outil */
+.cah-tool-link {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--success-light);
+  border-left: 4px solid var(--success);
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.cah-tool-link a {
+  color: var(--success);
+  font-weight: 700;
+  text-decoration: none;
+}
+.cah-tool-link a:hover { text-decoration: underline; }
+
+/* Source / formule / règle additionnels dans une section */
+.cah-section-extras {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.cah-source {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 0.4rem 0.6rem;
+  border-left: 3px solid var(--border);
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<header class="sv-header">
+  <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
+  <div class="sv-subtitle">Cahier de Science — Pédagogie du sol vivant et de l'holobionte</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 00:35 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+</header>
+
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <span class="sv-nav-current">📚 Cahier de Science</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+
+
+<div id="root"></div>
+
+
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
+  · Données depuis sol_vivant.db
+</footer>
+
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
+
+<script>const DATA = {"version": 1, "chapitres": [{"id": "mo", "titre": "Matière Organique & Carbone du Sol", "icone": "🌱", "intro": "La matière organique du sol (MOS) n'est pas un stock homogène mais un continuum de formes, chacune avec son turnover propre. Depuis Cotrufo & Lavallee (2019), la vision moderne distingue POM (matière organique particulaire, turnover années) et MAOM (matière organique associée aux minéraux, turnover décennies à siècles). Ce chapitre pose les bases pour dialoguer avec le Calculateur Matière Organique.", "sections": [{"id": "pom_maom", "titre": "POM vs MAOM — la doctrine moderne", "content": "DISTINCTION FONDAMENTALE :\n\n• **POM** (Particulate Organic Matter) : débris végétaux libres et fragments peu transformés. Turnover rapide — de l'ordre de l'année à la décennie. C'est la part « mobile » de la MO, celle qui alimente la minéralisation saisonnière.\n• **MAOM** (Mineral-Associated Organic Matter) : carbone microbien stabilisé sur les surfaces minérales (argiles, oxydes de Fe/Al). Turnover long — décennies à siècles. C'est le « stock » du sol.\n\nCe modèle remplace l'ancienne dichotomie labile/récalcitrant (qui supposait que certaines molécules étaient intrinsèquement difficiles à dégrader). Aujourd'hui on comprend que **la stabilité dépend du contexte physico-chimique**, pas de la structure moléculaire : c'est la protection par occlusion ou adsorption sur les argiles qui rend le C stable.\n\nLA VOIE D'ENTRÉE DANS MAOM est microbienne : les micro-organismes digèrent la POM, et leurs métabolites (nécromasse, exopolysaccharides) s'adsorbent sur les surfaces minérales pour former la MAOM.", "source": "Cotrufo M.F. & Lavallee J.M. (2019). Soil Organic Matter Formation, Persistence, and Functioning: A Synthesis of Current Understanding.", "highlight": {"title": "Point pivot", "color": "info", "text": "Le « plafond MAOM » d'un sol est fixé par sa texture : plus la surface spécifique des argiles est grande, plus le stock stable est élevé. Un sol sableux a un plafond MAOM bas ; un sol argileux, élevé. Voir chapitre Textures →"}}, {"id": "cn_ratio", "titre": "Ratio C/N — la clé de la décomposition", "content": "Le rapport C/N d'un apport organique détermine le comportement microbien :\n\n• **C/N < 15** : minéralisation nette d'azote (azote disponible pour les plantes). Cas du lisier, fumier jeune, légumineuses vertes.\n• **C/N = 15-25** : équilibre, décomposition harmonieuse. Cas du compost mûr.\n• **C/N > 25** : faim d'azote microbienne — les micro-organismes immobilisent l'azote du sol pour décomposer le carbone apporté. Cas de la paille, BRF frais, sciure.\n\nLa faim d'azote n'est pas un problème en soi : c'est un **transfert temporaire** d'azote vers la biomasse microbienne, qui sera relarguée à mesure que les microbes meurent et se recyclent.", "rule": {"title": "À retenir", "text": "Un C/N élevé n'est pas mauvais — il faut juste en tenir compte dans le calendrier de disponibilité azotée. BRF appliqué en surface = pas de faim d'azote ; BRF enfoui = faim d'azote marquée sur 6-18 mois."}}, {"id": "k1_isohumique", "titre": "Coefficient isohumique (k₁)", "content": "Le coefficient isohumique k₁ mesure la fraction de MO apportée qui se transforme en humus stable (MAOM) la première année.\n\n• **BRF / paillage direct** : k₁ ≈ 0.30-0.40 (humification directe in situ, pertes minimales)\n• **Bokashi / fermentations** : k₁ ≈ 0.25-0.35 (MO pré-digérée, transfert rapide)\n• **Lombricompost** : k₁ ≈ 0.20-0.25\n• **Compost thermophile** : k₁ ≈ 0.15-0.20 (40-60% de perte en CO₂ pendant la phase thermophile)\n• **Fumier frais** : k₁ ≈ 0.10-0.15\n\nCes valeurs sont des ordres de grandeur — elles dépendent du substrat, de la conduite, et surtout du sol récepteur (texture, activité biologique).", "formula": {"expr": "ΔMO_humus = k₁ × MO_apportée", "source": "Modèle Hénin-Dupuis (1945), actualisé"}}, {"id": "kirkby", "titre": "Formule de Kirkby — la stœchiométrie de l'humification", "content": "L'humification (formation de MAOM) n'est pas illimitée : elle est **contrainte stœchiométriquement** par l'azote, le phosphore et le soufre disponibles.\n\nLa formule de Kirkby donne les rapports C:N:P:S nécessaires pour stabiliser 1 unité de carbone en MAOM :", "formula": {"expr": "C : N : P : S  =  10000 : 833 : 200 : 143", "source": "Kirkby et al. (2011, 2013, 2014)"}, "rule": {"title": "Conséquence pratique", "text": "Apporter du carbone sans N/P/S mobilisable (par exemple une paille pauvre sur sol carencé) → la stabilisation plafonne. C'est pourquoi le couplage MO + amendement minéral structurant (basalte, dolomie) est souvent plus efficace que l'un ou l'autre seul."}}, {"id": "priming", "titre": "Priming effect — l'amorçage de la minéralisation", "content": "L'apport de MO fraîche peut **accélérer** la décomposition de la MO ancienne du sol. C'est le priming effect, ou amorçage.\n\nMÉCANISME : la MO fraîche relance l'activité microbienne, qui pour alimenter son métabolisme en énergie « co-minéralise » une partie du stock stable. L'effet est transitoire (quelques semaines à mois) mais peut être significatif sur les sols à fort stock (argileux, humifères).\n\nSUR SOL SABLEUX À FAIBLE STOCK → priming quasi nul, le gain net d'apport est maximal.\nSUR SOL ARGILEUX À STOCK ÉLEVÉ → priming possible, le gain net est plus modeste (mais le stock absolu reste plus élevé).", "highlight": {"title": "Bilan net", "color": "success", "text": "Sur la plupart des situations agronomiques, le priming reste largement compensé par l'apport — le bilan C est positif. Le priming n'est un vrai enjeu que pour les sols forestiers ou tourbeux très riches."}}, {"id": "henin_dupuis", "titre": "Modèle Hénin-Dupuis et texture", "content": "Le modèle Hénin-Dupuis (1945) décrit l'évolution du stock de MO du sol par :", "formula": {"expr": "dMO/dt  =  k₁ × Apports  −  k₂ × MO", "source": "Hénin & Dupuis (1945)"}, "content_suite": "où k₁ est le coefficient isohumique (humification) et k₂ est le coefficient de minéralisation annuelle.\n\nK₂ DÉPEND DE LA TEXTURE :\n\n• **Sol sableux** : k₂ ≈ 0.03-0.05 /an (minéralisation rapide — la MO n'est pas protégée)\n• **Sol limoneux** : k₂ ≈ 0.02-0.03 /an\n• **Sol argileux** : k₂ ≈ 0.01-0.02 /an (MO protégée par l'argile)\n\nCELA EXPLIQUE POURQUOI un sol sableux « mange » vite ses apports — d'où la nécessité d'apports réguliers et conséquents. Un sol argileux capitalise plus longtemps.", "rule": {"title": "Passerelle avec le Calculateur", "text": "Le Calculateur Matière Organique utilise ces deux coefficients pour estimer le bilan et les équilibres à long terme. Voir le chapitre Textures → pour comprendre pourquoi la texture est déterminante."}}, {"id": "plafond_maom", "titre": "Plafond MAOM et amendements", "content": "Chaque sol a un **plafond MAOM** — un stock maximal de carbone stable qu'il peut retenir, dicté par sa fraction minérale fine (argile + limon fin).\n\nLORSQUE LE SOL EST LOIN DU PLAFOND (cas des sols dégradés, tropicaux, ou anciennement cultivés intensivement) → chaque tonne de C apportée a un rendement élevé. La marge est grande.\n\nLORSQUE LE SOL EST PROCHE DU PLAFOND → le rendement marginal baisse. Continuer à ajouter de la MO ne fait plus augmenter le stock stable, juste la fraction POM transitoire.\n\nLES AMENDEMENTS MINÉRAUX STRUCTURANTS (marne 100-300 t/ha, bentonite, basalte 6-10 t/ha) **augmentent le plafond** en ajoutant de la surface spécifique — ils modifient le « contenant » du sol.", "highlight": {"title": "Stratégie différenciée", "color": "warning", "text": "Sol sableux proche du plafond MAOM : marnage ou argilage = action structurelle ; apports MO = maintenance. Sol argileux déjà riche : priorité à la qualité biologique (BRF, ferments) plutôt qu'à la quantité brute."}}]}, {"id": "textures", "titre": "Textures, Argiles & Complexe Organo-Minéral", "icone": "🧱", "intro": "La texture — proportion de sable, limon et argile — est le paramètre le plus stable du sol. Elle détermine la capacité d'échange cationique (CEC), la réserve utile en eau, la capacité à stabiliser le carbone (MAOM). Ce chapitre pose les bases pour dialoguer avec le Triangle des Textures.", "sections": [{"id": "importance", "titre": "Pourquoi la texture est fondamentale", "content": "La texture — proportion de sable, limon et argile — détermine les propriétés physiques du sol :\n\n• Réserve utile (RU) : capacité à stocker l'eau disponible pour les plantes. Un sol argileux stocke 150-200 mm/m, un sableux 50-80 mm/m.\n• CEC : capacité d'échange cationique, donc rétention des nutriments. Directement proportionnelle à la teneur en argile.\n• Porosité et aération : un sol sableux draine bien mais retient peu. Un sol argileux retient bien mais peut devenir asphyxiant.\n• Portance : résistance au tassement par les engins agricoles.\n\nLa texture est le paramètre le plus stable du sol — mais elle n'est pas immuable. Le marnage historique (100-300 t/ha de marne) et les amendements argileux (bentonite) modifient durablement la fraction fine. Le basalte broyé (6-10 t/ha) augmente la CEC et la stabilité des agrégats sans modifier la granulométrie. Ces amendements structurants agissent sur le « contenant » du sol."}, {"id": "battance", "titre": "Battance et croûte de surface", "content": "La battance est la destruction des agrégats de surface sous l'impact des gouttes de pluie, formant une croûte imperméable.\n\n• Sols les plus sensibles : limons (LL, L) et sables limoneux (SL) — faible teneur en argile, pas assez de ciment organo-minéral.\n• Seuil critique : < 15% argile + faible MO = battance quasi certaine.\n• Protection : couverture permanente du sol (mulch, couverts), biofilms microbiens de surface (EPS), apports de matière organique.\n• Le test de stabilité des agrégats (test du tamis sous eau) mesure directement la sensibilité à la battance."}, {"id": "moargile", "titre": "Ratio MO/Argile — seuils de Husson", "content": "Le rapport C/Argile (carbone organique / teneur en argile) est l'indicateur clé de la santé structurale du sol :\n\n• < 12% : sol dégradé — structure effondrée, battance, compaction, faune appauvrie. Urgence.\n• 12-17% : sol en construction — la biologie reprend mais la structure est fragile. Couverts permanents indispensables.\n• 17-24% : transition avancée — sol fonctionnel, agrégats stables, bonne infiltration. Objectif réaliste en ACS.\n• > 24% : sol autonome — structure auto-entretenue par la biologie, résilience maximale.\n\nPlus un sol est argileux, plus il faut de MO pour atteindre ces seuils. Un sol à 40% d'argile a besoin du double de MO qu'un sol à 20%."}, {"id": "kirkby", "titre": "Texture et stockage de carbone", "content": "L'argile protège la matière organique de la minéralisation par adsorption sur les surfaces minérales (complexe organo-minéral, MAOM).\n\n• Chaque +10% d'argile réduit le coefficient de minéralisation K du modèle AMG de ~15%.\n• Un sol argileux stocke donc plus de carbone qu'un sol sableux à apports égaux.\n• La saturation en carbone (modèle Hassink) dépend de la fraction < 20 µm (argile + limon fin) : plus elle est élevée, plus le potentiel de stockage est grand.\n• Conséquence pratique : sur sol sableux, les apports doivent être plus fréquents car le turnover est rapide. Sur sol argileux, les apports s'accumulent mais le risque est l'asphyxie si enfouissement."}, {"id": "amendements", "titre": "Amendements minéraux : modifier le contenant du sol", "content": "Contrairement à la fertilisation (qui nourrit la plante) et au biostimulant (qui active la biologie), l'amendement structurant modifie la fraction minérale elle-même.\n\n• Marnage : apport de marne (argile + calcaire) — doses historiques 100-300 t/ha, effet 30-100 ans. Relève la CEC et le plafond MAOM des sols sableux.\n• Basalte broyé : 6-10 t/ha — C organique +69 à 135% (Richardson, 2024), séquestration 2-4 t CO₂/ha (Kelland, 2020). Technologie d'émission négative (GIEC).\n• Gypse (CaSO₄) : apporte Ca + S sans modifier le pH. Utile en sol sodique ou calcaire.\n• Bentonite : argile à très forte CEC (80-120 cmol+/kg). Alternative moderne au marnage.\n\nL'arbre de décision : sol sableux → marnage/bentonite/basalte | sol limoneux → MO + couverts | sol argileux → chaulage | sol calcaire → ne PAS chauler, corriger S/Bo/Zn."}, {"id": "camg", "titre": "Calcium vs Magnésium : pourquoi le ratio compte", "content": "Le calcium (Ca²⁺) et le magnésium (Mg²⁺) sont tous deux des cations divalents, mais leurs effets sur la structure du sol sont opposés.\n\n• Le Ca floculte les argiles : il rapproche les feuillets argileux et stabilise les agrégats (pontage cationique).\n• Le Mg disperse les argiles : son rayon ionique plus petit (0,066 nm vs 0,099 nm pour Ca) crée une sphère d'hydratation ~50% plus épaisse, écartant les feuillets au lieu de les rapprocher.\n\nUn ratio Ca/Mg trop faible dégrade la conductivité hydraulique même si le pH semble correct (Shirolkar et al., 2020).\n\nOutil de diagnostic avancé : la Charge Dispersive Nette (CDN, Rengasamy et al. 2016) intègre Na + Mg + K pour prédire la dispersion — plus précis que le seul ratio Ca/Mg."}, {"id": "metastable", "titre": "Sols sableux : un équilibre métastable", "content": "Un sol sableux régénéré (MO remontée, biologie active) reste fragile car le coefficient de minéralisation (k₂) est élevé :\n\n• k₂ sableux chaud : 0,03-0,05/an (demi-vie 14-23 ans)\n• k₂ limon tempéré : 0,01-0,02/an (demi-vie 35-70 ans)\n• k₂ argileux froid : 0,005/an (demi-vie 140 ans)\n\nÉquilibre Hénin-Dupuis : stock = (apport × k₁) / k₂\nSur sableux, la ration d'entretien annuelle est 3-10× supérieure à un limon équivalent.\n\nSans marnage ou basalte pour relever le plafond MAOM, le sol sableux reste « sous perfusion » — l'arrêt des apports provoque un déclin rapide. Le marnage convertit un régime métastable (biologique) en régime stable (minéral)."}, {"id": "argile_maom", "titre": "Argile et stabilisation MAOM — le pont avec le chapitre MO", "content": "Le rôle des argiles dans la stabilisation du carbone est aujourd'hui compris sous le nom de **MAOM** (Mineral-Associated Organic Matter) — voir chapitre Matière Organique →.\n\nMÉCANISME : la surface spécifique des argiles (jusqu'à 800 m²/g pour les smectites) offre des sites d'adsorption pour les métabolites microbiens. Ce sont ces métabolites adsorbés qui constituent le stock stable de carbone du sol — pas des composés végétaux récalcitrants comme on le pensait avant 2019.\n\nCONSÉQUENCES :\n\n• **Sol argileux** = plafond MAOM élevé = fort potentiel de stockage C à long terme\n• **Sol sableux** = plafond MAOM bas = priorité aux apports fréquents et à l'amendement structurant\n• **Sol amendé (marne, bentonite, basalte)** = augmentation du plafond = effet structurel durable", "source": "Cotrufo M.F. & Lavallee J.M. (2019) ; actualisation de la doctrine pré-2020 (labile/récalcitrant)."}]}, {"id": "ferments", "titre": "Fermentations Appliquées", "icone": "⚡", "intro": "Les préparations microbiennes paysannes (bokashi, LiFoFer, KNF, JADAM) reposent toutes sur un même principe : la lacto-fermentation anaérobie dirigée. Ce chapitre pose les bases pour dialoguer avec le Calculateur LiFoFer.", "sections": [{"id": "principe", "titre": "LiFoFer, bokashi, choucroute : même principe", "content": "La LiFoFer n'est pas une recette exotique. C'est une lacto-fermentation anaérobie — exactement comme la choucroute, le kimchi, le bokashi ou le silage agricole. Le principe est universel : un substrat + de l'eau + des bactéries lactiques + de l'anaérobie → chute de pH → éviction des pathogènes → produit stable, vivant et riche.\n\nCe qui change d'une préparation à l'autre : le substrat (légumes pour la choucroute, litière forestière pour la LiFoFer, son pour le bokashi) et l'échelle. La microbiologie, elle, obéit toujours à la même succession."}, {"id": "succession", "titre": "Succession microbienne en 3 phases", "content": "Dans une lacto-fermentation anaérobie dirigée, les populations microbiennes se succèdent dans un ordre prévisible, conditionné par la chute de pH et du potentiel redox (Eh).", "phases": [{"nom": "Phase LAB — Lactobacilles pionniers", "jours": "J0 — J3", "ph": "6.5 → 4.0", "eh_mv": "+100 → -50", "organismes": ["Lactobacillus plantarum", "L. brevis", "Pediococcus spp.", "Leuconostoc mesenteroides"], "role": "Acidification rapide par production d'acide lactique. La chute de pH sous 4.5 évince les pathogènes (E. coli, Salmonella, Clostridium pathogènes) et verrouille le milieu.", "couleur": "#2563EB"}, {"nom": "Phase Levures & Bacillus", "jours": "J3 — J7", "ph": "4.0 → 3.8", "eh_mv": "-50 → -150", "organismes": ["Saccharomyces cerevisiae", "Candida spp.", "Bacillus subtilis", "B. amyloliquefaciens"], "role": "Production d'éthanol, d'esters aromatiques, d'enzymes (protéases, cellulases) et de bactériocines. Les Bacillus synthétisent des antibiotiques naturels (iturine, fengycine) qui suppriment les pathogènes fongiques.", "couleur": "#D97706"}, {"nom": "Phase PNSB & Actinomycètes", "jours": "J7 — J21+", "ph": "3.8 stable", "eh_mv": "-150 → -250", "organismes": ["Rhodopseudomonas palustris", "Rhodobacter spp.", "Streptomyces spp."], "role": "Les PNSB (Purple Non-Sulfur Bacteria) fixent l'azote atmosphérique, synthétisent vitamines B12, coenzyme Q10, et métabolites bioactifs. Les Actinomycètes produisent les antibiotiques du sol (streptomycine, tétracyclines naturelles) et métabolisent la lignine.", "couleur": "#7C3AED"}]}, {"id": "redox", "titre": "Eh (redox) : la clé de la qualité", "content": "Le potentiel redox (Eh, en mV) mesure la disponibilité en oxygène et accepteurs d'électrons. C'est lui qui détermine quelles voies métaboliques sont actives — et donc quels micro-organismes prolifèrent.", "zones_redox": [{"label": "Aérobie", "eh_min": 300, "eh_max": null, "couleur": "#059669", "process": "Respiration O2 — compostage, nitrification"}, {"label": "Microaérobie", "eh_min": 100, "eh_max": 300, "couleur": "#D97706", "process": "Transition — dénitrification, nitrates"}, {"label": "Anaérobie fermentaire", "eh_min": -200, "eh_max": 100, "couleur": "#7C3AED", "process": "Fermentation LAB/levures — zone LiFoFer, choucroute, bokashi"}, {"label": "Anaérobie réductrice", "eh_min": null, "eh_max": -200, "couleur": "#2563EB", "process": "Méthanogenèse, sulfato-réduction (anaérobie subie)"}], "anaerobie_compare": {"good": {"titre": "Anaérobie CHOISIE (LiFoFer, choucroute)", "avantage": "Contrôlée, sans oxygène dès le départ. LAB dominent, pH chute vite, pathogènes évincés en <48h.", "techniques": ["Contenant hermétique", "Tassement pour chasser l'air", "Sucre rapide pour démarrer", "Inoculum LAB abondant"]}, "bad": {"titre": "Anaérobie SUBIE (sol hydromorphe, tas de fumier écrasé)", "risques": "Putréfaction, sulfato-réduction (H2S), méthanogenèse. Toxicité racinaire.", "signaux": ["Odeur de soufre", "Couleur bleu-gris", "Accumulation de nitrites", "Décroissance racinaire"]}}}, {"id": "pourquoi", "titre": "Pourquoi l'anaérobie ?", "bullets": ["Les bactéries lactiques sont anaérobies facultatives : elles prospèrent sans oxygène et acidifient le milieu.", "Sans O2, les pathogènes aérobies (moisissures, Pseudomonas) sont bloqués.", "Les voies fermentaires économisent le carbone : ~90% du C est préservé (contre 50% en compostage aérobie).", "Les métabolites produits (acides organiques, vitamines, antibiotiques) sont stables et bioactifs."]}, {"id": "lignee", "titre": "Lignée historique des préparations microbiennes", "content": "La LiFoFer n'est pas une invention moderne isolée. C'est le maillon contemporain d'une chaîne de savoirs paysans de plus de 10 000 ans, qui relie les premières poteries néolithiques aux techniques des jardiniers-maraîchers d'aujourd'hui. Toutes reposent sur le même principe microbiologique : la lacto-fermentation anaérobie.", "timeline": []}]}], "intro": "Ce cahier rassemble les fondations scientifiques du corpus Sol Vivant. Chaque chapitre pose les concepts et renvoie vers l'outil interactif associé. Doctrine moderne (Cotrufo & Lavallee 2019 pour la MO).", "chapter_tools": {"mo": {"url": "mo_calculateur.html", "label": "Calculateur Matière Organique", "icon": "🧪"}, "textures": {"url": "triangle_textures.html", "label": "Triangle des Textures GEPPA", "icon": "🔺"}, "ferments": {"url": "lifofer.html", "label": "Calculateur LiFoFer", "icon": "🌿"}}};</script>
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({
+  title,
+  icon,
+  defaultOpen = false,
+  children,
+  id
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse",
+    id: id
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-collapse-header",
+    onClick: () => setOpen(!open)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-collapse-title"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
+    className: `sv-collapse-chevron ${open ? 'open' : ''}`
+  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse-body"
+  }, children));
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({
+  children,
+  source
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula"
+  }, children, source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula-source"
+  }, source));
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({
+  children,
+  title
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({
+  children,
+  title,
+  icon
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note",
+    "data-icon": icon || ''
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({
+  value,
+  unit,
+  label,
+  color,
+  detail,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi",
+    style: style
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: color ? {
+      color
+    } : undefined
+  }, value), unit && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, unit), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: color ? {
+      color
+    } : undefined
+  }, label), detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, detail));
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({
+  children,
+  cols
+}) {
+  const style = cols ? {
+    gridTemplateColumns: `repeat(${cols}, 1fr)`
+  } : undefined;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid",
+    style: style
+  }, children);
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({
+  items,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, children);
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, item.date && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, item.place), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-timeline-tag"
+  }, t))))));
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({
+  title,
+  color,
+  label,
+  stats,
+  tags,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: color || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: color || 'var(--accent)'
+    }
+  }, label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, label), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, title)), stats && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-phase-tag"
+  }, t))), children && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, children));
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({
+  good,
+  bad
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({
+  ok,
+  ko
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, ok && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({
+  terms
+}) {
+  if (!terms || !terms.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, t.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: t.badgeStyle
+  }, t.badge), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.def))));
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({
+  sources
+}) {
+  if (!sources || !sources.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, s.year && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    rel: "noopener",
+    className: "sv-source-link"
+  }, "[lien]")))));
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-tabs"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    className: `sv-tab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({
+  text,
+  label
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content"
+  }, text));
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({
+  title,
+  items,
+  note,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, title), items && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-warning-text)',
+      lineHeight: 1.45,
+      fontStyle: 'italic'
+    }
+  }, note), children);
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({
+  title,
+  children,
+  color
+}) {
+  const c = color || 'success';
+  const colors = {
+    success: {
+      bg: 'var(--success-light)',
+      border: 'var(--success)',
+      text: 'var(--color-success-text)'
+    },
+    warning: {
+      bg: 'var(--warning-light)',
+      border: 'var(--warning)',
+      text: 'var(--color-warning-text)'
+    },
+    info: {
+      bg: 'var(--info-light)',
+      border: 'var(--accent)',
+      text: 'var(--accent-dark)'
+    },
+    purple: {
+      bg: 'var(--purple-light)',
+      border: 'var(--purple)',
+      text: 'var(--purple-dark)'
+    }
+  };
+  const s = colors[c] || colors.success;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box",
+    style: {
+      background: s.bg,
+      borderLeftColor: s.border
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title",
+    style: {
+      color: s.text
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, children));
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({
+  headers,
+  rows,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, children);
+  if (!headers || !rows) return null;
+  return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: h.align ? {
+      textAlign: h.align
+    } : undefined
+  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
+    key: j,
+    style: headers[j] && headers[j].align ? {
+      textAlign: headers[j].align
+    } : undefined
+  }, cell))))));
+}
+
+// ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
+// Usage: <SvBulletList items={["plain string", {text:"foo", emphasis:"bar"}, ...]} />
+// - Chaîne simple : rendue telle quelle
+// - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
+//   `strong` met en gras inline avec .sv-emphasis
+function SvBulletList({
+  items,
+  dense
+}) {
+  if (!items || !items.length) return null;
+  const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
+  return /*#__PURE__*/React.createElement("ul", {
+    className: cls
+  }, items.map((it, i) => {
+    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, it);
+    if (it && typeof it === 'object') {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
+        className: "sv-mark"
+      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
+        className: "sv-emphasis"
+      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
+    }
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, String(it));
+  }));
+}
+
+// ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
+// Usage: <SvSection title="Pourquoi l'anaérobie" label="Fermentation" level={2}>…</SvSection>
+// - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
+// - `level` : 2 (défaut) ou 3
+// - `icon` (optionnel) : emoji en préfixe du titre
+function SvSection({
+  title,
+  label,
+  level,
+  icon,
+  id,
+  children
+}) {
+  const H = level === 3 ? 'h3' : 'h2';
+  return /*#__PURE__*/React.createElement("section", {
+    className: "sv-section-block",
+    id: id
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "sv-section-label"
+  }, label), title && /*#__PURE__*/React.createElement(H, {
+    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-section-icon"
+  }, icon), title), children);
+}
+
+// ── SvRichText : rendu pédagogique de texte semi-structuré ──
+// Input : chaîne brute avec paragraphes (\n\n), bullets (• ...),
+//         sections en MAJUSCULES terminées par ':', refs "Card #N" et
+//         termes entre backticks `...`.
+// Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
+// Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+function SvRichText({
+  text,
+  onCardRef,
+  skipPrefixes
+}) {
+  if (!text) return null;
+  const skips = skipPrefixes || ['[2026-'];
+  const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
+
+  // Regroupement en blocs : paragraphes / bullets / section-labels
+  const blocks = [];
+  let i = 0;
+  while (i < rawLines.length) {
+    const line = rawLines[i];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    // Section MAJUSCULES suivie de ':' — ex : "COMPATIBILITÉS MAJEURES :"
+    // (au moins 2 mots, lettres accentuées, ratio majuscules ≥ 80%)
+    const isSectionLabel = (() => {
+      if (!trimmed.endsWith(':') && !trimmed.endsWith(' :')) return false;
+      const t = trimmed.replace(/:$/, '').trim();
+      if (t.length < 4 || t.length > 80) return false;
+      const letters = t.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+      if (letters.length < 4) return false;
+      const uppers = letters.filter(ch => ch === ch.toUpperCase());
+      return uppers.length / letters.length >= 0.8;
+    })();
+    if (isSectionLabel) {
+      blocks.push({
+        type: 'label',
+        text: trimmed.replace(/:$/, '').trim()
+      });
+      i++;
+      continue;
+    }
+    // Bullets contigus
+    if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
+      const items = [];
+      while (i < rawLines.length && (rawLines[i].trim().startsWith('• ') || rawLines[i].trim().startsWith('- '))) {
+        items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
+        i++;
+      }
+      blocks.push({
+        type: 'bullets',
+        items
+      });
+      continue;
+    }
+    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label)
+    const paraLines = [];
+    while (i < rawLines.length) {
+      const t = rawLines[i].trim();
+      if (!t) break;
+      if (t.startsWith('• ') || t.startsWith('- ')) break;
+      // nouvelle section-label → stop avant
+      const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
+        const x = t.replace(/:$/, '').trim();
+        const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+        if (letters.length < 4) return false;
+        const uppers = letters.filter(ch => ch === ch.toUpperCase());
+        return uppers.length / letters.length >= 0.8 && x.length < 80;
+      })();
+      if (isLabel && paraLines.length > 0) break;
+      paraLines.push(rawLines[i]);
+      i++;
+    }
+    if (paraLines.length) blocks.push({
+      type: 'para',
+      text: paraLines.join(' ')
+    });
+  }
+
+  // Rendu inline d'un texte : transforme "Card #11", "terme `foo`", "fiche 3"
+  const renderInline = (s, keyPrefix) => {
+    if (!s) return null;
+    const out = [];
+    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|fiche (\d+)/g;
+    let last = 0,
+      m,
+      n = 0;
+    while ((m = regex.exec(s)) !== null) {
+      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m[1]) {
+        const id = parseInt(m[1]);
+        out.push(/*#__PURE__*/React.createElement("a", {
+          key: keyPrefix + '-ref-' + n++,
+          onClick: () => onCardRef && onCardRef(id),
+          style: {
+            color: 'var(--accent)',
+            cursor: 'pointer',
+            textDecoration: 'underline'
+          }
+        }, "#", id));
+      } else if (m[2]) {
+        const title = m[2];
+        const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
+        if (found) {
+          out.push(/*#__PURE__*/React.createElement("a", {
+            key: keyPrefix + '-ref-' + n++,
+            onClick: () => onCardRef && onCardRef(found.id),
+            style: {
+              color: 'var(--accent)',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }
+          }, title));
+        } else {
+          out.push(title);
+        }
+      } else if (m[3]) {
+        out.push(/*#__PURE__*/React.createElement("span", {
+          key: keyPrefix + '-term-' + n++,
+          className: "sv-mark"
+        }, m[3]));
+      } else if (m[4]) {
+        out.push(m[0]);
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < s.length) out.push(s.substring(last));
+    return out;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, blocks.map((b, idx) => {
+    if (b.type === 'label') {
+      return /*#__PURE__*/React.createElement("div", {
+        key: idx,
+        className: "sv-section-label",
+        style: {
+          marginTop: idx > 0 ? '0.75rem' : 0
+        }
+      }, b.text);
+    }
+    if (b.type === 'bullets') {
+      return /*#__PURE__*/React.createElement("ul", {
+        key: idx,
+        className: "sv-bullet-list"
+      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
+        key: j
+      }, renderInline(it, idx + '-' + j))));
+    }
+    return /*#__PURE__*/React.createElement("p", {
+      key: idx,
+      className: "sv-prose",
+      style: {
+        margin: '0.35rem 0'
+      }
+    }, renderInline(b.text, 'p' + idx));
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Cahier de Science — rendu multi-chapitres type livre
+// Contenu piloté par DATA.chapitres (depuis config.cahier.chapitres)
+// ═══════════════════════════════════════════════════════════════════
+
+function Section({
+  section,
+  chapId,
+  onCardRef
+}) {
+  const anchor = 'sec-' + chapId + '-' + section.id;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "cah-section",
+    id: anchor
+  }, /*#__PURE__*/React.createElement(SvCollapse, {
+    title: section.titre,
+    icon: "\uD83D\uDD2C"
+  }, section.content && /*#__PURE__*/React.createElement(SvRichText, {
+    text: section.content,
+    onCardRef: onCardRef
+  }), section.content_suite && /*#__PURE__*/React.createElement(SvRichText, {
+    text: section.content_suite,
+    onCardRef: onCardRef
+  }), section.bullets && /*#__PURE__*/React.createElement(SvBulletList, {
+    items: section.bullets
+  }), section.phases && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.6rem',
+      marginTop: '0.75rem'
+    }
+  }, section.phases.map((ph, i) => /*#__PURE__*/React.createElement(SvPhaseCard, {
+    key: i,
+    title: ph.nom,
+    color: ph.couleur,
+    label: ph.jours,
+    stats: [{
+      label: 'pH',
+      value: ph.ph
+    }, {
+      label: 'Eh',
+      value: ph.eh_mv + ' mV'
+    }],
+    tags: ph.organismes
+  }, ph.role))), section.zones_redox && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))',
+      gap: '0.6rem',
+      marginTop: '0.75rem'
+    }
+  }, section.zones_redox.map((z, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    style: {
+      borderTop: '3px solid ' + z.couleur,
+      background: z.couleur + '10',
+      padding: '0.6rem 0.75rem',
+      borderRadius: '6px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      color: z.couleur,
+      fontSize: 'var(--font-sm)'
+    }
+  }, z.label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      marginTop: '2px'
+    }
+  }, z.eh_min != null && z.eh_max != null ? z.eh_min + ' à ' + z.eh_max + ' mV' : z.eh_min != null ? '> ' + z.eh_min + ' mV' : '< ' + z.eh_max + ' mV'), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      marginTop: '4px'
+    }
+  }, z.process)))), section.anaerobie_compare && section.anaerobie_compare.good && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement(SvCompare, {
+    good: {
+      title: '✓ ' + section.anaerobie_compare.good.titre,
+      text: section.anaerobie_compare.good.avantage,
+      items: section.anaerobie_compare.good.techniques
+    },
+    bad: {
+      title: '⚠ ' + section.anaerobie_compare.bad.titre,
+      text: section.anaerobie_compare.bad.risques,
+      items: section.anaerobie_compare.bad.signaux
+    }
+  })), section.timeline && /*#__PURE__*/React.createElement(SvTimeline, {
+    items: section.timeline.map(e => ({
+      date: e.annee || e.date || '',
+      place: e.lieu || e.place || '',
+      text: e.nom ? e.nom + (e.description ? ' — ' + e.description : '') : e.text || '',
+      tags: e.tags || []
+    }))
+  }), section.formula && /*#__PURE__*/React.createElement(SvFormula, {
+    source: section.formula.source
+  }, section.formula.expr), section.rule && /*#__PURE__*/React.createElement(SvRule, {
+    title: section.rule.title
+  }, section.rule.text), section.highlight && /*#__PURE__*/React.createElement(SvHighlightBox, {
+    title: section.highlight.title,
+    color: section.highlight.color || 'info'
+  }, section.highlight.text), section.source && /*#__PURE__*/React.createElement("div", {
+    className: "cah-source"
+  }, "\uD83D\uDCD6 ", section.source)));
+}
+function Chapter({
+  chap,
+  num,
+  onCardRef
+}) {
+  const anchor = 'chap-' + chap.id;
+  const toolLink = DATA.chapter_tools && DATA.chapter_tools[chap.id];
+  return /*#__PURE__*/React.createElement("article", {
+    className: "cah-chapter",
+    id: anchor
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "cah-chapter-head"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cah-chapter-num"
+  }, num), /*#__PURE__*/React.createElement("div", {
+    className: "cah-chapter-icon"
+  }, chap.icone), /*#__PURE__*/React.createElement("div", {
+    className: "cah-chapter-titles"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cah-chapter-label"
+  }, "Chapitre ", num), /*#__PURE__*/React.createElement("h2", {
+    className: "cah-chapter-title"
+  }, chap.titre))), chap.intro && /*#__PURE__*/React.createElement("div", {
+    className: "cah-chapter-intro"
+  }, chap.intro), /*#__PURE__*/React.createElement("div", null, chap.sections.map(sec => /*#__PURE__*/React.createElement(Section, {
+    key: sec.id,
+    section: sec,
+    chapId: chap.id,
+    onCardRef: onCardRef
+  }))), toolLink && /*#__PURE__*/React.createElement("div", {
+    className: "cah-tool-link"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '1.1rem'
+    }
+  }, "\uD83D\uDD27"), /*#__PURE__*/React.createElement("span", null, "Utiliser l'outil associ\xE9 : "), /*#__PURE__*/React.createElement("a", {
+    href: toolLink.url
+  }, toolLink.icon, " ", toolLink.label, " \u2192")));
+}
+function TOC({
+  chapitres
+}) {
+  const scrollTo = id => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+  return /*#__PURE__*/React.createElement("nav", {
+    className: "cah-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cah-toc-title"
+  }, "Sommaire"), chapitres.map((chap, i) => /*#__PURE__*/React.createElement("div", {
+    key: chap.id
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "cah-toc-chapter",
+    onClick: () => scrollTo('chap-' + chap.id)
+  }, i + 1 + '. ' + chap.icone + ' ' + chap.titre), /*#__PURE__*/React.createElement("ul", {
+    className: "cah-toc-sections"
+  }, chap.sections.map(sec => /*#__PURE__*/React.createElement("li", {
+    key: sec.id
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "cah-toc-section",
+    onClick: () => scrollTo('sec-' + chap.id + '-' + sec.id)
+  }, sec.titre)))))));
+}
+function App() {
+  const chapitres = DATA.chapitres || [];
+  const [, setTick] = React.useState(0);
+  const onCardRef = id => {
+    // Concept Cards est sur une autre page ; on redirige vers la page avec ancre
+    window.location.href = 'concept_cards.html#card-' + id;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "cah-root"
+  }, DATA.intro && /*#__PURE__*/React.createElement("div", {
+    className: "cah-intro"
+  }, DATA.intro), /*#__PURE__*/React.createElement("div", {
+    className: "cah-layout"
+  }, /*#__PURE__*/React.createElement(TOC, {
+    chapitres: chapitres
+  }), /*#__PURE__*/React.createElement("main", {
+    className: "cah-main"
+  }, chapitres.map((chap, i) => /*#__PURE__*/React.createElement(Chapter, {
+    key: chap.id,
+    chap: chap,
+    num: i + 1,
+    onCardRef: onCardRef
+  })))));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+</script>
+
+
+</body>
+</html>

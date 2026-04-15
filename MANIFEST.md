@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 52 tables, 8 vues, 38 scripts
+- 56 tables, 10 vues, 40 scripts
 
 ## Scripts
 
@@ -19,6 +19,7 @@
 | `session_start.py` | v3.0 | `tools/admin/` | Contexte session v2.3. |
 | `analyse_corpus.py` | v4.1 | `tools/batch/` | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | v1.0 | `tools/docs/` | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
+| `gen_cahier.py` | v1.0 | `tools/docs/` | Cahier de Science — livre pédagogique multi-chapitres (MO/POM-MAOM, Textures, Fermentations) |
 | `gen_explorer.py` | v1.0 | `tools/docs/` | Génération page Explorer DB statique |
 | `gen_lifofer.py` | v1.0 | `tools/docs/` | Calculateur interactif LiFoFer v1 |
 | `gen_mo_calc.py` | v1.0 | `tools/docs/` | Calculateur interactif Matière Organique — formule de Kirkby, mélanges, analyse sols. |
@@ -34,6 +35,7 @@
 | `gen_prompt_enrichissement.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
 | `gen_prompt_thesaurus.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | v1.0 | `tools/jenni/` | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
+| `integrate_fiche_retour.py` | v1.0 | `tools/jenni/` | Intègre un retour Jenni (docx) dans fiche_section_h2_notes — parse H2, extrait citations [N] et termes candidats |
 | `reformat_fiches_ris.py` | v1.0 | `tools/jenni/` | Reformate les citations Auteur-année des fiches historiques au format [N] en matchant contre biblio_norm.ris (source unique Zotero) |
 | `agent_runner.py` | v1.0 | `tools/lib/` | Pattern préparateur → agents Task → consolidateur. |
 | `cli.py` | v1.0 | `tools/lib/` | Helpers CLI partagés (add_db_arg, check_db) |
@@ -58,8 +60,8 @@ projet/
 │   ├── sync_scripts.py
 │   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, reformat_fiches_ris
+│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, integrate_fiche_retour, reformat_fiches_ris
 │   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 │   ├── zotero/                 attribution, normalise_ris, validate_ris
 ├── docx/                      Documents .docx et .ris
@@ -76,10 +78,11 @@ projet/
 
 ## Pages web interactives
 
-5 pages, 16 templates (1 partagés), vendor local (hors-ligne).
+6 pages, 25 templates (1 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
+| Cahier de Science | `cahier` | `cahier.html` |
 | Concept Cards | `concept_cards` | `concept_cards.html` |
 | Cartographie interactive | `index` | `index.html` |
 | Calculateur LiFoFer | `lifofer` | `lifofer.html` |

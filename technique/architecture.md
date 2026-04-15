@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source unique de verite. SQLite, 52 tables, 8 vues.
+Source unique de verite. SQLite, 56 tables, 10 vues.
 
 ### Tables principales
 
@@ -11,24 +11,24 @@ Source unique de verite. SQLite, 52 tables, 8 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 881 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 1175 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 874 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 3635 |
 | `chains_causales` | 16 chaines causales reliant les documents | 16 |
-| `chain_etapes` | Etapes des chaines | 120 |
+| `chain_etapes` | Etapes des chaines | 121 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 76 |
+| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 77 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 38 |
+| `scripts` | Registre des scripts avec versions | 40 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 612 |
+| `audit_log` | Journal des operations | 866 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `web_pages` | Pages web (slug, titre, OG tags) | 6 |
-| `html_templates` | Templates CSS/JS par page + partagés | 16 (1 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 56 |
+| `web_pages` | Pages web (slug, titre, OG tags) | 9 |
+| `html_templates` | Templates CSS/JS par page + partagés | 25 (1 partagés) |
+| `concept_cards` | Fiches conceptuelles synthétiques | 69 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 14 |
@@ -54,6 +54,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `analyse` | groupes, passes, template_passe2 |
 | `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
+| `cahier` | chapitres |
 | `claude_rules` | audit_cards_first, bq_access |
 | `corpus` | auteur, nom, regle_jenni |
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
@@ -81,6 +82,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `session_start.py` | admin | Contexte session v2.3. |
 | `analyse_corpus.py` | batch | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | docs | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
+| `gen_cahier.py` | docs | Cahier de Science — livre pédagogique multi-chapitres (MO/POM-MAOM, Textures, Fermentations) |
 | `gen_explorer.py` | docs | Génération page Explorer DB statique |
 | `gen_lifofer.py` | docs | Calculateur interactif LiFoFer v1 |
 | `gen_mo_calc.py` | docs | Calculateur interactif Matière Organique — formule de Kirkby, mélanges, analyse sols. |
@@ -96,6 +98,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_prompt_enrichissement.py` | jenni | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
 | `gen_prompt_thesaurus.py` | jenni | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | jenni | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
+| `integrate_fiche_retour.py` | jenni | Intègre un retour Jenni (docx) dans fiche_section_h2_notes — parse H2, extrait citations [N] et termes candidats |
 | `reformat_fiches_ris.py` | jenni | Reformate les citations Auteur-année des fiches historiques au format [N] en matchant contre biblio_norm.ris (source unique Zotero) |
 | `agent_runner.py` | lib | Pattern préparateur → agents Task → consolidateur. |
 | `cli.py` | lib | Helpers CLI partagés (add_db_arg, check_db) |
@@ -108,6 +111,8 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `attribution.py` | zotero | Attribution Zotero v4.1. |
 | `normalise_ris.py` | zotero | Normalisation RIS v2.0. |
 | `validate_ris.py` | zotero | Validation RIS v2.1. |
+| `inrae.py` | lib | Module partage |
+| `sources.py` | lib | Module partage |
 
 ## Reproduire le patron pour un autre corpus
 

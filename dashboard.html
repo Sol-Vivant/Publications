@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tableau de bord — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Tableau de bord — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="Tableau de bord du projet Sol Vivant : chiffres clés, avancement, dettes techniques, commits récents, intégrité, doctrine." />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Tableau de bord — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Tableau de bord du projet Sol Vivant : chiffres clés, avancement, dettes techniques, commits récents, intégrité, doctrine." />
+<link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
+
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<style>
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #cbd5e1;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Échelle typographique (source unique pour toutes les pages) */
+  --font-xs: 0.75rem;
+  --font-sm: 0.82rem;
+  --font-base: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.15rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: var(--font-base);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: var(--font-xs);
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Navigation inter-pages ── */
+.sv-nav-pages {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.sv-nav-pages a {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.sv-nav-pages a:hover {
+  background: var(--accent-light);
+  text-decoration: none;
+}
+.sv-nav-current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: #f1f5f9; }
+.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Onglets (pattern Pratique / Comprendre) ── */
+.sv-tabs {
+  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+}
+.sv-tab {
+  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
+  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.sv-tab:hover { color: var(--text); }
+.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
+@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--font-base);
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--font-base);
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem 0;
+  padding: 0 1.25rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+.sv-bullet-list-dense li {
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  font-size: var(--font-xs);
+}
+
+/* ── Inline emphasis / highlight unifiés ── */
+.sv-mark {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.sv-emphasis {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Bloc texte riche (SvRichText) ── */
+.sv-richtext { line-height: 1.55; }
+.sv-richtext p.sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-richtext .sv-section-label {
+  font-size: 0.7rem;
+  margin-bottom: 0.35rem;
+  color: var(--accent-dark);
+}
+.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+
+/* ── Bloc de section unifié (SvSection) ── */
+.sv-section-block {
+  margin: 1.25rem 0 1.5rem;
+}
+.sv-section-block + .sv-section-block {
+  margin-top: 2rem;
+}
+.sv-section-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-section-title-h2 { font-size: 1.35rem; }
+.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+.sv-section-block .sv-section-label + .sv-section-title {
+  margin-top: 0;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+/* Dashboard */
+.db-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.db-kpi { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow); }
+.db-kpi-value { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.db-kpi-label { font-size: var(--font-xs); color: var(--text-secondary); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.db-kpi-sub { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+
+.db-section { margin-bottom: 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow); }
+.db-section h2 { margin: 0 0 0.75rem 0; font-size: 1.1rem; color: var(--text); border-bottom: 2px solid var(--accent-light); padding-bottom: 4px; }
+.db-section h3 { font-size: 0.95rem; color: var(--text); margin: 0.75rem 0 0.5rem; }
+
+.db-dettes .dette { padding: 8px 10px; border-left: 4px solid var(--accent); background: var(--color-bg-subtle); border-radius: 4px; margin-bottom: 6px; font-size: var(--font-sm); }
+.db-dettes .dette.CRITIQUE { border-left-color: var(--danger); background: var(--danger-light); }
+.db-dettes .dette.IMPORTANT { border-left-color: var(--warning); background: var(--warning-light); }
+.db-dettes .dette.SOUHAITABLE { border-left-color: var(--info); }
+.db-dettes .dette.INFO { border-left-color: var(--text-secondary); opacity: 0.85; }
+.db-dettes .dette-titre { font-weight: 600; color: var(--text); }
+.db-dettes .dette-detail { font-size: var(--font-xs); color: var(--text-secondary); margin-top: 2px; }
+.db-dettes .dette-prio { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 6px; }
+
+.db-docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.db-doc { padding: 8px 10px; border-left: 3px solid var(--accent); background: var(--color-bg-subtle); border-radius: 4px; font-size: var(--font-sm); }
+.db-doc-head { display: flex; justify-content: space-between; align-items: baseline; }
+.db-doc-code { font-weight: 700; font-family: monospace; }
+.db-doc-avancement { font-weight: 600; }
+.db-doc-bar { height: 4px; background: var(--color-bg-muted); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+.db-doc-bar > div { height: 100%; background: var(--accent); }
+.db-doc-titre { font-size: 0.7rem; color: var(--text-secondary); margin-top: 3px; }
+
+.db-timeline { font-family: monospace; font-size: 0.78rem; }
+.db-timeline-item { padding: 3px 0; border-bottom: 1px dotted var(--border); color: var(--text); }
+.db-timeline-time { color: var(--text-secondary); margin-right: 8px; }
+.db-timeline-op { display: inline-block; width: 9ch; font-weight: 600; color: var(--accent); }
+
+.db-commit { padding: 4px 0; border-bottom: 1px dotted var(--border); font-size: var(--font-sm); }
+.db-commit-sha { font-family: monospace; color: var(--accent); margin-right: 8px; font-weight: 600; }
+
+.db-checks .check { padding: 4px 8px; border-radius: 4px; margin-bottom: 3px; font-size: var(--font-sm); display: flex; align-items: center; gap: 8px; }
+.db-checks .check.OK { background: var(--success-light); color: var(--success); }
+.db-checks .check.WARN { background: var(--warning-light); color: var(--warning); }
+.db-checks .check.INFO { background: var(--info-light); color: var(--info); opacity: 0.85; }
+.db-checks .check-count { font-weight: 700; }
+
+.db-doctrine .d { padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--color-bg-subtle); margin-bottom: 6px; font-size: var(--font-sm); }
+.db-doctrine .d-mod { display: inline-block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-right: 6px; }
+
+.db-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1rem; }
+
+.db-strate-F { background: #EDE9FE !important; border-left-color: #6D28D9 !important; }
+.db-strate-S { background: #DBEAFE !important; border-left-color: #1D4ED8 !important; }
+.db-strate-V { background: #D1FAE5 !important; border-left-color: #047857 !important; }
+.db-strate-P { background: #FEF3C7 !important; border-left-color: #B45309 !important; }
+.db-strate-H { background: #FEE2E2 !important; border-left-color: #B91C1C !important; }
+
+.db-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 6px; }
+.db-card-dim { padding: 6px 10px; border-radius: 4px; font-size: var(--font-xs); color: #fff; font-weight: 600; }
+.db-card-dim-n { font-size: 1.3rem; font-weight: 800; display: block; line-height: 1; }
+
+.db-fiches-list { font-size: var(--font-sm); }
+.db-fiche { display: flex; justify-content: space-between; padding: 3px 6px; border-bottom: 1px dotted var(--border); }
+.db-fiche-statut { font-size: 0.65rem; padding: 1px 6px; border-radius: 8px; font-weight: 600; }
+.db-fiche-statut.integre { background: var(--success-light); color: var(--success); }
+.db-fiche-statut.envoye { background: var(--info-light); color: var(--info); }
+.db-fiche-statut.archive { background: var(--color-bg-muted); color: var(--text-secondary); }
+
+.db-generated { text-align: right; font-size: var(--font-xs); color: var(--text-secondary); font-style: italic; padding: 8px 0; }
+
+
+</style>
+</head>
+<body>
+
+
+<header class="sv-header">
+  <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
+  <div class="sv-subtitle">Tableau de bord — Pilotage interne — vital signs, dettes, chantiers</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 00:35 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+</header>
+
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+
+
+<div id="root"></div>
+
+
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
+  · Données depuis sol_vivant.db
+</footer>
+
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
+
+
+<script>
+const DATA = {"vital": {"n_tables": 55, "n_views": 10, "n_scripts": 40, "n_docs": 18, "n_terms": 874, "n_terms_def": 874, "n_terms_en": 874, "n_chains": 16, "n_cards": 69, "n_cards_total": 69, "n_card_links": 150, "n_card_chain_links": 114, "n_cascade_links": 140, "n_fiches": 34, "n_fiches_integre": 8, "n_fiches_envoye": 11, "n_validations": 14, "n_sources": 226, "n_sources_zotero": 64, "n_source_usages": 167, "n_crossrefs": 118, "n_bq": 83, "n_bq_crit": 58}, "docs_avancement": [{"code": "F1", "titre": "Le Temps Long", "strate": "F", "avancement": 67, "n_sections": 13, "n_terms": 49, "states": {"dense": 2, "ok": 10, "graine": 1, "vide": 0}}, {"code": "F2", "titre": "L'Économie du Vivant", "strate": "F", "avancement": 70, "n_sections": 10, "n_terms": 35, "states": {"dense": 3, "ok": 6, "graine": 1, "vide": 0}}, {"code": "H1", "titre": "Sol, Alimentation et Santé Humaine", "strate": "H", "avancement": 68, "n_sections": 10, "n_terms": 34, "states": {"dense": 2, "ok": 7, "graine": 1, "vide": 0}}, {"code": "H2", "titre": "Le Microbiome Intestinal", "strate": "H", "avancement": 68, "n_sections": 8, "n_terms": 21, "states": {"dense": 2, "ok": 5, "graine": 1, "vide": 0}}, {"code": "H3", "titre": "La Résistance Antimicrobienne", "strate": "H", "avancement": 69, "n_sections": 6, "n_terms": 28, "states": {"dense": 2, "ok": 3, "graine": 1, "vide": 0}}, {"code": "P1", "titre": "Diagnostic du Sol Vivant", "strate": "P", "avancement": 72, "n_sections": 12, "n_terms": 41, "states": {"dense": 4, "ok": 7, "graine": 1, "vide": 0}}, {"code": "P2", "titre": "Agriculture de Conservation", "strate": "P", "avancement": 70, "n_sections": 11, "n_terms": 30, "states": {"dense": 3, "ok": 7, "graine": 1, "vide": 0}}, {"code": "P3", "titre": "Biostimulants et Fermentations Appliquées", "strate": "P", "avancement": 76, "n_sections": 10, "n_terms": 69, "states": {"dense": 5, "ok": 4, "graine": 1, "vide": 0}}, {"code": "P4", "titre": "Agroforesterie et Systèmes Pérennes", "strate": "P", "avancement": 64, "n_sections": 10, "n_terms": 20, "states": {"dense": 1, "ok": 8, "graine": 1, "vide": 0}}, {"code": "P5", "titre": "La Transition", "strate": "P", "avancement": 64, "n_sections": 9, "n_terms": 19, "states": {"dense": 1, "ok": 7, "graine": 1, "vide": 0}}, {"code": "S0", "titre": "L'Eau dans le Sol Vivant", "strate": "S", "avancement": 65, "n_sections": 12, "n_terms": 24, "states": {"dense": 1, "ok": 10, "graine": 1, "vide": 0}}, {"code": "S1", "titre": "Architecture du Sol", "strate": "S", "avancement": 75, "n_sections": 12, "n_terms": 51, "states": {"dense": 5, "ok": 6, "graine": 1, "vide": 0}}, {"code": "S2", "titre": "Le Microbiome du Sol", "strate": "S", "avancement": 69, "n_sections": 13, "n_terms": 167, "states": {"dense": 3, "ok": 9, "graine": 1, "vide": 0}}, {"code": "S3", "titre": "Le Microbiome Fongique et Mycorhizien", "strate": "S", "avancement": 65, "n_sections": 12, "n_terms": 48, "states": {"dense": 1, "ok": 10, "graine": 1, "vide": 0}}, {"code": "S4", "titre": "Le Carbone et les Grands Cycles", "strate": "S", "avancement": 78, "n_sections": 11, "n_terms": 71, "states": {"dense": 6, "ok": 4, "graine": 1, "vide": 0}}, {"code": "V1", "titre": "La Faune du Sol", "strate": "V", "avancement": 73, "n_sections": 11, "n_terms": 23, "states": {"dense": 4, "ok": 6, "graine": 1, "vide": 0}}, {"code": "V2", "titre": "L'Holobionte Plante-Microbiome", "strate": "V", "avancement": 86, "n_sections": 10, "n_terms": 78, "states": {"dense": 8, "ok": 1, "graine": 1, "vide": 0}}, {"code": "V3", "titre": "Les Fermentations Microbiennes", "strate": "V", "avancement": 73, "n_sections": 11, "n_terms": 35, "states": {"dense": 4, "ok": 6, "graine": 1, "vide": 0}}], "dettes": [{"priorite": "IMPORTANT", "titre": "11 fiche(s) envoyée(s)/reçue(s) non encore intégrée(s)", "detail": "statut envoye ou recu → à passer en integre"}, {"priorite": "SOUHAITABLE", "titre": "14 chevauchement(s) v1 legacy + v2 dans prompts", "detail": "Arbitrage manuel possible (garder/merger/purger)"}, {"priorite": "SOUHAITABLE", "titre": "162 source(s) à pousser dans Zotero", "detail": "export_sources_incomplete.py → scan Zotero → sync_sources_from_ris.py"}, {"priorite": "INFO", "titre": "9 terme(s) EN sans syn_en", "detail": "Non bloquant"}], "doctrine": [{"module": "batch", "titre": "Pipeline Zotero — 3 scripts", "preview": "```\nnormalise_ris.py v2.0   ->  Passage 0 local (gratuit)\n                            Pose STATUT/STRATE/CHAINE/VERSION\n\nattribution.py v6.0     ->  Pattern agents Task (fin de l'API externe)\n        "}, {"module": "batch", "titre": "STATUT: — logique de décision", "preview": "normalise_ris.py pose le STATUT. attribution.py v6.0 le recalcule via `compute_statut()` (fonction unique partagée).\n\n| STATUT | Action |\n|---|---|\n| VALIDE | skip (conf:haute + AB + pas PRIORITE_RESU"}, {"module": "batch", "titre": "Sécurité import Zotero", "preview": "TOUJOURS valider avant d'importer :\npython3 validate_ris.py --input biblio_finale.ris --db sol_vivant.db --no-opus\n\nUn RIS corrompu peut dupliquer toute la bibliothèque et faire perdre les PDF attaché"}, {"module": "claude", "titre": "Git — toujours travailler sur main", "preview": "**Règle** : travailler directement sur `main`. Pas de branches.\n\nLe projet est géré par un seul utilisateur + Claude Code. Les branches ajoutent de la complexité inutile (merge, stash, divergence) san"}, {"module": "claude", "titre": "DB = source de vérité — données en DB, fichiers = vues", "preview": "**Règle** : `sol_vivant.db` est la source de vérité unique. Les fichiers générés sont des **vues** de la DB.\n\n**Ne jamais modifier directement :**\n- `Publications/prompts/prompts_jenni_*.txt` → généré"}, {"module": "claude", "titre": "Ce que Claude ne fait PAS", "preview": "- Stocker le contenu Jenni (.docx) directement dans la DB\n- Modifier le RIS Zotero à la main (toujours passer par le pipeline `normalise → agents Task → validate`)\n- Ajouter des codes docs (S2, P1...)"}, {"module": "claude", "titre": "Pseudoscience — flag et définitions factuelles", "preview": "**Règle** : le corpus ne fait pas de publicité pour la pseudoscience.\n\n**Terme concerné** : `Agriculture Biodynamique` (ID 160, strate F, doc F1/F2)\n- Définition réécrite : factuelle, sourcée (Chalker"}, {"module": "claude", "titre": "Faux positifs Opus récurrents", "preview": "Claude Code est lui-même Opus — ces erreurs récurrentes doivent être détectées chez lui-même avant d'agir :\n\n1. **« Mentions problématiques dans prompts »** → SQLite LIKE est case-insensitive. `sol vi"}, {"module": "claude", "titre": "Stratégie de rédaction — cercle vertueux", "preview": "**Ordre de rédaction : F → S → V → P → H**\n\nChaque strate rédigée enrichit la DB pour les suivantes :\n\n1. **F/S rédigés** (Jenni passe 1)\n2. **Claude analyse** (passe 2 : DOI, niveau de preuve, lacune"}, {"module": "claude", "titre": "Fiches — zoom d'un point précis du corpus", "preview": "## Fiches — zoom d'un point précis du corpus\n\n### Définition (canonique)\n\n> **Une fiche est un zoom d'un point du corpus.**\n\n- **Zoom** : approfondissement, focalisation\n- **Un point** : un sujet préc"}, {"module": "claude", "titre": "Structure dépôt et conventions de nommage", "preview": "**Arborescence du dépôt :**\n```\nTools/                          ← racine git\n├── sol_vivant.db               ← source de vérité unique\n├── CLAUDE.md                   ← généré par session_start.py\n├──"}, {"module": "claude", "titre": "Environnement — pas de binaire sqlite3, utiliser python3", "preview": "Le binaire `sqlite3` **n'est pas installé** dans l'environnement Claude Code (erreur `sqlite3: command not found`).\n\n**Toujours utiliser le module Python** pour interroger la DB :\n\n```bash\npython3 -c "}, {"module": "claude", "titre": "Workflow — traitement des notes volantes (jmj/notes*.txt)", "preview": "## Workflow — traitement des notes volantes\n\n**Fichiers concernés** : `jmj/notes*.txt`, `jmj/transcriptions/*.txt` et tout matériel brut que JMJ capture \"au pied levé\" (posts LinkedIn, abstracts, frag"}, {"module": "jenni", "titre": "Jenni — ce que c'est", "preview": "Jenni est un outil de rédaction académique qui produit des **assemblages de citations** depuis des sources Open Access et Google Scholar. Elle ne rédige pas librement — elle cite et structure.\n\nCe que"}, {"module": "jenni", "titre": "Règle absolue — ce que Jenni ne voit jamais", "preview": "**S'applique à TOUT contenu destiné à Jenni** : prompts de documents (via export_jenni_doc.py), prompts de fiches, prompts de validation, prompts d'enrichissement du thésaurus — TOUT fichier dans Publ"}, {"module": "jenni", "titre": "Architecture des prompts — masque v3.0 + format blocs ---", "preview": "Les prompts sont générés **mécaniquement** par `export_jenni_doc.py` v3.0 depuis les tables :\n\n| Table | Données |\n|---|---|\n| `jenni_doc_specs` | titre_jenni, style, angle_entree |\n| `prompts` | H1, "}, {"module": "jenni", "titre": "Workflow de rédaction", "preview": "**Passe 1 — Rédaction (Jenni) :**\n1. Générer les prompts :\n   `python3 export_jenni_doc.py --db sol_vivant.db --doc S0`\n2. Dans Jenni : créer un projet, uploader le RIS filtré (sources pertinentes dep"}, {"module": "jenni", "titre": "Prompts manuels — fiches, enrichissement, pédagogie (templates + destinations)", "preview": "## Prompts manuels — fiches, validation, enrichissement\n\nLes prompts générés par `export_jenni_doc.py` suivent le masque v3.0 (BQ ID=41). Mais Claude produit aussi des **prompts manuels** pour d'autre"}, {"module": "jenni", "titre": "Règle — pas de conseils rédactionnels redondants", "preview": "## Règle prompts Jenni — pas de conseils rédactionnels redondants\n\nJenni produit naturellement un style concis et adapté au contexte donné. **Ne pas répéter** les conseils de style dans les prompts si"}, {"module": "jenni", "titre": "Charte Jenni — règles opérationnelles (enrichissement thésaurus)", "preview": "## Charte Jenni — règles opérationnelles (enrichissement thésaurus)\n\nSource : `docx/charte_de_recommandations_pour_un_travail_efficace.docx` — document produit par Jenni elle-même pour décrire son fon"}, {"module": "jenni", "titre": "Charte fiches techniques (Jenni) — structure standardisée 8 sous-blocs", "preview": "## Charte fiches techniques (Jenni)\n\n**Source** : `docx/charte_de_travail___fiches_techniques.docx` — produit par Jenni elle-même pour décrire ses attentes spécifiques aux fiches techniques / protocol"}, {"module": "jenni", "titre": "Validations — workflow et structure (table dédiée)", "preview": "## Validations — workflow et structure\n\n**Différence avec une fiche** : la fiche est un **zoom proactif** sur un sujet intéressant en soi ; la validation est un **comblement réactif** d''une dette ide"}, {"module": "jenni", "titre": "Listes de termes triées alphabétiquement (règle absolue workflow Jenni)", "preview": "## Thésaurus — listes de termes triées alphabétiquement obligatoire\n\n**Règle** : toute liste de termes envoyée à Jenni (workflow thésaurus : bloc\nde 10, complétion, redéfinition) **doit être triée alp"}, {"module": "jenni", "titre": "Comment Jenni comprend les instructions — modele mental (chartes)", "preview": "## Comment Jenni comprend les instructions — modele mental (source : chartes Jenni)\n\nSource : deux chartes redigees par Jenni elle-meme (docx/charte_de_recommandations_pour_un_travail_efficace.docx et"}, {"module": "jenni", "titre": "Contraintes de rendu — docx destinés à Jenni (tous types)", "preview": "## Contraintes de rendu — docx destinés à Jenni\n\n**S'applique à TOUS les .docx générés pour Jenni** : prompts de fiches\n(techniques ou transversales), ébauches de documents de strate, prompts\nde compl"}, {"module": "jenni", "titre": "Workflow thésaurus — import, complétion, déduplication", "preview": "## Workflow thésaurus Jenni — scripts et doctrine\n\n**Chaîne de traitement complète** d'un docx Jenni de thésaurus (format TERME/EN/DEF/SYN_FR/SYN_EN/BT/RT) :\n\n### 1. Export demande de complétion\n\nLes "}, {"module": "jenni", "titre": "Workflow fiches — génération prompts .docx et intégration", "preview": "## Workflow fiches — 1 fiche = 1 .docx prompt = 1 sujet\n\n### Génération prompt\n\n```bash\n# 1 fiche\npython3 tools/jenni/gen_fiche_prompt_docx.py --db sol_vivant.db --fiche-id 27\n\n# Toutes les fiches éli"}, {"module": "jenni", "titre": "Charte de travail Jenni — fiches techniques DIY", "preview": "## Charte de travail — Fiches (toutes) + spécificités techniques\n\nCharte rédigée par Jenni : `docx/charte_de_travail___fiches_techniques.docx`.\n\n**La structure générale** (ordre des blocs, numérotatio"}, {"module": "jenni", "titre": "Workflow granulaire fiches — fiche_section_h2_notes", "preview": "## Workflow granulaire fiches — table `fiche_section_h2_notes`\n\nTable de travail granulaire pour construire, exporter, importer et analyser\nles fiches techniques **bloc par bloc (H2)** plutôt que d'un"}, {"module": "maintenance", "titre": "Workflow session Claude Code (git + sync + dashboard)", "preview": "**Début de session :**\n```\ngit pull origin main\npython3 tools/admin/session_start.py --db sol_vivant.db\n```\nLe script produit le dashboard : santé thésaurus, documents, chaînes causales, scripts, hist"}, {"module": "maintenance", "titre": "maintenance_sessions — journal de bord", "preview": "Table `maintenance_sessions` — journal de bord des sessions Claude Code.\n\n**Procédure :**\n1. **Fin de session** : insérer UN enregistrement par session Claude Code\n2. **Pas de rapport intermédiaire** "}, {"module": "maintenance", "titre": "requetes_utiles — catalogue SQL", "preview": "27 requêtes de référence organisées par catégorie et type d'usage.\n\n**Catégories :** sante, documents, thesaurus, chaines, bq, scripts, maintenance, zotero, cascade, pilotage\n\n**Types d'usage :**\n- `s"}, {"module": "maintenance", "titre": "Audit d'intégrité DB — checklist", "preview": "Lancer régulièrement (toutes les 3-5 sessions) un audit d'intégrité :\n\n```sql\n-- Doublons thésaurus\nSELECT fr, COUNT(*) c FROM terms GROUP BY LOWER(fr) HAVING c > 1;\n\n-- Termes orphelins (doc_code ine"}, {"module": "maintenance", "titre": "Régénération pipeline — regen_all.py + gen_*.py", "preview": "## Régénération complète depuis la DB\n\nPrincipe : **la DB est la source de vérité unique**. Après toute modification de données, régénérer les outputs.\n\n### Commande unique\n\n```bash\npython3 tools/rege"}, {"module": "maintenance", "titre": "Rituel de clôture de session — session_end.py", "preview": "## Rituel session_end.py\n\n```bash\npython3 tools/admin/session_end.py --db sol_vivant.db\n```\n\n**Séquence** :\n1. Régénération des pages (dashboard, ebauches, explorer, etc.)\n2. `check_integrity.py` (val"}, {"module": "maintenance", "titre": "Pipeline analyse → fiches/validations → prompts → clôture", "preview": "## Pipeline analyse → fiches/validations → prompts → clôture\n\n**Cf. BQ « Modèle conceptuel — production du corpus » pour la vue d''ensemble.**\n\n### Déclencheurs\n- Audit du corpus (analyse_corpus.py, a"}, {"module": "projet", "titre": "Présentation du corpus Le Sol Vivant cet Holobionte", "preview": "Le corpus Le Sol Vivant cet Holobionte est un ensemble de 18 documents scientifiques sur l'agriculture régénératrice et la biologie des sols.\nAuteur : Jean-Michel Juzan.\n\n**Architecture en 5 strates :"}, {"module": "projet", "titre": "Règle absolue — Contenu Jenni", "preview": "Aucun contenu produit par Jenni (.docx) ne rentre **directement** dans la DB. Tout document Jenni passe par analyse Claude avant intégration corpus. Le .docx vit hors DB.\n\n**Précision :** les document"}, {"module": "projet", "titre": "Audit intégral corpus 2026-04-08", "preview": "## Audit intégral du corpus — 18 documents (2026-04-08)\n\n### État global\n- 155 sections, 573 termes, 9 chaînes causales, 191 prompts\n- Tous les enrichissements sont tronqués (artefact d'export à corri"}, {"module": "projet", "titre": "Discipline BQ-clean — prompts jamais en contact avec méta-vocab", "preview": "## Règle absolue BQ-clean — aucune fuite de méta-vocab dans les prompts Jenni\n\n**Liste noire** (vérifier AVANT génération de tout prompt Jenni) :\n\n- Codes doc : S0-S4, V1-V3, P1-P5, F1-F2, H1-H3\n- Voc"}, {"module": "projet", "titre": "Modèle conceptuel — production du corpus (référence absolue)", "preview": "## Modèle conceptuel — production du corpus\n\n**Document de référence absolu.** Toute future session Claude doit lire cette entrée en priorité avant d'agir sur les fiches, validations, prompts ou produ"}, {"module": "projet", "titre": "Concept cards — filtre de rigueur (« une affirmation bancale ne passe pas »)", "preview": "## Concept cards — système de filtre de rigueur\n\n> **« Une affirmation bancale ne passe pas dans le corpus. »** (règle absolue JMJ)\n\nLes `concept_cards` sont l''**outil de filtre** qui garantit la qua"}, {"module": "projet", "titre": "Concept cards — contradictions explicites uniquement (pas d'heuristique texte)", "preview": "## Concept cards — contradictions explicites uniquement\n\n**Règle** : les contradictions entre concept cards doivent être **tissées\nexplicitement** via `concept_card_links.link_type='contradicts'`. Pas"}, {"module": "projet", "titre": "Structure `recherches/` — rangement canonique", "preview": "## Structure des dossiers de travail `recherches/`\n\n**Source unique** pour tout ce qui est \"document de travail en cours ou\nhistorique\" lié au corpus. Publications/recherches n'existe plus (éliminé\nle"}, {"module": "projet", "titre": "Doctrine alignement INRAE — corpus = référence, INRAE = préférence", "preview": "## Doctrine d'alignement INRAE — préférence, pas autorité\n\n**Règle** : le corpus *Le Sol Vivant cet Holobionte* est la **référence**.\nLe thésaurus INRAE (v2.6, ~16 500 concepts) est une **préférence d"}, {"module": "projet", "titre": "Session article Shelake 2026 — intégration complète", "preview": "## Session article Shelake 2026 — intégration complète\n\n**Date** : 2026-04-12 (session suite sol sableux)\n**Article** : Shelake RM, Waghunde RR, Kim JY. Coevolution of plant-microbe interactions, frie"}, {"module": "projet", "titre": "Workflow fiche/validation — de la source à l'intégration (référence)", "preview": "## Workflow fiche/validation — de la source à l'intégration\n\n### Deux régimes de création\n\n**Régime 1 — Source externe (primaire)** :\nOrigine : transcription vidéo de confiance, note de lecture, artic"}, {"module": "sqlite", "titre": "Architecture DB — tables, vues, colonnes clés", "preview": "**Comptages à jour** (générés dynamiquement par `session_start.py`) :\n```sql\nSELECT\n  (SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name != 'sqlite_sequence') as tables,\n  (SELECT COUNT(*"}, {"module": "sqlite", "titre": "Requêtes utiles — pilotage, thésaurus, diagnostic", "preview": "Les requêtes de référence sont stockées dans la table `requetes_utiles` (27 requêtes).\n\n```sql\n-- Trouver une requête par nom\nSELECT sql_text FROM requetes_utiles WHERE nom = 'etat_production';\n\n-- Re"}, {"module": "web", "titre": "Architecture pages web", "preview": "## Architecture des pages HTML\n\nChaque page web interactive suit le même pattern en 4 couches :\n\n1. **`web_pages`** — Métadonnées (slug, title, subtitle, description, og_image, script_path, status, ic"}, {"module": "web", "titre": "Charte graphique Sol Vivant", "preview": "## Charte graphique Sol Vivant\n\nDéfinie dans `tools/lib/web_template.py` (CHARTER_CSS). Toutes les pages DOIVENT utiliser ces variables et classes.\n\n### Variables CSS (26)\n\n```\n--bg: #f4f6f8          "}, {"module": "web", "titre": "web_template.py — API", "preview": "## web_template.py — Module partagé\n\nModule `tools/lib/web_template.py` — génère le HTML final avec la charte.\n\n### Fonctions\n\n| Fonction | Signature | Rôle |\n|----------|-----------|------|\n| `load_p"}, {"module": "web", "titre": "Données dynamiques — Règle zéro statique", "preview": "## Données dynamiques — Règle zéro statique\n\n**Aucune donnée du corpus ne doit être hardcodée dans le template JS.**\n\n### Où stocker les données\n\n| Type de donnée | Table DB | Exemple |\n|-------------"}, {"module": "web", "titre": "Charte pédagogique unifiée — Cahier de Science", "preview": "## Charte pédagogique unifiée — Cahier de Science\n\n### Composants CSS partagés (CHARTER_CSS)\n\nClasses `sv-*` dans `web_template.py` pour la présentation pédagogique :\n\n| Classe | Usage |\n|--------|---"}, {"module": "web", "titre": "Bibliothèque d'icônes unifiée — règles visuelles", "preview": "## Bibliothèque d'icônes unifiée Sol Vivant\n\nSource de vérité : `config.web.icon_library`\n\n### Règles\n\n1. **Navigation et onglets** : emojis autorisés (repères fixes, rares)\n2. **Accordéons SvCollapse"}, {"module": "zotero", "titre": "Workflow : Zotero → Jenni", "preview": "1. Filtrer : `DOC:S2` + `CONF:haute` dans Zotero\n2. Sélectionner tout → Exporter → Format RIS → `RIS_S2_valide.ris`\n3. Dans Jenni : uploader `RIS_S2_valide.ris` dans le projet\n4. Jenni prioritise ces "}, {"module": "zotero", "titre": "Anti-batch d'intégration — pleine conscience unitaire", "preview": "## Anti-batch d'intégration — pleine conscience unitaire\n\n**Règle doctrinale issue d'un constat rétrospectif** (2026-04-14) :\nles traitements batch d'intégration (analyse automatique de plusieurs\nfich"}, {"module": "zotero", "titre": "Audit Zotero 2026-04-13 — Ma bibliothèque.ris (chiffres à jour)", "preview": "## Audit Zotero 2026-04-13 — Ma bibliothèque.ris\n\nSource : export Zotero du 2026-04-12 (`Ma bibliothèque.ris`, 17 Mo, 6907 refs).\n\n### Chiffres clés (réels, supersèdent les BQ antérieures)\n\n| Métrique"}], "cartes_stats": [{"nom": "Cadre — Eau", "couleur": "#0ea5e9", "id": 1, "n_cartes": 1}, {"nom": "Cadre — Redox", "couleur": "#7c3aed", "id": 2, "n_cartes": 2}, {"nom": "Cadre — Économique", "couleur": "#d97706", "id": 3, "n_cartes": 1}, {"nom": "Cadre — Socio-économique", "couleur": "#f59e0b", "id": 4, "n_cartes": 1}, {"nom": "Cadre — Évolutif", "couleur": "#4338ca", "id": 5, "n_cartes": 7}, {"nom": "Types de sols", "couleur": "#ea580c", "id": 6, "n_cartes": 7}, {"nom": "Histoire", "couleur": "#78350f", "id": 7, "n_cartes": 1}, {"nom": "Symptôme — MO/Hydrique", "couleur": "#be185d", "id": 9, "n_cartes": 5}, {"nom": "Symptôme — Structure", "couleur": "#dc2626", "id": 10, "n_cartes": 10}, {"nom": "Pratique", "couleur": "#059669", "id": 11, "n_cartes": 14}, {"nom": "Cycle", "couleur": "#2563EB", "id": 12, "n_cartes": 7}, {"nom": "Continuum", "couleur": "#0891b2", "id": 13, "n_cartes": 13}], "generated_at": "2026-04-15 00:35", "audit_recent": [{"ts": "2026-04-15 00:35:59", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_cahier exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:58", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_concept_cards exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:57", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_lifofer exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:56", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_triangle_textures exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:54", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_mo_calculateur exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:53", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_index exécuté — page regénérée"}, {"ts": "2026-04-15 00:35:42", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_cahier exécuté — page regénérée"}, {"ts": "2026-04-15 00:34:00", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_cahier exécuté — page regénérée"}, {"ts": "2026-04-15 00:34", "operation": "SYNC", "table": "scripts", "ref": "1 scripts", "detail": "sync_scripts.py --inject : 1 scripts mis à jour depuis fichiers"}, {"ts": "2026-04-15 00:29:26", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_dashboard exécuté — page regénérée"}, {"ts": "2026-04-15 00:29:26", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_explorer exécuté — page regénérée"}, {"ts": "2026-04-15 00:28:55", "operation": "INSERT", "table": "scripts,web_pages,html_templates,config", "ref": "cahier", "detail": "Création page Cahier de Science : web_pages cahier (ordre 80, status publie, icon 📚) + 3 html_templates (head/css/js) + config.cahier.chapitres (3 chapitres, 20 sections : MO, Textures, Fermentations)"}, {"ts": "2026-04-15 00:28:18", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_lifofer exécuté — page regénérée"}, {"ts": "2026-04-15 00:28:18", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_concept_cards exécuté — page regénérée"}, {"ts": "2026-04-15 00:28:18", "operation": "GENERATE", "table": "web_pages", "ref": "", "detail": "gen_cahier exécuté — page regénérée"}], "commits_recent": [{"sha": "e57f9de", "msg": "fix: cahier cassé — imbrication <script type=text/babel> par re-wrap inutile"}, {"sha": "3d5ff36", "msg": "Cahier de Science : nouvelle page pédagogique multi-chapitres"}, {"sha": "c70c06e", "msg": "BQ web : documenter nouveaux composants + inventaire pages à jour"}, {"sha": "ed56241", "msg": "Concept Cards : refonte charte sv-* + composant SvRichText partagé"}, {"sha": "063c640", "msg": "Pages HTML : NavBar propre, retrait docx, fondations charte unifiée"}, {"sha": "5d6fa30", "msg": "Fiches prompts : statut encodé dans le nom de fichier"}, {"sha": "fd914cc", "msg": "Index INDEX.md pour les 19 prompts fiches — clarification envoye vs a_faire"}, {"sha": "5f5e187", "msg": "Nettoyage : suppression docx thesaurus_incomplets périmés"}, {"sha": "fa48214", "msg": "Régénération docx post-dédupe : 18 ébauches strates + 19 prompts fiches"}, {"sha": "f04dddf", "msg": "Dédupe post-Passe 1 : fusion doublons sémantiques détectés"}, {"sha": "fe9b6b7", "msg": "Passe 1 + Passe 3 enrichissements fiches : +21 termes + RT enrichis"}, {"sha": "0b33519", "msg": "Audit Enrichissements fiches : 36 termes candidats hors thésaurus"}, {"sha": "13d49a2", "msg": "Option 3 : README + guide technique régénérés depuis DB"}, {"sha": "ae5e28f", "msg": "Option 2 + Option 1 : dispositif retour fiches + vues unifiées trios"}, {"sha": "fcf4a1c", "msg": "Audit redondance inter-tables + actions maintenance DB"}], "checks": [{"icon": "✓", "priorite": "CRITIQUE", "titre": "Termes sans doc_code", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "Termes sans définition ou <50 chars", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "SOUHAITABLE", "titre": "Termes sans traduction EN", "count": 0, "status": "OK"}, {"icon": "ℹ", "priorite": "INFO", "titre": "Termes EN sans syn_en", "count": 9, "status": "INFO"}, {"icon": "✓", "priorite": "CRITIQUE", "titre": "FK concept_cards.dimension_id cassée", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "Sources biblio corrompues (titre dans auteurs)", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "CRITIQUE", "titre": "prompts.doc_code sans document", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "chain_etapes.term_id orphelins", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "CRITIQUE", "titre": "Liens concept_card_links orphelins", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "Cartes actives sans description", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "INFO", "titre": "Dimensions sans carte active", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "Contradictions explicites actives entre cartes", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "Cohérence cascade_prerequis JSON ↔ cascade_level_links", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "CRITIQUE", "titre": "card_chain_links pointant vers card/chain inexistant", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "IMPORTANT", "titre": "cascade_level_links entity orphelines", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "SOUHAITABLE", "titre": "Cartes actives isolées (0 lien/chain/cascade/test)", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "CRITIQUE", "titre": "source_usages pointant vers ressource inexistante", "count": 0, "status": "OK"}, {"icon": "✓", "priorite": "INFO", "titre": "Docs sans ébauche .docx générée", "count": 0, "status": "OK"}, {"icon": "🟡", "priorite": "SOUHAITABLE", "titre": "Chevauchements v1 legacy + v2 non résolus", "count": 2, "status": "WARN"}, {"icon": "✓", "priorite": "INFO", "titre": "Docs avec avancement < 60% (besoin de matière)", "count": 0, "status": "OK"}], "fiches": [{"id": 34, "titre": "Agriculture de Conservation en Climat Méditerranéen et Tropical", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"P2\", \"P4\"]", "version": 0, "date_retour": null}, {"id": 33, "titre": "Biochar, Chitosane et Extraits d'Algues — Biostimulants Sous-couverts", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"P1\", \"P2\"]", "version": 0, "date_retour": null}, {"id": 32, "titre": "Le Priming Immunitaire Végétal — Mémoire Épigénétique de la Défense", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"V2\", \"V3\"]", "version": 0, "date_retour": null}, {"id": 31, "titre": "Les Strigolactones — Signal Clé du Recrutement Mycorhizien", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"V2\", \"S3\"]", "version": 0, "date_retour": null}, {"id": 30, "titre": "Le Cycle du Potassium dans les Sols Vivants", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"S4\", \"P1\"]", "version": 0, "date_retour": null}, {"id": 29, "titre": "Les Cycles Couplés C-N-P-S-Fe dans les Sols", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"S4\"]", "version": 0, "date_retour": null}, {"id": 28, "titre": "Le Cycle du Fer et les Bactéries Ferro-réductrices", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"S2\", \"S4\"]", "version": 0, "date_retour": null}, {"id": 27, "titre": "Les Archées du Sol — Un Troisième Domaine Sous-estimé", "statut": "a_faire", "type": "transversale", "docs_cibles": "[\"S2\", \"S4\"]", "version": 0, "date_retour": null}, {"id": 26, "titre": "Revue Shelake 2026 — Coévolution plante-microbe, continuum ami-ennemi, ingénierie microbiome", "statut": "integre", "type": "revue_critique", "docs_cibles": "[\"F1\",\"F2\",\"S3\",\"V1\",\"V2\",\"P2\",\"P3\"]", "version": 1, "date_retour": null}, {"id": 25, "titre": "Analyse croisée — Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique", "statut": "integre", "type": "analyse_croisee", "docs_cibles": "[\"S1\",\"S4\",\"P1\",\"P2\"]", "version": 2, "date_retour": "2026-04-13"}, {"id": 24, "titre": "AMR et Résistome du Sol", "statut": "integre", "type": "zoom", "docs_cibles": "[\"H3\"]", "version": 2, "date_retour": "2026-04-13"}, {"id": 23, "titre": "Thermodynamique Redox des Sols", "statut": "integre", "type": "zoom", "docs_cibles": "[\"S1\",\"S4\",\"P2\"]", "version": 2, "date_retour": "2026-04-13"}, {"id": 22, "titre": "Quorum Sensing et Communication Chimique Rhizosphérique", "statut": "integre", "type": "zoom", "docs_cibles": "[\"S2\",\"V2\",\"P1\"]", "version": 2, "date_retour": "2026-04-13"}, {"id": 21, "titre": "Extrêmes Climatiques et Triangle des Maladies Végétales", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"V2\"]", "version": 1, "date_retour": null}, {"id": 20, "titre": "Gestion Systémique des Nématodes à Galles", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"V1\", \"P1\", \"P3\"]", "version": 1, "date_retour": null}, {"id": 19, "titre": "Protozoaires du Sol et Boucle Microbienne", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"V1\", \"S2\"]", "version": 1, "date_retour": null}, {"id": 18, "titre": "Fixation Biologique de l'Azote — Le Modèle Brésilien", "statut": "integre", "type": "transversale", "docs_cibles": "[\"F2\", \"P3\"]", "version": 2, "date_retour": "2026-04-13"}, {"id": 17, "titre": "Impact Économique de la Perte de Biodiversité sur l'Agriculture", "statut": "archive", "type": "transversale", "docs_cibles": "[\"F2\", \"P5\"]", "version": 1, "date_retour": null}, {"id": 16, "titre": "Chélation par Acides Aminés — Protocoles DIY", "statut": "envoye", "type": "technique", "docs_cibles": "[\"P3\", \"V2\"]", "version": 1, "date_retour": null}, {"id": 15, "titre": "Natural Farming Avancé — IPMO, JAKOBA, Natto, Jiuqu", "statut": "envoye", "type": "technique", "docs_cibles": "[\"V3\", \"P3\"]", "version": 1, "date_retour": null}, {"id": 14, "titre": "Rhodopseudomonas palustris — Culture et Applications Agricoles", "statut": "envoye", "type": "technique", "docs_cibles": "[\"V3\", \"P3\"]", "version": 1, "date_retour": null}, {"id": 13, "titre": "Mycobiome Intestinal et Axe Gut-Brain Fongique", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"H2\", \"H1\"]", "version": 1, "date_retour": null}, {"id": 12, "titre": "Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire", "statut": "envoye", "type": "technique", "docs_cibles": "[\"V2\", \"P1\"]", "version": 1, "date_retour": null}, {"id": 11, "titre": "Le Soil Continuum Model — Fin du Paradigme de l'Humification", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"S4\", \"S1\"]", "version": 1, "date_retour": null}, {"id": 10, "titre": "Cobalt, Vitamine B12 et Fixation Biologique de l'Azote", "statut": "envoye", "type": "transversale", "docs_cibles": "[\"V2\", \"S2\", \"S4\"]", "version": 1, "date_retour": null}, {"id": 9, "titre": "Revue critique — C7 : Piège de la performance → Robustesse", "statut": "archive", "type": "revue_critique", "docs_cibles": "[\"F2\", \"S2\", \"P2\", \"P5\"]", "version": 1, "date_retour": "2026-04-03"}, {"id": 8, "titre": "Analyse croisée — ACS, couverts végétaux et gestion de l'eau", "statut": "archive", "type": "analyse_croisee", "docs_cibles": "[\"S0\", \"P2\", \"P3\"]", "version": 1, "date_retour": "2026-04-03"}, {"id": 7, "titre": "Analyse croisée — Transition agroécologique, résilience et diagnostic", "statut": "archive", "type": "analyse_croisee", "docs_cibles": "[\"P5\", \"F2\", \"P1\"]", "version": 1, "date_retour": "2026-04-03"}, {"id": 6, "titre": "Analyse croisée — Agroforesterie et systèmes de haies", "statut": "archive", "type": "analyse_croisee", "docs_cibles": "[\"P4\"]", "version": 1, "date_retour": "2026-04-03"}, {"id": 5, "titre": "Analyse croisée — Fermentations, Bokashi et PNSB", "statut": "archive", "type": "analyse_croisee", "docs_cibles": "[\"V3\", \"P3\"]", "version": 1, "date_retour": "2026-04-03"}], "ebauches": [{"fichier": "F1_ebauche_2026-04-13.docx", "doc_code": "F1", "taille_ko": 43, "mtime": "2026-04-14"}, {"fichier": "F1_ebauche_2026-04-14.docx", "doc_code": "F1", "taille_ko": 43, "mtime": "2026-04-14"}, {"fichier": "F2_ebauche_2026-04-13.docx", "doc_code": "F2", "taille_ko": 50, "mtime": "2026-04-14"}, {"fichier": "F2_ebauche_2026-04-14.docx", "doc_code": "F2", "taille_ko": 50, "mtime": "2026-04-14"}, {"fichier": "H1_ebauche_2026-04-13.docx", "doc_code": "H1", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "H1_ebauche_2026-04-14.docx", "doc_code": "H1", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "H2_ebauche_2026-04-13.docx", "doc_code": "H2", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "H2_ebauche_2026-04-14.docx", "doc_code": "H2", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "H3_ebauche_2026-04-13.docx", "doc_code": "H3", "taille_ko": 54, "mtime": "2026-04-14"}, {"fichier": "H3_ebauche_2026-04-14.docx", "doc_code": "H3", "taille_ko": 54, "mtime": "2026-04-14"}, {"fichier": "P1_ebauche_2026-04-13.docx", "doc_code": "P1", "taille_ko": 56, "mtime": "2026-04-14"}, {"fichier": "P1_ebauche_2026-04-14.docx", "doc_code": "P1", "taille_ko": 85, "mtime": "2026-04-14"}, {"fichier": "P2_ebauche_2026-04-13.docx", "doc_code": "P2", "taille_ko": 59, "mtime": "2026-04-14"}, {"fichier": "P2_ebauche_2026-04-14.docx", "doc_code": "P2", "taille_ko": 88, "mtime": "2026-04-14"}, {"fichier": "P3_ebauche_2026-04-13.docx", "doc_code": "P3", "taille_ko": 72, "mtime": "2026-04-14"}, {"fichier": "P3_ebauche_2026-04-14.docx", "doc_code": "P3", "taille_ko": 72, "mtime": "2026-04-14"}, {"fichier": "P4_ebauche_2026-04-13.docx", "doc_code": "P4", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "P4_ebauche_2026-04-14.docx", "doc_code": "P4", "taille_ko": 41, "mtime": "2026-04-14"}, {"fichier": "P5_ebauche_2026-04-13.docx", "doc_code": "P5", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "P5_ebauche_2026-04-14.docx", "doc_code": "P5", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "S0_ebauche_2026-04-13.docx", "doc_code": "S0", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "S0_ebauche_2026-04-14.docx", "doc_code": "S0", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "S1_ebauche_2026-04-13.docx", "doc_code": "S1", "taille_ko": 58, "mtime": "2026-04-14"}, {"fichier": "S1_ebauche_2026-04-14.docx", "doc_code": "S1", "taille_ko": 87, "mtime": "2026-04-14"}, {"fichier": "S2_ebauche_2026-04-13.docx", "doc_code": "S2", "taille_ko": 58, "mtime": "2026-04-14"}, {"fichier": "S2_ebauche_2026-04-14.docx", "doc_code": "S2", "taille_ko": 58, "mtime": "2026-04-14"}, {"fichier": "S3_ebauche_2026-04-13.docx", "doc_code": "S3", "taille_ko": 63, "mtime": "2026-04-14"}, {"fichier": "S3_ebauche_2026-04-14.docx", "doc_code": "S3", "taille_ko": 63, "mtime": "2026-04-14"}, {"fichier": "S4_ebauche_2026-04-13.docx", "doc_code": "S4", "taille_ko": 62, "mtime": "2026-04-14"}, {"fichier": "S4_ebauche_2026-04-14.docx", "doc_code": "S4", "taille_ko": 91, "mtime": "2026-04-14"}, {"fichier": "V1_ebauche_2026-04-13.docx", "doc_code": "V1", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "V1_ebauche_2026-04-14.docx", "doc_code": "V1", "taille_ko": 42, "mtime": "2026-04-14"}, {"fichier": "V2_ebauche_2026-04-13.docx", "doc_code": "V2", "taille_ko": 76, "mtime": "2026-04-14"}, {"fichier": "V2_ebauche_2026-04-14.docx", "doc_code": "V2", "taille_ko": 77, "mtime": "2026-04-14"}, {"fichier": "V3_ebauche_2026-04-13.docx", "doc_code": "V3", "taille_ko": 45, "mtime": "2026-04-14"}, {"fichier": "V3_ebauche_2026-04-14.docx", "doc_code": "V3", "taille_ko": 45, "mtime": "2026-04-14"}], "strate_colors": {"F": "#8B5CF6", "S": "#3B82F6", "V": "#10B981", "P": "#F59E0B", "H": "#EF4444"}, "strate_names": {"F": "Fondements", "S": "Sol", "V": "Vivant", "P": "Pratiques", "H": "Humain"}, "strate_order": ["F", "S", "V", "P", "H"]};
+</script>
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({
+  title,
+  icon,
+  defaultOpen = false,
+  children,
+  id
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse",
+    id: id
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-collapse-header",
+    onClick: () => setOpen(!open)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-collapse-title"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
+    className: `sv-collapse-chevron ${open ? 'open' : ''}`
+  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse-body"
+  }, children));
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({
+  children,
+  source
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula"
+  }, children, source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula-source"
+  }, source));
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({
+  children,
+  title
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({
+  children,
+  title,
+  icon
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note",
+    "data-icon": icon || ''
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({
+  value,
+  unit,
+  label,
+  color,
+  detail,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi",
+    style: style
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: color ? {
+      color
+    } : undefined
+  }, value), unit && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, unit), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: color ? {
+      color
+    } : undefined
+  }, label), detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, detail));
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({
+  children,
+  cols
+}) {
+  const style = cols ? {
+    gridTemplateColumns: `repeat(${cols}, 1fr)`
+  } : undefined;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid",
+    style: style
+  }, children);
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({
+  items,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, children);
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, item.date && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, item.place), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-timeline-tag"
+  }, t))))));
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({
+  title,
+  color,
+  label,
+  stats,
+  tags,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: color || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: color || 'var(--accent)'
+    }
+  }, label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, label), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, title)), stats && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-phase-tag"
+  }, t))), children && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, children));
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({
+  good,
+  bad
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({
+  ok,
+  ko
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, ok && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({
+  terms
+}) {
+  if (!terms || !terms.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, t.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: t.badgeStyle
+  }, t.badge), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.def))));
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({
+  sources
+}) {
+  if (!sources || !sources.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, s.year && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    rel: "noopener",
+    className: "sv-source-link"
+  }, "[lien]")))));
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-tabs"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    className: `sv-tab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({
+  text,
+  label
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content"
+  }, text));
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({
+  title,
+  items,
+  note,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, title), items && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-warning-text)',
+      lineHeight: 1.45,
+      fontStyle: 'italic'
+    }
+  }, note), children);
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({
+  title,
+  children,
+  color
+}) {
+  const c = color || 'success';
+  const colors = {
+    success: {
+      bg: 'var(--success-light)',
+      border: 'var(--success)',
+      text: 'var(--color-success-text)'
+    },
+    warning: {
+      bg: 'var(--warning-light)',
+      border: 'var(--warning)',
+      text: 'var(--color-warning-text)'
+    },
+    info: {
+      bg: 'var(--info-light)',
+      border: 'var(--accent)',
+      text: 'var(--accent-dark)'
+    },
+    purple: {
+      bg: 'var(--purple-light)',
+      border: 'var(--purple)',
+      text: 'var(--purple-dark)'
+    }
+  };
+  const s = colors[c] || colors.success;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box",
+    style: {
+      background: s.bg,
+      borderLeftColor: s.border
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title",
+    style: {
+      color: s.text
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, children));
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({
+  headers,
+  rows,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, children);
+  if (!headers || !rows) return null;
+  return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: h.align ? {
+      textAlign: h.align
+    } : undefined
+  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
+    key: j,
+    style: headers[j] && headers[j].align ? {
+      textAlign: headers[j].align
+    } : undefined
+  }, cell))))));
+}
+
+// ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
+// Usage: <SvBulletList items={["plain string", {text:"foo", emphasis:"bar"}, ...]} />
+// - Chaîne simple : rendue telle quelle
+// - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
+//   `strong` met en gras inline avec .sv-emphasis
+function SvBulletList({
+  items,
+  dense
+}) {
+  if (!items || !items.length) return null;
+  const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
+  return /*#__PURE__*/React.createElement("ul", {
+    className: cls
+  }, items.map((it, i) => {
+    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, it);
+    if (it && typeof it === 'object') {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
+        className: "sv-mark"
+      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
+        className: "sv-emphasis"
+      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
+    }
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, String(it));
+  }));
+}
+
+// ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
+// Usage: <SvSection title="Pourquoi l'anaérobie" label="Fermentation" level={2}>…</SvSection>
+// - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
+// - `level` : 2 (défaut) ou 3
+// - `icon` (optionnel) : emoji en préfixe du titre
+function SvSection({
+  title,
+  label,
+  level,
+  icon,
+  id,
+  children
+}) {
+  const H = level === 3 ? 'h3' : 'h2';
+  return /*#__PURE__*/React.createElement("section", {
+    className: "sv-section-block",
+    id: id
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "sv-section-label"
+  }, label), title && /*#__PURE__*/React.createElement(H, {
+    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-section-icon"
+  }, icon), title), children);
+}
+
+// ── SvRichText : rendu pédagogique de texte semi-structuré ──
+// Input : chaîne brute avec paragraphes (\n\n), bullets (• ...),
+//         sections en MAJUSCULES terminées par ':', refs "Card #N" et
+//         termes entre backticks `...`.
+// Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
+// Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+function SvRichText({
+  text,
+  onCardRef,
+  skipPrefixes
+}) {
+  if (!text) return null;
+  const skips = skipPrefixes || ['[2026-'];
+  const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
+
+  // Regroupement en blocs : paragraphes / bullets / section-labels
+  const blocks = [];
+  let i = 0;
+  while (i < rawLines.length) {
+    const line = rawLines[i];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    // Section MAJUSCULES suivie de ':' — ex : "COMPATIBILITÉS MAJEURES :"
+    // (au moins 2 mots, lettres accentuées, ratio majuscules ≥ 80%)
+    const isSectionLabel = (() => {
+      if (!trimmed.endsWith(':') && !trimmed.endsWith(' :')) return false;
+      const t = trimmed.replace(/:$/, '').trim();
+      if (t.length < 4 || t.length > 80) return false;
+      const letters = t.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+      if (letters.length < 4) return false;
+      const uppers = letters.filter(ch => ch === ch.toUpperCase());
+      return uppers.length / letters.length >= 0.8;
+    })();
+    if (isSectionLabel) {
+      blocks.push({
+        type: 'label',
+        text: trimmed.replace(/:$/, '').trim()
+      });
+      i++;
+      continue;
+    }
+    // Bullets contigus
+    if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
+      const items = [];
+      while (i < rawLines.length && (rawLines[i].trim().startsWith('• ') || rawLines[i].trim().startsWith('- '))) {
+        items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
+        i++;
+      }
+      blocks.push({
+        type: 'bullets',
+        items
+      });
+      continue;
+    }
+    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label)
+    const paraLines = [];
+    while (i < rawLines.length) {
+      const t = rawLines[i].trim();
+      if (!t) break;
+      if (t.startsWith('• ') || t.startsWith('- ')) break;
+      // nouvelle section-label → stop avant
+      const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
+        const x = t.replace(/:$/, '').trim();
+        const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+        if (letters.length < 4) return false;
+        const uppers = letters.filter(ch => ch === ch.toUpperCase());
+        return uppers.length / letters.length >= 0.8 && x.length < 80;
+      })();
+      if (isLabel && paraLines.length > 0) break;
+      paraLines.push(rawLines[i]);
+      i++;
+    }
+    if (paraLines.length) blocks.push({
+      type: 'para',
+      text: paraLines.join(' ')
+    });
+  }
+
+  // Rendu inline d'un texte : transforme "Card #11", "terme `foo`", "fiche 3"
+  const renderInline = (s, keyPrefix) => {
+    if (!s) return null;
+    const out = [];
+    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|fiche (\d+)/g;
+    let last = 0,
+      m,
+      n = 0;
+    while ((m = regex.exec(s)) !== null) {
+      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m[1]) {
+        const id = parseInt(m[1]);
+        out.push(/*#__PURE__*/React.createElement("a", {
+          key: keyPrefix + '-ref-' + n++,
+          onClick: () => onCardRef && onCardRef(id),
+          style: {
+            color: 'var(--accent)',
+            cursor: 'pointer',
+            textDecoration: 'underline'
+          }
+        }, "#", id));
+      } else if (m[2]) {
+        const title = m[2];
+        const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
+        if (found) {
+          out.push(/*#__PURE__*/React.createElement("a", {
+            key: keyPrefix + '-ref-' + n++,
+            onClick: () => onCardRef && onCardRef(found.id),
+            style: {
+              color: 'var(--accent)',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }
+          }, title));
+        } else {
+          out.push(title);
+        }
+      } else if (m[3]) {
+        out.push(/*#__PURE__*/React.createElement("span", {
+          key: keyPrefix + '-term-' + n++,
+          className: "sv-mark"
+        }, m[3]));
+      } else if (m[4]) {
+        out.push(m[0]);
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < s.length) out.push(s.substring(last));
+    return out;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, blocks.map((b, idx) => {
+    if (b.type === 'label') {
+      return /*#__PURE__*/React.createElement("div", {
+        key: idx,
+        className: "sv-section-label",
+        style: {
+          marginTop: idx > 0 ? '0.75rem' : 0
+        }
+      }, b.text);
+    }
+    if (b.type === 'bullets') {
+      return /*#__PURE__*/React.createElement("ul", {
+        key: idx,
+        className: "sv-bullet-list"
+      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
+        key: j
+      }, renderInline(it, idx + '-' + j))));
+    }
+    return /*#__PURE__*/React.createElement("p", {
+      key: idx,
+      className: "sv-prose",
+      style: {
+        margin: '0.35rem 0'
+      }
+    }, renderInline(b.text, 'p' + idx));
+  }));
+}
+const STRATE_COLORS = DATA.strate_colors || {};
+const STRATE_NAMES = DATA.strate_names || {};
+const STRATE_ORDER = DATA.strate_order || ['F', 'S', 'V', 'P', 'H'];
+function Kpi({
+  value,
+  label,
+  sub,
+  color
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "db-kpi"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "db-kpi-value",
+    style: color ? {
+      color
+    } : {}
+  }, value), /*#__PURE__*/React.createElement("div", {
+    className: "db-kpi-label"
+  }, label), sub && /*#__PURE__*/React.createElement("div", {
+    className: "db-kpi-sub"
+  }, sub));
+}
+function Dettes({
+  dettes
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section db-dettes"
+  }, /*#__PURE__*/React.createElement("h2", null, "Dettes techniques (", dettes.length, ")"), dettes.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: 'var(--text-secondary)',
+      fontStyle: 'italic'
+    }
+  }, "Rien \xE0 signaler \u2713") : dettes.map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: 'dette ' + d.priorite
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "dette-prio"
+  }, d.priorite), /*#__PURE__*/React.createElement("span", {
+    className: "dette-titre"
+  }, d.titre), /*#__PURE__*/React.createElement("div", {
+    className: "dette-detail"
+  }, d.detail))));
+}
+function DocsAvancement({
+  docs
+}) {
+  const byStrate = {};
+  docs.forEach(d => {
+    if (!byStrate[d.strate]) byStrate[d.strate] = [];
+    byStrate[d.strate].push(d);
+  });
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "Avancement production (par doc)"), STRATE_ORDER.filter(s => byStrate[s]).map(strate => {
+    const avg = Math.round(byStrate[strate].reduce((s, d) => s + d.avancement, 0) / byStrate[strate].length);
+    return /*#__PURE__*/React.createElement("div", {
+      key: strate,
+      style: {
+        marginBottom: '0.75rem'
+      }
+    }, /*#__PURE__*/React.createElement("h3", null, "Strate ", strate, " \xB7 ", STRATE_NAMES[strate] || '', " \xB7 moyenne ", avg, "%"), /*#__PURE__*/React.createElement("div", {
+      className: "db-docs-grid"
+    }, byStrate[strate].map(d => /*#__PURE__*/React.createElement("div", {
+      key: d.code,
+      className: 'db-doc db-strate-' + d.strate
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "db-doc-head"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "db-doc-code"
+    }, d.code), /*#__PURE__*/React.createElement("span", {
+      className: "db-doc-avancement"
+    }, d.avancement, "%")), /*#__PURE__*/React.createElement("div", {
+      className: "db-doc-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: d.avancement + '%',
+        background: STRATE_COLORS[d.strate] || 'var(--accent)'
+      }
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "db-doc-titre"
+    }, d.titre.slice(0, 60)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: '0.65rem',
+        color: 'var(--text-secondary)',
+        marginTop: '3px'
+      }
+    }, d.n_sections, " sections \xB7 ", d.n_terms, " termes \xB7 \u25CF", d.states.dense, " \u25D0", d.states.ok, " \u25CC", d.states.graine, " \u25CB", d.states.vide)))));
+  }));
+}
+function Cartes({
+  stats
+}) {
+  const total = stats.reduce((s, x) => s + x.n_cartes, 0);
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "Concept cards (", total, " actives)"), /*#__PURE__*/React.createElement("div", {
+    className: "db-cards-grid"
+  }, stats.filter(x => x.n_cartes > 0).map(x => /*#__PURE__*/React.createElement("div", {
+    key: x.id,
+    className: "db-card-dim",
+    style: {
+      background: x.couleur || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "db-card-dim-n"
+  }, x.n_cartes), x.nom))));
+}
+function ChantiersAudit({
+  items
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "audit_log r\xE9cent"), /*#__PURE__*/React.createElement("div", {
+    className: "db-timeline"
+  }, items.map((a, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "db-timeline-item"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "db-timeline-time"
+  }, (a.ts || '').slice(0, 16)), /*#__PURE__*/React.createElement("span", {
+    className: "db-timeline-op"
+  }, a.operation), /*#__PURE__*/React.createElement("span", null, a.table), a.ref && /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--accent)',
+      marginLeft: '6px'
+    }
+  }, a.ref), /*#__PURE__*/React.createElement("span", {
+    style: {
+      marginLeft: '8px',
+      color: 'var(--text-secondary)'
+    }
+  }, a.detail)))));
+}
+function ChantiersCommits({
+  commits
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "Commits r\xE9cents (main)"), commits.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "db-commit"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "db-commit-sha"
+  }, c.sha), /*#__PURE__*/React.createElement("span", null, c.msg))));
+}
+function IntegriteChecks({
+  checks
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section db-checks"
+  }, /*#__PURE__*/React.createElement("h2", null, "Int\xE9grit\xE9 DB (", checks.length, " checks)"), checks.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: 'check ' + c.status
+  }, /*#__PURE__*/React.createElement("span", null, c.icon), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontWeight: 600,
+      fontSize: '0.7rem',
+      textTransform: 'uppercase'
+    }
+  }, c.priorite), /*#__PURE__*/React.createElement("span", null, c.titre), /*#__PURE__*/React.createElement("span", {
+    className: "check-count",
+    style: {
+      marginLeft: 'auto'
+    }
+  }, c.count))));
+}
+function Doctrine({
+  entries
+}) {
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section db-doctrine"
+  }, /*#__PURE__*/React.createElement("h2", null, "Doctrine active (", entries.length, " BQ critiques)"), entries.map((d, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "d"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "d-mod"
+  }, d.module), /*#__PURE__*/React.createElement("strong", null, d.titre), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      marginTop: '3px'
+    }
+  }, d.preview.slice(0, 150), "..."))));
+}
+function FichesEbauches({
+  fiches,
+  ebauches
+}) {
+  const integre = fiches.filter(f => f.statut === 'integre').length;
+  const envoye = fiches.filter(f => f.statut === 'envoye').length;
+  const archive = fiches.filter(f => f.statut === 'archive').length;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "db-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "Fiches & \xE9bauches"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: '12px',
+      marginBottom: '0.75rem',
+      fontSize: 'var(--font-sm)'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "\u2713 ", integre, " int\xE9gr\xE9es"), /*#__PURE__*/React.createElement("span", null, "\u21E8 ", envoye, " envoy\xE9es"), /*#__PURE__*/React.createElement("span", null, "\u22A0 ", archive, " archiv\xE9es"), /*#__PURE__*/React.createElement("span", null, "\uD83D\uDCC4 ", ebauches.length, " \xE9bauches .docx")), /*#__PURE__*/React.createElement("h3", null, "Derni\xE8res fiches"), /*#__PURE__*/React.createElement("div", {
+    className: "db-fiches-list"
+  }, fiches.slice(0, 12).map(f => /*#__PURE__*/React.createElement("div", {
+    key: f.id,
+    className: "db-fiche"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-secondary)'
+    }
+  }, "#", f.id), " ", f.titre.slice(0, 60), " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '0.7rem',
+      color: 'var(--text-secondary)'
+    }
+  }, "v", f.version, " \xB7 ", f.type)), /*#__PURE__*/React.createElement("span", {
+    className: 'db-fiche-statut ' + f.statut
+  }, f.statut)))));
+}
+function App() {
+  const v = DATA.vital;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "db-hero"
+  }, /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_terms,
+    label: "termes",
+    sub: `${v.n_terms_def} avec DEF ≥50c · ${v.n_terms_en} avec EN`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_docs,
+    label: "documents",
+    color: "var(--info)"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_chains,
+    label: "cha\xEEnes",
+    color: "var(--success)"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_cards,
+    label: "concept cards",
+    sub: `${v.n_card_links} liens · ${v.n_card_chain_links} card↔chain`,
+    color: "var(--warning)"
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_fiches_integre,
+    label: "fiches int\xE9gr\xE9es",
+    sub: `/${v.n_fiches} total · ${v.n_fiches_envoye} envoyées`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_sources,
+    label: "sources",
+    sub: `${v.n_sources_zotero} dans Zotero · ${v.n_source_usages} usages`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_bq_crit,
+    label: "BQ critiques",
+    sub: `${v.n_bq} entrées actives`
+  }), /*#__PURE__*/React.createElement(Kpi, {
+    value: v.n_crossrefs,
+    label: "cross-refs"
+  })), /*#__PURE__*/React.createElement(Dettes, {
+    dettes: DATA.dettes
+  }), /*#__PURE__*/React.createElement(DocsAvancement, {
+    docs: DATA.docs_avancement
+  }), /*#__PURE__*/React.createElement(Cartes, {
+    stats: DATA.cartes_stats
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "db-2col"
+  }, /*#__PURE__*/React.createElement(ChantiersAudit, {
+    items: DATA.audit_recent
+  }), /*#__PURE__*/React.createElement(ChantiersCommits, {
+    commits: DATA.commits_recent
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "db-2col"
+  }, /*#__PURE__*/React.createElement(IntegriteChecks, {
+    checks: DATA.checks
+  }), /*#__PURE__*/React.createElement(FichesEbauches, {
+    fiches: DATA.fiches,
+    ebauches: DATA.ebauches
+  })), /*#__PURE__*/React.createElement(Doctrine, {
+    entries: DATA.doctrine
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "db-generated"
+  }, "Tableau de bord g\xE9n\xE9r\xE9 le ", DATA.generated_at));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+</script>
+
+
+</body>
+</html>
