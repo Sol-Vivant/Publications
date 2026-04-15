@@ -965,6 +965,79 @@ h3 {
   color: var(--text);
 }
 
+/* ── SvCascadeGrid : projection d'un sujet sur les 4 cascades ── */
+.sv-cascade-grid {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-cascade-grid-head {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--border);
+}
+.sv-cascade-grid-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+}
+.sv-cascade-grid-sujet {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.sv-cascade-grid-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.sv-cascade-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .sv-cascade-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+.sv-cascade-row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+.sv-cascade-row-icon { font-size: 1.05rem; line-height: 1; }
+.sv-cascade-row-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.sv-cascade-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem 0.2rem 0.5rem;
+  border-left: 3px solid;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: var(--font-xs);
+  cursor: help;
+}
+.sv-cascade-badge strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sv-cascade-badge-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 /* ── Passerelle Outil → Cahier de Science ── */
 .sv-cahier-link {
   margin: 1.5rem auto 0.5rem;
@@ -1129,7 +1202,7 @@ h3 {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 10:16 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 14:19 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1801,6 +1874,91 @@ function SvCahierLink({
   }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
     href: 'cahier.html#chap-' + chapitre
   }, "Cahier de Science \u2192 ", titre));
+}
+
+// ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
+// Usage :
+//   <SvCascadeGrid
+//     titre="Labour profond régulier"
+//     projection={{
+//       biophysique: [{niveau:'N1', label:'Structure', impact:'neg'}, ...],
+//       temporelle:  [{niveau:'T2', label:'Annuel'},    {niveau:'T3', ...}],
+//       couts:       [{niveau:'€0', label:'Carburant'}, ...],
+//       consequences:[{niveau:'E0', label:'Rendement initial'}, ...],
+//     }}
+//   />
+// Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
+function SvCascadeGrid({
+  titre,
+  sujet,
+  projection
+}) {
+  if (!projection) return null;
+  const AXES = [{
+    key: 'biophysique',
+    icon: '🧱',
+    label: 'Biophysique',
+    color: 'var(--success)'
+  }, {
+    key: 'temporelle',
+    icon: '⏱️',
+    label: 'Temporelle',
+    color: 'var(--accent)'
+  }, {
+    key: 'couts',
+    icon: '💶',
+    label: 'Coûts cachés',
+    color: 'var(--warning)'
+  }, {
+    key: 'consequences',
+    icon: '🌍',
+    label: 'Conséquences',
+    color: 'var(--purple)'
+  }];
+  const renderBadge = (it, axeColor) => {
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-badge",
+      style: {
+        borderLeftColor: impactColor,
+        color: impactColor
+      },
+      title: it.detail || it.niveau + ' — ' + (it.label || '')
+    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-badge-label"
+    }, it.label));
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid"
+  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-head"
+  }, titre && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-title"
+  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-sujet"
+  }, sujet)), /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-rows"
+  }, AXES.map(ax => {
+    const items = projection[ax.key];
+    if (!items || !items.length) return null;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ax.key,
+      className: "sv-cascade-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sv-cascade-row-head",
+      style: {
+        color: ax.color
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-row-icon"
+    }, ax.icon), /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-row-label"
+    }, ax.label)), /*#__PURE__*/React.createElement("div", {
+      className: "sv-cascade-row-items"
+    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, renderBadge(it, ax.color)))));
+  })));
 }
 
 // ── Helpers & Constants ──

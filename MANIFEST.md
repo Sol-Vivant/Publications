@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 56 tables, 10 vues, 40 scripts
+- 56 tables, 10 vues, 42 scripts
 
 ## Scripts
 
@@ -13,6 +13,7 @@
 | `audit_opus.py` | v3.0 | `tools/admin/` | Audit Opus v3.1. |
 | `bq_query.py` | v1.0 | `tools/admin/` | Consultation BQ on-demand — modules, recherche, filtres |
 | `check_integrity.py` | v1.0 | `tools/admin/` | Validation intégrité DB (termes orphelins, FK, doublons) |
+| `deploy_publications.py` | v1.0 | `tools/admin/` | Synchronise Publications/web/ vers ../Publications/ (dépôt GitHub Pages séparé) via rsync. |
 | `explorer.py` | v1.0 | `tools/admin/` | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
 | `export_tools.py` | v1.5 | `tools/admin/` | Exporteur scripts v1.5. |
 | `fix_titres.py` | v1.0 | `tools/admin/` | Correction titres jenni_doc_specs |
@@ -25,6 +26,7 @@
 | `gen_mo_calc.py` | v1.0 | `tools/docs/` | Calculateur interactif Matière Organique — formule de Kirkby, mélanges, analyse sols. |
 | `gen_readme.py` | v1.1 | `tools/docs/` | Génération dynamique de tous les README depuis la DB. |
 | `gen_reports.py` | v1.0 | `tools/docs/` | Génère les rapports d'audit depuis audit_reports → jmj/analyses/reports/ |
+| `gen_technique.py` | v1.0 | `tools/docs/` | Guide Technique (Publications/technique/index.html) — architecture, méthode, portabilité du patron. |
 | `gen_triangle_textures.py` | v2.0 | `tools/docs/` | Triangle des textures interactif — classification USDA des sols. |
 | `gen_web.py` | v2.2 | `tools/docs/` | Cartographie React interactive v1.1 (web public). |
 | `gen_workflows.py` | v2.0 | `tools/docs/` | Génération des workflows horodatés par module. |
@@ -58,9 +60,9 @@ projet/
 ├── MANIFEST.md            # ce fichier
 ├── tools/
 │   ├── sync_scripts.py
-│   ├── admin/                  audit_opus, bq_query, check_integrity, explorer, export_tools, fix_titres, session_start
+│   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_triangle_textures, gen_web, gen_workflows
+│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, integrate_fiche_retour, reformat_fiches_ris
 │   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 │   ├── zotero/                 attribution, normalise_ris, validate_ris
@@ -78,7 +80,7 @@ projet/
 
 ## Pages web interactives
 
-6 pages, 25 templates (1 partagés), vendor local (hors-ligne).
+6 pages, 31 templates (1 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
