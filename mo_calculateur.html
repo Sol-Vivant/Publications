@@ -83,7 +83,7 @@ body {
 .sv-header {
   background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
   color: #fff;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 1.25rem;
   box-shadow: 0 2px 20px rgba(37,99,235,0.12);
 }
 .sv-header h1 {
@@ -104,7 +104,6 @@ body {
 
 /* ── Navigation / breadcrumb ── */
 .sv-nav {
-  max-width: 1400px;
   margin: 0;
   padding: 0.6rem 1.25rem;
   font-size: var(--font-sm);
@@ -120,9 +119,8 @@ body {
 
 /* ── Navigation inter-pages ── */
 .sv-nav-pages {
-  max-width: 1400px;
   margin: 0;
-  padding: 0.5rem 1.25rem;
+  padding: 0.35rem 1.25rem;
   font-size: var(--font-sm);
   color: var(--text-secondary);
   background: var(--card-bg);
@@ -194,9 +192,8 @@ h3 {
 
 /* ── Page générique : cadrage à gauche uniforme ── */
 .sv-page {
-  max-width: 1400px;
   margin: 0;
-  padding: 0 1.25rem 2rem;
+  padding: 0.35rem 1.25rem 2rem;
 }
 @media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
 
@@ -249,14 +246,12 @@ h3 {
 
 /* ── Containers ── */
 .sv-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  margin: 0;
+  padding: 1.5rem 1.25rem;
 }
 .sv-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  margin: 0;
+  padding: 0 1.25rem;
 }
 
 /* ── Tags / badges ── */
@@ -333,7 +328,6 @@ h3 {
 
 /* ── Footer ── */
 .sv-footer {
-  max-width: 1400px;
   margin: 2rem 0 0;
   padding: 1rem 1.25rem;
   text-align: left;
@@ -345,7 +339,6 @@ h3 {
 
 /* ── Details / Glossary ── */
 .sv-details {
-  max-width: 1400px;
   margin: 1rem 0;
   padding: 0 1.25rem;
 }
@@ -388,9 +381,8 @@ h3 {
 .sv-sidebar-layout {
   display: flex;
   gap: 1.25rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
+  margin: 0;
+  padding: 1rem 0;
   min-height: calc(100vh - 80px);
 }
 .sv-sidebar {
@@ -416,7 +408,7 @@ h3 {
 
 /* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
 .sv-tab-content {
-  padding: 1rem 0;
+  padding: 0 0 1rem;
   min-height: 400px;
 }
 
@@ -1202,7 +1194,7 @@ h3 {
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Calculateur Matière Organique — C/N, humification, mélanges interactifs</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 14:19 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-15 19:09 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <span class="sv-nav-current">🧪 Calculateur Matière Organique</span>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2523,11 +2515,6 @@ function App() {
   return /*#__PURE__*/React.createElement("div", {
     className: "sv-page"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      textAlign: 'center',
-      padding: '1rem 1.5rem 0.5rem'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
     className: "sv-tab-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "sv-sidebar-layout"
