@@ -87,6 +87,7 @@ python3 tools/docs/gen_lifofer.py --db sol_vivant.db
 python3 tools/docs/gen_mo_calc.py --db sol_vivant.db
 python3 tools/docs/gen_readme.py --db sol_vivant.db
 python3 tools/docs/gen_reports.py --db sol_vivant.db
+python3 tools/docs/gen_technique.py --db sol_vivant.db
 python3 tools/docs/gen_triangle_textures.py --db sol_vivant.db
 python3 tools/docs/gen_web.py --db sol_vivant.db
 python3 tools/docs/gen_workflows.py --db sol_vivant.db

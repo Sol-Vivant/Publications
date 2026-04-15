@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte</title>
+<!-- Open Graph -->
+<meta property="og:title" content="Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="Guide technique du patron Sol Vivant : architecture DB-driven, méthode en rupture avec Claude Code, reproductibilité pour d'autres projets." />
+<meta property="og:type" content="website" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Guide technique du patron Sol Vivant : architecture DB-driven, méthode en rupture avec Claude Code, reproductibilité pour d'autres projets." />
+<link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
+
+<script src="../vendor/react.production.min.js"></script>
+<script src="../vendor/react-dom.production.min.js"></script>
+<style>
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #cbd5e1;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Échelle typographique (source unique pour toutes les pages) */
+  --font-xs: 0.75rem;
+  --font-sm: 0.82rem;
+  --font-base: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.15rem;
+  --font-xl: 1.5rem;
+  --font-2xl: 1.8rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
+  --success: #059669;
+  --success-light: #D1FAE5;
+  --warning: #D97706;
+  --warning-light: #FEF3C7;
+  --danger: #DC2626;
+  --danger-light: #FEE2E2;
+  --info: #2563EB;
+  --info-light: #DBEAFE;
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.sv-header .sv-subtitle {
+  font-size: var(--font-base);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+.sv-header .sv-meta {
+  font-size: var(--font-xs);
+  opacity: 0.45;
+  margin-top: 0.15rem;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Navigation inter-pages ── */
+.sv-nav-pages {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.sv-nav-pages a {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.sv-nav-pages a:hover {
+  background: var(--accent-light);
+  text-decoration: none;
+}
+.sv-nav-current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* ── Styles par défaut h1/h2/h3 (uniformisation charte) ───────────
+   Les CSS page-spécifiques peuvent override avec même spécificité
+   (leur règle est chargée après CHARTER_CSS). */
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: #f1f5f9; }
+.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Onglets (pattern Pratique / Comprendre) ── */
+.sv-tabs {
+  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+}
+.sv-tab {
+  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
+  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  margin-bottom: -1px;
+}
+.sv-tab:hover { color: var(--text); }
+.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
+@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+.sv-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+
+/* ── Callout / highlight box ── */
+.sv-callout {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--font-base);
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--font-base);
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  max-width: 1400px;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  max-width: 1400px;
+  margin: 1rem 0;
+  padding: 0 1.25rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: 1.25rem; }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 1rem 0;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ── */
+.sv-cahier {
+  background: #fdfbf7;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
+  border: 1px solid #e8e0d0;
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: 1rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+.sv-bullet-list-dense li {
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  font-size: var(--font-xs);
+}
+
+/* ── Inline emphasis / highlight unifiés ── */
+.sv-mark {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.sv-emphasis {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── SvCascadeGrid : projection d'un sujet sur les 4 cascades ── */
+.sv-cascade-grid {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-cascade-grid-head {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--border);
+}
+.sv-cascade-grid-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+}
+.sv-cascade-grid-sujet {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.sv-cascade-grid-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.sv-cascade-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .sv-cascade-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+.sv-cascade-row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+.sv-cascade-row-icon { font-size: 1.05rem; line-height: 1; }
+.sv-cascade-row-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.sv-cascade-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem 0.2rem 0.5rem;
+  border-left: 3px solid;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: var(--font-xs);
+  cursor: help;
+}
+.sv-cascade-badge strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sv-cascade-badge-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Passerelle Outil → Cahier de Science ── */
+.sv-cahier-link {
+  margin: 1.5rem auto 0.5rem;
+  padding: 0.85rem 1.25rem;
+  max-width: 720px;
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+.sv-cahier-link-icon { font-size: 1.2rem; line-height: 1; }
+.sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
+.sv-cahier-link a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.sv-cahier-link a:hover { text-decoration: underline; }
+
+/* ── Bloc texte riche (SvRichText) ── */
+.sv-richtext { line-height: 1.55; }
+.sv-richtext p.sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-richtext .sv-section-label {
+  font-size: 0.7rem;
+  margin-bottom: 0.35rem;
+  color: var(--accent-dark);
+}
+.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+
+/* ── Bloc de section unifié (SvSection) ── */
+.sv-section-block {
+  margin: 1.25rem 0 1.5rem;
+}
+.sv-section-block + .sv-section-block {
+  margin-top: 2rem;
+}
+.sv-section-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-section-title-h2 { font-size: 1.35rem; }
+.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+.sv-section-block .sv-section-label + .sv-section-title {
+  margin-top: 0;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+
+/* ═══ Guide Technique — layout doc ═══ */
+
+.tech-root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+/* Header custom minimaliste (pas la nav complète du site) */
+.tech-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.tech-header-icon { font-size: 2rem; line-height: 1; }
+.tech-header-titles { flex: 1; min-width: 220px; }
+.tech-header-title { font-size: 1.35rem; font-weight: 700; color: var(--text); margin: 0; }
+.tech-header-subtitle { font-size: var(--font-sm); color: var(--text-secondary); margin-top: 0.15rem; }
+.tech-header-back {
+  font-size: var(--font-sm);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.tech-header-back:hover { background: var(--accent-light); }
+
+.tech-intro {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  font-size: var(--font-sm);
+  line-height: 1.55;
+}
+
+/* Layout 2-cols : sommaire + contenu */
+.tech-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+}
+@media (max-width: 860px) {
+  .tech-layout { grid-template-columns: 1fr; }
+}
+
+.tech-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 0.85rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.tech-toc-title {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+.tech-toc-chapter {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.tech-toc-chapter:hover { background: var(--accent-light); color: var(--accent-dark); }
+.tech-toc-sections {
+  margin: 0.1rem 0 0.35rem 0.35rem;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid var(--border);
+}
+.tech-toc-section {
+  display: block;
+  padding: 0.2rem 0.55rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.35;
+}
+.tech-toc-section:hover { color: var(--accent); }
+
+.tech-main { min-width: 0; }
+
+/* Chapitre */
+.tech-chapter {
+  margin-bottom: 2.5rem;
+  scroll-margin-top: 1rem;
+}
+.tech-chapter-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 1.1rem;
+}
+.tech-chapter-num {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+}
+.tech-chapter-icon { font-size: 1.4rem; line-height: 1; }
+.tech-chapter-titles { flex: 1; min-width: 0; }
+.tech-chapter-label {
+  font-size: var(--font-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.tech-chapter-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin: 0;
+}
+.tech-chapter-intro {
+  font-size: var(--font-sm);
+  line-height: 1.55;
+  color: var(--text);
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-bg-subtle);
+  border-radius: 6px;
+  font-style: italic;
+}
+
+/* Section */
+.tech-section {
+  scroll-margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.tech-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+
+</style>
+</head>
+<body>
+
+
+
+
+
+<div id="root"></div>
+
+
+<footer class="sv-footer">
+  Le Sol Vivant cet Holobionte · Jean-Michel Juzan · v1.0
+  · Données depuis sol_vivant.db
+</footer>
+
+<div id="sv-tooltip" class="sv-tooltip"></div>
+
+
+<script>const DATA = {"version": 1, "chapitres": [{"id": "architecture", "titre": "Architecture du corpus", "icone": "🏗️", "intro": "Le corpus Sol Vivant est construit autour d'une **base de données SQLite unique** (`sol_vivant.db`) qui est la source de vérité. Tout ce qui est dans un fichier sur disque (HTML, README, prompts Jenni, workflows) est une **vue régénérable** depuis la DB. Ce chapitre présente la structure interne du corpus.", "sections": [{"id": "db_source", "titre": "La DB comme source de vérité unique", "content": "**Principe** : rien n'existe tant que ce n'est pas en base. Les fichiers générés (HTML, Markdown, docx, JSON) sont des projections qui peuvent être régénérées à tout moment sans perte d'information.\n\nCONSÉQUENCES PRATIQUES :\n\n• On ne modifie jamais un fichier généré directement — toujours la DB puis régénération\n• Les scripts peuvent être réinjectés depuis la DB (`sync_scripts.py --extract`) sur toute machine fraîche\n• Un backup = un seul fichier `.db` (binaire, versionné en git)\n• L'intégrité est garantie par les FK, CHECK et UNIQUE au niveau SQL\n\nCONTREPARTIE :\n\nLe `.db` est binaire donc non-mergeable. Mais en workflow mono-utilisateur, ça ne pose aucun problème — `origin/main` fait foi, `session_start.py` reset tout ce qui diverge au démarrage.", "highlight": {"title": "Pourquoi SQLite et pas PostgreSQL / MongoDB / JSON ?", "color": "info", "text": "SQLite est un fichier. Pas de serveur, pas de config réseau, pas de dépendance système. Il se versionne en git, se sauvegarde d'un cp, se transporte d'un scp. Pour un corpus mono-utilisateur jusqu'à quelques Go, il n'y a aucune raison d'aller plus loin."}}, {"id": "tables", "titre": "Inventaire des tables (56 tables, 10 vues)", "content": "Le schéma couvre 4 grandes familles :\n\nFAMILLE — CORPUS SCIENTIFIQUE :\n\n• `documents` (18) — les 18 documents finaux du corpus (F1-F2, S0-S4, V1-V3, P1-P5, H1-H3)\n• `prompts` (191) — sections de rédaction (type, chapitre, contexte_sci, instructions)\n• `prompt_contenus` — contenu Jenni intégré par Claude\n• `terms` (874) — thésaurus canonique (FR/EN, définitions, strates)\n• `term_relations` (3635) — BT/NT/RT entre termes\n• `fiches`, `fiche_sections`, `fiche_contenus` — zooms proactifs\n• `validations`, `validation_sections` — vérifications et comblements réactifs\n\nFAMILLE — FILTRE DE RIGUEUR :\n\n• `concept_cards` (73) — atomes rigoureux filtrés, organisés en 12 dimensions\n• `concept_card_links` — relations entre cartes (complete, derives_from, related_to, prerequisite)\n• `concept_card_tests` — ancrage sur tests terrain\n• `chains_causales` (16) — récits mécanistes transdisciplinaires\n• `chain_etapes` — étapes des chaînes\n• `cascade_prerequis` — les 6 niveaux N0-N5 de la colonne vertébrale\n• `doc_cross_refs` (118) — renvois inter-documents bidirectionnels\n\nFAMILLE — INFRASTRUCTURE WEB :\n\n• `web_pages` (9) — métadonnées des pages (slug, title, status, icon)\n• `html_templates` (28) — head/css/js par page + composants React partagés\n• `ref_matieres`, `ref_textures` — données de référence pour les calculateurs\n\nFAMILLE — MÉTA / MÉMOIRE :\n\n• `bq_entries` (83) — Bibliothèque de Connaissances (règles, conventions, méta-doctrine)\n• `config` — paramètres centralisés (catégorie/clé/valeur JSON)\n• `scripts` (41) — registre des scripts Python avec contenu versionné\n• `audit_log` (902) — journal horodaté des opérations DB\n• `maintenance_sessions` (21) — rapports structurés par session Claude\n• `audit_reports` — rapports markdown (session_recap, chaînes, audits)"}, {"id": "scripts", "titre": "Les scripts comme vues (41 scripts)", "content": "Les scripts Python dans `tools/` sont organisés en sous-dossiers thématiques et **enregistrés en DB** dans la table `scripts` (avec contenu versionné). La sync disque↔DB est pilotée par `tools/sync_scripts.py`.\n\nARBORESCENCE :\n\n• `tools/admin/` — démarrage session, intégrité, dédupe, audits\n• `tools/batch/` — traitements en masse (Zotero, attribution)\n• `tools/docs/` — générateurs `gen_*.py` (pages HTML, README, rapports)\n• `tools/jenni/` — exports prompts Jenni (fiches, validations, thésaurus)\n• `tools/lib/` — modules partagés (web_template, db, cli, pub_path, config)\n• `tools/zotero/` — attribution, RIS, sync\n\nRÈGLE :\n\nTout script peut être régénéré depuis la DB sur une machine fraîche. Inversement, toute modification locale d'un script doit être injectée (`sync_scripts.py --inject`) avant `git push`, sinon l'état DB et disque divergent.", "rule": {"title": "Orchestrateur", "text": "`tools/regen_all.py` régénère toutes les pages HTML + README + rapports + workflows en une commande. Utile en fin de session pour s'assurer que tous les fichiers sur disque reflètent l'état actuel de la DB."}}, {"id": "web_pages_overview", "titre": "Pages web et outils interactifs (9 pages)", "content": "Chaque page web suit le même pattern 4 couches : entrée `web_pages` (métadonnées), templates `html_templates` (head + css + js), script `gen_*.py` (extrait DATA depuis la DB, appelle render_page), et le module `tools/lib/web_template.py` (charte CSS, composants React partagés, pré-compilation JSX).\n\nPAGES PUBLIQUES :\n\n• 🗺️ **Cartographie interactive** (`index.html`) — exploration documents, chaînes causales, thésaurus, cross-refs\n• 🧪 **Calculateur Matière Organique** — formule de Kirkby, ratios C/N, k₁/k₂ Hénin-Dupuis, 110 matières référencées\n• 🌿 **Calculateur LiFoFer** — conversions mélasse/sucres, dilutions, recettes\n• 🔺 **Triangle des Textures GEPPA** — classification USDA interactive, test du bocal\n• 📚 **Cahier de Science** — livre pédagogique multi-chapitres (MO, Textures, Fermentations, Méthodologie)\n• 📋 **Concept Cards** — grille interactive des 69 cartes actives\n\nPAGES INTERNES (hors nav, outils de pilotage) :\n\n• 📊 **Dashboard** — vision rapide pour Claude\n• 📝 **Ébauches** — lecture web des retours Jenni (via mammoth)\n• 🔍 **Explorer DB** — inspection tables + intégrité"}, {"id": "workflow_production", "titre": "Workflow de production des documents", "content": "Chaîne de production d'un document final (par exemple S4 — Le Carbone et les Grands Cycles), en 7 étapes :\n\n1. **Audit initial** — `analyse_corpus.py` identifie les manques (termes, chaînes, sections). Produit un rapport `audit_reports`.\n2. **Identification des trous** — termes manquants → enrichissement thésaurus ; sujets transversaux → nouvelles fiches ; lacunes → nouvelles validations.\n3. **Filtre de rigueur** — chaque hypothèse passe par une concept card (positionnement dans 12 dimensions, confrontation aux tests terrain).\n4. **Production des prompts Jenni** — `export_fiche.py`, `export_validation.py`, `gen_prompt_enrichissement.py` génèrent des `.txt` envoyés à Jenni.\n5. **Cycle Jenni** — envoye → recu : les `.docx` reviennent, sont stockés dans `jmj/docx_recu/`.\n6. **Intégration Claude** — extraction termes → `terms`, contenu fiches → `fiche_contenus` + `prompts.contexte_sci/.enrichissement`, mise à jour des statuts.\n7. **Clôture des prompts** — une vue SQL auto-déduit qu'un prompt est `cloture` quand aucune fiche/validation ouverte ne le référence plus. Quand tous les prompts d'un doc sont clôturés → le doc passe en `pret_a_rediger` → passe finale Jenni → doc rédigé.", "source": "Modèle conceptuel détaillé dans la BQ #... (module projet)"}, {"id": "maintenance", "titre": "Maintenance et intégrité", "content": "Le projet intègre nativement ses mécanismes de rigueur :\n\n• **`session_start.py`** — reset `origin/main`, backup DB journalier, dashboard synthétique avec santé / documents / chaînes / intégrité / règles actives chargées depuis la DB\n• **`check_integrity.py`** — FK orphelines, termes sans définition, prompts doc manquants, chain_etapes orphelines, doublons sémantiques\n• **`audit_log`** — toute opération DB structurelle (INSERT/UPDATE/DELETE impactante) est horodatée avec détail\n• **`maintenance_sessions`** — rapport structuré par session (objectif, actions, décisions, état avant/après, reste à faire)\n• **BQ active** — les règles (doctrine BQ #53, audit concept_cards obligatoire, zéro texte hardcodé, etc.) sont stockées en DB et affichées par `session_start.py` au démarrage — pas un snapshot Markdown qui périme"}]}, {"id": "methode", "titre": "La méthode en rupture", "icone": "✨", "intro": "Les outils classiques de gestion de corpus (Word, Notion, wikis, Obsidian, Zotero) sont pensés pour des humains qui lisent. Le patron Sol Vivant est pensé pour une collaboration homme + IA agentique (Claude Code). Ce chapitre explicite les ruptures et leurs effets pratiques, notamment sur la consommation de tokens.", "sections": [{"id": "problematique", "titre": "Le problème des outils classiques face à une IA agentique", "content": "Les outils documentaires classiques posent trois problèmes quand on veut faire collaborer un agent IA :\n\n• **Pas interrogeables** — un fichier Word, une page Notion ou un note Obsidian se lisent, mais ne se requêtent pas. L'agent doit tout charger pour chercher quelque chose.\n• **Pas versionnables proprement** — formats binaires ou propriétaires, merges pénibles, historique opaque.\n• **Pas de source de vérité** — doublons entre README, docs, commentaires code, issues GitHub, discussions Slack. L'agent doit reconstituer l'état cohérent à chaque interaction.\n\nRésultat : l'agent **re-découvre le projet** à chaque session. Il doit charger les dossiers, relire la doctrine, reconstituer l'historique, deviner ce qui a bougé. Ce coût s'exprime en **tokens consommés** — et il n'est pas petit.", "highlight": {"title": "Les plans Pro/Max qui fondent", "color": "warning", "text": "Beaucoup d'utilisateurs observent que Claude Code (ou équivalents) consomme leurs plans forfaitaires très vite. L'enquête rapide pointe la même cause récurrente : l'agent passe 50-70% de son budget à re-explorer, re-lire, re-contextualiser ce qu'il devrait pouvoir consulter de façon ciblée."}}, {"id": "pattern_db_driven", "titre": "Pattern DB-driven + scripts comme vues", "content": "Le patron Sol Vivant renverse la logique : **la DB est la source, les fichiers sont des vues**.\n\nCONSÉQUENCES :\n\n• Un agent ne charge jamais un gros fichier pour chercher — il fait une requête SQL ciblée qui renvoie quelques lignes\n• Les modifications sont ciblées : `UPDATE table SET field=… WHERE id=…` au lieu de réécrire un fichier de 50 ko\n• La régénération est explicite et réversible : les fichiers n'accumulent pas de dérive silencieuse\n• L'audit est natif : `audit_log` horodate chaque opération structurante\n\nMATÉRIELLEMENT :\n\n• Source de vérité : 1 fichier (`sol_vivant.db`, quelques Mo)\n• Sorties régénérables : HTML (9 pages), Markdown (README × 13), prompts Jenni (.txt × N), rapports audit (.md × N)\n• Commandes de régénération : `regen_all.py` en 1 minute, `sync_scripts.py --extract` pour les scripts"}, {"id": "claude_code_github", "titre": "Claude Code + GitHub : workflow mono-utilisateur", "content": "La plateforme Claude Code web impose une branche `claude/<nom-session>` par session. Le patron Sol Vivant assume ce workflow mono-utilisateur et l'optimise :\n\n• **Pas de Pull Request**, pas de review humaine — JMJ + Claude sont les deux acteurs, point\n• **Propagation main en fast-forward strict** à chaque fin de session (jamais de merge commit)\n• **Reset agressif au démarrage** — `session_start.py` fait un `git reset --hard origin/main` et supprime les branches `claude/*` fantômes\n• **La DB binaire n'est pas un problème** — un seul writer à la fois, source de vérité claire\n\nRésultat : pas de conflits de merge, pas de divergence git, pas de discussions sur qui a raison. Le workflow file tout droit.", "rule": {"title": "Règle de clôture obligatoire", "text": "Avant de rendre la main à JMJ, Claude propage systématiquement sur `main` : `git checkout main && git merge --ff-only claude/<branche> && git push origin main`. Cette clôture évite que JMJ ne manipule les branches manuellement dans GitKraken pendant les tests — cause principale des collisions working tree / merges parasites."}}, {"id": "tokens_synthese", "titre": "Observation : consommation de tokens (franchise)", "content": "**Constat subjectif** : la conso de tokens ressentie en Claude Code sur ce projet est notablement inférieure à ce qu'on entend chez d'autres utilisateurs. On ne dispose pas de mesures rigoureuses (les plans forfaitaires Claude Code ne détaillent pas l'usage par session), mais les **mécanismes structurels** qui justifient cette économie sont identifiables.\n\nCE QUI NE VIENT PAS DE SQLITE EN SOI :\n\nBeaucoup de gens supposent « utilisez une DB, vous économiserez des tokens ». C'est approximatif. On aurait pu avoir le même résultat avec des JSON bien indexés pour un corpus petit/moyen. La DB ne devient objectivement supérieure qu'à partir de plusieurs dizaines de Mo, avec besoin de jointures ou de recherche full-text.\n\nCE QUI ÉCONOMISE VRAIMENT LES TOKENS :\n\nQuatre pratiques, qui sont **portables** quel que soit le format de stockage sous-jacent. Voir section suivante.", "highlight": {"title": "Honnêteté", "color": "info", "text": "Sans chiffres mesurés, on ne peut pas affirmer « ça coûte X fois moins » que les workflows classiques. Mais les mécanismes ci-dessous sont identifiables, reproductibles et explicables. L'économie de tokens en est la conséquence logique, pas un effet magique du choix SQLite."}}, {"id": "quatre_pratiques", "titre": "Les 4 pratiques qui économisent les tokens", "content": "PRATIQUE 1 — DOCTRINE STRUCTURÉE ET INTERROGEABLE :\n\nPas un CLAUDE.md de 50 ko qui doit être chargé intégralement à chaque conversation. Plutôt une structure interrogeable : chez nous, la BQ (Bibliothèque de Connaissances, 83 entrées actives) avec modules et `bq_query.py --search \"<terme>\"`. L'agent charge **la règle pertinente** au bon moment, pas toutes les règles tout le temps.\n\nTypique : 200-500 tokens par consultation au lieu de 12-15k tokens re-chargés à chaque conversation.\n\nPRATIQUE 2 — BOOTSTRAP DE SESSION AVEC DASHBOARD SYNTHÉTIQUE :\n\nChez nous, `session_start.py` produit en ~2k tokens : santé du thésaurus, statut des 18 documents, règles actives, intégrité, historique récent. L'agent n'a **jamais** besoin d'explorer l'arborescence pour comprendre l'état du projet.\n\nÀ comparer aux 5-15k tokens typiquement dépensés en `ls + cat README + cat package.json + ls src/ + cat src/...` dans les projets non pré-structurés.\n\nPRATIQUE 3 — HISTORIQUE STRUCTURÉ :\n\n`audit_log` + `maintenance_sessions` + `audit_reports` donnent à l'agent une vue structurée de ce qui s'est passé, sans avoir à relire `git log` en détail ni à reconstituer le contexte à partir des diffs.\n\nPRATIQUE 4 — SORTIES RÉGÉNÉRABLES, MODIFS CIBLÉES :\n\nModifier un template via `UPDATE html_templates SET contenu=... WHERE id=...` coûte ~500 tokens en output. Réécrire le HTML généré correspondant en coûterait 50k+. Même principe pour tous les exports (prompts, READMEs, rapports) : on touche à la source, on régénère, on ne réécrit jamais un gros output à la main.\n\nSYNTHÈSE PORTABLE :\n\n**Pré-structurer ce que l'agent doit savoir. Ne jamais lui demander de re-découvrir à chaque session.**", "rule": {"title": "Applicable quel que soit le domaine", "text": "Ces 4 pratiques s'implémentent en SQLite (comme ici), en JSON indexés (pour corpus petit/moyen), ou même en fichiers plats bien organisés avec un script de synthèse. Le format sous-jacent n'est pas le point de rupture. Le point de rupture est l'intention de **pré-structurer** pour l'agent au lieu de le laisser explorer."}}, {"id": "regles_bq_vivantes", "titre": "Les règles actives comme source vivante", "content": "Un principe clé du patron : les règles de travail sont **en DB et affichées au démarrage de chaque session**, pas dans un Markdown qui périme.\n\nExemples de règles actives (extraites de la BQ `claude_rules`) :\n\n• **Audit concept_cards obligatoire avant toute création** — Claude vérifie qu'une carte équivalente n'existe pas déjà avant de proposer d'en créer une nouvelle\n• **Doctrine BQ — recherche au fil de l'eau** — pas de chargement en bloc, requêtes ciblées selon le besoin\n• **Zéro texte hardcodé** dans les templates JS — tout vient de DATA injecté depuis la DB\n• **Zéro liste brute, zéro titre brut** — utiliser SvBulletList, SvSection, SvRichText\n• **Clôture de session obligatoire** — propagation main en fast-forward strict\n\nCes règles sont ajoutables/modifiables à la volée via `UPDATE config SET valeur=… WHERE categorie='claude_rules' AND cle=…`. Effet immédiat au prochain `session_start.py`. Pas de redéploiement, pas de re-chargement, pas de redite dans les prompts."}]}, {"id": "patron", "titre": "Reproduire le patron", "icone": "🔄", "intro": "Le patron Sol Vivant n'est pas lié à l'agriculture. C'est une architecture modulaire pour construire un corpus de connaissances structuré avec un agent IA. Tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser. Ce chapitre liste les composants réutilisables et l'ordre d'adaptation.", "sections": [{"id": "noyau", "titre": "Le noyau : Claude Code + SQLite + Python", "content": "Le minimum viable pour démarrer :\n\n• **Claude Code** (ou équivalent agent IA) pour orchestrer\n• **SQLite** comme source de vérité\n• **Python** pour les scripts de génération / maintenance / sync\n• **Git + GitHub** pour le versionnement et éventuellement la publication\n\nAucune autre dépendance obligatoire. Les couches optionnelles ci-dessous s'ajoutent selon le besoin.\n\nSCHÉMA DB MINIMAL À PRÉVOIR :\n\n• Une ou plusieurs tables de **contenu** (documents, termes, fiches, cartes…)\n• Une table `config` pour les paramètres (catégorie/clé/valeur JSON)\n• Une table `bq_entries` pour la doctrine interrogeable\n• Une table `scripts` qui versionne les scripts Python eux-mêmes\n• Une table `audit_log` pour l'historique des opérations\n• Une table `maintenance_sessions` pour les rapports structurés par session\n\nLes tables de contenu dépendent du domaine. Le reste est transposable tel quel."}, {"id": "couches_optionnelles", "titre": "Couches optionnelles", "content": "Chaque couche s'active indépendamment selon la nature du projet :\n\n• **Jenni AI** — rédaction longue avec citations intégrées. Utile pour un corpus académique avec bibliographie dense. Sinon rédiger directement via Claude Code ou autre.\n\n• **Zotero** — gestion bibliographique (RIS, attribution). Utile si on cite des publications scientifiques. Le pipeline normalise → attribution → validate est dans `tools/zotero/`.\n\n• **API Anthropic (batch)** — analyse en masse (audit, attribution) pour gros volumes de traitement automatisé. Utile pour des passes initiales sur des corpus existants.\n\n• **GitHub Pages** — publication web publique. Dépôt `Publications/` séparé, déployé par `deploy_publications.py` via rsync.\n\n• **React + Babel + vendor local** — pour les pages interactives (calculateurs, triangle, cahier, concept cards). Pas nécessaire si le projet ne publie que du Markdown."}, {"id": "exemples", "titre": "Exemples de domaines applicables", "content": "Le patron s'applique à tout projet qui a :\n\n• Un **corpus textuel** à organiser (documents, fiches, concepts)\n• Un **vocabulaire technique** à stabiliser (thésaurus, glossaire)\n• Des **relations structurelles** entre objets (chaînes, arbres de décision)\n• Des **outils interactifs** à publier (calculateurs, diagnostics, filtres)", "bullets": ["**Solutions low-tech** — matériaux, énergie, eau, alimentation, habitat. Outils : calculateurs de consommation, fiches techniques de construction.", "**Guide de permaculture** — sol, plantes, eau, design, animaux. Outils : calendrier d'implantation, associations de cultures, diagnostic sol.", "**Base médicale TDAH** — fondements, diagnostic, traitements, famille, outils. Outils : fiches FALC, échelles d'évaluation, arbres décisionnels.", "**Patrimoine architectural** — époques, matériaux, techniques, réglementations. Outils : cartographie, fiches bâtiment, check-lists intervention.", "**Cuisine et nutrition** — ingrédients, techniques, nutrition, recettes. Outils : calculateur nutritionnel, saisonnalité, substitutions.", "**Documentation technique d'entreprise** — architecture, API, runbooks, incidents. Outils : fiches incidents réversibles, arbre de décision d'escalade, diagrammes régénérés."]}, {"id": "demarrage_4_etapes", "titre": "Démarrage en 4 étapes", "content": "ÉTAPE 1 — CRÉER LA BASE :\n\nDéfinir les tables de contenu propres au domaine (ex: documents, termes, fiches) et installer le squelette transverse (config, bq_entries, scripts, audit_log, maintenance_sessions). Écrire un schéma SQL dans `schema.sql` et un script `init_db.py` qui le joue sur une DB vierge.\n\nÉTAPE 2 — DÉFINIR LES STRATES / LA STRUCTURE :\n\nQuels sont les grands axes d'organisation du corpus ? Chez Sol Vivant, ce sont F/S/V/P/H (Fondements/Sol/Vivant/Pratique/Humain). Dans un autre domaine : Contexte/Diagnostic/Intervention/Suivi, par exemple. Ces strates remplissent une table `strates` ou équivalent.\n\nÉTAPE 3 — PEUPLER INITIALEMENT :\n\nIntroduire le premier vocabulaire (20-50 termes), les premiers documents (quelques sections), les premières règles en BQ. On peut démarrer très petit — le patron se remplit au fur et à mesure.\n\nÉTAPE 4 — GÉNÉRER LES PREMIÈRES VUES :\n\nUn script `gen_web.py` qui produit une page HTML de consultation. Un `session_start.py` qui affiche un dashboard de santé. À partir de là, le patron s'auto-alimente : les vues aident à voir les trous, Claude aide à les combler, les règles s'affinent.", "rule": {"title": "Démarrer très petit", "text": "Erreur classique : vouloir définir le schéma parfait avant de commencer. Démarrer avec 3-4 tables minimales, les règles évidentes, une seule vue HTML. Le patron se révèle par l'usage, pas par la spécification amont."}}, {"id": "adaptations", "titre": "Adaptations domain-specific", "content": "Quelques éléments à adapter lors de la réutilisation :\n\n• **Charte graphique** — `tools/lib/web_template.py` contient CHARTER_CSS (variables couleurs, classes `.sv-*`). Renommer le préfixe et ajuster les couleurs primaires.\n• **Icônes** — la table `config.web.icon_library` centralise les emojis par catégorie (navigation, onglets, thématiques, strates). À redéfinir selon le domaine.\n• **Composants React partagés** — les 18+ composants `Sv*` (SvCollapse, SvBulletList, SvCascadeGrid, etc.) sont génériques et se réutilisent tels quels. Ajuster au besoin.\n• **Workflow Jenni / Zotero / batch API** — optionnels, à activer seulement si le domaine a besoin de rédaction longue avec citations ou de traitement en masse.\n• **Charte pédagogique** — classes `.sv-cahier`, `.sv-formula`, `.sv-rule`, etc. Utiles si le corpus inclut des explications scientifiques. Inutiles si c'est un corpus plus opérationnel."}, {"id": "invitation", "titre": "Invitation à réutiliser", "content": "Le code du patron (hors contenu agronomique spécifique) est libre à réutiliser. Les scripts transverses — `session_start.py`, `sync_scripts.py`, `check_integrity.py`, `regen_all.py`, `deploy_publications.py`, `bq_query.py`, la charte CSS et les composants React — sont génériques.\n\nLes tables transverses (`config`, `bq_entries`, `scripts`, `audit_log`, `maintenance_sessions`, `audit_reports`) sont transposables tel quel.\n\nSi vous reprenez le patron, un retour d'expérience (ce qui a bien marché, ce qui a été adapté, ce qui a été supprimé) serait précieux pour faire évoluer la doctrine.", "highlight": {"title": "Un outil devient un patron quand il a été copié au moins une fois", "color": "success", "text": "Le patron Sol Vivant n'est pas encore un « patron » au sens strict — il n'a été instancié qu'une fois (pour Sol Vivant lui-même). Il le deviendra quand un second corpus l'adoptera et le critiquera sur ce qui n'était pas assez générique."}}]}], "intro": "Ce guide technique présente le patron Sol Vivant — architecture, méthode et portabilité. Il s'adresse aux développeurs, agronomes ou chercheurs qui veulent comprendre comment le corpus est construit, pourquoi ce choix d'architecture, et comment réutiliser le patron pour un autre projet."};</script>
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// Composants React partagés — Charte pédagogique Sol Vivant
+// Tous les textes arrivent via props (jamais hardcodés)
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SvCollapse : section compactable/décompactable ──
+function SvCollapse({
+  title,
+  icon,
+  defaultOpen = false,
+  children,
+  id
+}) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse",
+    id: id
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "sv-collapse-header",
+    onClick: () => setOpen(!open)
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-collapse-title"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
+    className: `sv-collapse-chevron ${open ? 'open' : ''}`
+  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-collapse-body"
+  }, children));
+}
+
+// ── SvFormula : formule scientifique avec source optionnelle ──
+function SvFormula({
+  children,
+  source
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula"
+  }, children, source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-formula-source"
+  }, source));
+}
+
+// ── SvRule : règle pratique "à retenir" ──
+function SvRule({
+  children,
+  title
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-rule-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvScienceNote : encart cahier de science ──
+function SvScienceNote({
+  children,
+  title,
+  icon
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note",
+    "data-icon": icon || ''
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-science-note-title"
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvKPI : indicateur clé ──
+function SvKPI({
+  value,
+  unit,
+  label,
+  color,
+  detail,
+  style
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi",
+    style: style
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-value",
+    style: color ? {
+      color
+    } : undefined
+  }, value), unit && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-unit"
+  }, unit), /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-label",
+    style: color ? {
+      color
+    } : undefined
+  }, label), detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-detail"
+  }, detail));
+}
+
+// ── SvKPIGrid : grille de KPIs ──
+function SvKPIGrid({
+  children,
+  cols
+}) {
+  const style = cols ? {
+    gridTemplateColumns: `repeat(${cols}, 1fr)`
+  } : undefined;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-kpi-grid",
+    style: style
+  }, children);
+}
+
+// ── SvTimeline : frise chronologique ──
+function SvTimeline({
+  items,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, children);
+  if (!items || !items.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline"
+  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-timeline-item"
+  }, item.date && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-date"
+  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-place"
+  }, item.place), /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-text"
+  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-timeline-tags"
+  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
+    key: j,
+    className: "sv-timeline-tag"
+  }, t))))));
+}
+
+// ── SvPhaseCard : phase/étape colorée ──
+function SvPhaseCard({
+  title,
+  color,
+  label,
+  stats,
+  tags,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-card",
+    style: {
+      borderLeftColor: color || 'var(--accent)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-header",
+    style: {
+      color: color || 'var(--accent)'
+    }
+  }, label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-label"
+  }, label), /*#__PURE__*/React.createElement("span", {
+    className: "sv-phase-name"
+  }, title)), stats && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-stats"
+  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
+    key: i
+  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-tags"
+  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-phase-tag"
+  }, t))), children && /*#__PURE__*/React.createElement("div", {
+    className: "sv-phase-text"
+  }, children));
+}
+
+// ── SvCompare : comparaison bon/mauvais ──
+function SvCompare({
+  good,
+  bad
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-good"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-bad"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-compare-title"
+  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-compare-list"
+  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvDiagnostic : grille diagnostic OK/KO ──
+function SvDiagnostic({
+  ok,
+  ko
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-grid"
+  }, ok && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ok"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-card sv-diag-ko"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-diag-title"
+  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
+    className: "sv-diag-list"
+  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
+    key: i
+  }, it)))));
+}
+
+// ── SvTermList : liste de termes glossaire ──
+function SvTermList({
+  terms
+}) {
+  if (!terms || !terms.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-term"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-head"
+  }, t.badge && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-badge",
+    style: t.badgeStyle
+  }, t.badge), /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-name"
+  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
+    className: "sv-term-alt"
+  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
+    className: "sv-term-def"
+  }, t.def))));
+}
+
+// ── SvSourceList : liste de sources biblio ──
+function SvSourceList({
+  sources
+}) {
+  if (!sources || !sources.length) return null;
+  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-source"
+  }, s.year && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-year"
+  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
+    className: "sv-source-title"
+  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
+    href: s.url,
+    target: "_blank",
+    rel: "noopener",
+    className: "sv-source-link"
+  }, "[lien]")))));
+}
+
+// ── SvTabs : navigation onglets unifiée ──
+function SvTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-tabs"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    className: `sv-tab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvNoteAccordion : mini-note inline ──
+function SvNoteAccordion({
+  text,
+  label
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!text) return null;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content"
+  }, text));
+}
+
+// ── SvRefBox : encart de référence chiffrée ──
+function SvRefBox({
+  title,
+  items,
+  note,
+  children
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-box-title"
+  }, title), items && /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-grid"
+  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "sv-ref-item"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-num"
+  }, it.value), /*#__PURE__*/React.createElement("div", {
+    className: "sv-ref-label"
+  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--color-warning-text)',
+      lineHeight: 1.45,
+      fontStyle: 'italic'
+    }
+  }, note), children);
+}
+
+// ── SvHighlightBox : conclusion / point clé ──
+function SvHighlightBox({
+  title,
+  children,
+  color
+}) {
+  const c = color || 'success';
+  const colors = {
+    success: {
+      bg: 'var(--success-light)',
+      border: 'var(--success)',
+      text: 'var(--color-success-text)'
+    },
+    warning: {
+      bg: 'var(--warning-light)',
+      border: 'var(--warning)',
+      text: 'var(--color-warning-text)'
+    },
+    info: {
+      bg: 'var(--info-light)',
+      border: 'var(--accent)',
+      text: 'var(--accent-dark)'
+    },
+    purple: {
+      bg: 'var(--purple-light)',
+      border: 'var(--purple)',
+      text: 'var(--purple-dark)'
+    }
+  };
+  const s = colors[c] || colors.success;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box",
+    style: {
+      background: s.bg,
+      borderLeftColor: s.border
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-highlight-box-title",
+    style: {
+      color: s.text
+    }
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "sv-prose",
+    style: {
+      fontSize: 'var(--font-sm)'
+    }
+  }, children));
+}
+
+// ── SvDataTable : table de données stylisée ──
+function SvDataTable({
+  headers,
+  rows,
+  children
+}) {
+  if (children) return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, children);
+  if (!headers || !rows) return null;
+  return /*#__PURE__*/React.createElement("table", {
+    className: "sv-data-table"
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
+    key: i,
+    style: h.align ? {
+      textAlign: h.align
+    } : undefined
+  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
+    key: i
+  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
+    key: j,
+    style: headers[j] && headers[j].align ? {
+      textAlign: headers[j].align
+    } : undefined
+  }, cell))))));
+}
+
+// ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
+// Usage: <SvBulletList items={["plain string", {text:"foo", emphasis:"bar"}, ...]} />
+// - Chaîne simple : rendue telle quelle
+// - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
+//   `strong` met en gras inline avec .sv-emphasis
+function SvBulletList({
+  items,
+  dense
+}) {
+  if (!items || !items.length) return null;
+  const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
+  return /*#__PURE__*/React.createElement("ul", {
+    className: cls
+  }, items.map((it, i) => {
+    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, it);
+    if (it && typeof it === 'object') {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
+        className: "sv-mark"
+      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
+        className: "sv-emphasis"
+      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
+    }
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, String(it));
+  }));
+}
+
+// ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
+// Usage: <SvSection title="Pourquoi l'anaérobie" label="Fermentation" level={2}>…</SvSection>
+// - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
+// - `level` : 2 (défaut) ou 3
+// - `icon` (optionnel) : emoji en préfixe du titre
+function SvSection({
+  title,
+  label,
+  level,
+  icon,
+  id,
+  children
+}) {
+  const H = level === 3 ? 'h3' : 'h2';
+  return /*#__PURE__*/React.createElement("section", {
+    className: "sv-section-block",
+    id: id
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "sv-section-label"
+  }, label), title && /*#__PURE__*/React.createElement(H, {
+    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-section-icon"
+  }, icon), title), children);
+}
+
+// ── SvRichText : rendu pédagogique de texte semi-structuré ──
+// Input : chaîne brute avec paragraphes (\n\n), bullets (• ...),
+//         sections en MAJUSCULES terminées par ':', refs "Card #N" et
+//         termes entre backticks `...`.
+// Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
+// Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+function SvRichText({
+  text,
+  onCardRef,
+  skipPrefixes
+}) {
+  if (!text) return null;
+  const skips = skipPrefixes || ['[2026-'];
+  const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
+
+  // Regroupement en blocs : paragraphes / bullets / section-labels
+  const blocks = [];
+  let i = 0;
+  while (i < rawLines.length) {
+    const line = rawLines[i];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    // Section MAJUSCULES suivie de ':' — ex : "COMPATIBILITÉS MAJEURES :"
+    // (au moins 2 mots, lettres accentuées, ratio majuscules ≥ 80%)
+    const isSectionLabel = (() => {
+      if (!trimmed.endsWith(':') && !trimmed.endsWith(' :')) return false;
+      const t = trimmed.replace(/:$/, '').trim();
+      if (t.length < 4 || t.length > 80) return false;
+      const letters = t.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+      if (letters.length < 4) return false;
+      const uppers = letters.filter(ch => ch === ch.toUpperCase());
+      return uppers.length / letters.length >= 0.8;
+    })();
+    if (isSectionLabel) {
+      blocks.push({
+        type: 'label',
+        text: trimmed.replace(/:$/, '').trim()
+      });
+      i++;
+      continue;
+    }
+    // Bullets contigus
+    if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
+      const items = [];
+      while (i < rawLines.length && (rawLines[i].trim().startsWith('• ') || rawLines[i].trim().startsWith('- '))) {
+        items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
+        i++;
+      }
+      blocks.push({
+        type: 'bullets',
+        items
+      });
+      continue;
+    }
+    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label)
+    const paraLines = [];
+    while (i < rawLines.length) {
+      const t = rawLines[i].trim();
+      if (!t) break;
+      if (t.startsWith('• ') || t.startsWith('- ')) break;
+      // nouvelle section-label → stop avant
+      const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
+        const x = t.replace(/:$/, '').trim();
+        const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
+        if (letters.length < 4) return false;
+        const uppers = letters.filter(ch => ch === ch.toUpperCase());
+        return uppers.length / letters.length >= 0.8 && x.length < 80;
+      })();
+      if (isLabel && paraLines.length > 0) break;
+      paraLines.push(rawLines[i]);
+      i++;
+    }
+    if (paraLines.length) blocks.push({
+      type: 'para',
+      text: paraLines.join(' ')
+    });
+  }
+
+  // Rendu inline d'un texte : transforme "Card #11", "terme `foo`", "fiche 3"
+  const renderInline = (s, keyPrefix) => {
+    if (!s) return null;
+    const out = [];
+    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|fiche (\d+)/g;
+    let last = 0,
+      m,
+      n = 0;
+    while ((m = regex.exec(s)) !== null) {
+      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m[1]) {
+        const id = parseInt(m[1]);
+        out.push(/*#__PURE__*/React.createElement("a", {
+          key: keyPrefix + '-ref-' + n++,
+          onClick: () => onCardRef && onCardRef(id),
+          style: {
+            color: 'var(--accent)',
+            cursor: 'pointer',
+            textDecoration: 'underline'
+          }
+        }, "#", id));
+      } else if (m[2]) {
+        const title = m[2];
+        const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
+        if (found) {
+          out.push(/*#__PURE__*/React.createElement("a", {
+            key: keyPrefix + '-ref-' + n++,
+            onClick: () => onCardRef && onCardRef(found.id),
+            style: {
+              color: 'var(--accent)',
+              cursor: 'pointer',
+              textDecoration: 'underline'
+            }
+          }, title));
+        } else {
+          out.push(title);
+        }
+      } else if (m[3]) {
+        out.push(/*#__PURE__*/React.createElement("span", {
+          key: keyPrefix + '-term-' + n++,
+          className: "sv-mark"
+        }, m[3]));
+      } else if (m[4]) {
+        out.push(m[0]);
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < s.length) out.push(s.substring(last));
+    return out;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, blocks.map((b, idx) => {
+    if (b.type === 'label') {
+      return /*#__PURE__*/React.createElement("div", {
+        key: idx,
+        className: "sv-section-label",
+        style: {
+          marginTop: idx > 0 ? '0.75rem' : 0
+        }
+      }, b.text);
+    }
+    if (b.type === 'bullets') {
+      return /*#__PURE__*/React.createElement("ul", {
+        key: idx,
+        className: "sv-bullet-list"
+      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
+        key: j
+      }, renderInline(it, idx + '-' + j))));
+    }
+    return /*#__PURE__*/React.createElement("p", {
+      key: idx,
+      className: "sv-prose",
+      style: {
+        margin: '0.35rem 0'
+      }
+    }, renderInline(b.text, 'p' + idx));
+  }));
+}
+
+// ── SvCahierLink : passerelle outil → Cahier de Science ──
+// Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
+// Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
+function SvCahierLink({
+  chapitre,
+  titre
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-cahier-link"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "sv-cahier-link-icon"
+  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
+    className: "sv-cahier-link-text"
+  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
+    href: 'cahier.html#chap-' + chapitre
+  }, "Cahier de Science \u2192 ", titre));
+}
+
+// ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
+// Usage :
+//   <SvCascadeGrid
+//     titre="Labour profond régulier"
+//     projection={{
+//       biophysique: [{niveau:'N1', label:'Structure', impact:'neg'}, ...],
+//       temporelle:  [{niveau:'T2', label:'Annuel'},    {niveau:'T3', ...}],
+//       couts:       [{niveau:'€0', label:'Carburant'}, ...],
+//       consequences:[{niveau:'E0', label:'Rendement initial'}, ...],
+//     }}
+//   />
+// Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
+function SvCascadeGrid({
+  titre,
+  sujet,
+  projection
+}) {
+  if (!projection) return null;
+  const AXES = [{
+    key: 'biophysique',
+    icon: '🧱',
+    label: 'Biophysique',
+    color: 'var(--success)'
+  }, {
+    key: 'temporelle',
+    icon: '⏱️',
+    label: 'Temporelle',
+    color: 'var(--accent)'
+  }, {
+    key: 'couts',
+    icon: '💶',
+    label: 'Coûts cachés',
+    color: 'var(--warning)'
+  }, {
+    key: 'consequences',
+    icon: '🌍',
+    label: 'Conséquences',
+    color: 'var(--purple)'
+  }];
+  const renderBadge = (it, axeColor) => {
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-badge",
+      style: {
+        borderLeftColor: impactColor,
+        color: impactColor
+      },
+      title: it.detail || it.niveau + ' — ' + (it.label || '')
+    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-badge-label"
+    }, it.label));
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid"
+  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-head"
+  }, titre && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-title"
+  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-sujet"
+  }, sujet)), /*#__PURE__*/React.createElement("div", {
+    className: "sv-cascade-grid-rows"
+  }, AXES.map(ax => {
+    const items = projection[ax.key];
+    if (!items || !items.length) return null;
+    return /*#__PURE__*/React.createElement("div", {
+      key: ax.key,
+      className: "sv-cascade-row"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sv-cascade-row-head",
+      style: {
+        color: ax.color
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-row-icon"
+    }, ax.icon), /*#__PURE__*/React.createElement("span", {
+      className: "sv-cascade-row-label"
+    }, ax.label)), /*#__PURE__*/React.createElement("div", {
+      className: "sv-cascade-row-items"
+    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+      key: i
+    }, renderBadge(it, ax.color)))));
+  })));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Guide Technique — doc multi-chapitres (source config.technique.chapitres)
+// ═══════════════════════════════════════════════════════════════════
+
+function Section({
+  section,
+  chapId
+}) {
+  const anchor = 'sec-' + chapId + '-' + section.id;
+  return /*#__PURE__*/React.createElement("section", {
+    className: "tech-section",
+    id: anchor
+  }, /*#__PURE__*/React.createElement(SvCollapse, {
+    title: section.titre,
+    icon: "\uD83D\uDD2C"
+  }, section.content && /*#__PURE__*/React.createElement(SvRichText, {
+    text: section.content
+  }), section.bullets && /*#__PURE__*/React.createElement(SvBulletList, {
+    items: section.bullets
+  }), section.formula && /*#__PURE__*/React.createElement(SvFormula, {
+    source: section.formula.source
+  }, section.formula.expr), section.rule && /*#__PURE__*/React.createElement(SvRule, {
+    title: section.rule.title
+  }, section.rule.text), section.highlight && /*#__PURE__*/React.createElement(SvHighlightBox, {
+    title: section.highlight.title,
+    color: section.highlight.color || 'info'
+  }, section.highlight.text), section.source && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      fontStyle: 'italic',
+      marginTop: '0.5rem'
+    }
+  }, "\uD83D\uDCD6 ", section.source)));
+}
+function Chapter({
+  chap,
+  num
+}) {
+  return /*#__PURE__*/React.createElement("article", {
+    className: "tech-chapter",
+    id: 'chap-' + chap.id
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "tech-chapter-head"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tech-chapter-num"
+  }, num), /*#__PURE__*/React.createElement("div", {
+    className: "tech-chapter-icon"
+  }, chap.icone), /*#__PURE__*/React.createElement("div", {
+    className: "tech-chapter-titles"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tech-chapter-label"
+  }, "Chapitre ", num), /*#__PURE__*/React.createElement("h2", {
+    className: "tech-chapter-title"
+  }, chap.titre))), chap.intro && /*#__PURE__*/React.createElement("div", {
+    className: "tech-chapter-intro"
+  }, chap.intro), /*#__PURE__*/React.createElement("div", null, chap.sections.map(sec => /*#__PURE__*/React.createElement(Section, {
+    key: sec.id,
+    section: sec,
+    chapId: chap.id
+  }))));
+}
+function TOC({
+  chapitres
+}) {
+  const scrollTo = id => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+  return /*#__PURE__*/React.createElement("nav", {
+    className: "tech-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tech-toc-title"
+  }, "Sommaire"), chapitres.map((chap, i) => /*#__PURE__*/React.createElement("div", {
+    key: chap.id
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "tech-toc-chapter",
+    onClick: () => scrollTo('chap-' + chap.id)
+  }, i + 1 + '. ' + chap.icone + ' ' + chap.titre), /*#__PURE__*/React.createElement("ul", {
+    className: "tech-toc-sections"
+  }, chap.sections.map(sec => /*#__PURE__*/React.createElement("li", {
+    key: sec.id
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "tech-toc-section",
+    onClick: () => scrollTo('sec-' + chap.id + '-' + sec.id)
+  }, sec.titre)))))));
+}
+function App() {
+  const chapitres = DATA.chapitres || [];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "tech-root"
+  }, /*#__PURE__*/React.createElement("header", {
+    className: "tech-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tech-header-icon"
+  }, "\uD83D\uDCD6"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-header-titles"
+  }, /*#__PURE__*/React.createElement("h1", {
+    className: "tech-header-title"
+  }, "Guide Technique \u2014 Sol Vivant"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-header-subtitle"
+  }, "Architecture, m\xE9thode et portabilit\xE9 du patron")), /*#__PURE__*/React.createElement("a", {
+    className: "tech-header-back",
+    href: "../index.html"
+  }, "\u2190 Cartographie")), DATA.intro && /*#__PURE__*/React.createElement("div", {
+    className: "tech-intro"
+  }, DATA.intro), /*#__PURE__*/React.createElement("div", {
+    className: "tech-layout"
+  }, /*#__PURE__*/React.createElement(TOC, {
+    chapitres: chapitres
+  }), /*#__PURE__*/React.createElement("main", {
+    className: "tech-main"
+  }, chapitres.map((chap, i) => /*#__PURE__*/React.createElement(Chapter, {
+    key: chap.id,
+    chap: chap,
+    num: i + 1
+  })))), /*#__PURE__*/React.createElement("footer", {
+    className: "tech-footer"
+  }, "Guide Technique \xB7 Sol Vivant cet Holobionte \xB7 Jean-Michel Juzan \xB7 avril 2026"));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+</script>
+
+
+</body>
+</html>

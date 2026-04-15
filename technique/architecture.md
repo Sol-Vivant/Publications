@@ -16,19 +16,19 @@ Source unique de verite. SQLite, 56 tables, 10 vues.
 | `chains_causales` | 16 chaines causales reliant les documents | 16 |
 | `chain_etapes` | Etapes des chaines | 121 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 77 |
+| `config` | Parametres centralises (api, strates, zotero, analyse, batch, corpus) | 79 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 40 |
+| `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 866 |
+| `audit_log` | Journal des operations | 915 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `web_pages` | Pages web (slug, titre, OG tags) | 9 |
-| `html_templates` | Templates CSS/JS par page + partagés | 25 (1 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 69 |
+| `web_pages` | Pages web (slug, titre, OG tags) | 10 |
+| `html_templates` | Templates CSS/JS par page + partagés | 31 (1 partagés) |
+| `concept_cards` | Fiches conceptuelles synthétiques | 73 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 14 |
@@ -56,6 +56,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
 | `cahier` | chapitres |
 | `claude_rules` | audit_cards_first, bq_access |
+| `concept_cards` | page_intro |
 | `corpus` | auteur, nom, regle_jenni |
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
@@ -63,6 +64,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `mo_calc` | cat_colors, modes_transformation, zones_eh_fallback |
 | `projet` | base_url_publications, github_org_url, github_pages_url, github_publications_url, github_repo_url, github_tools_url |
 | `strates` | couleurs, couleurs_cascade, couleurs_light, descriptions, noms, ordre |
+| `technique` | chapitres |
 | `triangle` | sections_didactiques, test_bocal, test_boudin |
 | `web` | icon_library, index_description_template |
 | `zotero` | batch_size_avec_resume, batch_size_sans_resume, batch_version, est_tokens_in_ab, est_tokens_in_no, est_tokens_out_ab, est_tokens_out_no, max_abstract_chars, max_entry_chars, max_field_chars, max_ris_abstract_chars, max_ris_size_mb, min_abstract_len, min_bigram_chars, opus_doubt_threshold_pct, opus_error_threshold_pct, opus_sample_size, statuts, warn_entry_chars, warn_field_chars, warn_sans_doi_count |
@@ -76,6 +78,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `audit_opus.py` | admin | Audit Opus v3.1. |
 | `bq_query.py` | admin | Consultation BQ on-demand — modules, recherche, filtres |
 | `check_integrity.py` | admin | Validation intégrité DB (termes orphelins, FK, doublons) |
+| `deploy_publications.py` | admin | Synchronise Publications/web/ vers ../Publications/ (dépôt GitHub Pages séparé) via rsync. |
 | `explorer.py` | admin | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
 | `export_tools.py` | admin | Exporteur scripts v1.5. |
 | `fix_titres.py` | admin | Correction titres jenni_doc_specs |
@@ -88,6 +91,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_mo_calc.py` | docs | Calculateur interactif Matière Organique — formule de Kirkby, mélanges, analyse sols. |
 | `gen_readme.py` | docs | Génération dynamique de tous les README depuis la DB. |
 | `gen_reports.py` | docs | Génère les rapports d'audit depuis audit_reports → jmj/analyses/reports/ |
+| `gen_technique.py` | docs | Guide Technique (Publications/technique/index.html) — architecture, méthode, portabilité du patron. |
 | `gen_triangle_textures.py` | docs | Triangle des textures interactif — classification USDA des sols. |
 | `gen_web.py` | docs | Cartographie React interactive v1.1 (web public). |
 | `gen_workflows.py` | docs | Génération des workflows horodatés par module. |
