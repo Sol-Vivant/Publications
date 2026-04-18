@@ -63,7 +63,27 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (2)** :
+**Règles actuellement en base (4)** :
+
+### `archivage_fiches` — Archivage auto docx + prompts post-intégration pour fiches
+
+```
+# Archivage automatique des fichiers sources post-intégration
+
+**Règle absolue** — dès qu'une fiche passe en statut `integre` ou `integre_partiel`, les fichiers sources associés DOIVENT être déplacés dans leurs dossiers `archives/` respectifs :
+
+1. **Docx source (retour Jenni)** : `docx/<name>.docx` → `docx/archives/<name>.docx`
+2. **Prompts générés** : `recherches/fiches/prompt_fiche_*_<slug>_*.docx` → `recherches/fiches/archives/...`
+
+**Raison** : sans archivage automatique, `docx/` et `recherches/fiches/` accumulent les fichiers traités, on ne distingue plus ce qui est actif vs ce qui est fait. Obligation d'archiver en fin de session ce qui aurait dû l'être au fil de l'eau.
+
+**Implémentation** :
+- `tools/admin/integrate_fiche_docx.py::archive_fiche_files()` — appelée automatiquement à la fin de `apply_integration()` après `con.commit()`.
+- Idempotente (re-passe sans écrasement).
+- Journalisée dans `audit_log` (operation='ARCHIVE', table='files').
+
+**Pour les scripts ad-hoc (intégrations en direct par Claude)** : TOUJOURS importer et appeler `archive_fiche_files(fiche, docx_path)` à la fin du script d'intégration. La règle s'applique à tous les pipelines, pas seulement au script canonique.
+```
 
 ### `audit_cards_first` — Audit concept_cards obligatoire avant toute création ou update
 
@@ -108,6 +128,25 @@ Triggers obligatoires — Claude lance --search AVANT de :
   • diagnostiquer un script qui échoue de manière inattendue
 ```
 
+### `fiche_docx_production` — Regles de production du .docx pour fiches (evite repetitions session apres session)
+
+```
+Production docx fiches (rappels pratiques) :
+
+1. AUCUNE consigne dans le docx — pas de "Dimensions attendues", pas de "Jenni rédige...", pas de "[à compléter]". Seulement du contenu (même amorce).
+2. AMORCES EN TEXTE NORMAL (pas d'italique gris) — l'amorce est du CONTENU incomplet de document, pas une note editoriale. Les refs inline doivent rester lisibles.
+3. ACCENTS francais corrects partout — jamais d'ascii dépouillé. évolution, écologie, é/è/ê/à.
+4. TERMES CANONIQUES dans le texte avec EN entre parenthèses à la 1re mention. Pas de tableau final.
+5. TITLE court sans accent (Jenni l'utilise comme nom de fichier).
+6. REFS INLINE (Auteur, année) + section 'Références' en fin, format APA, une par paragraphe, tri alpha. CHAQUE REF DOIT AVOIR DOI ET/OU URL (resoluble). Si DOI seul : https://doi.org/<doi> est utilise. Si les deux differents : afficher les deux. Alerte script si ref sans lien. Meme pattern que Jenni.
+7. PAS DE DECORATION ASCII (---, ===, banderoles).
+8. Le docx = état du document, pas discussion avec Jenni.
+
+9. SECTIONS BODY EN H1 NUMÉROTÉES (`1.`, `2.`, ...). Introduction et Résumé sans numéro. Sous-sections H2 (`1.1.`, `1.2.`...) si justifié (plusieurs sous-thèmes distincts, comparaison structurée, volume dense) — pas systématique. H3 max. Numérotation portée par les titres DB (fiche_sections.titre), pas ajoutée par le script.
+
+Voir BQ #130 wf_fiche pour détails.
+```
+
 ## Bibliothèque de Connaissances (BQ)
 
 La BQ stocke les guides, conventions et retours d'expérience dans la table `bq_entries`, organisés en modules (`bq_modules`). La doctrine d'accès est « **recherche au fil de l'eau** » : on ne charge pas un bloc au démarrage, on cherche au moment où un doute émerge (voir règle `bq_access` ci-dessus).
@@ -125,16 +164,15 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --modules <code>
 python3 tools/admin/bq_query.py --db sol_vivant.db --list
 ```
 
-### Modules disponibles (9)
+### Modules disponibles (8)
 
 | Code | Titre | Description |
 |------|-------|-------------|
 | `projet` | Projet Le Sol Vivant cet Holobionte | Vue d'ensemble, architecture, strates, chaînes causales |
 | `claude` | Guide Claude — contraintes et workflow | Contraintes comportementales, règles absolues, stratégie rédaction, structure dépôt |
+| `workflow` | Workflow — pipelines métier bout-en-bout | Un workflow par BQ : session, fiche, thésaurus, concept cards, veille, web, régénération. |
 | `sqlite` | Guide SQLite — architecture DB complète | Architecture DB, tables actives/legacy, requêtes de pilotage |
 | `jenni` | Guide Jenni — Workflow v3.0 | Masque mécanique, données dans les tables, workflow one-shot + analyse |
-| `batch` | Guide Batch — Pipeline Zotero v3 | normalise → batch_attribution → validate. Patch in-place, STATUT-driven. |
-| `zotero` | Guide Zotero | Tags STATUT/STRATE/CHAINE, filtres, workflow import |
 | `illustrations` | Guide Illustrations | FigureLabs, Mermaid, 12 concepts, prochains lots |
 | `maintenance` | Guide Maintenance — Sync, sessions, requêtes | Workflow session, gestion scripts, sync DB/fichiers, journal de bord |
 | `web` | Guide Web — Charte graphique et templates HTML | Architecture des pages HTML interactives : charte Sol Vivant, templates, scripts de génération, conventions. |

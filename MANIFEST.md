@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 56 tables, 10 vues, 42 scripts
+- 59 tables, 10 vues, 41 scripts
 
 ## Scripts
 
@@ -21,6 +21,7 @@
 | `analyse_corpus.py` | v4.1 | `tools/batch/` | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | v1.0 | `tools/docs/` | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
 | `gen_cahier.py` | v1.0 | `tools/docs/` | Cahier de Science — livre pédagogique multi-chapitres (MO/POM-MAOM, Textures, Fermentations) |
+| `gen_esclaves_calc.py` | v1.0 | `tools/docs/` | Calculateur Esclaves Energetiques : web page avec saisie combustible + quantite annuelle, calcul du nombre d equivalents humains au travail. |
 | `gen_explorer.py` | v1.0 | `tools/docs/` | Génération page Explorer DB statique |
 | `gen_lifofer.py` | v1.0 | `tools/docs/` | Calculateur interactif LiFoFer v1 |
 | `gen_mo_calc.py` | v1.0 | `tools/docs/` | Calculateur interactif Matière Organique — formule de Kirkby, mélanges, analyse sols. |
@@ -30,15 +31,15 @@
 | `gen_triangle_textures.py` | v2.0 | `tools/docs/` | Triangle des textures interactif — classification USDA des sols. |
 | `gen_web.py` | v2.2 | `tools/docs/` | Cartographie React interactive v1.1 (web public). |
 | `gen_workflows.py` | v2.0 | `tools/docs/` | Génération des workflows horodatés par module. |
+| `enrich_thesaurus.py` | v1.0 | `tools/jenni/` | Pipeline unifie enrichissement thesaurus : audit (par axe bt/syn/def et strate) -> export lot de 10 pour Jenni -> import retour (parse TERME/EN/DEF/... |
 | `export_fiche.py` | v1.0 | `tools/jenni/` | Export prompts fiches transversales depuis la DB. |
 | `export_jenni_doc.py` | v3.1 | `tools/jenni/` | Génération prompts Jenni v3.1. |
 | `export_validation.py` | v1.0 | `tools/jenni/` | Génération des prompts de validations depuis validation_sections. |
+| `gen_fiche_docx.py` | v1.0 | `tools/jenni/` | Generateur de fiche .docx au format "document dans son etat courant" (doctrine wf_fiche). |
 | `gen_prompt_completion.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni pour compléter les champs manquants (BT, RT, SYN_FR, SYN_EN) de termes déjà existants dans le thésaurus. |
 | `gen_prompt_enrichissement.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni d'enrichissement thésaurus depuis liste/JSON/final_consolide (filtres criticité, strate, doc_cible) |
 | `gen_prompt_thesaurus.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | v1.0 | `tools/jenni/` | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
-| `integrate_fiche_retour.py` | v1.0 | `tools/jenni/` | Intègre un retour Jenni (docx) dans fiche_section_h2_notes — parse H2, extrait citations [N] et termes candidats |
-| `reformat_fiches_ris.py` | v1.0 | `tools/jenni/` | Reformate les citations Auteur-année des fiches historiques au format [N] en matchant contre biblio_norm.ris (source unique Zotero) |
 | `agent_runner.py` | v1.0 | `tools/lib/` | Pattern préparateur → agents Task → consolidateur. |
 | `cli.py` | v1.0 | `tools/lib/` | Helpers CLI partagés (add_db_arg, check_db) |
 | `config.py` | v1.0 | `tools/lib/` | Accès centralisé à la table config (get, get_json) |
@@ -47,9 +48,7 @@
 | `pub_path.py` | v1.0 | `tools/lib/` | Chemins de publication (Publications/web/, Publications/cartographie/) |
 | `repair_json.py` | v1.0 | `tools/lib/` | Module partagé : repair_json() — réparation JSON tronqué/malformé des réponses LLM. |
 | `web_template.py` | v1.0 | `tools/lib/` | Template HTML partagé — charte Sol Vivant, render_page, OG tags |
-| `attribution.py` | v4.0 | `tools/zotero/` | Attribution Zotero v4.1. |
-| `normalise_ris.py` | v2.0 | `tools/zotero/` | Normalisation RIS v2.0. |
-| `validate_ris.py` | v2.0 | `tools/zotero/` | Validation RIS v2.1. |
+| `weekly_scan.py` | v1.0 | `tools/veille/` | Veille PubMed hebdomadaire : balaye config.veille.hot_topics, dedoublonne contre pubmed_seen, produit rapport Markdown des nouveaux candidats dans recherches/veille/ |
 
 ## Arborescence
 
@@ -62,10 +61,9 @@ projet/
 │   ├── sync_scripts.py
 │   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, integrate_fiche_retour, reformat_fiches_ris
+│   ├── docs/                   gen_archive, gen_cahier, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
 │   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
-│   ├── zotero/                 attribution, normalise_ris, validate_ris
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
 └── Publications/
@@ -80,15 +78,17 @@ projet/
 
 ## Pages web interactives
 
-6 pages, 31 templates (1 partagés), vendor local (hors-ligne).
+8 pages, 37 templates (1 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
 | Cahier de Science | `cahier` | `cahier.html` |
 | Concept Cards | `concept_cards` | `concept_cards.html` |
+| Esclaves énergétiques | `esclaves_calculateur` | `esclaves_calculateur.html` |
 | Cartographie interactive | `index` | `index.html` |
 | Calculateur LiFoFer | `lifofer` | `lifofer.html` |
 | Calculateur Matière Organique | `mo_calculateur` | `mo_calculateur.html` |
+| Transition robuste — France | `transition_robuste` | `transition_robuste.html` |
 | Triangle des Textures GEPPA | `triangle_textures` | `triangle_textures.html` |
 
 Déploiement : `rsync -av Publications/web/ /Publications/` → GitHub Pages
@@ -116,11 +116,6 @@ python3 tools/docs/gen_readme.py --db sol_vivant.db
 # Prompts Jenni
 python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --doc S2
 python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --all
-
-# Pipeline Zotero
-python3 tools/zotero/normalise_ris.py --db sol_vivant.db --input biblio.ris --output biblio_norm.ris
-python3 tools/zotero/attribution.py --input biblio.json --db sol_vivant.db --output biblio_tagged.ris
-python3 tools/zotero/validate_ris.py --input biblio_tagged.ris --db sol_vivant.db
 
 # Audit
 python3 tools/admin/audit_opus.py --db sol_vivant.db --dry-run

@@ -9,16 +9,16 @@ Outils de production du corpus scientifique francophone sur l'agriculture régé
 
 Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la biologie des sols, organisé en 5 strates thématiques (Fondements, Sol, Vivant, Pratiques, Humain).
 
-**L'originalité** : une base de données unique (`sol_vivant.db`) orchestre tout le projet — du thésaurus terminologique aux pages web interactives, en passant par la rédaction assistée. Claude (Anthropic) assure la cohérence scientifique, les connexions inter-documents et la maintenance du code. Jenni AI assemble les citations depuis Zotero.
+**L'originalité** : une base de données unique (`sol_vivant.db`) orchestre tout le projet — du thésaurus terminologique aux pages web interactives, en passant par la rédaction assistée. Claude (Anthropic) assure la cohérence scientifique, les connexions inter-documents et la maintenance du code. Jenni AI assemble les citations depuis la biblio interne curée.
 
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **874 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **965 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
 - **16 chaînes causales** et **118 renvois** inter-documents
-- **73 fiches conceptuelles** et **191 prompts** structurés
-- **6 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **56 tables** SQLite, 42 scripts Python
+- **91 fiches conceptuelles** et **191 prompts** structurés
+- **8 pages web** interactives (calculateurs, cartographie, triangle des textures)
+- **59 tables** SQLite, 41 scripts Python
 
 ### Les forces de cette architecture
 
@@ -46,9 +46,8 @@ Tools/
 ├── tools/
 │   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  export_fiche, export_jenni_doc, export_validation, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, integrate_fiche_retour, reformat_fiches_ris
-│   ├── zotero/                 attribution, normalise_ris, validate_ris
+│   ├── docs/                   gen_archive, gen_cahier, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
 │   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
@@ -62,7 +61,7 @@ Tools/
 ```
 sol_vivant.db → export_jenni_doc.py → prompts/
                                         ↓
-                               Jenni AI (Zotero) → .docx
+                               Jenni AI (biblio curée) → .docx
                                         ↓
                                Claude (analyse) → prompt_contenus
                                         ↓
@@ -85,7 +84,7 @@ L'architecture est **modulaire** et **indépendante du domaine**. Le cœur du sy
 
 **Le noyau** (suffisant seul) : Claude Code + une DB SQLite. On peut construire un corpus complet en conversation directe : documents, thésaurus, pages web interactives, scripts de génération.
 
-**Les couches optionnelles** : Jenni AI (rédaction académique), Zotero (bibliographie), API Anthropic batch (traitement en masse). On les active selon le projet.
+**Les couches optionnelles** : Jenni AI (rédaction académique), API Anthropic batch (traitement en masse). On les active selon le projet.
 
 **Exemples** : solutions low-tech, guide de permaculture, base médicale, patrimoine architectural... le patron fonctionne pour tout domaine ayant besoin de structurer des connaissances avec un vocabulaire technique.
 

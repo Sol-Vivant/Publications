@@ -1779,7 +1779,7 @@ function SvRichText({
   const skips = skipPrefixes || ['[2026-'];
   const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
 
-  // Regroupement en blocs : paragraphes / bullets / section-labels
+  // Regroupement en blocs : headings (## / ### / ####), paragraphes, bullets, section-labels
   const blocks = [];
   let i = 0;
   while (i < rawLines.length) {
@@ -1789,8 +1789,22 @@ function SvRichText({
       i++;
       continue;
     }
+
+    // Headings markdown : ##, ###, #### — niveau 2 ou 3 (#### ramené à h3)
+    const mH = /^(#{2,6})\s+(.+)$/.exec(trimmed);
+    if (mH) {
+      const hashes = mH[1].length;
+      const level = hashes === 2 ? 2 : 3;
+      blocks.push({
+        type: 'heading',
+        level,
+        text: mH[2].trim()
+      });
+      i++;
+      continue;
+    }
+
     // Section MAJUSCULES suivie de ':' — ex : "COMPATIBILITÉS MAJEURES :"
-    // (au moins 2 mots, lettres accentuées, ratio majuscules ≥ 80%)
     const isSectionLabel = (() => {
       if (!trimmed.endsWith(':') && !trimmed.endsWith(' :')) return false;
       const t = trimmed.replace(/:$/, '').trim();
@@ -1821,13 +1835,13 @@ function SvRichText({
       });
       continue;
     }
-    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label)
+    // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
     const paraLines = [];
     while (i < rawLines.length) {
       const t = rawLines[i].trim();
       if (!t) break;
       if (t.startsWith('• ') || t.startsWith('- ')) break;
-      // nouvelle section-label → stop avant
+      if (/^#{2,6}\s+/.test(t)) break;
       const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
         const x = t.replace(/:$/, '').trim();
         const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
@@ -1845,11 +1859,11 @@ function SvRichText({
     });
   }
 
-  // Rendu inline d'un texte : transforme "Card #11", "terme `foo`", "fiche 3"
+  // Rendu inline d'un texte : Card refs, backticks → sv-mark, **gras** → sv-emphasis
   const renderInline = (s, keyPrefix) => {
     if (!s) return null;
     const out = [];
-    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|fiche (\d+)/g;
+    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|fiche (\d+)/g;
     let last = 0,
       m,
       n = 0;
@@ -1888,6 +1902,11 @@ function SvRichText({
           className: "sv-mark"
         }, m[3]));
       } else if (m[4]) {
+        out.push(/*#__PURE__*/React.createElement("span", {
+          key: keyPrefix + '-em-' + n++,
+          className: "sv-emphasis"
+        }, m[4]));
+      } else if (m[5]) {
         out.push(m[0]);
       }
       last = m.index + m[0].length;
@@ -1898,6 +1917,19 @@ function SvRichText({
   return /*#__PURE__*/React.createElement("div", {
     className: "sv-richtext"
   }, blocks.map((b, idx) => {
+    if (b.type === 'heading') {
+      const Tag = b.level === 2 ? 'h2' : 'h3';
+      const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
+      const mt = b.level === 2 ? '1.25rem' : '1rem';
+      return /*#__PURE__*/React.createElement(Tag, {
+        key: idx,
+        className: cls,
+        style: {
+          marginTop: idx > 0 ? mt : 0,
+          marginBottom: '0.5rem'
+        }
+      }, renderInline(b.text, 'h' + idx));
+    }
     if (b.type === 'label') {
       return /*#__PURE__*/React.createElement("div", {
         key: idx,
@@ -1923,6 +1955,206 @@ function SvRichText({
       }
     }, renderInline(b.text, 'p' + idx));
   }));
+}
+
+// ── SvExpandableCard : carte colorée expansible (pattern cartographie) ──
+// Props :
+//   badge      : string court affiché dans une pastille colorée (ex: 'F', 'S1')
+//   color      : couleur principale (hex ou var CSS) — barre gauche, badge, progression
+//   title      : titre principal
+//   subtitle   : sous-titre (ex: "2 docs · 84 termes")
+//   progress   : nombre 0-100 (facultatif) — affiche une barre de progression
+//   open       : bool — état contrôlé
+//   onClick    : callback au clic sur la carte
+function SvExpandableCard({
+  badge,
+  color,
+  title,
+  subtitle,
+  progress,
+  open,
+  onClick,
+  children
+}) {
+  const c = color || 'var(--text-secondary)';
+  return /*#__PURE__*/React.createElement("div", {
+    onClick: onClick,
+    style: {
+      background: open ? c + '12' : 'var(--card-bg)',
+      border: '1px solid ' + (open ? c : 'var(--border)'),
+      borderLeft: '4px solid ' + c,
+      borderRadius: 'var(--radius)',
+      padding: '10px 14px',
+      cursor: 'pointer',
+      transition: 'all 0.15s',
+      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px'
+    }
+  }, badge && /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: c,
+      color: 'var(--card-bg)',
+      borderRadius: '50%',
+      width: '28px',
+      height: '28px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontWeight: 700,
+      fontSize: 'var(--font-sm)',
+      flexShrink: 0
+    }
+  }, badge), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 700,
+      fontSize: 'var(--font-base)',
+      color: 'var(--text)'
+    }
+  }, title), subtitle && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)'
+    }
+  }, subtitle), progress != null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '5px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      height: '4px',
+      background: 'var(--border)',
+      borderRadius: '2px',
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: progress + '%',
+      height: '100%',
+      background: c,
+      transition: 'width 0.3s'
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: '0.65rem',
+      color: 'var(--text-secondary)',
+      fontWeight: 600,
+      minWidth: '26px',
+      textAlign: 'right'
+    }
+  }, progress, "%")), children), /*#__PURE__*/React.createElement("span", {
+    className: 'sv-collapse-chevron' + (open ? ' open' : '')
+  }, "\u25B8")));
+}
+
+// ── SvTagButton : pill pour sous-item (code + label + stat) ──
+// Props :
+//   code     : code court gras (ex: 'F1', '#11')
+//   label    : titre secondaire tronqué si trop long
+//   stat     : petite stat à droite (ex: '49t')
+//   color    : couleur de l'accent (border-left + bg quand actif)
+//   active   : bool
+//   onClick  : callback
+function SvTagButton({
+  code,
+  label,
+  stat,
+  color,
+  active,
+  onClick
+}) {
+  const c = color || 'var(--text-secondary)';
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      padding: '8px 14px',
+      borderRadius: 'var(--radius)',
+      cursor: 'pointer',
+      border: '2px solid ' + (active ? c : 'var(--border)'),
+      borderLeft: '4px solid ' + c,
+      background: active ? c + '15' : 'var(--card-bg)',
+      fontWeight: active ? 700 : 600,
+      fontSize: 'var(--font-sm)',
+      color: active ? c : 'var(--text)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+      transition: 'all 0.15s'
+    }
+  }, code && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontWeight: 700
+    }
+  }, code), label && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)',
+      maxWidth: '200px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap'
+    }
+  }, label), stat && /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 'var(--font-xs)',
+      color: 'var(--text-secondary)'
+    }
+  }, stat));
+}
+
+// ── SvTabIntro : résumé + détail accordéon pour présenter un onglet/une page ──
+// Props :
+//   resume : texte court affiché en ligne
+//   detail : texte long révélé par 'en savoir plus'
+// Sert aussi de point de référence d'alignement horizontal sous le bandeau.
+function SvTabIntro({
+  resume,
+  detail
+}) {
+  const [open, setOpen] = React.useState(false);
+  if (!resume && !detail) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: '1rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      fontSize: 'var(--font-sm)',
+      color: 'var(--text-secondary)'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1
+    }
+  }, resume), detail && /*#__PURE__*/React.createElement("span", {
+    className: "sv-note-toggle",
+    onClick: () => setOpen(!open)
+  }, open ? '▾ masquer' : '▸ en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-note-content",
+    style: {
+      marginTop: '0.5rem',
+      padding: '0.75rem',
+      background: 'var(--color-bg-subtle, var(--bg))',
+      borderRadius: 'var(--radius)',
+      lineHeight: 1.6
+    }
+  }, detail));
 }
 
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
