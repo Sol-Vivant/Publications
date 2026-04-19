@@ -16,22 +16,22 @@ Source unique de verite. SQLite, 59 tables, 10 vues.
 | `chains_causales` | 16 chaines causales reliant les documents | 16 |
 | `chain_etapes` | Etapes des chaines | 121 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 81 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 88 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `scripts` | Registre des scripts avec versions | 41 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 1363 |
+| `audit_log` | Journal des operations | 1582 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `web_pages` | Pages web (slug, titre, OG tags) | 12 |
-| `html_templates` | Templates CSS/JS par page + partagés | 37 (1 partagés) |
+| `web_pages` | Pages web (slug, titre, OG tags) | 13 |
+| `html_templates` | Templates CSS/JS par page + partagés | 40 (1 partagés) |
 | `concept_cards` | Fiches conceptuelles synthétiques | 91 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
-| `illustration_prompts` | Diagrammes Mermaid générés | 14 |
+| `illustration_prompts` | Diagrammes Mermaid générés | 15 |
 | `ref_matieres` | Matières organiques (C/N, k1, NPK) | 110 |
 | `ref_textures` | Classes texturales GEPPA | 14 |
 
@@ -56,18 +56,22 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
 | `cahier` | chapitres, onglets, tab_descriptions |
 | `claude_rules` | archivage_fiches, audit_cards_first, bq_access, fiche_docx_production |
-| `concept_cards` | page_intro |
+| `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
+| `esclaves_calculateur` | tab_intros |
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
-| `lifofer` | data, sources_sucre, ui |
+| `lifofer` | data, sources_sucre, tab_intros, ui |
 | `mo_calc` | cat_colors, modes_transformation, zones_eh_fallback |
+| `mo_calculateur` | tab_intros |
 | `paths` | analyses_reports, docx_archives, docx_en_cours, jmj_archives, jmj_docx, jmj_notes, jmj_pdf, publications_web, publications_workflows, rapports_audit, rapports_session, recherches_archives, recherches_fiches, recherches_sources, recherches_thesaurus, recherches_veille |
 | `projet` | base_url_publications, github_org_url, github_pages_url, github_publications_url, github_repo_url, github_tools_url |
 | `strates` | couleurs, couleurs_cascade, couleurs_light, descriptions, noms, ordre |
 | `technique` | chapitres |
-| `triangle` | sections_didactiques, test_bocal, test_boudin |
+| `tests_terrain` | tab_intros |
+| `transition_robuste` | tab_intros |
+| `triangle` | sections_didactiques, tab_intros, test_bocal, test_boudin |
 | `veille` | hot_topics, scholar_alerts |
 | `web` | icon_library, index_description_template |
 

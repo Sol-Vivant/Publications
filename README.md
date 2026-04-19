@@ -17,7 +17,7 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 - **965 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
 - **16 chaînes causales** et **118 renvois** inter-documents
 - **91 fiches conceptuelles** et **191 prompts** structurés
-- **8 pages web** interactives (calculateurs, cartographie, triangle des textures)
+- **9 pages web** interactives (calculateurs, cartographie, triangle des textures)
 - **59 tables** SQLite, 41 scripts Python
 
 ### Les forces de cette architecture

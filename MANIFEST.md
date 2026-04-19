@@ -78,7 +78,7 @@ projet/
 
 ## Pages web interactives
 
-8 pages, 37 templates (1 partagés), vendor local (hors-ligne).
+9 pages, 40 templates (1 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
@@ -88,7 +88,8 @@ projet/
 | Cartographie interactive | `index` | `index.html` |
 | Calculateur LiFoFer | `lifofer` | `lifofer.html` |
 | Calculateur Matière Organique | `mo_calculateur` | `mo_calculateur.html` |
-| Transition robuste — France | `transition_robuste` | `transition_robuste.html` |
+| Tests terrain | `tests_terrain` | `tests_terrain.html` |
+| Transition robuste | `transition_robuste` | `transition_robuste.html` |
 | Triangle des Textures GEPPA | `triangle_textures` | `triangle_textures.html` |
 
 Déploiement : `rsync -av Publications/web/ /Publications/` → GitHub Pages

@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transition robuste — France — Le Sol Vivant cet Holobionte</title>
+<title>Transition robuste — Le Sol Vivant cet Holobionte</title>
 <!-- Open Graph -->
-<meta property="og:title" content="Transition robuste — France — Le Sol Vivant cet Holobionte" />
+<meta property="og:title" content="Transition robuste — Le Sol Vivant cet Holobionte" />
 <meta property="og:description" content="Les 20 chantiers de la décarbonation française vus par le Shift Project dans le rapport PREF 2026. Zoom sur les 3 chantiers agricoles (azote, élevage, puits de carbone) et cadre énergie-climat complet avec trajectoires 2050." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://sol-vivant.github.io/Publications/img/esclaves.png" />
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Transition robuste — France — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:title" content="Transition robuste — Le Sol Vivant cet Holobionte" />
 <meta name="twitter:description" content="Les 20 chantiers de la décarbonation française vus par le Shift Project dans le rapport PREF 2026. Zoom sur les 3 chantiers agricoles (azote, élevage, puits de carbone) et cadre énergie-climat complet avec trajectoires 2050." />
 <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/img/esclaves.png" />
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
@@ -36,14 +36,27 @@
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
-  /* Échelle typographique (source unique pour toutes les pages) */
-  --font-xs: 0.75rem;
-  --font-sm: 0.82rem;
-  --font-base: 0.9rem;
-  --font-md: 1rem;
-  --font-lg: 1.15rem;
-  --font-xl: 1.5rem;
-  --font-2xl: 1.8rem;
+  /* Echelle typographique (source unique pour toutes les pages)
+     Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
+  --font-scale: 1;
+  --font-2xs: calc(0.68rem * var(--font-scale));
+  --font-xs:   calc(0.75rem * var(--font-scale));
+  --font-sm:   calc(0.82rem * var(--font-scale));
+  --font-base: calc(0.9rem  * var(--font-scale));
+  --font-md:   calc(1rem    * var(--font-scale));
+  --font-lg:   calc(1.15rem * var(--font-scale));
+  --font-xl:   calc(1.5rem  * var(--font-scale));
+  --font-2xl:  calc(1.8rem  * var(--font-scale));
+  --font-1-4:  calc(1.4rem  * var(--font-scale));
+  /* Echelle d'espacement (source unique pour paddings/margins) */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.25rem;
+  --space-xl:  1.5rem;
+  --space-2xl: 2rem;
   /* Couleurs sémantiques (inline → var) */
   --color-text: #1e293b;
   --color-text-secondary: #475569;
@@ -54,13 +67,13 @@
   --color-warning-text: #92400e;
   --color-danger-text: #991b1b;
   --success: #059669;
-  --success-light: #D1FAE5;
+  --success-light: #BBF7D0;       /* green-200 — un cran + sature pour ressortir sur blanc */
   --warning: #D97706;
-  --warning-light: #FEF3C7;
+  --warning-light: #FDE68A;       /* yellow-300 — le pale yellow-100 disparaissait sur blanc */
   --danger: #DC2626;
-  --danger-light: #FEE2E2;
+  --danger-light: #FECACA;        /* red-200 */
   --info: #2563EB;
-  --info-light: #DBEAFE;
+  --info-light: #BFDBFE;          /* blue-200 */
   --purple: #7c3aed;
   --purple-dark: #6d28d9;
   --purple-light: #faf5ff;
@@ -70,7 +83,152 @@
   --zone-limon: rgba(99,102,241,0.12);
   --zone-argile: rgba(239,68,68,0.12);
   --zone-loam: rgba(34,197,94,0.12);
+  /* Fond papier crème (Cahier de Science, Science Note) */
+  --paper-bg: #fdfbf7;
+  --paper-bg-2: #f8f6f0;
+  --paper-border: #e8e0d0;
 }
+
+/* ── Mode sombre : preference systeme + override manuel via [data-theme] ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-dark: #3b82f6;
+    --accent-light: #1e3a8a;
+    --border: #334155;
+    --border-hover: #475569;
+    --shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+    --color-text: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-bg-subtle: #1e293b;
+    --color-bg-muted: #273449;
+    --color-success-text: #86efac;
+    --color-warning-text: #fcd34d;
+    --color-danger-text: #fca5a5;
+    --success: #34d399;
+    --success-light: #064e3b;
+    --warning: #fbbf24;
+    --warning-light: #451a03;
+    --danger: #f87171;
+    --danger-light: #450a0a;
+    --info: #60a5fa;
+    --info-light: #1e3a8a;
+    --purple: #a78bfa;
+    --purple-dark: #7c3aed;
+    --purple-light: #3b0764;
+    --header-from: #020617;
+    --header-to: #0f172a;
+    --zone-sable: rgba(251,191,36,0.08);
+    --zone-limon: rgba(99,102,241,0.18);
+    --zone-argile: rgba(239,68,68,0.18);
+    --zone-loam: rgba(34,197,94,0.18);
+    --paper-bg: #1e293b;
+    --paper-bg-2: #273449;
+    --paper-border: #334155;
+  }
+}
+
+/* Override manuel : [data-theme="dark"] force le dark, [data-theme="light"] force le light */
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-light: #1e3a8a;
+  --border: #334155;
+  --border-hover: #475569;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #1e293b;
+  --color-bg-muted: #273449;
+  --color-success-text: #86efac;
+  --color-warning-text: #fcd34d;
+  --color-danger-text: #fca5a5;
+  --success: #34d399;
+  --success-light: #064e3b;
+  --warning: #fbbf24;
+  --warning-light: #451a03;
+  --danger: #f87171;
+  --danger-light: #450a0a;
+  --info: #60a5fa;
+  --info-light: #1e3a8a;
+  --purple: #a78bfa;
+  --purple-dark: #7c3aed;
+  --purple-light: #3b0764;
+  --header-from: #020617;
+  --header-to: #0f172a;
+  --zone-sable: rgba(251,191,36,0.08);
+  --zone-limon: rgba(99,102,241,0.18);
+  --zone-argile: rgba(239,68,68,0.18);
+  --zone-loam: rgba(34,197,94,0.18);
+  --paper-bg: #1e293b;
+  --paper-bg-2: #273449;
+  --paper-border: #334155;
+}
+
+/* Barre flottante d'outils utilisateur (zoom typo + theme) */
+.sv-toolbar {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.sv-toolbar-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+.sv-toolbar-btn:hover { background: rgba(255,255,255,0.18); }
+.sv-toolbar-btn.active { background: rgba(255,255,255,0.28); }
+.sv-toolbar-btn.sv-theme-toggle { font-size: var(--font-md); }
+.sv-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.22);
+  margin: 0 0.15rem;
+}
+@media (max-width: 480px) {
+  .sv-toolbar { top: 0.5rem; right: 0.5rem; }
+  .sv-toolbar-btn { width: 28px; height: 28px; font-size: var(--font-sm); }
+}
+
+/* Images : legere attenuation en dark pour eviter le bright contrast */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
+}
+:root[data-theme="dark"] img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -119,11 +277,14 @@ body {
 }
 .sv-nav a:hover { text-decoration: underline; }
 
-/* ── Navigation inter-pages ── */
+/* ── Navigation inter-pages (captive en haut au scroll) ──
+   Reste sur 1 ligne (scroll horizontal si overflow) pour que .sv-tabs
+   puisse ancrer son top sur une hauteur predictible.
+   padding-right reserve la place de la toolbar flottante (~155px). */
 .sv-nav-pages {
   margin: 0;
-  padding: 0.35rem 1.25rem;
-  font-size: var(--font-sm);
+  padding: 0.3rem 165px 0.3rem 0.9rem;
+  font-size: var(--font-xs);
   color: var(--text-secondary);
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
@@ -131,9 +292,19 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.2rem;
+  flex-wrap: nowrap;
+  gap: 0.1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
+.sv-nav-pages::-webkit-scrollbar { height: 4px; }
+.sv-nav-pages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-nav-pages a, .sv-nav-pages .sv-nav-current { padding: 0.15rem 0.3rem; }
 .sv-nav-pages a {
   color: var(--accent);
   text-decoration: none;
@@ -171,21 +342,21 @@ body {
    Les CSS page-spécifiques peuvent override avec même spécificité
    (leur règle est chargée après CHARTER_CSS). */
 h1 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 1rem;
   line-height: 1.25;
 }
 h2 {
-  font-size: 1.15rem;
+  font-size: var(--font-lg);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 0.75rem;
   line-height: 1.3;
 }
 h3 {
-  font-size: 1rem;
+  font-size: var(--font-md);
   font-weight: 600;
   color: var(--text-secondary);
   margin: 0 0 0.5rem;
@@ -209,12 +380,12 @@ h3 {
 }
 .sv-accordion-header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  padding: 0.75rem 1rem; cursor: pointer; background: var(--color-bg-subtle);
   border-bottom: 1px solid var(--border); transition: background 0.15s;
   user-select: none;
 }
-.sv-accordion-header:hover { background: #f1f5f9; }
-.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-header:hover { background: var(--color-bg-muted); }
+.sv-accordion-title { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
 .sv-accordion-chevron {
   font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
   flex-shrink: 0; margin-left: 0.5rem;
@@ -226,21 +397,72 @@ h3 {
 }
 @keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ── Onglets (pattern Pratique / Comprendre) ── */
+/* ── Onglets niveau 1 (Pratique / Comprendre) — captifs juste sous .sv-nav-pages ── */
 .sv-tabs {
-  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.25rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+  position: sticky;
+  top: 1.8rem;                    /* hauteur sv-nav-pages (font-xs + padding 0.3) */
+  background: var(--bg);
+  z-index: 15;
 }
 .sv-tab {
-  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
-  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   margin-bottom: -1px;
+  font-family: inherit;
 }
-.sv-tab:hover { color: var(--text); }
-.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
-@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-tab:hover { color: var(--text); background: var(--color-bg-subtle); }
+.sv-tab.active {
+  color: var(--success);
+  background: var(--card-bg);
+  border-color: var(--border);
+  border-bottom-color: var(--card-bg);  /* relie le tab a son contenu */
+}
+@media (max-width: 640px) {
+  .sv-tabs { top: 1.8rem; }       /* nav-pages reste sur 1 ligne (overflow-x) */
+  .sv-tab { padding: 0.3rem 0.6rem; }
+}
+
+/* ── Onglets niveau 2 (sous-onglets) — pills compactes inline ── */
+.sv-subtabs {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+.sv-subtab {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.sv-subtab:hover { color: var(--text); border-color: var(--border-hover); }
+.sv-subtab.active {
+  color: #fff;
+  background: var(--success);
+  border-color: var(--success);
+}
 .sv-card h3 {
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   font-weight: 600;
   margin: 0.75rem 0 0.25rem;
   color: var(--text);
@@ -271,20 +493,182 @@ h3 {
 .sv-tag-test:hover { background: #BFDBFE; }
 .sv-tag-term  { background: var(--success-light); color: var(--success); }
 .sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
-.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+.sv-tag-info  { background: var(--color-bg-subtle); color: var(--text-secondary); }
 
-/* ── Callout / highlight box ── */
+/* ── Callout / highlight box ──
+   color explicite obligatoire : --*-light devient tres fonce en dark
+   et le texte heritait du parent (illisible). */
 .sv-callout {
-  background: #f1f5f9;
+  background: var(--color-bg-subtle);
+  color: var(--text);
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   font-size: var(--font-base);
   border-left: 4px solid var(--accent);
   margin: 0.75rem 0;
 }
-.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
-.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
-.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); color: var(--color-success-text); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); color: var(--color-warning-text); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light);  color: var(--color-danger-text); }
+.sv-callout-title { font-weight: 600; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+.sv-callout-icon { font-size: var(--font-md); }
+
+/* ── SvTabIntro : intro accordeon sous les onglets ── */
+.sv-tab-intro {
+  margin: 0.25rem 0 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+.sv-tab-intro-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.sv-tab-intro-resume {
+  flex: 1 1 320px;
+  min-width: 0;
+  line-height: 1.5;
+  white-space: normal;
+}
+.sv-tab-intro-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: var(--font-xs);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.sv-tab-intro-toggle:hover { background: var(--accent-light); border-color: var(--accent); }
+.sv-tab-intro-detail {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── SvImageCard : image illustrative + legende ── */
+.sv-image-card {
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sv-image-caption {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ── SvProcedureSteps : procedure pas-a-pas numerotee ── */
+.sv-procedure {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-procedure-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.sv-procedure-meta {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sv-procedure-steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+}
+.sv-procedure-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.3rem 0 0.3rem 2rem;
+  font-size: var(--font-base);
+}
+.sv-procedure-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sv-procedure-label { font-weight: 500; color: var(--text); }
+.sv-procedure-detail { color: var(--text-secondary); }
+
+/* ── SvTestCard : carte standardisee pour un terrain_test ── */
+.sv-test-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-test-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-test-card-title {
+  font-weight: 700;
+  font-size: var(--font-lg);
+  color: var(--text);
+}
+.sv-test-card-dim {
+  font-size: var(--font-xs);
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sv-test-card-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+}
+.sv-test-card-source {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
 
 /* ── Inputs ── */
 .sv-input {
@@ -294,12 +678,18 @@ h3 {
   font-size: var(--font-base);
   transition: border-color 0.15s;
   background: var(--card-bg);
+  color: var(--text);
+  font-family: inherit;
 }
 .sv-input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
 }
+.sv-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+/* <option> suit le theme (evite fond blanc en dark sur Chrome/Firefox) */
+.sv-input option { background: var(--card-bg); color: var(--text); }
+select.sv-input { color-scheme: light dark; }
 
 .sv-btn {
   padding: 0.4rem 1rem;
@@ -347,7 +737,7 @@ h3 {
 .sv-details summary {
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   color: var(--text);
   padding: 0.75rem 1rem;
   background: var(--card-bg);
@@ -369,7 +759,7 @@ h3 {
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .sv-header { padding: 1rem 1.25rem; }
-  .sv-header h1 { font-size: 1.25rem; }
+  .sv-header h1 { font-size: var(--font-lg); }
   .sv-container { padding: 1rem; }
   .sv-section { padding: 0 1rem; }
 }
@@ -414,11 +804,14 @@ h3 {
   min-height: 400px;
 }
 
-/* ── Cahier de science : fond & ambiance ── */
+/* ── Cahier de science : fond & ambiance ──
+   Variable dediee --paper-bg pour preserver le ton beige en light
+   et basculer vers var(--card-bg) en dark. */
 .sv-cahier {
-  background: #fdfbf7;
+  background: var(--paper-bg, #fdfbf7);
   border-radius: var(--radius);
   padding: 1.25rem;
+  color: var(--text);
 }
 
 /* ── Prose didactique (texte courant pédagogique) ── */
@@ -484,20 +877,21 @@ h3 {
 
 /* ── Encart Science Note (cahier de labo) ── */
 .sv-science-note {
-  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
-  border: 1px solid #e8e0d0;
+  background: linear-gradient(135deg, var(--paper-bg), var(--paper-bg-2));
+  border: 1px solid var(--paper-border);
   border-left: 4px solid var(--success);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem;
   margin: 0.75rem 0;
   position: relative;
+  color: var(--text);
 }
 .sv-science-note::before {
   content: attr(data-icon);
   position: absolute;
   top: 0.85rem;
   left: -2.2rem;
-  font-size: 1rem;
+  font-size: var(--font-md);
   width: 1.75rem;
   height: 1.75rem;
   display: flex;
@@ -506,7 +900,7 @@ h3 {
   background: var(--success);
   color: #fff;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: var(--font-sm);
 }
 .sv-science-note-title {
   font-weight: 700;
@@ -582,7 +976,7 @@ h3 {
   box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 .sv-kpi-value {
-  font-size: 1.3rem;
+  font-size: var(--font-1-4);
   font-weight: 800;
   line-height: 1.1;
 }
@@ -598,7 +992,7 @@ h3 {
   margin-top: 0.15rem;
 }
 .sv-kpi-detail {
-  font-size: 0.68rem;
+  font-size: var(--font-2xs);
   color: var(--color-text-muted);
   margin-top: 0.2rem;
   line-height: 1.3;
@@ -629,7 +1023,7 @@ h3 {
   box-shadow: 0 0 0 2px var(--success);
 }
 .sv-timeline-date {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -637,7 +1031,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-timeline-place {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   color: var(--color-text-muted);
   font-style: italic;
   margin-bottom: 0.15rem;
@@ -654,7 +1048,7 @@ h3 {
   margin-top: 0.3rem;
 }
 .sv-timeline-tag {
-  font-size: 0.65rem;
+  font-size: var(--font-2xs);
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
   background: var(--color-bg-muted);
@@ -676,13 +1070,13 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-label {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .sv-phase-name {
-  font-size: 0.92rem;
+  font-size: var(--font-base);
   font-weight: 700;
 }
 .sv-phase-stats {
@@ -699,7 +1093,7 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-tag {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
   background: var(--card-bg);
@@ -806,7 +1200,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-term-badge {
-  font-size: 0.62rem;
+  font-size: var(--font-2xs);
   font-weight: 700;
   padding: 0.1rem 0.45rem;
   border-radius: 999px;
@@ -838,7 +1232,7 @@ h3 {
 }
 .sv-source-year { color: var(--color-text-muted); }
 .sv-source-title { color: var(--color-text-muted); }
-.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: var(--font-xs); }
 
 /* ── Référence / Box encadrée ── */
 .sv-ref-box {
@@ -849,7 +1243,7 @@ h3 {
   margin: 0.75rem 0;
 }
 .sv-ref-box-title {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -868,8 +1262,8 @@ h3 {
   background: var(--warning-light);
   border-radius: 6px;
 }
-.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
-.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+.sv-ref-num { font-size: var(--font-md); font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: var(--font-2xs); color: var(--color-warning-text); margin-top: 2px; }
 @media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── Table caractérisation unifiée ── */
@@ -1005,7 +1399,7 @@ h3 {
   font-weight: 600;
   font-size: var(--font-sm);
 }
-.sv-cascade-row-icon { font-size: 1.05rem; line-height: 1; }
+.sv-cascade-row-icon { font-size: var(--font-md); line-height: 1; }
 .sv-cascade-row-items {
   display: flex;
   flex-wrap: wrap;
@@ -1023,7 +1417,7 @@ h3 {
   cursor: help;
 }
 .sv-cascade-badge strong {
-  font-size: 0.8rem;
+  font-size: var(--font-sm);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -1046,7 +1440,7 @@ h3 {
   gap: 0.65rem;
   flex-wrap: wrap;
 }
-.sv-cahier-link-icon { font-size: 1.2rem; line-height: 1; }
+.sv-cahier-link-icon { font-size: var(--font-lg); line-height: 1; }
 .sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
 .sv-cahier-link a {
   color: var(--accent-dark);
@@ -1063,7 +1457,7 @@ h3 {
   color: var(--text);
 }
 .sv-richtext .sv-section-label {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
   color: var(--accent-dark);
 }
@@ -1085,8 +1479,8 @@ h3 {
   align-items: center;
   gap: 0.5rem;
 }
-.sv-section-title-h2 { font-size: 1.35rem; }
-.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-title-h2 { font-size: var(--font-1-4); }
+.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
 .sv-section-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -1112,7 +1506,7 @@ h3 {
 /* ── Responsive ajouts pédagogiques ── */
 @media (max-width: 640px) {
   .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-kpi-value { font-size: var(--font-lg); }
   .sv-cahier { padding: 0.75rem; }
 }
 
@@ -1124,14 +1518,85 @@ h3 {
 </head>
 <body>
 
+<script>
+(function(){
+  // ── Theme (clair/sombre) ──
+  const savedTheme = localStorage.getItem('sv-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+  function isDark(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    if (cur === 'dark') return true;
+    if (cur === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  window.svToggleTheme = function(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    const prefDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let next;
+    if (cur === 'dark') next = 'light';
+    else if (cur === 'light') next = 'dark';
+    else next = prefDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('sv-theme', next);
+    const btn = document.querySelector('.sv-theme-toggle');
+    if (btn) btn.textContent = isDark() ? '☀' : '☾';
+  };
+
+  // ── Zoom typo (A- / A / A+) ──
+  // Modifie --font-scale sur :root → toutes les variables --font-* derivent.
+  const SCALES = [0.85, 1.0, 1.15, 1.3];
+  const savedScale = parseFloat(localStorage.getItem('sv-font-scale'));
+  if (savedScale && SCALES.indexOf(savedScale) >= 0) {
+    document.documentElement.style.setProperty('--font-scale', savedScale);
+  }
+  window.svSetFontScale = function(scale){
+    document.documentElement.style.setProperty('--font-scale', scale);
+    localStorage.setItem('sv-font-scale', scale);
+    document.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === scale);
+    });
+  };
+  window.svBumpFontScale = function(delta){
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    let idx = SCALES.indexOf(cur);
+    if (idx < 0) idx = SCALES.indexOf(1.0);
+    idx = Math.max(0, Math.min(SCALES.length - 1, idx + delta));
+    window.svSetFontScale(SCALES[idx]);
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const bar = document.createElement('div');
+    bar.className = 'sv-toolbar';
+    bar.innerHTML =
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="0.85" title="Texte plus petit" aria-label="Texte plus petit">A−</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1" title="Texte normal" aria-label="Texte normal">A</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1.15" title="Texte plus grand" aria-label="Texte plus grand">A+</button>' +
+      '<span class="sv-toolbar-sep"></span>' +
+      '<button class="sv-toolbar-btn sv-theme-toggle" title="Basculer clair/sombre" aria-label="Basculer clair/sombre">' + (isDark() ? '☀' : '☾') + '</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('.sv-theme-toggle').onclick = window.svToggleTheme;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.onclick = () => window.svSetFontScale(parseFloat(b.dataset.scale));
+    });
+    // Marque le scale courant comme actif
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === cur);
+    });
+  });
+})();
+</script>
+
 
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
-  <div class="sv-subtitle">Transition robuste — France — Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 00:23 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-subtitle">Transition robuste — Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 15:26 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste — France</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1146,7 +1611,7 @@ h3 {
 
 
 <script>
-const DATA = {"chantiers": [{"numero": 1, "famille": "transports", "titre": "Déployer massivement le vélo", "objectif_2050": "Part modale vélo 10-15 % (vs 3 %)", "etat_2025": "3 % part modale ; retard vs NL/DK", "chiffres_cles": "- Potentiel maximal : 30-50% part modale / 25% des kilomètres parcourus\n- 1 vélo sur 3 vendu en 2024 est un VAE (2 millions vendus/an)\n- Vélos cargo : 33 000 vendus/an en 2024 (doublement vs. 2021)\n- Part modale Pays-Bas : 20% des déplacements\n- 68 000 km de pistes cyclables en 2025 (cible 2030 : 100 000 km)\n- Rythme construction : 3 000 km/an actuellement → 5 000 km/an requis pour 2030\n- Stationnement sécurisé en gares : 59% des 1 133 gares en 2025 (objectif décret)\n- Filière vélo : 64 000 ETP en 2025 (6,4% en production)\n- Production française : 495 308 unités en 2024 (-18% vs. 2023)\n- Réparation : +119% depuis 2019\n- 200 000 vélos publics en 410 services (70% avec listes d'attente)\n- Taux cyclabilité : 4% du réseau routier français (8% dans aires urbaines >200k hab.)\n- Intermodalité gare : 2% arrivent à vélo en France vs. 47% Pays-Bas\n- 7 Français sur 10 habitent à moins de 6 km d'une gare", "variante_haute": "Infra cyclables nationale + voiries dédiées", "variante_intermediaire": "Déploiement urbain uniquement", "variante_basse": "Statu quo infrastructures", "leviers": "Plan vélo ; VAE ; stationnement sécurisé", "verrous": "Politique nationale absente ; voirie ; sécurité", "pertinence_corpus": "Hors scope direct (mobilité urbaine)", "pages": "27-34", "ordre": 1}, {"numero": 2, "famille": "transports", "titre": "Étendre les transports en commun", "objectif_2050": "Report modal voiture→TC", "etat_2025": "SERM en lancement ; GPE en construction", "chiffres_cles": "- Métro/tramway : 55 fois moins émissif qu'auto thermique, 25 fois moins qu'auto électrique\n- Bus/car électrique/bioGNV : 10-50 fois moins émissif qu'auto thermique\n- Grand Paris Express (GPE) : 200 km de voies (doublement du réseau parisien), 3 millions passagers/jour attendus à terme, mise en service lignes 15-18 entre 2026-2031\n- 26 projets SERM labellisés (Services Express Régionaux Métropolitains)\n- Objectif trafic 2030 : +25% vs. 2025\n- Besoins en recrutement secteur TC : 100 000 personnes à 2030 (vs. 260 000 emplois actuels)\n- 200 000 emplois actuels dans transports publics/ferroviaires (base pour calcul besoin)", "variante_haute": "SERM généralisés + matériel roulant", "variante_intermediaire": "GPE + 5-10 SERM", "variante_basse": "GPE seul", "leviers": "SERM ; GPE ; matériel roulant agrégé", "verrous": "Financement long terme ; vision nationale", "pertinence_corpus": "Hors scope direct", "pages": "35-42", "ordre": 2}, {"numero": 3, "famille": "transports", "titre": "Généraliser la voiture électrique sobre", "objectif_2050": "Parc majoritairement VE dici 2050", "etat_2025": "~15 % ventes VE neufs", "chiffres_cles": "- Auto thermique vs. électrique : VEB 4 fois moins émissif en cycle de vie complet\n- Émissions usage : 80% du total (vs. 20% fabrication)\n- Voiture électrique : 55 fois moins émissive que thermique; 25 fois moins qu'électrique par rappport au VEB\n- Production France 2025 : <1,5 millions véhicules (30-40% électrifiés) vs. 2 millions cible 2030\n- VEB 2025 : 20% marché France (17,4% Europe) vs. 66% cible 2030\n- Batteries : 30-35% prix VEB; 2 GWh produits 2025 (40 000 autos) vs. 10-20 GWh prévus\n- Gigafactories France : ~120 GWh cible 2030, 150+ GWh 2035\n- Recharge : 2,8 millions points totaux (37% entreprises, 56% particuliers, 7% public); 185 000 publics; 35 000+ rapides (>50kW)\n- Cible recharge : 400 000 points publics 2030, 800 000 en 2035, 1,3 millions 2050\n- Points privés : >10 millions avant 2035, ~22 millions avant 2050\n- Filière services automobile : 140 000 entreprises, 480 000 emplois (360 000 en distribution/réparation)\n- Emplois baisse 2025-2050 : -30 à -40% distribution/réparation\n- Marché petites voitures électriques : 500 000-600 000 neuves/an potentiel\n- Parc total : 40 millions voitures particulières (95% thermique)\n- Âge moyen parc : 11,5 ans en 2025 vs. <10 ans en 2016\n- Autonomie VEB : 300+ km courant; 50-60 kWh suffisant pour quotidien\n- 1% population : déplacements >100 km/jour", "variante_haute": "VE sobres + occasion + quadricycles", "variante_intermediaire": "Accélération VE neufs", "variante_basse": "Stagnation VE ; retour essence", "leviers": "Prix ; occasion ; infrastructures recharge", "verrous": "Prix ; autonomie psychologique ; parc actuel", "pertinence_corpus": "Hors scope direct", "pages": "43-51", "ordre": 3}, {"numero": 4, "famille": "transports", "titre": "Massifier le train passagers", "objectif_2050": "Doublement passagers", "etat_2025": "Croissance mais < attendu", "chiffres_cles": "- Parc TGV SNCF : 363 rames actuelles (durée vie 40 ans, radiables d'ici 2050)\n- TGV M : +15% capacité, -20% consommation, -40% consommation/voyageur\n- Taux de livraison : 12-15 rames/an actuellement → 20 rames/an requis (2 lignes)\n- Cible 500 rames TGV en 25 ans + 200 rames complémentaires pour triplement\n- LGV Paris-Lyon : 13 trains/h actuellement → 16 trains/h avec ERTMS 2030 (430 trains/jour)\n- Parc matériel régional : 2000 automotrices (fin de vie 2035-2045)\n- Augmentation offre régionale possible : 50-80% à moyens constants\n- Processus homologation : 5-6 ans minimum, jusqu'à 8-10 ans (TGV-M)\n- Ingénierie train régional : ~500k heures standard vs. 1,3M heures pour France\n- Croissance emplois nécessaire : +30 à 50% des effectifs\n- Investissement maintenance TGV : 300M€ Technicentre Sud-Est + 1Md€ sur 10 sites régionaux\n- Garage nocturne : 140 km voies pour 700 rames TGV (200m chacune)\n- Emplois recrutement total transport ferroviaire : 100 000 (estimé Chantier 2)", "variante_haute": "Réseau + matériel roulant massif", "variante_intermediaire": "Progression modérée", "variante_basse": "Statu quo", "leviers": "Réseau ; matériel ; maintenance ; formation", "verrous": "Capacité réseau ; gouvernance", "pertinence_corpus": "Hors scope direct", "pages": "52-60", "ordre": 4}, {"numero": 5, "famille": "transports", "titre": "Décarboner le secteur aérien", "objectif_2050": "SAF + baisse trafic", "etat_2025": "Kérosène fossile dominant", "chiffres_cles": "- Émissions aérien : 2-3% mondiales, 6,8% France (incluant production + usage)\n- Croissance trafic : +3,5%/an → doublement d'ici 2050 (contexte inchangé)\n- Densité énergétique batterie : 50x inférieure kérosène (actuel), 25x même avec toutes dernières techno\n- Moteur CFM LEAP : -15% consommation vs. CFM56\n- Open Fan (projet RISE) : -20% consommation vs. moteurs Leap; entrée service ~2035; généralisation ~2060\n- Renouvellement flotte mondiale : ~25 ans\n- Effet rebond 1973-2018 : énergie/passager/km ÷5 mais trafic ×13 → +triplement émissions\n- SAF consommation mondiale : <1% actuellement\n- Régulation RefuelEU : 2% SAF 2025 → 70% SAF 2050 (50% e-SAF)\n- Voie HEFA industrielle : gisement limité, atteint fin décennie\n- Potentiel France e-SAF : 110 TWh électricité = ~5,6 millions tonnes (vs. 7,3 MT kérosène actuel)\n- Besoin mondial e-SAF : ~10 000 TWh (1/3 production électricité mondiale)\n- Réduction trafic requise : ~30% pour décarbonation acceptable (avec 30% biomasse + 70 TWh électricité)\n- Hydrogène avion : repoussé sans nouvelle échéance; non significatif horizon 2050", "variante_haute": "SAF + eSAF + sobriété trafic", "variante_intermediaire": "SAF limité", "variante_basse": "Kérosène fossile ; croissance", "leviers": "SAF ; eSAF ; sobriété", "verrous": "Gisements SAF limités ; maturité eSAF", "pertinence_corpus": "Hors scope direct", "pages": "61-67", "ordre": 5}, {"numero": 6, "famille": "transports", "titre": "Relancer le fret ferroviaire", "objectif_2050": "Report modal route→rail", "etat_2025": "Fret ferroviaire marginal", "chiffres_cles": "- Part modal rail France 2024 : 9,7% (vs. Suisse 35%, Allemagne 17%, UE moyenne 17,3%)\n- Baisse fret ferroviaire depuis 2000 : -43%\n- Rapport économique : fret fer 1,7x plus cher que routier\n- Baisse effectifs fer depuis 2010 : -67%\n- Hausse effectifs requise 2050 : +165%\n- Baisse emplois routier attendue : -50% (chauffeurs PL)\n- Trafic fret réseau : 13,4% (2022)\n- Électrification fret : 75% (25% diesel)\n- Part transport combiné : 25% du fret ferroviaire\n- Part conventionnel : 60% du fret ferroviaire\n- Retards fret 2024 : 15,7% >30 minutes\n- Part fer ports France 2024 : 13% (vs. Allemagne 45%)\n- OFP (Opérateurs Proximité) : 5% t-km 2019\n- CEE budget : 40M€/an pour aides fret\n- Hausse électricité 2022 : ×4 à ×8 (vs. pays voisins normalisé)\n- Investissement réseau : 1,5Md€/an supplémentaires (plans Ulysses, contournements exclus)\n- Part fret SNCF : 47% marché", "variante_haute": "Réseau + emplois ; obligation chargeurs", "variante_intermediaire": "Progression limitée", "variante_basse": "Déclin", "leviers": "Réseau ; prix ; fiabilité ; SNDFF", "verrous": "Réseau vieillissant ; mégacamions", "pertinence_corpus": "Hors scope direct", "pages": "68-73", "ordre": 6}, {"numero": 7, "famille": "transports", "titre": "Électrifier les poids lourds", "objectif_2050": "Flotte PL électrique 2050", "etat_2025": "VECTO ; bornes en démarrage", "chiffres_cles": "- Parc français PL : 621 500 (50% camions, 30% tracteurs, 20% VASP); 96,9% diesel, 1,6% gaz\n- Ventes annuelles PL : ~45 000/an\n- Émissions PL 2024 : 27 Mt CO2e (7% émissions territoriales)\n- Efficacité camion électrique : -45 à -90% GES vs. diesel (cycle vie)\n- Efficacité hydrogène PL : 3x moins efficace que électrique direct\n- Règlement VECTO : -45% 2030, -90% 2040 (vs. 2019)\n- Autonomie PL électrique : 450-600+ km (6 packs 565 kWh; 1000 kWh longue distance)\n- Prix PL électrique : 150-350k€ vs. diesel 85-130k€ (3x plus cher)\n- Prix borne rapide : ~100k€ (150kW)\n- Subventions : 35k€ (porteur 19T) à 53k€ (tracteur); jusqu'à 60% coût total\n- Bornes MCS (Mega Charging) : 3,75 MW, recharge 400 km en 45 min\n- Besoins bornes 2035 : 10 000 standards + 2 200 rapides sur 519 aires (Enedis)\n- Batteries pour PL très lourd : jusqu'à 1000 kWh (>600 km autonomie)\n- PTAC augmentation requise : +2 tonnes (44→46T) pour compenser batterie\n- Part demande métaux cas extrême : 15-20% (électrification complète 2035)\n- Assemblage France 2024 : 80% PL électriques vs. 40-45% diesel\n- Production batteries : 80% Asie; projets usines Europe en cours\n- Coût total de possession (TCO) : PL électrique supérieur 2-3 ans, puis inverse (~7 ans)\n- Coût kWh recharge : 1-5€ entre dépôt et autoroute\n- Péage coûts : ~7% TCO\n- Transit international : ~30% t-km 2018\n- Règlement VECTO trailer : entrée vigueur 2030", "variante_haute": "Flotte PLE + bornes forte puissance", "variante_intermediaire": "Déploiement progressif", "variante_basse": "Diesel dominant", "leviers": "Prix ; bornes ; réglementation ; transit", "verrous": "Prix ; organisation ; chargeurs", "pertinence_corpus": "Hors scope direct", "pages": "74-81", "ordre": 7}, {"numero": 8, "famille": "batiment", "titre": "Massifier la rénovation des logements", "objectif_2050": "Rénovation thermique généralisée", "etat_2025": "Rythme insuffisant", "chiffres_cles": "- Énergie logement en France : 30% énergie finale (63% chauffage)\n- Rénovations 2024 : 60-120k d'ampleur/an (parc privé) + 40k éco-PLS social = ~100-160k total\n- Objectif SNBC3 : 250k rénovations d'ampleur/an (rythme actuel ~moitié visée)\n- Objectif SNBC2/PTEF 2040-2050 : ~1 million/an (niveau BBC)\n- Retard cible : rythme actuel ~50% par rapport SNBC3, bien moins pour BBC\n- Aides publiques 2024 : ~9 Md€ (vs. 6 Md€ 2020) = ~40% investissements rénovation privée\n- Montant MaPrimeRénov' + CEE + TVA 5,5% + éco-PTZ : principaux soutiens\n- Financement logements sociaux : ~1 Md€/an\n- Délai instruction aide : ~3 mois moyen, 6 mois courants\n- Fraude estimée ANAH : 9% budget (tentatives déjouées comprises)\n- Emplois rénovation 2020-2030 : ~200 000 supplémentaires\n- Besoins recrutement total : +200k emplois + 3x besoins remplacement (retraites, turnover)\n- Recrutements jugés difficiles : 78%\n- Formation continue secteur : 20% salariés touchés (concentrée obligatoire)\n- Taux insertion formation bâtiment : <1/3 diplômés s'insèrent après formation\n- 4000 opérateurs Mon Accompagnateur Rénov' (MAR)\n- Fonds Social pour le Climat (UE) : repoussé 2028 (initialement 2026)", "variante_haute": "Rénovations profondes massifiées", "variante_intermediaire": "Rénovations simples dominantes", "variante_basse": "Statu quo", "leviers": "DPE ; aides ; formation ; confiance", "verrous": "Aides discontinues ; compétences ; volume", "pertinence_corpus": "Hors scope direct", "pages": "82-89", "ordre": 8}, {"numero": 9, "famille": "batiment", "titre": "Déployer les pompes à chaleur", "objectif_2050": "Parc majoritairement PAC ÷3 gaz/fioul", "etat_2025": "Déploiement significatif mais retard", "chiffres_cles": "- Émissions bâtiments 2024 : 60 Mt CO2e (15% totales); 85% chauffage/ECS\n- Consommation bâtiment : 28% résidentiel, 15% tertiaire France\n- SCOP PAC air-eau/air-air : ~3 (3 kWh chaleur/1 kWh élec); géothermie 4-5\n- Réduction consommation : -50 à -80% vs. thermique; émissions directes -80 à -90%\n- Amortissement CO2 : 2-10 mois (vs. chaudière gaz); cycle 17 ans = 50 t CO2 économisées\n- Économies facture : -40 à -50% vs. chauffage actuel\n- Prix PAC air-eau : 10-15k€ TTC (vs. chaudière 2-5k€)\n- Prix PAC air-air : 5-12k€\n- Géothermie : 25-50k€ (coût forage)\n- Aides moyennes PAC air-eau : ~5k€ (reste charge ~10k€)\n- ROI sans aides : 10-14 ans (rempl. volontaire); 3-9 ans (chaudière EOL)\n- ROI avec aides : 7-12 ans (volontaire); 2-5 ans (EOL)\n- Ventes 2023 : ~1,2 millions PAC (20% air-eau, 80% air-air) vs. 300k en 2012\n- Croissance annuelle : ~15%/an avant 2023\n- Ventes 2024 : ~1 million (air-eau -52% en 2 ans)\n- Chaudières gaz/fioul 2024 : 445 000 unités vendues\n- Part marché maison neuve 2024 : 85% PAC (RE2020 impact)\n- Parc PAC France 2023 : 14% MI, <3% collectif\n- Parc PAC Norvège : 630/1000 ménages; Suède/Finlande 500; France 234; Allemagne 54\n- Industrie Europe : >250 usines (50 Italie, 20 France, 38 Allemagne)\n- Emplois 2020 France : 3 400 fabrication, 13 400 installation-maintenance\n- Besoin emplois supplémentaires : plusieurs dizaines de milliers\n- Formations professionnelles : 10 000 diplômés + 1 200 titres/an (insuffisant)\n- Plan gouvernemental 2024 : 1 million PAC d'ici 2027\n- Seuil RE2020 neuf 2025 : Ic 4 kgCO2e/m²/an (MI), 320 kg CO2e/m² collectif\n- Ratio prix électricité/gaz : 1,4 (Norvège/Suède) vs. 1,7-2 (France) vs. 3 (Allemagne)", "variante_haute": "PAC massifiées partout", "variante_intermediaire": "PAC ville + maisons", "variante_basse": "Chauffages fossiles maintenus", "leviers": "Prix ; aides ; formation installateurs ; écart prix élec/gaz", "verrous": "Investissement initial ; sophistication", "pertinence_corpus": "Hors scope direct (rural = PAC air-eau pertinente)", "pages": "90-98", "ordre": 9}, {"numero": 10, "famille": "numerique", "titre": "Maîtriser le déploiement des centres de données", "objectif_2050": "Conso numérique <60 TWh 2050", "etat_2025": "~10 TWh actuels", "chiffres_cles": "- Émissions numérique mondiale 2020 : 4% GES total (~poids lourds mondiaux)\n- Croissance mondiale centres données : 13%/an 2019-2024 vs. 7%/an 2014-2019\n- Consommation mondiale 2024 : 420 TWh (vs. 165 TWh 2014)\n- Consommation France 2023 : 3-10 TWh estimée (divergences sources : SDES 4, ADEME 8,2, ENEDIS 3, RTE 4-10)\n- Projets raccordés réseau transport RTE : 14 GW au 1/11/2025 (18× puissance actuelles)\n- Île-de-France concentre : 7 GW (50% demandes)\n- Consommation estimée 2050 France : 40 TWh visée SNBC3 vs. risque potentiel ~250 TWh (60% hors France)\n- Usages français hébergés étranger 2020 : 11,3 TWh (60% cloud français)\n- Puissance moyenne RTE 2025 : 22% puissance contractualisée appelée\n- Centres raccordés RTE : 8 sur ~350 existants France\n- Exonération TICFE sous conditions : incitations actuelles\n- Empreinte matérielle : 40% cycle de vie (fabrication > usage)\n- Augmentation impact 168% pour gravure divisée 14× (serveurs denses)\n- Centres mondiaux (USA) : 1-3,6 GW en 1-3,6 ans de construction\n- Estimation numérique France 2050 si inchangé : 250 TWh dont 22% en France", "variante_haute": "Régulation forte + rapatriement usages", "variante_intermediaire": "Modéré", "variante_basse": "Laisser-faire (60+ TWh)", "leviers": "Disponibilité élec ; raccordement ; chaleur fatale", "verrous": "Concurrence usages ; pressions locales", "pertinence_corpus": "Hors scope direct (mais IA/élec : enjeux émergents)", "pages": "99-106", "ordre": 10}, {"numero": 11, "famille": "industrie", "titre": "Produire de lacier bas-carbone", "objectif_2050": "EAF + H2-DRI-EAF + CCS HF", "etat_2025": "Hauts-fourneaux charbon dominants", "chiffres_cles": "- Voie hauts fourneaux (HF) : 62,7% production France 2024 (70% mondial); 1,8 tCO2e/t; 5950 kWh/t\n- Voie four arc électrique (EAF) : 37,3% France 2024 (22% mondial); 0,16 tCO2e/t; 580 kWh/t\n- Voie DRI-gaz naturel : 0,95 tCO2e/t; 4750 kWh/t (non présente France)\n- Voie DRI-hydrogène : 0,15 tCO2e/t; 3600 kWh/t (0% France)\n- Demande acier France : BTP 43%, auto 26%, équipements 16%\n- Émissions HF : 92% émissions filière française\n- Production primaire-charbon : 60% émissions intrinsèques procédé\n- CCS sur HF : captage 50-70% max, +15-20% électricité supplémentaire\n- Surcoût H2 : ~200€/t acier (4€/kgH2; 55 kgH2/t)\n- Surcoût CCS : 200-250€/t CO2 (prix acier ~500€)\n- Ferrailles France 2023 : 9599 kt disponibles, 4528 kt utilisées (~50%), 5071 kt exportées\n- Production automobile France : baisse -22% vs. pré-COVID\n- Construction neuve France : baisse -15% 2021-2024; objectif PTEF -37% à 2050\n- Emplois filière HF-EAF France 2023 : 35 000 ETP (sidérurgie 26 000)\n- Emplois DRI-EAF 2 Mt/an : ~500 directs + 3000 indirects (vs. 1000 HF)\n- Électricité consommée 2024 : ~3,4 TWh/an (HF 1,1 TWh; EAF 2,3 TWh)\n- Consommation future 2050 : ×2 (EAF seul) à ×8 (H2-DRI-EAF) vs. 2024", "variante_haute": "Transformation filière complète", "variante_intermediaire": "Transition partielle", "variante_basse": "Contraction subie", "leviers": "EAF ; H2-DRI ; CCS ; ferrailles qualité", "verrous": "Électricité abondante ; demande aval", "pertinence_corpus": "Hors scope direct", "pages": "107-116", "ordre": 11}, {"numero": 12, "famille": "industrie", "titre": "Massifier lhydrogène bas-carbone", "objectif_2050": "H2 pour engrais/acier/eSAF", "etat_2025": "H2 fossile dominant", "chiffres_cles": "- Production mondiale 2024 : 100 Mt H2/an (France 0,9 Mt/an)\n- Vaporeformage méthane : ~11 tCO2e/t H2 (75% production mondiale)\n- Gazéification charbon : ~20 tCO2e/t H2 (25% production)\n- Électrolyse eau France mix : ~2,9 tCO2e/t H2 (vs. moyenne UE 11 tCO2e/t, Pologne 26)\n- Rendements production : électrolyse 60%, vaporeformage 72%, CCS vaporeformage 61%\n- Rendement utilisations : moteur électrique 90%, moteur H2 30%, utilisation électricité 25%\n- Consommation électrique électrolyse : 55 kWh/kg H2 (33 kWh/kg rendement 60%)\n- Compression H2 : 2,7-4,9 kWh/kg (5-10% surcharge)\n- Voie biométhane vaporeformage : 2,1 tCO2e/t H2 (9 t CO2 biogénique)\n- Biométhane + CCS : 2,1 tCO2e/t (8,1 t capturées)\n- Puissance électrolyse France fin 2024 : 22 MW (15 projets 0,5-5 MW)\n- Objectif stratégie nationale 2030 : 4 500 MW\n- Électrolyse Europe : certains sites 20 MW\n- Besoin aciérie 2 Mt/an H2 : 108 000 t H2 = 730 MW électrolyse (95% temps)\n- Potentiel stockage cavité saline France : sites Manosque, Tersanne/Etrez, Verville\n- Premiers stockages : 2030-2032 (test Etrez 2025 concluant)\n- Projets H2 France : GravitHy (acier), FertigHy/Normand'Hy (ammoniac), NeoCarb/Take Kair/e-fuels\n- Électricité H2 pour sidérurgie 6,4 Mt acier : 19 TWh (paire EPR2)\n- e-fuels aérien/maritime France 2050 : 100-175 TWh/an (116-175 ADEME)\n- Rendement chaîne e-fuels : ~30% (25-55% optimiste 2050)", "variante_haute": "Appareil productif à échelle FR", "variante_intermediaire": "Déploiement limité", "variante_basse": "H2 fossile maintenu", "leviers": "Électrolyse ; priorisation usages ; réseau H2", "verrous": "Surcoût ; priorisation ; compétences", "pertinence_corpus": "Partiel (engrais azotés H2 pertinent ch.14)", "pages": "117-127", "ordre": 12}, {"numero": 13, "famille": "industrie", "titre": "Capter, stocker, valoriser CO2 industriel", "objectif_2050": "CCS pour ciment/chaux/acier résiduels", "etat_2025": "Pas de déploiement", "chiffres_cles": "- Émissions industrie France 2023 : 62,4 Mt CO2e (17% nationale)\n- Émissions résid intrinsèques procédés : 41% total industrie\n- Potentiel CO2 captable France ADEME 2020 : 51 Mt CO2/an\n- Énergie captage 51 Mt : 23-82 TWh/an (moyenne ~51 TWh/an = 1000 kWh/t CO2)\n- Captage (post-combustion amines) : 445-1600 kWh/t CO2 (efficacité ~90%)\n- Energi captage amines : 60% thermique, 40% électricité\n- Électricité requise 51 Mt captage : 9-33 TWh/an (1-3 EPR2)\n- DAC (direct air capture) : 1800-2600 kWh/t CO2 (vs. CCS 445-1600)\n- DAC coût actuel : 1600-3000 $/t CO2 (future ~230-835 $/t)\n- Stockage permanent minimalité : 800m profondeur terre/océan\n- Potentiel stockage France champs pétrole/gaz déplétés : 667 Mt CO2\n- Potentiel stockage aquifères salins profonds France : 4100 Mt CO2\n- Projets CCS France : Callisto, GOCO2, CarboClearTech, Rhône Décarbonation, Cap Décarbonation, Projet 3D, Pycasso\n- Valorisation CO2 mondiale : 0,8 Mt/an France, 230 Mt/an monde (vs. 38600 Mt émissions monde 2024)\n- EOR (récupération pétrole assistée) : principal usage actual (exclu scope décarbonation)\n- Applications valorisation : agroaliment, chimie, pharma, cosmétique, agriculture (temporaire)\n- e-SAF + H2 : 3 t CO2 + 0,5 t H2/t e-SAF; rendement 30-55% optimiste", "variante_haute": "CCS industries lourdes + BECCS", "variante_intermediaire": "CCS limité", "variante_basse": "Pas de CCS", "leviers": "Captage ; transport ; stockage ; demande aval", "verrous": "Coût énergie ; acceptation ; cadre EU", "pertinence_corpus": "Hors scope direct", "pages": "128-136", "ordre": 13}, {"numero": 14, "famille": "agriculture", "titre": "Transformer la gestion de lazote", "objectif_2050": "-70 % engrais N synthèse", "etat_2025": "Haber-Bosch = 80 % N, 17,7 MtCO2e", "chiffres_cles": null, "variante_haute": "Légumineuses 10×3 + décarbonation + recyclage", "variante_intermediaire": "Progression légumineuses modérée", "variante_basse": "Statu quo Haber-Bosch fossile", "leviers": "Légumineuses ; H2 électrolytique ; OAD ; recyclage urines/digestats", "verrous": "Silos inadaptés ; sélection génétique ; débouchés ; formation", "pertinence_corpus": "CŒUR DE CORPUS : toutes fiches N, légumineuses, fertilité, azote", "pages": "137-146", "ordre": 14}, {"numero": 15, "famille": "agriculture", "titre": "Maintenir les élevages résilients", "objectif_2050": "Cheptels bovins réduits mais herbagers préservés", "etat_2025": "16,4 M bovins ; 60 % émissions agri", "chiffres_cles": null, "variante_haute": "Réduction planifiée + herbagers + polyculture", "variante_intermediaire": "Réduction subie mi-intensifs", "variante_basse": "Décapitalisation aveugle", "leviers": "Baisse cheptels sélective ; herbagers ; légumineuses prairies ; relocalisation alim", "verrous": "Dépendance soja ; attractivité métier ; revenus", "pertinence_corpus": "CŒUR DE CORPUS : fiches élevage, prairies, haies, fumier", "pages": "147-155", "ordre": 15}, {"numero": 16, "famille": "production_electrique", "titre": "Développer éolien + photovoltaïque", "objectif_2050": "2 GW/an éolien terrestre + 2 GW/an mer + 5 GW/an PV", "etat_2025": "<2 GW/an sur plusieurs filières", "chiffres_cles": "- 10 000 éoliennes existantes → nécessité d'atteindre 20 à 30 000 (scénario 100% EnR, sans augmentation significative puissance)\n- 0,3% du territoire français suffirait pour déployer tous panneaux PV requis à horizon 2050\n- 65% de la capacité PV raccordée 2025 = installations S21 (< 500 kWc) sur toits/ombrières\n- Puissance moyenne éoliennes France = ~2,8 MW (vs 4-5 MW pays voisins)\n- 100 000 à 150 000 postes supplémentaires administration (DREAL/DDT) pour réduire délais instruction (3 ans typiquement)\n- Délais raccordement : jusqu'à 7 ans pour parc éolien dans certains territoires\n- 8-12 000 professionnels formés manquent chaque année dans filière réseaux (d'ici 2030) pour raccordements\n- Hausse effectifs totaux filière EnR : +26% à +140% d'ici 2050\n- 1/3 capacités européennes production turbines/pales/sous-stations = en France (Siemens-Gamesa Le Havre, LM Wind Cherbourg, Prysmian câbles sous-marins Yonne, Chantiers Atlantique Saint-Nazaire)\n- Assemble demi-GW éolien en mer : réquisitionne hub logistique Saint-Nazaire 6 mois\n- Panneaux solaires : majeure partie importée (Chine : Longi, Trina, Jinko)\n- Projets gigafactories : Carbon (Fos-sur-mer) + Holosolis (Hambach) = 5 GW/an chacune (demande actuelle française)", "variante_haute": "2+2+5 GW/an cumulés", "variante_intermediaire": "1+1+2,5 GW/an", "variante_basse": "Arrêt éolien + PV résiduel 1 GW/an", "leviers": "Foncier ; instruction ; raccordement ; filière industrielle", "verrous": "Délais ; recours ; concurrence China", "pertinence_corpus": "Hors scope direct", "pages": "156-164", "ordre": 16}, {"numero": 17, "famille": "production_electrique", "titre": "Prolonger + lancer nucléaire", "objectif_2050": "6-14 EPR2 + prolongation 65 ans", "etat_2025": "Parc historique prolongation à 50 ans en cours", "chiffres_cles": "- Parc actuel = 56 réacteurs ; EPR Flamanville = 1600 MWe (entré service 2024)\n- 32 réacteurs 900MWe : prolongation 50 ans déjà autorisée (22/32 travaux complétés fin 2024 ; dernier 2031)\n- 20 réacteurs 1300MWe : avis générique positif juillet 2025 pour prolongation 50 ans\n- Prolongation 60 ans 900MWe = probable (modifications limitées vs 50 ans)\n- Prolongation au-delà 60 ans = incertainté majeure (positif 50% parc en puissance vs 75% si prolongation 70 ans)\n- 6 EPR2 prévus : paires à Penly (2038), Gravelines (2040), Bugey (2042)\n- 8 EPR2 supplémentaires possibles → max 14 EPR2 horizon 2050 (borne haute filière) ; certains envisagent 20-22\n- Filière nucléaire = ~2 000 entreprises, ~250 000 salariés\n- Besoins recrutement : 100 000 emplois dans 10 ans (filière compte 250 000 actuellement)\n- Délai conception+construction EPR = plusieurs années ; premiers EPR2 initialement 2035 → décalés 2038 (audit maturité design)\n- Coûts mondiaux nucléaire en hausse multifactorielle (réglementation, conception complexe, manque normalisation, gestion projet)\n- EPR Flamanville : 12 ans de retard, surcoûts majeurs", "variante_haute": "14 EPR2 + prolongation à 65 ans", "variante_intermediaire": "6 EPR2 + 60 ans", "variante_basse": "Pas de EPR2 + 60 ans max", "leviers": "Prolongation ; EPR2 ; formation", "verrous": "Coûts ; retards ; acceptabilité", "pertinence_corpus": "Hors scope direct", "pages": "165-172", "ordre": 17}, {"numero": 18, "famille": "production_electrique", "titre": "Déployer bioénergies soutenables", "objectif_2050": "Biogaz, biocarburants transition, bois-énergie", "etat_2025": "Méthanisation en croissance", "chiffres_cles": "- 803 unités méthanisation France (2025) injectant 13,6 TWh (vs 350 TWh consommation gaz)\n- PPE3 cible 44 TWh injection réseau 2030 (vs 15,6 TWh capacité installée actuelle)\n- Répartition gisements méthanisés (2025) : effluents élevage 51% ; déchets agro-alimentaires 17% ; CIVE 14%\n- Seuil max cultures alimentaires = 15% biomasse intrants méthaniseur (décret 2016-929)\n- Rayon collecte : ~7 km méthanisation collective vs 50 km projets industriels\n- Délai développement projet : 3-8 ans (instruction, chantier, raccordement)\n- Unité 25 GWh/an (industrielle) = ~10 camions/jour\n- Potentiel biogaz 2050 : 70-140 TWh (selon arbitrages industriels et soutien économique)\n- Méthanisation = recyclage azote : 95% P, 100% K, 58-76% N dans digestat restitué agriculteurs\n- Méthanisation lisier/fumier vs CIVE : première meilleur bilan GES (évite émissions stockage) ; CIVE ajoute émissions en amont (fertilisation azotée)\n- Tarif BG16 (cogénération) abrogé sept 2025 ; nouveau financement = Certificats Production Biogaz (CPB) ; visibilité 3 ans vs 15 ans tarifs d'achat (300 indicateurs à renseigner à 6 organismes distincts)\n- 40% analyses préliminaires actuelles = unités > 25 GWh/an", "variante_haute": "Méthanisation + CIVE + biocarburants + bois", "variante_intermediaire": "Développement limité", "variante_basse": "Stagnation", "leviers": "Méthanisation territoriale ; CIVE ; digestats ; bois", "verrous": "Conflits usage biomasse ; emploi ; pilotage", "pertinence_corpus": "PARTIEL : méthanisation + CIVE + digestats (liens ch.14)", "pages": "173-183", "ordre": 18}, {"numero": 19, "famille": "agriculture", "titre": "Préserver puits C naturels agri+forestiers", "objectif_2050": "Puits -45 MtCO2e 2050 (haut) ; risque +30 MtCO2e (bas)", "etat_2025": "-37 MtCO2e 2023 ; -26 % en 10 ans", "chiffres_cles": null, "variante_haute": "Pratiques stockantes + forêts diversifiées", "variante_intermediaire": "Modéré", "variante_basse": "Érosion subie", "leviers": "Prairies ; couverts ; haies ; agroforesterie ; diversification forêt", "verrous": "Soutien économique ; formation ; pérennité stockage ; climat", "pertinence_corpus": "CŒUR DE CORPUS : fiches stockage C, agroforesterie, forêts, sols", "pages": "184-197", "ordre": 19}, {"numero": 20, "famille": "autres", "titre": "Autres chantiers (divers)", "objectif_2050": "Chantiers hors-scope principal", "etat_2025": "Variés", "chiffres_cles": null, "variante_haute": "Tous réussis", "variante_intermediaire": "Partiellement", "variante_basse": "Échecs", "leviers": "Divers (tertiaire, électrification industrie, etc.)", "verrous": "Divers", "pertinence_corpus": "Hors scope", "pages": "198-202", "ordre": 20}, {"numero": 21, "famille": "transverses", "titre": "Emploi et compétences — transversal", "objectif_2050": "Formation = condition de la décarbonation", "etat_2025": "30M actifs, besoin formation massive", "chiffres_cles": "**Pages** : 278-297  \n**Focus** : Secteurs création d'emplois vs reconversions ; formation urgente ; compétences transition écologique pour 30M actifs  \n\n**Chiffres-clés** :\n\n*Secteurs production électrique* :\n- 270 000 emplois directs système électrique actuel\n- Réseaux électriques : +61% emplois 2023-2030 (atteindre 106 000) pour raccordements\n- Hausse effectifs EnR : +26% à +140% d'ici 2050 (variantes)\n- Nucléaire : ~100 000 emplois recrutement 10 ans (filière 250 000 total) ; métiers en tension : ingénieurs, soudeurs, électromécaniciens, techniciens maintenance\n\n*Secteur automobile* :\n- 920 000 ETP actuellement\n- Construction VE intensité emploi plus faible ; perte 50 000 ETP industrie 2018-2023\n- Commerce/location/réparation : baisse forte emplois ; besoin compétences pointues électrique\n- Bornes recharge : 23 000 emplois + forte croissance (équiper territoire)\n- Stations essence : ~17 000 salariés (impacts à étudier)\n\n*Transport ferroviaire* :\n- 160 000 emplois actuels\n- Massification train : recrutement considérable peu préparé ; maintenance réseau à hausse/stabilité\n- Retards recrutement techniciens maintenance/réparation = blocage complet massification trafic\n\n*Transport aérien* :\n- Réduction indispensable = perte emplois significative (surtout trajets courts vers train)\n- 60% réduction voyageurs ; 34% réduction distances (personnel sol > personnel vol)\n\n*Transport marchandises* :\n- 590 000 emplois (hors compte propre) \n- Report modal route→rail/fleuve = baisse emploi routier + hausse ferroviaire/fluvial\n- Volume transporté -20% tonnes-km\n- Chauffeurs routiers : premiers affectés\n- Cyclologistique (vélos-cargos) : recrutements élevés\n\n*Bâtiment* :\n- 1 750 000 emplois (1 160 000 logement)\n- Rénovation énergétique : +200 000 emplois 2019-2030\n- Construction neuve 320 000 emplois actuels\n- Baisse neuve (290 000→180 000 logements/an 2050) libère main-d'œuvre vers rénovation\n\n*Agriculture* :\n- 675 000 ETP ; baisse démographique de décennies\n- Maraîchage : +25 000 ETP (+55%) si doublement production 2050 (relocalisation légumes)\n- Élevage : -20-30% animaux = -230 000 ETP directs (impact limité si fermes herbagères prioritaires)\n- Priorité : renouvellement générations (1 exploitant sur 3 non remplacé actuellement)\n\n**Compétences** :\n- 30 millions actifs = tous doivent se former partiellement (degrés variés)\n- Métiers majeures évolutions : mécaniciens auto→électriques ; chauffagistes→pompes chaleur ; commercial argument écologique ; agriculteur pratiques agroécologiques (couvert, légumineuses)\n- Tous professionnels extérieur : protection fortes chaleurs\n- Délai création filière formation = plusieurs années (orientation, connaissance métier, attractivité, tissu local)\n- Écoconduite poids-lourds = réductions mesurables consommation carburant\n- Formation initiale vs continue : cette dernière plus agile ; alternance raccourcit délai mise en situation\n\n**Reconversions** :\n- Moteurs thermiques → batteries\n- Hauts-fourneaux → fours arc électrique\n- Poids-lourds → transports en commun\n- Commerciaux → accompagnement rénovation énergétique\n- Magasiniers → collecte valorisation déchets BTP\n- Freins individuels : perte rémunération, attachement culture professionnelle, territoire\n- Freins employeurs : anticipation contraction activité, dialogue syndicats, Opco/Transitions Pro/DARP\n- Exemples : Transitions Pro Grand-Est (100 salariés secteurs carbonés) ; fédération Chimie-Énergie CFDT\n\n**Levier attractivité emploi** :\n- 62% actifs : engagement transition écologique = facteur attractivité\n- 71% : facteur fidélisation\n- Métiers \"verts\" identifiés : batteries, EnR, agroécologie\n- Promotion manquante : électriciens, BTP, conducteurs transport en commun\n- Initiatives : Greentaf (jeunes peu sensibilisés) ; festival Transition Bourgogne Franche-Comté\n\n**Conclusions fortes** :\n1. **Formation = condition décarbonation** (sans elle, faisabilité trajectoires compromises)\n2. **Compétences au bon lieu/temps = essentiel** ; délais recrutement-formation", "variante_haute": "Reconversions + apprentissage + attractivité", "variante_intermediaire": "Freins partiels", "variante_basse": "Tabou destructions emploi", "leviers": "Formation, reconversion, apprentissage, attractivité", "verrous": "Concurrence recrutement, formation lente, résistance culturelle", "pertinence_corpus": "PARTIEL — maraîchage relocalisation +25k ETP, renouvellement générations agri prioritaire", "pages": "278-297", "ordre": 21}, {"numero": 22, "famille": "transverses", "titre": "Cuivre — matériau critique", "objectif_2050": "Approvisionnement sécurisé via substitution + recyclage", "etat_2025": "32 Mt/an mondial ; France 100% dépendance import", "chiffres_cles": "**Pages** : 298-311  \n**Focus** : Dépendance géopolitique ; concentration mining ; recyclage structurellement limité ; tension offre-demande 2030-2050  \n\n**Chiffres-clés** :\n\n*Structure filière* :\n- Minerais sulfurés ~80% production mondiale (0,5-1% cuivre)\n- Minerais oxydés ~20% (traitement hydrométallurgie, coûts plus faibles)\n- Cathodes raffinées : 99,99% pureté\n- Recyclage 2024 = 1/3 usage mondial : 15% (5 Mt) raffinage ; 18% (6 Mt) refusion\n\n*Production mining mondiale* :\n- 23 Mt 2024\n- 3 pays concentrent ~50% : Chili, Pérou, RDC\n- 7 pays = >70% offre mondiale\n- 45 ans durée réserves (1 Gt / 23 Mt/an)\n- Ressources estimées 2,1 Gt cuivre\n\n*Raffinage* :\n- Production mondiale raffiné ~27 Mt 2024 (incluant raffinage secondaire)\n- Chine concentre 41-45,5% capacités raffinage (vs ~8% production mining)\n- 2/3 usage sous forme pure ; ~20% laiton (Cu+Zn) ; ~5% bronze (Cu+Sn) ; <5% autres alliages\n- 400+ alliages cuivre marché\n\n*Recyclage* :\n- Théoriquement sans perte propriétés ; pratiquement boucles ouvertes (alliages difficiles réintégrer propriétés)\n- 2 flux : new scrap (production) ~100% recyclé ; old scrap (fin vie) = \"mine urbaine\"\n- Scénarios AIE : recyclage monte 52-56% en 2050 (~30 Mt)\n- Contrainte : inertie stocks (infra longue durée) = flux fin vie progressent lentement\n- À 100% recyclage : ne couvre pas nouvelle demande croissante\n\n*Cas européen + français* :\n- UE : 3-5% production mining ; 10% consommation mondiale\n- Dépendance import extraction : ~48% ; raffinage : 17%\n- UE raffinage : 9,5% mondial (vs 15% consommation)\n- France : **zéro production mining + zéro affinage** = 100% dépendance import\n- Consommation France raffiné 2023 : 170 kt (câbliers)\n- **Consommation finale France 2023 : 500-700 kt/an** (bâtiment, transports, équipements)\n- Collecte déchets France 2021 : 218 kt\n- Export déchets France 2021 : 206 kt (faute capacités affinage)\n- Recyclage refusion France 2021 : 66 kt (+ 53 kt imports déchets)\n\n*Demande mondiale 2050* :\n- AIE scénario NZE : +64% à +78% demande 2023-2050 (32 Mt→57 Mt)\n- Eurométaux : projections plus élevées (~70 Mt 2050)\n- Demande technologies bas-carbone cuivre raffiné : 24% (2023)→47% (NZE 2050)\n- Demande croissante liée : réseaux électriques, VE, EnR, infra associées\n- Échelle européenne UE27+UK+AELE : consommation 4,3 Mt (2023)→6 Mt (2050) = +40%\n- Augmentation transition énergétique UE : 1,25 Mt (2030) ; 1,5 Mt (2040-2050)\n\n*Écart offre-demande & contraintes flux* :\n- Historique : ~3%/an croissance production 100+ ans (1 Mt 1900→20 Mt actuellement)\n- **Écart production-demande probable dès 2030** ; atteint 9-14 Mt 2040 (~40% demande totale)\n- OFREMI : déficit moyen ~6 Mt 2035 mondiale\n- 9 projections / 15 montrent écarts approvisionnement ; 5 avant 2035 (Parpan et al.)\n- Délai développement projet mining : 15-20 ans (exploration→production)\n- Risques retard/annulation : contraintes sociales, environnementales, géopolitiques\n\n*Dégradation teneurs & énergie* :\n- Teneur moyenne 1990 : 1,68%→2017 : 0,98% (baisse ~40% trente ans)\n- Mines récentes : 0,53% ; projets en dév. : ~0,43% teneur\n- Conséquence : tonnage roches extraire+traiter ↑ → besoins énergie+eau ↑ ; volumes déchets ↑\n- Sector mining doit consommer davantage énergie dans contexte décarbonation contraint\n\n*Stress hydrique* :\n- 52% mines = zones fort stress hydrique\n- Intensité hydrique 10-100 m³/tonne Cu produite (ordre grandeur)\n- Empreinte eau Cu moyenne ~74 kL/t\n\n*Consommation France 2025* :\n- ~300 kt (estimation base modèle; fourchette réelle 350-700 kt selon méthodologies)\n- Périmètre analyse : agriculture, électroménagers, construction, numérique, mobilité, industrie\n- Approche \"empreinte\" = Cu biens/infra vendus France peu importe provenance\n\n*Trajectoires cuivre France 2050* :\n- Électrification VE + capacité prod électrique + centres données = contributeurs majeurs hausse consommation\n- VE batteries, infra production renouvelable = gros besoin cuivre\n- Mobilité + énergie passent 40%→50% part consommation Cu 2025-2050\n", "variante_haute": "Recyclage 56% max 2050 + substitution aluminium", "variante_intermediaire": "Tensions modérées", "variante_basse": "Pénurie offre-demande dès 2030", "leviers": "Substitution, recyclage max, sobriété matière", "verrous": "Concentration géopolitique (Chili/Pérou/RDC=50%), raffinage Chine 45%, délais mining 15-20 ans", "pertinence_corpus": "FAIBLE — matériau critique infrastructure énergétique (réseaux, VE, EnR), impact indirect territoires mining", "pages": "298-311", "ordre": 22}], "france": {"france_agriculture": [{"section": "france_agriculture", "code": "n_haber_bosch_part", "nom": "Part de lazote fourni par Haber-Bosch", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.14 p.138", "commentaire": "Procédé industriel qui a permis la hausse des rendements du XXe s. Mobilise gaz naturel comme matière première ET combustible.", "ordre": 10}, {"section": "france_agriculture", "code": "n_emissions_epandage", "nom": "Émissions épandage engrais N synthèse", "valeur": 7.7, "unite": "MtCO2e", "fourchette_min": 7.5, "fourchette_max": 8.0, "source": "Shift PREF 2026 ch.14 p.138 citant CITEPA 2022", "commentaire": "Émissions directes liées à lépandage (N2O).", "ordre": 11}, {"section": "france_agriculture", "code": "n_emissions_fabrication", "nom": "Émissions fabrication engrais N synthèse", "valeur": 10.0, "unite": "MtCO2e", "fourchette_min": 9.5, "fourchette_max": 10.5, "source": "Shift PREF 2026 ch.14 p.140 citant CITEPA 2021", "commentaire": "41 % des émissions indirectes agricoles. Décarbonation possible via H2 électrolytique.", "ordre": 12}, {"section": "france_agriculture", "code": "n_fixation_fourrageres", "nom": "Fixation N légumineuses fourragères", "valeur": 175.0, "unite": "kgN/ha/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "Luzerne, trèfle, sainfoin. Plafond haut par caractère pérenne et longue saison de croissance.", "ordre": 13}, {"section": "france_agriculture", "code": "n_fixation_graines", "nom": "Fixation N légumineuses à graines", "valeur": 90.0, "unite": "kgN/ha/an", "fourchette_min": 50.0, "fourchette_max": 130.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "Soja, lentille, pois chiche. Fourchette large car annuelles à cycle plus court.", "ordre": 14}, {"section": "france_agriculture", "code": "legumineuses_grandes_cultures", "nom": "Part légumineuses grandes cultures", "valeur": 4.0, "unite": "%", "fourchette_min": 3.5, "fourchette_max": 4.5, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "0,58 Mha sur ~14 Mha. Potentiel dexpansion conséquent.", "ordre": 15}, {"section": "france_agriculture", "code": "legumineuses_prairies", "nom": "Part légumineuses dans prairies", "valeur": 15.0, "unite": "%", "fourchette_min": 13.0, "fourchette_max": 17.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "1,7 Mha équivalent. Surtout en bio.", "ordre": 16}, {"section": "france_agriculture", "code": "objectif_reduction_n_shift", "nom": "Objectif Shift -N synthèse 2050", "valeur": 70.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Scénario de conciliation (haute ambition).", "ordre": 17}, {"section": "france_agriculture", "code": "co2e_ammonitrate", "nom": "Intensité CO2 ammonitrate", "valeur": 5.18, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Le moins émissif des fertilisants N synthèse.", "ordre": 18}, {"section": "france_agriculture", "code": "co2e_uree", "nom": "Intensité CO2 urée", "valeur": 7.62, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "+47 % vs ammonitrate à lépandage.", "ordre": 19}, {"section": "france_agriculture", "code": "co2e_solution_azotee", "nom": "Intensité CO2 solution azotée", "valeur": 6.86, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Valeur intermédiaire. Choix du fertilisant = levier direct.", "ordre": 20}, {"section": "france_agriculture", "code": "soja_import_emissions", "nom": "Émissions indirectes soja importé", "valeur": 3.7, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Déforestation + transport. 2/3 tourteaux FR importés.", "ordre": 21}, {"section": "france_agriculture", "code": "recyclage_urines_potentiel", "nom": "Potentiel recyclage N urines humaines", "valeur": 180.0, "unite": "ktN/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.141 (calcul GRAFS)", "commentaire": "Vs ~30 ktN/an actuellement. Représenterait 10 % de la conso N synthèse.", "ordre": 22}, {"section": "france_agriculture", "code": "digestats_n", "nom": "Azote dans digestats méthanisation", "valeur": 5.0, "unite": "kgN/tonne", "fourchette_min": 3.0, "fourchette_max": 7.0, "source": "Shift PREF 2026 ch.14 p.142", "commentaire": "Sous-produit de la méthanisation. Retour au sol essentiel.", "ordre": 23}], "france_elevage": [{"section": "france_elevage", "code": "exploitations_elevage", "nom": "Nombre exploitations élevage FR", "valeur": 145000.0, "unite": "exploitations", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant Agreste", "commentaire": "37 % du total national des fermes.", "ordre": 30}, {"section": "france_elevage", "code": "emissions_directes_agri", "nom": "Part élevage émissions directes agri", "valeur": 60.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant CITEPA 2022", "commentaire": "Essentiellement CH4 fermentation entérique.", "ordre": 31}, {"section": "france_elevage", "code": "cheptel_bovin", "nom": "Cheptel bovin France", "valeur": 16.4, "unite": "M têtes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste 2024", "commentaire": "Décapitalisation subie -10 % en 10 ans.", "ordre": 32}, {"section": "france_elevage", "code": "bovins_ch4_part", "nom": "Part bovins émissions CH4 agri", "valeur": 84.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149", "commentaire": "Fermentation entérique des ruminants.", "ordre": 33}, {"section": "france_elevage", "code": "bovins_emissions_totales", "nom": "Émissions totales bovins FR", "valeur": 35.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant CITEPA 2023", "commentaire": "~9 % des émissions nationales GES.", "ordre": 34}, {"section": "france_elevage", "code": "tourteaux_import", "nom": "Part tourteaux importés", "valeur": 67.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148", "commentaire": "2/3 des tourteaux FR importés, surtout soja Amérique du Sud.", "ordre": 35}, {"section": "france_elevage", "code": "herbe_ration_allaitante", "nom": "Herbe dans ration vache allaitante", "valeur": 80.0, "unite": "%", "fourchette_min": 75.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.15 p.149", "commentaire": "Systèmes allaitants herbagers : base alimentaire.", "ordre": 36}, {"section": "france_elevage", "code": "decroissance_cheptel_10ans", "nom": "Décroissance cheptel bovin 10 ans", "valeur": -10.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "commentaire": "Érosion subie principalement sur les systèmes herbagers les plus vertueux.", "ordre": 37}, {"section": "france_elevage", "code": "decroissance_fermes_10ans", "nom": "Décroissance fermes bovines 10 ans", "valeur": -25.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "commentaire": "1/3 des exploitants non remplacés.", "ordre": 38}, {"section": "france_elevage", "code": "baisse_etp_elevage", "nom": "Baisse ETP élevage 2010-2019", "valeur": -15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "Hors polyculture-polyélevage.", "ordre": 39}, {"section": "france_elevage", "code": "genetique_ch4_variabilite", "nom": "Génétique et variabilité CH4", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "Part de la variabilité des émissions CH4 expliquée par la génétique.", "ordre": 40}, {"section": "france_elevage", "code": "revenu_bovin_lait", "nom": "Revenu moyen bovin lait", "valeur": 24600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Moyenne décennie 2010. Très disparate.", "ordre": 41}, {"section": "france_elevage", "code": "revenu_bovin_viande", "nom": "Revenu moyen bovin viande", "valeur": 18600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Moyenne décennie 2010. Le plus bas après fermes en grande culture.", "ordre": 42}, {"section": "france_elevage", "code": "revenu_agri_10pct_bas", "nom": "Revenu 10 % agriculteurs les plus bas", "valeur": -4600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Revenu courant avant impôts négatif. Décennie 2010.", "ordre": 43}, {"section": "france_elevage", "code": "fermes_ruminants_specialisees", "nom": "Fermes ruminants spécialisées", "valeur": 80000.0, "unite": "fermes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "175 000 ETP. Impact direct dune réduction cheptel.", "ordre": 44}], "france_energie": [{"section": "france_energie", "code": "part_fossile_france", "nom": "Part des fossiles dans consommation énergétique FR", "valeur": 60.0, "unite": "%", "fourchette_min": 58.0, "fourchette_max": 65.0, "source": "Shift Project 2024 Réussir la transition (rapport PREF)", "commentaire": "France dépendante à >60 % des énergies fossiles pour sa consommation d'énergie. Part en leger recul historique mais plafond visible.", "ordre": 90}, {"section": "france_energie", "code": "objectif_reduction_emissions", "nom": "Objectif réduction émissions GES (PTEF)", "valeur": 5.0, "unite": "%/an", "fourchette_min": 5.0, "fourchette_max": 5.0, "source": "Shift Project 2024 (PTEF)", "commentaire": "-5 % par an sur 25 ans. Objectif du Plan de Transformation de l'Economie Française (PTEF). Horizon 2050.", "ordre": 91}, {"section": "france_energie", "code": "horizon_transition", "nom": "Horizon de la transition PREF", "valeur": 25.0, "unite": "ans", "fourchette_min": 20.0, "fourchette_max": 30.0, "source": "Shift Project 2024", "commentaire": "Analyse sur 25 années futures (2024-2049). Perspective du rapport \"Réussir la transition dans l'incertitude\".", "ordre": 92}, {"section": "france_energie", "code": "leviers_decarbonation", "nom": "Leviers de décarbonation (PREF)", "valeur": null, "unite": "structure", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2024 Rapport PREF", "commentaire": "{\"leviers\": [\"Production d'énergies bas-carbone française\", \"Électrification massive de l'économie\", \"Maîtrise de la consommation énergétique\", \"Réduction des émissions hors combustion\", \"Préservation des puits de carbone naturels\"], \"chantiers_secteurs\": [\"transports\", \"logement\", \"numérique\", \"industrie\", \"agriculture\", \"énergie\"], \"n_chantiers_total\": 20}", "ordre": 93}, {"section": "france_energie", "code": "exposition_fossile_france", "nom": "Exposition énergétique fossile France", "valeur": 70.0, "unite": "%", "fourchette_min": 68.0, "fourchette_max": 75.0, "source": "Shift Project PREF 2024, p.2", "commentaire": "Exposition incluant l'énergie contenue dans les biens et services importés (vs 60 % dans la consommation finale seule).", "ordre": 94}], "france_foret": [{"section": "france_foret", "code": "surface_foret", "nom": "Surface forestière FR", "valeur": 17.6, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "commentaire": "32 % du territoire national.", "ordre": 70}, {"section": "france_foret", "code": "foret_privee_part", "nom": "Part forêt privée", "valeur": 75.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "commentaire": "3,3 M propriétaires. Hyper-morcellée.", "ordre": 71}, {"section": "france_foret", "code": "puits_forestier_2023", "nom": "Puits forestier 2023", "valeur": -51.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Vs -71 en 2013 = -30 %.", "ordre": 72}, {"section": "france_foret", "code": "mortalite_arbres_actuelle", "nom": "Mortalité arbres 2014-2022", "valeur": 15.2, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Doublée vs 2005-2013 (7,4 Mm3/an).", "ordre": 73}, {"section": "france_foret", "code": "expansion_foret", "nom": "Expansion surfaces forêts", "valeur": 90000.0, "unite": "ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "~9 fois la superficie de Paris chaque année.", "ordre": 74}, {"section": "france_foret", "code": "recolte_bois", "nom": "Récolte bois annuelle", "valeur": 52.0, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "73 % de laccroissement net 2015-2023.", "ordre": 75}, {"section": "france_foret", "code": "essences_nb", "nom": "Nombre essences arbres FR", "valeur": 138.0, "unite": "essences", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.192", "commentaire": "75 % des essences européennes. Mais peuplements peu diversifiés.", "ordre": 76}, {"section": "france_foret", "code": "incendie_2022", "nom": "Surfaces forêt brûlées 2022", "valeur": 60000.0, "unite": "ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Dont 30 000 ha en Gironde.", "ordre": 77}, {"section": "france_foret", "code": "stock_sols_forestiers", "nom": "Stock C sols forestiers (30 cm)", "valeur": 81.0, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190 IGN-FCBA", "commentaire": "Puit annuel estimé 200 kgC/ha/an (prudence IGN).", "ordre": 78}, {"section": "france_foret", "code": "scolytes_bois_crise", "nom": "Bois de crise scolytes cumulé", "valeur": 37.0, "unite": "Mm3", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Depuis 2018. 22 épicéa + 15 sapin.", "ordre": 79}], "france_historique": [{"section": "france_historique", "code": "covid_reduction_ges", "nom": "Baisse GES France pendant COVID 2020", "valeur": 5.0, "unite": "%", "fourchette_min": 4.0, "fourchette_max": 6.0, "source": "Shift Project PREF 2024", "commentaire": "Baisse de 5 % des émissions GES territoriales France en 2020 (confinements COVID). Référence du type de rupture possible.", "ordre": 130}], "france_macro": [{"section": "france_macro", "code": "emissions_ges_2025", "nom": "Émissions territoriales FR 2025", "valeur": 364.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.238 citant HCC 2025", "commentaire": "Vs >500 MtCO2e en 2010. Baisse -1,5 % 2024-2025 insuffisante.", "ordre": 90}, {"section": "france_macro", "code": "conso_energie_fossile", "nom": "Consommation énergie fossile 2025", "valeur": 1100.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.240-241", "commentaire": "60 % de la conso finale dénergie.", "ordre": 91}, {"section": "france_macro", "code": "conso_electrique", "nom": "Consommation électrique FR 2025", "valeur": 450.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.264", "commentaire": "Doit passer à 600-700 TWh en 2050 pour électrification.", "ordre": 92}, {"section": "france_macro", "code": "objectif_fossile_2050", "nom": "Objectif fossiles énergie finale 2050", "valeur": 1.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.242", "commentaire": "Cible réussite totale. Typiquement <5 % par grand secteur.", "ordre": 93}, {"section": "france_macro", "code": "hausse_conso_elec_min", "nom": "Hausse conso électrique 2025-2050 min", "valeur": 150.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "commentaire": "Avec maîtrise haute conso. Borne basse incontournable.", "ordre": 94}, {"section": "france_macro", "code": "hausse_conso_elec_max", "nom": "Hausse conso électrique 2025-2050 max", "valeur": 250.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "commentaire": "Avec maîtrise basse conso. Borne haute.", "ordre": 95}, {"section": "france_macro", "code": "transport_emissions_part", "nom": "Part transports émissions 2024", "valeur": 33.0, "unite": "%", "fourchette_min": 30.0, "fourchette_max": 35.0, "source": "Shift PREF 2026 p.238 citant HCC", "commentaire": "Voitures ½, utilitaires+PL 1/3.", "ordre": 96}, {"section": "france_macro", "code": "batiments_emissions_part", "nom": "Part bâtiments émissions 2024", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.239 citant HCC", "commentaire": "Logement 60 % / tertiaire 40 %.", "ordre": 97}], "france_puits_c": [{"section": "france_puits_c", "code": "puits_total_2023", "nom": "Puits total agri+forestiers 2023", "valeur": -37.0, "unite": "MtCO2e", "fourchette_min": -40.0, "fourchette_max": -35.0, "source": "Shift PREF 2026 ch.19 p.185 citant CITEPA", "commentaire": "10 % des émissions nationales. -26 % vs 2013.", "ordre": 50}, {"section": "france_puits_c", "code": "erosion_puits_10ans", "nom": "Érosion puits C sur 10 ans", "valeur": -26.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Diminution inquiétante liée au changement climatique.", "ordre": 51}, {"section": "france_puits_c", "code": "puits_prairies", "nom": "Puits C prairies 2023", "valeur": -4.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Seul écosystème agricole encore puits net.", "ordre": 52}, {"section": "france_puits_c", "code": "emissions_terres_cultivees", "nom": "Émissions terres cultivées 2023", "valeur": 12.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Devenues émettrices nettes.", "ordre": 53}, {"section": "france_puits_c", "code": "stock_prairies_permanentes", "nom": "Stock C sols prairies permanentes", "valeur": 84.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Moyenne FR. +64 % vs grandes cultures.", "ordre": 54}, {"section": "france_puits_c", "code": "stock_grandes_cultures", "nom": "Stock C sols grandes cultures", "valeur": 51.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Bas initial → potentiel stockage additionnel élevé.", "ordre": 55}, {"section": "france_puits_c", "code": "potentiel_grandes_cultures", "nom": "Potentiel stockage additionnel GC", "valeur": 18.0, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Horizon 30 ans. Généralisation couverts + haies + prairies temporaires.", "ordre": 56}, {"section": "france_puits_c", "code": "potentiel_couverts_intermediaires", "nom": "Potentiel stockage couverts intermédiaires", "valeur": 7.3, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "Principal levier. Millions dhectares investissables.", "ordre": 57}, {"section": "france_puits_c", "code": "potentiel_prairies_temporaires", "nom": "Potentiel prairies temporaires", "valeur": 3.1, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "Substitution maïs fourrager → prairie temporaire.", "ordre": 58}, {"section": "france_puits_c", "code": "stockage_haies_tco2e_ha", "nom": "Stockage unitaire haies", "valeur": 1.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "80-93 % en biomasse aérienne.", "ordre": 59}, {"section": "france_puits_c", "code": "stockage_agroforesterie_tco2e_ha", "nom": "Stockage unitaire agroforesterie intra", "valeur": 4.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "80 % en biomasse aérienne.", "ordre": 60}, {"section": "france_puits_c", "code": "acs_surfaces", "nom": "Surfaces agriculture conservation", "valeur": 4.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Seulement 4 % des surfaces cultivées. Marge énorme.", "ordre": 61}, {"section": "france_puits_c", "code": "perte_prairies_40ans", "nom": "Perte prairies 40 ans", "valeur": -4.0, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Conversion en cultures annuelles → déstockage.", "ordre": 62}, {"section": "france_puits_c", "code": "perte_haies_annuelle", "nom": "Perte haies par an", "valeur": 23500.0, "unite": "km/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "2017-2021. Malgré programmes de plantation.", "ordre": 63}, {"section": "france_puits_c", "code": "snbc3_puits_2050", "nom": "Puits naturels 2050 SNBC 3", "valeur": -24.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Révision à la baisse : SNBC 2 prévoyait 67 MtCO2e.", "ordre": 64}], "france_scenarios_2050": [{"section": "france_scenarios_2050", "code": "puits_c_reussite", "nom": "Puits C agri/forestier 2050 (succès)", "valeur": 45.0, "unite": "MtCO2/an", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "Shift Project PREF 2024", "commentaire": "Capture nette par préservation des puits naturels si réussite totale.", "ordre": 110}, {"section": "france_scenarios_2050", "code": "puits_c_echec", "nom": "Puits C agri/forestier 2050 (échec)", "valeur": -30.0, "unite": "MtCO2/an", "fourchette_min": -35.0, "fourchette_max": -25.0, "source": "Shift Project PREF 2024", "commentaire": "Valeur négative : les puits deviennent émetteurs nets si échec total. Renversement de +45 à -30 = 75 Mt/an d'écart.", "ordre": 111}, {"section": "france_scenarios_2050", "code": "ccs_industrie", "nom": "CCS industrie 2050", "valeur": 3.0, "unite": "MtCO2/an", "fourchette_min": 2.5, "fourchette_max": 3.5, "source": "Shift Project PREF 2024", "commentaire": "Capture et séquestration de carbone sur sites industriels à procédés carbonés sans alternative (ex. ciment).", "ordre": 112}, {"section": "france_scenarios_2050", "code": "nucleaire_declin_renoncement", "nom": "Déclin nucléaire si renoncement", "valeur": 280.0, "unite": "TWh", "fourchette_min": 250.0, "fourchette_max": 310.0, "source": "Shift Project PREF 2024", "commentaire": "Perte de production nucléaire d'ici 2050 si pas de prolongation >60 ans et pas d'EPR2.", "ordre": 113}, {"section": "france_scenarios_2050", "code": "nucleaire_nouveau_reussite", "nom": "Gain nucléaire max (succès complet)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 80.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "commentaire": "Réussite complète des chantiers nucléaires (prolongation + EPR2) augmente production de +100 TWh en 2050.", "ordre": 114}, {"section": "france_scenarios_2050", "code": "enr_2050", "nom": "EnR France 2050 (scénario central)", "valeur": 350.0, "unite": "TWh", "fourchette_min": 300.0, "fourchette_max": 400.0, "source": "Shift Project PREF 2024", "commentaire": "Photovoltaïque + éolien terrestre + éolien en mer. Scénario tendance forte.", "ordre": 115}, {"section": "france_scenarios_2050", "code": "prod_elec_reussite_totale", "nom": "Production élec 2050 (réussite totale)", "valeur": 1000.0, "unite": "TWh", "fourchette_min": 900.0, "fourchette_max": 1050.0, "source": "Shift Project PREF 2024", "commentaire": "Production électrique France 2050 si tous les chantiers nucléaires + EnR réussissent (haute incertitude).", "ordre": 116}, {"section": "france_scenarios_2050", "code": "prod_elec_moderement_incertain", "nom": "Production élec 2050 (action immédiate)", "valeur": 600.0, "unite": "TWh", "fourchette_min": 550.0, "fourchette_max": 650.0, "source": "Shift Project PREF 2024", "commentaire": "Production 2050 si France mène dès aujourd'hui l'ensemble chantiers EnR + nucléaires (modérément incertain).", "ordre": 117}, {"section": "france_scenarios_2050", "code": "fossile_residuel_liquides", "nom": "Carburants liquides fossiles importés 2050 (scénario dégradé)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 90.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "commentaire": "Reliquat si transition ratée.", "ordre": 118}, {"section": "france_scenarios_2050", "code": "fossile_residuel_gaz", "nom": "Gaz fossile importé 2050 (scénario dégradé)", "valeur": 200.0, "unite": "TWh", "fourchette_min": 180.0, "fourchette_max": 240.0, "source": "Shift Project PREF 2024", "commentaire": "Reliquat si transition ratée.", "ordre": 119}, {"section": "france_scenarios_2050", "code": "camions_fossile_degrade", "nom": "Énergie camions fossile 2050 (dégradé)", "valeur": 40.0, "unite": "%", "fourchette_min": 35.0, "fourchette_max": 45.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 (rate les objectifs) : 40 % énergie camions encore fossile en 2050.", "ordre": 120}, {"section": "france_scenarios_2050", "code": "vl_fossile_degrade", "nom": "Énergie véhicules légers fossile 2050 (dégradé)", "valeur": 55.0, "unite": "%", "fourchette_min": 50.0, "fourchette_max": 60.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 : 55 % énergie VL encore fossile en 2050.", "ordre": 121}, {"section": "france_scenarios_2050", "code": "chauffage_fossile_degrade", "nom": "Énergie chauffage fossile 2050 (dégradé)", "valeur": 25.0, "unite": "%", "fourchette_min": 22.0, "fourchette_max": 30.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 : 25 % chauffage logement encore fossile.", "ordre": 122}], "france_secteurs": [{"section": "france_secteurs", "code": "vehicules_fossiles_actuels", "nom": "Véhicules fonctionnant aux fossiles (France 2025)", "valeur": 90.0, "unite": "%", "fourchette_min": 88.0, "fourchette_max": 92.0, "source": "Shift Project PREF 2024", "commentaire": "Essence, diesel, kérosène. >90 % des véhicules en France.", "ordre": 100}, {"section": "france_secteurs", "code": "industrie_part_emissions", "nom": "Part industrie dans émissions GES France", "valeur": 15.0, "unite": "%", "fourchette_min": 14.0, "fourchette_max": 17.0, "source": "Shift Project PREF 2024", "commentaire": "Principalement métallurgie (acier), chimie (engrais), minéraux (ciment).", "ordre": 101}, {"section": "france_secteurs", "code": "puits_carbone_agri_foret", "nom": "Puits C agricoles/forestiers (compensation actuelle)", "valeur": 10.0, "unite": "%", "fourchette_min": 8.0, "fourchette_max": 12.0, "source": "Shift Project PREF 2024", "commentaire": "Écosystèmes agricoles et forestiers compensent ~10 % des émissions annuelles de carbone françaises.", "ordre": 102}]}};
+const DATA = {"chantiers": [{"numero": 1, "famille": "transports", "titre": "Déployer massivement le vélo", "objectif_2050": "Part modale vélo 10-15 % (vs 3 %)", "etat_2025": "3 % part modale ; retard vs NL/DK", "chiffres_cles": "- Potentiel maximal : 30-50% part modale / 25% des kilomètres parcourus\n- 1 vélo sur 3 vendu en 2024 est un VAE (2 millions vendus/an)\n- Vélos cargo : 33 000 vendus/an en 2024 (doublement vs. 2021)\n- Part modale Pays-Bas : 20% des déplacements\n- 68 000 km de pistes cyclables en 2025 (cible 2030 : 100 000 km)\n- Rythme construction : 3 000 km/an actuellement → 5 000 km/an requis pour 2030\n- Stationnement sécurisé en gares : 59% des 1 133 gares en 2025 (objectif décret)\n- Filière vélo : 64 000 ETP en 2025 (6,4% en production)\n- Production française : 495 308 unités en 2024 (-18% vs. 2023)\n- Réparation : +119% depuis 2019\n- 200 000 vélos publics en 410 services (70% avec listes d'attente)\n- Taux cyclabilité : 4% du réseau routier français (8% dans aires urbaines >200k hab.)\n- Intermodalité gare : 2% arrivent à vélo en France vs. 47% Pays-Bas\n- 7 Français sur 10 habitent à moins de 6 km d'une gare", "variante_haute": "Infra cyclables nationale + voiries dédiées", "variante_intermediaire": "Déploiement urbain uniquement", "variante_basse": "Statu quo infrastructures", "leviers": "Plan vélo ; VAE ; stationnement sécurisé", "verrous": "Politique nationale absente ; voirie ; sécurité", "pertinence_corpus": "Hors scope direct (mobilité urbaine)", "pages": "27-34", "ordre": 1}, {"numero": 2, "famille": "transports", "titre": "Étendre les transports en commun", "objectif_2050": "Report modal voiture→TC", "etat_2025": "SERM en lancement ; GPE en construction", "chiffres_cles": "- Métro/tramway : 55 fois moins émissif qu'auto thermique, 25 fois moins qu'auto électrique\n- Bus/car électrique/bioGNV : 10-50 fois moins émissif qu'auto thermique\n- Grand Paris Express (GPE) : 200 km de voies (doublement du réseau parisien), 3 millions passagers/jour attendus à terme, mise en service lignes 15-18 entre 2026-2031\n- 26 projets SERM labellisés (Services Express Régionaux Métropolitains)\n- Objectif trafic 2030 : +25% vs. 2025\n- Besoins en recrutement secteur TC : 100 000 personnes à 2030 (vs. 260 000 emplois actuels)\n- 200 000 emplois actuels dans transports publics/ferroviaires (base pour calcul besoin)", "variante_haute": "SERM généralisés + matériel roulant", "variante_intermediaire": "GPE + 5-10 SERM", "variante_basse": "GPE seul", "leviers": "SERM ; GPE ; matériel roulant agrégé", "verrous": "Financement long terme ; vision nationale", "pertinence_corpus": "Hors scope direct", "pages": "35-42", "ordre": 2}, {"numero": 3, "famille": "transports", "titre": "Généraliser la voiture électrique sobre", "objectif_2050": "Parc majoritairement VE dici 2050", "etat_2025": "~15 % ventes VE neufs", "chiffres_cles": "- Auto thermique vs. électrique : VEB 4 fois moins émissif en cycle de vie complet\n- Émissions usage : 80% du total (vs. 20% fabrication)\n- Voiture électrique : 55 fois moins émissive que thermique; 25 fois moins qu'électrique par rappport au VEB\n- Production France 2025 : <1,5 millions véhicules (30-40% électrifiés) vs. 2 millions cible 2030\n- VEB 2025 : 20% marché France (17,4% Europe) vs. 66% cible 2030\n- Batteries : 30-35% prix VEB; 2 GWh produits 2025 (40 000 autos) vs. 10-20 GWh prévus\n- Gigafactories France : ~120 GWh cible 2030, 150+ GWh 2035\n- Recharge : 2,8 millions points totaux (37% entreprises, 56% particuliers, 7% public); 185 000 publics; 35 000+ rapides (>50kW)\n- Cible recharge : 400 000 points publics 2030, 800 000 en 2035, 1,3 millions 2050\n- Points privés : >10 millions avant 2035, ~22 millions avant 2050\n- Filière services automobile : 140 000 entreprises, 480 000 emplois (360 000 en distribution/réparation)\n- Emplois baisse 2025-2050 : -30 à -40% distribution/réparation\n- Marché petites voitures électriques : 500 000-600 000 neuves/an potentiel\n- Parc total : 40 millions voitures particulières (95% thermique)\n- Âge moyen parc : 11,5 ans en 2025 vs. <10 ans en 2016\n- Autonomie VEB : 300+ km courant; 50-60 kWh suffisant pour quotidien\n- 1% population : déplacements >100 km/jour", "variante_haute": "VE sobres + occasion + quadricycles", "variante_intermediaire": "Accélération VE neufs", "variante_basse": "Stagnation VE ; retour essence", "leviers": "Prix ; occasion ; infrastructures recharge", "verrous": "Prix ; autonomie psychologique ; parc actuel", "pertinence_corpus": "Hors scope direct", "pages": "43-51", "ordre": 3}, {"numero": 4, "famille": "transports", "titre": "Massifier le train passagers", "objectif_2050": "Doublement passagers", "etat_2025": "Croissance mais < attendu", "chiffres_cles": "- Parc TGV SNCF : 363 rames actuelles (durée vie 40 ans, radiables d'ici 2050)\n- TGV M : +15% capacité, -20% consommation, -40% consommation/voyageur\n- Taux de livraison : 12-15 rames/an actuellement → 20 rames/an requis (2 lignes)\n- Cible 500 rames TGV en 25 ans + 200 rames complémentaires pour triplement\n- LGV Paris-Lyon : 13 trains/h actuellement → 16 trains/h avec ERTMS 2030 (430 trains/jour)\n- Parc matériel régional : 2000 automotrices (fin de vie 2035-2045)\n- Augmentation offre régionale possible : 50-80% à moyens constants\n- Processus homologation : 5-6 ans minimum, jusqu'à 8-10 ans (TGV-M)\n- Ingénierie train régional : ~500k heures standard vs. 1,3M heures pour France\n- Croissance emplois nécessaire : +30 à 50% des effectifs\n- Investissement maintenance TGV : 300M€ Technicentre Sud-Est + 1Md€ sur 10 sites régionaux\n- Garage nocturne : 140 km voies pour 700 rames TGV (200m chacune)\n- Emplois recrutement total transport ferroviaire : 100 000 (estimé Chantier 2)", "variante_haute": "Réseau + matériel roulant massif", "variante_intermediaire": "Progression modérée", "variante_basse": "Statu quo", "leviers": "Réseau ; matériel ; maintenance ; formation", "verrous": "Capacité réseau ; gouvernance", "pertinence_corpus": "Hors scope direct", "pages": "52-60", "ordre": 4}, {"numero": 5, "famille": "transports", "titre": "Décarboner le secteur aérien", "objectif_2050": "SAF + baisse trafic", "etat_2025": "Kérosène fossile dominant", "chiffres_cles": "- Émissions aérien : 2-3% mondiales, 6,8% France (incluant production + usage)\n- Croissance trafic : +3,5%/an → doublement d'ici 2050 (contexte inchangé)\n- Densité énergétique batterie : 50x inférieure kérosène (actuel), 25x même avec toutes dernières techno\n- Moteur CFM LEAP : -15% consommation vs. CFM56\n- Open Fan (projet RISE) : -20% consommation vs. moteurs Leap; entrée service ~2035; généralisation ~2060\n- Renouvellement flotte mondiale : ~25 ans\n- Effet rebond 1973-2018 : énergie/passager/km ÷5 mais trafic ×13 → +triplement émissions\n- SAF consommation mondiale : <1% actuellement\n- Régulation RefuelEU : 2% SAF 2025 → 70% SAF 2050 (50% e-SAF)\n- Voie HEFA industrielle : gisement limité, atteint fin décennie\n- Potentiel France e-SAF : 110 TWh électricité = ~5,6 millions tonnes (vs. 7,3 MT kérosène actuel)\n- Besoin mondial e-SAF : ~10 000 TWh (1/3 production électricité mondiale)\n- Réduction trafic requise : ~30% pour décarbonation acceptable (avec 30% biomasse + 70 TWh électricité)\n- Hydrogène avion : repoussé sans nouvelle échéance; non significatif horizon 2050", "variante_haute": "SAF + eSAF + sobriété trafic", "variante_intermediaire": "SAF limité", "variante_basse": "Kérosène fossile ; croissance", "leviers": "SAF ; eSAF ; sobriété", "verrous": "Gisements SAF limités ; maturité eSAF", "pertinence_corpus": "Hors scope direct", "pages": "61-67", "ordre": 5}, {"numero": 6, "famille": "transports", "titre": "Relancer le fret ferroviaire", "objectif_2050": "Report modal route→rail", "etat_2025": "Fret ferroviaire marginal", "chiffres_cles": "- Part modal rail France 2024 : 9,7% (vs. Suisse 35%, Allemagne 17%, UE moyenne 17,3%)\n- Baisse fret ferroviaire depuis 2000 : -43%\n- Rapport économique : fret fer 1,7x plus cher que routier\n- Baisse effectifs fer depuis 2010 : -67%\n- Hausse effectifs requise 2050 : +165%\n- Baisse emplois routier attendue : -50% (chauffeurs PL)\n- Trafic fret réseau : 13,4% (2022)\n- Électrification fret : 75% (25% diesel)\n- Part transport combiné : 25% du fret ferroviaire\n- Part conventionnel : 60% du fret ferroviaire\n- Retards fret 2024 : 15,7% >30 minutes\n- Part fer ports France 2024 : 13% (vs. Allemagne 45%)\n- OFP (Opérateurs Proximité) : 5% t-km 2019\n- CEE budget : 40M€/an pour aides fret\n- Hausse électricité 2022 : ×4 à ×8 (vs. pays voisins normalisé)\n- Investissement réseau : 1,5Md€/an supplémentaires (plans Ulysses, contournements exclus)\n- Part fret SNCF : 47% marché", "variante_haute": "Réseau + emplois ; obligation chargeurs", "variante_intermediaire": "Progression limitée", "variante_basse": "Déclin", "leviers": "Réseau ; prix ; fiabilité ; SNDFF", "verrous": "Réseau vieillissant ; mégacamions", "pertinence_corpus": "Hors scope direct", "pages": "68-73", "ordre": 6}, {"numero": 7, "famille": "transports", "titre": "Électrifier les poids lourds", "objectif_2050": "Flotte PL électrique 2050", "etat_2025": "VECTO ; bornes en démarrage", "chiffres_cles": "- Parc français PL : 621 500 (50% camions, 30% tracteurs, 20% VASP); 96,9% diesel, 1,6% gaz\n- Ventes annuelles PL : ~45 000/an\n- Émissions PL 2024 : 27 Mt CO2e (7% émissions territoriales)\n- Efficacité camion électrique : -45 à -90% GES vs. diesel (cycle vie)\n- Efficacité hydrogène PL : 3x moins efficace que électrique direct\n- Règlement VECTO : -45% 2030, -90% 2040 (vs. 2019)\n- Autonomie PL électrique : 450-600+ km (6 packs 565 kWh; 1000 kWh longue distance)\n- Prix PL électrique : 150-350k€ vs. diesel 85-130k€ (3x plus cher)\n- Prix borne rapide : ~100k€ (150kW)\n- Subventions : 35k€ (porteur 19T) à 53k€ (tracteur); jusqu'à 60% coût total\n- Bornes MCS (Mega Charging) : 3,75 MW, recharge 400 km en 45 min\n- Besoins bornes 2035 : 10 000 standards + 2 200 rapides sur 519 aires (Enedis)\n- Batteries pour PL très lourd : jusqu'à 1000 kWh (>600 km autonomie)\n- PTAC augmentation requise : +2 tonnes (44→46T) pour compenser batterie\n- Part demande métaux cas extrême : 15-20% (électrification complète 2035)\n- Assemblage France 2024 : 80% PL électriques vs. 40-45% diesel\n- Production batteries : 80% Asie; projets usines Europe en cours\n- Coût total de possession (TCO) : PL électrique supérieur 2-3 ans, puis inverse (~7 ans)\n- Coût kWh recharge : 1-5€ entre dépôt et autoroute\n- Péage coûts : ~7% TCO\n- Transit international : ~30% t-km 2018\n- Règlement VECTO trailer : entrée vigueur 2030", "variante_haute": "Flotte PLE + bornes forte puissance", "variante_intermediaire": "Déploiement progressif", "variante_basse": "Diesel dominant", "leviers": "Prix ; bornes ; réglementation ; transit", "verrous": "Prix ; organisation ; chargeurs", "pertinence_corpus": "Hors scope direct", "pages": "74-81", "ordre": 7}, {"numero": 8, "famille": "batiment", "titre": "Massifier la rénovation des logements", "objectif_2050": "Rénovation thermique généralisée", "etat_2025": "Rythme insuffisant", "chiffres_cles": "- Énergie logement en France : 30% énergie finale (63% chauffage)\n- Rénovations 2024 : 60-120k d'ampleur/an (parc privé) + 40k éco-PLS social = ~100-160k total\n- Objectif SNBC3 : 250k rénovations d'ampleur/an (rythme actuel ~moitié visée)\n- Objectif SNBC2/PTEF 2040-2050 : ~1 million/an (niveau BBC)\n- Retard cible : rythme actuel ~50% par rapport SNBC3, bien moins pour BBC\n- Aides publiques 2024 : ~9 Md€ (vs. 6 Md€ 2020) = ~40% investissements rénovation privée\n- Montant MaPrimeRénov' + CEE + TVA 5,5% + éco-PTZ : principaux soutiens\n- Financement logements sociaux : ~1 Md€/an\n- Délai instruction aide : ~3 mois moyen, 6 mois courants\n- Fraude estimée ANAH : 9% budget (tentatives déjouées comprises)\n- Emplois rénovation 2020-2030 : ~200 000 supplémentaires\n- Besoins recrutement total : +200k emplois + 3x besoins remplacement (retraites, turnover)\n- Recrutements jugés difficiles : 78%\n- Formation continue secteur : 20% salariés touchés (concentrée obligatoire)\n- Taux insertion formation bâtiment : <1/3 diplômés s'insèrent après formation\n- 4000 opérateurs Mon Accompagnateur Rénov' (MAR)\n- Fonds Social pour le Climat (UE) : repoussé 2028 (initialement 2026)", "variante_haute": "Rénovations profondes massifiées", "variante_intermediaire": "Rénovations simples dominantes", "variante_basse": "Statu quo", "leviers": "DPE ; aides ; formation ; confiance", "verrous": "Aides discontinues ; compétences ; volume", "pertinence_corpus": "Hors scope direct", "pages": "82-89", "ordre": 8}, {"numero": 9, "famille": "batiment", "titre": "Déployer les pompes à chaleur", "objectif_2050": "Parc majoritairement PAC ÷3 gaz/fioul", "etat_2025": "Déploiement significatif mais retard", "chiffres_cles": "- Émissions bâtiments 2024 : 60 Mt CO2e (15% totales); 85% chauffage/ECS\n- Consommation bâtiment : 28% résidentiel, 15% tertiaire France\n- SCOP PAC air-eau/air-air : ~3 (3 kWh chaleur/1 kWh élec); géothermie 4-5\n- Réduction consommation : -50 à -80% vs. thermique; émissions directes -80 à -90%\n- Amortissement CO2 : 2-10 mois (vs. chaudière gaz); cycle 17 ans = 50 t CO2 économisées\n- Économies facture : -40 à -50% vs. chauffage actuel\n- Prix PAC air-eau : 10-15k€ TTC (vs. chaudière 2-5k€)\n- Prix PAC air-air : 5-12k€\n- Géothermie : 25-50k€ (coût forage)\n- Aides moyennes PAC air-eau : ~5k€ (reste charge ~10k€)\n- ROI sans aides : 10-14 ans (rempl. volontaire); 3-9 ans (chaudière EOL)\n- ROI avec aides : 7-12 ans (volontaire); 2-5 ans (EOL)\n- Ventes 2023 : ~1,2 millions PAC (20% air-eau, 80% air-air) vs. 300k en 2012\n- Croissance annuelle : ~15%/an avant 2023\n- Ventes 2024 : ~1 million (air-eau -52% en 2 ans)\n- Chaudières gaz/fioul 2024 : 445 000 unités vendues\n- Part marché maison neuve 2024 : 85% PAC (RE2020 impact)\n- Parc PAC France 2023 : 14% MI, <3% collectif\n- Parc PAC Norvège : 630/1000 ménages; Suède/Finlande 500; France 234; Allemagne 54\n- Industrie Europe : >250 usines (50 Italie, 20 France, 38 Allemagne)\n- Emplois 2020 France : 3 400 fabrication, 13 400 installation-maintenance\n- Besoin emplois supplémentaires : plusieurs dizaines de milliers\n- Formations professionnelles : 10 000 diplômés + 1 200 titres/an (insuffisant)\n- Plan gouvernemental 2024 : 1 million PAC d'ici 2027\n- Seuil RE2020 neuf 2025 : Ic 4 kgCO2e/m²/an (MI), 320 kg CO2e/m² collectif\n- Ratio prix électricité/gaz : 1,4 (Norvège/Suède) vs. 1,7-2 (France) vs. 3 (Allemagne)", "variante_haute": "PAC massifiées partout", "variante_intermediaire": "PAC ville + maisons", "variante_basse": "Chauffages fossiles maintenus", "leviers": "Prix ; aides ; formation installateurs ; écart prix élec/gaz", "verrous": "Investissement initial ; sophistication", "pertinence_corpus": "Hors scope direct (rural = PAC air-eau pertinente)", "pages": "90-98", "ordre": 9}, {"numero": 10, "famille": "numerique", "titre": "Maîtriser le déploiement des centres de données", "objectif_2050": "Conso numérique <60 TWh 2050", "etat_2025": "~10 TWh actuels", "chiffres_cles": "- Émissions numérique mondiale 2020 : 4% GES total (~poids lourds mondiaux)\n- Croissance mondiale centres données : 13%/an 2019-2024 vs. 7%/an 2014-2019\n- Consommation mondiale 2024 : 420 TWh (vs. 165 TWh 2014)\n- Consommation France 2023 : 3-10 TWh estimée (divergences sources : SDES 4, ADEME 8,2, ENEDIS 3, RTE 4-10)\n- Projets raccordés réseau transport RTE : 14 GW au 1/11/2025 (18× puissance actuelles)\n- Île-de-France concentre : 7 GW (50% demandes)\n- Consommation estimée 2050 France : 40 TWh visée SNBC3 vs. risque potentiel ~250 TWh (60% hors France)\n- Usages français hébergés étranger 2020 : 11,3 TWh (60% cloud français)\n- Puissance moyenne RTE 2025 : 22% puissance contractualisée appelée\n- Centres raccordés RTE : 8 sur ~350 existants France\n- Exonération TICFE sous conditions : incitations actuelles\n- Empreinte matérielle : 40% cycle de vie (fabrication > usage)\n- Augmentation impact 168% pour gravure divisée 14× (serveurs denses)\n- Centres mondiaux (USA) : 1-3,6 GW en 1-3,6 ans de construction\n- Estimation numérique France 2050 si inchangé : 250 TWh dont 22% en France", "variante_haute": "Régulation forte + rapatriement usages", "variante_intermediaire": "Modéré", "variante_basse": "Laisser-faire (60+ TWh)", "leviers": "Disponibilité élec ; raccordement ; chaleur fatale", "verrous": "Concurrence usages ; pressions locales", "pertinence_corpus": "Hors scope direct (mais IA/élec : enjeux émergents)", "pages": "99-106", "ordre": 10}, {"numero": 11, "famille": "industrie", "titre": "Produire de lacier bas-carbone", "objectif_2050": "EAF + H2-DRI-EAF + CCS HF", "etat_2025": "Hauts-fourneaux charbon dominants", "chiffres_cles": "- Voie hauts fourneaux (HF) : 62,7% production France 2024 (70% mondial); 1,8 tCO2e/t; 5950 kWh/t\n- Voie four arc électrique (EAF) : 37,3% France 2024 (22% mondial); 0,16 tCO2e/t; 580 kWh/t\n- Voie DRI-gaz naturel : 0,95 tCO2e/t; 4750 kWh/t (non présente France)\n- Voie DRI-hydrogène : 0,15 tCO2e/t; 3600 kWh/t (0% France)\n- Demande acier France : BTP 43%, auto 26%, équipements 16%\n- Émissions HF : 92% émissions filière française\n- Production primaire-charbon : 60% émissions intrinsèques procédé\n- CCS sur HF : captage 50-70% max, +15-20% électricité supplémentaire\n- Surcoût H2 : ~200€/t acier (4€/kgH2; 55 kgH2/t)\n- Surcoût CCS : 200-250€/t CO2 (prix acier ~500€)\n- Ferrailles France 2023 : 9599 kt disponibles, 4528 kt utilisées (~50%), 5071 kt exportées\n- Production automobile France : baisse -22% vs. pré-COVID\n- Construction neuve France : baisse -15% 2021-2024; objectif PTEF -37% à 2050\n- Emplois filière HF-EAF France 2023 : 35 000 ETP (sidérurgie 26 000)\n- Emplois DRI-EAF 2 Mt/an : ~500 directs + 3000 indirects (vs. 1000 HF)\n- Électricité consommée 2024 : ~3,4 TWh/an (HF 1,1 TWh; EAF 2,3 TWh)\n- Consommation future 2050 : ×2 (EAF seul) à ×8 (H2-DRI-EAF) vs. 2024", "variante_haute": "Transformation filière complète", "variante_intermediaire": "Transition partielle", "variante_basse": "Contraction subie", "leviers": "EAF ; H2-DRI ; CCS ; ferrailles qualité", "verrous": "Électricité abondante ; demande aval", "pertinence_corpus": "Hors scope direct", "pages": "107-116", "ordre": 11}, {"numero": 12, "famille": "industrie", "titre": "Massifier lhydrogène bas-carbone", "objectif_2050": "H2 pour engrais/acier/eSAF", "etat_2025": "H2 fossile dominant", "chiffres_cles": "- Production mondiale 2024 : 100 Mt H2/an (France 0,9 Mt/an)\n- Vaporeformage méthane : ~11 tCO2e/t H2 (75% production mondiale)\n- Gazéification charbon : ~20 tCO2e/t H2 (25% production)\n- Électrolyse eau France mix : ~2,9 tCO2e/t H2 (vs. moyenne UE 11 tCO2e/t, Pologne 26)\n- Rendements production : électrolyse 60%, vaporeformage 72%, CCS vaporeformage 61%\n- Rendement utilisations : moteur électrique 90%, moteur H2 30%, utilisation électricité 25%\n- Consommation électrique électrolyse : 55 kWh/kg H2 (33 kWh/kg rendement 60%)\n- Compression H2 : 2,7-4,9 kWh/kg (5-10% surcharge)\n- Voie biométhane vaporeformage : 2,1 tCO2e/t H2 (9 t CO2 biogénique)\n- Biométhane + CCS : 2,1 tCO2e/t (8,1 t capturées)\n- Puissance électrolyse France fin 2024 : 22 MW (15 projets 0,5-5 MW)\n- Objectif stratégie nationale 2030 : 4 500 MW\n- Électrolyse Europe : certains sites 20 MW\n- Besoin aciérie 2 Mt/an H2 : 108 000 t H2 = 730 MW électrolyse (95% temps)\n- Potentiel stockage cavité saline France : sites Manosque, Tersanne/Etrez, Verville\n- Premiers stockages : 2030-2032 (test Etrez 2025 concluant)\n- Projets H2 France : GravitHy (acier), FertigHy/Normand'Hy (ammoniac), NeoCarb/Take Kair/e-fuels\n- Électricité H2 pour sidérurgie 6,4 Mt acier : 19 TWh (paire EPR2)\n- e-fuels aérien/maritime France 2050 : 100-175 TWh/an (116-175 ADEME)\n- Rendement chaîne e-fuels : ~30% (25-55% optimiste 2050)", "variante_haute": "Appareil productif à échelle FR", "variante_intermediaire": "Déploiement limité", "variante_basse": "H2 fossile maintenu", "leviers": "Électrolyse ; priorisation usages ; réseau H2", "verrous": "Surcoût ; priorisation ; compétences", "pertinence_corpus": "Partiel (engrais azotés H2 pertinent ch.14)", "pages": "117-127", "ordre": 12}, {"numero": 13, "famille": "industrie", "titre": "Capter, stocker, valoriser CO2 industriel", "objectif_2050": "CCS pour ciment/chaux/acier résiduels", "etat_2025": "Pas de déploiement", "chiffres_cles": "- Émissions industrie France 2023 : 62,4 Mt CO2e (17% nationale)\n- Émissions résid intrinsèques procédés : 41% total industrie\n- Potentiel CO2 captable France ADEME 2020 : 51 Mt CO2/an\n- Énergie captage 51 Mt : 23-82 TWh/an (moyenne ~51 TWh/an = 1000 kWh/t CO2)\n- Captage (post-combustion amines) : 445-1600 kWh/t CO2 (efficacité ~90%)\n- Energi captage amines : 60% thermique, 40% électricité\n- Électricité requise 51 Mt captage : 9-33 TWh/an (1-3 EPR2)\n- DAC (direct air capture) : 1800-2600 kWh/t CO2 (vs. CCS 445-1600)\n- DAC coût actuel : 1600-3000 $/t CO2 (future ~230-835 $/t)\n- Stockage permanent minimalité : 800m profondeur terre/océan\n- Potentiel stockage France champs pétrole/gaz déplétés : 667 Mt CO2\n- Potentiel stockage aquifères salins profonds France : 4100 Mt CO2\n- Projets CCS France : Callisto, GOCO2, CarboClearTech, Rhône Décarbonation, Cap Décarbonation, Projet 3D, Pycasso\n- Valorisation CO2 mondiale : 0,8 Mt/an France, 230 Mt/an monde (vs. 38600 Mt émissions monde 2024)\n- EOR (récupération pétrole assistée) : principal usage actual (exclu scope décarbonation)\n- Applications valorisation : agroaliment, chimie, pharma, cosmétique, agriculture (temporaire)\n- e-SAF + H2 : 3 t CO2 + 0,5 t H2/t e-SAF; rendement 30-55% optimiste", "variante_haute": "CCS industries lourdes + BECCS", "variante_intermediaire": "CCS limité", "variante_basse": "Pas de CCS", "leviers": "Captage ; transport ; stockage ; demande aval", "verrous": "Coût énergie ; acceptation ; cadre EU", "pertinence_corpus": "Hors scope direct", "pages": "128-136", "ordre": 13}, {"numero": 14, "famille": "agriculture", "titre": "Transformer la gestion de lazote", "objectif_2050": "-70 % engrais N synthèse", "etat_2025": "Haber-Bosch = 80 % N, 17,7 MtCO2e", "chiffres_cles": null, "variante_haute": "Légumineuses 10×3 + décarbonation + recyclage", "variante_intermediaire": "Progression légumineuses modérée", "variante_basse": "Statu quo Haber-Bosch fossile", "leviers": "Légumineuses ; H2 électrolytique ; OAD ; recyclage urines/digestats", "verrous": "Silos inadaptés ; sélection génétique ; débouchés ; formation", "pertinence_corpus": "CŒUR DE CORPUS : toutes fiches N, légumineuses, fertilité, azote", "pages": "137-146", "ordre": 14}, {"numero": 15, "famille": "agriculture", "titre": "Maintenir les élevages résilients", "objectif_2050": "Cheptels bovins réduits mais herbagers préservés", "etat_2025": "16,4 M bovins ; 60 % émissions agri", "chiffres_cles": null, "variante_haute": "Réduction planifiée + herbagers + polyculture", "variante_intermediaire": "Réduction subie mi-intensifs", "variante_basse": "Décapitalisation aveugle", "leviers": "Baisse cheptels sélective ; herbagers ; légumineuses prairies ; relocalisation alim", "verrous": "Dépendance soja ; attractivité métier ; revenus", "pertinence_corpus": "CŒUR DE CORPUS : fiches élevage, prairies, haies, fumier", "pages": "147-155", "ordre": 15}, {"numero": 16, "famille": "production_electrique", "titre": "Développer éolien + photovoltaïque", "objectif_2050": "2 GW/an éolien terrestre + 2 GW/an mer + 5 GW/an PV", "etat_2025": "<2 GW/an sur plusieurs filières", "chiffres_cles": "- 10 000 éoliennes existantes → nécessité d'atteindre 20 à 30 000 (scénario 100% EnR, sans augmentation significative puissance)\n- 0,3% du territoire français suffirait pour déployer tous panneaux PV requis à horizon 2050\n- 65% de la capacité PV raccordée 2025 = installations S21 (< 500 kWc) sur toits/ombrières\n- Puissance moyenne éoliennes France = ~2,8 MW (vs 4-5 MW pays voisins)\n- 100 000 à 150 000 postes supplémentaires administration (DREAL/DDT) pour réduire délais instruction (3 ans typiquement)\n- Délais raccordement : jusqu'à 7 ans pour parc éolien dans certains territoires\n- 8-12 000 professionnels formés manquent chaque année dans filière réseaux (d'ici 2030) pour raccordements\n- Hausse effectifs totaux filière EnR : +26% à +140% d'ici 2050\n- 1/3 capacités européennes production turbines/pales/sous-stations = en France (Siemens-Gamesa Le Havre, LM Wind Cherbourg, Prysmian câbles sous-marins Yonne, Chantiers Atlantique Saint-Nazaire)\n- Assemble demi-GW éolien en mer : réquisitionne hub logistique Saint-Nazaire 6 mois\n- Panneaux solaires : majeure partie importée (Chine : Longi, Trina, Jinko)\n- Projets gigafactories : Carbon (Fos-sur-mer) + Holosolis (Hambach) = 5 GW/an chacune (demande actuelle française)", "variante_haute": "2+2+5 GW/an cumulés", "variante_intermediaire": "1+1+2,5 GW/an", "variante_basse": "Arrêt éolien + PV résiduel 1 GW/an", "leviers": "Foncier ; instruction ; raccordement ; filière industrielle", "verrous": "Délais ; recours ; concurrence China", "pertinence_corpus": "Hors scope direct", "pages": "156-164", "ordre": 16}, {"numero": 17, "famille": "production_electrique", "titre": "Prolonger + lancer nucléaire", "objectif_2050": "6-14 EPR2 + prolongation 65 ans", "etat_2025": "Parc historique prolongation à 50 ans en cours", "chiffres_cles": "- Parc actuel = 56 réacteurs ; EPR Flamanville = 1600 MWe (entré service 2024)\n- 32 réacteurs 900MWe : prolongation 50 ans déjà autorisée (22/32 travaux complétés fin 2024 ; dernier 2031)\n- 20 réacteurs 1300MWe : avis générique positif juillet 2025 pour prolongation 50 ans\n- Prolongation 60 ans 900MWe = probable (modifications limitées vs 50 ans)\n- Prolongation au-delà 60 ans = incertainté majeure (positif 50% parc en puissance vs 75% si prolongation 70 ans)\n- 6 EPR2 prévus : paires à Penly (2038), Gravelines (2040), Bugey (2042)\n- 8 EPR2 supplémentaires possibles → max 14 EPR2 horizon 2050 (borne haute filière) ; certains envisagent 20-22\n- Filière nucléaire = ~2 000 entreprises, ~250 000 salariés\n- Besoins recrutement : 100 000 emplois dans 10 ans (filière compte 250 000 actuellement)\n- Délai conception+construction EPR = plusieurs années ; premiers EPR2 initialement 2035 → décalés 2038 (audit maturité design)\n- Coûts mondiaux nucléaire en hausse multifactorielle (réglementation, conception complexe, manque normalisation, gestion projet)\n- EPR Flamanville : 12 ans de retard, surcoûts majeurs", "variante_haute": "14 EPR2 + prolongation à 65 ans", "variante_intermediaire": "6 EPR2 + 60 ans", "variante_basse": "Pas de EPR2 + 60 ans max", "leviers": "Prolongation ; EPR2 ; formation", "verrous": "Coûts ; retards ; acceptabilité", "pertinence_corpus": "Hors scope direct", "pages": "165-172", "ordre": 17}, {"numero": 18, "famille": "production_electrique", "titre": "Déployer bioénergies soutenables", "objectif_2050": "Biogaz, biocarburants transition, bois-énergie", "etat_2025": "Méthanisation en croissance", "chiffres_cles": "- 803 unités méthanisation France (2025) injectant 13,6 TWh (vs 350 TWh consommation gaz)\n- PPE3 cible 44 TWh injection réseau 2030 (vs 15,6 TWh capacité installée actuelle)\n- Répartition gisements méthanisés (2025) : effluents élevage 51% ; déchets agro-alimentaires 17% ; CIVE 14%\n- Seuil max cultures alimentaires = 15% biomasse intrants méthaniseur (décret 2016-929)\n- Rayon collecte : ~7 km méthanisation collective vs 50 km projets industriels\n- Délai développement projet : 3-8 ans (instruction, chantier, raccordement)\n- Unité 25 GWh/an (industrielle) = ~10 camions/jour\n- Potentiel biogaz 2050 : 70-140 TWh (selon arbitrages industriels et soutien économique)\n- Méthanisation = recyclage azote : 95% P, 100% K, 58-76% N dans digestat restitué agriculteurs\n- Méthanisation lisier/fumier vs CIVE : première meilleur bilan GES (évite émissions stockage) ; CIVE ajoute émissions en amont (fertilisation azotée)\n- Tarif BG16 (cogénération) abrogé sept 2025 ; nouveau financement = Certificats Production Biogaz (CPB) ; visibilité 3 ans vs 15 ans tarifs d'achat (300 indicateurs à renseigner à 6 organismes distincts)\n- 40% analyses préliminaires actuelles = unités > 25 GWh/an", "variante_haute": "Méthanisation + CIVE + biocarburants + bois", "variante_intermediaire": "Développement limité", "variante_basse": "Stagnation", "leviers": "Méthanisation territoriale ; CIVE ; digestats ; bois", "verrous": "Conflits usage biomasse ; emploi ; pilotage", "pertinence_corpus": "PARTIEL : méthanisation + CIVE + digestats (liens ch.14)", "pages": "173-183", "ordre": 18}, {"numero": 19, "famille": "agriculture", "titre": "Préserver puits C naturels agri+forestiers", "objectif_2050": "Puits -45 MtCO2e 2050 (haut) ; risque +30 MtCO2e (bas)", "etat_2025": "-37 MtCO2e 2023 ; -26 % en 10 ans", "chiffres_cles": null, "variante_haute": "Pratiques stockantes + forêts diversifiées", "variante_intermediaire": "Modéré", "variante_basse": "Érosion subie", "leviers": "Prairies ; couverts ; haies ; agroforesterie ; diversification forêt", "verrous": "Soutien économique ; formation ; pérennité stockage ; climat", "pertinence_corpus": "CŒUR DE CORPUS : fiches stockage C, agroforesterie, forêts, sols", "pages": "184-197", "ordre": 19}, {"numero": 20, "famille": "autres", "titre": "Autres chantiers (divers)", "objectif_2050": "Chantiers hors-scope principal", "etat_2025": "Variés", "chiffres_cles": null, "variante_haute": "Tous réussis", "variante_intermediaire": "Partiellement", "variante_basse": "Échecs", "leviers": "Divers (tertiaire, électrification industrie, etc.)", "verrous": "Divers", "pertinence_corpus": "Hors scope", "pages": "198-202", "ordre": 20}, {"numero": 21, "famille": "transverses", "titre": "Emploi et compétences — transversal", "objectif_2050": "Formation = condition de la décarbonation", "etat_2025": "30M actifs, besoin formation massive", "chiffres_cles": "**Pages** : 278-297  \n**Focus** : Secteurs création d'emplois vs reconversions ; formation urgente ; compétences transition écologique pour 30M actifs  \n\n**Chiffres-clés** :\n\n*Secteurs production électrique* :\n- 270 000 emplois directs système électrique actuel\n- Réseaux électriques : +61% emplois 2023-2030 (atteindre 106 000) pour raccordements\n- Hausse effectifs EnR : +26% à +140% d'ici 2050 (variantes)\n- Nucléaire : ~100 000 emplois recrutement 10 ans (filière 250 000 total) ; métiers en tension : ingénieurs, soudeurs, électromécaniciens, techniciens maintenance\n\n*Secteur automobile* :\n- 920 000 ETP actuellement\n- Construction VE intensité emploi plus faible ; perte 50 000 ETP industrie 2018-2023\n- Commerce/location/réparation : baisse forte emplois ; besoin compétences pointues électrique\n- Bornes recharge : 23 000 emplois + forte croissance (équiper territoire)\n- Stations essence : ~17 000 salariés (impacts à étudier)\n\n*Transport ferroviaire* :\n- 160 000 emplois actuels\n- Massification train : recrutement considérable peu préparé ; maintenance réseau à hausse/stabilité\n- Retards recrutement techniciens maintenance/réparation = blocage complet massification trafic\n\n*Transport aérien* :\n- Réduction indispensable = perte emplois significative (surtout trajets courts vers train)\n- 60% réduction voyageurs ; 34% réduction distances (personnel sol > personnel vol)\n\n*Transport marchandises* :\n- 590 000 emplois (hors compte propre) \n- Report modal route→rail/fleuve = baisse emploi routier + hausse ferroviaire/fluvial\n- Volume transporté -20% tonnes-km\n- Chauffeurs routiers : premiers affectés\n- Cyclologistique (vélos-cargos) : recrutements élevés\n\n*Bâtiment* :\n- 1 750 000 emplois (1 160 000 logement)\n- Rénovation énergétique : +200 000 emplois 2019-2030\n- Construction neuve 320 000 emplois actuels\n- Baisse neuve (290 000→180 000 logements/an 2050) libère main-d'œuvre vers rénovation\n\n*Agriculture* :\n- 675 000 ETP ; baisse démographique de décennies\n- Maraîchage : +25 000 ETP (+55%) si doublement production 2050 (relocalisation légumes)\n- Élevage : -20-30% animaux = -230 000 ETP directs (impact limité si fermes herbagères prioritaires)\n- Priorité : renouvellement générations (1 exploitant sur 3 non remplacé actuellement)\n\n**Compétences** :\n- 30 millions actifs = tous doivent se former partiellement (degrés variés)\n- Métiers majeures évolutions : mécaniciens auto→électriques ; chauffagistes→pompes chaleur ; commercial argument écologique ; agriculteur pratiques agroécologiques (couvert, légumineuses)\n- Tous professionnels extérieur : protection fortes chaleurs\n- Délai création filière formation = plusieurs années (orientation, connaissance métier, attractivité, tissu local)\n- Écoconduite poids-lourds = réductions mesurables consommation carburant\n- Formation initiale vs continue : cette dernière plus agile ; alternance raccourcit délai mise en situation\n\n**Reconversions** :\n- Moteurs thermiques → batteries\n- Hauts-fourneaux → fours arc électrique\n- Poids-lourds → transports en commun\n- Commerciaux → accompagnement rénovation énergétique\n- Magasiniers → collecte valorisation déchets BTP\n- Freins individuels : perte rémunération, attachement culture professionnelle, territoire\n- Freins employeurs : anticipation contraction activité, dialogue syndicats, Opco/Transitions Pro/DARP\n- Exemples : Transitions Pro Grand-Est (100 salariés secteurs carbonés) ; fédération Chimie-Énergie CFDT\n\n**Levier attractivité emploi** :\n- 62% actifs : engagement transition écologique = facteur attractivité\n- 71% : facteur fidélisation\n- Métiers \"verts\" identifiés : batteries, EnR, agroécologie\n- Promotion manquante : électriciens, BTP, conducteurs transport en commun\n- Initiatives : Greentaf (jeunes peu sensibilisés) ; festival Transition Bourgogne Franche-Comté\n\n**Conclusions fortes** :\n1. **Formation = condition décarbonation** (sans elle, faisabilité trajectoires compromises)\n2. **Compétences au bon lieu/temps = essentiel** ; délais recrutement-formation", "variante_haute": "Reconversions + apprentissage + attractivité", "variante_intermediaire": "Freins partiels", "variante_basse": "Tabou destructions emploi", "leviers": "Formation, reconversion, apprentissage, attractivité", "verrous": "Concurrence recrutement, formation lente, résistance culturelle", "pertinence_corpus": "PARTIEL — maraîchage relocalisation +25k ETP, renouvellement générations agri prioritaire", "pages": "278-297", "ordre": 21}, {"numero": 22, "famille": "transverses", "titre": "Cuivre — matériau critique", "objectif_2050": "Approvisionnement sécurisé via substitution + recyclage", "etat_2025": "32 Mt/an mondial ; France 100% dépendance import", "chiffres_cles": "**Pages** : 298-311  \n**Focus** : Dépendance géopolitique ; concentration mining ; recyclage structurellement limité ; tension offre-demande 2030-2050  \n\n**Chiffres-clés** :\n\n*Structure filière* :\n- Minerais sulfurés ~80% production mondiale (0,5-1% cuivre)\n- Minerais oxydés ~20% (traitement hydrométallurgie, coûts plus faibles)\n- Cathodes raffinées : 99,99% pureté\n- Recyclage 2024 = 1/3 usage mondial : 15% (5 Mt) raffinage ; 18% (6 Mt) refusion\n\n*Production mining mondiale* :\n- 23 Mt 2024\n- 3 pays concentrent ~50% : Chili, Pérou, RDC\n- 7 pays = >70% offre mondiale\n- 45 ans durée réserves (1 Gt / 23 Mt/an)\n- Ressources estimées 2,1 Gt cuivre\n\n*Raffinage* :\n- Production mondiale raffiné ~27 Mt 2024 (incluant raffinage secondaire)\n- Chine concentre 41-45,5% capacités raffinage (vs ~8% production mining)\n- 2/3 usage sous forme pure ; ~20% laiton (Cu+Zn) ; ~5% bronze (Cu+Sn) ; <5% autres alliages\n- 400+ alliages cuivre marché\n\n*Recyclage* :\n- Théoriquement sans perte propriétés ; pratiquement boucles ouvertes (alliages difficiles réintégrer propriétés)\n- 2 flux : new scrap (production) ~100% recyclé ; old scrap (fin vie) = \"mine urbaine\"\n- Scénarios AIE : recyclage monte 52-56% en 2050 (~30 Mt)\n- Contrainte : inertie stocks (infra longue durée) = flux fin vie progressent lentement\n- À 100% recyclage : ne couvre pas nouvelle demande croissante\n\n*Cas européen + français* :\n- UE : 3-5% production mining ; 10% consommation mondiale\n- Dépendance import extraction : ~48% ; raffinage : 17%\n- UE raffinage : 9,5% mondial (vs 15% consommation)\n- France : **zéro production mining + zéro affinage** = 100% dépendance import\n- Consommation France raffiné 2023 : 170 kt (câbliers)\n- **Consommation finale France 2023 : 500-700 kt/an** (bâtiment, transports, équipements)\n- Collecte déchets France 2021 : 218 kt\n- Export déchets France 2021 : 206 kt (faute capacités affinage)\n- Recyclage refusion France 2021 : 66 kt (+ 53 kt imports déchets)\n\n*Demande mondiale 2050* :\n- AIE scénario NZE : +64% à +78% demande 2023-2050 (32 Mt→57 Mt)\n- Eurométaux : projections plus élevées (~70 Mt 2050)\n- Demande technologies bas-carbone cuivre raffiné : 24% (2023)→47% (NZE 2050)\n- Demande croissante liée : réseaux électriques, VE, EnR, infra associées\n- Échelle européenne UE27+UK+AELE : consommation 4,3 Mt (2023)→6 Mt (2050) = +40%\n- Augmentation transition énergétique UE : 1,25 Mt (2030) ; 1,5 Mt (2040-2050)\n\n*Écart offre-demande & contraintes flux* :\n- Historique : ~3%/an croissance production 100+ ans (1 Mt 1900→20 Mt actuellement)\n- **Écart production-demande probable dès 2030** ; atteint 9-14 Mt 2040 (~40% demande totale)\n- OFREMI : déficit moyen ~6 Mt 2035 mondiale\n- 9 projections / 15 montrent écarts approvisionnement ; 5 avant 2035 (Parpan et al.)\n- Délai développement projet mining : 15-20 ans (exploration→production)\n- Risques retard/annulation : contraintes sociales, environnementales, géopolitiques\n\n*Dégradation teneurs & énergie* :\n- Teneur moyenne 1990 : 1,68%→2017 : 0,98% (baisse ~40% trente ans)\n- Mines récentes : 0,53% ; projets en dév. : ~0,43% teneur\n- Conséquence : tonnage roches extraire+traiter ↑ → besoins énergie+eau ↑ ; volumes déchets ↑\n- Sector mining doit consommer davantage énergie dans contexte décarbonation contraint\n\n*Stress hydrique* :\n- 52% mines = zones fort stress hydrique\n- Intensité hydrique 10-100 m³/tonne Cu produite (ordre grandeur)\n- Empreinte eau Cu moyenne ~74 kL/t\n\n*Consommation France 2025* :\n- ~300 kt (estimation base modèle; fourchette réelle 350-700 kt selon méthodologies)\n- Périmètre analyse : agriculture, électroménagers, construction, numérique, mobilité, industrie\n- Approche \"empreinte\" = Cu biens/infra vendus France peu importe provenance\n\n*Trajectoires cuivre France 2050* :\n- Électrification VE + capacité prod électrique + centres données = contributeurs majeurs hausse consommation\n- VE batteries, infra production renouvelable = gros besoin cuivre\n- Mobilité + énergie passent 40%→50% part consommation Cu 2025-2050\n", "variante_haute": "Recyclage 56% max 2050 + substitution aluminium", "variante_intermediaire": "Tensions modérées", "variante_basse": "Pénurie offre-demande dès 2030", "leviers": "Substitution, recyclage max, sobriété matière", "verrous": "Concentration géopolitique (Chili/Pérou/RDC=50%), raffinage Chine 45%, délais mining 15-20 ans", "pertinence_corpus": "FAIBLE — matériau critique infrastructure énergétique (réseaux, VE, EnR), impact indirect territoires mining", "pages": "298-311", "ordre": 22}], "france": {"france_agriculture": [{"section": "france_agriculture", "code": "n_haber_bosch_part", "nom": "Part de lazote fourni par Haber-Bosch", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.14 p.138", "commentaire": "Procédé industriel qui a permis la hausse des rendements du XXe s. Mobilise gaz naturel comme matière première ET combustible.", "ordre": 10}, {"section": "france_agriculture", "code": "n_emissions_epandage", "nom": "Émissions épandage engrais N synthèse", "valeur": 7.7, "unite": "MtCO2e", "fourchette_min": 7.5, "fourchette_max": 8.0, "source": "Shift PREF 2026 ch.14 p.138 citant CITEPA 2022", "commentaire": "Émissions directes liées à lépandage (N2O).", "ordre": 11}, {"section": "france_agriculture", "code": "n_emissions_fabrication", "nom": "Émissions fabrication engrais N synthèse", "valeur": 10.0, "unite": "MtCO2e", "fourchette_min": 9.5, "fourchette_max": 10.5, "source": "Shift PREF 2026 ch.14 p.140 citant CITEPA 2021", "commentaire": "41 % des émissions indirectes agricoles. Décarbonation possible via H2 électrolytique.", "ordre": 12}, {"section": "france_agriculture", "code": "n_fixation_fourrageres", "nom": "Fixation N légumineuses fourragères", "valeur": 175.0, "unite": "kgN/ha/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "Luzerne, trèfle, sainfoin. Plafond haut par caractère pérenne et longue saison de croissance.", "ordre": 13}, {"section": "france_agriculture", "code": "n_fixation_graines", "nom": "Fixation N légumineuses à graines", "valeur": 90.0, "unite": "kgN/ha/an", "fourchette_min": 50.0, "fourchette_max": 130.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "Soja, lentille, pois chiche. Fourchette large car annuelles à cycle plus court.", "ordre": 14}, {"section": "france_agriculture", "code": "legumineuses_grandes_cultures", "nom": "Part légumineuses grandes cultures", "valeur": 4.0, "unite": "%", "fourchette_min": 3.5, "fourchette_max": 4.5, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "0,58 Mha sur ~14 Mha. Potentiel dexpansion conséquent.", "ordre": 15}, {"section": "france_agriculture", "code": "legumineuses_prairies", "nom": "Part légumineuses dans prairies", "valeur": 15.0, "unite": "%", "fourchette_min": 13.0, "fourchette_max": 17.0, "source": "Shift PREF 2026 ch.14 p.139", "commentaire": "1,7 Mha équivalent. Surtout en bio.", "ordre": 16}, {"section": "france_agriculture", "code": "objectif_reduction_n_shift", "nom": "Objectif Shift -N synthèse 2050", "valeur": 70.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Scénario de conciliation (haute ambition).", "ordre": 17}, {"section": "france_agriculture", "code": "co2e_ammonitrate", "nom": "Intensité CO2 ammonitrate", "valeur": 5.18, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Le moins émissif des fertilisants N synthèse.", "ordre": 18}, {"section": "france_agriculture", "code": "co2e_uree", "nom": "Intensité CO2 urée", "valeur": 7.62, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "+47 % vs ammonitrate à lépandage.", "ordre": 19}, {"section": "france_agriculture", "code": "co2e_solution_azotee", "nom": "Intensité CO2 solution azotée", "valeur": 6.86, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Valeur intermédiaire. Choix du fertilisant = levier direct.", "ordre": 20}, {"section": "france_agriculture", "code": "soja_import_emissions", "nom": "Émissions indirectes soja importé", "valeur": 3.7, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "commentaire": "Déforestation + transport. 2/3 tourteaux FR importés.", "ordre": 21}, {"section": "france_agriculture", "code": "recyclage_urines_potentiel", "nom": "Potentiel recyclage N urines humaines", "valeur": 180.0, "unite": "ktN/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.141 (calcul GRAFS)", "commentaire": "Vs ~30 ktN/an actuellement. Représenterait 10 % de la conso N synthèse.", "ordre": 22}, {"section": "france_agriculture", "code": "digestats_n", "nom": "Azote dans digestats méthanisation", "valeur": 5.0, "unite": "kgN/tonne", "fourchette_min": 3.0, "fourchette_max": 7.0, "source": "Shift PREF 2026 ch.14 p.142", "commentaire": "Sous-produit de la méthanisation. Retour au sol essentiel.", "ordre": 23}], "france_elevage": [{"section": "france_elevage", "code": "exploitations_elevage", "nom": "Nombre exploitations élevage FR", "valeur": 145000.0, "unite": "exploitations", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant Agreste", "commentaire": "37 % du total national des fermes.", "ordre": 30}, {"section": "france_elevage", "code": "emissions_directes_agri", "nom": "Part élevage émissions directes agri", "valeur": 60.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant CITEPA 2022", "commentaire": "Essentiellement CH4 fermentation entérique.", "ordre": 31}, {"section": "france_elevage", "code": "cheptel_bovin", "nom": "Cheptel bovin France", "valeur": 16.4, "unite": "M têtes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste 2024", "commentaire": "Décapitalisation subie -10 % en 10 ans.", "ordre": 32}, {"section": "france_elevage", "code": "bovins_ch4_part", "nom": "Part bovins émissions CH4 agri", "valeur": 84.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149", "commentaire": "Fermentation entérique des ruminants.", "ordre": 33}, {"section": "france_elevage", "code": "bovins_emissions_totales", "nom": "Émissions totales bovins FR", "valeur": 35.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant CITEPA 2023", "commentaire": "~9 % des émissions nationales GES.", "ordre": 34}, {"section": "france_elevage", "code": "tourteaux_import", "nom": "Part tourteaux importés", "valeur": 67.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148", "commentaire": "2/3 des tourteaux FR importés, surtout soja Amérique du Sud.", "ordre": 35}, {"section": "france_elevage", "code": "herbe_ration_allaitante", "nom": "Herbe dans ration vache allaitante", "valeur": 80.0, "unite": "%", "fourchette_min": 75.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.15 p.149", "commentaire": "Systèmes allaitants herbagers : base alimentaire.", "ordre": 36}, {"section": "france_elevage", "code": "decroissance_cheptel_10ans", "nom": "Décroissance cheptel bovin 10 ans", "valeur": -10.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "commentaire": "Érosion subie principalement sur les systèmes herbagers les plus vertueux.", "ordre": 37}, {"section": "france_elevage", "code": "decroissance_fermes_10ans", "nom": "Décroissance fermes bovines 10 ans", "valeur": -25.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "commentaire": "1/3 des exploitants non remplacés.", "ordre": 38}, {"section": "france_elevage", "code": "baisse_etp_elevage", "nom": "Baisse ETP élevage 2010-2019", "valeur": -15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "Hors polyculture-polyélevage.", "ordre": 39}, {"section": "france_elevage", "code": "genetique_ch4_variabilite", "nom": "Génétique et variabilité CH4", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "Part de la variabilité des émissions CH4 expliquée par la génétique.", "ordre": 40}, {"section": "france_elevage", "code": "revenu_bovin_lait", "nom": "Revenu moyen bovin lait", "valeur": 24600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Moyenne décennie 2010. Très disparate.", "ordre": 41}, {"section": "france_elevage", "code": "revenu_bovin_viande", "nom": "Revenu moyen bovin viande", "valeur": 18600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Moyenne décennie 2010. Le plus bas après fermes en grande culture.", "ordre": 42}, {"section": "france_elevage", "code": "revenu_agri_10pct_bas", "nom": "Revenu 10 % agriculteurs les plus bas", "valeur": -4600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "commentaire": "Revenu courant avant impôts négatif. Décennie 2010.", "ordre": 43}, {"section": "france_elevage", "code": "fermes_ruminants_specialisees", "nom": "Fermes ruminants spécialisées", "valeur": 80000.0, "unite": "fermes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "commentaire": "175 000 ETP. Impact direct dune réduction cheptel.", "ordre": 44}], "france_energie": [{"section": "france_energie", "code": "part_fossile_france", "nom": "Part des fossiles dans consommation énergétique FR", "valeur": 60.0, "unite": "%", "fourchette_min": 58.0, "fourchette_max": 65.0, "source": "Shift Project 2024 Réussir la transition (rapport PREF)", "commentaire": "France dépendante à >60 % des énergies fossiles pour sa consommation d'énergie. Part en leger recul historique mais plafond visible.", "ordre": 90}, {"section": "france_energie", "code": "objectif_reduction_emissions", "nom": "Objectif réduction émissions GES (PTEF)", "valeur": 5.0, "unite": "%/an", "fourchette_min": 5.0, "fourchette_max": 5.0, "source": "Shift Project 2024 (PTEF)", "commentaire": "-5 % par an sur 25 ans. Objectif du Plan de Transformation de l'Economie Française (PTEF). Horizon 2050.", "ordre": 91}, {"section": "france_energie", "code": "horizon_transition", "nom": "Horizon de la transition PREF", "valeur": 25.0, "unite": "ans", "fourchette_min": 20.0, "fourchette_max": 30.0, "source": "Shift Project 2024", "commentaire": "Analyse sur 25 années futures (2024-2049). Perspective du rapport \"Réussir la transition dans l'incertitude\".", "ordre": 92}, {"section": "france_energie", "code": "leviers_decarbonation", "nom": "Leviers de décarbonation (PREF)", "valeur": null, "unite": "structure", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2024 Rapport PREF", "commentaire": "{\"leviers\": [\"Production d'énergies bas-carbone française\", \"Électrification massive de l'économie\", \"Maîtrise de la consommation énergétique\", \"Réduction des émissions hors combustion\", \"Préservation des puits de carbone naturels\"], \"chantiers_secteurs\": [\"transports\", \"logement\", \"numérique\", \"industrie\", \"agriculture\", \"énergie\"], \"n_chantiers_total\": 20}", "ordre": 93}, {"section": "france_energie", "code": "exposition_fossile_france", "nom": "Exposition énergétique fossile France", "valeur": 70.0, "unite": "%", "fourchette_min": 68.0, "fourchette_max": 75.0, "source": "Shift Project PREF 2024, p.2", "commentaire": "Exposition incluant l'énergie contenue dans les biens et services importés (vs 60 % dans la consommation finale seule).", "ordre": 94}], "france_foret": [{"section": "france_foret", "code": "surface_foret", "nom": "Surface forestière FR", "valeur": 17.6, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "commentaire": "32 % du territoire national.", "ordre": 70}, {"section": "france_foret", "code": "foret_privee_part", "nom": "Part forêt privée", "valeur": 75.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "commentaire": "3,3 M propriétaires. Hyper-morcellée.", "ordre": 71}, {"section": "france_foret", "code": "puits_forestier_2023", "nom": "Puits forestier 2023", "valeur": -51.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Vs -71 en 2013 = -30 %.", "ordre": 72}, {"section": "france_foret", "code": "mortalite_arbres_actuelle", "nom": "Mortalité arbres 2014-2022", "valeur": 15.2, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Doublée vs 2005-2013 (7,4 Mm3/an).", "ordre": 73}, {"section": "france_foret", "code": "expansion_foret", "nom": "Expansion surfaces forêts", "valeur": 90000.0, "unite": "ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "~9 fois la superficie de Paris chaque année.", "ordre": 74}, {"section": "france_foret", "code": "recolte_bois", "nom": "Récolte bois annuelle", "valeur": 52.0, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "73 % de laccroissement net 2015-2023.", "ordre": 75}, {"section": "france_foret", "code": "essences_nb", "nom": "Nombre essences arbres FR", "valeur": 138.0, "unite": "essences", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.192", "commentaire": "75 % des essences européennes. Mais peuplements peu diversifiés.", "ordre": 76}, {"section": "france_foret", "code": "incendie_2022", "nom": "Surfaces forêt brûlées 2022", "valeur": 60000.0, "unite": "ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Dont 30 000 ha en Gironde.", "ordre": 77}, {"section": "france_foret", "code": "stock_sols_forestiers", "nom": "Stock C sols forestiers (30 cm)", "valeur": 81.0, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190 IGN-FCBA", "commentaire": "Puit annuel estimé 200 kgC/ha/an (prudence IGN).", "ordre": 78}, {"section": "france_foret", "code": "scolytes_bois_crise", "nom": "Bois de crise scolytes cumulé", "valeur": 37.0, "unite": "Mm3", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "commentaire": "Depuis 2018. 22 épicéa + 15 sapin.", "ordre": 79}], "france_historique": [{"section": "france_historique", "code": "covid_reduction_ges", "nom": "Baisse GES France pendant COVID 2020", "valeur": 5.0, "unite": "%", "fourchette_min": 4.0, "fourchette_max": 6.0, "source": "Shift Project PREF 2024", "commentaire": "Baisse de 5 % des émissions GES territoriales France en 2020 (confinements COVID). Référence du type de rupture possible.", "ordre": 130}], "france_macro": [{"section": "france_macro", "code": "emissions_ges_2025", "nom": "Émissions territoriales FR 2025", "valeur": 364.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.238 citant HCC 2025", "commentaire": "Vs >500 MtCO2e en 2010. Baisse -1,5 % 2024-2025 insuffisante.", "ordre": 90}, {"section": "france_macro", "code": "conso_energie_fossile", "nom": "Consommation énergie fossile 2025", "valeur": 1100.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.240-241", "commentaire": "60 % de la conso finale dénergie.", "ordre": 91}, {"section": "france_macro", "code": "conso_electrique", "nom": "Consommation électrique FR 2025", "valeur": 450.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.264", "commentaire": "Doit passer à 600-700 TWh en 2050 pour électrification.", "ordre": 92}, {"section": "france_macro", "code": "objectif_fossile_2050", "nom": "Objectif fossiles énergie finale 2050", "valeur": 1.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.242", "commentaire": "Cible réussite totale. Typiquement <5 % par grand secteur.", "ordre": 93}, {"section": "france_macro", "code": "hausse_conso_elec_min", "nom": "Hausse conso électrique 2025-2050 min", "valeur": 150.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "commentaire": "Avec maîtrise haute conso. Borne basse incontournable.", "ordre": 94}, {"section": "france_macro", "code": "hausse_conso_elec_max", "nom": "Hausse conso électrique 2025-2050 max", "valeur": 250.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "commentaire": "Avec maîtrise basse conso. Borne haute.", "ordre": 95}, {"section": "france_macro", "code": "transport_emissions_part", "nom": "Part transports émissions 2024", "valeur": 33.0, "unite": "%", "fourchette_min": 30.0, "fourchette_max": 35.0, "source": "Shift PREF 2026 p.238 citant HCC", "commentaire": "Voitures ½, utilitaires+PL 1/3.", "ordre": 96}, {"section": "france_macro", "code": "batiments_emissions_part", "nom": "Part bâtiments émissions 2024", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.239 citant HCC", "commentaire": "Logement 60 % / tertiaire 40 %.", "ordre": 97}], "france_puits_c": [{"section": "france_puits_c", "code": "puits_total_2023", "nom": "Puits total agri+forestiers 2023", "valeur": -37.0, "unite": "MtCO2e", "fourchette_min": -40.0, "fourchette_max": -35.0, "source": "Shift PREF 2026 ch.19 p.185 citant CITEPA", "commentaire": "10 % des émissions nationales. -26 % vs 2013.", "ordre": 50}, {"section": "france_puits_c", "code": "erosion_puits_10ans", "nom": "Érosion puits C sur 10 ans", "valeur": -26.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Diminution inquiétante liée au changement climatique.", "ordre": 51}, {"section": "france_puits_c", "code": "puits_prairies", "nom": "Puits C prairies 2023", "valeur": -4.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Seul écosystème agricole encore puits net.", "ordre": 52}, {"section": "france_puits_c", "code": "emissions_terres_cultivees", "nom": "Émissions terres cultivées 2023", "valeur": 12.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Devenues émettrices nettes.", "ordre": 53}, {"section": "france_puits_c", "code": "stock_prairies_permanentes", "nom": "Stock C sols prairies permanentes", "valeur": 84.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Moyenne FR. +64 % vs grandes cultures.", "ordre": 54}, {"section": "france_puits_c", "code": "stock_grandes_cultures", "nom": "Stock C sols grandes cultures", "valeur": 51.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Bas initial → potentiel stockage additionnel élevé.", "ordre": 55}, {"section": "france_puits_c", "code": "potentiel_grandes_cultures", "nom": "Potentiel stockage additionnel GC", "valeur": 18.0, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Horizon 30 ans. Généralisation couverts + haies + prairies temporaires.", "ordre": 56}, {"section": "france_puits_c", "code": "potentiel_couverts_intermediaires", "nom": "Potentiel stockage couverts intermédiaires", "valeur": 7.3, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "Principal levier. Millions dhectares investissables.", "ordre": 57}, {"section": "france_puits_c", "code": "potentiel_prairies_temporaires", "nom": "Potentiel prairies temporaires", "valeur": 3.1, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "Substitution maïs fourrager → prairie temporaire.", "ordre": 58}, {"section": "france_puits_c", "code": "stockage_haies_tco2e_ha", "nom": "Stockage unitaire haies", "valeur": 1.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "80-93 % en biomasse aérienne.", "ordre": 59}, {"section": "france_puits_c", "code": "stockage_agroforesterie_tco2e_ha", "nom": "Stockage unitaire agroforesterie intra", "valeur": 4.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "commentaire": "80 % en biomasse aérienne.", "ordre": 60}, {"section": "france_puits_c", "code": "acs_surfaces", "nom": "Surfaces agriculture conservation", "valeur": 4.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Seulement 4 % des surfaces cultivées. Marge énorme.", "ordre": 61}, {"section": "france_puits_c", "code": "perte_prairies_40ans", "nom": "Perte prairies 40 ans", "valeur": -4.0, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "Conversion en cultures annuelles → déstockage.", "ordre": 62}, {"section": "france_puits_c", "code": "perte_haies_annuelle", "nom": "Perte haies par an", "valeur": 23500.0, "unite": "km/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "commentaire": "2017-2021. Malgré programmes de plantation.", "ordre": 63}, {"section": "france_puits_c", "code": "snbc3_puits_2050", "nom": "Puits naturels 2050 SNBC 3", "valeur": -24.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "commentaire": "Révision à la baisse : SNBC 2 prévoyait 67 MtCO2e.", "ordre": 64}], "france_scenarios_2050": [{"section": "france_scenarios_2050", "code": "puits_c_reussite", "nom": "Puits C agri/forestier 2050 (succès)", "valeur": 45.0, "unite": "MtCO2/an", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "Shift Project PREF 2024", "commentaire": "Capture nette par préservation des puits naturels si réussite totale.", "ordre": 110}, {"section": "france_scenarios_2050", "code": "puits_c_echec", "nom": "Puits C agri/forestier 2050 (échec)", "valeur": -30.0, "unite": "MtCO2/an", "fourchette_min": -35.0, "fourchette_max": -25.0, "source": "Shift Project PREF 2024", "commentaire": "Valeur négative : les puits deviennent émetteurs nets si échec total. Renversement de +45 à -30 = 75 Mt/an d'écart.", "ordre": 111}, {"section": "france_scenarios_2050", "code": "ccs_industrie", "nom": "CCS industrie 2050", "valeur": 3.0, "unite": "MtCO2/an", "fourchette_min": 2.5, "fourchette_max": 3.5, "source": "Shift Project PREF 2024", "commentaire": "Capture et séquestration de carbone sur sites industriels à procédés carbonés sans alternative (ex. ciment).", "ordre": 112}, {"section": "france_scenarios_2050", "code": "nucleaire_declin_renoncement", "nom": "Déclin nucléaire si renoncement", "valeur": 280.0, "unite": "TWh", "fourchette_min": 250.0, "fourchette_max": 310.0, "source": "Shift Project PREF 2024", "commentaire": "Perte de production nucléaire d'ici 2050 si pas de prolongation >60 ans et pas d'EPR2.", "ordre": 113}, {"section": "france_scenarios_2050", "code": "nucleaire_nouveau_reussite", "nom": "Gain nucléaire max (succès complet)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 80.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "commentaire": "Réussite complète des chantiers nucléaires (prolongation + EPR2) augmente production de +100 TWh en 2050.", "ordre": 114}, {"section": "france_scenarios_2050", "code": "enr_2050", "nom": "EnR France 2050 (scénario central)", "valeur": 350.0, "unite": "TWh", "fourchette_min": 300.0, "fourchette_max": 400.0, "source": "Shift Project PREF 2024", "commentaire": "Photovoltaïque + éolien terrestre + éolien en mer. Scénario tendance forte.", "ordre": 115}, {"section": "france_scenarios_2050", "code": "prod_elec_reussite_totale", "nom": "Production élec 2050 (réussite totale)", "valeur": 1000.0, "unite": "TWh", "fourchette_min": 900.0, "fourchette_max": 1050.0, "source": "Shift Project PREF 2024", "commentaire": "Production électrique France 2050 si tous les chantiers nucléaires + EnR réussissent (haute incertitude).", "ordre": 116}, {"section": "france_scenarios_2050", "code": "prod_elec_moderement_incertain", "nom": "Production élec 2050 (action immédiate)", "valeur": 600.0, "unite": "TWh", "fourchette_min": 550.0, "fourchette_max": 650.0, "source": "Shift Project PREF 2024", "commentaire": "Production 2050 si France mène dès aujourd'hui l'ensemble chantiers EnR + nucléaires (modérément incertain).", "ordre": 117}, {"section": "france_scenarios_2050", "code": "fossile_residuel_liquides", "nom": "Carburants liquides fossiles importés 2050 (scénario dégradé)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 90.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "commentaire": "Reliquat si transition ratée.", "ordre": 118}, {"section": "france_scenarios_2050", "code": "fossile_residuel_gaz", "nom": "Gaz fossile importé 2050 (scénario dégradé)", "valeur": 200.0, "unite": "TWh", "fourchette_min": 180.0, "fourchette_max": 240.0, "source": "Shift Project PREF 2024", "commentaire": "Reliquat si transition ratée.", "ordre": 119}, {"section": "france_scenarios_2050", "code": "camions_fossile_degrade", "nom": "Énergie camions fossile 2050 (dégradé)", "valeur": 40.0, "unite": "%", "fourchette_min": 35.0, "fourchette_max": 45.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 (rate les objectifs) : 40 % énergie camions encore fossile en 2050.", "ordre": 120}, {"section": "france_scenarios_2050", "code": "vl_fossile_degrade", "nom": "Énergie véhicules légers fossile 2050 (dégradé)", "valeur": 55.0, "unite": "%", "fourchette_min": 50.0, "fourchette_max": 60.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 : 55 % énergie VL encore fossile en 2050.", "ordre": 121}, {"section": "france_scenarios_2050", "code": "chauffage_fossile_degrade", "nom": "Énergie chauffage fossile 2050 (dégradé)", "valeur": 25.0, "unite": "%", "fourchette_min": 22.0, "fourchette_max": 30.0, "source": "Shift Project PREF 2024", "commentaire": "Scenario 3 : 25 % chauffage logement encore fossile.", "ordre": 122}], "france_secteurs": [{"section": "france_secteurs", "code": "vehicules_fossiles_actuels", "nom": "Véhicules fonctionnant aux fossiles (France 2025)", "valeur": 90.0, "unite": "%", "fourchette_min": 88.0, "fourchette_max": 92.0, "source": "Shift Project PREF 2024", "commentaire": "Essence, diesel, kérosène. >90 % des véhicules en France.", "ordre": 100}, {"section": "france_secteurs", "code": "industrie_part_emissions", "nom": "Part industrie dans émissions GES France", "valeur": 15.0, "unite": "%", "fourchette_min": 14.0, "fourchette_max": 17.0, "source": "Shift Project PREF 2024", "commentaire": "Principalement métallurgie (acier), chimie (engrais), minéraux (ciment).", "ordre": 101}, {"section": "france_secteurs", "code": "puits_carbone_agri_foret", "nom": "Puits C agricoles/forestiers (compensation actuelle)", "valeur": 10.0, "unite": "%", "fourchette_min": 8.0, "fourchette_max": 12.0, "source": "Shift Project PREF 2024", "commentaire": "Écosystèmes agricoles et forestiers compensent ~10 % des émissions annuelles de carbone françaises.", "ordre": 102}]}, "tab_intros": {"donnees": {"resume": "Donnees publiques (INSEE, RGA, Solagro) : surfaces agricoles, cheptel, energie, emissions par secteur pour la France.", "detail": "Tableau de bord chiffre des grands postes a transformer pour une transition robuste (alimentation, energie, materiaux). Sources officielles, granularite regionale quand disponible. Sert de base aux scenarios de l'onglet Analyse."}, "analyse": {"resume": "Lecture systemique des donnees : ce qu'elles disent, ce qu'elles cachent, et les leviers d'action prioritaires.", "detail": "Lecture transversale alimentaire/energie/materiaux. Identifie les goulots, les co-benefices possibles, les conflits d'usage (sol, eau, biomasse). S'appuie sur le corpus Sol Vivant pour articuler agronomie regenerative et trajectoire collective."}}};
 </script>
 
 
@@ -1430,19 +1895,184 @@ function SvSourceList({
   }, "[lien]")))));
 }
 
-// ── SvTabs : navigation onglets unifiée ──
+// ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
+// Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
 function SvTabs({
   tabs,
   active,
   onChange
 }) {
   return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs"
+    className: "sv-tabs",
+    role: "tablist"
   }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
     key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
     className: `sv-tab ${active === t.id ? 'active' : ''}`,
     onClick: () => onChange(t.id)
   }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
+// A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
+// Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
+// Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
+function SvSubTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-subtabs",
+    role: "tablist"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
+    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
+// Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
+// Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
+function SvCallout({
+  variant,
+  title,
+  icon,
+  children
+}) {
+  const v = variant || 'info';
+  const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
+  return /*#__PURE__*/React.createElement("div", {
+    className: cls
+  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-callout-title"
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-callout-icon"
+  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
+function SvAlert({
+  variant,
+  title,
+  children
+}) {
+  const v = variant || 'info';
+  return /*#__PURE__*/React.createElement("div", {
+    className: `sv-alert sv-alert-${v}`
+  }, title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      marginBottom: '0.25rem'
+    }
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvImageCard : image illustrative avec legende et styles standardises ──
+// Resout le bug "double style" + manque de max-width responsive.
+// Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
+function SvImageCard({
+  src,
+  alt,
+  caption,
+  maxHeight,
+  maxWidth
+}) {
+  const mh = maxHeight || '320px';
+  const mw = maxWidth || '100%';
+  return /*#__PURE__*/React.createElement("figure", {
+    className: "sv-image-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: src,
+    alt: alt || '',
+    style: {
+      width: '100%',
+      maxWidth: mw,
+      maxHeight: mh,
+      objectFit: 'contain',
+      borderRadius: 'var(--radius)',
+      border: '1px solid var(--border)',
+      boxShadow: 'var(--shadow)',
+      display: 'block'
+    }
+  }), caption && /*#__PURE__*/React.createElement("figcaption", {
+    className: "sv-image-caption"
+  }, caption));
+}
+
+// ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
+// Reutilisable pour test bocal, recettes lifofer, mode operatoire mo_calc, etc.
+// Props :
+//   steps : [{label, detail?}] ou [string]
+//   materiel : array de strings (optionnel)
+//   duree : string (optionnel)
+//   title : string (optionnel)
+function SvProcedureSteps({
+  title,
+  steps,
+  materiel,
+  duree
+}) {
+  if (!steps || !steps.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-title"
+  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-meta"
+  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
+    className: "sv-procedure-steps"
+  }, steps.map((s, i) => {
+    const label = typeof s === 'string' ? s : s.label;
+    const detail = typeof s === 'string' ? null : s.detail;
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-label"
+    }, label), detail && /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-detail"
+    }, " \u2014 ", detail));
+  })));
+}
+
+// ── SvTestCard : carte standardisee pour un terrain_test ──
+// Reutilisable dans la page Triangle (section test du bocal) ET pour la
+// future page autonome tests_terrain.
+// Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
+function SvTestCard({
+  test
+}) {
+  if (!test) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-title"
+  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-test-card-dim"
+  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-desc"
+  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
+    src: test.image_url,
+    alt: test.title,
+    caption: null,
+    maxHeight: "220px"
+  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
+    title: null,
+    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
+    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
+    duree: test.duree
+  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
+    variant: "success",
+    title: "Interpretation"
+  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-source"
+  }, "Source : ", test.source));
 }
 
 // ── SvNoteAccordion : mini-note inline ──
@@ -1987,33 +2617,17 @@ function SvTabIntro({
   const [open, setOpen] = React.useState(false);
   if (!resume && !detail) return null;
   return /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: '1rem'
-    }
+    className: "sv-tab-intro"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text-secondary)'
-    }
+    className: "sv-tab-intro-row"
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      flex: 1
-    }
-  }, resume), detail && /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
+    className: "sv-tab-intro-resume"
+  }, resume), detail && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sv-tab-intro-toggle",
     onClick: () => setOpen(!open)
-  }, open ? '▾ masquer' : '▸ en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content",
-    style: {
-      marginTop: '0.5rem',
-      padding: '0.75rem',
-      background: 'var(--color-bg-subtle, var(--bg))',
-      borderRadius: 'var(--radius)',
-      lineHeight: 1.6
-    }
+  }, open ? 'masquer' : 'en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-intro-detail"
   }, detail));
 }
 
@@ -2642,7 +3256,14 @@ function App() {
     }],
     active: tab,
     onChange: setTab
-  }), /*#__PURE__*/React.createElement("div", {
+  }), (() => {
+    const _intros = typeof DATA !== 'undefined' && DATA.tab_intros || {};
+    const _i = _intros[tab];
+    return _i ? /*#__PURE__*/React.createElement(SvTabIntro, {
+      resume: _i.resume,
+      detail: _i.detail
+    }) : null;
+  })(), /*#__PURE__*/React.createElement("div", {
     className: "sv-tab-content"
   }, tab === 'chantiers' ? /*#__PURE__*/React.createElement(ChantiersView, null) : tab === 'agri' ? /*#__PURE__*/React.createElement(AgriView, null) : tab === 'chiffres' ? /*#__PURE__*/React.createElement(ChiffresView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
 }

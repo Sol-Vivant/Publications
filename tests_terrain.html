@@ -3,19 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte</title>
+<title>Tests terrain — Le Sol Vivant cet Holobionte</title>
 <!-- Open Graph -->
-<meta property="og:title" content="Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte" />
-<meta property="og:description" content="Guide technique du patron Sol Vivant : architecture DB-driven, méthode en rupture avec Claude Code, reproductibilité pour d'autres projets." />
+<meta property="og:title" content="Tests terrain — Le Sol Vivant cet Holobionte" />
+<meta property="og:description" content="Bibliotheque des 20 tests terrain du corpus Sol Vivant : test bocal, infiltration, beche, comptage vers... filtrables par dimension." />
 <meta property="og:type" content="website" />
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Guide Technique — Sol Vivant — Le Sol Vivant cet Holobionte" />
-<meta name="twitter:description" content="Guide technique du patron Sol Vivant : architecture DB-driven, méthode en rupture avec Claude Code, reproductibilité pour d'autres projets." />
+<meta name="twitter:title" content="Tests terrain — Le Sol Vivant cet Holobionte" />
+<meta name="twitter:description" content="Bibliotheque des 20 tests terrain du corpus Sol Vivant : test bocal, infiltration, beche, comptage vers... filtrables par dimension." />
 <link rel="icon" type="image/png" href="https://sol-vivant.github.io/Publications/img/sv-logo.png">
 
-<script src="../vendor/react.production.min.js"></script>
-<script src="../vendor/react-dom.production.min.js"></script>
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+
 <style>
 
 :root {
@@ -1506,161 +1507,55 @@ select.sv-input { color-scheme: light dark; }
 }
 
 
-/* ═══ Guide Technique — layout doc ═══ */
-
-/* Header custom minimaliste (pas la nav complète du site) */
-.tech-header {
+/* ── tests_terrain : layout grille de SvTestCard ── */
+.tt-page {
+  padding-top: 0.5rem;
+}
+.tt-filters {
   display: flex;
+  gap: 0.6rem;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem 0 1.5rem;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  margin-bottom: var(--space-md);
 }
-.tech-header-icon { font-size: var(--font-2xl); line-height: 1; }
-.tech-header-titles { flex: 1; min-width: 220px; }
-.tech-header-title { font-size: var(--font-1-4); font-weight: 700; color: var(--text); margin: 0; }
-.tech-header-subtitle { font-size: var(--font-sm); color: var(--text-secondary); margin-top: 0.15rem; }
-.tech-header-back {
+.tt-filter-count {
   font-size: var(--font-sm);
-  color: var(--accent);
-  text-decoration: none;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.tech-header-back:hover { background: var(--accent-light); }
-
-.tech-intro {
-  background: var(--accent-light);
-  border-left: 4px solid var(--accent);
-  padding: 0.9rem 1.1rem;
-  border-radius: var(--radius);
-  margin-bottom: 2rem;
-  font-size: var(--font-sm);
-  line-height: 1.55;
-}
-
-/* Layout 2-cols : sommaire + contenu */
-.tech-layout {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 2rem;
-}
-@media (max-width: 860px) {
-  .tech-layout { grid-template-columns: 1fr; }
-}
-
-.tech-sidebar {
-  position: sticky;
-  top: 1rem;
-  align-self: start;
-  max-height: calc(100vh - 2rem);
-  overflow-y: auto;
-  padding: 0.85rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.tech-toc-title {
-  font-size: var(--font-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: var(--text-secondary);
-  font-weight: 700;
-  margin-bottom: 0.65rem;
+  margin-left: auto;
 }
-.tech-toc-chapter {
-  display: block;
-  padding: 0.4rem 0.5rem;
-  font-size: var(--font-sm);
-  font-weight: 600;
-  color: var(--text);
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  line-height: 1.3;
-}
-.tech-toc-chapter:hover { background: var(--accent-light); color: var(--accent-dark); }
-.tech-toc-sections {
-  margin: 0.1rem 0 0.35rem 0.35rem;
-  padding: 0;
-  list-style: none;
-  border-left: 2px solid var(--border);
-}
-.tech-toc-section {
-  display: block;
-  padding: 0.2rem 0.55rem;
-  font-size: var(--font-xs);
-  color: var(--text-secondary);
-  cursor: pointer;
-  text-decoration: none;
-  line-height: 1.35;
-}
-.tech-toc-section:hover { color: var(--accent); }
-
-.tech-main { min-width: 0; }
-
-/* Chapitre */
-.tech-chapter {
-  margin-bottom: 2.5rem;
-  scroll-margin-top: 1rem;
-}
-.tech-chapter-head {
+.tt-dim-pills {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 1.1rem;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
 }
-.tech-chapter-num {
-  font-size: var(--font-2xl);
-  font-weight: 300;
-  color: var(--accent);
-  line-height: 1;
-}
-.tech-chapter-icon { font-size: var(--font-1-4); line-height: 1; }
-.tech-chapter-titles { flex: 1; min-width: 0; }
-.tech-chapter-label {
-  font-size: var(--font-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+.tt-dim-pill {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
   color: var(--text-secondary);
-  font-weight: 600;
-}
-.tech-chapter-title {
-  font-size: var(--font-lg);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.25;
-  margin: 0;
-}
-.tech-chapter-intro {
-  font-size: var(--font-sm);
-  line-height: 1.55;
-  color: var(--text);
-  margin-bottom: 1rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--color-bg-subtle);
-  border-radius: 6px;
-  font-style: italic;
-}
-
-/* Section */
-.tech-section {
-  scroll-margin-top: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.tech-footer {
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
   font-size: var(--font-xs);
-  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.tt-dim-pill:hover { color: var(--text); border-color: var(--border-hover); }
+.tt-dim-pill.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.tt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-md);
+}
+.tt-empty {
   text-align: center;
+  padding: var(--space-2xl);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
 }
 
 
@@ -1740,7 +1635,13 @@ select.sv-input { color-scheme: light dark; }
 </script>
 
 
-<nav class="sv-nav-pages"><a href="../index.html">🗺️ Cartographie interactive</a>  ·  <a href="../mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="../lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="../triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="../tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="../cahier.html">📚 Cahier de Science</a>  ·  <a href="../esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="../transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="../concept_cards.html">📋 Concept Cards</a></nav>
+<header class="sv-header">
+  <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
+  <div class="sv-subtitle">Tests terrain — Diagnostiquer son sol au champ avec 20 protocoles simples</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 15:26 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+</header>
+
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1754,7 +1655,7 @@ select.sv-input { color-scheme: light dark; }
 <div id="sv-tooltip" class="sv-tooltip"></div>
 
 
-<script>const DATA = {"version": 1, "chapitres": [{"id": "architecture", "titre": "Architecture du corpus", "icone": "🏗️", "intro": "Le corpus Sol Vivant est construit autour d'une **base de données SQLite unique** (`sol_vivant.db`) qui est la source de vérité. Tout ce qui est dans un fichier sur disque (HTML, README, prompts Jenni, workflows) est une **vue régénérable** depuis la DB. Ce chapitre présente la structure interne du corpus.", "sections": [{"id": "db_source", "titre": "La DB comme source de vérité unique", "content": "**Principe** : rien n'existe tant que ce n'est pas en base. Les fichiers générés (HTML, Markdown, docx, JSON) sont des projections qui peuvent être régénérées à tout moment sans perte d'information.\n\nCONSÉQUENCES PRATIQUES :\n\n• On ne modifie jamais un fichier généré directement — toujours la DB puis régénération\n• Les scripts peuvent être réinjectés depuis la DB (`sync_scripts.py --extract`) sur toute machine fraîche\n• Un backup = un seul fichier `.db` (binaire, versionné en git)\n• L'intégrité est garantie par les FK, CHECK et UNIQUE au niveau SQL\n\nCONTREPARTIE :\n\nLe `.db` est binaire donc non-mergeable. Mais en workflow mono-utilisateur, ça ne pose aucun problème — `origin/main` fait foi, `session_start.py` reset tout ce qui diverge au démarrage.", "highlight": {"title": "Pourquoi SQLite et pas PostgreSQL / MongoDB / JSON ?", "color": "info", "text": "SQLite est un fichier. Pas de serveur, pas de config réseau, pas de dépendance système. Il se versionne en git, se sauvegarde d'un cp, se transporte d'un scp. Pour un corpus mono-utilisateur jusqu'à quelques Go, il n'y a aucune raison d'aller plus loin."}}, {"id": "tables", "titre": "Inventaire des tables (56 tables, 10 vues)", "content": "Le schéma couvre 4 grandes familles :\n\nFAMILLE — CORPUS SCIENTIFIQUE :\n\n• `documents` (18) — les 18 documents finaux du corpus (F1-F2, S0-S4, V1-V3, P1-P5, H1-H3)\n• `prompts` (191) — sections de rédaction (type, chapitre, contexte_sci, instructions)\n• `prompt_contenus` — contenu Jenni intégré par Claude\n• `terms` (874) — thésaurus canonique (FR/EN, définitions, strates)\n• `term_relations` (3635) — BT/NT/RT entre termes\n• `fiches`, `fiche_sections`, `fiche_contenus` — zooms proactifs\n• `validations`, `validation_sections` — vérifications et comblements réactifs\n\nFAMILLE — FILTRE DE RIGUEUR :\n\n• `concept_cards` (73) — atomes rigoureux filtrés, organisés en 12 dimensions\n• `concept_card_links` — relations entre cartes (complete, derives_from, related_to, prerequisite)\n• `concept_card_tests` — ancrage sur tests terrain\n• `chains_causales` (16) — récits mécanistes transdisciplinaires\n• `chain_etapes` — étapes des chaînes\n• `cascade_prerequis` — les 6 niveaux N0-N5 de la colonne vertébrale\n• `doc_cross_refs` (118) — renvois inter-documents bidirectionnels\n\nFAMILLE — INFRASTRUCTURE WEB :\n\n• `web_pages` (9) — métadonnées des pages (slug, title, status, icon)\n• `html_templates` (28) — head/css/js par page + composants React partagés\n• `ref_matieres`, `ref_textures` — données de référence pour les calculateurs\n\nFAMILLE — MÉTA / MÉMOIRE :\n\n• `bq_entries` (83) — Bibliothèque de Connaissances (règles, conventions, méta-doctrine)\n• `config` — paramètres centralisés (catégorie/clé/valeur JSON)\n• `scripts` (41) — registre des scripts Python avec contenu versionné\n• `audit_log` (902) — journal horodaté des opérations DB\n• `maintenance_sessions` (21) — rapports structurés par session Claude\n• `audit_reports` — rapports markdown (session_recap, chaînes, audits)"}, {"id": "scripts", "titre": "Les scripts comme vues (41 scripts)", "content": "Les scripts Python dans `tools/` sont organisés en sous-dossiers thématiques et **enregistrés en DB** dans la table `scripts` (avec contenu versionné). La sync disque↔DB est pilotée par `tools/sync_scripts.py`.\n\nARBORESCENCE :\n\n• `tools/admin/` — démarrage session, intégrité, dédupe, audits\n• `tools/batch/` — traitements en masse (Zotero, attribution)\n• `tools/docs/` — générateurs `gen_*.py` (pages HTML, README, rapports)\n• `tools/jenni/` — exports prompts Jenni (fiches, validations, thésaurus)\n• `tools/lib/` — modules partagés (web_template, db, cli, pub_path, config)\n• `tools/zotero/` — attribution, RIS, sync\n\nRÈGLE :\n\nTout script peut être régénéré depuis la DB sur une machine fraîche. Inversement, toute modification locale d'un script doit être injectée (`sync_scripts.py --inject`) avant `git push`, sinon l'état DB et disque divergent.", "rule": {"title": "Orchestrateur", "text": "`tools/regen_all.py` régénère toutes les pages HTML + README + rapports + workflows en une commande. Utile en fin de session pour s'assurer que tous les fichiers sur disque reflètent l'état actuel de la DB."}}, {"id": "web_pages_overview", "titre": "Pages web et outils interactifs (9 pages)", "content": "Chaque page web suit le même pattern 4 couches : entrée `web_pages` (métadonnées), templates `html_templates` (head + css + js), script `gen_*.py` (extrait DATA depuis la DB, appelle render_page), et le module `tools/lib/web_template.py` (charte CSS, composants React partagés, pré-compilation JSX).\n\nPAGES PUBLIQUES :\n\n• 🗺️ **Cartographie interactive** (`index.html`) — exploration documents, chaînes causales, thésaurus, cross-refs\n• 🧪 **Calculateur Matière Organique** — formule de Kirkby, ratios C/N, k₁/k₂ Hénin-Dupuis, 110 matières référencées\n• 🌿 **Calculateur LiFoFer** — conversions mélasse/sucres, dilutions, recettes\n• 🔺 **Triangle des Textures GEPPA** — classification USDA interactive, test du bocal\n• 📚 **Cahier de Science** — livre pédagogique multi-chapitres (MO, Textures, Fermentations, Méthodologie)\n• 📋 **Concept Cards** — grille interactive des 69 cartes actives\n\nPAGES INTERNES (hors nav, outils de pilotage) :\n\n• 📊 **Dashboard** — vision rapide pour Claude\n• 📝 **Ébauches** — lecture web des retours Jenni (via mammoth)\n• 🔍 **Explorer DB** — inspection tables + intégrité"}, {"id": "workflow_production", "titre": "Workflow de production des documents", "content": "Chaîne de production d'un document final (par exemple S4 — Le Carbone et les Grands Cycles), en 7 étapes :\n\n1. **Audit initial** — `analyse_corpus.py` identifie les manques (termes, chaînes, sections). Produit un rapport `audit_reports`.\n2. **Identification des trous** — termes manquants → enrichissement thésaurus ; sujets transversaux → nouvelles fiches ; lacunes → nouvelles validations.\n3. **Filtre de rigueur** — chaque hypothèse passe par une concept card (positionnement dans 12 dimensions, confrontation aux tests terrain).\n4. **Production des prompts Jenni** — `export_fiche.py`, `export_validation.py`, `gen_prompt_enrichissement.py` génèrent des `.txt` envoyés à Jenni.\n5. **Cycle Jenni** — envoye → recu : les `.docx` reviennent, sont stockés dans `jmj/docx_recu/`.\n6. **Intégration Claude** — extraction termes → `terms`, contenu fiches → `fiche_contenus` + `prompts.contexte_sci/.enrichissement`, mise à jour des statuts.\n7. **Clôture des prompts** — une vue SQL auto-déduit qu'un prompt est `cloture` quand aucune fiche/validation ouverte ne le référence plus. Quand tous les prompts d'un doc sont clôturés → le doc passe en `pret_a_rediger` → passe finale Jenni → doc rédigé.", "source": "Modèle conceptuel détaillé dans la BQ #... (module projet)"}, {"id": "maintenance", "titre": "Maintenance et intégrité", "content": "Le projet intègre nativement ses mécanismes de rigueur :\n\n• **`session_start.py`** — reset `origin/main`, backup DB journalier, dashboard synthétique avec santé / documents / chaînes / intégrité / règles actives chargées depuis la DB\n• **`check_integrity.py`** — FK orphelines, termes sans définition, prompts doc manquants, chain_etapes orphelines, doublons sémantiques\n• **`audit_log`** — toute opération DB structurelle (INSERT/UPDATE/DELETE impactante) est horodatée avec détail\n• **`maintenance_sessions`** — rapport structuré par session (objectif, actions, décisions, état avant/après, reste à faire)\n• **BQ active** — les règles (doctrine BQ #53, audit concept_cards obligatoire, zéro texte hardcodé, etc.) sont stockées en DB et affichées par `session_start.py` au démarrage — pas un snapshot Markdown qui périme"}]}, {"id": "methode", "titre": "La méthode en rupture", "icone": "✨", "intro": "Les outils classiques de gestion de corpus (Word, Notion, wikis, Obsidian, Zotero) sont pensés pour des humains qui lisent. Le patron Sol Vivant est pensé pour une collaboration homme + IA agentique (Claude Code). Ce chapitre explicite les ruptures et leurs effets pratiques, notamment sur la consommation de tokens.", "sections": [{"id": "problematique", "titre": "Le problème des outils classiques face à une IA agentique", "content": "Les outils documentaires classiques posent trois problèmes quand on veut faire collaborer un agent IA :\n\n• **Pas interrogeables** — un fichier Word, une page Notion ou un note Obsidian se lisent, mais ne se requêtent pas. L'agent doit tout charger pour chercher quelque chose.\n• **Pas versionnables proprement** — formats binaires ou propriétaires, merges pénibles, historique opaque.\n• **Pas de source de vérité** — doublons entre README, docs, commentaires code, issues GitHub, discussions Slack. L'agent doit reconstituer l'état cohérent à chaque interaction.\n\nRésultat : l'agent **re-découvre le projet** à chaque session. Il doit charger les dossiers, relire la doctrine, reconstituer l'historique, deviner ce qui a bougé. Ce coût s'exprime en **tokens consommés** — et il n'est pas petit.", "highlight": {"title": "Les plans Pro/Max qui fondent", "color": "warning", "text": "Beaucoup d'utilisateurs observent que Claude Code (ou équivalents) consomme leurs plans forfaitaires très vite. L'enquête rapide pointe la même cause récurrente : l'agent passe 50-70% de son budget à re-explorer, re-lire, re-contextualiser ce qu'il devrait pouvoir consulter de façon ciblée."}}, {"id": "pattern_db_driven", "titre": "Pattern DB-driven + scripts comme vues", "content": "Le patron Sol Vivant renverse la logique : **la DB est la source, les fichiers sont des vues**.\n\nCONSÉQUENCES :\n\n• Un agent ne charge jamais un gros fichier pour chercher — il fait une requête SQL ciblée qui renvoie quelques lignes\n• Les modifications sont ciblées : `UPDATE table SET field=… WHERE id=…` au lieu de réécrire un fichier de 50 ko\n• La régénération est explicite et réversible : les fichiers n'accumulent pas de dérive silencieuse\n• L'audit est natif : `audit_log` horodate chaque opération structurante\n\nMATÉRIELLEMENT :\n\n• Source de vérité : 1 fichier (`sol_vivant.db`, quelques Mo)\n• Sorties régénérables : HTML (9 pages), Markdown (README × 13), prompts Jenni (.txt × N), rapports audit (.md × N)\n• Commandes de régénération : `regen_all.py` en 1 minute, `sync_scripts.py --extract` pour les scripts"}, {"id": "claude_code_github", "titre": "Claude Code + GitHub : workflow mono-utilisateur", "content": "La plateforme Claude Code web impose une branche `claude/<nom-session>` par session. Le patron Sol Vivant assume ce workflow mono-utilisateur et l'optimise :\n\n• **Pas de Pull Request**, pas de review humaine — JMJ + Claude sont les deux acteurs, point\n• **Propagation main en fast-forward strict** à chaque fin de session (jamais de merge commit)\n• **Reset agressif au démarrage** — `session_start.py` fait un `git reset --hard origin/main` et supprime les branches `claude/*` fantômes\n• **La DB binaire n'est pas un problème** — un seul writer à la fois, source de vérité claire\n\nRésultat : pas de conflits de merge, pas de divergence git, pas de discussions sur qui a raison. Le workflow file tout droit.", "rule": {"title": "Règle de clôture obligatoire", "text": "Avant de rendre la main à JMJ, Claude propage systématiquement sur `main` : `git checkout main && git merge --ff-only claude/<branche> && git push origin main`. Cette clôture évite que JMJ ne manipule les branches manuellement dans GitKraken pendant les tests — cause principale des collisions working tree / merges parasites."}}, {"id": "tokens_synthese", "titre": "Observation : consommation de tokens (franchise)", "content": "**Constat subjectif** : la conso de tokens ressentie en Claude Code sur ce projet est notablement inférieure à ce qu'on entend chez d'autres utilisateurs. On ne dispose pas de mesures rigoureuses (les plans forfaitaires Claude Code ne détaillent pas l'usage par session), mais les **mécanismes structurels** qui justifient cette économie sont identifiables.\n\nCE QUI NE VIENT PAS DE SQLITE EN SOI :\n\nBeaucoup de gens supposent « utilisez une DB, vous économiserez des tokens ». C'est approximatif. On aurait pu avoir le même résultat avec des JSON bien indexés pour un corpus petit/moyen. La DB ne devient objectivement supérieure qu'à partir de plusieurs dizaines de Mo, avec besoin de jointures ou de recherche full-text.\n\nCE QUI ÉCONOMISE VRAIMENT LES TOKENS :\n\nQuatre pratiques, qui sont **portables** quel que soit le format de stockage sous-jacent. Voir section suivante.", "highlight": {"title": "Honnêteté", "color": "info", "text": "Sans chiffres mesurés, on ne peut pas affirmer « ça coûte X fois moins » que les workflows classiques. Mais les mécanismes ci-dessous sont identifiables, reproductibles et explicables. L'économie de tokens en est la conséquence logique, pas un effet magique du choix SQLite."}}, {"id": "quatre_pratiques", "titre": "Les 4 pratiques qui économisent les tokens", "content": "PRATIQUE 1 — DOCTRINE STRUCTURÉE ET INTERROGEABLE :\n\nPas un CLAUDE.md de 50 ko qui doit être chargé intégralement à chaque conversation. Plutôt une structure interrogeable : chez nous, la BQ (Bibliothèque de Connaissances, 83 entrées actives) avec modules et `bq_query.py --search \"<terme>\"`. L'agent charge **la règle pertinente** au bon moment, pas toutes les règles tout le temps.\n\nTypique : 200-500 tokens par consultation au lieu de 12-15k tokens re-chargés à chaque conversation.\n\nPRATIQUE 2 — BOOTSTRAP DE SESSION AVEC DASHBOARD SYNTHÉTIQUE :\n\nChez nous, `session_start.py` produit en ~2k tokens : santé du thésaurus, statut des 18 documents, règles actives, intégrité, historique récent. L'agent n'a **jamais** besoin d'explorer l'arborescence pour comprendre l'état du projet.\n\nÀ comparer aux 5-15k tokens typiquement dépensés en `ls + cat README + cat package.json + ls src/ + cat src/...` dans les projets non pré-structurés.\n\nPRATIQUE 3 — HISTORIQUE STRUCTURÉ :\n\n`audit_log` + `maintenance_sessions` + `audit_reports` donnent à l'agent une vue structurée de ce qui s'est passé, sans avoir à relire `git log` en détail ni à reconstituer le contexte à partir des diffs.\n\nPRATIQUE 4 — SORTIES RÉGÉNÉRABLES, MODIFS CIBLÉES :\n\nModifier un template via `UPDATE html_templates SET contenu=... WHERE id=...` coûte ~500 tokens en output. Réécrire le HTML généré correspondant en coûterait 50k+. Même principe pour tous les exports (prompts, READMEs, rapports) : on touche à la source, on régénère, on ne réécrit jamais un gros output à la main.\n\nSYNTHÈSE PORTABLE :\n\n**Pré-structurer ce que l'agent doit savoir. Ne jamais lui demander de re-découvrir à chaque session.**", "rule": {"title": "Applicable quel que soit le domaine", "text": "Ces 4 pratiques s'implémentent en SQLite (comme ici), en JSON indexés (pour corpus petit/moyen), ou même en fichiers plats bien organisés avec un script de synthèse. Le format sous-jacent n'est pas le point de rupture. Le point de rupture est l'intention de **pré-structurer** pour l'agent au lieu de le laisser explorer."}}, {"id": "regles_bq_vivantes", "titre": "Les règles actives comme source vivante", "content": "Un principe clé du patron : les règles de travail sont **en DB et affichées au démarrage de chaque session**, pas dans un Markdown qui périme.\n\nExemples de règles actives (extraites de la BQ `claude_rules`) :\n\n• **Audit concept_cards obligatoire avant toute création** — Claude vérifie qu'une carte équivalente n'existe pas déjà avant de proposer d'en créer une nouvelle\n• **Doctrine BQ — recherche au fil de l'eau** — pas de chargement en bloc, requêtes ciblées selon le besoin\n• **Zéro texte hardcodé** dans les templates JS — tout vient de DATA injecté depuis la DB\n• **Zéro liste brute, zéro titre brut** — utiliser SvBulletList, SvSection, SvRichText\n• **Clôture de session obligatoire** — propagation main en fast-forward strict\n\nCes règles sont ajoutables/modifiables à la volée via `UPDATE config SET valeur=… WHERE categorie='claude_rules' AND cle=…`. Effet immédiat au prochain `session_start.py`. Pas de redéploiement, pas de re-chargement, pas de redite dans les prompts."}]}, {"id": "patron", "titre": "Reproduire le patron", "icone": "🔄", "intro": "Le patron Sol Vivant n'est pas lié à l'agriculture. C'est une architecture modulaire pour construire un corpus de connaissances structuré avec un agent IA. Tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser. Ce chapitre liste les composants réutilisables et l'ordre d'adaptation.", "sections": [{"id": "noyau", "titre": "Le noyau : Claude Code + SQLite + Python", "content": "Le minimum viable pour démarrer :\n\n• **Claude Code** (ou équivalent agent IA) pour orchestrer\n• **SQLite** comme source de vérité\n• **Python** pour les scripts de génération / maintenance / sync\n• **Git + GitHub** pour le versionnement et éventuellement la publication\n\nAucune autre dépendance obligatoire. Les couches optionnelles ci-dessous s'ajoutent selon le besoin.\n\nSCHÉMA DB MINIMAL À PRÉVOIR :\n\n• Une ou plusieurs tables de **contenu** (documents, termes, fiches, cartes…)\n• Une table `config` pour les paramètres (catégorie/clé/valeur JSON)\n• Une table `bq_entries` pour la doctrine interrogeable\n• Une table `scripts` qui versionne les scripts Python eux-mêmes\n• Une table `audit_log` pour l'historique des opérations\n• Une table `maintenance_sessions` pour les rapports structurés par session\n\nLes tables de contenu dépendent du domaine. Le reste est transposable tel quel."}, {"id": "couches_optionnelles", "titre": "Couches optionnelles", "content": "Chaque couche s'active indépendamment selon la nature du projet :\n\n• **Jenni AI** — rédaction longue avec citations intégrées. Utile pour un corpus académique avec bibliographie dense. Sinon rédiger directement via Claude Code ou autre.\n\n• **Zotero** — gestion bibliographique (RIS, attribution). Utile si on cite des publications scientifiques. Le pipeline normalise → attribution → validate est dans `tools/zotero/`.\n\n• **API Anthropic (batch)** — analyse en masse (audit, attribution) pour gros volumes de traitement automatisé. Utile pour des passes initiales sur des corpus existants.\n\n• **GitHub Pages** — publication web publique. Dépôt `Publications/` séparé, déployé par `deploy_publications.py` via rsync.\n\n• **React + Babel + vendor local** — pour les pages interactives (calculateurs, triangle, cahier, concept cards). Pas nécessaire si le projet ne publie que du Markdown."}, {"id": "exemples", "titre": "Exemples de domaines applicables", "content": "Le patron s'applique à tout projet qui a :\n\n• Un **corpus textuel** à organiser (documents, fiches, concepts)\n• Un **vocabulaire technique** à stabiliser (thésaurus, glossaire)\n• Des **relations structurelles** entre objets (chaînes, arbres de décision)\n• Des **outils interactifs** à publier (calculateurs, diagnostics, filtres)", "bullets": ["**Solutions low-tech** — matériaux, énergie, eau, alimentation, habitat. Outils : calculateurs de consommation, fiches techniques de construction.", "**Guide de permaculture** — sol, plantes, eau, design, animaux. Outils : calendrier d'implantation, associations de cultures, diagnostic sol.", "**Base médicale TDAH** — fondements, diagnostic, traitements, famille, outils. Outils : fiches FALC, échelles d'évaluation, arbres décisionnels.", "**Patrimoine architectural** — époques, matériaux, techniques, réglementations. Outils : cartographie, fiches bâtiment, check-lists intervention.", "**Cuisine et nutrition** — ingrédients, techniques, nutrition, recettes. Outils : calculateur nutritionnel, saisonnalité, substitutions.", "**Documentation technique d'entreprise** — architecture, API, runbooks, incidents. Outils : fiches incidents réversibles, arbre de décision d'escalade, diagrammes régénérés."]}, {"id": "demarrage_4_etapes", "titre": "Démarrage en 4 étapes", "content": "ÉTAPE 1 — CRÉER LA BASE :\n\nDéfinir les tables de contenu propres au domaine (ex: documents, termes, fiches) et installer le squelette transverse (config, bq_entries, scripts, audit_log, maintenance_sessions). Écrire un schéma SQL dans `schema.sql` et un script `init_db.py` qui le joue sur une DB vierge.\n\nÉTAPE 2 — DÉFINIR LES STRATES / LA STRUCTURE :\n\nQuels sont les grands axes d'organisation du corpus ? Chez Sol Vivant, ce sont F/S/V/P/H (Fondements/Sol/Vivant/Pratique/Humain). Dans un autre domaine : Contexte/Diagnostic/Intervention/Suivi, par exemple. Ces strates remplissent une table `strates` ou équivalent.\n\nÉTAPE 3 — PEUPLER INITIALEMENT :\n\nIntroduire le premier vocabulaire (20-50 termes), les premiers documents (quelques sections), les premières règles en BQ. On peut démarrer très petit — le patron se remplit au fur et à mesure.\n\nÉTAPE 4 — GÉNÉRER LES PREMIÈRES VUES :\n\nUn script `gen_web.py` qui produit une page HTML de consultation. Un `session_start.py` qui affiche un dashboard de santé. À partir de là, le patron s'auto-alimente : les vues aident à voir les trous, Claude aide à les combler, les règles s'affinent.", "rule": {"title": "Démarrer très petit", "text": "Erreur classique : vouloir définir le schéma parfait avant de commencer. Démarrer avec 3-4 tables minimales, les règles évidentes, une seule vue HTML. Le patron se révèle par l'usage, pas par la spécification amont."}}, {"id": "adaptations", "titre": "Adaptations domain-specific", "content": "Quelques éléments à adapter lors de la réutilisation :\n\n• **Charte graphique** — `tools/lib/web_template.py` contient CHARTER_CSS (variables couleurs, classes `.sv-*`). Renommer le préfixe et ajuster les couleurs primaires.\n• **Icônes** — la table `config.web.icon_library` centralise les emojis par catégorie (navigation, onglets, thématiques, strates). À redéfinir selon le domaine.\n• **Composants React partagés** — les 18+ composants `Sv*` (SvCollapse, SvBulletList, SvCascadeGrid, etc.) sont génériques et se réutilisent tels quels. Ajuster au besoin.\n• **Workflow Jenni / Zotero / batch API** — optionnels, à activer seulement si le domaine a besoin de rédaction longue avec citations ou de traitement en masse.\n• **Charte pédagogique** — classes `.sv-cahier`, `.sv-formula`, `.sv-rule`, etc. Utiles si le corpus inclut des explications scientifiques. Inutiles si c'est un corpus plus opérationnel."}, {"id": "invitation", "titre": "Invitation à réutiliser", "content": "Le code du patron (hors contenu agronomique spécifique) est libre à réutiliser. Les scripts transverses — `session_start.py`, `sync_scripts.py`, `check_integrity.py`, `regen_all.py`, `deploy_publications.py`, `bq_query.py`, la charte CSS et les composants React — sont génériques.\n\nLes tables transverses (`config`, `bq_entries`, `scripts`, `audit_log`, `maintenance_sessions`, `audit_reports`) sont transposables tel quel.\n\nSi vous reprenez le patron, un retour d'expérience (ce qui a bien marché, ce qui a été adapté, ce qui a été supprimé) serait précieux pour faire évoluer la doctrine.", "highlight": {"title": "Un outil devient un patron quand il a été copié au moins une fois", "color": "success", "text": "Le patron Sol Vivant n'est pas encore un « patron » au sens strict — il n'a été instancié qu'une fois (pour Sol Vivant lui-même). Il le deviendra quand un second corpus l'adoptera et le critiquera sur ce qui n'était pas assez générique."}}]}], "intro": "Ce guide technique présente le patron Sol Vivant — architecture, méthode et portabilité. Il s'adresse aux développeurs, agronomes ou chercheurs qui veulent comprendre comment le corpus est construit, pourquoi ce choix d'architecture, et comment réutiliser le patron pour un autre projet."};</script>
+<script>const DATA = {"tests": [{"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "docs_codes": ["P1", "S1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "docs_codes": ["P1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "docs_codes": ["P1", "S2", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "docs_codes": ["P1", "P2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "docs_codes": ["P1", "S4", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "docs_codes": ["S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "docs_codes": ["P1", "S1", "S4"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "docs_codes": ["P1", "S1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};</script>
 <script>
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
@@ -2874,128 +2775,130 @@ function SvCascadeGrid({
   })));
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// Guide Technique — doc multi-chapitres (source config.technique.chapitres)
-// ═══════════════════════════════════════════════════════════════════
+// ── Page tests_terrain — base de depart ──
+// 20 tests terrain organises par dimension, filtrables, branches sur SvTestCard.
+// Source : table terrain_tests (DB), liens concept_cards via concept_card_tests.
 
-function Section({
-  section,
-  chapId
-}) {
-  const anchor = 'sec-' + chapId + '-' + section.id;
-  return /*#__PURE__*/React.createElement("section", {
-    className: "tech-section",
-    id: anchor
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: section.titre,
-    icon: "\uD83D\uDD2C"
-  }, section.content && /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.content
-  }), section.bullets && /*#__PURE__*/React.createElement(SvBulletList, {
-    items: section.bullets
-  }), section.formula && /*#__PURE__*/React.createElement(SvFormula, {
-    source: section.formula.source
-  }, section.formula.expr), section.rule && /*#__PURE__*/React.createElement(SvRule, {
-    title: section.rule.title
-  }, section.rule.text), section.highlight && /*#__PURE__*/React.createElement(SvHighlightBox, {
-    title: section.highlight.title,
-    color: section.highlight.color || 'info'
-  }, section.highlight.text), section.source && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      fontStyle: 'italic',
-      marginTop: '0.5rem'
+function PratiqueView() {
+  const [search, setSearch] = React.useState('');
+  const [dimFilter, setDimFilter] = React.useState(null);
+  const tests = DATA && DATA.tests || [];
+  const dims = DATA && DATA.dimensions || [];
+  const filtered = tests.filter(t => {
+    if (dimFilter !== null && t.dimension_id !== dimFilter) return false;
+    if (search) {
+      const s = search.toLowerCase();
+      return (t.title || '').toLowerCase().includes(s) || (t.description || '').toLowerCase().includes(s) || (t.code || '').toLowerCase().includes(s);
     }
-  }, "\uD83D\uDCD6 ", section.source)));
-}
-function Chapter({
-  chap,
-  num
-}) {
-  return /*#__PURE__*/React.createElement("article", {
-    className: "tech-chapter",
-    id: 'chap-' + chap.id
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "tech-chapter-head"
+    return true;
+  });
+  return /*#__PURE__*/React.createElement("div", {
+    className: "tt-page"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-num"
-  }, num), /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-icon"
-  }, chap.icone), /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-titles"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-label"
-  }, "Chapitre ", num), /*#__PURE__*/React.createElement("h2", {
-    className: "tech-chapter-title"
-  }, chap.titre))), chap.intro && /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-intro"
-  }, chap.intro), /*#__PURE__*/React.createElement("div", null, chap.sections.map(sec => /*#__PURE__*/React.createElement(Section, {
-    key: sec.id,
-    section: sec,
-    chapId: chap.id
+    className: "tt-filters"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "sv-input",
+    placeholder: "Rechercher : bocal, infiltration, vers...",
+    value: search,
+    onChange: e => setSearch(e.target.value),
+    style: {
+      minWidth: '260px',
+      flex: '1 1 260px'
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "tt-filter-count"
+  }, filtered.length, " / ", tests.length, " test", tests.length > 1 ? 's' : '')), /*#__PURE__*/React.createElement("div", {
+    className: "tt-dim-pills"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "tt-dim-pill" + (dimFilter === null ? " active" : ""),
+    onClick: () => setDimFilter(null)
+  }, "Toutes"), dims.map(d => /*#__PURE__*/React.createElement("button", {
+    key: d.id,
+    className: "tt-dim-pill" + (dimFilter === d.id ? " active" : ""),
+    style: dimFilter === d.id && d.couleur ? {
+      background: d.couleur,
+      borderColor: d.couleur
+    } : undefined,
+    onClick: () => setDimFilter(d.id)
+  }, d.nom))), filtered.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "tt-empty"
+  }, "Aucun test ne correspond aux filtres.") : /*#__PURE__*/React.createElement("div", {
+    className: "tt-grid"
+  }, filtered.map(t => /*#__PURE__*/React.createElement(SvTestCard, {
+    key: t.id,
+    test: t
   }))));
 }
-function TOC({
-  chapitres
-}) {
-  const scrollTo = id => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-  };
-  return /*#__PURE__*/React.createElement("nav", {
-    className: "tech-sidebar"
+function ComprendreView() {
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: '860px'
+    }
+  }, /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Pourquoi des tests terrain ?",
+    icon: "\uD83D\uDD2C",
+    defaultOpen: true
   }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-toc-title"
-  }, "Sommaire"), chapitres.map((chap, i) => /*#__PURE__*/React.createElement("div", {
-    key: chap.id
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "tech-toc-chapter",
-    onClick: () => scrollTo('chap-' + chap.id)
-  }, i + 1 + '. ' + chap.icone + ' ' + chap.titre), /*#__PURE__*/React.createElement("ul", {
-    className: "tech-toc-sections"
-  }, chap.sections.map(sec => /*#__PURE__*/React.createElement("li", {
-    key: sec.id
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "tech-toc-section",
-    onClick: () => scrollTo('sec-' + chap.id + '-' + sec.id)
-  }, sec.titre)))))));
+    className: "sv-richtext"
+  }, /*#__PURE__*/React.createElement("p", null, "Le ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "diagnostic terrain"), " est l'ancrage scientifique du corpus Sol Vivant. Une affirmation qui n'est demontrable par aucun test reproductible n'a pas sa place dans le corpus, meme si elle est seduisante en theorie."), /*#__PURE__*/React.createElement("p", null, "Ces 20 tests ont ete selectionnes pour leur ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-mark"
+  }, "simplicite materielle"), " (bocal, beche, regle, eau) et leur ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-mark"
+  }, "reproductibilite"), " : un agriculteur, un conseiller ou un chercheur peut les realiser avec le meme protocole et obtenir des resultats comparables."))), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Articulation avec les concept cards",
+    icon: "\uD83D\uDD2C",
+    defaultOpen: true
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, /*#__PURE__*/React.createElement("p", null, "Chaque concept card du corpus peut etre liee a un ou plusieurs tests terrain via la table ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-mark"
+  }, "concept_card_tests"), ". La carte est ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "active"), " si au moins un test la valide empiriquement, ", /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "archive"), " sinon (memoire de rejet)."), /*#__PURE__*/React.createElement("p", null, "C'est ce filtre qui evite la pollution du corpus par des hypotheses jamais verifiees au champ."))), /*#__PURE__*/React.createElement(SvCollapse, {
+    title: "Lectures sources",
+    icon: "\uD83D\uDCDA"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-richtext"
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "AFES"), " \u2014 Association Francaise pour l'Etude du Sol. Manuel de pedologie."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "OAB"), " \u2014 Observatoire Agricole de la Biodiversite (vers, vegetaux, invertebres)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "Solvita"), " \u2014 protocole respiration sol industrialise, base micro-bio."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "Husson"), " \u2014 diagnostic redox du sol (gradients, microzones)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
+    className: "sv-emphasis"
+  }, "Pochon"), " \u2014 biologie du sol, decomposition, vie microbienne."))));
 }
 function App() {
-  const chapitres = DATA.chapitres || [];
+  const [tab, setTab] = React.useState('pratique');
+  const intros = DATA && DATA.tab_intros || {};
+  const intro = intros[tab];
   return /*#__PURE__*/React.createElement("div", {
     className: "sv-page"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "tech-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-header-icon"
-  }, "\uD83D\uDCD6"), /*#__PURE__*/React.createElement("div", {
-    className: "tech-header-titles"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "tech-header-title"
-  }, "Guide Technique \u2014 Sol Vivant"), /*#__PURE__*/React.createElement("div", {
-    className: "tech-header-subtitle"
-  }, "Architecture, m\xE9thode et portabilit\xE9 du patron")), /*#__PURE__*/React.createElement("a", {
-    className: "tech-header-back",
-    href: "../index.html"
-  }, "\u2190 Cartographie")), DATA.intro && /*#__PURE__*/React.createElement("div", {
-    className: "tech-intro"
-  }, DATA.intro), /*#__PURE__*/React.createElement("div", {
-    className: "tech-layout"
-  }, /*#__PURE__*/React.createElement(TOC, {
-    chapitres: chapitres
-  }), /*#__PURE__*/React.createElement("main", {
-    className: "tech-main"
-  }, chapitres.map((chap, i) => /*#__PURE__*/React.createElement(Chapter, {
-    key: chap.id,
-    chap: chap,
-    num: i + 1
-  })))), /*#__PURE__*/React.createElement("footer", {
-    className: "tech-footer"
-  }, "Guide Technique \xB7 Sol Vivant cet Holobionte \xB7 Jean-Michel Juzan \xB7 avril 2026"));
+  }, /*#__PURE__*/React.createElement(SvTabs, {
+    tabs: [{
+      id: 'pratique',
+      icon: '🧫',
+      label: 'Pratique'
+    }, {
+      id: 'comprendre',
+      icon: '📚',
+      label: 'Comprendre'
+    }],
+    active: tab,
+    onChange: setTab
+  }), intro && /*#__PURE__*/React.createElement(SvTabIntro, {
+    resume: intro.resume,
+    detail: intro.detail
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-content"
+  }, tab === 'pratique' ? /*#__PURE__*/React.createElement(PratiqueView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
 }
 ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>

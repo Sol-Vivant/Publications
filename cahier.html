@@ -31,14 +31,27 @@
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
-  /* Échelle typographique (source unique pour toutes les pages) */
-  --font-xs: 0.75rem;
-  --font-sm: 0.82rem;
-  --font-base: 0.9rem;
-  --font-md: 1rem;
-  --font-lg: 1.15rem;
-  --font-xl: 1.5rem;
-  --font-2xl: 1.8rem;
+  /* Echelle typographique (source unique pour toutes les pages)
+     Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
+  --font-scale: 1;
+  --font-2xs: calc(0.68rem * var(--font-scale));
+  --font-xs:   calc(0.75rem * var(--font-scale));
+  --font-sm:   calc(0.82rem * var(--font-scale));
+  --font-base: calc(0.9rem  * var(--font-scale));
+  --font-md:   calc(1rem    * var(--font-scale));
+  --font-lg:   calc(1.15rem * var(--font-scale));
+  --font-xl:   calc(1.5rem  * var(--font-scale));
+  --font-2xl:  calc(1.8rem  * var(--font-scale));
+  --font-1-4:  calc(1.4rem  * var(--font-scale));
+  /* Echelle d'espacement (source unique pour paddings/margins) */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.25rem;
+  --space-xl:  1.5rem;
+  --space-2xl: 2rem;
   /* Couleurs sémantiques (inline → var) */
   --color-text: #1e293b;
   --color-text-secondary: #475569;
@@ -49,13 +62,13 @@
   --color-warning-text: #92400e;
   --color-danger-text: #991b1b;
   --success: #059669;
-  --success-light: #D1FAE5;
+  --success-light: #BBF7D0;       /* green-200 — un cran + sature pour ressortir sur blanc */
   --warning: #D97706;
-  --warning-light: #FEF3C7;
+  --warning-light: #FDE68A;       /* yellow-300 — le pale yellow-100 disparaissait sur blanc */
   --danger: #DC2626;
-  --danger-light: #FEE2E2;
+  --danger-light: #FECACA;        /* red-200 */
   --info: #2563EB;
-  --info-light: #DBEAFE;
+  --info-light: #BFDBFE;          /* blue-200 */
   --purple: #7c3aed;
   --purple-dark: #6d28d9;
   --purple-light: #faf5ff;
@@ -65,7 +78,152 @@
   --zone-limon: rgba(99,102,241,0.12);
   --zone-argile: rgba(239,68,68,0.12);
   --zone-loam: rgba(34,197,94,0.12);
+  /* Fond papier crème (Cahier de Science, Science Note) */
+  --paper-bg: #fdfbf7;
+  --paper-bg-2: #f8f6f0;
+  --paper-border: #e8e0d0;
 }
+
+/* ── Mode sombre : preference systeme + override manuel via [data-theme] ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-dark: #3b82f6;
+    --accent-light: #1e3a8a;
+    --border: #334155;
+    --border-hover: #475569;
+    --shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+    --color-text: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-bg-subtle: #1e293b;
+    --color-bg-muted: #273449;
+    --color-success-text: #86efac;
+    --color-warning-text: #fcd34d;
+    --color-danger-text: #fca5a5;
+    --success: #34d399;
+    --success-light: #064e3b;
+    --warning: #fbbf24;
+    --warning-light: #451a03;
+    --danger: #f87171;
+    --danger-light: #450a0a;
+    --info: #60a5fa;
+    --info-light: #1e3a8a;
+    --purple: #a78bfa;
+    --purple-dark: #7c3aed;
+    --purple-light: #3b0764;
+    --header-from: #020617;
+    --header-to: #0f172a;
+    --zone-sable: rgba(251,191,36,0.08);
+    --zone-limon: rgba(99,102,241,0.18);
+    --zone-argile: rgba(239,68,68,0.18);
+    --zone-loam: rgba(34,197,94,0.18);
+    --paper-bg: #1e293b;
+    --paper-bg-2: #273449;
+    --paper-border: #334155;
+  }
+}
+
+/* Override manuel : [data-theme="dark"] force le dark, [data-theme="light"] force le light */
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-light: #1e3a8a;
+  --border: #334155;
+  --border-hover: #475569;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #1e293b;
+  --color-bg-muted: #273449;
+  --color-success-text: #86efac;
+  --color-warning-text: #fcd34d;
+  --color-danger-text: #fca5a5;
+  --success: #34d399;
+  --success-light: #064e3b;
+  --warning: #fbbf24;
+  --warning-light: #451a03;
+  --danger: #f87171;
+  --danger-light: #450a0a;
+  --info: #60a5fa;
+  --info-light: #1e3a8a;
+  --purple: #a78bfa;
+  --purple-dark: #7c3aed;
+  --purple-light: #3b0764;
+  --header-from: #020617;
+  --header-to: #0f172a;
+  --zone-sable: rgba(251,191,36,0.08);
+  --zone-limon: rgba(99,102,241,0.18);
+  --zone-argile: rgba(239,68,68,0.18);
+  --zone-loam: rgba(34,197,94,0.18);
+  --paper-bg: #1e293b;
+  --paper-bg-2: #273449;
+  --paper-border: #334155;
+}
+
+/* Barre flottante d'outils utilisateur (zoom typo + theme) */
+.sv-toolbar {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.sv-toolbar-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+.sv-toolbar-btn:hover { background: rgba(255,255,255,0.18); }
+.sv-toolbar-btn.active { background: rgba(255,255,255,0.28); }
+.sv-toolbar-btn.sv-theme-toggle { font-size: var(--font-md); }
+.sv-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.22);
+  margin: 0 0.15rem;
+}
+@media (max-width: 480px) {
+  .sv-toolbar { top: 0.5rem; right: 0.5rem; }
+  .sv-toolbar-btn { width: 28px; height: 28px; font-size: var(--font-sm); }
+}
+
+/* Images : legere attenuation en dark pour eviter le bright contrast */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
+}
+:root[data-theme="dark"] img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -114,11 +272,14 @@ body {
 }
 .sv-nav a:hover { text-decoration: underline; }
 
-/* ── Navigation inter-pages ── */
+/* ── Navigation inter-pages (captive en haut au scroll) ──
+   Reste sur 1 ligne (scroll horizontal si overflow) pour que .sv-tabs
+   puisse ancrer son top sur une hauteur predictible.
+   padding-right reserve la place de la toolbar flottante (~155px). */
 .sv-nav-pages {
   margin: 0;
-  padding: 0.35rem 1.25rem;
-  font-size: var(--font-sm);
+  padding: 0.3rem 165px 0.3rem 0.9rem;
+  font-size: var(--font-xs);
   color: var(--text-secondary);
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
@@ -126,9 +287,19 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.2rem;
+  flex-wrap: nowrap;
+  gap: 0.1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
+.sv-nav-pages::-webkit-scrollbar { height: 4px; }
+.sv-nav-pages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-nav-pages a, .sv-nav-pages .sv-nav-current { padding: 0.15rem 0.3rem; }
 .sv-nav-pages a {
   color: var(--accent);
   text-decoration: none;
@@ -166,21 +337,21 @@ body {
    Les CSS page-spécifiques peuvent override avec même spécificité
    (leur règle est chargée après CHARTER_CSS). */
 h1 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 1rem;
   line-height: 1.25;
 }
 h2 {
-  font-size: 1.15rem;
+  font-size: var(--font-lg);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 0.75rem;
   line-height: 1.3;
 }
 h3 {
-  font-size: 1rem;
+  font-size: var(--font-md);
   font-weight: 600;
   color: var(--text-secondary);
   margin: 0 0 0.5rem;
@@ -204,12 +375,12 @@ h3 {
 }
 .sv-accordion-header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  padding: 0.75rem 1rem; cursor: pointer; background: var(--color-bg-subtle);
   border-bottom: 1px solid var(--border); transition: background 0.15s;
   user-select: none;
 }
-.sv-accordion-header:hover { background: #f1f5f9; }
-.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-header:hover { background: var(--color-bg-muted); }
+.sv-accordion-title { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
 .sv-accordion-chevron {
   font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
   flex-shrink: 0; margin-left: 0.5rem;
@@ -221,21 +392,72 @@ h3 {
 }
 @keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ── Onglets (pattern Pratique / Comprendre) ── */
+/* ── Onglets niveau 1 (Pratique / Comprendre) — captifs juste sous .sv-nav-pages ── */
 .sv-tabs {
-  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.25rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+  position: sticky;
+  top: 1.8rem;                    /* hauteur sv-nav-pages (font-xs + padding 0.3) */
+  background: var(--bg);
+  z-index: 15;
 }
 .sv-tab {
-  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
-  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   margin-bottom: -1px;
+  font-family: inherit;
 }
-.sv-tab:hover { color: var(--text); }
-.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
-@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-tab:hover { color: var(--text); background: var(--color-bg-subtle); }
+.sv-tab.active {
+  color: var(--success);
+  background: var(--card-bg);
+  border-color: var(--border);
+  border-bottom-color: var(--card-bg);  /* relie le tab a son contenu */
+}
+@media (max-width: 640px) {
+  .sv-tabs { top: 1.8rem; }       /* nav-pages reste sur 1 ligne (overflow-x) */
+  .sv-tab { padding: 0.3rem 0.6rem; }
+}
+
+/* ── Onglets niveau 2 (sous-onglets) — pills compactes inline ── */
+.sv-subtabs {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+.sv-subtab {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.sv-subtab:hover { color: var(--text); border-color: var(--border-hover); }
+.sv-subtab.active {
+  color: #fff;
+  background: var(--success);
+  border-color: var(--success);
+}
 .sv-card h3 {
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   font-weight: 600;
   margin: 0.75rem 0 0.25rem;
   color: var(--text);
@@ -266,20 +488,182 @@ h3 {
 .sv-tag-test:hover { background: #BFDBFE; }
 .sv-tag-term  { background: var(--success-light); color: var(--success); }
 .sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
-.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+.sv-tag-info  { background: var(--color-bg-subtle); color: var(--text-secondary); }
 
-/* ── Callout / highlight box ── */
+/* ── Callout / highlight box ──
+   color explicite obligatoire : --*-light devient tres fonce en dark
+   et le texte heritait du parent (illisible). */
 .sv-callout {
-  background: #f1f5f9;
+  background: var(--color-bg-subtle);
+  color: var(--text);
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   font-size: var(--font-base);
   border-left: 4px solid var(--accent);
   margin: 0.75rem 0;
 }
-.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
-.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
-.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); color: var(--color-success-text); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); color: var(--color-warning-text); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light);  color: var(--color-danger-text); }
+.sv-callout-title { font-weight: 600; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+.sv-callout-icon { font-size: var(--font-md); }
+
+/* ── SvTabIntro : intro accordeon sous les onglets ── */
+.sv-tab-intro {
+  margin: 0.25rem 0 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+.sv-tab-intro-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.sv-tab-intro-resume {
+  flex: 1 1 320px;
+  min-width: 0;
+  line-height: 1.5;
+  white-space: normal;
+}
+.sv-tab-intro-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: var(--font-xs);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.sv-tab-intro-toggle:hover { background: var(--accent-light); border-color: var(--accent); }
+.sv-tab-intro-detail {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── SvImageCard : image illustrative + legende ── */
+.sv-image-card {
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sv-image-caption {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ── SvProcedureSteps : procedure pas-a-pas numerotee ── */
+.sv-procedure {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-procedure-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.sv-procedure-meta {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sv-procedure-steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+}
+.sv-procedure-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.3rem 0 0.3rem 2rem;
+  font-size: var(--font-base);
+}
+.sv-procedure-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sv-procedure-label { font-weight: 500; color: var(--text); }
+.sv-procedure-detail { color: var(--text-secondary); }
+
+/* ── SvTestCard : carte standardisee pour un terrain_test ── */
+.sv-test-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-test-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-test-card-title {
+  font-weight: 700;
+  font-size: var(--font-lg);
+  color: var(--text);
+}
+.sv-test-card-dim {
+  font-size: var(--font-xs);
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sv-test-card-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+}
+.sv-test-card-source {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
 
 /* ── Inputs ── */
 .sv-input {
@@ -289,12 +673,18 @@ h3 {
   font-size: var(--font-base);
   transition: border-color 0.15s;
   background: var(--card-bg);
+  color: var(--text);
+  font-family: inherit;
 }
 .sv-input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
 }
+.sv-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+/* <option> suit le theme (evite fond blanc en dark sur Chrome/Firefox) */
+.sv-input option { background: var(--card-bg); color: var(--text); }
+select.sv-input { color-scheme: light dark; }
 
 .sv-btn {
   padding: 0.4rem 1rem;
@@ -342,7 +732,7 @@ h3 {
 .sv-details summary {
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   color: var(--text);
   padding: 0.75rem 1rem;
   background: var(--card-bg);
@@ -364,7 +754,7 @@ h3 {
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .sv-header { padding: 1rem 1.25rem; }
-  .sv-header h1 { font-size: 1.25rem; }
+  .sv-header h1 { font-size: var(--font-lg); }
   .sv-container { padding: 1rem; }
   .sv-section { padding: 0 1rem; }
 }
@@ -409,11 +799,14 @@ h3 {
   min-height: 400px;
 }
 
-/* ── Cahier de science : fond & ambiance ── */
+/* ── Cahier de science : fond & ambiance ──
+   Variable dediee --paper-bg pour preserver le ton beige en light
+   et basculer vers var(--card-bg) en dark. */
 .sv-cahier {
-  background: #fdfbf7;
+  background: var(--paper-bg, #fdfbf7);
   border-radius: var(--radius);
   padding: 1.25rem;
+  color: var(--text);
 }
 
 /* ── Prose didactique (texte courant pédagogique) ── */
@@ -479,20 +872,21 @@ h3 {
 
 /* ── Encart Science Note (cahier de labo) ── */
 .sv-science-note {
-  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
-  border: 1px solid #e8e0d0;
+  background: linear-gradient(135deg, var(--paper-bg), var(--paper-bg-2));
+  border: 1px solid var(--paper-border);
   border-left: 4px solid var(--success);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem;
   margin: 0.75rem 0;
   position: relative;
+  color: var(--text);
 }
 .sv-science-note::before {
   content: attr(data-icon);
   position: absolute;
   top: 0.85rem;
   left: -2.2rem;
-  font-size: 1rem;
+  font-size: var(--font-md);
   width: 1.75rem;
   height: 1.75rem;
   display: flex;
@@ -501,7 +895,7 @@ h3 {
   background: var(--success);
   color: #fff;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: var(--font-sm);
 }
 .sv-science-note-title {
   font-weight: 700;
@@ -577,7 +971,7 @@ h3 {
   box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 .sv-kpi-value {
-  font-size: 1.3rem;
+  font-size: var(--font-1-4);
   font-weight: 800;
   line-height: 1.1;
 }
@@ -593,7 +987,7 @@ h3 {
   margin-top: 0.15rem;
 }
 .sv-kpi-detail {
-  font-size: 0.68rem;
+  font-size: var(--font-2xs);
   color: var(--color-text-muted);
   margin-top: 0.2rem;
   line-height: 1.3;
@@ -624,7 +1018,7 @@ h3 {
   box-shadow: 0 0 0 2px var(--success);
 }
 .sv-timeline-date {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -632,7 +1026,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-timeline-place {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   color: var(--color-text-muted);
   font-style: italic;
   margin-bottom: 0.15rem;
@@ -649,7 +1043,7 @@ h3 {
   margin-top: 0.3rem;
 }
 .sv-timeline-tag {
-  font-size: 0.65rem;
+  font-size: var(--font-2xs);
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
   background: var(--color-bg-muted);
@@ -671,13 +1065,13 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-label {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .sv-phase-name {
-  font-size: 0.92rem;
+  font-size: var(--font-base);
   font-weight: 700;
 }
 .sv-phase-stats {
@@ -694,7 +1088,7 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-tag {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
   background: var(--card-bg);
@@ -801,7 +1195,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-term-badge {
-  font-size: 0.62rem;
+  font-size: var(--font-2xs);
   font-weight: 700;
   padding: 0.1rem 0.45rem;
   border-radius: 999px;
@@ -833,7 +1227,7 @@ h3 {
 }
 .sv-source-year { color: var(--color-text-muted); }
 .sv-source-title { color: var(--color-text-muted); }
-.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: var(--font-xs); }
 
 /* ── Référence / Box encadrée ── */
 .sv-ref-box {
@@ -844,7 +1238,7 @@ h3 {
   margin: 0.75rem 0;
 }
 .sv-ref-box-title {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -863,8 +1257,8 @@ h3 {
   background: var(--warning-light);
   border-radius: 6px;
 }
-.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
-.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+.sv-ref-num { font-size: var(--font-md); font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: var(--font-2xs); color: var(--color-warning-text); margin-top: 2px; }
 @media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── Table caractérisation unifiée ── */
@@ -1000,7 +1394,7 @@ h3 {
   font-weight: 600;
   font-size: var(--font-sm);
 }
-.sv-cascade-row-icon { font-size: 1.05rem; line-height: 1; }
+.sv-cascade-row-icon { font-size: var(--font-md); line-height: 1; }
 .sv-cascade-row-items {
   display: flex;
   flex-wrap: wrap;
@@ -1018,7 +1412,7 @@ h3 {
   cursor: help;
 }
 .sv-cascade-badge strong {
-  font-size: 0.8rem;
+  font-size: var(--font-sm);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -1041,7 +1435,7 @@ h3 {
   gap: 0.65rem;
   flex-wrap: wrap;
 }
-.sv-cahier-link-icon { font-size: 1.2rem; line-height: 1; }
+.sv-cahier-link-icon { font-size: var(--font-lg); line-height: 1; }
 .sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
 .sv-cahier-link a {
   color: var(--accent-dark);
@@ -1058,7 +1452,7 @@ h3 {
   color: var(--text);
 }
 .sv-richtext .sv-section-label {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
   color: var(--accent-dark);
 }
@@ -1080,8 +1474,8 @@ h3 {
   align-items: center;
   gap: 0.5rem;
 }
-.sv-section-title-h2 { font-size: 1.35rem; }
-.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-title-h2 { font-size: var(--font-1-4); }
+.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
 .sv-section-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -1107,7 +1501,7 @@ h3 {
 /* ── Responsive ajouts pédagogiques ── */
 @media (max-width: 640px) {
   .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-kpi-value { font-size: var(--font-lg); }
   .sv-cahier { padding: 0.75rem; }
 }
 
@@ -1141,14 +1535,85 @@ h3 {
 </head>
 <body>
 
+<script>
+(function(){
+  // ── Theme (clair/sombre) ──
+  const savedTheme = localStorage.getItem('sv-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+  function isDark(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    if (cur === 'dark') return true;
+    if (cur === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  window.svToggleTheme = function(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    const prefDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let next;
+    if (cur === 'dark') next = 'light';
+    else if (cur === 'light') next = 'dark';
+    else next = prefDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('sv-theme', next);
+    const btn = document.querySelector('.sv-theme-toggle');
+    if (btn) btn.textContent = isDark() ? '☀' : '☾';
+  };
+
+  // ── Zoom typo (A- / A / A+) ──
+  // Modifie --font-scale sur :root → toutes les variables --font-* derivent.
+  const SCALES = [0.85, 1.0, 1.15, 1.3];
+  const savedScale = parseFloat(localStorage.getItem('sv-font-scale'));
+  if (savedScale && SCALES.indexOf(savedScale) >= 0) {
+    document.documentElement.style.setProperty('--font-scale', savedScale);
+  }
+  window.svSetFontScale = function(scale){
+    document.documentElement.style.setProperty('--font-scale', scale);
+    localStorage.setItem('sv-font-scale', scale);
+    document.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === scale);
+    });
+  };
+  window.svBumpFontScale = function(delta){
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    let idx = SCALES.indexOf(cur);
+    if (idx < 0) idx = SCALES.indexOf(1.0);
+    idx = Math.max(0, Math.min(SCALES.length - 1, idx + delta));
+    window.svSetFontScale(SCALES[idx]);
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const bar = document.createElement('div');
+    bar.className = 'sv-toolbar';
+    bar.innerHTML =
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="0.85" title="Texte plus petit" aria-label="Texte plus petit">A−</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1" title="Texte normal" aria-label="Texte normal">A</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1.15" title="Texte plus grand" aria-label="Texte plus grand">A+</button>' +
+      '<span class="sv-toolbar-sep"></span>' +
+      '<button class="sv-toolbar-btn sv-theme-toggle" title="Basculer clair/sombre" aria-label="Basculer clair/sombre">' + (isDark() ? '☀' : '☾') + '</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('.sv-theme-toggle').onclick = window.svToggleTheme;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.onclick = () => window.svSetFontScale(parseFloat(b.dataset.scale));
+    });
+    // Marque le scale courant comme actif
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === cur);
+    });
+  });
+})();
+</script>
+
 
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Cahier de Science — Pédagogie du sol vivant et de l'holobionte</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-18 23:28 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 15:26 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <span class="sv-nav-current">📚 Cahier de Science</span>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste — France</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <span class="sv-nav-current">📚 Cahier de Science</span>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1443,19 +1908,184 @@ function SvSourceList({
   }, "[lien]")))));
 }
 
-// ── SvTabs : navigation onglets unifiée ──
+// ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
+// Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
 function SvTabs({
   tabs,
   active,
   onChange
 }) {
   return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs"
+    className: "sv-tabs",
+    role: "tablist"
   }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
     key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
     className: `sv-tab ${active === t.id ? 'active' : ''}`,
     onClick: () => onChange(t.id)
   }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
+// A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
+// Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
+// Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
+function SvSubTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-subtabs",
+    role: "tablist"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
+    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
+// Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
+// Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
+function SvCallout({
+  variant,
+  title,
+  icon,
+  children
+}) {
+  const v = variant || 'info';
+  const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
+  return /*#__PURE__*/React.createElement("div", {
+    className: cls
+  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-callout-title"
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-callout-icon"
+  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
+function SvAlert({
+  variant,
+  title,
+  children
+}) {
+  const v = variant || 'info';
+  return /*#__PURE__*/React.createElement("div", {
+    className: `sv-alert sv-alert-${v}`
+  }, title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      marginBottom: '0.25rem'
+    }
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvImageCard : image illustrative avec legende et styles standardises ──
+// Resout le bug "double style" + manque de max-width responsive.
+// Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
+function SvImageCard({
+  src,
+  alt,
+  caption,
+  maxHeight,
+  maxWidth
+}) {
+  const mh = maxHeight || '320px';
+  const mw = maxWidth || '100%';
+  return /*#__PURE__*/React.createElement("figure", {
+    className: "sv-image-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: src,
+    alt: alt || '',
+    style: {
+      width: '100%',
+      maxWidth: mw,
+      maxHeight: mh,
+      objectFit: 'contain',
+      borderRadius: 'var(--radius)',
+      border: '1px solid var(--border)',
+      boxShadow: 'var(--shadow)',
+      display: 'block'
+    }
+  }), caption && /*#__PURE__*/React.createElement("figcaption", {
+    className: "sv-image-caption"
+  }, caption));
+}
+
+// ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
+// Reutilisable pour test bocal, recettes lifofer, mode operatoire mo_calc, etc.
+// Props :
+//   steps : [{label, detail?}] ou [string]
+//   materiel : array de strings (optionnel)
+//   duree : string (optionnel)
+//   title : string (optionnel)
+function SvProcedureSteps({
+  title,
+  steps,
+  materiel,
+  duree
+}) {
+  if (!steps || !steps.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-title"
+  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-meta"
+  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
+    className: "sv-procedure-steps"
+  }, steps.map((s, i) => {
+    const label = typeof s === 'string' ? s : s.label;
+    const detail = typeof s === 'string' ? null : s.detail;
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-label"
+    }, label), detail && /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-detail"
+    }, " \u2014 ", detail));
+  })));
+}
+
+// ── SvTestCard : carte standardisee pour un terrain_test ──
+// Reutilisable dans la page Triangle (section test du bocal) ET pour la
+// future page autonome tests_terrain.
+// Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
+function SvTestCard({
+  test
+}) {
+  if (!test) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-title"
+  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-test-card-dim"
+  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-desc"
+  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
+    src: test.image_url,
+    alt: test.title,
+    caption: null,
+    maxHeight: "220px"
+  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
+    title: null,
+    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
+    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
+    duree: test.duree
+  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
+    variant: "success",
+    title: "Interpretation"
+  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-source"
+  }, "Source : ", test.source));
 }
 
 // ── SvNoteAccordion : mini-note inline ──
@@ -2000,33 +2630,17 @@ function SvTabIntro({
   const [open, setOpen] = React.useState(false);
   if (!resume && !detail) return null;
   return /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: '1rem'
-    }
+    className: "sv-tab-intro"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text-secondary)'
-    }
+    className: "sv-tab-intro-row"
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      flex: 1
-    }
-  }, resume), detail && /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
+    className: "sv-tab-intro-resume"
+  }, resume), detail && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sv-tab-intro-toggle",
     onClick: () => setOpen(!open)
-  }, open ? '▾ masquer' : '▸ en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content",
-    style: {
-      marginTop: '0.5rem',
-      padding: '0.75rem',
-      background: 'var(--color-bg-subtle, var(--bg))',
-      borderRadius: 'var(--radius)',
-      lineHeight: 1.6
-    }
+  }, open ? 'masquer' : 'en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-intro-detail"
   }, detail));
 }
 
@@ -2313,7 +2927,7 @@ function ChapterContent({
     className: "cah-tool-link"
   }, /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: '1.1rem'
+      fontSize: 'var(--font-lg)'
     }
   }, "\uD83D\uDD27"), /*#__PURE__*/React.createElement("span", null, "Utiliser l'outil associ\xE9 : "), /*#__PURE__*/React.createElement("a", {
     href: toolLink.url

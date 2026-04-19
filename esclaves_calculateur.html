@@ -35,14 +35,27 @@
   --radius: 10px;
   --shadow: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
-  /* Échelle typographique (source unique pour toutes les pages) */
-  --font-xs: 0.75rem;
-  --font-sm: 0.82rem;
-  --font-base: 0.9rem;
-  --font-md: 1rem;
-  --font-lg: 1.15rem;
-  --font-xl: 1.5rem;
-  --font-2xl: 1.8rem;
+  /* Echelle typographique (source unique pour toutes les pages)
+     Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
+  --font-scale: 1;
+  --font-2xs: calc(0.68rem * var(--font-scale));
+  --font-xs:   calc(0.75rem * var(--font-scale));
+  --font-sm:   calc(0.82rem * var(--font-scale));
+  --font-base: calc(0.9rem  * var(--font-scale));
+  --font-md:   calc(1rem    * var(--font-scale));
+  --font-lg:   calc(1.15rem * var(--font-scale));
+  --font-xl:   calc(1.5rem  * var(--font-scale));
+  --font-2xl:  calc(1.8rem  * var(--font-scale));
+  --font-1-4:  calc(1.4rem  * var(--font-scale));
+  /* Echelle d'espacement (source unique pour paddings/margins) */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.25rem;
+  --space-xl:  1.5rem;
+  --space-2xl: 2rem;
   /* Couleurs sémantiques (inline → var) */
   --color-text: #1e293b;
   --color-text-secondary: #475569;
@@ -53,13 +66,13 @@
   --color-warning-text: #92400e;
   --color-danger-text: #991b1b;
   --success: #059669;
-  --success-light: #D1FAE5;
+  --success-light: #BBF7D0;       /* green-200 — un cran + sature pour ressortir sur blanc */
   --warning: #D97706;
-  --warning-light: #FEF3C7;
+  --warning-light: #FDE68A;       /* yellow-300 — le pale yellow-100 disparaissait sur blanc */
   --danger: #DC2626;
-  --danger-light: #FEE2E2;
+  --danger-light: #FECACA;        /* red-200 */
   --info: #2563EB;
-  --info-light: #DBEAFE;
+  --info-light: #BFDBFE;          /* blue-200 */
   --purple: #7c3aed;
   --purple-dark: #6d28d9;
   --purple-light: #faf5ff;
@@ -69,7 +82,152 @@
   --zone-limon: rgba(99,102,241,0.12);
   --zone-argile: rgba(239,68,68,0.12);
   --zone-loam: rgba(34,197,94,0.12);
+  /* Fond papier crème (Cahier de Science, Science Note) */
+  --paper-bg: #fdfbf7;
+  --paper-bg-2: #f8f6f0;
+  --paper-border: #e8e0d0;
 }
+
+/* ── Mode sombre : preference systeme + override manuel via [data-theme] ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-dark: #3b82f6;
+    --accent-light: #1e3a8a;
+    --border: #334155;
+    --border-hover: #475569;
+    --shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+    --color-text: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-bg-subtle: #1e293b;
+    --color-bg-muted: #273449;
+    --color-success-text: #86efac;
+    --color-warning-text: #fcd34d;
+    --color-danger-text: #fca5a5;
+    --success: #34d399;
+    --success-light: #064e3b;
+    --warning: #fbbf24;
+    --warning-light: #451a03;
+    --danger: #f87171;
+    --danger-light: #450a0a;
+    --info: #60a5fa;
+    --info-light: #1e3a8a;
+    --purple: #a78bfa;
+    --purple-dark: #7c3aed;
+    --purple-light: #3b0764;
+    --header-from: #020617;
+    --header-to: #0f172a;
+    --zone-sable: rgba(251,191,36,0.08);
+    --zone-limon: rgba(99,102,241,0.18);
+    --zone-argile: rgba(239,68,68,0.18);
+    --zone-loam: rgba(34,197,94,0.18);
+    --paper-bg: #1e293b;
+    --paper-bg-2: #273449;
+    --paper-border: #334155;
+  }
+}
+
+/* Override manuel : [data-theme="dark"] force le dark, [data-theme="light"] force le light */
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-light: #1e3a8a;
+  --border: #334155;
+  --border-hover: #475569;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #1e293b;
+  --color-bg-muted: #273449;
+  --color-success-text: #86efac;
+  --color-warning-text: #fcd34d;
+  --color-danger-text: #fca5a5;
+  --success: #34d399;
+  --success-light: #064e3b;
+  --warning: #fbbf24;
+  --warning-light: #451a03;
+  --danger: #f87171;
+  --danger-light: #450a0a;
+  --info: #60a5fa;
+  --info-light: #1e3a8a;
+  --purple: #a78bfa;
+  --purple-dark: #7c3aed;
+  --purple-light: #3b0764;
+  --header-from: #020617;
+  --header-to: #0f172a;
+  --zone-sable: rgba(251,191,36,0.08);
+  --zone-limon: rgba(99,102,241,0.18);
+  --zone-argile: rgba(239,68,68,0.18);
+  --zone-loam: rgba(34,197,94,0.18);
+  --paper-bg: #1e293b;
+  --paper-bg-2: #273449;
+  --paper-border: #334155;
+}
+
+/* Barre flottante d'outils utilisateur (zoom typo + theme) */
+.sv-toolbar {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.sv-toolbar-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+.sv-toolbar-btn:hover { background: rgba(255,255,255,0.18); }
+.sv-toolbar-btn.active { background: rgba(255,255,255,0.28); }
+.sv-toolbar-btn.sv-theme-toggle { font-size: var(--font-md); }
+.sv-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.22);
+  margin: 0 0.15rem;
+}
+@media (max-width: 480px) {
+  .sv-toolbar { top: 0.5rem; right: 0.5rem; }
+  .sv-toolbar-btn { width: 28px; height: 28px; font-size: var(--font-sm); }
+}
+
+/* Images : legere attenuation en dark pour eviter le bright contrast */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
+}
+:root[data-theme="dark"] img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -118,11 +276,14 @@ body {
 }
 .sv-nav a:hover { text-decoration: underline; }
 
-/* ── Navigation inter-pages ── */
+/* ── Navigation inter-pages (captive en haut au scroll) ──
+   Reste sur 1 ligne (scroll horizontal si overflow) pour que .sv-tabs
+   puisse ancrer son top sur une hauteur predictible.
+   padding-right reserve la place de la toolbar flottante (~155px). */
 .sv-nav-pages {
   margin: 0;
-  padding: 0.35rem 1.25rem;
-  font-size: var(--font-sm);
+  padding: 0.3rem 165px 0.3rem 0.9rem;
+  font-size: var(--font-xs);
   color: var(--text-secondary);
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
@@ -130,9 +291,19 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.2rem;
+  flex-wrap: nowrap;
+  gap: 0.1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
+.sv-nav-pages::-webkit-scrollbar { height: 4px; }
+.sv-nav-pages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-nav-pages a, .sv-nav-pages .sv-nav-current { padding: 0.15rem 0.3rem; }
 .sv-nav-pages a {
   color: var(--accent);
   text-decoration: none;
@@ -170,21 +341,21 @@ body {
    Les CSS page-spécifiques peuvent override avec même spécificité
    (leur règle est chargée après CHARTER_CSS). */
 h1 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 1rem;
   line-height: 1.25;
 }
 h2 {
-  font-size: 1.15rem;
+  font-size: var(--font-lg);
   font-weight: 700;
   color: var(--text);
   margin: 0 0 0.75rem;
   line-height: 1.3;
 }
 h3 {
-  font-size: 1rem;
+  font-size: var(--font-md);
   font-weight: 600;
   color: var(--text-secondary);
   margin: 0 0 0.5rem;
@@ -208,12 +379,12 @@ h3 {
 }
 .sv-accordion-header {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 0.75rem 1rem; cursor: pointer; background: #f8fafc;
+  padding: 0.75rem 1rem; cursor: pointer; background: var(--color-bg-subtle);
   border-bottom: 1px solid var(--border); transition: background 0.15s;
   user-select: none;
 }
-.sv-accordion-header:hover { background: #f1f5f9; }
-.sv-accordion-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+.sv-accordion-header:hover { background: var(--color-bg-muted); }
+.sv-accordion-title { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
 .sv-accordion-chevron {
   font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
   flex-shrink: 0; margin-left: 0.5rem;
@@ -225,21 +396,72 @@ h3 {
 }
 @keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ── Onglets (pattern Pratique / Comprendre) ── */
+/* ── Onglets niveau 1 (Pratique / Comprendre) — captifs juste sous .sv-nav-pages ── */
 .sv-tabs {
-  display: flex; gap: 0.5rem; padding: 1rem 0 0.5rem; border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem; position: sticky; top: 0; background: var(--bg); z-index: 10;
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.25rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+  position: sticky;
+  top: 1.8rem;                    /* hauteur sv-nav-pages (font-xs + padding 0.3) */
+  background: var(--bg);
+  z-index: 15;
 }
 .sv-tab {
-  padding: 0.6rem 1.2rem; background: none; border: none; border-bottom: 3px solid transparent;
-  font-size: 0.95rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   margin-bottom: -1px;
+  font-family: inherit;
 }
-.sv-tab:hover { color: var(--text); }
-.sv-tab.active { color: var(--success); border-bottom-color: var(--success); }
-@media (max-width: 640px) { .sv-tab { font-size: var(--font-base); padding: 0.5rem 0.8rem; } }
+.sv-tab:hover { color: var(--text); background: var(--color-bg-subtle); }
+.sv-tab.active {
+  color: var(--success);
+  background: var(--card-bg);
+  border-color: var(--border);
+  border-bottom-color: var(--card-bg);  /* relie le tab a son contenu */
+}
+@media (max-width: 640px) {
+  .sv-tabs { top: 1.8rem; }       /* nav-pages reste sur 1 ligne (overflow-x) */
+  .sv-tab { padding: 0.3rem 0.6rem; }
+}
+
+/* ── Onglets niveau 2 (sous-onglets) — pills compactes inline ── */
+.sv-subtabs {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+.sv-subtab {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.sv-subtab:hover { color: var(--text); border-color: var(--border-hover); }
+.sv-subtab.active {
+  color: #fff;
+  background: var(--success);
+  border-color: var(--success);
+}
 .sv-card h3 {
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   font-weight: 600;
   margin: 0.75rem 0 0.25rem;
   color: var(--text);
@@ -270,20 +492,182 @@ h3 {
 .sv-tag-test:hover { background: #BFDBFE; }
 .sv-tag-term  { background: var(--success-light); color: var(--success); }
 .sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
-.sv-tag-info  { background: #F1F5F9; color: var(--text-secondary); }
+.sv-tag-info  { background: var(--color-bg-subtle); color: var(--text-secondary); }
 
-/* ── Callout / highlight box ── */
+/* ── Callout / highlight box ──
+   color explicite obligatoire : --*-light devient tres fonce en dark
+   et le texte heritait du parent (illisible). */
 .sv-callout {
-  background: #f1f5f9;
+  background: var(--color-bg-subtle);
+  color: var(--text);
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   font-size: var(--font-base);
   border-left: 4px solid var(--accent);
   margin: 0.75rem 0;
 }
-.sv-callout-success { border-left-color: var(--success); background: var(--success-light); }
-.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); }
-.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light); }
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); color: var(--color-success-text); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); color: var(--color-warning-text); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light);  color: var(--color-danger-text); }
+.sv-callout-title { font-weight: 600; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+.sv-callout-icon { font-size: var(--font-md); }
+
+/* ── SvTabIntro : intro accordeon sous les onglets ── */
+.sv-tab-intro {
+  margin: 0.25rem 0 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+.sv-tab-intro-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.sv-tab-intro-resume {
+  flex: 1 1 320px;
+  min-width: 0;
+  line-height: 1.5;
+  white-space: normal;
+}
+.sv-tab-intro-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: var(--font-xs);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.sv-tab-intro-toggle:hover { background: var(--accent-light); border-color: var(--accent); }
+.sv-tab-intro-detail {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── SvImageCard : image illustrative + legende ── */
+.sv-image-card {
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sv-image-caption {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ── SvProcedureSteps : procedure pas-a-pas numerotee ── */
+.sv-procedure {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-procedure-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.sv-procedure-meta {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sv-procedure-steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+}
+.sv-procedure-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.3rem 0 0.3rem 2rem;
+  font-size: var(--font-base);
+}
+.sv-procedure-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sv-procedure-label { font-weight: 500; color: var(--text); }
+.sv-procedure-detail { color: var(--text-secondary); }
+
+/* ── SvTestCard : carte standardisee pour un terrain_test ── */
+.sv-test-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-test-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-test-card-title {
+  font-weight: 700;
+  font-size: var(--font-lg);
+  color: var(--text);
+}
+.sv-test-card-dim {
+  font-size: var(--font-xs);
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sv-test-card-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+}
+.sv-test-card-source {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
 
 /* ── Inputs ── */
 .sv-input {
@@ -293,12 +677,18 @@ h3 {
   font-size: var(--font-base);
   transition: border-color 0.15s;
   background: var(--card-bg);
+  color: var(--text);
+  font-family: inherit;
 }
 .sv-input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
 }
+.sv-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+/* <option> suit le theme (evite fond blanc en dark sur Chrome/Firefox) */
+.sv-input option { background: var(--card-bg); color: var(--text); }
+select.sv-input { color-scheme: light dark; }
 
 .sv-btn {
   padding: 0.4rem 1rem;
@@ -346,7 +736,7 @@ h3 {
 .sv-details summary {
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--font-base);
   color: var(--text);
   padding: 0.75rem 1rem;
   background: var(--card-bg);
@@ -368,7 +758,7 @@ h3 {
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .sv-header { padding: 1rem 1.25rem; }
-  .sv-header h1 { font-size: 1.25rem; }
+  .sv-header h1 { font-size: var(--font-lg); }
   .sv-container { padding: 1rem; }
   .sv-section { padding: 0 1rem; }
 }
@@ -413,11 +803,14 @@ h3 {
   min-height: 400px;
 }
 
-/* ── Cahier de science : fond & ambiance ── */
+/* ── Cahier de science : fond & ambiance ──
+   Variable dediee --paper-bg pour preserver le ton beige en light
+   et basculer vers var(--card-bg) en dark. */
 .sv-cahier {
-  background: #fdfbf7;
+  background: var(--paper-bg, #fdfbf7);
   border-radius: var(--radius);
   padding: 1.25rem;
+  color: var(--text);
 }
 
 /* ── Prose didactique (texte courant pédagogique) ── */
@@ -483,20 +876,21 @@ h3 {
 
 /* ── Encart Science Note (cahier de labo) ── */
 .sv-science-note {
-  background: linear-gradient(135deg, #fdfbf7, #f8f6f0);
-  border: 1px solid #e8e0d0;
+  background: linear-gradient(135deg, var(--paper-bg), var(--paper-bg-2));
+  border: 1px solid var(--paper-border);
   border-left: 4px solid var(--success);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1rem 1.25rem;
   margin: 0.75rem 0;
   position: relative;
+  color: var(--text);
 }
 .sv-science-note::before {
   content: attr(data-icon);
   position: absolute;
   top: 0.85rem;
   left: -2.2rem;
-  font-size: 1rem;
+  font-size: var(--font-md);
   width: 1.75rem;
   height: 1.75rem;
   display: flex;
@@ -505,7 +899,7 @@ h3 {
   background: var(--success);
   color: #fff;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: var(--font-sm);
 }
 .sv-science-note-title {
   font-weight: 700;
@@ -581,7 +975,7 @@ h3 {
   box-shadow: 0 1px 4px rgba(0,0,0,0.03);
 }
 .sv-kpi-value {
-  font-size: 1.3rem;
+  font-size: var(--font-1-4);
   font-weight: 800;
   line-height: 1.1;
 }
@@ -597,7 +991,7 @@ h3 {
   margin-top: 0.15rem;
 }
 .sv-kpi-detail {
-  font-size: 0.68rem;
+  font-size: var(--font-2xs);
   color: var(--color-text-muted);
   margin-top: 0.2rem;
   line-height: 1.3;
@@ -628,7 +1022,7 @@ h3 {
   box-shadow: 0 0 0 2px var(--success);
 }
 .sv-timeline-date {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -636,7 +1030,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-timeline-place {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   color: var(--color-text-muted);
   font-style: italic;
   margin-bottom: 0.15rem;
@@ -653,7 +1047,7 @@ h3 {
   margin-top: 0.3rem;
 }
 .sv-timeline-tag {
-  font-size: 0.65rem;
+  font-size: var(--font-2xs);
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
   background: var(--color-bg-muted);
@@ -675,13 +1069,13 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-label {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .sv-phase-name {
-  font-size: 0.92rem;
+  font-size: var(--font-base);
   font-weight: 700;
 }
 .sv-phase-stats {
@@ -698,7 +1092,7 @@ h3 {
   margin-bottom: 0.4rem;
 }
 .sv-phase-tag {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   padding: 0.15rem 0.55rem;
   border-radius: 999px;
   background: var(--card-bg);
@@ -805,7 +1199,7 @@ h3 {
   margin-bottom: 0.2rem;
 }
 .sv-term-badge {
-  font-size: 0.62rem;
+  font-size: var(--font-2xs);
   font-weight: 700;
   padding: 0.1rem 0.45rem;
   border-radius: 999px;
@@ -837,7 +1231,7 @@ h3 {
 }
 .sv-source-year { color: var(--color-text-muted); }
 .sv-source-title { color: var(--color-text-muted); }
-.sv-source-link { color: var(--accent); text-decoration: underline; font-size: 0.72rem; }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: var(--font-xs); }
 
 /* ── Référence / Box encadrée ── */
 .sv-ref-box {
@@ -848,7 +1242,7 @@ h3 {
   margin: 0.75rem 0;
 }
 .sv-ref-box-title {
-  font-size: 0.72rem;
+  font-size: var(--font-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -867,8 +1261,8 @@ h3 {
   background: var(--warning-light);
   border-radius: 6px;
 }
-.sv-ref-num { font-size: 1.05rem; font-weight: 800; color: var(--color-warning-text); }
-.sv-ref-label { font-size: 0.65rem; color: var(--color-warning-text); margin-top: 2px; }
+.sv-ref-num { font-size: var(--font-md); font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: var(--font-2xs); color: var(--color-warning-text); margin-top: 2px; }
 @media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── Table caractérisation unifiée ── */
@@ -1004,7 +1398,7 @@ h3 {
   font-weight: 600;
   font-size: var(--font-sm);
 }
-.sv-cascade-row-icon { font-size: 1.05rem; line-height: 1; }
+.sv-cascade-row-icon { font-size: var(--font-md); line-height: 1; }
 .sv-cascade-row-items {
   display: flex;
   flex-wrap: wrap;
@@ -1022,7 +1416,7 @@ h3 {
   cursor: help;
 }
 .sv-cascade-badge strong {
-  font-size: 0.8rem;
+  font-size: var(--font-sm);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
@@ -1045,7 +1439,7 @@ h3 {
   gap: 0.65rem;
   flex-wrap: wrap;
 }
-.sv-cahier-link-icon { font-size: 1.2rem; line-height: 1; }
+.sv-cahier-link-icon { font-size: var(--font-lg); line-height: 1; }
 .sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
 .sv-cahier-link a {
   color: var(--accent-dark);
@@ -1062,7 +1456,7 @@ h3 {
   color: var(--text);
 }
 .sv-richtext .sv-section-label {
-  font-size: 0.7rem;
+  font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
   color: var(--accent-dark);
 }
@@ -1084,8 +1478,8 @@ h3 {
   align-items: center;
   gap: 0.5rem;
 }
-.sv-section-title-h2 { font-size: 1.35rem; }
-.sv-section-title-h3 { font-size: 1.1rem; color: var(--text-secondary); }
+.sv-section-title-h2 { font-size: var(--font-1-4); }
+.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
 .sv-section-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -1111,7 +1505,7 @@ h3 {
 /* ── Responsive ajouts pédagogiques ── */
 @media (max-width: 640px) {
   .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .sv-kpi-value { font-size: 1.1rem; }
+  .sv-kpi-value { font-size: var(--font-lg); }
   .sv-cahier { padding: 0.75rem; }
 }
 
@@ -1124,9 +1518,9 @@ h3 {
 .ec-input-group { margin-bottom: 1rem; }
 .ec-input-group label { display: block; font-size: var(--font-sm); font-weight: 600; margin-bottom: 0.35rem; color: var(--text); }
 .ec-input-group input, .ec-input-group select { width: 100%; padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: var(--font-base); background: var(--bg); color: var(--text); }
-.ec-result { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid var(--warning); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+.ec-result { background: var(--warning-light); border-left: 4px solid var(--warning); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; color: var(--color-warning-text); }
 .ec-result-value { font-size: 2.5rem; font-weight: 700; color: var(--warning); line-height: 1; margin-bottom: 0.35rem; }
-.ec-result-label { font-size: var(--font-sm); color: var(--text-secondary); }
+.ec-result-label { font-size: var(--font-sm); color: var(--color-warning-text); opacity: 0.85; }
 .ec-breakdown { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
 .ec-breakdown-row { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px dashed var(--border); font-size: var(--font-sm); }
 .ec-breakdown-row:last-child { border-bottom: none; font-weight: 700; padding-top: 0.6rem; }
@@ -1141,14 +1535,85 @@ h3 {
 </head>
 <body>
 
+<script>
+(function(){
+  // ── Theme (clair/sombre) ──
+  const savedTheme = localStorage.getItem('sv-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }
+  function isDark(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    if (cur === 'dark') return true;
+    if (cur === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  window.svToggleTheme = function(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    const prefDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let next;
+    if (cur === 'dark') next = 'light';
+    else if (cur === 'light') next = 'dark';
+    else next = prefDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('sv-theme', next);
+    const btn = document.querySelector('.sv-theme-toggle');
+    if (btn) btn.textContent = isDark() ? '☀' : '☾';
+  };
+
+  // ── Zoom typo (A- / A / A+) ──
+  // Modifie --font-scale sur :root → toutes les variables --font-* derivent.
+  const SCALES = [0.85, 1.0, 1.15, 1.3];
+  const savedScale = parseFloat(localStorage.getItem('sv-font-scale'));
+  if (savedScale && SCALES.indexOf(savedScale) >= 0) {
+    document.documentElement.style.setProperty('--font-scale', savedScale);
+  }
+  window.svSetFontScale = function(scale){
+    document.documentElement.style.setProperty('--font-scale', scale);
+    localStorage.setItem('sv-font-scale', scale);
+    document.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === scale);
+    });
+  };
+  window.svBumpFontScale = function(delta){
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    let idx = SCALES.indexOf(cur);
+    if (idx < 0) idx = SCALES.indexOf(1.0);
+    idx = Math.max(0, Math.min(SCALES.length - 1, idx + delta));
+    window.svSetFontScale(SCALES[idx]);
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    const bar = document.createElement('div');
+    bar.className = 'sv-toolbar';
+    bar.innerHTML =
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="0.85" title="Texte plus petit" aria-label="Texte plus petit">A−</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1" title="Texte normal" aria-label="Texte normal">A</button>' +
+      '<button class="sv-toolbar-btn sv-font-btn" data-scale="1.15" title="Texte plus grand" aria-label="Texte plus grand">A+</button>' +
+      '<span class="sv-toolbar-sep"></span>' +
+      '<button class="sv-toolbar-btn sv-theme-toggle" title="Basculer clair/sombre" aria-label="Basculer clair/sombre">' + (isDark() ? '☀' : '☾') + '</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('.sv-theme-toggle').onclick = window.svToggleTheme;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.onclick = () => window.svSetFontScale(parseFloat(b.dataset.scale));
+    });
+    // Marque le scale courant comme actif
+    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
+    bar.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === cur);
+    });
+  });
+})();
+</script>
+
 
 <header class="sv-header">
   <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
   <div class="sv-subtitle">Esclaves énergétiques — Quantification de la dépendance énergétique fossile</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 00:29 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 15:26 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste — France</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1162,7 +1627,7 @@ h3 {
 <div id="sv-tooltip" class="sv-tooltip"></div>
 
 
-<script>const DATA = {"params": {"appareil_quotidien": [{"section": "appareil_quotidien", "code": "app_bouilloire", "nom": "Bouilloire électrique", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour chauffer 1 L d'eau — 20 personnes qui pédalent en même temps.", "ordre": 1}, {"section": "appareil_quotidien", "code": "app_four", "nom": "Four électrique", "valeur": 30.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Rôtir un poulet, cuire un plat — 30 personnes pédalant ensemble pendant 1 h.", "ordre": 2}, {"section": "appareil_quotidien", "code": "app_plaque", "nom": "Plaque de cuisson (induction)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Faire mijoter — 20 personnes pour une seule plaque au maximum.", "ordre": 3}, {"section": "appareil_quotidien", "code": "app_microondes", "nom": "Micro-ondes", "valeur": 10.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Réchauffer une tasse — 10 personnes pédalant.", "ordre": 4}, {"section": "appareil_quotidien", "code": "app_seche_cheveux", "nom": "Sèche-cheveux", "valeur": 18.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "5 min pour se sécher les cheveux — 18 personnes.", "ordre": 5}, {"section": "appareil_quotidien", "code": "app_fer_repasser", "nom": "Fer à repasser", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Repasser une chemise — 15 personnes pédalant.", "ordre": 6}, {"section": "appareil_quotidien", "code": "app_aspirateur", "nom": "Aspirateur", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "15 personnes pour aspirer le salon.", "ordre": 7}, {"section": "appareil_quotidien", "code": "app_machine_laver", "nom": "Machine à laver (cycle chaud)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pendant ~1h30 pour un cycle 60°C — 20 personnes.", "ordre": 8}, {"section": "appareil_quotidien", "code": "app_seche_linge", "nom": "Sèche-linge", "valeur": 25.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "1 cycle (2 h) — 25 personnes en continu.", "ordre": 9}, {"section": "appareil_quotidien", "code": "app_lave_vaisselle", "nom": "Lave-vaisselle", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Cycle éco 1h30 — 15 personnes.", "ordre": 10}, {"section": "appareil_quotidien", "code": "app_clim_2kw", "nom": "Climatiseur (unité 2 kW)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour rafraîchir un salon — 20 personnes en continu.", "ordre": 11}, {"section": "appareil_quotidien", "code": "app_ballon_eau_chaude", "nom": "Ballon d'eau chaude (résistance)", "valeur": 24.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour chauffer le ballon — 24 personnes pendant la durée de chauffe.", "ordre": 12}, {"section": "appareil_quotidien", "code": "app_frigo", "nom": "Réfrigérateur/congélateur", "valeur": 1.5, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Seulement ~1 personne et demie… mais 24 h sur 24, 365 jours par an.", "ordre": 13}, {"section": "appareil_quotidien", "code": "app_pompe_chaleur", "nom": "Pompe à chaleur (air-eau, 5 kW)", "valeur": 50.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Chauffer une maison — 50 personnes. (Mais chaleur finale ≈ 15 kW via COP 3.)", "ordre": 14}, {"section": "appareil_quotidien", "code": "app_tv", "nom": "Téléviseur LCD 55\"", "valeur": 1.2, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Une soirée télé = ~1 personne pendant toute la soirée.", "ordre": 15}, {"section": "appareil_quotidien", "code": "app_ordi", "nom": "Ordinateur portable", "valeur": 0.6, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Travailler sur son ordi = moitié de la puissance d'un humain pédalant.", "ordre": 16}, {"section": "appareil_quotidien", "code": "app_box_wifi", "nom": "Box internet + wifi", "valeur": 0.15, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Restée allumée 24/7 — 0,15 humain × 8760 h/an = 1300 h-humain.", "ordre": 17}, {"section": "appareil_quotidien", "code": "app_voiture_cuisson", "nom": "Voiture au ralenti (essence)", "valeur": 50.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Moteur tournant au ralenti = 50 humains. En ville : 15 kW = 150 humains.", "ordre": 18}], "climax_mondial": [{"section": "climax_mondial", "code": "world_prod_fossile", "nom": "Production mondiale énergies fossiles (2023)", "valeur": 65400.0, "unite": "milliards d'esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "Pétrole + gaz + charbon = 135 000 TWh/an. Divisé par puissance humaine continue (100 W × 8760 h = 876 kWh/an par humain), avec rendement mécanique 0,6 kWh utile/kWh fossile → 65 400 milliards d'équivalents humains travaillant pour nous jour et nuit.", "ordre": 1}, {"section": "climax_mondial", "code": "world_multiplicateur_humanite", "nom": "Équivalents humains par habitant Terre", "valeur": 8200.0, "unite": "esclaves/personne", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "65 400 milliards ÷ 8 milliards d'humains ≈ 8 200 esclaves énergétiques par personne si on répartissait. En réalité très inégal : un Occidental bénéficie de ~30 000 esclaves, un habitant pays en développement ~300.", "ordre": 2}, {"section": "climax_mondial", "code": "world_puissance_instantanee", "nom": "Puissance instantanée fossile mondiale", "valeur": 15.4, "unite": "TW continus", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "135 000 TWh/an ÷ 8760 h = 15,4 TW en moyenne continue. Cela équivaut à 154 milliards d'humains pédalant H24 — soit 19 fois la population mondiale.", "ordre": 3}, {"section": "climax_mondial", "code": "world_petrole_quotidien", "nom": "Pétrole brûlé chaque jour dans le monde", "valeur": 95.6, "unite": "millions de barils/jour", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "95,6 Mb/jour × 158,988 L/baril × 37,15 MJ/L × rendement 0,25 = 35 TWh utiles par jour. Soit 4 milliards d'humains travaillant 1 journée de 10 h — toute la population active mondiale.", "ordre": 4}, {"section": "climax_mondial", "code": "world_croissance_fossile", "nom": "Croissance annuelle de la consommation mondiale de fossiles", "valeur": 1.2, "unite": "% / an", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2026 + AIE", "source_id": 1669, "commentaire": "Malgré l'urgence climatique, la consommation mondiale de fossiles continue de croître (~+1,2 %/an en moyenne 2020-2024). Au lieu de freiner, on accélère : +3 %/an en Asie, compensé par quelques reculs en Europe. À ce rythme, la décennie 2030 verra encore plus d'esclaves énergétiques que 2025.", "ordre": 6}, {"section": "climax_mondial", "code": "world_temps_rempl_humain", "nom": "Si on remplaçait tous les fossiles par des humains", "valeur": 0.0, "unite": "IMPOSSIBLE", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "Cela supposerait 65 400 milliards d'humains pédalant 24/7. Il n'y a que 8 milliards d'humains sur Terre. La moitié de leur temps cumulé (sommeil, repas, enfance, vieillesse, etc.) est indisponible. Le travail fossile est littéralement irremplaçable par du travail humain — d'où le coût réel de la transition.", "ordre": 7}], "gros_engin": [{"section": "gros_engin", "code": "gros_tgv", "nom": "TGV en ligne (Paris-Lyon)", "valeur": 9300.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un TGV consomme 9,3 MW en vitesse de croisière (320 km/h). Soit 93 000 humains. Avec 500 passagers à bord, chaque voyageur mobilise 186 humains-équivalents pendant les 2 h de trajet.", "ordre": 1}, {"section": "gros_engin", "code": "gros_avion_a320_croisiere", "nom": "Avion A320 en croisière", "valeur": 8000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un A320 consomme ~2400 kg kérosène/h en croisière = ~28 MW en équivalent énergie. Avec rendement mécanique 30 % → ~8 MW utiles. Pour 180 passagers, 44 humains chacun pédalent 2 h.", "ordre": 2}, {"section": "gros_engin", "code": "gros_avion_a380_decollage", "nom": "Avion A380 au décollage", "valeur": 150000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Les 4 réacteurs d'un A380 en poussée maximale délivrent ~310 MW (thermique). Rendement mécanique ~50 % → 150 MW utiles = 1,5 million d'humains. Heureusement, le décollage ne dure que 2-3 minutes.", "ordre": 3}, {"section": "gros_engin", "code": "gros_cargo_container", "nom": "Porte-conteneurs (moteur principal)", "valeur": 800000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un Triple-E (Maersk) ou Panamax moderne a un moteur de 80 MW. Soit 800 000 humains pédalant en continu pour traverser le Pacifique à 22 nœuds (40 km/h). Plus que la population de Lyon.", "ordre": 4}, {"section": "gros_engin", "code": "gros_paquebot_croisiere", "nom": "Paquebot de croisière (Harmony of the Seas)", "valeur": 970000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "97 MW installés, 6 000 passagers, tout compris (cabines, piscines, cuisines, propulsion). Soit 970 000 humains — une grande agglomération entière pédalant pour faire naviguer le bateau et faire vivre ses occupants.", "ordre": 5}, {"section": "gros_engin", "code": "gros_camion_40t", "nom": "Camion 40 tonnes autoroute", "valeur": 4000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un semi-remorque en phase de croisière à 90 km/h consomme ~400 kW utiles au crochet. Soit 4 000 humains — ça tracterait le camion, mais pas tout le temps.", "ordre": 6}, {"section": "gros_engin", "code": "gros_fusee_saturnV_decollage", "nom": "Fusée Saturn V au décollage", "valeur": 1900000000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Les 5 moteurs F-1 délivrent 190 GW de puissance thermique brute. 1,9 milliard d'humains pédalant ensemble. Pendant 2,5 minutes, le décollage de Saturn V dépassait 25 % de la puissance instantanée humaine mondiale (habitants de la Terre cumulés).", "ordre": 7}, {"section": "gros_engin", "code": "gros_ferme_eolienne", "nom": "Ferme éolienne (10 turbines × 5 MW)", "valeur": 500000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Puissance crête 50 MW. En conditions nominales, équivaut à 500 000 humains. Mais facteur de charge ~30 % (vent intermittent) → 150 000 humains-équivalents en moyenne annuelle.", "ordre": 8}, {"section": "gros_engin", "code": "gros_centrale_nuke", "nom": "Centrale nucléaire (1 réacteur N4 1450 MW)", "valeur": 14500000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un réacteur EDF classique produit 1,45 GW électriques en continu, 24 h/24. 14,5 millions d'humains. Pour mémoire, il y a 56 réacteurs en France — équivalent de 800 millions d'humains pédalants continument.", "ordre": 9}, {"section": "gros_engin", "code": "gros_laminoir_sidérurgique", "nom": "Laminoir d'aciérie", "valeur": 200000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "20 MW en pointe. Un laminoir moderne consomme autant qu'une petite ville (Morlaix ~15 000 hab). Multiplier la sidérurgie d'un pays = multiplier ces consommations à l'échelle de dizaines d'agglomérations.", "ordre": 10}, {"section": "gros_engin", "code": "gros_tractopelle", "nom": "Tractopelle (engin BTP moyen)", "valeur": 1200.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un CAT 950 GC ou équivalent = 120 kW utiles. Soit 1 200 humains. 8 h de chantier = 9 600 heures-humain, soit 1 200 personnes travaillant une journée complète.", "ordre": 11}, {"section": "gros_engin", "code": "gros_chauffage_immeuble", "nom": "Chaudière collective (immeuble 50 logements)", "valeur": 3000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "300 kW thermiques en période de grand froid. Soit 3 000 humains pédalant ensemble juste pour chauffer l'immeuble. Les jours les plus froids d'hiver.", "ordre": 12}], "energie_combustible": [{"section": "energie_combustible", "code": "pci_essence", "nom": "PCI essence", "valeur": 34.2, "unite": "MJ/L", "fourchette_min": 33.5, "fourchette_max": 34.8, "source": "Smil 2017 Energy and Civilization, Table 1.1", "source_id": 1663, "commentaire": "≈ 9,5 kWh/L. PCI = Pouvoir Calorifique Inferieur (standard thermodynamique)", "ordre": 10}, {"section": "energie_combustible", "code": "pci_diesel", "nom": "PCI diesel", "valeur": 35.9, "unite": "MJ/L", "fourchette_min": 35.5, "fourchette_max": 36.5, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 10 kWh/L. Plus dense energetiquement que essence", "ordre": 11}, {"section": "energie_combustible", "code": "pci_gaz_naturel", "nom": "PCI gaz naturel", "valeur": 35.5, "unite": "MJ/m3", "fourchette_min": 33.0, "fourchette_max": 38.0, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 9,9 kWh/m3. Variable selon composition methane/autres", "ordre": 12}, {"section": "energie_combustible", "code": "pci_charbon", "nom": "PCI charbon (bitumineux)", "valeur": 27.0, "unite": "MJ/kg", "fourchette_min": 24.0, "fourchette_max": 30.0, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 7,5 kWh/kg. Variable selon type (lignite 15, anthracite 32)", "ordre": 13}, {"section": "energie_combustible", "code": "pci_petrole_brut", "nom": "PCI pétrole brut", "valeur": 37.15, "unite": "MJ/L", "fourchette_min": 35.0, "fourchette_max": 40.0, "source": "JMJ 2025 §I.2 (Weidema et al. 2013)", "source_id": 1666, "commentaire": "43,2 MJ/kg × 0,86 kg/L densité moyenne. Variable selon type (léger vs lourd).", "ordre": 14}], "france_agriculture": [{"section": "france_agriculture", "code": "n_haber_bosch_part", "nom": "Part de lazote fourni par Haber-Bosch", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.14 p.138", "source_id": 1669, "commentaire": "Procédé industriel qui a permis la hausse des rendements du XXe s. Mobilise gaz naturel comme matière première ET combustible.", "ordre": 10}, {"section": "france_agriculture", "code": "n_emissions_epandage", "nom": "Émissions épandage engrais N synthèse", "valeur": 7.7, "unite": "MtCO2e", "fourchette_min": 7.5, "fourchette_max": 8.0, "source": "Shift PREF 2026 ch.14 p.138 citant CITEPA 2022", "source_id": 1669, "commentaire": "Émissions directes liées à lépandage (N2O).", "ordre": 11}, {"section": "france_agriculture", "code": "n_emissions_fabrication", "nom": "Émissions fabrication engrais N synthèse", "valeur": 10.0, "unite": "MtCO2e", "fourchette_min": 9.5, "fourchette_max": 10.5, "source": "Shift PREF 2026 ch.14 p.140 citant CITEPA 2021", "source_id": 1669, "commentaire": "41 % des émissions indirectes agricoles. Décarbonation possible via H2 électrolytique.", "ordre": 12}, {"section": "france_agriculture", "code": "n_fixation_fourrageres", "nom": "Fixation N légumineuses fourragères", "valeur": 175.0, "unite": "kgN/ha/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "Luzerne, trèfle, sainfoin. Plafond haut par caractère pérenne et longue saison de croissance.", "ordre": 13}, {"section": "france_agriculture", "code": "n_fixation_graines", "nom": "Fixation N légumineuses à graines", "valeur": 90.0, "unite": "kgN/ha/an", "fourchette_min": 50.0, "fourchette_max": 130.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "Soja, lentille, pois chiche. Fourchette large car annuelles à cycle plus court.", "ordre": 14}, {"section": "france_agriculture", "code": "legumineuses_grandes_cultures", "nom": "Part légumineuses grandes cultures", "valeur": 4.0, "unite": "%", "fourchette_min": 3.5, "fourchette_max": 4.5, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "0,58 Mha sur ~14 Mha. Potentiel dexpansion conséquent.", "ordre": 15}, {"section": "france_agriculture", "code": "legumineuses_prairies", "nom": "Part légumineuses dans prairies", "valeur": 15.0, "unite": "%", "fourchette_min": 13.0, "fourchette_max": 17.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "1,7 Mha équivalent. Surtout en bio.", "ordre": 16}, {"section": "france_agriculture", "code": "objectif_reduction_n_shift", "nom": "Objectif Shift -N synthèse 2050", "valeur": 70.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Scénario de conciliation (haute ambition).", "ordre": 17}, {"section": "france_agriculture", "code": "co2e_ammonitrate", "nom": "Intensité CO2 ammonitrate", "valeur": 5.18, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Le moins émissif des fertilisants N synthèse.", "ordre": 18}, {"section": "france_agriculture", "code": "co2e_uree", "nom": "Intensité CO2 urée", "valeur": 7.62, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "+47 % vs ammonitrate à lépandage.", "ordre": 19}, {"section": "france_agriculture", "code": "co2e_solution_azotee", "nom": "Intensité CO2 solution azotée", "valeur": 6.86, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Valeur intermédiaire. Choix du fertilisant = levier direct.", "ordre": 20}, {"section": "france_agriculture", "code": "soja_import_emissions", "nom": "Émissions indirectes soja importé", "valeur": 3.7, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Déforestation + transport. 2/3 tourteaux FR importés.", "ordre": 21}, {"section": "france_agriculture", "code": "recyclage_urines_potentiel", "nom": "Potentiel recyclage N urines humaines", "valeur": 180.0, "unite": "ktN/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.141 (calcul GRAFS)", "source_id": 1669, "commentaire": "Vs ~30 ktN/an actuellement. Représenterait 10 % de la conso N synthèse.", "ordre": 22}, {"section": "france_agriculture", "code": "digestats_n", "nom": "Azote dans digestats méthanisation", "valeur": 5.0, "unite": "kgN/tonne", "fourchette_min": 3.0, "fourchette_max": 7.0, "source": "Shift PREF 2026 ch.14 p.142", "source_id": 1669, "commentaire": "Sous-produit de la méthanisation. Retour au sol essentiel.", "ordre": 23}], "rendement_moteur": [{"section": "rendement_moteur", "code": "rendement_moteur_essence", "nom": "Rendement net moteur essence (vehicule)", "valeur": 0.25, "unite": "-", "fourchette_min": 0.2, "fourchette_max": 0.3, "source": "Smil 2017", "source_id": 1663, "commentaire": "Net, roue : 20-30 %. Rendement ameliore sur hybrides", "ordre": 20}, {"section": "rendement_moteur", "code": "rendement_moteur_diesel", "nom": "Rendement net moteur diesel (vehicule)", "valeur": 0.35, "unite": "-", "fourchette_min": 0.3, "fourchette_max": 0.4, "source": "Smil 2017", "source_id": 1663, "commentaire": "Meilleur que essence, jusqu a 45 % sur gros moteurs industriels", "ordre": 21}, {"section": "rendement_moteur", "code": "rendement_moteur_electrique", "nom": "Rendement moteur electrique (roue)", "valeur": 0.85, "unite": "-", "fourchette_min": 0.8, "fourchette_max": 0.92, "source": "Smil 2017", "source_id": 1663, "commentaire": "Tres eleve, mais sans compter production + stockage electricite", "ordre": 22}, {"section": "rendement_moteur", "code": "rendement_centrale_thermique", "nom": "Rendement central thermique (mix EU)", "valeur": 0.4, "unite": "-", "fourchette_min": 0.35, "fourchette_max": 0.55, "source": "Smil 2017", "source_id": 1663, "commentaire": "Turbine gaz haut rendement 50-60 %, charbon 35-45 %", "ordre": 23}], "puissance_humaine": [{"section": "puissance_humaine", "code": "puissance_humaine_soutenue", "nom": "Puissance mecanique humaine soutenable (travail physique)", "valeur": 100.0, "unite": "W", "fourchette_min": 75.0, "fourchette_max": 150.0, "source": "JMJ 2025 Coûts cachés §I.2 (Even et al. 2021)", "source_id": 1666, "commentaire": "Valeur de reference retenue par JMJ depuis Even et al. 2021. Historiquement donnee 75 W (soutenable 8h/j) mais 100 W est la convention physique moyenne utilisee dans les bilans energie-sociales.", "ordre": 30}, {"section": "puissance_humaine", "code": "duree_journee_travail", "nom": "Duree journee travail physique", "valeur": 8.0, "unite": "h", "fourchette_min": 6.0, "fourchette_max": 10.0, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "Standard 8 h/j pour calcul energie utile annuelle", "ordre": 31}, {"section": "puissance_humaine", "code": "energie_journaliere_utile", "nom": "Energie mecanique humaine utile journaliere", "valeur": 0.8, "unite": "kWh/j", "fourchette_min": 0.6, "fourchette_max": 1.2, "source": "JMJ 2025 (calcul 100 W × 8 h)", "source_id": 1666, "commentaire": "100 W × 8 h = 800 Wh = 0,8 kWh/j mecanique utile", "ordre": 32}, {"section": "puissance_humaine", "code": "jours_ouvres_an", "nom": "Jours travailles par an", "valeur": 220.0, "unite": "j/an", "fourchette_min": 180.0, "fourchette_max": 250.0, "source": "Statistiques travail FR (INSEE)", "source_id": null, "commentaire": "Exclut week-ends + conges + feries", "ordre": 33}, {"section": "puissance_humaine", "code": "energie_humaine_annuelle_utile", "nom": "Energie mecanique humaine utile annuelle", "valeur": 176.0, "unite": "kWh/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "JMJ 2025 (calcul 0,8 × 220)", "source_id": 1666, "commentaire": "0,8 kWh/j × 220 j ouvres = 176 kWh/an utile. Mondial : calcul sur 365 j continus → ~ 3 153 kWh (cf. 6,54 PW / 100 W humain).", "ordre": 34}, {"section": "puissance_humaine", "code": "ration_metabolique", "nom": "Apport metabolique humain", "valeur": 2500.0, "unite": "kcal/j", "fourchette_min": 2000.0, "fourchette_max": 3500.0, "source": "Organisation Mondiale de la Sante (OMS)", "source_id": null, "commentaire": "Soit ~ 2,9 kWh/j metaboliques. Dont ~ 0,6 kWh utile au travail, le reste est thermique (chaleur corporelle)", "ordre": 35}], "france_elevage": [{"section": "france_elevage", "code": "exploitations_elevage", "nom": "Nombre exploitations élevage FR", "valeur": 145000.0, "unite": "exploitations", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant Agreste", "source_id": 1669, "commentaire": "37 % du total national des fermes.", "ordre": 30}, {"section": "france_elevage", "code": "emissions_directes_agri", "nom": "Part élevage émissions directes agri", "valeur": 60.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant CITEPA 2022", "source_id": 1669, "commentaire": "Essentiellement CH4 fermentation entérique.", "ordre": 31}, {"section": "france_elevage", "code": "cheptel_bovin", "nom": "Cheptel bovin France", "valeur": 16.4, "unite": "M têtes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste 2024", "source_id": 1669, "commentaire": "Décapitalisation subie -10 % en 10 ans.", "ordre": 32}, {"section": "france_elevage", "code": "bovins_ch4_part", "nom": "Part bovins émissions CH4 agri", "valeur": 84.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149", "source_id": 1669, "commentaire": "Fermentation entérique des ruminants.", "ordre": 33}, {"section": "france_elevage", "code": "bovins_emissions_totales", "nom": "Émissions totales bovins FR", "valeur": 35.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant CITEPA 2023", "source_id": 1669, "commentaire": "~9 % des émissions nationales GES.", "ordre": 34}, {"section": "france_elevage", "code": "tourteaux_import", "nom": "Part tourteaux importés", "valeur": 67.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148", "source_id": 1669, "commentaire": "2/3 des tourteaux FR importés, surtout soja Amérique du Sud.", "ordre": 35}, {"section": "france_elevage", "code": "herbe_ration_allaitante", "nom": "Herbe dans ration vache allaitante", "valeur": 80.0, "unite": "%", "fourchette_min": 75.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.15 p.149", "source_id": 1669, "commentaire": "Systèmes allaitants herbagers : base alimentaire.", "ordre": 36}, {"section": "france_elevage", "code": "decroissance_cheptel_10ans", "nom": "Décroissance cheptel bovin 10 ans", "valeur": -10.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "source_id": 1669, "commentaire": "Érosion subie principalement sur les systèmes herbagers les plus vertueux.", "ordre": 37}, {"section": "france_elevage", "code": "decroissance_fermes_10ans", "nom": "Décroissance fermes bovines 10 ans", "valeur": -25.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "source_id": 1669, "commentaire": "1/3 des exploitants non remplacés.", "ordre": 38}, {"section": "france_elevage", "code": "baisse_etp_elevage", "nom": "Baisse ETP élevage 2010-2019", "valeur": -15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "Hors polyculture-polyélevage.", "ordre": 39}, {"section": "france_elevage", "code": "genetique_ch4_variabilite", "nom": "Génétique et variabilité CH4", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "Part de la variabilité des émissions CH4 expliquée par la génétique.", "ordre": 40}, {"section": "france_elevage", "code": "revenu_bovin_lait", "nom": "Revenu moyen bovin lait", "valeur": 24600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Moyenne décennie 2010. Très disparate.", "ordre": 41}, {"section": "france_elevage", "code": "revenu_bovin_viande", "nom": "Revenu moyen bovin viande", "valeur": 18600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Moyenne décennie 2010. Le plus bas après fermes en grande culture.", "ordre": 42}, {"section": "france_elevage", "code": "revenu_agri_10pct_bas", "nom": "Revenu 10 % agriculteurs les plus bas", "valeur": -4600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Revenu courant avant impôts négatif. Décennie 2010.", "ordre": 43}, {"section": "france_elevage", "code": "fermes_ruminants_specialisees", "nom": "Fermes ruminants spécialisées", "valeur": 80000.0, "unite": "fermes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "175 000 ETP. Impact direct dune réduction cheptel.", "ordre": 44}], "formule": [{"section": "formule", "code": "formule_esclaves", "nom": "Nombre d'esclaves energetiques", "valeur": null, "unite": "personnes", "fourchette_min": null, "fourchette_max": null, "source": "Fuller 1938, popularise Jancovici 2015", "source_id": 1662, "commentaire": "N = energie_consommee_kWh_utiles_an / energie_humaine_annuelle_utile_kWh_an. Ex: conso francais moyen ~40 000 kWh/an → ~ 300 esclaves.", "ordre": 40}], "exemple": [{"section": "exemple", "code": "exemple_francais_moyen", "nom": "Francais moyen : equivalent esclaves", "valeur": 300.0, "unite": "esclaves", "fourchette_min": 200.0, "fourchette_max": 400.0, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "Moyenne ~300, mais varie de 100 (precaires) a 1000+ (tres gros consommateurs). Calcul : 40 000 kWh/an / 132 kWh/an/humain.", "ordre": 41}, {"section": "exemple", "code": "exemple_1L_essence", "nom": "Equivalent energetique : 1 L essence", "valeur": 16.0, "unite": "jours-homme", "fourchette_min": 12.0, "fourchette_max": 20.0, "source": "Calcul : (PCI × rendement_moteur) / energie_journaliere", "source_id": null, "commentaire": "(34,2 MJ × 0,25) / (0,6 kWh × 3,6 MJ/kWh) = 8,55 / 2,16 = ~4 jours-homme pour moteur essence. Valeur ~16 jours si on compare directement l'energie thermique (34,2 MJ) au travail humain (2,16 MJ/j). Depend fortement des hypotheses.", "ordre": 42}, {"section": "exemple", "code": "exemple_tracteur_35cv", "nom": "Tracteur 35 CV", "valeur": 26100.0, "unite": "W", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "35 ch × 746 W/ch ≈ 26 100 W. Équivaut à 261 humains (100 W) au travail.", "ordre": 43}], "mondial": [{"section": "mondial", "code": "conso_petrole_mondiale_barils", "nom": "Consommation pétrole mondiale", "valeur": 95.6, "unite": "Mb/jour", "fourchette_min": 90.0, "fourchette_max": 100.0, "source": "JMJ 2025 §I.2 (Edo et al. 2024)", "source_id": 1666, "commentaire": "95,6 millions de barils/jour (2021). x 365 = 34,9 milliards barils/an.", "ordre": 50}, {"section": "mondial", "code": "barril_litres", "nom": "1 baril équivalent litres", "valeur": 158.988, "unite": "L", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2 (OSTROVETSKY 2021)", "source_id": 1666, "commentaire": "Baril US standard = 158,988 L. Fixe.", "ordre": 51}, {"section": "mondial", "code": "energie_mondiale_petrole_EJ", "nom": "Énergie annuelle issue du pétrole", "valeur": 206.27, "unite": "EJ/an", "fourchette_min": 200.0, "fourchette_max": 215.0, "source": "JMJ 2025 §I.2 (calcul 5551 G L × 37,15 MJ/L)", "source_id": 1666, "commentaire": "206,27 Exajoules/an. Représente ~1/3 de l'énergie primaire mondiale.", "ordre": 52}, {"section": "mondial", "code": "puissance_mondiale_petrole_PW", "nom": "Puissance continue équivalente pétrole", "valeur": 6.54, "unite": "PW", "fourchette_min": 6.0, "fourchette_max": 7.0, "source": "JMJ 2025 §I.2 (calcul 206,27 EJ / 31,56 Ms)", "source_id": 1666, "commentaire": "6,54 PétaWatts (continu). 1 Watt = 1 J/s ; an = 31 557 600 s.", "ordre": 53}, {"section": "mondial", "code": "esclaves_mondiaux", "nom": "Esclaves énergétiques mondiaux (pétrole seul)", "valeur": 65400000000000.0, "unite": "esclaves", "fourchette_min": 60000000000000.0, "fourchette_max": 70000000000000.0, "source": "JMJ 2025 §I.2 (calcul 6,54 PW / 100 W/humain)", "source_id": 1666, "commentaire": "~65 400 milliards. Comparé à ~8 milliards d'humains : ~8200x la population mondiale travaillant en continu.", "ordre": 54}, {"section": "mondial", "code": "ratio_esclaves_population", "nom": "Ratio esclaves / population", "valeur": 8200.0, "unite": "-", "fourchette_min": 7500.0, "fourchette_max": 9000.0, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "La puissance pétrole mondiale équivaut à 8200 fois la population humaine au travail en continu.", "ordre": 55}], "france_puits_c": [{"section": "france_puits_c", "code": "puits_total_2023", "nom": "Puits total agri+forestiers 2023", "valeur": -37.0, "unite": "MtCO2e", "fourchette_min": -40.0, "fourchette_max": -35.0, "source": "Shift PREF 2026 ch.19 p.185 citant CITEPA", "source_id": 1669, "commentaire": "10 % des émissions nationales. -26 % vs 2013.", "ordre": 50}, {"section": "france_puits_c", "code": "erosion_puits_10ans", "nom": "Érosion puits C sur 10 ans", "valeur": -26.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Diminution inquiétante liée au changement climatique.", "ordre": 51}, {"section": "france_puits_c", "code": "puits_prairies", "nom": "Puits C prairies 2023", "valeur": -4.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Seul écosystème agricole encore puits net.", "ordre": 52}, {"section": "france_puits_c", "code": "emissions_terres_cultivees", "nom": "Émissions terres cultivées 2023", "valeur": 12.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Devenues émettrices nettes.", "ordre": 53}, {"section": "france_puits_c", "code": "stock_prairies_permanentes", "nom": "Stock C sols prairies permanentes", "valeur": 84.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Moyenne FR. +64 % vs grandes cultures.", "ordre": 54}, {"section": "france_puits_c", "code": "stock_grandes_cultures", "nom": "Stock C sols grandes cultures", "valeur": 51.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Bas initial → potentiel stockage additionnel élevé.", "ordre": 55}, {"section": "france_puits_c", "code": "potentiel_grandes_cultures", "nom": "Potentiel stockage additionnel GC", "valeur": 18.0, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Horizon 30 ans. Généralisation couverts + haies + prairies temporaires.", "ordre": 56}, {"section": "france_puits_c", "code": "potentiel_couverts_intermediaires", "nom": "Potentiel stockage couverts intermédiaires", "valeur": 7.3, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "Principal levier. Millions dhectares investissables.", "ordre": 57}, {"section": "france_puits_c", "code": "potentiel_prairies_temporaires", "nom": "Potentiel prairies temporaires", "valeur": 3.1, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "Substitution maïs fourrager → prairie temporaire.", "ordre": 58}, {"section": "france_puits_c", "code": "stockage_haies_tco2e_ha", "nom": "Stockage unitaire haies", "valeur": 1.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "80-93 % en biomasse aérienne.", "ordre": 59}, {"section": "france_puits_c", "code": "stockage_agroforesterie_tco2e_ha", "nom": "Stockage unitaire agroforesterie intra", "valeur": 4.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "80 % en biomasse aérienne.", "ordre": 60}, {"section": "france_puits_c", "code": "acs_surfaces", "nom": "Surfaces agriculture conservation", "valeur": 4.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Seulement 4 % des surfaces cultivées. Marge énorme.", "ordre": 61}, {"section": "france_puits_c", "code": "perte_prairies_40ans", "nom": "Perte prairies 40 ans", "valeur": -4.0, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Conversion en cultures annuelles → déstockage.", "ordre": 62}, {"section": "france_puits_c", "code": "perte_haies_annuelle", "nom": "Perte haies par an", "valeur": 23500.0, "unite": "km/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "2017-2021. Malgré programmes de plantation.", "ordre": 63}, {"section": "france_puits_c", "code": "snbc3_puits_2050", "nom": "Puits naturels 2050 SNBC 3", "valeur": -24.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Révision à la baisse : SNBC 2 prévoyait 67 MtCO2e.", "ordre": 64}], "haber_bosch": [{"section": "haber_bosch", "code": "part_energie_mondiale_HB", "nom": "Part énergie mondiale Haber-Bosch", "valeur": 1.5, "unite": "%", "fourchette_min": 1.0, "fourchette_max": 2.0, "source": "JMJ 2025 §I.1 (Martin 2020)", "source_id": 1666, "commentaire": "1-2 % de l'énergie mondiale dédiée à la synthèse d'engrais azotés.", "ordre": 60}, {"section": "haber_bosch", "code": "energie_par_kg_N", "nom": "Énergie par kg d'azote synthétisé", "valeur": 45.0, "unite": "GJ/kg N", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "JMJ 2025 §I.1 (Dubois et al. 2022)", "source_id": 1666, "commentaire": "≈ 1 L pétrole par kg N synthétisé.", "ordre": 61}, {"section": "haber_bosch", "code": "part_co2_mondial_HB", "nom": "Part émissions CO2 d'origine Haber-Bosch", "valeur": 1.44, "unite": "%", "fourchette_min": 1.2, "fourchette_max": 1.6, "source": "JMJ 2025 §I.1 (Ambrosio et al. 2024)", "source_id": 1666, "commentaire": "1,44 % des émissions de CO2 d'origine humaine.", "ordre": 62}, {"section": "haber_bosch", "code": "pertes_azote", "nom": "Pertes azote dans environnement", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "JMJ 2025 §I.1 (Mayor et al. 2022)", "source_id": 1666, "commentaire": "~80 % du N apporté perdu (ruissellement, lixiviation, volatilisation). 25-75 % pour P.", "ordre": 63}], "scenario": [{"section": "scenario", "code": "scn_foyer_fr", "nom": "Foyer français moyen (4 pers.)", "valeur": 300.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "40000 kWh utiles/an. Consommation totale tous usages : chauffage (50%), transport voiture (20%), électricité ménagère (15%), reste (15%). ~40 000 kWh utiles/an.", "ordre": 70}, {"section": "scenario", "code": "scn_voiture", "nom": "Voiture essence 15 000 km/an", "valeur": 17.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "2250 kWh utiles/an. Conso 7 L/100 km × 15 000 km = 1050 L × 34,2 MJ/L × 0,25 rendement = 8979 MJ = 2250 kWh utiles.", "ordre": 71}, {"section": "scenario", "code": "scn_tracteur", "nom": "Tracteur 35 CV — 800 h/an", "valeur": 158.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "20880 kWh utiles/an. 26 100 W × 800 h = 20 880 kWh utiles (pleine charge moyenne). Hors fabrication et intrants.", "ordre": 72}, {"section": "scenario", "code": "scn_tonne_N", "nom": "Production 1 tonne azote synthèse", "valeur": 95.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Dubois 2022 via JMJ", "source_id": 1666, "commentaire": "12500 kWh utiles/an. 1 kg N ≈ 45 GJ (Dubois 2022) = 12,5 kWh utiles (conversion ~0,001 — mais le calcul classique mène à 45 GJ primaire : 12 500 kWh thermique équiv. humain).", "ordre": 73}, {"section": "scenario", "code": "scn_centre_donnees_1MW", "nom": "Centre de données 1 MW continu", "valeur": 66364.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.3", "source_id": 1666, "commentaire": "8760000 kWh utiles/an. 1 MW × 8760 h = 8,76 TWh électriques directs (quasi 100 % utile vs moteur thermique). ~66 400 esclaves pour un seul centre de données moyen.", "ordre": 74}, {"section": "scenario", "code": "scn_avion_paris_ny", "nom": "Vol Paris-NY aller-retour (1 passager)", "valeur": 19.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "2500 kWh utiles/an. Kerosene ~450 L/passager/AR × 35 MJ/L × 0,35 rendement ≈ 2500 kWh utiles (équivalent 19 humains en continu pour 1 vol).", "ordre": 75}, {"section": "scenario", "code": "scn_streaming_1h", "nom": "Streaming vidéo 1 h/jour pendant 1 an", "valeur": 0.2, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.3", "source_id": 1666, "commentaire": "30 kWh utiles/an. ~0,08 kWh/h (moyenne mondiale incluant data centers + réseau + device) × 365 h = 30 kWh utiles/an. Faible individuellement, massif agrégé.", "ordre": 76}, {"section": "scenario", "code": "scn_laminoir", "nom": "Laminoir sidérurgique (usine moyenne)", "valeur": 1327273.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "175200000 kWh utiles/an. Puissance typique 20 MW × 8760 h = 175 GWh électriques. ~1,3 million d'humains équivalents pour une seule usine.", "ordre": 77}, {"section": "scenario", "code": "scn_smartphone", "nom": "Smartphone (fabrication + usage 2 ans)", "valeur": 2.3, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "300 kWh utiles/an. Fabrication ~250 kWh + usage 2 ans × 25 kWh/an ≈ 300 kWh. Faible par unité, massif à échelle 2 milliards d'unités annuelles.", "ordre": 78}, {"section": "scenario", "code": "scn_1kg_boeuf", "nom": "1 kg de bœuf (production conventionnelle)", "valeur": 0.2, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Smil 2017", "source_id": null, "commentaire": "27 kWh utiles/an. ~100 MJ par kg production totale (fourrage + transport + abattage + distribution). 27 kWh ≈ 0,2 humain-an.", "ordre": 79}], "france_foret": [{"section": "france_foret", "code": "surface_foret", "nom": "Surface forestière FR", "valeur": 17.6, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "source_id": 1669, "commentaire": "32 % du territoire national.", "ordre": 70}, {"section": "france_foret", "code": "foret_privee_part", "nom": "Part forêt privée", "valeur": 75.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "source_id": 1669, "commentaire": "3,3 M propriétaires. Hyper-morcellée.", "ordre": 71}, {"section": "france_foret", "code": "puits_forestier_2023", "nom": "Puits forestier 2023", "valeur": -51.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Vs -71 en 2013 = -30 %.", "ordre": 72}, {"section": "france_foret", "code": "mortalite_arbres_actuelle", "nom": "Mortalité arbres 2014-2022", "valeur": 15.2, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Doublée vs 2005-2013 (7,4 Mm3/an).", "ordre": 73}, {"section": "france_foret", "code": "expansion_foret", "nom": "Expansion surfaces forêts", "valeur": 90000.0, "unite": "ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "~9 fois la superficie de Paris chaque année.", "ordre": 74}, {"section": "france_foret", "code": "recolte_bois", "nom": "Récolte bois annuelle", "valeur": 52.0, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "73 % de laccroissement net 2015-2023.", "ordre": 75}, {"section": "france_foret", "code": "essences_nb", "nom": "Nombre essences arbres FR", "valeur": 138.0, "unite": "essences", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.192", "source_id": 1669, "commentaire": "75 % des essences européennes. Mais peuplements peu diversifiés.", "ordre": 76}, {"section": "france_foret", "code": "incendie_2022", "nom": "Surfaces forêt brûlées 2022", "valeur": 60000.0, "unite": "ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Dont 30 000 ha en Gironde.", "ordre": 77}, {"section": "france_foret", "code": "stock_sols_forestiers", "nom": "Stock C sols forestiers (30 cm)", "valeur": 81.0, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190 IGN-FCBA", "source_id": 1669, "commentaire": "Puit annuel estimé 200 kgC/ha/an (prudence IGN).", "ordre": 78}, {"section": "france_foret", "code": "scolytes_bois_crise", "nom": "Bois de crise scolytes cumulé", "valeur": 37.0, "unite": "Mm3", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Depuis 2018. 22 épicéa + 15 sapin.", "ordre": 79}], "correlation_pib": [{"section": "correlation_pib", "code": "correlation_pib_energie", "nom": "Corrélation PIB mondial / énergie primaire", "valeur": 0.99, "unite": "r (Pearson)", "fourchette_min": 0.97, "fourchette_max": 0.995, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "Coefficient Pearson sur la periode 1965-2021 sur base annuelle. Tres robuste : 1 % de PIB requiert ~ 0,9 % d energie primaire supplementaire. La decarbonation economique (decorrelation) reste marginale a l echelle mondiale.", "ordre": 80}, {"section": "correlation_pib", "code": "serie_pib_energie", "nom": "Série historique PIB / énergie (1965-2021)", "valeur": null, "unite": "serie", "fourchette_min": null, "fourchette_max": null, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "[[1965, 19, 150, 134], [1975, 30, 240, 217], [1985, 40, 310, 273], [1995, 55, 380, 330], [2005, 70, 480, 420], [2015, 88, 575, 488], [2021, 96, 605, 505]]", "ordre": 81}, {"section": "correlation_pib", "code": "part_fossile_energie_mondiale", "nom": "Part des fossiles dans l'énergie primaire mondiale", "valeur": 83.0, "unite": "%", "fourchette_min": 80.0, "fourchette_max": 85.0, "source": "BP Statistical Review 2022", "source_id": null, "commentaire": "Charbon 27 %, petrole 31 %, gaz 24 %. Renouvelables + nucleaire = 17 %. La part fossile a legerement baisse depuis 1965 (85 %) mais le volume fossile a triple.", "ordre": 82}, {"section": "correlation_pib", "code": "elasticite_pib_energie", "nom": "Élasticité PIB / énergie", "valeur": 0.9, "unite": "-", "fourchette_min": 0.7, "fourchette_max": 1.0, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "Pour 1 % de croissance du PIB, il faut typiquement 0,7-0,9 % de croissance de l energie primaire. Decouplage partiel dans pays deja developpes mais jamais total.", "ordre": 83}], "france_energie": [{"section": "france_energie", "code": "part_fossile_france", "nom": "Part des fossiles dans consommation énergétique FR", "valeur": 60.0, "unite": "%", "fourchette_min": 58.0, "fourchette_max": 65.0, "source": "Shift Project 2024 Réussir la transition (rapport PREF)", "source_id": 1669, "commentaire": "France dépendante à >60 % des énergies fossiles pour sa consommation d'énergie. Part en leger recul historique mais plafond visible.", "ordre": 90}, {"section": "france_energie", "code": "objectif_reduction_emissions", "nom": "Objectif réduction émissions GES (PTEF)", "valeur": 5.0, "unite": "%/an", "fourchette_min": 5.0, "fourchette_max": 5.0, "source": "Shift Project 2024 (PTEF)", "source_id": 1669, "commentaire": "-5 % par an sur 25 ans. Objectif du Plan de Transformation de l'Economie Française (PTEF). Horizon 2050.", "ordre": 91}, {"section": "france_energie", "code": "horizon_transition", "nom": "Horizon de la transition PREF", "valeur": 25.0, "unite": "ans", "fourchette_min": 20.0, "fourchette_max": 30.0, "source": "Shift Project 2024", "source_id": 1669, "commentaire": "Analyse sur 25 années futures (2024-2049). Perspective du rapport \"Réussir la transition dans l'incertitude\".", "ordre": 92}, {"section": "france_energie", "code": "leviers_decarbonation", "nom": "Leviers de décarbonation (PREF)", "valeur": null, "unite": "structure", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2024 Rapport PREF", "source_id": 1669, "commentaire": "{\"leviers\": [\"Production d'énergies bas-carbone française\", \"Électrification massive de l'économie\", \"Maîtrise de la consommation énergétique\", \"Réduction des émissions hors combustion\", \"Préservation des puits de carbone naturels\"], \"chantiers_secteurs\": [\"transports\", \"logement\", \"numérique\", \"industrie\", \"agriculture\", \"énergie\"], \"n_chantiers_total\": 20}", "ordre": 93}, {"section": "france_energie", "code": "exposition_fossile_france", "nom": "Exposition énergétique fossile France", "valeur": 70.0, "unite": "%", "fourchette_min": 68.0, "fourchette_max": 75.0, "source": "Shift Project PREF 2024, p.2", "source_id": 1669, "commentaire": "Exposition incluant l'énergie contenue dans les biens et services importés (vs 60 % dans la consommation finale seule).", "ordre": 94}], "france_macro": [{"section": "france_macro", "code": "emissions_ges_2025", "nom": "Émissions territoriales FR 2025", "valeur": 364.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.238 citant HCC 2025", "source_id": 1669, "commentaire": "Vs >500 MtCO2e en 2010. Baisse -1,5 % 2024-2025 insuffisante.", "ordre": 90}, {"section": "france_macro", "code": "conso_energie_fossile", "nom": "Consommation énergie fossile 2025", "valeur": 1100.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.240-241", "source_id": 1669, "commentaire": "60 % de la conso finale dénergie.", "ordre": 91}, {"section": "france_macro", "code": "conso_electrique", "nom": "Consommation électrique FR 2025", "valeur": 450.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.264", "source_id": 1669, "commentaire": "Doit passer à 600-700 TWh en 2050 pour électrification.", "ordre": 92}, {"section": "france_macro", "code": "objectif_fossile_2050", "nom": "Objectif fossiles énergie finale 2050", "valeur": 1.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.242", "source_id": 1669, "commentaire": "Cible réussite totale. Typiquement <5 % par grand secteur.", "ordre": 93}, {"section": "france_macro", "code": "hausse_conso_elec_min", "nom": "Hausse conso électrique 2025-2050 min", "valeur": 150.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "source_id": 1669, "commentaire": "Avec maîtrise haute conso. Borne basse incontournable.", "ordre": 94}, {"section": "france_macro", "code": "hausse_conso_elec_max", "nom": "Hausse conso électrique 2025-2050 max", "valeur": 250.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "source_id": 1669, "commentaire": "Avec maîtrise basse conso. Borne haute.", "ordre": 95}, {"section": "france_macro", "code": "transport_emissions_part", "nom": "Part transports émissions 2024", "valeur": 33.0, "unite": "%", "fourchette_min": 30.0, "fourchette_max": 35.0, "source": "Shift PREF 2026 p.238 citant HCC", "source_id": 1669, "commentaire": "Voitures ½, utilitaires+PL 1/3.", "ordre": 96}, {"section": "france_macro", "code": "batiments_emissions_part", "nom": "Part bâtiments émissions 2024", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.239 citant HCC", "source_id": 1669, "commentaire": "Logement 60 % / tertiaire 40 %.", "ordre": 97}], "france_secteurs": [{"section": "france_secteurs", "code": "vehicules_fossiles_actuels", "nom": "Véhicules fonctionnant aux fossiles (France 2025)", "valeur": 90.0, "unite": "%", "fourchette_min": 88.0, "fourchette_max": 92.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Essence, diesel, kérosène. >90 % des véhicules en France.", "ordre": 100}, {"section": "france_secteurs", "code": "industrie_part_emissions", "nom": "Part industrie dans émissions GES France", "valeur": 15.0, "unite": "%", "fourchette_min": 14.0, "fourchette_max": 17.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Principalement métallurgie (acier), chimie (engrais), minéraux (ciment).", "ordre": 101}, {"section": "france_secteurs", "code": "puits_carbone_agri_foret", "nom": "Puits C agricoles/forestiers (compensation actuelle)", "valeur": 10.0, "unite": "%", "fourchette_min": 8.0, "fourchette_max": 12.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Écosystèmes agricoles et forestiers compensent ~10 % des émissions annuelles de carbone françaises.", "ordre": 102}], "france_scenarios_2050": [{"section": "france_scenarios_2050", "code": "puits_c_reussite", "nom": "Puits C agri/forestier 2050 (succès)", "valeur": 45.0, "unite": "MtCO2/an", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Capture nette par préservation des puits naturels si réussite totale.", "ordre": 110}, {"section": "france_scenarios_2050", "code": "puits_c_echec", "nom": "Puits C agri/forestier 2050 (échec)", "valeur": -30.0, "unite": "MtCO2/an", "fourchette_min": -35.0, "fourchette_max": -25.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Valeur négative : les puits deviennent émetteurs nets si échec total. Renversement de +45 à -30 = 75 Mt/an d'écart.", "ordre": 111}, {"section": "france_scenarios_2050", "code": "ccs_industrie", "nom": "CCS industrie 2050", "valeur": 3.0, "unite": "MtCO2/an", "fourchette_min": 2.5, "fourchette_max": 3.5, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Capture et séquestration de carbone sur sites industriels à procédés carbonés sans alternative (ex. ciment).", "ordre": 112}, {"section": "france_scenarios_2050", "code": "nucleaire_declin_renoncement", "nom": "Déclin nucléaire si renoncement", "valeur": 280.0, "unite": "TWh", "fourchette_min": 250.0, "fourchette_max": 310.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Perte de production nucléaire d'ici 2050 si pas de prolongation >60 ans et pas d'EPR2.", "ordre": 113}, {"section": "france_scenarios_2050", "code": "nucleaire_nouveau_reussite", "nom": "Gain nucléaire max (succès complet)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 80.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Réussite complète des chantiers nucléaires (prolongation + EPR2) augmente production de +100 TWh en 2050.", "ordre": 114}, {"section": "france_scenarios_2050", "code": "enr_2050", "nom": "EnR France 2050 (scénario central)", "valeur": 350.0, "unite": "TWh", "fourchette_min": 300.0, "fourchette_max": 400.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Photovoltaïque + éolien terrestre + éolien en mer. Scénario tendance forte.", "ordre": 115}, {"section": "france_scenarios_2050", "code": "prod_elec_reussite_totale", "nom": "Production élec 2050 (réussite totale)", "valeur": 1000.0, "unite": "TWh", "fourchette_min": 900.0, "fourchette_max": 1050.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Production électrique France 2050 si tous les chantiers nucléaires + EnR réussissent (haute incertitude).", "ordre": 116}, {"section": "france_scenarios_2050", "code": "prod_elec_moderement_incertain", "nom": "Production élec 2050 (action immédiate)", "valeur": 600.0, "unite": "TWh", "fourchette_min": 550.0, "fourchette_max": 650.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Production 2050 si France mène dès aujourd'hui l'ensemble chantiers EnR + nucléaires (modérément incertain).", "ordre": 117}, {"section": "france_scenarios_2050", "code": "fossile_residuel_liquides", "nom": "Carburants liquides fossiles importés 2050 (scénario dégradé)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 90.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Reliquat si transition ratée.", "ordre": 118}, {"section": "france_scenarios_2050", "code": "fossile_residuel_gaz", "nom": "Gaz fossile importé 2050 (scénario dégradé)", "valeur": 200.0, "unite": "TWh", "fourchette_min": 180.0, "fourchette_max": 240.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Reliquat si transition ratée.", "ordre": 119}, {"section": "france_scenarios_2050", "code": "camions_fossile_degrade", "nom": "Énergie camions fossile 2050 (dégradé)", "valeur": 40.0, "unite": "%", "fourchette_min": 35.0, "fourchette_max": 45.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 (rate les objectifs) : 40 % énergie camions encore fossile en 2050.", "ordre": 120}, {"section": "france_scenarios_2050", "code": "vl_fossile_degrade", "nom": "Énergie véhicules légers fossile 2050 (dégradé)", "valeur": 55.0, "unite": "%", "fourchette_min": 50.0, "fourchette_max": 60.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 : 55 % énergie VL encore fossile en 2050.", "ordre": 121}, {"section": "france_scenarios_2050", "code": "chauffage_fossile_degrade", "nom": "Énergie chauffage fossile 2050 (dégradé)", "valeur": 25.0, "unite": "%", "fourchette_min": 22.0, "fourchette_max": 30.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 : 25 % chauffage logement encore fossile.", "ordre": 122}], "france_historique": [{"section": "france_historique", "code": "covid_reduction_ges", "nom": "Baisse GES France pendant COVID 2020", "valeur": 5.0, "unite": "%", "fourchette_min": 4.0, "fourchette_max": 6.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Baisse de 5 % des émissions GES territoriales France en 2020 (confinements COVID). Référence du type de rupture possible.", "ordre": 130}]}, "sources": {"1662": {"id": 1662, "auteurs": "Fuller, R. Buckminster", "annee": 1938, "titre": "Nine Chains to the Moon", "journal": "Lippincott (Philadelphia)", "url": "https://www.worldcat.org/title/nine-chains-to-the-moon/oclc/4146956"}, "1663": {"id": 1663, "auteurs": "Smil, Vaclav", "annee": 2017, "titre": "Energy and Civilization: A History", "journal": "MIT Press", "url": "https://mitpress.mit.edu/9780262035774/energy-and-civilization/"}, "1664": {"id": 1664, "auteurs": "Jancovici, Jean-Marc", "annee": 2015, "titre": "Dormez tranquilles jusqu'en 2100 : Et autres malentendus sur le climat et l'energie", "journal": "Odile Jacob", "url": "https://www.odilejacob.fr/catalogue/sciences/ecologie-environnement/dormez-tranquilles-jusqu-en-2100_9782738132338.php"}, "1666": {"id": 1666, "auteurs": "Juzan, Jean-Michel", "annee": 2025, "titre": "Le problème des coûts cachés — Analyse intégrée", "journal": "Document de travail Sol Vivant", "url": null}, "1669": {"id": 1669, "auteurs": "The Shift Project", "annee": 2026, "titre": "Réussir la transition dans l'incertitude", "journal": "The Shift Project", "url": "https://theshiftproject.org/publications/reussir-la-transition-dans-lincertitude/"}}};</script>
+<script>const DATA = {"params": {"appareil_quotidien": [{"section": "appareil_quotidien", "code": "app_bouilloire", "nom": "Bouilloire électrique", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour chauffer 1 L d'eau — 20 personnes qui pédalent en même temps.", "ordre": 1}, {"section": "appareil_quotidien", "code": "app_four", "nom": "Four électrique", "valeur": 30.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Rôtir un poulet, cuire un plat — 30 personnes pédalant ensemble pendant 1 h.", "ordre": 2}, {"section": "appareil_quotidien", "code": "app_plaque", "nom": "Plaque de cuisson (induction)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Faire mijoter — 20 personnes pour une seule plaque au maximum.", "ordre": 3}, {"section": "appareil_quotidien", "code": "app_microondes", "nom": "Micro-ondes", "valeur": 10.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Réchauffer une tasse — 10 personnes pédalant.", "ordre": 4}, {"section": "appareil_quotidien", "code": "app_seche_cheveux", "nom": "Sèche-cheveux", "valeur": 18.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "5 min pour se sécher les cheveux — 18 personnes.", "ordre": 5}, {"section": "appareil_quotidien", "code": "app_fer_repasser", "nom": "Fer à repasser", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Repasser une chemise — 15 personnes pédalant.", "ordre": 6}, {"section": "appareil_quotidien", "code": "app_aspirateur", "nom": "Aspirateur", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "15 personnes pour aspirer le salon.", "ordre": 7}, {"section": "appareil_quotidien", "code": "app_machine_laver", "nom": "Machine à laver (cycle chaud)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pendant ~1h30 pour un cycle 60°C — 20 personnes.", "ordre": 8}, {"section": "appareil_quotidien", "code": "app_seche_linge", "nom": "Sèche-linge", "valeur": 25.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "1 cycle (2 h) — 25 personnes en continu.", "ordre": 9}, {"section": "appareil_quotidien", "code": "app_lave_vaisselle", "nom": "Lave-vaisselle", "valeur": 15.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Cycle éco 1h30 — 15 personnes.", "ordre": 10}, {"section": "appareil_quotidien", "code": "app_clim_2kw", "nom": "Climatiseur (unité 2 kW)", "valeur": 20.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour rafraîchir un salon — 20 personnes en continu.", "ordre": 11}, {"section": "appareil_quotidien", "code": "app_ballon_eau_chaude", "nom": "Ballon d'eau chaude (résistance)", "valeur": 24.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Pour chauffer le ballon — 24 personnes pendant la durée de chauffe.", "ordre": 12}, {"section": "appareil_quotidien", "code": "app_frigo", "nom": "Réfrigérateur/congélateur", "valeur": 1.5, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Seulement ~1 personne et demie… mais 24 h sur 24, 365 jours par an.", "ordre": 13}, {"section": "appareil_quotidien", "code": "app_pompe_chaleur", "nom": "Pompe à chaleur (air-eau, 5 kW)", "valeur": 50.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Chauffer une maison — 50 personnes. (Mais chaleur finale ≈ 15 kW via COP 3.)", "ordre": 14}, {"section": "appareil_quotidien", "code": "app_tv", "nom": "Téléviseur LCD 55\"", "valeur": 1.2, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Une soirée télé = ~1 personne pendant toute la soirée.", "ordre": 15}, {"section": "appareil_quotidien", "code": "app_ordi", "nom": "Ordinateur portable", "valeur": 0.6, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Travailler sur son ordi = moitié de la puissance d'un humain pédalant.", "ordre": 16}, {"section": "appareil_quotidien", "code": "app_box_wifi", "nom": "Box internet + wifi", "valeur": 0.15, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Restée allumée 24/7 — 0,15 humain × 8760 h/an = 1300 h-humain.", "ordre": 17}, {"section": "appareil_quotidien", "code": "app_voiture_cuisson", "nom": "Voiture au ralenti (essence)", "valeur": 50.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain (Even 2021, JMJ 2025)", "source_id": 1669, "commentaire": "Moteur tournant au ralenti = 50 humains. En ville : 15 kW = 150 humains.", "ordre": 18}], "climax_mondial": [{"section": "climax_mondial", "code": "world_prod_fossile", "nom": "Production mondiale énergies fossiles (2023)", "valeur": 65400.0, "unite": "milliards d'esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "Pétrole + gaz + charbon = 135 000 TWh/an. Divisé par puissance humaine continue (100 W × 8760 h = 876 kWh/an par humain), avec rendement mécanique 0,6 kWh utile/kWh fossile → 65 400 milliards d'équivalents humains travaillant pour nous jour et nuit.", "ordre": 1}, {"section": "climax_mondial", "code": "world_multiplicateur_humanite", "nom": "Équivalents humains par habitant Terre", "valeur": 8200.0, "unite": "esclaves/personne", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "65 400 milliards ÷ 8 milliards d'humains ≈ 8 200 esclaves énergétiques par personne si on répartissait. En réalité très inégal : un Occidental bénéficie de ~30 000 esclaves, un habitant pays en développement ~300.", "ordre": 2}, {"section": "climax_mondial", "code": "world_puissance_instantanee", "nom": "Puissance instantanée fossile mondiale", "valeur": 15.4, "unite": "TW continus", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "135 000 TWh/an ÷ 8760 h = 15,4 TW en moyenne continue. Cela équivaut à 154 milliards d'humains pédalant H24 — soit 19 fois la population mondiale.", "ordre": 3}, {"section": "climax_mondial", "code": "world_petrole_quotidien", "nom": "Pétrole brûlé chaque jour dans le monde", "valeur": 95.6, "unite": "millions de barils/jour", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "95,6 Mb/jour × 158,988 L/baril × 37,15 MJ/L × rendement 0,25 = 35 TWh utiles par jour. Soit 4 milliards d'humains travaillant 1 journée de 10 h — toute la population active mondiale.", "ordre": 4}, {"section": "climax_mondial", "code": "world_croissance_fossile", "nom": "Croissance annuelle de la consommation mondiale de fossiles", "valeur": 1.2, "unite": "% / an", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2026 + AIE", "source_id": 1669, "commentaire": "Malgré l'urgence climatique, la consommation mondiale de fossiles continue de croître (~+1,2 %/an en moyenne 2020-2024). Au lieu de freiner, on accélère : +3 %/an en Asie, compensé par quelques reculs en Europe. À ce rythme, la décennie 2030 verra encore plus d'esclaves énergétiques que 2025.", "ordre": 6}, {"section": "climax_mondial", "code": "world_temps_rempl_humain", "nom": "Si on remplaçait tous les fossiles par des humains", "valeur": 0.0, "unite": "IMPOSSIBLE", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 + Smil 2017 + Shift PREF 2026", "source_id": 1669, "commentaire": "Cela supposerait 65 400 milliards d'humains pédalant 24/7. Il n'y a que 8 milliards d'humains sur Terre. La moitié de leur temps cumulé (sommeil, repas, enfance, vieillesse, etc.) est indisponible. Le travail fossile est littéralement irremplaçable par du travail humain — d'où le coût réel de la transition.", "ordre": 7}], "gros_engin": [{"section": "gros_engin", "code": "gros_tgv", "nom": "TGV en ligne (Paris-Lyon)", "valeur": 9300.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un TGV consomme 9,3 MW en vitesse de croisière (320 km/h). Soit 93 000 humains. Avec 500 passagers à bord, chaque voyageur mobilise 186 humains-équivalents pendant les 2 h de trajet.", "ordre": 1}, {"section": "gros_engin", "code": "gros_avion_a320_croisiere", "nom": "Avion A320 en croisière", "valeur": 8000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un A320 consomme ~2400 kg kérosène/h en croisière = ~28 MW en équivalent énergie. Avec rendement mécanique 30 % → ~8 MW utiles. Pour 180 passagers, 44 humains chacun pédalent 2 h.", "ordre": 2}, {"section": "gros_engin", "code": "gros_avion_a380_decollage", "nom": "Avion A380 au décollage", "valeur": 150000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Les 4 réacteurs d'un A380 en poussée maximale délivrent ~310 MW (thermique). Rendement mécanique ~50 % → 150 MW utiles = 1,5 million d'humains. Heureusement, le décollage ne dure que 2-3 minutes.", "ordre": 3}, {"section": "gros_engin", "code": "gros_cargo_container", "nom": "Porte-conteneurs (moteur principal)", "valeur": 800000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un Triple-E (Maersk) ou Panamax moderne a un moteur de 80 MW. Soit 800 000 humains pédalant en continu pour traverser le Pacifique à 22 nœuds (40 km/h). Plus que la population de Lyon.", "ordre": 4}, {"section": "gros_engin", "code": "gros_paquebot_croisiere", "nom": "Paquebot de croisière (Harmony of the Seas)", "valeur": 970000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "97 MW installés, 6 000 passagers, tout compris (cabines, piscines, cuisines, propulsion). Soit 970 000 humains — une grande agglomération entière pédalant pour faire naviguer le bateau et faire vivre ses occupants.", "ordre": 5}, {"section": "gros_engin", "code": "gros_camion_40t", "nom": "Camion 40 tonnes autoroute", "valeur": 4000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un semi-remorque en phase de croisière à 90 km/h consomme ~400 kW utiles au crochet. Soit 4 000 humains — ça tracterait le camion, mais pas tout le temps.", "ordre": 6}, {"section": "gros_engin", "code": "gros_fusee_saturnV_decollage", "nom": "Fusée Saturn V au décollage", "valeur": 1900000000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Les 5 moteurs F-1 délivrent 190 GW de puissance thermique brute. 1,9 milliard d'humains pédalant ensemble. Pendant 2,5 minutes, le décollage de Saturn V dépassait 25 % de la puissance instantanée humaine mondiale (habitants de la Terre cumulés).", "ordre": 7}, {"section": "gros_engin", "code": "gros_ferme_eolienne", "nom": "Ferme éolienne (10 turbines × 5 MW)", "valeur": 500000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Puissance crête 50 MW. En conditions nominales, équivaut à 500 000 humains. Mais facteur de charge ~30 % (vent intermittent) → 150 000 humains-équivalents en moyenne annuelle.", "ordre": 8}, {"section": "gros_engin", "code": "gros_centrale_nuke", "nom": "Centrale nucléaire (1 réacteur N4 1450 MW)", "valeur": 14500000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un réacteur EDF classique produit 1,45 GW électriques en continu, 24 h/24. 14,5 millions d'humains. Pour mémoire, il y a 56 réacteurs en France — équivalent de 800 millions d'humains pédalants continument.", "ordre": 9}, {"section": "gros_engin", "code": "gros_laminoir_sidérurgique", "nom": "Laminoir d'aciérie", "valeur": 200000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "20 MW en pointe. Un laminoir moderne consomme autant qu'une petite ville (Morlaix ~15 000 hab). Multiplier la sidérurgie d'un pays = multiplier ces consommations à l'échelle de dizaines d'agglomérations.", "ordre": 10}, {"section": "gros_engin", "code": "gros_tractopelle", "nom": "Tractopelle (engin BTP moyen)", "valeur": 1200.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "Un CAT 950 GC ou équivalent = 120 kW utiles. Soit 1 200 humains. 8 h de chantier = 9 600 heures-humain, soit 1 200 personnes travaillant une journée complète.", "ordre": 11}, {"section": "gros_engin", "code": "gros_chauffage_immeuble", "nom": "Chaudière collective (immeuble 50 logements)", "valeur": 3000.0, "unite": "humains pédalants", "fourchette_min": null, "fourchette_max": null, "source": "Calcul 100 W/humain + constructeurs", "source_id": 1669, "commentaire": "300 kW thermiques en période de grand froid. Soit 3 000 humains pédalant ensemble juste pour chauffer l'immeuble. Les jours les plus froids d'hiver.", "ordre": 12}], "energie_combustible": [{"section": "energie_combustible", "code": "pci_essence", "nom": "PCI essence", "valeur": 34.2, "unite": "MJ/L", "fourchette_min": 33.5, "fourchette_max": 34.8, "source": "Smil 2017 Energy and Civilization, Table 1.1", "source_id": 1663, "commentaire": "≈ 9,5 kWh/L. PCI = Pouvoir Calorifique Inferieur (standard thermodynamique)", "ordre": 10}, {"section": "energie_combustible", "code": "pci_diesel", "nom": "PCI diesel", "valeur": 35.9, "unite": "MJ/L", "fourchette_min": 35.5, "fourchette_max": 36.5, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 10 kWh/L. Plus dense energetiquement que essence", "ordre": 11}, {"section": "energie_combustible", "code": "pci_gaz_naturel", "nom": "PCI gaz naturel", "valeur": 35.5, "unite": "MJ/m3", "fourchette_min": 33.0, "fourchette_max": 38.0, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 9,9 kWh/m3. Variable selon composition methane/autres", "ordre": 12}, {"section": "energie_combustible", "code": "pci_charbon", "nom": "PCI charbon (bitumineux)", "valeur": 27.0, "unite": "MJ/kg", "fourchette_min": 24.0, "fourchette_max": 30.0, "source": "Smil 2017", "source_id": 1663, "commentaire": "≈ 7,5 kWh/kg. Variable selon type (lignite 15, anthracite 32)", "ordre": 13}, {"section": "energie_combustible", "code": "pci_petrole_brut", "nom": "PCI pétrole brut", "valeur": 37.15, "unite": "MJ/L", "fourchette_min": 35.0, "fourchette_max": 40.0, "source": "JMJ 2025 §I.2 (Weidema et al. 2013)", "source_id": 1666, "commentaire": "43,2 MJ/kg × 0,86 kg/L densité moyenne. Variable selon type (léger vs lourd).", "ordre": 14}], "france_agriculture": [{"section": "france_agriculture", "code": "n_haber_bosch_part", "nom": "Part de lazote fourni par Haber-Bosch", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.14 p.138", "source_id": 1669, "commentaire": "Procédé industriel qui a permis la hausse des rendements du XXe s. Mobilise gaz naturel comme matière première ET combustible.", "ordre": 10}, {"section": "france_agriculture", "code": "n_emissions_epandage", "nom": "Émissions épandage engrais N synthèse", "valeur": 7.7, "unite": "MtCO2e", "fourchette_min": 7.5, "fourchette_max": 8.0, "source": "Shift PREF 2026 ch.14 p.138 citant CITEPA 2022", "source_id": 1669, "commentaire": "Émissions directes liées à lépandage (N2O).", "ordre": 11}, {"section": "france_agriculture", "code": "n_emissions_fabrication", "nom": "Émissions fabrication engrais N synthèse", "valeur": 10.0, "unite": "MtCO2e", "fourchette_min": 9.5, "fourchette_max": 10.5, "source": "Shift PREF 2026 ch.14 p.140 citant CITEPA 2021", "source_id": 1669, "commentaire": "41 % des émissions indirectes agricoles. Décarbonation possible via H2 électrolytique.", "ordre": 12}, {"section": "france_agriculture", "code": "n_fixation_fourrageres", "nom": "Fixation N légumineuses fourragères", "valeur": 175.0, "unite": "kgN/ha/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "Luzerne, trèfle, sainfoin. Plafond haut par caractère pérenne et longue saison de croissance.", "ordre": 13}, {"section": "france_agriculture", "code": "n_fixation_graines", "nom": "Fixation N légumineuses à graines", "valeur": 90.0, "unite": "kgN/ha/an", "fourchette_min": 50.0, "fourchette_max": 130.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "Soja, lentille, pois chiche. Fourchette large car annuelles à cycle plus court.", "ordre": 14}, {"section": "france_agriculture", "code": "legumineuses_grandes_cultures", "nom": "Part légumineuses grandes cultures", "valeur": 4.0, "unite": "%", "fourchette_min": 3.5, "fourchette_max": 4.5, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "0,58 Mha sur ~14 Mha. Potentiel dexpansion conséquent.", "ordre": 15}, {"section": "france_agriculture", "code": "legumineuses_prairies", "nom": "Part légumineuses dans prairies", "valeur": 15.0, "unite": "%", "fourchette_min": 13.0, "fourchette_max": 17.0, "source": "Shift PREF 2026 ch.14 p.139", "source_id": 1669, "commentaire": "1,7 Mha équivalent. Surtout en bio.", "ordre": 16}, {"section": "france_agriculture", "code": "objectif_reduction_n_shift", "nom": "Objectif Shift -N synthèse 2050", "valeur": 70.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Scénario de conciliation (haute ambition).", "ordre": 17}, {"section": "france_agriculture", "code": "co2e_ammonitrate", "nom": "Intensité CO2 ammonitrate", "valeur": 5.18, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Le moins émissif des fertilisants N synthèse.", "ordre": 18}, {"section": "france_agriculture", "code": "co2e_uree", "nom": "Intensité CO2 urée", "valeur": 7.62, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "+47 % vs ammonitrate à lépandage.", "ordre": 19}, {"section": "france_agriculture", "code": "co2e_solution_azotee", "nom": "Intensité CO2 solution azotée", "valeur": 6.86, "unite": "kgCO2e/kgN", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Valeur intermédiaire. Choix du fertilisant = levier direct.", "ordre": 20}, {"section": "france_agriculture", "code": "soja_import_emissions", "nom": "Émissions indirectes soja importé", "valeur": 3.7, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.140", "source_id": 1669, "commentaire": "Déforestation + transport. 2/3 tourteaux FR importés.", "ordre": 21}, {"section": "france_agriculture", "code": "recyclage_urines_potentiel", "nom": "Potentiel recyclage N urines humaines", "valeur": 180.0, "unite": "ktN/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.14 p.141 (calcul GRAFS)", "source_id": 1669, "commentaire": "Vs ~30 ktN/an actuellement. Représenterait 10 % de la conso N synthèse.", "ordre": 22}, {"section": "france_agriculture", "code": "digestats_n", "nom": "Azote dans digestats méthanisation", "valeur": 5.0, "unite": "kgN/tonne", "fourchette_min": 3.0, "fourchette_max": 7.0, "source": "Shift PREF 2026 ch.14 p.142", "source_id": 1669, "commentaire": "Sous-produit de la méthanisation. Retour au sol essentiel.", "ordre": 23}], "rendement_moteur": [{"section": "rendement_moteur", "code": "rendement_moteur_essence", "nom": "Rendement net moteur essence (vehicule)", "valeur": 0.25, "unite": "-", "fourchette_min": 0.2, "fourchette_max": 0.3, "source": "Smil 2017", "source_id": 1663, "commentaire": "Net, roue : 20-30 %. Rendement ameliore sur hybrides", "ordre": 20}, {"section": "rendement_moteur", "code": "rendement_moteur_diesel", "nom": "Rendement net moteur diesel (vehicule)", "valeur": 0.35, "unite": "-", "fourchette_min": 0.3, "fourchette_max": 0.4, "source": "Smil 2017", "source_id": 1663, "commentaire": "Meilleur que essence, jusqu a 45 % sur gros moteurs industriels", "ordre": 21}, {"section": "rendement_moteur", "code": "rendement_moteur_electrique", "nom": "Rendement moteur electrique (roue)", "valeur": 0.85, "unite": "-", "fourchette_min": 0.8, "fourchette_max": 0.92, "source": "Smil 2017", "source_id": 1663, "commentaire": "Tres eleve, mais sans compter production + stockage electricite", "ordre": 22}, {"section": "rendement_moteur", "code": "rendement_centrale_thermique", "nom": "Rendement central thermique (mix EU)", "valeur": 0.4, "unite": "-", "fourchette_min": 0.35, "fourchette_max": 0.55, "source": "Smil 2017", "source_id": 1663, "commentaire": "Turbine gaz haut rendement 50-60 %, charbon 35-45 %", "ordre": 23}], "puissance_humaine": [{"section": "puissance_humaine", "code": "puissance_humaine_soutenue", "nom": "Puissance mecanique humaine soutenable (travail physique)", "valeur": 100.0, "unite": "W", "fourchette_min": 75.0, "fourchette_max": 150.0, "source": "JMJ 2025 Coûts cachés §I.2 (Even et al. 2021)", "source_id": 1666, "commentaire": "Valeur de reference retenue par JMJ depuis Even et al. 2021. Historiquement donnee 75 W (soutenable 8h/j) mais 100 W est la convention physique moyenne utilisee dans les bilans energie-sociales.", "ordre": 30}, {"section": "puissance_humaine", "code": "duree_journee_travail", "nom": "Duree journee travail physique", "valeur": 8.0, "unite": "h", "fourchette_min": 6.0, "fourchette_max": 10.0, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "Standard 8 h/j pour calcul energie utile annuelle", "ordre": 31}, {"section": "puissance_humaine", "code": "energie_journaliere_utile", "nom": "Energie mecanique humaine utile journaliere", "valeur": 0.8, "unite": "kWh/j", "fourchette_min": 0.6, "fourchette_max": 1.2, "source": "JMJ 2025 (calcul 100 W × 8 h)", "source_id": 1666, "commentaire": "100 W × 8 h = 800 Wh = 0,8 kWh/j mecanique utile", "ordre": 32}, {"section": "puissance_humaine", "code": "jours_ouvres_an", "nom": "Jours travailles par an", "valeur": 220.0, "unite": "j/an", "fourchette_min": 180.0, "fourchette_max": 250.0, "source": "Statistiques travail FR (INSEE)", "source_id": null, "commentaire": "Exclut week-ends + conges + feries", "ordre": 33}, {"section": "puissance_humaine", "code": "energie_humaine_annuelle_utile", "nom": "Energie mecanique humaine utile annuelle", "valeur": 176.0, "unite": "kWh/an", "fourchette_min": 150.0, "fourchette_max": 200.0, "source": "JMJ 2025 (calcul 0,8 × 220)", "source_id": 1666, "commentaire": "0,8 kWh/j × 220 j ouvres = 176 kWh/an utile. Mondial : calcul sur 365 j continus → ~ 3 153 kWh (cf. 6,54 PW / 100 W humain).", "ordre": 34}, {"section": "puissance_humaine", "code": "ration_metabolique", "nom": "Apport metabolique humain", "valeur": 2500.0, "unite": "kcal/j", "fourchette_min": 2000.0, "fourchette_max": 3500.0, "source": "Organisation Mondiale de la Sante (OMS)", "source_id": null, "commentaire": "Soit ~ 2,9 kWh/j metaboliques. Dont ~ 0,6 kWh utile au travail, le reste est thermique (chaleur corporelle)", "ordre": 35}], "france_elevage": [{"section": "france_elevage", "code": "exploitations_elevage", "nom": "Nombre exploitations élevage FR", "valeur": 145000.0, "unite": "exploitations", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant Agreste", "source_id": 1669, "commentaire": "37 % du total national des fermes.", "ordre": 30}, {"section": "france_elevage", "code": "emissions_directes_agri", "nom": "Part élevage émissions directes agri", "valeur": 60.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148 citant CITEPA 2022", "source_id": 1669, "commentaire": "Essentiellement CH4 fermentation entérique.", "ordre": 31}, {"section": "france_elevage", "code": "cheptel_bovin", "nom": "Cheptel bovin France", "valeur": 16.4, "unite": "M têtes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste 2024", "source_id": 1669, "commentaire": "Décapitalisation subie -10 % en 10 ans.", "ordre": 32}, {"section": "france_elevage", "code": "bovins_ch4_part", "nom": "Part bovins émissions CH4 agri", "valeur": 84.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149", "source_id": 1669, "commentaire": "Fermentation entérique des ruminants.", "ordre": 33}, {"section": "france_elevage", "code": "bovins_emissions_totales", "nom": "Émissions totales bovins FR", "valeur": 35.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant CITEPA 2023", "source_id": 1669, "commentaire": "~9 % des émissions nationales GES.", "ordre": 34}, {"section": "france_elevage", "code": "tourteaux_import", "nom": "Part tourteaux importés", "valeur": 67.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.148", "source_id": 1669, "commentaire": "2/3 des tourteaux FR importés, surtout soja Amérique du Sud.", "ordre": 35}, {"section": "france_elevage", "code": "herbe_ration_allaitante", "nom": "Herbe dans ration vache allaitante", "valeur": 80.0, "unite": "%", "fourchette_min": 75.0, "fourchette_max": 85.0, "source": "Shift PREF 2026 ch.15 p.149", "source_id": 1669, "commentaire": "Systèmes allaitants herbagers : base alimentaire.", "ordre": 36}, {"section": "france_elevage", "code": "decroissance_cheptel_10ans", "nom": "Décroissance cheptel bovin 10 ans", "valeur": -10.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "source_id": 1669, "commentaire": "Érosion subie principalement sur les systèmes herbagers les plus vertueux.", "ordre": 37}, {"section": "france_elevage", "code": "decroissance_fermes_10ans", "nom": "Décroissance fermes bovines 10 ans", "valeur": -25.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.149 citant Agreste", "source_id": 1669, "commentaire": "1/3 des exploitants non remplacés.", "ordre": 38}, {"section": "france_elevage", "code": "baisse_etp_elevage", "nom": "Baisse ETP élevage 2010-2019", "valeur": -15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "Hors polyculture-polyélevage.", "ordre": 39}, {"section": "france_elevage", "code": "genetique_ch4_variabilite", "nom": "Génétique et variabilité CH4", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "Part de la variabilité des émissions CH4 expliquée par la génétique.", "ordre": 40}, {"section": "france_elevage", "code": "revenu_bovin_lait", "nom": "Revenu moyen bovin lait", "valeur": 24600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Moyenne décennie 2010. Très disparate.", "ordre": 41}, {"section": "france_elevage", "code": "revenu_bovin_viande", "nom": "Revenu moyen bovin viande", "valeur": 18600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Moyenne décennie 2010. Le plus bas après fermes en grande culture.", "ordre": 42}, {"section": "france_elevage", "code": "revenu_agri_10pct_bas", "nom": "Revenu 10 % agriculteurs les plus bas", "valeur": -4600.0, "unite": "€/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.154 n. 336", "source_id": 1669, "commentaire": "Revenu courant avant impôts négatif. Décennie 2010.", "ordre": 43}, {"section": "france_elevage", "code": "fermes_ruminants_specialisees", "nom": "Fermes ruminants spécialisées", "valeur": 80000.0, "unite": "fermes", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.15 p.153", "source_id": 1669, "commentaire": "175 000 ETP. Impact direct dune réduction cheptel.", "ordre": 44}], "formule": [{"section": "formule", "code": "formule_esclaves", "nom": "Nombre d'esclaves energetiques", "valeur": null, "unite": "personnes", "fourchette_min": null, "fourchette_max": null, "source": "Fuller 1938, popularise Jancovici 2015", "source_id": 1662, "commentaire": "N = energie_consommee_kWh_utiles_an / energie_humaine_annuelle_utile_kWh_an. Ex: conso francais moyen ~40 000 kWh/an → ~ 300 esclaves.", "ordre": 40}], "exemple": [{"section": "exemple", "code": "exemple_francais_moyen", "nom": "Francais moyen : equivalent esclaves", "valeur": 300.0, "unite": "esclaves", "fourchette_min": 200.0, "fourchette_max": 400.0, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "Moyenne ~300, mais varie de 100 (precaires) a 1000+ (tres gros consommateurs). Calcul : 40 000 kWh/an / 132 kWh/an/humain.", "ordre": 41}, {"section": "exemple", "code": "exemple_1L_essence", "nom": "Equivalent energetique : 1 L essence", "valeur": 16.0, "unite": "jours-homme", "fourchette_min": 12.0, "fourchette_max": 20.0, "source": "Calcul : (PCI × rendement_moteur) / energie_journaliere", "source_id": null, "commentaire": "(34,2 MJ × 0,25) / (0,6 kWh × 3,6 MJ/kWh) = 8,55 / 2,16 = ~4 jours-homme pour moteur essence. Valeur ~16 jours si on compare directement l'energie thermique (34,2 MJ) au travail humain (2,16 MJ/j). Depend fortement des hypotheses.", "ordre": 42}, {"section": "exemple", "code": "exemple_tracteur_35cv", "nom": "Tracteur 35 CV", "valeur": 26100.0, "unite": "W", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "35 ch × 746 W/ch ≈ 26 100 W. Équivaut à 261 humains (100 W) au travail.", "ordre": 43}], "mondial": [{"section": "mondial", "code": "conso_petrole_mondiale_barils", "nom": "Consommation pétrole mondiale", "valeur": 95.6, "unite": "Mb/jour", "fourchette_min": 90.0, "fourchette_max": 100.0, "source": "JMJ 2025 §I.2 (Edo et al. 2024)", "source_id": 1666, "commentaire": "95,6 millions de barils/jour (2021). x 365 = 34,9 milliards barils/an.", "ordre": 50}, {"section": "mondial", "code": "barril_litres", "nom": "1 baril équivalent litres", "valeur": 158.988, "unite": "L", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2 (OSTROVETSKY 2021)", "source_id": 1666, "commentaire": "Baril US standard = 158,988 L. Fixe.", "ordre": 51}, {"section": "mondial", "code": "energie_mondiale_petrole_EJ", "nom": "Énergie annuelle issue du pétrole", "valeur": 206.27, "unite": "EJ/an", "fourchette_min": 200.0, "fourchette_max": 215.0, "source": "JMJ 2025 §I.2 (calcul 5551 G L × 37,15 MJ/L)", "source_id": 1666, "commentaire": "206,27 Exajoules/an. Représente ~1/3 de l'énergie primaire mondiale.", "ordre": 52}, {"section": "mondial", "code": "puissance_mondiale_petrole_PW", "nom": "Puissance continue équivalente pétrole", "valeur": 6.54, "unite": "PW", "fourchette_min": 6.0, "fourchette_max": 7.0, "source": "JMJ 2025 §I.2 (calcul 206,27 EJ / 31,56 Ms)", "source_id": 1666, "commentaire": "6,54 PétaWatts (continu). 1 Watt = 1 J/s ; an = 31 557 600 s.", "ordre": 53}, {"section": "mondial", "code": "esclaves_mondiaux", "nom": "Esclaves énergétiques mondiaux (pétrole seul)", "valeur": 65400000000000.0, "unite": "esclaves", "fourchette_min": 60000000000000.0, "fourchette_max": 70000000000000.0, "source": "JMJ 2025 §I.2 (calcul 6,54 PW / 100 W/humain)", "source_id": 1666, "commentaire": "~65 400 milliards. Comparé à ~8 milliards d'humains : ~8200x la population mondiale travaillant en continu.", "ordre": 54}, {"section": "mondial", "code": "ratio_esclaves_population", "nom": "Ratio esclaves / population", "valeur": 8200.0, "unite": "-", "fourchette_min": 7500.0, "fourchette_max": 9000.0, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "La puissance pétrole mondiale équivaut à 8200 fois la population humaine au travail en continu.", "ordre": 55}], "france_puits_c": [{"section": "france_puits_c", "code": "puits_total_2023", "nom": "Puits total agri+forestiers 2023", "valeur": -37.0, "unite": "MtCO2e", "fourchette_min": -40.0, "fourchette_max": -35.0, "source": "Shift PREF 2026 ch.19 p.185 citant CITEPA", "source_id": 1669, "commentaire": "10 % des émissions nationales. -26 % vs 2013.", "ordre": 50}, {"section": "france_puits_c", "code": "erosion_puits_10ans", "nom": "Érosion puits C sur 10 ans", "valeur": -26.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Diminution inquiétante liée au changement climatique.", "ordre": 51}, {"section": "france_puits_c", "code": "puits_prairies", "nom": "Puits C prairies 2023", "valeur": -4.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Seul écosystème agricole encore puits net.", "ordre": 52}, {"section": "france_puits_c", "code": "emissions_terres_cultivees", "nom": "Émissions terres cultivées 2023", "valeur": 12.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Devenues émettrices nettes.", "ordre": 53}, {"section": "france_puits_c", "code": "stock_prairies_permanentes", "nom": "Stock C sols prairies permanentes", "valeur": 84.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Moyenne FR. +64 % vs grandes cultures.", "ordre": 54}, {"section": "france_puits_c", "code": "stock_grandes_cultures", "nom": "Stock C sols grandes cultures", "valeur": 51.6, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Bas initial → potentiel stockage additionnel élevé.", "ordre": 55}, {"section": "france_puits_c", "code": "potentiel_grandes_cultures", "nom": "Potentiel stockage additionnel GC", "valeur": 18.0, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Horizon 30 ans. Généralisation couverts + haies + prairies temporaires.", "ordre": 56}, {"section": "france_puits_c", "code": "potentiel_couverts_intermediaires", "nom": "Potentiel stockage couverts intermédiaires", "valeur": 7.3, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "Principal levier. Millions dhectares investissables.", "ordre": 57}, {"section": "france_puits_c", "code": "potentiel_prairies_temporaires", "nom": "Potentiel prairies temporaires", "valeur": 3.1, "unite": "MtCO2e/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "Substitution maïs fourrager → prairie temporaire.", "ordre": 58}, {"section": "france_puits_c", "code": "stockage_haies_tco2e_ha", "nom": "Stockage unitaire haies", "valeur": 1.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "80-93 % en biomasse aérienne.", "ordre": 59}, {"section": "france_puits_c", "code": "stockage_agroforesterie_tco2e_ha", "nom": "Stockage unitaire agroforesterie intra", "valeur": 4.0, "unite": "tCO2e/ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.187", "source_id": 1669, "commentaire": "80 % en biomasse aérienne.", "ordre": 60}, {"section": "france_puits_c", "code": "acs_surfaces", "nom": "Surfaces agriculture conservation", "valeur": 4.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Seulement 4 % des surfaces cultivées. Marge énorme.", "ordre": 61}, {"section": "france_puits_c", "code": "perte_prairies_40ans", "nom": "Perte prairies 40 ans", "valeur": -4.0, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "Conversion en cultures annuelles → déstockage.", "ordre": 62}, {"section": "france_puits_c", "code": "perte_haies_annuelle", "nom": "Perte haies par an", "valeur": 23500.0, "unite": "km/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.186", "source_id": 1669, "commentaire": "2017-2021. Malgré programmes de plantation.", "ordre": 63}, {"section": "france_puits_c", "code": "snbc3_puits_2050", "nom": "Puits naturels 2050 SNBC 3", "valeur": -24.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.185", "source_id": 1669, "commentaire": "Révision à la baisse : SNBC 2 prévoyait 67 MtCO2e.", "ordre": 64}], "haber_bosch": [{"section": "haber_bosch", "code": "part_energie_mondiale_HB", "nom": "Part énergie mondiale Haber-Bosch", "valeur": 1.5, "unite": "%", "fourchette_min": 1.0, "fourchette_max": 2.0, "source": "JMJ 2025 §I.1 (Martin 2020)", "source_id": 1666, "commentaire": "1-2 % de l'énergie mondiale dédiée à la synthèse d'engrais azotés.", "ordre": 60}, {"section": "haber_bosch", "code": "energie_par_kg_N", "nom": "Énergie par kg d'azote synthétisé", "valeur": 45.0, "unite": "GJ/kg N", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "JMJ 2025 §I.1 (Dubois et al. 2022)", "source_id": 1666, "commentaire": "≈ 1 L pétrole par kg N synthétisé.", "ordre": 61}, {"section": "haber_bosch", "code": "part_co2_mondial_HB", "nom": "Part émissions CO2 d'origine Haber-Bosch", "valeur": 1.44, "unite": "%", "fourchette_min": 1.2, "fourchette_max": 1.6, "source": "JMJ 2025 §I.1 (Ambrosio et al. 2024)", "source_id": 1666, "commentaire": "1,44 % des émissions de CO2 d'origine humaine.", "ordre": 62}, {"section": "haber_bosch", "code": "pertes_azote", "nom": "Pertes azote dans environnement", "valeur": 80.0, "unite": "%", "fourchette_min": 70.0, "fourchette_max": 85.0, "source": "JMJ 2025 §I.1 (Mayor et al. 2022)", "source_id": 1666, "commentaire": "~80 % du N apporté perdu (ruissellement, lixiviation, volatilisation). 25-75 % pour P.", "ordre": 63}], "scenario": [{"section": "scenario", "code": "scn_foyer_fr", "nom": "Foyer français moyen (4 pers.)", "valeur": 300.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Jancovici 2015", "source_id": 1664, "commentaire": "40000 kWh utiles/an. Consommation totale tous usages : chauffage (50%), transport voiture (20%), électricité ménagère (15%), reste (15%). ~40 000 kWh utiles/an.", "ordre": 70}, {"section": "scenario", "code": "scn_voiture", "nom": "Voiture essence 15 000 km/an", "valeur": 17.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "2250 kWh utiles/an. Conso 7 L/100 km × 15 000 km = 1050 L × 34,2 MJ/L × 0,25 rendement = 8979 MJ = 2250 kWh utiles.", "ordre": 71}, {"section": "scenario", "code": "scn_tracteur", "nom": "Tracteur 35 CV — 800 h/an", "valeur": 158.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "20880 kWh utiles/an. 26 100 W × 800 h = 20 880 kWh utiles (pleine charge moyenne). Hors fabrication et intrants.", "ordre": 72}, {"section": "scenario", "code": "scn_tonne_N", "nom": "Production 1 tonne azote synthèse", "valeur": 95.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Dubois 2022 via JMJ", "source_id": 1666, "commentaire": "12500 kWh utiles/an. 1 kg N ≈ 45 GJ (Dubois 2022) = 12,5 kWh utiles (conversion ~0,001 — mais le calcul classique mène à 45 GJ primaire : 12 500 kWh thermique équiv. humain).", "ordre": 73}, {"section": "scenario", "code": "scn_centre_donnees_1MW", "nom": "Centre de données 1 MW continu", "valeur": 66364.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.3", "source_id": 1666, "commentaire": "8760000 kWh utiles/an. 1 MW × 8760 h = 8,76 TWh électriques directs (quasi 100 % utile vs moteur thermique). ~66 400 esclaves pour un seul centre de données moyen.", "ordre": 74}, {"section": "scenario", "code": "scn_avion_paris_ny", "nom": "Vol Paris-NY aller-retour (1 passager)", "valeur": 19.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "2500 kWh utiles/an. Kerosene ~450 L/passager/AR × 35 MJ/L × 0,35 rendement ≈ 2500 kWh utiles (équivalent 19 humains en continu pour 1 vol).", "ordre": 75}, {"section": "scenario", "code": "scn_streaming_1h", "nom": "Streaming vidéo 1 h/jour pendant 1 an", "valeur": 0.2, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.3", "source_id": 1666, "commentaire": "30 kWh utiles/an. ~0,08 kWh/h (moyenne mondiale incluant data centers + réseau + device) × 365 h = 30 kWh utiles/an. Faible individuellement, massif agrégé.", "ordre": 76}, {"section": "scenario", "code": "scn_laminoir", "nom": "Laminoir sidérurgique (usine moyenne)", "valeur": 1327273.0, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025 §I.2", "source_id": 1666, "commentaire": "175200000 kWh utiles/an. Puissance typique 20 MW × 8760 h = 175 GWh électriques. ~1,3 million d'humains équivalents pour une seule usine.", "ordre": 77}, {"section": "scenario", "code": "scn_smartphone", "nom": "Smartphone (fabrication + usage 2 ans)", "valeur": 2.3, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "JMJ 2025", "source_id": 1666, "commentaire": "300 kWh utiles/an. Fabrication ~250 kWh + usage 2 ans × 25 kWh/an ≈ 300 kWh. Faible par unité, massif à échelle 2 milliards d'unités annuelles.", "ordre": 78}, {"section": "scenario", "code": "scn_1kg_boeuf", "nom": "1 kg de bœuf (production conventionnelle)", "valeur": 0.2, "unite": "esclaves", "fourchette_min": null, "fourchette_max": null, "source": "Smil 2017", "source_id": null, "commentaire": "27 kWh utiles/an. ~100 MJ par kg production totale (fourrage + transport + abattage + distribution). 27 kWh ≈ 0,2 humain-an.", "ordre": 79}], "france_foret": [{"section": "france_foret", "code": "surface_foret", "nom": "Surface forestière FR", "valeur": 17.6, "unite": "Mha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "source_id": 1669, "commentaire": "32 % du territoire national.", "ordre": 70}, {"section": "france_foret", "code": "foret_privee_part", "nom": "Part forêt privée", "valeur": 75.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190", "source_id": 1669, "commentaire": "3,3 M propriétaires. Hyper-morcellée.", "ordre": 71}, {"section": "france_foret", "code": "puits_forestier_2023", "nom": "Puits forestier 2023", "valeur": -51.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Vs -71 en 2013 = -30 %.", "ordre": 72}, {"section": "france_foret", "code": "mortalite_arbres_actuelle", "nom": "Mortalité arbres 2014-2022", "valeur": 15.2, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Doublée vs 2005-2013 (7,4 Mm3/an).", "ordre": 73}, {"section": "france_foret", "code": "expansion_foret", "nom": "Expansion surfaces forêts", "valeur": 90000.0, "unite": "ha/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "~9 fois la superficie de Paris chaque année.", "ordre": 74}, {"section": "france_foret", "code": "recolte_bois", "nom": "Récolte bois annuelle", "valeur": 52.0, "unite": "Mm3/an", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "73 % de laccroissement net 2015-2023.", "ordre": 75}, {"section": "france_foret", "code": "essences_nb", "nom": "Nombre essences arbres FR", "valeur": 138.0, "unite": "essences", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.192", "source_id": 1669, "commentaire": "75 % des essences européennes. Mais peuplements peu diversifiés.", "ordre": 76}, {"section": "france_foret", "code": "incendie_2022", "nom": "Surfaces forêt brûlées 2022", "valeur": 60000.0, "unite": "ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Dont 30 000 ha en Gironde.", "ordre": 77}, {"section": "france_foret", "code": "stock_sols_forestiers", "nom": "Stock C sols forestiers (30 cm)", "valeur": 81.0, "unite": "tC/ha", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.190 IGN-FCBA", "source_id": 1669, "commentaire": "Puit annuel estimé 200 kgC/ha/an (prudence IGN).", "ordre": 78}, {"section": "france_foret", "code": "scolytes_bois_crise", "nom": "Bois de crise scolytes cumulé", "valeur": 37.0, "unite": "Mm3", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 ch.19 p.189", "source_id": 1669, "commentaire": "Depuis 2018. 22 épicéa + 15 sapin.", "ordre": 79}], "correlation_pib": [{"section": "correlation_pib", "code": "correlation_pib_energie", "nom": "Corrélation PIB mondial / énergie primaire", "valeur": 0.99, "unite": "r (Pearson)", "fourchette_min": 0.97, "fourchette_max": 0.995, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "Coefficient Pearson sur la periode 1965-2021 sur base annuelle. Tres robuste : 1 % de PIB requiert ~ 0,9 % d energie primaire supplementaire. La decarbonation economique (decorrelation) reste marginale a l echelle mondiale.", "ordre": 80}, {"section": "correlation_pib", "code": "serie_pib_energie", "nom": "Série historique PIB / énergie (1965-2021)", "valeur": null, "unite": "serie", "fourchette_min": null, "fourchette_max": null, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "[[1965, 19, 150, 134], [1975, 30, 240, 217], [1985, 40, 310, 273], [1995, 55, 380, 330], [2005, 70, 480, 420], [2015, 88, 575, 488], [2021, 96, 605, 505]]", "ordre": 81}, {"section": "correlation_pib", "code": "part_fossile_energie_mondiale", "nom": "Part des fossiles dans l'énergie primaire mondiale", "valeur": 83.0, "unite": "%", "fourchette_min": 80.0, "fourchette_max": 85.0, "source": "BP Statistical Review 2022", "source_id": null, "commentaire": "Charbon 27 %, petrole 31 %, gaz 24 %. Renouvelables + nucleaire = 17 %. La part fossile a legerement baisse depuis 1965 (85 %) mais le volume fossile a triple.", "ordre": 82}, {"section": "correlation_pib", "code": "elasticite_pib_energie", "nom": "Élasticité PIB / énergie", "valeur": 0.9, "unite": "-", "fourchette_min": 0.7, "fourchette_max": 1.0, "source": "The Shift Project (2024) 'Réussir la transition dans l'incertitude' + Carbone 4", "source_id": 1669, "commentaire": "Pour 1 % de croissance du PIB, il faut typiquement 0,7-0,9 % de croissance de l energie primaire. Decouplage partiel dans pays deja developpes mais jamais total.", "ordre": 83}], "france_energie": [{"section": "france_energie", "code": "part_fossile_france", "nom": "Part des fossiles dans consommation énergétique FR", "valeur": 60.0, "unite": "%", "fourchette_min": 58.0, "fourchette_max": 65.0, "source": "Shift Project 2024 Réussir la transition (rapport PREF)", "source_id": 1669, "commentaire": "France dépendante à >60 % des énergies fossiles pour sa consommation d'énergie. Part en leger recul historique mais plafond visible.", "ordre": 90}, {"section": "france_energie", "code": "objectif_reduction_emissions", "nom": "Objectif réduction émissions GES (PTEF)", "valeur": 5.0, "unite": "%/an", "fourchette_min": 5.0, "fourchette_max": 5.0, "source": "Shift Project 2024 (PTEF)", "source_id": 1669, "commentaire": "-5 % par an sur 25 ans. Objectif du Plan de Transformation de l'Economie Française (PTEF). Horizon 2050.", "ordre": 91}, {"section": "france_energie", "code": "horizon_transition", "nom": "Horizon de la transition PREF", "valeur": 25.0, "unite": "ans", "fourchette_min": 20.0, "fourchette_max": 30.0, "source": "Shift Project 2024", "source_id": 1669, "commentaire": "Analyse sur 25 années futures (2024-2049). Perspective du rapport \"Réussir la transition dans l'incertitude\".", "ordre": 92}, {"section": "france_energie", "code": "leviers_decarbonation", "nom": "Leviers de décarbonation (PREF)", "valeur": null, "unite": "structure", "fourchette_min": null, "fourchette_max": null, "source": "Shift Project 2024 Rapport PREF", "source_id": 1669, "commentaire": "{\"leviers\": [\"Production d'énergies bas-carbone française\", \"Électrification massive de l'économie\", \"Maîtrise de la consommation énergétique\", \"Réduction des émissions hors combustion\", \"Préservation des puits de carbone naturels\"], \"chantiers_secteurs\": [\"transports\", \"logement\", \"numérique\", \"industrie\", \"agriculture\", \"énergie\"], \"n_chantiers_total\": 20}", "ordre": 93}, {"section": "france_energie", "code": "exposition_fossile_france", "nom": "Exposition énergétique fossile France", "valeur": 70.0, "unite": "%", "fourchette_min": 68.0, "fourchette_max": 75.0, "source": "Shift Project PREF 2024, p.2", "source_id": 1669, "commentaire": "Exposition incluant l'énergie contenue dans les biens et services importés (vs 60 % dans la consommation finale seule).", "ordre": 94}], "france_macro": [{"section": "france_macro", "code": "emissions_ges_2025", "nom": "Émissions territoriales FR 2025", "valeur": 364.0, "unite": "MtCO2e", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.238 citant HCC 2025", "source_id": 1669, "commentaire": "Vs >500 MtCO2e en 2010. Baisse -1,5 % 2024-2025 insuffisante.", "ordre": 90}, {"section": "france_macro", "code": "conso_energie_fossile", "nom": "Consommation énergie fossile 2025", "valeur": 1100.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.240-241", "source_id": 1669, "commentaire": "60 % de la conso finale dénergie.", "ordre": 91}, {"section": "france_macro", "code": "conso_electrique", "nom": "Consommation électrique FR 2025", "valeur": 450.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.264", "source_id": 1669, "commentaire": "Doit passer à 600-700 TWh en 2050 pour électrification.", "ordre": 92}, {"section": "france_macro", "code": "objectif_fossile_2050", "nom": "Objectif fossiles énergie finale 2050", "valeur": 1.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.242", "source_id": 1669, "commentaire": "Cible réussite totale. Typiquement <5 % par grand secteur.", "ordre": 93}, {"section": "france_macro", "code": "hausse_conso_elec_min", "nom": "Hausse conso électrique 2025-2050 min", "valeur": 150.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "source_id": 1669, "commentaire": "Avec maîtrise haute conso. Borne basse incontournable.", "ordre": 94}, {"section": "france_macro", "code": "hausse_conso_elec_max", "nom": "Hausse conso électrique 2025-2050 max", "valeur": 250.0, "unite": "TWh", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.265", "source_id": 1669, "commentaire": "Avec maîtrise basse conso. Borne haute.", "ordre": 95}, {"section": "france_macro", "code": "transport_emissions_part", "nom": "Part transports émissions 2024", "valeur": 33.0, "unite": "%", "fourchette_min": 30.0, "fourchette_max": 35.0, "source": "Shift PREF 2026 p.238 citant HCC", "source_id": 1669, "commentaire": "Voitures ½, utilitaires+PL 1/3.", "ordre": 96}, {"section": "france_macro", "code": "batiments_emissions_part", "nom": "Part bâtiments émissions 2024", "valeur": 15.0, "unite": "%", "fourchette_min": null, "fourchette_max": null, "source": "Shift PREF 2026 p.239 citant HCC", "source_id": 1669, "commentaire": "Logement 60 % / tertiaire 40 %.", "ordre": 97}], "france_secteurs": [{"section": "france_secteurs", "code": "vehicules_fossiles_actuels", "nom": "Véhicules fonctionnant aux fossiles (France 2025)", "valeur": 90.0, "unite": "%", "fourchette_min": 88.0, "fourchette_max": 92.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Essence, diesel, kérosène. >90 % des véhicules en France.", "ordre": 100}, {"section": "france_secteurs", "code": "industrie_part_emissions", "nom": "Part industrie dans émissions GES France", "valeur": 15.0, "unite": "%", "fourchette_min": 14.0, "fourchette_max": 17.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Principalement métallurgie (acier), chimie (engrais), minéraux (ciment).", "ordre": 101}, {"section": "france_secteurs", "code": "puits_carbone_agri_foret", "nom": "Puits C agricoles/forestiers (compensation actuelle)", "valeur": 10.0, "unite": "%", "fourchette_min": 8.0, "fourchette_max": 12.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Écosystèmes agricoles et forestiers compensent ~10 % des émissions annuelles de carbone françaises.", "ordre": 102}], "france_scenarios_2050": [{"section": "france_scenarios_2050", "code": "puits_c_reussite", "nom": "Puits C agri/forestier 2050 (succès)", "valeur": 45.0, "unite": "MtCO2/an", "fourchette_min": 40.0, "fourchette_max": 50.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Capture nette par préservation des puits naturels si réussite totale.", "ordre": 110}, {"section": "france_scenarios_2050", "code": "puits_c_echec", "nom": "Puits C agri/forestier 2050 (échec)", "valeur": -30.0, "unite": "MtCO2/an", "fourchette_min": -35.0, "fourchette_max": -25.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Valeur négative : les puits deviennent émetteurs nets si échec total. Renversement de +45 à -30 = 75 Mt/an d'écart.", "ordre": 111}, {"section": "france_scenarios_2050", "code": "ccs_industrie", "nom": "CCS industrie 2050", "valeur": 3.0, "unite": "MtCO2/an", "fourchette_min": 2.5, "fourchette_max": 3.5, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Capture et séquestration de carbone sur sites industriels à procédés carbonés sans alternative (ex. ciment).", "ordre": 112}, {"section": "france_scenarios_2050", "code": "nucleaire_declin_renoncement", "nom": "Déclin nucléaire si renoncement", "valeur": 280.0, "unite": "TWh", "fourchette_min": 250.0, "fourchette_max": 310.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Perte de production nucléaire d'ici 2050 si pas de prolongation >60 ans et pas d'EPR2.", "ordre": 113}, {"section": "france_scenarios_2050", "code": "nucleaire_nouveau_reussite", "nom": "Gain nucléaire max (succès complet)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 80.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Réussite complète des chantiers nucléaires (prolongation + EPR2) augmente production de +100 TWh en 2050.", "ordre": 114}, {"section": "france_scenarios_2050", "code": "enr_2050", "nom": "EnR France 2050 (scénario central)", "valeur": 350.0, "unite": "TWh", "fourchette_min": 300.0, "fourchette_max": 400.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Photovoltaïque + éolien terrestre + éolien en mer. Scénario tendance forte.", "ordre": 115}, {"section": "france_scenarios_2050", "code": "prod_elec_reussite_totale", "nom": "Production élec 2050 (réussite totale)", "valeur": 1000.0, "unite": "TWh", "fourchette_min": 900.0, "fourchette_max": 1050.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Production électrique France 2050 si tous les chantiers nucléaires + EnR réussissent (haute incertitude).", "ordre": 116}, {"section": "france_scenarios_2050", "code": "prod_elec_moderement_incertain", "nom": "Production élec 2050 (action immédiate)", "valeur": 600.0, "unite": "TWh", "fourchette_min": 550.0, "fourchette_max": 650.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Production 2050 si France mène dès aujourd'hui l'ensemble chantiers EnR + nucléaires (modérément incertain).", "ordre": 117}, {"section": "france_scenarios_2050", "code": "fossile_residuel_liquides", "nom": "Carburants liquides fossiles importés 2050 (scénario dégradé)", "valeur": 100.0, "unite": "TWh", "fourchette_min": 90.0, "fourchette_max": 120.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Reliquat si transition ratée.", "ordre": 118}, {"section": "france_scenarios_2050", "code": "fossile_residuel_gaz", "nom": "Gaz fossile importé 2050 (scénario dégradé)", "valeur": 200.0, "unite": "TWh", "fourchette_min": 180.0, "fourchette_max": 240.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Reliquat si transition ratée.", "ordre": 119}, {"section": "france_scenarios_2050", "code": "camions_fossile_degrade", "nom": "Énergie camions fossile 2050 (dégradé)", "valeur": 40.0, "unite": "%", "fourchette_min": 35.0, "fourchette_max": 45.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 (rate les objectifs) : 40 % énergie camions encore fossile en 2050.", "ordre": 120}, {"section": "france_scenarios_2050", "code": "vl_fossile_degrade", "nom": "Énergie véhicules légers fossile 2050 (dégradé)", "valeur": 55.0, "unite": "%", "fourchette_min": 50.0, "fourchette_max": 60.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 : 55 % énergie VL encore fossile en 2050.", "ordre": 121}, {"section": "france_scenarios_2050", "code": "chauffage_fossile_degrade", "nom": "Énergie chauffage fossile 2050 (dégradé)", "valeur": 25.0, "unite": "%", "fourchette_min": 22.0, "fourchette_max": 30.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Scenario 3 : 25 % chauffage logement encore fossile.", "ordre": 122}], "france_historique": [{"section": "france_historique", "code": "covid_reduction_ges", "nom": "Baisse GES France pendant COVID 2020", "valeur": 5.0, "unite": "%", "fourchette_min": 4.0, "fourchette_max": 6.0, "source": "Shift Project PREF 2024", "source_id": 1669, "commentaire": "Baisse de 5 % des émissions GES territoriales France en 2020 (confinements COVID). Référence du type de rupture possible.", "ordre": 130}]}, "sources": {"1662": {"id": 1662, "auteurs": "Fuller, R. Buckminster", "annee": 1938, "titre": "Nine Chains to the Moon", "journal": "Lippincott (Philadelphia)", "url": "https://www.worldcat.org/title/nine-chains-to-the-moon/oclc/4146956"}, "1663": {"id": 1663, "auteurs": "Smil, Vaclav", "annee": 2017, "titre": "Energy and Civilization: A History", "journal": "MIT Press", "url": "https://mitpress.mit.edu/9780262035774/energy-and-civilization/"}, "1664": {"id": 1664, "auteurs": "Jancovici, Jean-Marc", "annee": 2015, "titre": "Dormez tranquilles jusqu'en 2100 : Et autres malentendus sur le climat et l'energie", "journal": "Odile Jacob", "url": "https://www.odilejacob.fr/catalogue/sciences/ecologie-environnement/dormez-tranquilles-jusqu-en-2100_9782738132338.php"}, "1666": {"id": 1666, "auteurs": "Juzan, Jean-Michel", "annee": 2025, "titre": "Le problème des coûts cachés — Analyse intégrée", "journal": "Document de travail Sol Vivant", "url": null}, "1669": {"id": 1669, "auteurs": "The Shift Project", "annee": 2026, "titre": "Réussir la transition dans l'incertitude", "journal": "The Shift Project", "url": "https://theshiftproject.org/publications/reussir-la-transition-dans-lincertitude/"}}, "tab_intros": {"pratique": {"resume": "Calculateur d'esclaves energetiques : convertis ta consommation d'energie en equivalent travail humain pour visualiser ton empreinte.", "detail": "Saisis tes consommations annuelles (electricite, transport, chauffage, alimentation, biens, services) et le calculateur les convertit en 'esclaves energetiques' (1 esclave = 100 W continus, soit le metabolisme moyen d'un humain au travail). Permet de comparer modes de vie, secteurs, et de visualiser l'asymetrie energie/travail."}, "comprendre": {"resume": "Le concept d'esclave energetique (Buckminster Fuller, Jancovici) traduit nos flux d'energie en travail humain pour donner un repere intuitif.", "detail": "Cet onglet explique la genese du concept, les conversions sources (kWh, tep, GJ), les references bibliographiques, et les usages legitimes/discutables de cette unite (utile pour la comparaison qualitative, pas pour les calculs ingenieurs)."}}};</script>
 <script>
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
@@ -1443,19 +1908,184 @@ function SvSourceList({
   }, "[lien]")))));
 }
 
-// ── SvTabs : navigation onglets unifiée ──
+// ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
+// Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
 function SvTabs({
   tabs,
   active,
   onChange
 }) {
   return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs"
+    className: "sv-tabs",
+    role: "tablist"
   }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
     key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
     className: `sv-tab ${active === t.id ? 'active' : ''}`,
     onClick: () => onChange(t.id)
   }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
+// A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
+// Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
+// Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
+function SvSubTabs({
+  tabs,
+  active,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-subtabs",
+    role: "tablist"
+  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    role: "tab",
+    "aria-selected": active === t.id,
+    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
+    onClick: () => onChange(t.id)
+  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+}
+
+// ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
+// Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
+// Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
+function SvCallout({
+  variant,
+  title,
+  icon,
+  children
+}) {
+  const v = variant || 'info';
+  const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
+  return /*#__PURE__*/React.createElement("div", {
+    className: cls
+  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-callout-title"
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    className: "sv-callout-icon"
+  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
+function SvAlert({
+  variant,
+  title,
+  children
+}) {
+  const v = variant || 'info';
+  return /*#__PURE__*/React.createElement("div", {
+    className: `sv-alert sv-alert-${v}`
+  }, title && /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 600,
+      marginBottom: '0.25rem'
+    }
+  }, title), /*#__PURE__*/React.createElement("div", null, children));
+}
+
+// ── SvImageCard : image illustrative avec legende et styles standardises ──
+// Resout le bug "double style" + manque de max-width responsive.
+// Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
+function SvImageCard({
+  src,
+  alt,
+  caption,
+  maxHeight,
+  maxWidth
+}) {
+  const mh = maxHeight || '320px';
+  const mw = maxWidth || '100%';
+  return /*#__PURE__*/React.createElement("figure", {
+    className: "sv-image-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: src,
+    alt: alt || '',
+    style: {
+      width: '100%',
+      maxWidth: mw,
+      maxHeight: mh,
+      objectFit: 'contain',
+      borderRadius: 'var(--radius)',
+      border: '1px solid var(--border)',
+      boxShadow: 'var(--shadow)',
+      display: 'block'
+    }
+  }), caption && /*#__PURE__*/React.createElement("figcaption", {
+    className: "sv-image-caption"
+  }, caption));
+}
+
+// ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
+// Reutilisable pour test bocal, recettes lifofer, mode operatoire mo_calc, etc.
+// Props :
+//   steps : [{label, detail?}] ou [string]
+//   materiel : array de strings (optionnel)
+//   duree : string (optionnel)
+//   title : string (optionnel)
+function SvProcedureSteps({
+  title,
+  steps,
+  materiel,
+  duree
+}) {
+  if (!steps || !steps.length) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure"
+  }, title && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-title"
+  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-procedure-meta"
+  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
+    className: "sv-procedure-steps"
+  }, steps.map((s, i) => {
+    const label = typeof s === 'string' ? s : s.label;
+    const detail = typeof s === 'string' ? null : s.detail;
+    return /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-label"
+    }, label), detail && /*#__PURE__*/React.createElement("span", {
+      className: "sv-procedure-detail"
+    }, " \u2014 ", detail));
+  })));
+}
+
+// ── SvTestCard : carte standardisee pour un terrain_test ──
+// Reutilisable dans la page Triangle (section test du bocal) ET pour la
+// future page autonome tests_terrain.
+// Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
+function SvTestCard({
+  test
+}) {
+  if (!test) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-title"
+  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
+    className: "sv-test-card-dim"
+  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-desc"
+  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
+    src: test.image_url,
+    alt: test.title,
+    caption: null,
+    maxHeight: "220px"
+  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
+    title: null,
+    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
+    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
+    duree: test.duree
+  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
+    variant: "success",
+    title: "Interpretation"
+  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
+    className: "sv-test-card-source"
+  }, "Source : ", test.source));
 }
 
 // ── SvNoteAccordion : mini-note inline ──
@@ -2000,33 +2630,17 @@ function SvTabIntro({
   const [open, setOpen] = React.useState(false);
   if (!resume && !detail) return null;
   return /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: '1rem'
-    }
+    className: "sv-tab-intro"
   }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text-secondary)'
-    }
+    className: "sv-tab-intro-row"
   }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      flex: 1
-    }
-  }, resume), detail && /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
+    className: "sv-tab-intro-resume"
+  }, resume), detail && /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "sv-tab-intro-toggle",
     onClick: () => setOpen(!open)
-  }, open ? '▾ masquer' : '▸ en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content",
-    style: {
-      marginTop: '0.5rem',
-      padding: '0.75rem',
-      background: 'var(--color-bg-subtle, var(--bg))',
-      borderRadius: 'var(--radius)',
-      lineHeight: 1.6
-    }
+  }, open ? 'masquer' : 'en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
+    className: "sv-tab-intro-detail"
   }, detail));
 }
 
@@ -2159,7 +2773,7 @@ function LineChart({
       maxWidth: width + 'px',
       border: '1px solid var(--border)',
       borderRadius: 'var(--radius)',
-      background: '#fff',
+      background: 'var(--card-bg)',
       padding: '0.5rem'
     }
   }, /*#__PURE__*/React.createElement("line", {
@@ -2262,7 +2876,7 @@ function BarChartLog({
       maxWidth: width + 'px',
       border: '1px solid var(--border)',
       borderRadius: 'var(--radius)',
-      background: '#fff',
+      background: 'var(--card-bg)',
       padding: '0.5rem'
     }
   }, data.map((d, i) => {
@@ -2402,7 +3016,7 @@ function HumainsPictos({
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: '1.4rem',
+      fontSize: 'var(--font-1-4)',
       lineHeight: '1.6',
       letterSpacing: '0.1em'
     }
@@ -2619,12 +3233,9 @@ function ComprendreView() {
   }, "~300 esclaves \xE9nerg\xE9tiques par Fran\xE7ais moyen"), ". Un habitant d'Occident b\xE9n\xE9ficie de plusieurs milliers d'heures de travail quotidiennes, sans qu'il s'en rende compte."), /*#__PURE__*/React.createElement("p", null, "L'exercice de cette page : ", /*#__PURE__*/React.createElement("span", {
     className: "sv-emphasis"
   }, "rendre visible ce que cache le mur"), ". Si votre bouilloire \xE9tait actionn\xE9e par 20 personnes qui p\xE9dalent dans votre cuisine pour chauffer votre eau, vous verriez l'\xE9nergie."), /*#__PURE__*/React.createElement("div", {
+    className: "sv-callout sv-callout-warning",
     style: {
-      padding: '0.8rem 1rem',
-      background: '#FEF3C7',
-      borderLeft: '4px solid #D97706',
-      borderRadius: 'var(--radius)',
-      marginTop: '1rem'
+      marginTop: "1rem"
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
@@ -2686,12 +3297,9 @@ function ComprendreView() {
       color: 'var(--text-secondary)'
     }
   }, c.unite))))), /*#__PURE__*/React.createElement("div", {
+    className: "sv-callout sv-callout-danger",
     style: {
-      marginTop: '1.5rem',
-      padding: '1rem',
-      background: '#FEF2F2',
-      borderLeft: '4px solid #DC2626',
-      borderRadius: 'var(--radius)'
+      marginTop: "1.5rem"
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
@@ -2840,7 +3448,14 @@ function App() {
     }],
     active: tab,
     onChange: setTab
-  }), /*#__PURE__*/React.createElement("div", {
+  }), (() => {
+    const _intros = typeof DATA !== 'undefined' && DATA.tab_intros || {};
+    const _i = _intros[tab];
+    return _i ? /*#__PURE__*/React.createElement(SvTabIntro, {
+      resume: _i.resume,
+      detail: _i.detail
+    }) : null;
+  })(), /*#__PURE__*/React.createElement("div", {
     className: "sv-tab-content"
   }, tab === 'pratique' ? /*#__PURE__*/React.createElement(CalculateurView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
 }
