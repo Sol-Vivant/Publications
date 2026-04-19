@@ -244,20 +244,44 @@ body {
   padding: 1.5rem 1.25rem;
   box-shadow: 0 2px 20px rgba(37,99,235,0.12);
 }
+.sv-header .sv-corpus-link {
+  display: block;
+  font-size: var(--font-xs);
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-header .sv-corpus-link:hover { color: rgba(255,255,255,0.9); }
 .sv-header h1 {
   font-size: var(--font-xl);
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sv-header .sv-subtitle {
-  font-size: var(--font-base);
+  font-size: var(--font-sm);
   opacity: 0.7;
   margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sv-header .sv-meta {
   font-size: var(--font-xs);
   opacity: 0.45;
   margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Navigation / breadcrumb ── */
@@ -1605,11 +1629,14 @@ select.sv-input { color-scheme: light dark; }
 .lf-ing-extra { font-size: var(--font-2xs); color: var(--purple); font-style: italic; margin-top: 2px; }
 
 .lf-badge {
-  display: inline-block; padding: 0.1rem 0.5rem; border-radius: 999px;
-  font-size: var(--font-2xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  display: inline-block; padding: 0.08rem 0.5rem; border-radius: 999px;
+  font-size: var(--font-2xs); font-weight: 500; letter-spacing: 0;
+  border: 1px solid var(--border);
+  background: var(--color-bg-subtle);
+  color: var(--text-secondary);
 }
-.lf-badge-req { background: var(--danger-light); color: var(--color-danger-text); }
-.lf-badge-opt { background: var(--info-light); color: var(--accent-dark); }
+.lf-badge-req::before { content: '● '; color: var(--danger); }
+.lf-badge-opt::before { content: '○ '; color: var(--text-secondary); }
 
 /* ── Test du poing / contenant ────────────────────────────────────── */
 .lf-test-poing {
@@ -1801,6 +1828,29 @@ select.sv-input { color-scheme: light dark; }
     window.svSetFontScale(SCALES[idx]);
   };
 
+  // Applique un scale à --font-scale + met a jour l'etat actif des boutons.
+  // N'ecrit pas dans localStorage (contrairement a svSetFontScale) : sert aussi
+  // quand on recoit un 'storage' event d'un autre onglet.
+  function applyFontScale(scale){
+    document.documentElement.style.setProperty('--font-scale', scale);
+    document.querySelectorAll('.sv-font-btn').forEach(b => {
+      b.classList.toggle('active', parseFloat(b.dataset.scale) === scale);
+    });
+  }
+
+  // Synchronisation cross-tab : si l'utilisateur change scale/theme dans un
+  // onglet, les autres onglets ouverts suivent sans reload.
+  window.addEventListener('storage', function(e){
+    if (e.key === 'sv-font-scale' && e.newValue) {
+      const v = parseFloat(e.newValue);
+      if (SCALES.indexOf(v) >= 0) applyFontScale(v);
+    } else if (e.key === 'sv-theme' && (e.newValue === 'dark' || e.newValue === 'light')) {
+      document.documentElement.setAttribute('data-theme', e.newValue);
+      const btn = document.querySelector('.sv-theme-toggle');
+      if (btn) btn.textContent = isDark() ? '☀' : '☾';
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', function(){
     const bar = document.createElement('div');
     bar.className = 'sv-toolbar';
@@ -1815,20 +1865,21 @@ select.sv-input { color-scheme: light dark; }
     bar.querySelectorAll('.sv-font-btn').forEach(b => {
       b.onclick = () => window.svSetFontScale(parseFloat(b.dataset.scale));
     });
-    // Marque le scale courant comme actif
-    const cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-scale')) || 1;
-    bar.querySelectorAll('.sv-font-btn').forEach(b => {
-      b.classList.toggle('active', parseFloat(b.dataset.scale) === cur);
-    });
+    // Marque le scale courant comme actif au chargement initial.
+    // Relit localStorage pour gerer le cas d'un onglet ouvert avant un changement.
+    const saved = parseFloat(localStorage.getItem('sv-font-scale'));
+    const cur = (saved && SCALES.indexOf(saved) >= 0) ? saved : 1;
+    applyFontScale(cur);
   });
 })();
 </script>
 
 
 <header class="sv-header">
-  <h1><a href="index.html" style="color:#fff;text-decoration:none">Le Sol Vivant cet Holobionte</a></h1>
-  <div class="sv-subtitle">Calculateur LiFoFer — Litière Forestière Fermentée — Préparation interactive</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 15:26 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
+  <h1>Calculateur LiFoFer</h1>
+  <div class="sv-subtitle">Litière Forestière Fermentée — Préparation interactive</div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 18:33 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <span class="sv-nav-current">🌿 Calculateur LiFoFer</span>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2514,11 +2565,14 @@ function SvRichText({
       continue;
     }
 
-    // Headings markdown : ##, ###, #### — niveau 2 ou 3 (#### ramené à h3)
-    const mH = /^(#{2,6})\s+(.+)$/.exec(trimmed);
+    // Headings markdown : #, ##, ###, ####
+    // # (H1) et ## -> rendu h2 ; ### / #### -> h3 (les fiches Jenni
+    // produisent parfois # Intro et # 1. Section au lieu de ## —
+    // on tolere pour eviter l'affichage brut du dièse).
+    const mH = /^(#{1,6})\s+(.+)$/.exec(trimmed);
     if (mH) {
       const hashes = mH[1].length;
-      const level = hashes === 2 ? 2 : 3;
+      const level = hashes <= 2 ? 2 : 3;
       blocks.push({
         type: 'heading',
         level,
@@ -2565,7 +2619,7 @@ function SvRichText({
       const t = rawLines[i].trim();
       if (!t) break;
       if (t.startsWith('• ') || t.startsWith('- ')) break;
-      if (/^#{2,6}\s+/.test(t)) break;
+      if (/^#{1,6}\s+/.test(t)) break;
       const isLabel = (t.endsWith(':') || t.endsWith(' :')) && (() => {
         const x = t.replace(/:$/, '').trim();
         const letters = x.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/g) || [];
@@ -3007,55 +3061,36 @@ function KPIRow({
   const items = [{
     label: "Durée",
     value: conditions.duree.valeur,
-    detail: conditions.duree.detail,
-    color: "var(--success)",
-    bg: "#f0fdf4"
+    detail: conditions.duree.detail
   }, {
     label: "Température",
     value: conditions.temperature.valeur,
-    detail: `Optimum ${conditions.temperature.optimum}°C`,
-    color: "var(--warning)",
-    bg: "#fff7ed"
+    detail: `Optimum ${conditions.temperature.optimum}°C`
   }, {
     label: "pH cible",
     value: conditions.ph_cible.valeur,
-    detail: conditions.ph_cible.detail,
-    color: "#7C3AED",
-    bg: "#faf5ff"
+    detail: conditions.ph_cible.detail
   }, {
     label: "Conservation",
     value: conditions.conservation.valeur,
-    detail: conditions.conservation.detail,
-    color: "var(--info)",
-    bg: "#eff6ff"
+    detail: conditions.conservation.detail
   }];
   if (conditions.eh_cible) {
     items.splice(3, 0, {
       label: "Eh redox",
       value: conditions.eh_cible.valeur,
-      detail: conditions.eh_cible.detail,
-      color: "#4338CA",
-      bg: "#eef2ff"
+      detail: conditions.eh_cible.detail
     });
   }
   return /*#__PURE__*/React.createElement("div", {
     className: "sv-kpi-grid"
   }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
     key: i,
-    className: "sv-kpi",
-    style: {
-      background: it.bg
-    }
+    className: "sv-kpi"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-label",
-    style: {
-      color: it.color
-    }
+    className: "sv-kpi-label"
   }, it.label), /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-value",
-    style: {
-      color: it.color
-    }
+    className: "sv-kpi-value"
   }, it.value), /*#__PURE__*/React.createElement("div", {
     className: "sv-kpi-detail"
   }, it.detail))));
