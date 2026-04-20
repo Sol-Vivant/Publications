@@ -63,7 +63,29 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (4)** :
+**Règles actuellement en base (8)** :
+
+### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
+
+```
+# Reflexe agent_runner — pour N items LLM independants
+
+Quand une tache repetitive porte sur N items independants (analyse de
+fiches, audit, attribution Zotero, validation RIS, extraction sources),
+**ne jamais lancer les agents Task un par un**. Utiliser le pattern
+`tools/lib/agent_runner.py` en 3 phases :
+
+  1. Script `--prepare` -> batches/<cid>.json + state.json + README
+  2. Claude Code lance les agents Task dans **un seul message**
+     (plusieurs Agent() calls en parallele) -> responses/<cid>.json
+  3. Script `--consolidate` -> ingere responses/ en DB ou artefact
+
+Declencheurs obligatoires : N > 5 items similaires, reprise souhaitable,
+resultat trop volumineux pour le contexte.
+
+Exemples : audit_opus, attribution, analyse_corpus, analyse_fiches.
+Doctrine complete : `bq_query.py --search "strategie_agents"` (BQ #132).
+```
 
 ### `archivage_fiches` — Archivage auto docx + prompts post-intégration pour fiches
 
@@ -147,9 +169,97 @@ Production docx fiches (rappels pratiques) :
 Voir BQ #130 wf_fiche pour détails.
 ```
 
+### `parser_docx_omath` — Parseur docx doit extraire oMath (formules chimiques Jenni)
+
+```
+# Parseur docx Jenni — formules OMML à extraire (règle critique)
+
+**Jenni écrit TOUTES les formules chimiques/indices/exposants en Office Math ML** (`<m:oMath>` dans le XML Word) : `NH₃`, `CO₂`, `Fe²⁺`, `k₁`, `ΔG`, `NO₃⁻`, etc.
+
+**`python-docx` ignore les oMath** → les formules sont perdues, remplacées par `(...)` vides.
+
+**Tout script lisant un docx Jenni DOIT utiliser un parseur XML custom** qui :
+- Parse `word/document.xml` directement
+- Extrait `<m:oMath>` et convertit en Unicode (sub/sup)
+- Skip les `<w:t>` fallback à l'intérieur des oMath
+
+Implémenté dans `tools/jenni/import_termes_jenni.py::parse_docx()` depuis 2026-04-20.
+
+Voir BQ #137 (claude/parse_docx_omath) pour les détails.
+
+**Vérification post-import** :
+```python
+SELECT id, fr, definition FROM terms
+WHERE definition GLOB '*(*)*'
+  AND definition LIKE '%()%';
+```
+Si résultats non vides → parseur défaillant ou bug Jenni.
+```
+
+### `pas_agent_redacteur` — Pas d'agents redacteurs - rediction c'est JMJ/Claude/Jenni uniquement
+
+```
+# Pas d'agents rédacteurs — la rédaction c'est JMJ + Claude + Jenni
+
+**Règle absolue** — la rédaction de contenu éditorial du corpus est STRICTEMENT limitée à :
+- **Jenni** (workflow docx : prompt → Jenni rédige → retour docx → import contrôlé)
+- **JMJ** (directement)
+- **Claude** (moi) SEULEMENT quand JMJ me le demande explicitement en direct
+
+**Sont interdits** :
+- Lancer un agent Task pour rédiger définitions, synonymes, contenus de fiches, contenus de prompts, descriptions de concept_cards, contenus BQ ou tout autre contenu éditorial du corpus
+- Demander à un agent de "produire des définitions courtes", "rédiger une synthèse", "écrire une amorce"
+- Inventer des définitions ou contenus sans base docx/prompt Jenni ou indication explicite de JMJ
+
+**Sont autorisés pour les agents Task** :
+- Classification, extraction, analyse (ex: normaliser la casse, détecter des orphelins, trier des termes)
+- Recherche dans le code ou la DB
+- Parsing/formatage de données existantes
+- Audit/comparaison
+
+**Workflow correct pour créer un terme** :
+1. Identifier le besoin (ex: hyperonyme manquant, terme orphelin à raccrocher)
+2. Écrire le nom du terme dans une liste à passer par Jenni
+3. Exporter via `export_thesaurus_incomplets.py` ou `gen_prompt_thesaurus.py`
+4. Jenni rédige la définition
+5. Réimport via `import_termes_jenni.py --replace`
+
+**Justification** : JMJ passe des heures à faire rédiger Jenni avec soin. Toute définition Claude-made sabote ce travail et pollue le thésaurus avec du contenu non validé. Violation détectée 2026-04-20 (14 termes créés avec def Claude en commit af35413 — supprimés et à refaire via Jenni).
+```
+
+### `pas_modif_fr_canonique` — Ne pas modifier automatiquement le fr canonique (cycle Jenni)
+
+```
+# Ne pas modifier le libelle fr canonique d'un terme (regle absolue)
+
+Le champ `terms.fr` est la CLE editoriale qui fait l'aller-retour avec Jenni.
+Toute modification automatique (casse, ponctuation, espaces) cree un cycle vicieux :
+
+1. Export : Jenni recoit la version modifiee
+2. Retour Jenni : docx a la version modifiee (Jenni recopie verbatim)
+3. Reimport : DB reste avec la version modifiee
+4. Perte definitive de la forme d'origine
+
+**INTERDIT** :
+- Scripts de normalisation automatique de casse/ponctuation sur le `fr`
+- Agents Task qui DECIDENT d'un changement de libelle (classification OK, modification NON)
+- Regles typographiques abstraites (francais, ISO) appliquees au `fr` existant
+
+**AUTORISE** :
+- Modifications ciblees d'UN terme apres validation explicite JMJ
+- Normalisations dans les champs secondaires (definition, syn_*, bt, rt)
+- Parser math-aware pour preserver les formules OMML
+
+**Incident 2026-04-20** : Chantier A (commit 5970137) avait baisse la Maj
+initiale de 216 termes (Antifragilite, Biofilms, Bioturbation...). Corrige
+commit 86408df. Cette erreur NE DOIT JAMAIS se reproduire.
+
+Voir BQ #138 (claude/pas_modif_fr_canonique) pour les details.
+```
+
 ## Bibliothèque de Connaissances (BQ)
 
-La BQ stocke les guides, conventions et retours d'expérience dans la table `bq_entries`, organisés en modules (`bq_modules`). La doctrine d'accès est « **recherche au fil de l'eau** » : on ne charge pas un bloc au démarrage, on cherche au moment où un doute émerge (voir règle `bq_access` ci-dessus).
+La BQ stocke les guides, conventions et retours d'expérience dans la table `bq_entries`, classés par **domaines techniques** (`domaines_techniques`) via la table de jointure `domaine_bq` (une entrée a 1 domaine primaire + 0-5 domaines de référence). Quatre catégories : pipeline | corpus | web | technique | specifique. La doctrine d'accès est « **recherche au fil de l'eau** » : on ne charge pas un bloc au démarrage, on cherche au moment où un doute émerge (voir règle `bq_access` ci-dessus).
 
 ### Commandes usuelles
 
@@ -157,25 +267,31 @@ La BQ stocke les guides, conventions et retours d'expérience dans la table `bq_
 # Recherche ciblée par mot-clé (réflexe principal)
 python3 tools/admin/bq_query.py --db sol_vivant.db --search "<terme>"
 
-# Charger un module entier (seulement si plusieurs entrées pertinentes)
-python3 tools/admin/bq_query.py --db sol_vivant.db --modules <code>
+# Charger un domaine entier (primaires + références)
+python3 tools/admin/bq_query.py --db sol_vivant.db --domaine <slug>
 
-# Inventaire des modules disponibles
+# Inventaire des domaines disponibles
 python3 tools/admin/bq_query.py --db sol_vivant.db --list
 ```
 
-### Modules disponibles (8)
+### Domaines disponibles (14)
 
-| Code | Titre | Description |
-|------|-------|-------------|
-| `projet` | Projet Le Sol Vivant cet Holobionte | Vue d'ensemble, architecture, strates, chaînes causales |
-| `claude` | Guide Claude — contraintes et workflow | Contraintes comportementales, règles absolues, stratégie rédaction, structure dépôt |
-| `workflow` | Workflow — pipelines métier bout-en-bout | Un workflow par BQ : session, fiche, thésaurus, concept cards, veille, web, régénération. |
-| `sqlite` | Guide SQLite — architecture DB complète | Architecture DB, tables actives/legacy, requêtes de pilotage |
-| `jenni` | Guide Jenni — Workflow v3.0 | Masque mécanique, données dans les tables, workflow one-shot + analyse |
-| `illustrations` | Guide Illustrations | FigureLabs, Mermaid, 12 concepts, prochains lots |
-| `maintenance` | Guide Maintenance — Sync, sessions, requêtes | Workflow session, gestion scripts, sync DB/fichiers, journal de bord |
-| `web` | Guide Web — Charte graphique et templates HTML | Architecture des pages HTML interactives : charte Sol Vivant, templates, scripts de génération, conventions. |
+| Slug | Nom | Catégorie | Description |
+|------|-----|-----------|-------------|
+| `concept-cards` | Cartes de concept | corpus | filtre de rigueur entre captation et intégration |
+| `chaines` | Chaînes causales | corpus | chains_causales, étapes, workflow v4 |
+| `thesaurus` | Pipeline thesaurus | pipeline | prompt termes → Jenni → import en DB |
+| `fiches` | Pipeline fiches | pipeline | prompt → Jenni → .docx → intégration → rendu Cahier |
+| `docs` | Pipeline docs strate | pipeline | prompts F1/S2/V1/P13… clôturés → passe finale Jenni |
+| `validations` | Pipeline validations | pipeline | prompt validation → Jenni → intégration (combler lacunes) |
+| `bq` | BQ elle-même | technique | architecture BQ, consultation, doctrine |
+| `session` | Gestion de session | technique | démarrage, clôture, git, propagation main |
+| `integrite` | Intégrité DB | technique | check_integrity, audit structurel, FK, orphelins |
+| `analyse` | Analyse corpus | technique | analyse_corpus, audit_opus, veille, agent_runner |
+| `archivage` | Archivage post-intégration | technique | règles fichiers/fiches/prompts traités |
+| `jenni-workflow` | Workflow Jenni | technique | prompts docx, OMML, charte rédaction, refs APA |
+| `sources-autoritaires` | Sources autoritaires externes | technique | doctrines de référence (INRAE, Shift, etc.) utilisées pour aligner le corpus |
+| `web` | Pages web (toutes) | web | site, pages, charte CSS, dark mode, calculateurs, templates, React |
 
 ## Cheat-sheet — commandes usuelles
 
@@ -201,4 +317,4 @@ python3 tools/docs/gen_readme.py --db sol_vivant.db
 
 ---
 
-*Ce document est regénéré automatiquement par `tools/docs/gen_readme.py` (cible `sessions`) depuis les tables `config` et `bq_modules`. Ne pas éditer à la main.*
+*Ce document est regénéré automatiquement par `tools/docs/gen_readme.py` (cible `sessions`) depuis les tables `config` et `domaines_techniques`. Ne pas éditer à la main.*

@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 59 tables, 10 vues, 41 scripts
+- 58 tables, 7 vues, 42 scripts
 
 ## Scripts
 
@@ -17,6 +17,7 @@
 | `explorer.py` | v1.0 | `tools/admin/` | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
 | `export_tools.py` | v1.5 | `tools/admin/` | Exporteur scripts v1.5. |
 | `fix_titres.py` | v1.0 | `tools/admin/` | Correction titres jenni_doc_specs |
+| `integrate_doc_docx.py` | v1.0 | `tools/admin/` | Integration docx redige (document de strate) -> doc_contenus.contenu_integre. |
 | `session_start.py` | v3.0 | `tools/admin/` | Contexte session v2.3. |
 | `analyse_corpus.py` | v4.1 | `tools/batch/` | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | v1.0 | `tools/docs/` | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
@@ -59,7 +60,7 @@ projet/
 ├── MANIFEST.md            # ce fichier
 ├── tools/
 │   ├── sync_scripts.py
-│   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, session_start
+│   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, integrate_doc_docx, session_start
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_cahier, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
@@ -78,19 +79,20 @@ projet/
 
 ## Pages web interactives
 
-9 pages, 40 templates (1 partagés), vendor local (hors-ligne).
+10 pages, 41 templates (2 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|
 | Cahier de Science | `cahier` | `cahier.html` |
 | Concept Cards | `concept_cards` | `concept_cards.html` |
+| Ébauches des documents | `ebauches` | `ebauches.html` |
 | Esclaves énergétiques | `esclaves_calculateur` | `esclaves_calculateur.html` |
-| Cartographie interactive | `index` | `index.html` |
-| Calculateur LiFoFer | `lifofer` | `lifofer.html` |
-| Calculateur Matière Organique | `mo_calculateur` | `mo_calculateur.html` |
+| Cartographie | `index` | `index.html` |
+| LiFoFer | `lifofer` | `lifofer.html` |
+| Matière organique | `mo_calculateur` | `mo_calculateur.html` |
 | Tests terrain | `tests_terrain` | `tests_terrain.html` |
 | Transition robuste | `transition_robuste` | `transition_robuste.html` |
-| Triangle des Textures GEPPA | `triangle_textures` | `triangle_textures.html` |
+| Textures GEPPA | `triangle_textures` | `triangle_textures.html` |
 
 Déploiement : `rsync -av Publications/web/ /Publications/` → GitHub Pages
 

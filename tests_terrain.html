@@ -18,7 +18,6 @@
 <script src="vendor/react-dom.production.min.js"></script>
 
 <style>
-
 :root {
   --bg: #f4f6f8;
   --card-bg: #ffffff;
@@ -481,6 +480,8 @@ h3 {
   background: var(--success);
   border-color: var(--success);
 }
+[data-theme="dark"] .sv-subtab.active { color: var(--card-bg); font-weight: 700; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sv-subtab.active { color: var(--card-bg); font-weight: 700; } }
 .sv-card h3 {
   font-size: var(--font-base);
   font-weight: 600;
@@ -1448,25 +1449,29 @@ select.sv-input { color-scheme: light dark; }
 
 /* ── Passerelle Outil → Cahier de Science ── */
 .sv-cahier-link {
-  margin: 1.5rem auto 0.5rem;
-  padding: 0.85rem 1.25rem;
-  max-width: 720px;
+  margin: 1rem 0 0.75rem;
+  padding: 0.6rem 1rem;
   background: var(--accent-light);
   border-left: 4px solid var(--accent);
   border-radius: var(--radius);
   font-size: var(--font-sm);
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 .sv-cahier-link-icon { font-size: var(--font-lg); line-height: 1; }
-.sv-cahier-link-text { color: var(--text-secondary); flex: 1; min-width: 200px; }
+.sv-cahier-link-text { color: var(--text-secondary); flex-shrink: 0; white-space: nowrap; }
 .sv-cahier-link a {
   color: var(--accent-dark);
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 .sv-cahier-link a:hover { text-decoration: underline; }
 
@@ -1530,6 +1535,1709 @@ select.sv-input { color-scheme: light dark; }
   .sv-cahier { padding: 0.75rem; }
 }
 
+/* ── SvComprendre : onglet Comprendre unifié ── */
+.sv-comprendre-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+.sv-comprendre-card {
+  display: block;
+  padding: 0.75rem 0.9rem;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.sv-comprendre-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.sv-comprendre-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: var(--font-xs);
+}
+.sv-comprendre-card-badge {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.sv-comprendre-card-dim {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: var(--font-2xs);
+  letter-spacing: 0.06em;
+}
+.sv-comprendre-card-title {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.sv-comprendre-card-desc {
+  font-size: var(--font-xs);
+  line-height: 1.45;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sv-comprendre-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sv-comprendre-term {
+  padding: 0.6rem 0.75rem;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+.sv-comprendre-term-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+.sv-comprendre-term-fr {
+  font-weight: 600;
+  color: var(--text);
+  font-size: var(--font-base);
+}
+.sv-comprendre-term-en {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+}
+.sv-comprendre-term-def {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+
+:root {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --accent: #2563EB;
+  --accent-dark: #1d4ed8;
+  --accent-light: #DBEAFE;
+  --border: #cbd5e1;
+  --border-hover: #cbd5e1;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
+  /* Echelle typographique (source unique pour toutes les pages)
+     Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
+  --font-scale: 1;
+  --font-2xs: calc(0.68rem * var(--font-scale));
+  --font-xs:   calc(0.75rem * var(--font-scale));
+  --font-sm:   calc(0.82rem * var(--font-scale));
+  --font-base: calc(0.9rem  * var(--font-scale));
+  --font-md:   calc(1rem    * var(--font-scale));
+  --font-lg:   calc(1.15rem * var(--font-scale));
+  --font-xl:   calc(1.5rem  * var(--font-scale));
+  --font-2xl:  calc(1.8rem  * var(--font-scale));
+  --font-1-4:  calc(1.4rem  * var(--font-scale));
+  /* Echelle d'espacement (source unique pour paddings/margins) */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.25rem;
+  --space-xl:  1.5rem;
+  --space-2xl: 2rem;
+  /* Couleurs sémantiques (inline → var) */
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-success-text: #166534;
+  --color-warning-text: #92400e;
+  --color-danger-text: #991b1b;
+  --success: #059669;
+  --success-light: #BBF7D0;       /* green-200 — un cran + sature pour ressortir sur blanc */
+  --warning: #D97706;
+  --warning-light: #FDE68A;       /* yellow-300 — le pale yellow-100 disparaissait sur blanc */
+  --danger: #DC2626;
+  --danger-light: #FECACA;        /* red-200 */
+  --info: #2563EB;
+  --info-light: #BFDBFE;          /* blue-200 */
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --purple-light: #faf5ff;
+  --header-from: #0f172a;
+  --header-to: #1e3a5f;
+  --zone-sable: rgba(251,191,36,0.12);
+  --zone-limon: rgba(99,102,241,0.12);
+  --zone-argile: rgba(239,68,68,0.12);
+  --zone-loam: rgba(34,197,94,0.12);
+  /* Fond papier crème (Cahier de Science, Science Note) */
+  --paper-bg: #fdfbf7;
+  --paper-bg-2: #f8f6f0;
+  --paper-border: #e8e0d0;
+}
+
+/* ── Mode sombre : preference systeme + override manuel via [data-theme] ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-dark: #3b82f6;
+    --accent-light: #1e3a8a;
+    --border: #334155;
+    --border-hover: #475569;
+    --shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+    --color-text: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-bg-subtle: #1e293b;
+    --color-bg-muted: #273449;
+    --color-success-text: #86efac;
+    --color-warning-text: #fcd34d;
+    --color-danger-text: #fca5a5;
+    --success: #34d399;
+    --success-light: #064e3b;
+    --warning: #fbbf24;
+    --warning-light: #451a03;
+    --danger: #f87171;
+    --danger-light: #450a0a;
+    --info: #60a5fa;
+    --info-light: #1e3a8a;
+    --purple: #a78bfa;
+    --purple-dark: #7c3aed;
+    --purple-light: #3b0764;
+    --header-from: #020617;
+    --header-to: #0f172a;
+    --zone-sable: rgba(251,191,36,0.08);
+    --zone-limon: rgba(99,102,241,0.18);
+    --zone-argile: rgba(239,68,68,0.18);
+    --zone-loam: rgba(34,197,94,0.18);
+    --paper-bg: #1e293b;
+    --paper-bg-2: #273449;
+    --paper-border: #334155;
+  }
+}
+
+/* Override manuel : [data-theme="dark"] force le dark, [data-theme="light"] force le light */
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-light: #1e3a8a;
+  --border: #334155;
+  --border-hover: #475569;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.55);
+  --color-text: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-bg-subtle: #1e293b;
+  --color-bg-muted: #273449;
+  --color-success-text: #86efac;
+  --color-warning-text: #fcd34d;
+  --color-danger-text: #fca5a5;
+  --success: #34d399;
+  --success-light: #064e3b;
+  --warning: #fbbf24;
+  --warning-light: #451a03;
+  --danger: #f87171;
+  --danger-light: #450a0a;
+  --info: #60a5fa;
+  --info-light: #1e3a8a;
+  --purple: #a78bfa;
+  --purple-dark: #7c3aed;
+  --purple-light: #3b0764;
+  --header-from: #020617;
+  --header-to: #0f172a;
+  --zone-sable: rgba(251,191,36,0.08);
+  --zone-limon: rgba(99,102,241,0.18);
+  --zone-argile: rgba(239,68,68,0.18);
+  --zone-loam: rgba(34,197,94,0.18);
+  --paper-bg: #1e293b;
+  --paper-bg-2: #273449;
+  --paper-border: #334155;
+}
+
+/* Barre flottante d'outils utilisateur (zoom typo + theme) */
+.sv-toolbar {
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.sv-toolbar-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: var(--font-base);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+.sv-toolbar-btn:hover { background: rgba(255,255,255,0.18); }
+.sv-toolbar-btn.active { background: rgba(255,255,255,0.28); }
+.sv-toolbar-btn.sv-theme-toggle { font-size: var(--font-md); }
+.sv-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.22);
+  margin: 0 0.15rem;
+}
+@media (max-width: 480px) {
+  .sv-toolbar { top: 0.5rem; right: 0.5rem; }
+  .sv-toolbar-btn { width: 28px; height: 28px; font-size: var(--font-sm); }
+}
+
+/* Images : legere attenuation en dark pour eviter le bright contrast */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
+}
+:root[data-theme="dark"] img:not(.sv-logo) { filter: brightness(0.92) contrast(0.98); }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Header bandeau bleu "cours de biologie" ── */
+.sv-header {
+  background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+  color: #fff;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 2px 20px rgba(37,99,235,0.12);
+}
+.sv-header .sv-corpus-link {
+  display: block;
+  font-size: var(--font-xs);
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-header .sv-corpus-link:hover { color: rgba(255,255,255,0.9); }
+.sv-header h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-header .sv-subtitle {
+  font-size: var(--font-sm);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sv-header .sv-meta {
+  font-size: var(--font-xs);
+  opacity: 0.45;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Navigation / breadcrumb ── */
+.sv-nav {
+  margin: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.sv-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sv-nav a:hover { text-decoration: underline; }
+
+/* ── Navigation inter-pages (captive en haut au scroll) ──
+   Reste sur 1 ligne (scroll horizontal si overflow) pour que .sv-tabs
+   puisse ancrer son top sur une hauteur predictible.
+   padding-right reserve la place de la toolbar flottante (~155px). */
+.sv-nav-pages {
+  margin: 0;
+  padding: 0.3rem 165px 0.3rem 0.9rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.sv-nav-pages::-webkit-scrollbar { height: 4px; }
+.sv-nav-pages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-nav-pages a, .sv-nav-pages .sv-nav-current { padding: 0.15rem 0.3rem; }
+.sv-nav-pages a {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.sv-nav-pages a:hover {
+  background: var(--accent-light);
+  text-decoration: none;
+}
+.sv-nav-current {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Cards ── */
+.sv-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.sv-card:hover { box-shadow: var(--shadow-hover); }
+.sv-card h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* ── Styles par défaut h1/h2/h3 (uniformisation charte) ───────────
+   Les CSS page-spécifiques peuvent override avec même spécificité
+   (leur règle est chargée après CHARTER_CSS). */
+h1 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+h2 {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+h3 {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+/* ── Page générique : cadrage à gauche uniforme ── */
+.sv-page {
+  margin: 0;
+  padding: 0.35rem 1.25rem 2rem;
+}
+@media (max-width: 640px) { .sv-page { padding: 0 0.75rem 1.5rem; } }
+
+/* ── Accordéon déroulant (sections pédagogiques) ── */
+.sv-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-accordion-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem 1rem; cursor: pointer; background: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--border); transition: background 0.15s;
+  user-select: none;
+}
+.sv-accordion-header:hover { background: var(--color-bg-muted); }
+.sv-accordion-title { font-weight: 600; font-size: var(--font-sm); color: var(--text); }
+.sv-accordion-chevron {
+  font-size: var(--font-base); color: var(--text-secondary); transition: transform 0.2s;
+  flex-shrink: 0; margin-left: 0.5rem;
+}
+.sv-accordion-chevron.open { transform: rotate(90deg); }
+.sv-accordion-body {
+  padding: 0.85rem 1rem; font-size: var(--font-base); color: var(--text-secondary);
+  line-height: 1.6; animation: sv-fadeIn 0.2s ease-in;
+}
+@keyframes sv-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Onglets niveau 1 (Pratique / Comprendre) — captifs juste sous .sv-nav-pages ── */
+.sv-tabs {
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.25rem 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-md);
+  position: sticky;
+  top: 1.8rem;                    /* hauteur sv-nav-pages (font-xs + padding 0.3) */
+  background: var(--bg);
+  z-index: 15;
+}
+.sv-tab {
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+  font-family: inherit;
+}
+.sv-tab:hover { color: var(--text); background: var(--color-bg-subtle); }
+.sv-tab.active {
+  color: var(--success);
+  background: var(--card-bg);
+  border-color: var(--border);
+  border-bottom-color: var(--card-bg);  /* relie le tab a son contenu */
+}
+@media (max-width: 640px) {
+  .sv-tabs { top: 1.8rem; }       /* nav-pages reste sur 1 ligne (overflow-x) */
+  .sv-tab { padding: 0.3rem 0.6rem; }
+}
+
+/* ── Onglets niveau 2 (sous-onglets) — pills compactes inline ── */
+.sv-subtabs {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem 0;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+.sv-subtab {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+.sv-subtab:hover { color: var(--text); border-color: var(--border-hover); }
+.sv-subtab.active {
+  color: #fff;
+  background: var(--success);
+  border-color: var(--success);
+}
+[data-theme="dark"] .sv-subtab.active { color: var(--card-bg); font-weight: 700; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sv-subtab.active { color: var(--card-bg); font-weight: 700; } }
+.sv-card h3 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--text);
+}
+
+/* ── Containers ── */
+.sv-container {
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+}
+.sv-section {
+  margin: 0;
+  padding: 0 1.25rem;
+}
+
+/* ── Tags / badges ── */
+.sv-tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  font-size: var(--font-xs);
+  font-weight: 500;
+  margin: 0.15rem;
+  line-height: 1.4;
+}
+.sv-tag-risk  { background: var(--danger-light);  color: var(--danger); }
+.sv-tag-test  { background: var(--info-light);    color: var(--info); cursor: pointer; }
+.sv-tag-test:hover { background: #BFDBFE; }
+.sv-tag-term  { background: var(--success-light); color: var(--success); }
+.sv-tag-doc   { background: var(--warning-light); color: var(--warning); }
+.sv-tag-info  { background: var(--color-bg-subtle); color: var(--text-secondary); }
+
+/* ── Callout / highlight box ──
+   color explicite obligatoire : --*-light devient tres fonce en dark
+   et le texte heritait du parent (illisible). */
+.sv-callout {
+  background: var(--color-bg-subtle);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: var(--font-base);
+  border-left: 4px solid var(--accent);
+  margin: 0.75rem 0;
+}
+.sv-callout-success { border-left-color: var(--success); background: var(--success-light); color: var(--color-success-text); }
+.sv-callout-warning { border-left-color: var(--warning); background: var(--warning-light); color: var(--color-warning-text); }
+.sv-callout-danger  { border-left-color: var(--danger);  background: var(--danger-light);  color: var(--color-danger-text); }
+.sv-callout-title { font-weight: 600; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+.sv-callout-icon { font-size: var(--font-md); }
+
+/* ── SvTabIntro : intro accordeon sous les onglets ── */
+.sv-tab-intro {
+  margin: 0.25rem 0 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+.sv-tab-intro-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.sv-tab-intro-resume {
+  flex: 1 1 320px;
+  min-width: 0;
+  line-height: 1.5;
+  white-space: normal;
+}
+.sv-tab-intro-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: var(--font-xs);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.sv-tab-intro-toggle:hover { background: var(--accent-light); border-color: var(--accent); }
+.sv-tab-intro-detail {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── SvImageCard : image illustrative + legende ── */
+.sv-image-card {
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sv-image-caption {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ── SvProcedureSteps : procedure pas-a-pas numerotee ── */
+.sv-procedure {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-procedure-title {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.sv-procedure-meta {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.sv-procedure-steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+  margin: 0;
+}
+.sv-procedure-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.3rem 0 0.3rem 2rem;
+  font-size: var(--font-base);
+}
+.sv-procedure-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sv-procedure-label { font-weight: 500; color: var(--text); }
+.sv-procedure-detail { color: var(--text-secondary); }
+
+/* ── SvTestCard : carte standardisee pour un terrain_test ── */
+.sv-test-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-test-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-test-card-title {
+  font-weight: 700;
+  font-size: var(--font-lg);
+  color: var(--text);
+}
+.sv-test-card-dim {
+  font-size: var(--font-xs);
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sv-test-card-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+}
+.sv-test-card-source {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ── Inputs ── */
+.sv-input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: var(--font-base);
+  transition: border-color 0.15s;
+  background: var(--card-bg);
+  color: var(--text);
+  font-family: inherit;
+}
+.sv-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.sv-input::placeholder { color: var(--text-secondary); opacity: 0.7; }
+/* <option> suit le theme (evite fond blanc en dark sur Chrome/Firefox) */
+.sv-input option { background: var(--card-bg); color: var(--text); }
+select.sv-input { color-scheme: light dark; }
+
+.sv-btn {
+  padding: 0.4rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--font-base);
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.sv-btn:hover { background: var(--accent-dark); }
+
+/* ── Tooltip ── */
+.sv-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--header-from);
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--font-sm);
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ── Footer ── */
+.sv-footer {
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+.sv-footer a { color: var(--accent); text-decoration: none; }
+
+/* ── Details / Glossary ── */
+.sv-details {
+  margin: 1rem 0;
+  padding: 0 1.25rem;
+}
+.sv-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.sv-details summary::-webkit-details-marker { display: none; }
+.sv-details summary::before { content: '▸ '; color: var(--accent); }
+.sv-details[open] summary::before { content: '▾ '; }
+.sv-details .sv-details-content {
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sv-header { padding: 1rem 1.25rem; }
+  .sv-header h1 { font-size: var(--font-lg); }
+  .sv-container { padding: 1rem; }
+  .sv-section { padding: 0 1rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Charte pédagogique unifiée — "Cahier de Science"
+   Composants réutilisables pour la pédagogie et la compréhension
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Layout sidebar + main (unifié) ── */
+.sv-sidebar-layout {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 1rem 0;
+  min-height: calc(100vh - 80px);
+}
+.sv-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+.sv-sidebar::-webkit-scrollbar { width: 4px; }
+.sv-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sv-main { flex: 1; min-width: 0; overflow: hidden; }
+@media (max-width: 1024px) {
+  .sv-sidebar-layout { flex-direction: column; padding: 0.75rem; }
+  .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
+}
+
+/* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
+.sv-tab-content {
+  padding: 0 0 1rem;
+  min-height: 400px;
+}
+
+/* ── Cahier de science : fond & ambiance ──
+   Variable dediee --paper-bg pour preserver le ton beige en light
+   et basculer vers var(--card-bg) en dark. */
+.sv-cahier {
+  background: var(--paper-bg, #fdfbf7);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  color: var(--text);
+}
+
+/* ── Prose didactique (texte courant pédagogique) ── */
+.sv-prose {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+.sv-prose strong { color: var(--text); }
+.sv-prose em { color: var(--color-text-muted); }
+
+/* ── Section compactable/décompactable ── */
+.sv-collapse {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.sv-collapse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  user-select: none;
+  font-family: inherit;
+  color: inherit;
+}
+.sv-collapse-header:hover { background: var(--color-bg-muted); }
+.sv-collapse-title {
+  font-weight: 600;
+  font-size: var(--font-base);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-collapse-chevron {
+  font-size: var(--font-base);
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.sv-collapse-chevron.open { transform: rotate(90deg); }
+.sv-collapse-body {
+  padding: 1rem 1.25rem;
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  animation: sv-slideDown 0.2s ease-out;
+}
+@keyframes sv-slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Encart Science Note (cahier de labo) ── */
+.sv-science-note {
+  background: linear-gradient(135deg, var(--paper-bg), var(--paper-bg-2));
+  border: 1px solid var(--paper-border);
+  border-left: 4px solid var(--success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  position: relative;
+  color: var(--text);
+}
+.sv-science-note::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0.85rem;
+  left: -2.2rem;
+  font-size: var(--font-md);
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--success);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--font-sm);
+}
+.sv-science-note-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.sv-science-note p, .sv-science-note .sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Formule scientifique ── */
+.sv-formula {
+  background: var(--purple-light);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: var(--font-base);
+  color: var(--text);
+  line-height: 1.6;
+}
+.sv-formula-highlight {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--purple-dark);
+  font-size: 1.05em;
+}
+.sv-formula-source {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  margin-top: 0.35rem;
+}
+
+/* ── Règle pratique "À retenir" ── */
+.sv-rule {
+  background: var(--success-light);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+  margin: 0.75rem 0;
+  border-left: 4px solid var(--success);
+}
+.sv-rule-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.25rem;
+}
+.sv-rule p, .sv-rule span {
+  font-size: var(--font-base);
+  color: var(--color-success-text);
+  line-height: 1.5;
+}
+
+/* ── KPI unifié ── */
+.sv-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.sv-kpi {
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.sv-kpi-value {
+  font-size: var(--font-1-4);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.sv-kpi-unit {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+.sv-kpi-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+}
+.sv-kpi-detail {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.3;
+}
+
+/* ── Timeline / Frise chronologique ── */
+.sv-timeline {
+  position: relative;
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+.sv-timeline-item {
+  position: relative;
+  padding: 0.5rem 0 0.75rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.sv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.9rem;
+  top: 0.8rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--success);
+}
+.sv-timeline-date {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--success);
+  margin-bottom: 0.2rem;
+}
+.sv-timeline-place {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 0.15rem;
+}
+.sv-timeline-text {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.45;
+}
+.sv-timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+.sv-timeline-tag {
+  font-size: var(--font-2xs);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+}
+
+/* ── Phase card (succession, étapes) ── */
+.sv-phase-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border-left: 4px solid;
+  background: var(--color-bg-subtle);
+  margin-bottom: 0.6rem;
+}
+.sv-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-label {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-phase-name {
+  font-size: var(--font-base);
+  font-weight: 700;
+}
+.sv-phase-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+.sv-phase-tag {
+  font-size: var(--font-2xs);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.sv-phase-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Alerte unifiée ── */
+.sv-alert {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: var(--font-sm);
+  margin-bottom: 0.5rem;
+  border: 1px solid;
+  line-height: 1.5;
+}
+.sv-alert-danger  { background: var(--danger-light);  color: var(--color-danger-text);  border-color: var(--danger-light); }
+.sv-alert-warning { background: var(--warning-light); color: var(--color-warning-text); border-color: var(--warning-light); }
+.sv-alert-success { background: var(--success-light); color: var(--color-success-text); border-color: var(--success-light); }
+.sv-alert-info    { background: var(--info-light);    color: var(--accent-dark);        border-color: var(--info-light); }
+
+/* ── Diagnostic OK/KO ── */
+.sv-diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.sv-diag-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid;
+}
+.sv-diag-ok { background: var(--success-light); border-color: var(--success-light); }
+.sv-diag-ko { background: var(--danger-light);  border-color: var(--danger-light); }
+.sv-diag-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.4rem; }
+.sv-diag-ok .sv-diag-title { color: var(--color-success-text); }
+.sv-diag-ko .sv-diag-title { color: var(--color-danger-text); }
+.sv-diag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sv-diag-list li {
+  font-size: var(--font-sm);
+  line-height: 1.45;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.sv-diag-list li:last-child { border-bottom: none; }
+@media (max-width: 640px) { .sv-diag-grid { grid-template-columns: 1fr; } }
+
+/* ── Comparaison côte-à-côte ── */
+.sv-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+.sv-compare-good {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--success-light);
+  border: 1px solid var(--success-light);
+}
+.sv-compare-bad {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--danger-light);
+  border: 1px solid var(--danger-light);
+}
+.sv-compare-title { font-weight: 700; font-size: var(--font-sm); margin-bottom: 0.35rem; }
+.sv-compare-good .sv-compare-title { color: var(--color-success-text); }
+.sv-compare-bad .sv-compare-title { color: var(--color-danger-text); }
+.sv-compare-list { list-style: none; padding: 0; margin: 0; }
+.sv-compare-list li {
+  font-size: var(--font-sm);
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+.sv-compare-good .sv-compare-list li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.sv-compare-bad .sv-compare-list li::before  { content: '• '; color: var(--danger); }
+@media (max-width: 640px) { .sv-compare { grid-template-columns: 1fr; } }
+
+/* ── Terme glossaire ── */
+.sv-term {
+  padding: 0.5rem 0.65rem;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+.sv-term-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+.sv-term-badge {
+  font-size: var(--font-2xs);
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sv-term-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-term-alt {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.sv-term-def {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ── Source bibliographique ── */
+.sv-source {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 0.25rem 0;
+}
+.sv-source-year { color: var(--color-text-muted); }
+.sv-source-title { color: var(--color-text-muted); }
+.sv-source-link { color: var(--accent); text-decoration: underline; font-size: var(--font-xs); }
+
+/* ── Référence / Box encadrée ── */
+.sv-ref-box {
+  background: var(--card-bg);
+  border: 1px solid var(--warning);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+}
+.sv-ref-box-title {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-warning-text);
+  margin-bottom: 0.5rem;
+}
+.sv-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sv-ref-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--warning-light);
+  border-radius: 6px;
+}
+.sv-ref-num { font-size: var(--font-md); font-weight: 800; color: var(--color-warning-text); }
+.sv-ref-label { font-size: var(--font-2xs); color: var(--color-warning-text); margin-top: 2px; }
+@media (max-width: 640px) { .sv-ref-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Table caractérisation unifiée ── */
+.sv-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+.sv-data-table th {
+  text-align: left;
+  padding: 0.5rem 0.4rem;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+}
+.sv-data-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-data-table tr:hover { background: var(--color-bg-subtle); }
+
+/* ── Section label (titre de section uppercase) ── */
+.sv-section-label {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Filiation / conclusion highlight ── */
+.sv-highlight-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--success);
+  background: var(--success-light);
+  margin: 0.75rem 0;
+}
+.sv-highlight-box-title {
+  font-weight: 700;
+  font-size: var(--font-sm);
+  color: var(--color-success-text);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Bullet list pédagogique ── */
+.sv-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+.sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1.2rem;
+  position: relative;
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-bullet-list li:last-child { border-bottom: none; }
+.sv-bullet-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+.sv-bullet-list-dense li {
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  font-size: var(--font-xs);
+}
+
+/* ── Inline emphasis / highlight unifiés ── */
+.sv-mark {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+.sv-emphasis {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── SvCascadeGrid : projection d'un sujet sur les 4 cascades ── */
+.sv-cascade-grid {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+.sv-cascade-grid-head {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px dashed var(--border);
+}
+.sv-cascade-grid-title {
+  font-weight: 700;
+  font-size: var(--font-base);
+  color: var(--text);
+}
+.sv-cascade-grid-sujet {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.sv-cascade-grid-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.sv-cascade-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .sv-cascade-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+.sv-cascade-row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+.sv-cascade-row-icon { font-size: var(--font-md); line-height: 1; }
+.sv-cascade-row-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.sv-cascade-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem 0.2rem 0.5rem;
+  border-left: 3px solid;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: var(--font-xs);
+  cursor: help;
+}
+.sv-cascade-badge strong {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sv-cascade-badge-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Passerelle Outil → Cahier de Science ── */
+.sv-cahier-link {
+  margin: 1rem 0 0.75rem;
+  padding: 0.6rem 1rem;
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.sv-cahier-link-icon { font-size: var(--font-lg); line-height: 1; }
+.sv-cahier-link-text { color: var(--text-secondary); flex-shrink: 0; white-space: nowrap; }
+.sv-cahier-link a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+.sv-cahier-link a:hover { text-decoration: underline; }
+
+/* ── Bloc texte riche (SvRichText) ── */
+.sv-richtext { line-height: 1.55; }
+.sv-richtext p.sv-prose {
+  font-size: var(--font-sm);
+  color: var(--text);
+}
+.sv-richtext .sv-section-label {
+  font-size: var(--font-2xs);
+  margin-bottom: 0.35rem;
+  color: var(--accent-dark);
+}
+.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+
+/* ── Bloc de section unifié (SvSection) ── */
+.sv-section-block {
+  margin: 1.25rem 0 1.5rem;
+}
+.sv-section-block + .sv-section-block {
+  margin-top: 2rem;
+}
+.sv-section-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sv-section-title-h2 { font-size: var(--font-1-4); }
+.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
+.sv-section-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+.sv-section-block .sv-section-label + .sv-section-title {
+  margin-top: 0;
+}
+
+/* ── Note inline mini-accordion ── */
+.sv-note-toggle {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: var(--font-xs);
+}
+.sv-note-toggle:hover { text-decoration: underline; }
+.sv-note-content {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  padding: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* ── Responsive ajouts pédagogiques ── */
+@media (max-width: 640px) {
+  .sv-kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .sv-kpi-value { font-size: var(--font-lg); }
+  .sv-cahier { padding: 0.75rem; }
+}
+
+/* ── SvComprendre : onglet Comprendre unifié ── */
+.sv-comprendre-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+.sv-comprendre-card {
+  display: block;
+  padding: 0.75rem 0.9rem;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.sv-comprendre-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.sv-comprendre-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: var(--font-xs);
+}
+.sv-comprendre-card-badge {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+.sv-comprendre-card-dim {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: var(--font-2xs);
+  letter-spacing: 0.06em;
+}
+.sv-comprendre-card-title {
+  font-weight: 600;
+  font-size: var(--font-sm);
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.sv-comprendre-card-desc {
+  font-size: var(--font-xs);
+  line-height: 1.45;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sv-comprendre-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sv-comprendre-term {
+  padding: 0.6rem 0.75rem;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+.sv-comprendre-term-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+.sv-comprendre-term-fr {
+  font-weight: 600;
+  color: var(--text);
+  font-size: var(--font-base);
+}
+.sv-comprendre-term-en {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+}
+.sv-comprendre-term-def {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.5;
+}
 
 /* ── tests_terrain : layout grille de SvTestCard ── */
 .tt-page {
@@ -1686,10 +3394,10 @@ select.sv-input { color-scheme: light dark; }
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Tests terrain</h1>
   <div class="sv-subtitle">Diagnostiquer son sol au champ avec 20 protocoles simples</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-19 20:11 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-20 22:56 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
-<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie interactive</a>  ·  <a href="mo_calculateur.html">🧪 Calculateur Matière Organique</a>  ·  <a href="lifofer.html">🌿 Calculateur LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Triangle des Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
+<nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
 
 
 <div id="root"></div>
@@ -1704,393 +3412,239 @@ select.sv-input { color-scheme: light dark; }
 
 
 <script>const DATA = {"tests": [{"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "docs_codes": ["P1", "S1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "docs_codes": ["P1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "docs_codes": ["P1", "S2", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "docs_codes": ["P1", "P2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "docs_codes": ["P1", "S4", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "docs_codes": ["S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "docs_codes": ["P1", "S1", "S4"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "docs_codes": ["P1", "S1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};</script>
-<script>
+<script type="text/babel">
+
+
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
 // Tous les textes arrivent via props (jamais hardcodés)
 // ═══════════════════════════════════════════════════════════════════
 
 // ── SvCollapse : section compactable/décompactable ──
-function SvCollapse({
-  title,
-  icon,
-  defaultOpen = false,
-  children,
-  id
-}) {
+function SvCollapse({ title, icon, defaultOpen = false, children, id }) {
   const [open, setOpen] = React.useState(defaultOpen);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse",
-    id: id
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "sv-collapse-header",
-    onClick: () => setOpen(!open)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-collapse-title"
-  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
-    className: `sv-collapse-chevron ${open ? 'open' : ''}`
-  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse-body"
-  }, children));
+  return <div className="sv-collapse" id={id}>
+    <button className="sv-collapse-header" onClick={() => setOpen(!open)}>
+      <span className="sv-collapse-title">{icon && <span>{icon}</span>}{title}</span>
+      <span className={`sv-collapse-chevron ${open ? 'open' : ''}`}>▸</span>
+    </button>
+    {open && <div className="sv-collapse-body">{children}</div>}
+  </div>;
 }
 
 // ── SvFormula : formule scientifique avec source optionnelle ──
-function SvFormula({
-  children,
-  source
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula"
-  }, children, source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula-source"
-  }, source));
+function SvFormula({ children, source }) {
+  return <div className="sv-formula">
+    {children}
+    {source && <div className="sv-formula-source">{source}</div>}
+  </div>;
 }
 
 // ── SvRule : règle pratique "à retenir" ──
-function SvRule({
-  children,
-  title
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvRule({ children, title }) {
+  return <div className="sv-rule">
+    {title && <div className="sv-rule-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvScienceNote : encart cahier de science ──
-function SvScienceNote({
-  children,
-  title,
-  icon
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note",
-    "data-icon": icon || ''
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvScienceNote({ children, title, icon }) {
+  return <div className="sv-science-note" data-icon={icon || ''}>
+    {title && <div className="sv-science-note-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvKPI : indicateur clé ──
-function SvKPI({
-  value,
-  unit,
-  label,
-  color,
-  detail,
-  style
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi",
-    style: style
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-value",
-    style: color ? {
-      color
-    } : undefined
-  }, value), unit && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-unit"
-  }, unit), /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-label",
-    style: color ? {
-      color
-    } : undefined
-  }, label), detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-detail"
-  }, detail));
+function SvKPI({ value, unit, label, color, detail, style }) {
+  return <div className="sv-kpi" style={style}>
+    <div className="sv-kpi-value" style={color ? {color} : undefined}>{value}</div>
+    {unit && <div className="sv-kpi-unit">{unit}</div>}
+    <div className="sv-kpi-label" style={color ? {color} : undefined}>{label}</div>
+    {detail && <div className="sv-kpi-detail">{detail}</div>}
+  </div>;
 }
 
 // ── SvKPIGrid : grille de KPIs ──
-function SvKPIGrid({
-  children,
-  cols
-}) {
-  const style = cols ? {
-    gridTemplateColumns: `repeat(${cols}, 1fr)`
-  } : undefined;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-grid",
-    style: style
-  }, children);
+function SvKPIGrid({ children, cols }) {
+  const style = cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined;
+  return <div className="sv-kpi-grid" style={style}>{children}</div>;
 }
 
 // ── SvTimeline : frise chronologique ──
-function SvTimeline({
-  items,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, children);
+function SvTimeline({ items, children }) {
+  if (children) return <div className="sv-timeline">{children}</div>;
   if (!items || !items.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-timeline-item"
-  }, item.date && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-date"
-  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-place"
-  }, item.place), /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-text"
-  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-tags"
-  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "sv-timeline-tag"
-  }, t))))));
+  return <div className="sv-timeline">
+    {items.map((item, i) => <div key={i} className="sv-timeline-item">
+      {item.date && <div className="sv-timeline-date">{item.date}</div>}
+      {item.place && <div className="sv-timeline-place">{item.place}</div>}
+      <div className="sv-timeline-text">{item.text}</div>
+      {item.tags && <div className="sv-timeline-tags">
+        {item.tags.map((t, j) => <span key={j} className="sv-timeline-tag">{t}</span>)}
+      </div>}
+    </div>)}
+  </div>;
 }
 
 // ── SvPhaseCard : phase/étape colorée ──
-function SvPhaseCard({
-  title,
-  color,
-  label,
-  stats,
-  tags,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-card",
-    style: {
-      borderLeftColor: color || 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-header",
-    style: {
-      color: color || 'var(--accent)'
-    }
-  }, label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-label"
-  }, label), /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-name"
-  }, title)), stats && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-stats"
-  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
-    key: i
-  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-tags"
-  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-phase-tag"
-  }, t))), children && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-text"
-  }, children));
+function SvPhaseCard({ title, color, label, stats, tags, children }) {
+  return <div className="sv-phase-card" style={{ borderLeftColor: color || 'var(--accent)' }}>
+    <div className="sv-phase-header" style={{ color: color || 'var(--accent)' }}>
+      {label && <span className="sv-phase-label">{label}</span>}
+      <span className="sv-phase-name">{title}</span>
+    </div>
+    {stats && <div className="sv-phase-stats">{stats.map((s, i) =>
+      <span key={i}><strong>{s.label}</strong> {s.value}</span>
+    )}</div>}
+    {tags && <div className="sv-phase-tags">{tags.map((t, i) =>
+      <span key={i} className="sv-phase-tag">{t}</span>
+    )}</div>}
+    {children && <div className="sv-phase-text">{children}</div>}
+  </div>;
 }
 
 // ── SvCompare : comparaison bon/mauvais ──
-function SvCompare({
-  good,
-  bad
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-good"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-bad"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvCompare({ good, bad }) {
+  return <div className="sv-compare">
+    <div className="sv-compare-good">
+      <div className="sv-compare-title">{good.title}</div>
+      {good.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{good.text}</div>}
+      {good.items && <ul className="sv-compare-list">
+        {good.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+    <div className="sv-compare-bad">
+      <div className="sv-compare-title">{bad.title}</div>
+      {bad.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{bad.text}</div>}
+      {bad.items && <ul className="sv-compare-list">
+        {bad.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+  </div>;
 }
 
 // ── SvDiagnostic : grille diagnostic OK/KO ──
-function SvDiagnostic({
-  ok,
-  ko
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-grid"
-  }, ok && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ok"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ko"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvDiagnostic({ ok, ko }) {
+  return <div className="sv-diag-grid">
+    {ok && <div className="sv-diag-card sv-diag-ok">
+      <div className="sv-diag-title">{ok.title}</div>
+      {ok.items && <ul className="sv-diag-list">
+        {ok.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+    {ko && <div className="sv-diag-card sv-diag-ko">
+      <div className="sv-diag-title">{ko.title}</div>
+      {ko.items && <ul className="sv-diag-list">
+        {ko.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+  </div>;
 }
 
 // ── SvTermList : liste de termes glossaire ──
-function SvTermList({
-  terms
-}) {
+function SvTermList({ terms }) {
   if (!terms || !terms.length) return null;
-  return /*#__PURE__*/React.createElement("div", null, terms.map((t, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-term"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-term-head"
-  }, t.badge && /*#__PURE__*/React.createElement("span", {
-    className: "sv-term-badge",
-    style: t.badgeStyle
-  }, t.badge), /*#__PURE__*/React.createElement("span", {
-    className: "sv-term-name"
-  }, t.name), t.alt && /*#__PURE__*/React.createElement("span", {
-    className: "sv-term-alt"
-  }, t.alt)), t.def && /*#__PURE__*/React.createElement("div", {
-    className: "sv-term-def"
-  }, t.def))));
+  return <div>
+    {terms.map((t, i) => <div key={i} className="sv-term">
+      <div className="sv-term-head">
+        {t.badge && <span className="sv-term-badge" style={t.badgeStyle}>{t.badge}</span>}
+        <span className="sv-term-name">{t.name}</span>
+        {t.alt && <span className="sv-term-alt">{t.alt}</span>}
+      </div>
+      {t.def && <div className="sv-term-def">{t.def}</div>}
+    </div>)}
+  </div>;
 }
 
 // ── SvSourceList : liste de sources biblio ──
-function SvSourceList({
-  sources
-}) {
+function SvSourceList({ sources }) {
   if (!sources || !sources.length) return null;
-  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-source"
-  }, s.year && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-year"
-  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-title"
-  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
-    href: s.url,
-    target: "_blank",
-    rel: "noopener",
-    className: "sv-source-link"
-  }, "[lien]")))));
+  return <div>
+    {sources.map((s, i) => <div key={i} className="sv-source">
+      {s.year && <span className="sv-source-year">{s.year} — </span>}
+      {s.authors && <strong>{s.authors}</strong>}{s.authors && ' '}
+      {s.title && <span className="sv-source-title">{s.title}</span>}
+      {s.url && <> <a href={s.url} target="_blank" rel="noopener" className="sv-source-link">[lien]</a></>}
+    </div>)}
+  </div>;
 }
 
 // ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
 // Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
-function SvTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-tab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvTabs({ tabs, active, onChange }) {
+  return <div className="sv-tabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-tab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
 // A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
 // Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
 // Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
-function SvSubTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-subtabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvSubTabs({ tabs, active, onChange }) {
+  return <div className="sv-subtabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-subtab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
 // Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
 // Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
-function SvCallout({
-  variant,
-  title,
-  icon,
-  children
-}) {
+function SvCallout({ variant, title, icon, children }) {
   const v = variant || 'info';
   const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cls
-  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout-title"
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-callout-icon"
-  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={cls}>
+    {(title || icon) && <div className="sv-callout-title">
+      {icon && <span className="sv-callout-icon">{icon}</span>}
+      {title && <span>{title}</span>}
+    </div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
-function SvAlert({
-  variant,
-  title,
-  children
-}) {
+function SvAlert({ variant, title, children }) {
   const v = variant || 'info';
-  return /*#__PURE__*/React.createElement("div", {
-    className: `sv-alert sv-alert-${v}`
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      marginBottom: '0.25rem'
-    }
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={`sv-alert sv-alert-${v}`}>
+    {title && <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvImageCard : image illustrative avec legende et styles standardises ──
 // Resout le bug "double style" + manque de max-width responsive.
 // Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
-function SvImageCard({
-  src,
-  alt,
-  caption,
-  maxHeight,
-  maxWidth
-}) {
+function SvImageCard({ src, alt, caption, maxHeight, maxWidth }) {
   const mh = maxHeight || '320px';
   const mw = maxWidth || '100%';
-  return /*#__PURE__*/React.createElement("figure", {
-    className: "sv-image-card"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: src,
-    alt: alt || '',
-    style: {
-      width: '100%',
-      maxWidth: mw,
-      maxHeight: mh,
-      objectFit: 'contain',
-      borderRadius: 'var(--radius)',
-      border: '1px solid var(--border)',
-      boxShadow: 'var(--shadow)',
-      display: 'block'
-    }
-  }), caption && /*#__PURE__*/React.createElement("figcaption", {
-    className: "sv-image-caption"
-  }, caption));
+  return <figure className="sv-image-card">
+    <img src={src} alt={alt || ''}
+      style={{
+        width: '100%',
+        maxWidth: mw,
+        maxHeight: mh,
+        objectFit: 'contain',
+        borderRadius: 'var(--radius)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow)',
+        display: 'block'
+      }} />
+    {caption && <figcaption className="sv-image-caption">{caption}</figcaption>}
+  </figure>;
 }
 
 // ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
@@ -2100,189 +3654,107 @@ function SvImageCard({
 //   materiel : array de strings (optionnel)
 //   duree : string (optionnel)
 //   title : string (optionnel)
-function SvProcedureSteps({
-  title,
-  steps,
-  materiel,
-  duree
-}) {
+function SvProcedureSteps({ title, steps, materiel, duree }) {
   if (!steps || !steps.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-title"
-  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-meta"
-  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
-    className: "sv-procedure-steps"
-  }, steps.map((s, i) => {
-    const label = typeof s === 'string' ? s : s.label;
-    const detail = typeof s === 'string' ? null : s.detail;
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-label"
-    }, label), detail && /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-detail"
-    }, " \u2014 ", detail));
-  })));
+  return <div className="sv-procedure">
+    {title && <div className="sv-procedure-title">{title}</div>}
+    {(materiel || duree) && <div className="sv-procedure-meta">
+      {materiel && materiel.length > 0 && <div>
+        <strong>Materiel : </strong>{materiel.join(' · ')}
+      </div>}
+      {duree && <div><strong>Duree : </strong>{duree}</div>}
+    </div>}
+    <ol className="sv-procedure-steps">
+      {steps.map((s, i) => {
+        const label = typeof s === 'string' ? s : s.label;
+        const detail = typeof s === 'string' ? null : s.detail;
+        return <li key={i}>
+          <span className="sv-procedure-label">{label}</span>
+          {detail && <span className="sv-procedure-detail"> — {detail}</span>}
+        </li>;
+      })}
+    </ol>
+  </div>;
 }
 
 // ── SvTestCard : carte standardisee pour un terrain_test ──
 // Reutilisable dans la page Triangle (section test du bocal) ET pour la
 // future page autonome tests_terrain.
 // Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
-function SvTestCard({
-  test
-}) {
+function SvTestCard({ test }) {
   if (!test) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-title"
-  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-test-card-dim"
-  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-desc"
-  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
-    src: test.image_url,
-    alt: test.title,
-    caption: null,
-    maxHeight: "220px"
-  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
-    title: null,
-    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
-    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
-    duree: test.duree
-  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
-    variant: "success",
-    title: "Interpretation"
-  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-source"
-  }, "Source : ", test.source));
+  return <div className="sv-test-card">
+    <div className="sv-test-card-header">
+      <div className="sv-test-card-title">{test.title}</div>
+      {test.dimension_label && <span className="sv-test-card-dim">{test.dimension_label}</span>}
+    </div>
+    {test.description && <div className="sv-test-card-desc">{test.description}</div>}
+    {test.image_url && <SvImageCard src={test.image_url} alt={test.title} caption={null} maxHeight="220px" />}
+    {(test.procedure || test.materiel || test.duree) && <SvProcedureSteps
+      title={null}
+      steps={test.procedure ? (Array.isArray(test.procedure) ? test.procedure : [test.procedure]) : []}
+      materiel={test.materiel ? (Array.isArray(test.materiel) ? test.materiel : [test.materiel]) : null}
+      duree={test.duree}
+    />}
+    {test.interpretation && <SvCallout variant="success" title="Interpretation">{test.interpretation}</SvCallout>}
+    {test.source && <div className="sv-test-card-source">Source : {test.source}</div>}
+  </div>;
 }
 
+
 // ── SvNoteAccordion : mini-note inline ──
-function SvNoteAccordion({
-  text,
-  label
-}) {
+function SvNoteAccordion({ text, label }) {
   const [open, setOpen] = React.useState(false);
   if (!text) return null;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content"
-  }, text));
+  return <div>
+    <span className="sv-note-toggle" onClick={() => setOpen(!open)}>
+      {open ? '\u25BE' : '\u25B8'} {open ? '' : (label || 'note')}
+    </span>
+    {open && <div className="sv-note-content">{text}</div>}
+  </div>;
 }
 
 // ── SvRefBox : encart de référence chiffrée ──
-function SvRefBox({
-  title,
-  items,
-  note,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box-title"
-  }, title), items && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-grid"
-  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-ref-item"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-num"
-  }, it.value), /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-label"
-  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--color-warning-text)',
-      lineHeight: 1.45,
-      fontStyle: 'italic'
-    }
-  }, note), children);
+function SvRefBox({ title, items, note, children }) {
+  return <div className="sv-ref-box">
+    {title && <div className="sv-ref-box-title">{title}</div>}
+    {items && <div className="sv-ref-grid">
+      {items.map((it, i) => <div key={i} className="sv-ref-item">
+        <div className="sv-ref-num">{it.value}</div>
+        <div className="sv-ref-label">{it.label}</div>
+      </div>)}
+    </div>}
+    {note && <div style={{fontSize:'var(--font-xs)',color:'var(--color-warning-text)',lineHeight:1.45,fontStyle:'italic'}}>{note}</div>}
+    {children}
+  </div>;
 }
 
 // ── SvHighlightBox : conclusion / point clé ──
-function SvHighlightBox({
-  title,
-  children,
-  color
-}) {
+function SvHighlightBox({ title, children, color }) {
   const c = color || 'success';
   const colors = {
-    success: {
-      bg: 'var(--success-light)',
-      border: 'var(--success)',
-      text: 'var(--color-success-text)'
-    },
-    warning: {
-      bg: 'var(--warning-light)',
-      border: 'var(--warning)',
-      text: 'var(--color-warning-text)'
-    },
-    info: {
-      bg: 'var(--info-light)',
-      border: 'var(--accent)',
-      text: 'var(--accent-dark)'
-    },
-    purple: {
-      bg: 'var(--purple-light)',
-      border: 'var(--purple)',
-      text: 'var(--purple-dark)'
-    }
+    success: { bg: 'var(--success-light)', border: 'var(--success)', text: 'var(--color-success-text)' },
+    warning: { bg: 'var(--warning-light)', border: 'var(--warning)', text: 'var(--color-warning-text)' },
+    info:    { bg: 'var(--info-light)',    border: 'var(--accent)',  text: 'var(--accent-dark)' },
+    purple:  { bg: 'var(--purple-light)',  border: 'var(--purple)',  text: 'var(--purple-dark)' },
   };
   const s = colors[c] || colors.success;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box",
-    style: {
-      background: s.bg,
-      borderLeftColor: s.border
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box-title",
-    style: {
-      color: s.text
-    }
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, children));
+  return <div className="sv-highlight-box" style={{background: s.bg, borderLeftColor: s.border}}>
+    {title && <div className="sv-highlight-box-title" style={{color: s.text}}>{title}</div>}
+    <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{children}</div>
+  </div>;
 }
 
 // ── SvDataTable : table de données stylisée ──
-function SvDataTable({
-  headers,
-  rows,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, children);
+function SvDataTable({ headers, rows, children }) {
+  if (children) return <table className="sv-data-table">{children}</table>;
   if (!headers || !rows) return null;
-  return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
-    key: i,
-    style: h.align ? {
-      textAlign: h.align
-    } : undefined
-  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-    key: j,
-    style: headers[j] && headers[j].align ? {
-      textAlign: headers[j].align
-    } : undefined
-  }, cell))))));
+  return <table className="sv-data-table">
+    <thead><tr>{headers.map((h, i) => <th key={i} style={h.align ? {textAlign: h.align} : undefined}>{h.label || h}</th>)}</tr></thead>
+    <tbody>{rows.map((row, i) => <tr key={i}>
+      {row.map((cell, j) => <td key={j} style={headers[j] && headers[j].align ? {textAlign: headers[j].align} : undefined}>{cell}</td>)}
+    </tr>)}</tbody>
+  </table>;
 }
 
 // ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
@@ -2290,31 +3762,24 @@ function SvDataTable({
 // - Chaîne simple : rendue telle quelle
 // - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
 //   `strong` met en gras inline avec .sv-emphasis
-function SvBulletList({
-  items,
-  dense
-}) {
+function SvBulletList({ items, dense }) {
   if (!items || !items.length) return null;
   const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
-  return /*#__PURE__*/React.createElement("ul", {
-    className: cls
-  }, items.map((it, i) => {
-    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, it);
-    if (it && typeof it === 'object') {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i
-      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
-        className: "sv-mark"
-      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
-        className: "sv-emphasis"
-      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
-    }
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, String(it));
-  }));
+  return <ul className={cls}>
+    {items.map((it, i) => {
+      if (typeof it === 'string') return <li key={i}>{it}</li>;
+      if (it && typeof it === 'object') {
+        return <li key={i}>
+          {it.emphasis && <span className="sv-mark">{it.emphasis}</span>}
+          {it.emphasis && it.text ? ' ' : ''}
+          {it.strong && <span className="sv-emphasis">{it.strong}</span>}
+          {it.strong && it.text ? ' ' : ''}
+          {it.text}
+        </li>;
+      }
+      return <li key={i}>{String(it)}</li>;
+    })}
+  </ul>;
 }
 
 // ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
@@ -2322,25 +3787,15 @@ function SvBulletList({
 // - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
 // - `level` : 2 (défaut) ou 3
 // - `icon` (optionnel) : emoji en préfixe du titre
-function SvSection({
-  title,
-  label,
-  level,
-  icon,
-  id,
-  children
-}) {
-  const H = level === 3 ? 'h3' : 'h2';
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block",
-    id: id
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), title && /*#__PURE__*/React.createElement(H, {
-    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-section-icon"
-  }, icon), title), children);
+function SvSection({ title, label, level, icon, id, children }) {
+  const H = (level === 3) ? 'h3' : 'h2';
+  return <section className="sv-section-block" id={id}>
+    {label && <div className="sv-section-label">{label}</div>}
+    {title && <H className={`sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`}>
+      {icon && <span className="sv-section-icon">{icon}</span>}{title}
+    </H>}
+    {children}
+  </section>;
 }
 
 // ── SvRichText : rendu pédagogique de texte semi-structuré ──
@@ -2349,11 +3804,7 @@ function SvSection({
 //         termes entre backticks `...`.
 // Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
 // Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
-function SvRichText({
-  text,
-  onCardRef,
-  skipPrefixes
-}) {
+function SvRichText({ text, onCardRef, skipPrefixes }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
   const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
@@ -2364,10 +3815,7 @@ function SvRichText({
   while (i < rawLines.length) {
     const line = rawLines[i];
     const trimmed = line.trim();
-    if (!trimmed) {
-      i++;
-      continue;
-    }
+    if (!trimmed) { i++; continue; }
 
     // Headings markdown : #, ##, ###, ####
     // # (H1) et ## -> rendu h2 ; ### / #### -> h3 (les fiches Jenni
@@ -2377,11 +3825,7 @@ function SvRichText({
     if (mH) {
       const hashes = mH[1].length;
       const level = hashes <= 2 ? 2 : 3;
-      blocks.push({
-        type: 'heading',
-        level,
-        text: mH[2].trim()
-      });
+      blocks.push({ type: 'heading', level, text: mH[2].trim() });
       i++;
       continue;
     }
@@ -2397,10 +3841,7 @@ function SvRichText({
       return uppers.length / letters.length >= 0.8;
     })();
     if (isSectionLabel) {
-      blocks.push({
-        type: 'label',
-        text: trimmed.replace(/:$/, '').trim()
-      });
+      blocks.push({ type: 'label', text: trimmed.replace(/:$/, '').trim() });
       i++;
       continue;
     }
@@ -2411,10 +3852,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'bullets',
-        items
-      });
+      blocks.push({ type: 'bullets', items });
       continue;
     }
     // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
@@ -2435,10 +3873,7 @@ function SvRichText({
       paraLines.push(rawLines[i]);
       i++;
     }
-    if (paraLines.length) blocks.push({
-      type: 'para',
-      text: paraLines.join(' ')
-    });
+    if (paraLines.length) blocks.push({ type: 'para', text: paraLines.join(' ') });
   }
 
   // Rendu inline d'un texte : Card refs, backticks → sv-mark, **gras** → sv-emphasis
@@ -2446,48 +3881,26 @@ function SvRichText({
     if (!s) return null;
     const out = [];
     const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|fiche (\d+)/g;
-    let last = 0,
-      m,
-      n = 0;
+    let last = 0, m, n = 0;
     while ((m = regex.exec(s)) !== null) {
       if (m.index > last) out.push(s.substring(last, m.index));
       if (m[1]) {
         const id = parseInt(m[1]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-ref-' + n++,
-          onClick: () => onCardRef && onCardRef(id),
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, "#", id));
+        out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(id)}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>#{id}</a>);
       } else if (m[2]) {
         const title = m[2];
         const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
         if (found) {
-          out.push(/*#__PURE__*/React.createElement("a", {
-            key: keyPrefix + '-ref-' + n++,
-            onClick: () => onCardRef && onCardRef(found.id),
-            style: {
-              color: 'var(--accent)',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }
-          }, title));
+          out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(found.id)}
+                       style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{title}</a>);
         } else {
           out.push(title);
         }
       } else if (m[3]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-term-' + n++,
-          className: "sv-mark"
-        }, m[3]));
+        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark">{m[3]}</span>);
       } else if (m[4]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-em-' + n++,
-          className: "sv-emphasis"
-        }, m[4]));
+        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[4]}</span>);
       } else if (m[5]) {
         out.push(m[0]);
       }
@@ -2496,48 +3909,31 @@ function SvRichText({
     if (last < s.length) out.push(s.substring(last));
     return out;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, blocks.map((b, idx) => {
-    if (b.type === 'heading') {
-      const Tag = b.level === 2 ? 'h2' : 'h3';
-      const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
-      const mt = b.level === 2 ? '1.25rem' : '1rem';
-      return /*#__PURE__*/React.createElement(Tag, {
-        key: idx,
-        className: cls,
-        style: {
-          marginTop: idx > 0 ? mt : 0,
-          marginBottom: '0.5rem'
-        }
-      }, renderInline(b.text, 'h' + idx));
-    }
-    if (b.type === 'label') {
-      return /*#__PURE__*/React.createElement("div", {
-        key: idx,
-        className: "sv-section-label",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, b.text);
-    }
-    if (b.type === 'bullets') {
-      return /*#__PURE__*/React.createElement("ul", {
-        key: idx,
-        className: "sv-bullet-list"
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    return /*#__PURE__*/React.createElement("p", {
-      key: idx,
-      className: "sv-prose",
-      style: {
-        margin: '0.35rem 0'
+
+  return <div className="sv-richtext">
+    {blocks.map((b, idx) => {
+      if (b.type === 'heading') {
+        const Tag = b.level === 2 ? 'h2' : 'h3';
+        const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
+        const mt = b.level === 2 ? '1.25rem' : '1rem';
+        return <Tag key={idx} className={cls} style={{marginTop: idx > 0 ? mt : 0, marginBottom: '0.5rem'}}>
+          {renderInline(b.text, 'h' + idx)}
+        </Tag>;
       }
-    }, renderInline(b.text, 'p' + idx));
-  }));
+      if (b.type === 'label') {
+        return <div key={idx} className="sv-section-label" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>{b.text}</div>;
+      }
+      if (b.type === 'bullets') {
+        return <ul key={idx} className="sv-bullet-list">
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ul>;
+      }
+      return <p key={idx} className="sv-prose" style={{margin: '0.35rem 0'}}>{renderInline(b.text, 'p' + idx)}</p>;
+    })}
+  </div>;
 }
+
+
 
 // ── SvExpandableCard : carte colorée expansible (pattern cartographie) ──
 // Props :
@@ -2548,98 +3944,40 @@ function SvRichText({
 //   progress   : nombre 0-100 (facultatif) — affiche une barre de progression
 //   open       : bool — état contrôlé
 //   onClick    : callback au clic sur la carte
-function SvExpandableCard({
-  badge,
-  color,
-  title,
-  subtitle,
-  progress,
-  open,
-  onClick,
-  children
-}) {
+function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("div", {
-    onClick: onClick,
-    style: {
-      background: open ? c + '12' : 'var(--card-bg)',
+  return <div onClick={onClick}
+    style={{background: open ? c + '12' : 'var(--card-bg)',
       border: '1px solid ' + (open ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       borderRadius: 'var(--radius)',
       padding: '10px 14px',
       cursor: 'pointer',
       transition: 'all 0.15s',
-      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '50%',
-      width: '28px',
-      height: '28px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)',
-      flexShrink: 0
-    }
-  }, badge), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-base)',
-      color: 'var(--text)'
-    }
-  }, title), subtitle && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '5px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
       height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: '0.65rem',
-      color: 'var(--text-secondary)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%")), children), /*#__PURE__*/React.createElement("span", {
-    className: 'sv-collapse-chevron' + (open ? ' open' : '')
-  }, "\u25B8")));
+      boxSizing: 'border-box',
+      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'}}>
+    <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
+      {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
+        {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
+          width: '28px', height: '28px', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
+        {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
+      </div>}
+      <div style={{flex: 1, minWidth: 0}}>
+        {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
+        {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
+        {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
+          <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
+            <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
+          </div>
+          <span style={{fontSize: '0.65rem', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+        </div>}
+        {children}
+      </div>
+      <span className={'sv-collapse-chevron' + (open ? ' open' : '')}>▸</span>
+    </div>
+  </div>;
 }
 
 // ── SvTagButton : pill pour sous-item (code + label + stat) ──
@@ -2650,95 +3988,56 @@ function SvExpandableCard({
 //   color    : couleur de l'accent (border-left + bg quand actif)
 //   active   : bool
 //   onClick  : callback
-function SvTagButton({
-  code,
-  label,
-  stat,
-  color,
-  active,
-  onClick
-}) {
+function SvTagButton({ code, label, stat, color, active, onClick }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: onClick,
-    style: {
-      padding: '8px 14px',
-      borderRadius: 'var(--radius)',
-      cursor: 'pointer',
+  return <button onClick={onClick}
+    style={{padding: '8px 14px', borderRadius: 'var(--radius)', cursor: 'pointer',
       border: '2px solid ' + (active ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       background: active ? c + '15' : 'var(--card-bg)',
       fontWeight: active ? 700 : 600,
       fontSize: 'var(--font-sm)',
       color: active ? c : 'var(--text)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px',
-      transition: 'all 0.15s'
-    }
-  }, code && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700
-    }
-  }, code), label && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      maxWidth: '200px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, label), stat && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, stat));
+      display: 'flex', alignItems: 'center', gap: '6px',
+      transition: 'all 0.15s'}}>
+    {code && <span style={{fontWeight: 700}}>{code}</span>}
+    {label && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)',
+      maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{label}</span>}
+    {stat && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{stat}</span>}
+  </button>;
 }
+
+
 
 // ── SvTabIntro : résumé + détail accordéon pour présenter un onglet/une page ──
 // Props :
 //   resume : texte court affiché en ligne
 //   detail : texte long révélé par 'en savoir plus'
 // Sert aussi de point de référence d'alignement horizontal sous le bandeau.
-function SvTabIntro({
-  resume,
-  detail
-}) {
+function SvTabIntro({ resume, detail }) {
   const [open, setOpen] = React.useState(false);
   if (!resume && !detail) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro-row"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-tab-intro-resume"
-  }, resume), detail && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sv-tab-intro-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? 'masquer' : 'en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro-detail"
-  }, detail));
+  return <div className="sv-tab-intro">
+    <div className="sv-tab-intro-row">
+      <span className="sv-tab-intro-resume">{resume}</span>
+      {detail && <button type="button" className="sv-tab-intro-toggle"
+        onClick={() => setOpen(!open)}>
+        {open ? 'masquer' : 'en savoir plus'}
+      </button>}
+    </div>
+    {open && detail && <div className="sv-tab-intro-detail">{detail}</div>}
+  </div>;
 }
 
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
 // Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
 // Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
-function SvCahierLink({
-  chapitre,
-  titre
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cahier-link"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-icon"
-  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-text"
-  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
-    href: 'cahier.html#chap-' + chapitre
-  }, "Cahier de Science \u2192 ", titre));
+function SvCahierLink({ chapitre, titre }) {
+  return <div className="sv-cahier-link">
+    <span className="sv-cahier-link-icon">📚</span>
+    <span className="sv-cahier-link-text">Pour comprendre les concepts en profondeur :</span>
+    <a href={'cahier.html#chap-' + chapitre}>Cahier de Science → {titre}</a>
+  </div>;
 }
 
 // ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
@@ -2753,78 +4052,125 @@ function SvCahierLink({
 //     }}
 //   />
 // Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
-function SvCascadeGrid({
-  titre,
-  sujet,
-  projection
-}) {
+function SvCascadeGrid({ titre, sujet, projection }) {
   if (!projection) return null;
-  const AXES = [{
-    key: 'biophysique',
-    icon: '🧱',
-    label: 'Biophysique',
-    color: 'var(--success)'
-  }, {
-    key: 'temporelle',
-    icon: '⏱️',
-    label: 'Temporelle',
-    color: 'var(--accent)'
-  }, {
-    key: 'couts',
-    icon: '💶',
-    label: 'Coûts cachés',
-    color: 'var(--warning)'
-  }, {
-    key: 'consequences',
-    icon: '🌍',
-    label: 'Conséquences',
-    color: 'var(--purple)'
-  }];
+  const AXES = [
+    { key: 'biophysique',  icon: '🧱', label: 'Biophysique',  color: 'var(--success)'  },
+    { key: 'temporelle',   icon: '⏱️', label: 'Temporelle',   color: 'var(--accent)'   },
+    { key: 'couts',        icon: '💶', label: 'Coûts cachés', color: 'var(--warning)'  },
+    { key: 'consequences', icon: '🌍', label: 'Conséquences', color: 'var(--purple)'   },
+  ];
   const renderBadge = (it, axeColor) => {
-    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
-    return /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge",
-      style: {
-        borderLeftColor: impactColor,
-        color: impactColor
-      },
-      title: it.detail || it.niveau + ' — ' + (it.label || '')
-    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge-label"
-    }, it.label));
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' :
+                        it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return <span className="sv-cascade-badge" style={{borderLeftColor: impactColor, color: impactColor}}
+      title={it.detail || (it.niveau + ' — ' + (it.label || ''))}>
+      <strong>{it.niveau}</strong>
+      {it.label && <span className="sv-cascade-badge-label">{it.label}</span>}
+    </span>;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid"
-  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-head"
-  }, titre && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-title"
-  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-sujet"
-  }, sujet)), /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-rows"
-  }, AXES.map(ax => {
-    const items = projection[ax.key];
-    if (!items || !items.length) return null;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ax.key,
-      className: "sv-cascade-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-head",
-      style: {
-        color: ax.color
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-icon"
-    }, ax.icon), /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-label"
-    }, ax.label)), /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-items"
-    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: i
-    }, renderBadge(it, ax.color)))));
-  })));
+  return <div className="sv-cascade-grid">
+    {(titre || sujet) && <div className="sv-cascade-grid-head">
+      {titre && <div className="sv-cascade-grid-title">{titre}</div>}
+      {sujet && <div className="sv-cascade-grid-sujet">{sujet}</div>}
+    </div>}
+    <div className="sv-cascade-grid-rows">
+      {AXES.map(ax => {
+        const items = projection[ax.key];
+        if (!items || !items.length) return null;
+        return <div key={ax.key} className="sv-cascade-row">
+          <div className="sv-cascade-row-head" style={{color: ax.color}}>
+            <span className="sv-cascade-row-icon">{ax.icon}</span>
+            <span className="sv-cascade-row-label">{ax.label}</span>
+          </div>
+          <div className="sv-cascade-row-items">
+            {items.map((it, i) => <React.Fragment key={i}>{renderBadge(it, ax.color)}</React.Fragment>)}
+          </div>
+        </div>;
+      })}
+    </div>
+  </div>;
 }
+
+// ── SvComprendre : onglet Comprendre unifié, piloté par DATA.comprendre ──
+// Usage :
+//   <SvComprendre data={DATA.comprendre} />
+// Structure de data (hydratée en Python par build_comprendre_data) :
+//   {
+//     cahier_link: { chapitre, titre } | null,
+//     sections: [
+//       { type: 'fiche',    titre, icon?, defaultOpen?, fiche: {contenu, refs} },
+//       { type: 'cards',    titre, icon?, defaultOpen?, items: [{id, title, description, dimension}] },
+//       { type: 'terms',    titre, icon?, defaultOpen?, items: [{id, fr, syn_en, definition}] },
+//       { type: 'cahier',   titre, icon?, defaultOpen?, chapitre, section, contenu },
+//       { type: 'richtext', titre, icon?, defaultOpen?, contenu },
+//     ]
+//   }
+function SvComprendreFiche({ fiche }) {
+  if (!fiche) return null;
+  return <>
+    <div className="sv-richtext">
+      <SvRichText text={fiche.contenu} />
+    </div>
+    {fiche.refs && fiche.refs.length > 0 && <div style={{marginTop:'1rem',paddingTop:'0.75rem',borderTop:'1px solid var(--border)'}}>
+      <div style={{fontSize:'var(--font-sm)',fontWeight:600,color:'var(--text-secondary)',marginBottom:'0.5rem'}}>Références</div>
+      <SvSourceList sources={fiche.refs} />
+    </div>}
+  </>;
+}
+
+function SvComprendreCards({ items }) {
+  if (!items || !items.length) return null;
+  return <div className="sv-comprendre-cards">
+    {items.map(c => <a key={c.id} href={'concept_cards.html#card-' + c.id} className="sv-comprendre-card">
+      <div className="sv-comprendre-card-head">
+        <span className="sv-comprendre-card-badge">#{c.id}</span>
+        {c.dimension && <span className="sv-comprendre-card-dim">{c.dimension}</span>}
+      </div>
+      <div className="sv-comprendre-card-title">{c.title}</div>
+      {c.description && <div className="sv-comprendre-card-desc">{c.description}</div>}
+    </a>)}
+  </div>;
+}
+
+function SvComprendreTerms({ items }) {
+  if (!items || !items.length) return null;
+  return <div className="sv-comprendre-terms">
+    {items.map(t => <div key={t.id} className="sv-comprendre-term">
+      <div className="sv-comprendre-term-head">
+        <span className="sv-comprendre-term-fr">{t.fr}</span>
+        {t.syn_en && <span className="sv-comprendre-term-en">{t.syn_en}</span>}
+      </div>
+      {t.definition && <div className="sv-comprendre-term-def">{t.definition}</div>}
+    </div>)}
+  </div>;
+}
+
+function SvComprendreSection({ section }) {
+  const icon = section.icon || '🔬';
+  const open = section.defaultOpen !== false && section.defaultOpen !== undefined
+    ? section.defaultOpen
+    : (section.type === 'fiche' ? false : false);
+  return <SvCollapse title={section.titre} icon={icon} defaultOpen={open}>
+    {section.type === 'fiche' && <SvComprendreFiche fiche={section.fiche} />}
+    {section.type === 'cards' && <SvComprendreCards items={section.items} />}
+    {section.type === 'terms' && <SvComprendreTerms items={section.items} />}
+    {(section.type === 'cahier' || section.type === 'richtext') && <div className="sv-richtext">
+      <SvRichText text={section.contenu} />
+    </div>}
+  </SvCollapse>;
+}
+
+function SvComprendre({ data }) {
+  if (!data) return <div className="sv-callout">Contenu pédagogique non défini pour cette page.</div>;
+  const sections = data.sections || [];
+  return <div style={{maxWidth:'900px'}}>
+    {data.cahier_link && <SvCahierLink chapitre={data.cahier_link.chapitre} titre={data.cahier_link.titre} />}
+    {sections.map((s, i) => <SvComprendreSection key={i} section={s} />)}
+  </div>;
+}
+
+
 
 // ── Page tests_terrain — base de depart ──
 // 20 tests terrain organises par dimension, filtrables, branches sur SvTestCard.
@@ -2833,125 +4179,74 @@ function SvCascadeGrid({
 function PratiqueView() {
   const [search, setSearch] = React.useState('');
   const [dimFilter, setDimFilter] = React.useState(null);
-  const tests = DATA && DATA.tests || [];
-  const dims = DATA && DATA.dimensions || [];
+
+  const tests = (DATA && DATA.tests) || [];
+  const dims = (DATA && DATA.dimensions) || [];
+
   const filtered = tests.filter(t => {
     if (dimFilter !== null && t.dimension_id !== dimFilter) return false;
     if (search) {
       const s = search.toLowerCase();
-      return (t.title || '').toLowerCase().includes(s) || (t.description || '').toLowerCase().includes(s) || (t.code || '').toLowerCase().includes(s);
+      return (t.title || '').toLowerCase().includes(s)
+          || (t.description || '').toLowerCase().includes(s)
+          || (t.code || '').toLowerCase().includes(s);
     }
     return true;
   });
-  return /*#__PURE__*/React.createElement("div", {
-    className: "tt-page"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tt-filters"
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "sv-input",
-    placeholder: "Rechercher : bocal, infiltration, vers...",
-    value: search,
-    onChange: e => setSearch(e.target.value),
-    style: {
-      minWidth: '260px',
-      flex: '1 1 260px'
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "tt-filter-count"
-  }, filtered.length, " / ", tests.length, " test", tests.length > 1 ? 's' : '')), /*#__PURE__*/React.createElement("div", {
-    className: "tt-dim-pills"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "tt-dim-pill" + (dimFilter === null ? " active" : ""),
-    onClick: () => setDimFilter(null)
-  }, "Toutes"), dims.map(d => /*#__PURE__*/React.createElement("button", {
-    key: d.id,
-    className: "tt-dim-pill" + (dimFilter === d.id ? " active" : ""),
-    style: dimFilter === d.id && d.couleur ? {
-      background: d.couleur,
-      borderColor: d.couleur
-    } : undefined,
-    onClick: () => setDimFilter(d.id)
-  }, d.nom))), filtered.length === 0 ? /*#__PURE__*/React.createElement("div", {
-    className: "tt-empty"
-  }, "Aucun test ne correspond aux filtres.") : /*#__PURE__*/React.createElement("div", {
-    className: "tt-grid"
-  }, filtered.map(t => /*#__PURE__*/React.createElement(SvTestCard, {
-    key: t.id,
-    test: t
-  }))));
+
+  return <div className="tt-page">
+    <div className="tt-filters">
+      <input className="sv-input" placeholder="Rechercher : bocal, infiltration, vers..."
+        value={search} onChange={e => setSearch(e.target.value)} style={{minWidth:'260px', flex:'1 1 260px'}} />
+      <span className="tt-filter-count">{filtered.length} / {tests.length} test{tests.length>1?'s':''}</span>
+    </div>
+
+    <div className="tt-dim-pills">
+      <button className={"tt-dim-pill" + (dimFilter === null ? " active" : "")}
+        onClick={() => setDimFilter(null)}>Toutes</button>
+      {dims.map(d => <button key={d.id}
+        className={"tt-dim-pill" + (dimFilter === d.id ? " active" : "")}
+        style={dimFilter === d.id && d.couleur ? {background: d.couleur, borderColor: d.couleur} : undefined}
+        onClick={() => setDimFilter(d.id)}>{d.nom}</button>)}
+    </div>
+
+    {filtered.length === 0 ? <div className="tt-empty">Aucun test ne correspond aux filtres.</div> :
+      <div className="tt-grid">
+        {filtered.map(t => <SvTestCard key={t.id} test={t} />)}
+      </div>}
+  </div>;
 }
+
 function ComprendreView() {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '860px'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Pourquoi des tests terrain ?",
-    icon: "\uD83D\uDD2C",
-    defaultOpen: true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement("p", null, "Le ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "diagnostic terrain"), " est l'ancrage scientifique du corpus Sol Vivant. Une affirmation qui n'est demontrable par aucun test reproductible n'a pas sa place dans le corpus, meme si elle est seduisante en theorie."), /*#__PURE__*/React.createElement("p", null, "Ces 20 tests ont ete selectionnes pour leur ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-mark"
-  }, "simplicite materielle"), " (bocal, beche, regle, eau) et leur ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-mark"
-  }, "reproductibilite"), " : un agriculteur, un conseiller ou un chercheur peut les realiser avec le meme protocole et obtenir des resultats comparables."))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Articulation avec les concept cards",
-    icon: "\uD83D\uDD2C",
-    defaultOpen: true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement("p", null, "Chaque concept card du corpus peut etre liee a un ou plusieurs tests terrain via la table ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-mark"
-  }, "concept_card_tests"), ". La carte est ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "active"), " si au moins un test la valide empiriquement, ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "archive"), " sinon (memoire de rejet)."), /*#__PURE__*/React.createElement("p", null, "C'est ce filtre qui evite la pollution du corpus par des hypotheses jamais verifiees au champ."))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Lectures sources",
-    icon: "\uD83D\uDCDA"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "AFES"), " \u2014 Association Francaise pour l'Etude du Sol. Manuel de pedologie."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "OAB"), " \u2014 Observatoire Agricole de la Biodiversite (vers, vegetaux, invertebres)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "Solvita"), " \u2014 protocole respiration sol industrialise, base micro-bio."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "Husson"), " \u2014 diagnostic redox du sol (gradients, microzones)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "Pochon"), " \u2014 biologie du sol, decomposition, vie microbienne."))));
+  return <div style={{maxWidth:'860px'}}>
+    <div style={{padding:'0.85rem 1rem',background:'var(--accent-light)',border:'1px solid var(--accent)',borderRadius:'var(--radius)',marginBottom:'1rem',fontSize:'var(--font-sm)'}}>
+      <div style={{fontWeight:600,color:'var(--accent-dark)',marginBottom:'0.4rem'}}>📚 Pour approfondir le cadre conceptuel</div>
+      <div style={{lineHeight:1.55}}>
+        Les <strong>tests terrain</strong> articulent le filtre de rigueur du corpus (une hypothèse doit être vérifiable au champ pour rester active). Cours complet dans le <strong>Cahier de Sciences</strong>, chapitre <strong>Méthodologie — les outils de rigueur du corpus</strong>.
+        <a href="cahier.html#chap-methodologie" style={{display:'inline-block',marginTop:'0.5rem',color:'var(--accent-dark)',fontWeight:600,textDecoration:'underline'}}>Ouvrir le chapitre Méthodologie →</a>
+      </div>
+    </div>
+  </div>;
 }
+
 function App() {
   const [tab, setTab] = React.useState('pratique');
-  const intros = DATA && DATA.tab_intros || {};
+  const intros = (DATA && DATA.tab_intros) || {};
   const intro = intros[tab];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-page"
-  }, /*#__PURE__*/React.createElement(SvTabs, {
-    tabs: [{
-      id: 'pratique',
-      icon: '🧫',
-      label: 'Pratique'
-    }, {
-      id: 'comprendre',
-      icon: '📚',
-      label: 'Comprendre'
-    }],
-    active: tab,
-    onChange: setTab
-  }), intro && /*#__PURE__*/React.createElement(SvTabIntro, {
-    resume: intro.resume,
-    detail: intro.detail
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, tab === 'pratique' ? /*#__PURE__*/React.createElement(PratiqueView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
+  return <div className="sv-page">
+    <SvTabs tabs={[
+      {id:'pratique', icon:'🧫', label:'Pratique'},
+      {id:'comprendre', icon:'📚', label:'Comprendre'}
+    ]} active={tab} onChange={setTab} />
+    {intro && <SvTabIntro resume={intro.resume} detail={intro.detail} />}
+    <div className="sv-tab-content">
+      {tab === 'pratique' ? <PratiqueView /> : <ComprendreView />}
+    </div>
+  </div>;
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
 </script>
 
 

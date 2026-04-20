@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source unique de verite. SQLite, 59 tables, 10 vues.
+Source unique de verite. SQLite, 58 tables, 7 vues.
 
 ### Tables principales
 
@@ -11,29 +11,29 @@ Source unique de verite. SQLite, 59 tables, 10 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 965 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 3996 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 961 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 6793 |
 | `chains_causales` | 16 chaines causales reliant les documents | 16 |
 | `chain_etapes` | Etapes des chaines | 121 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 88 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 95 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 41 |
+| `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 1727 |
+| `audit_log` | Journal des operations | 4529 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 13 |
-| `html_templates` | Templates CSS/JS par page + partagés | 40 (1 partagés) |
+| `html_templates` | Templates CSS/JS par page + partagés | 41 (2 partagés) |
 | `concept_cards` | Fiches conceptuelles synthétiques | 91 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 15 |
-| `ref_matieres` | Matières organiques (C/N, k1, NPK) | 110 |
-| `ref_textures` | Classes texturales GEPPA | 14 |
+| `refs` (kind=matiere) | Matières organiques (C/N, k1, NPK) | 110 |
+| `refs` (kind=texture) | Classes texturales GEPPA | 14 |
 
 ### Deploiement web
 
@@ -55,23 +55,23 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
 | `cahier` | chapitres, onglets, tab_descriptions |
-| `claude_rules` | archivage_fiches, audit_cards_first, bq_access, fiche_docx_production |
+| `claude_rules` | agent_runner_reflexe, archivage_fiches, audit_cards_first, bq_access, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
 | `esclaves_calculateur` | tab_intros |
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
-| `lifofer` | data, sources_sucre, tab_intros, ui |
+| `lifofer` | comprendre, data, sources_sucre, tab_intros, ui |
 | `mo_calc` | cat_colors, modes_transformation, zones_eh_fallback |
-| `mo_calculateur` | tab_intros |
+| `mo_calculateur` | comprendre, tab_intros |
 | `paths` | analyses_reports, docx_archives, docx_en_cours, jmj_archives, jmj_docx, jmj_notes, jmj_pdf, publications_web, publications_workflows, rapports_audit, rapports_session, recherches_archives, recherches_fiches, recherches_sources, recherches_thesaurus, recherches_veille |
 | `projet` | base_url_publications, github_org_url, github_pages_url, github_publications_url, github_repo_url, github_tools_url |
 | `strates` | couleurs, couleurs_cascade, couleurs_light, descriptions, noms, ordre |
 | `technique` | chapitres |
 | `tests_terrain` | tab_intros |
 | `transition_robuste` | tab_intros |
-| `triangle` | sections_didactiques, tab_intros, test_bocal, test_boudin |
+| `triangle` | comprendre, sections_didactiques, tab_intros, test_bocal, test_boudin |
 | `veille` | hot_topics, scholar_alerts |
 | `web` | icon_library, index_description_template |
 
@@ -88,6 +88,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `explorer.py` | admin | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
 | `export_tools.py` | admin | Exporteur scripts v1.5. |
 | `fix_titres.py` | admin | Correction titres jenni_doc_specs |
+| `integrate_doc_docx.py` | admin | Integration docx redige (document de strate) -> doc_contenus.contenu_integre. |
 | `session_start.py` | admin | Contexte session v2.3. |
 | `analyse_corpus.py` | batch | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | docs | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
@@ -121,7 +122,10 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `web_template.py` | lib | Template HTML partagé — charte Sol Vivant, render_page, OG tags |
 | `weekly_scan.py` | veille | Veille PubMed hebdomadaire : balaye config.veille.hot_topics, dedoublonne contre pubmed_seen, produit rapport Markdown des nouveaux candidats dans recherches/veille/ |
 | `inrae.py` | lib | Module partage |
+| `parse_jenni_docx.py` | lib | Module partage |
+| `refs.py` | lib | Module partage |
 | `sources.py` | lib | Module partage |
+| `term_rels.py` | lib | Module partage |
 
 ## Reproduire le patron pour un autre corpus
 
