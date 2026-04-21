@@ -20,7 +20,7 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 4529 |
+| `audit_log` | Journal des operations | 4640 |
 
 ### Tables web et outils interactifs
 

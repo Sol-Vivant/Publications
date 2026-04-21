@@ -19,6 +19,7 @@
 
 <script src="vendor/react.production.min.js"></script>
 <script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/babel.min.js"></script>
 
 <style>
 :root {
@@ -36,8 +37,12 @@
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
   /* Echelle typographique (source unique pour toutes les pages)
      Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
-     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
-  --font-scale: 1;
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3.
+     Defaut 0.85 (equivalent bouton A-) = taille de lecture confortable
+     pour les longues fiches et documents. Les utilisateurs peuvent
+     remonter via la toolbar A/A+ si besoin. */
+  --font-scale: 0.85;
+  --text-column-max: 900px;
   --font-2xs: calc(0.68rem * var(--font-scale));
   --font-xs:   calc(0.75rem * var(--font-scale));
   --font-sm:   calc(0.82rem * var(--font-scale));
@@ -1478,18 +1483,42 @@ select.sv-input { color-scheme: light dark; }
 }
 .sv-cahier-link a:hover { text-decoration: underline; }
 
-/* ── Bloc texte riche (SvRichText) ── */
-.sv-richtext { line-height: 1.55; }
+/* ── Bloc texte riche (SvRichText / SvFicheView) ──
+   Hiérarchie : H2 (titre de section) flush gauche,
+                contenu (p, ul, section-label) indenté 1rem,
+                H3 (sous-section) retrait léger 0.25rem. */
+.sv-richtext {
+  line-height: 1.55;
+  color: var(--text);
+}
+.sv-richtext p,
 .sv-richtext p.sv-prose {
   font-size: var(--font-sm);
   color: var(--text);
+  margin: 0 0 0.6rem;
+  padding-left: 1rem;
 }
 .sv-richtext .sv-section-label {
   font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
   color: var(--accent-dark);
+  padding-left: 1rem;
 }
-.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+.sv-richtext .sv-bullet-list {
+  margin: 0.35rem 0 0.85rem;
+  padding-left: 1rem;
+}
+.sv-richtext .sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text);
+  border-bottom: none;
+  padding: 0.2rem 0 0.2rem 1.2rem;
+}
+.sv-richtext .sv-section-title.sv-section-title-h3 {
+  padding-left: 0.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.35rem;
+}
 
 /* ── Bloc de section unifié (SvSection) ── */
 .sv-section-block {
@@ -1507,8 +1536,8 @@ select.sv-input { color-scheme: light dark; }
   align-items: center;
   gap: 0.5rem;
 }
-.sv-section-title-h2 { font-size: var(--font-1-4); }
-.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
+.sv-section-title-h2 { font-size: var(--font-lg); }
+.sv-section-title-h3 { font-size: var(--font-md); color: var(--text); font-weight: 600; }
 .sv-section-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -1630,6 +1659,125 @@ select.sv-input { color-scheme: light dark; }
   color: var(--text);
   line-height: 1.5;
 }
+
+/* ── SvFicheView : wrapper pour le rendu d'une fiche / document intégré ── */
+.sv-fiche-view { padding: 0.5rem 0; }
+.sv-fiche-view-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  font-size: var(--font-xs);
+  flex-wrap: wrap;
+}
+.sv-fiche-view-refs {
+  margin-top: 1.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border);
+}
+.sv-fiche-view-refs .sv-section-label {
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+/* ── SvSectionsNav : navigation compacte de sections expansibles ──
+   Style sobre pour listes longues (fiches, documents, planifications).
+   Typo small + num monospace muted + dot d'etat + chevron.
+   Quand ouverte, la section deploie son contenu dans un encart gris. */
+.sv-sections-nav { margin: 0.5rem 0; }
+.sv-sections-nav-label {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.sv-sections-nav-row-wrap {
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-sections-nav-row-wrap:last-child { border-bottom: none; }
+.sv-sections-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
+.sv-sections-nav-row-expandable { cursor: pointer; }
+.sv-sections-nav-row-expandable:hover .sv-sections-nav-title { color: var(--accent); }
+.sv-sections-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sv-sections-nav-num {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-family: monospace;
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.sv-sections-nav-title {
+  font-size: var(--font-sm);
+  color: var(--text);
+  flex: 1;
+  line-height: 1.4;
+}
+.sv-sections-nav-chev {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.sv-sections-nav-chev.open { transform: rotate(90deg); }
+.sv-sections-nav-content {
+  margin-left: 48px;
+  padding: 8px 12px;
+  background: var(--color-bg-subtle);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Contenus riches dans le nav-content : meme echelle compacte */
+.sv-sections-nav-content p {
+  font-size: var(--font-sm);
+  color: var(--text);
+  padding-left: 0;
+  margin: 0 0 0.55rem;
+}
+.sv-sections-nav-content p:last-child { margin-bottom: 0; }
+.sv-sections-nav-content .sv-bullet-list {
+  padding-left: 0;
+  margin: 0.35rem 0 0.55rem;
+}
+.sv-sections-nav-content .sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text);
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  border-bottom: none;
+}
+.sv-sections-nav-content .sv-section-title.sv-section-title-h3 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  padding-left: 0;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+  display: block;
+}
+
+/* ── Colonne de lecture (max width pour confort de lecture) ──
+   Variable pilotee par charte (ajustable). 900px = limite confort
+   pour paragraphes + bullets, evite le balayage horizontal sur ecrans
+   larges. Sous cette taille la colonne s'adapte au container parent. */
+.sv-text-column {
+  max-width: var(--text-column-max, 900px);
+}
+
 
 
 :root {
@@ -1647,8 +1795,12 @@ select.sv-input { color-scheme: light dark; }
   --shadow-hover: 0 4px 16px rgba(0,0,0,0.10);
   /* Echelle typographique (source unique pour toutes les pages)
      Toutes les valeurs derivent de --font-scale (modifiable runtime via bouton A-/A+).
-     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3. */
-  --font-scale: 1;
+     Persistance localStorage('sv-font-scale'), 0.85 / 1.0 / 1.15 / 1.3.
+     Defaut 0.85 (equivalent bouton A-) = taille de lecture confortable
+     pour les longues fiches et documents. Les utilisateurs peuvent
+     remonter via la toolbar A/A+ si besoin. */
+  --font-scale: 0.85;
+  --text-column-max: 900px;
   --font-2xs: calc(0.68rem * var(--font-scale));
   --font-xs:   calc(0.75rem * var(--font-scale));
   --font-sm:   calc(0.82rem * var(--font-scale));
@@ -3089,18 +3241,42 @@ select.sv-input { color-scheme: light dark; }
 }
 .sv-cahier-link a:hover { text-decoration: underline; }
 
-/* ── Bloc texte riche (SvRichText) ── */
-.sv-richtext { line-height: 1.55; }
+/* ── Bloc texte riche (SvRichText / SvFicheView) ──
+   Hiérarchie : H2 (titre de section) flush gauche,
+                contenu (p, ul, section-label) indenté 1rem,
+                H3 (sous-section) retrait léger 0.25rem. */
+.sv-richtext {
+  line-height: 1.55;
+  color: var(--text);
+}
+.sv-richtext p,
 .sv-richtext p.sv-prose {
   font-size: var(--font-sm);
   color: var(--text);
+  margin: 0 0 0.6rem;
+  padding-left: 1rem;
 }
 .sv-richtext .sv-section-label {
   font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
   color: var(--accent-dark);
+  padding-left: 1rem;
 }
-.sv-richtext .sv-bullet-list { margin: 0.35rem 0; }
+.sv-richtext .sv-bullet-list {
+  margin: 0.35rem 0 0.85rem;
+  padding-left: 1rem;
+}
+.sv-richtext .sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text);
+  border-bottom: none;
+  padding: 0.2rem 0 0.2rem 1.2rem;
+}
+.sv-richtext .sv-section-title.sv-section-title-h3 {
+  padding-left: 0.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.35rem;
+}
 
 /* ── Bloc de section unifié (SvSection) ── */
 .sv-section-block {
@@ -3118,8 +3294,8 @@ select.sv-input { color-scheme: light dark; }
   align-items: center;
   gap: 0.5rem;
 }
-.sv-section-title-h2 { font-size: var(--font-1-4); }
-.sv-section-title-h3 { font-size: var(--font-lg); color: var(--text-secondary); }
+.sv-section-title-h2 { font-size: var(--font-lg); }
+.sv-section-title-h3 { font-size: var(--font-md); color: var(--text); font-weight: 600; }
 .sv-section-icon {
   font-size: 1.1em;
   line-height: 1;
@@ -3241,6 +3417,125 @@ select.sv-input { color-scheme: light dark; }
   color: var(--text);
   line-height: 1.5;
 }
+
+/* ── SvFicheView : wrapper pour le rendu d'une fiche / document intégré ── */
+.sv-fiche-view { padding: 0.5rem 0; }
+.sv-fiche-view-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+  font-size: var(--font-xs);
+  flex-wrap: wrap;
+}
+.sv-fiche-view-refs {
+  margin-top: 1.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border);
+}
+.sv-fiche-view-refs .sv-section-label {
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+/* ── SvSectionsNav : navigation compacte de sections expansibles ──
+   Style sobre pour listes longues (fiches, documents, planifications).
+   Typo small + num monospace muted + dot d'etat + chevron.
+   Quand ouverte, la section deploie son contenu dans un encart gris. */
+.sv-sections-nav { margin: 0.5rem 0; }
+.sv-sections-nav-label {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.sv-sections-nav-row-wrap {
+  border-bottom: 1px solid var(--color-bg-muted);
+}
+.sv-sections-nav-row-wrap:last-child { border-bottom: none; }
+.sv-sections-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
+.sv-sections-nav-row-expandable { cursor: pointer; }
+.sv-sections-nav-row-expandable:hover .sv-sections-nav-title { color: var(--accent); }
+.sv-sections-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sv-sections-nav-num {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  font-family: monospace;
+  width: 40px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.sv-sections-nav-title {
+  font-size: var(--font-sm);
+  color: var(--text);
+  flex: 1;
+  line-height: 1.4;
+}
+.sv-sections-nav-chev {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+.sv-sections-nav-chev.open { transform: rotate(90deg); }
+.sv-sections-nav-content {
+  margin-left: 48px;
+  padding: 8px 12px;
+  background: var(--color-bg-subtle);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Contenus riches dans le nav-content : meme echelle compacte */
+.sv-sections-nav-content p {
+  font-size: var(--font-sm);
+  color: var(--text);
+  padding-left: 0;
+  margin: 0 0 0.55rem;
+}
+.sv-sections-nav-content p:last-child { margin-bottom: 0; }
+.sv-sections-nav-content .sv-bullet-list {
+  padding-left: 0;
+  margin: 0.35rem 0 0.55rem;
+}
+.sv-sections-nav-content .sv-bullet-list li {
+  font-size: var(--font-sm);
+  color: var(--text);
+  padding: 0.15rem 0 0.15rem 1.2rem;
+  border-bottom: none;
+}
+.sv-sections-nav-content .sv-section-title.sv-section-title-h3 {
+  font-size: var(--font-base);
+  font-weight: 600;
+  padding-left: 0;
+  margin-top: 0.7rem;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+  display: block;
+}
+
+/* ── Colonne de lecture (max width pour confort de lecture) ──
+   Variable pilotee par charte (ajustable). 900px = limite confort
+   pour paragraphes + bullets, evite le balayage horizontal sur ecrans
+   larges. Sous cette taille la colonne s'adapte au container parent. */
+.sv-text-column {
+  max-width: var(--text-column-max, 900px);
+}
+
 
 
 .ec-layout { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; margin-top: 1rem; }
@@ -3366,7 +3661,7 @@ select.sv-input { color-scheme: light dark; }
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Esclaves énergétiques</h1>
   <div class="sv-subtitle">Quantification de la dépendance énergétique fossile</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-20 22:56 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-21 00:29 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -4136,11 +4431,141 @@ function SvComprendreSection({ section }) {
 function SvComprendre({ data }) {
   if (!data) return <div className="sv-callout">Contenu pédagogique non défini pour cette page.</div>;
   const sections = data.sections || [];
-  return <div style={{maxWidth:'900px'}}>
+  return <div className="sv-text-column">
     {data.cahier_link && <SvCahierLink chapitre={data.cahier_link.chapitre} titre={data.cahier_link.titre} />}
     {sections.map((s, i) => <SvComprendreSection key={i} section={s} />)}
   </div>;
 }
+
+// ── SvFicheView : rendu d'une fiche / document intégré (sections structurées DB) ──
+// Utilisé par le Cahier de Science (onglet Fiches) et toute page qui affiche
+// une fiche ou un document de strate dont le contenu est déjà découpé en sections.
+//
+// Props :
+//   - fiche          : { id, titre, statut, sections: [{ordre, type, titre, blocks}], refs? }
+//                       section.type : 'intro' | 'section' | 'conclusion'
+//                       section.blocks : [{kind:'h3'|'bullet'|'para', text}]
+//                       refs : [{authors, year, title, url, ...}]
+//   - typeLabel      : libellé à afficher dans le tag type (ex: 'Fiche zoom')
+//   - typeVariant    : variante couleur du tag ('info'|'success'|...) — défaut 'info'
+//   - showTypeTag    : afficher le badge type (défaut true)
+//   - numberSections : préfixer les sections type='section' par leur n° (1., 2., ...) — défaut true
+//   - onCardRef      : callback(cardId) pour les liens Card #N
+function SvFicheBlock({ block }) {
+  if (!block || !block.text) return null;
+  if (block.kind === 'h3') {
+    return <h3 className="sv-section-title sv-section-title-h3">{block.text}</h3>;
+  }
+  if (block.kind === 'bullet') {
+    return <li>{block.text}</li>;
+  }
+  return <p>{block.text}</p>;
+}
+
+// SvFicheBlocks : rend la liste de blocks (para / h3 / bullet) sans titre de section.
+// Regroupe les bullets consecutifs dans un <ul>.
+function SvFicheBlocks({ blocks }) {
+  if (!blocks || !blocks.length) return null;
+  const groups = [];
+  let buf = null;
+  for (const b of blocks) {
+    if (b.kind === 'bullet') {
+      if (!buf) { buf = { kind: 'ul', items: [] }; groups.push(buf); }
+      buf.items.push(b);
+    } else {
+      buf = null;
+      groups.push(b);
+    }
+  }
+  return <>{groups.map((g, i) => g.kind === 'ul'
+    ? <ul key={i} className="sv-bullet-list">{g.items.map((b, j) => <SvFicheBlock key={j} block={b} />)}</ul>
+    : <SvFicheBlock key={i} block={g} />
+  )}</>;
+}
+
+function SvFicheSection({ section }) {
+  if (!section || !section.blocks || section.blocks.length === 0) return null;
+  return <section className="sv-section-block">
+    <h2 className="sv-section-title sv-section-title-h2">{section.titre}</h2>
+    <div className="sv-richtext">
+      <SvFicheBlocks blocks={section.blocks} />
+    </div>
+  </section>;
+}
+
+function SvFicheView({ fiche, typeLabel, typeVariant, showTypeTag, numberSections, onCardRef }) {
+  if (!fiche) return null;
+  const partial = fiche.statut === 'integre_partiel';
+  const sections = fiche.sections || [];
+  const variant = typeVariant || 'info';
+  const showTag = showTypeTag !== false;
+  const numSec = numberSections !== false;
+  const hasTagRow = (showTag && typeLabel) || partial;
+  let n = 0;
+  return <div className="sv-fiche-view">
+    {hasTagRow && <div className="sv-fiche-view-tags">
+      {showTag && typeLabel && <span className={'sv-tag sv-tag-' + variant}>{typeLabel}</span>}
+      {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+    </div>}
+    {sections.map(sec => {
+      let displayTitre = sec.titre;
+      if (numSec && sec.type === 'section') { n += 1; displayTitre = n + '. ' + sec.titre; }
+      return <SvFicheSection key={sec.ordre} section={{ ...sec, titre: displayTitre }} />;
+    })}
+    {fiche.refs && fiche.refs.length > 0 && <div className="sv-fiche-view-refs">
+      <div className="sv-section-label">📚 Sources ({fiche.refs.length})</div>
+      <SvSourceList sources={fiche.refs} />
+    </div>}
+  </div>;
+}
+
+// ── SvSectionsNav : navigation compacte de sections (accordeon exclusif) ──
+// Style partage (cahier fiches + index docs en cours) : dot d'etat + numero
+// monospace + titre + chevron. Click = toggle le contenu dans un encart gris.
+//
+// Props :
+//   - sections      : array
+//   - openKey       : cle de la section ouverte (ou null)
+//   - onToggle      : fn(newKeyOrNull)
+//   - label         : texte header discret (ex: 'SECTIONS (13)') — optionnel
+//   - getKey        : fn(section, index) -> string (cle unique)
+//   - getNumber     : fn(section, index) -> string affichee (ex: '1.1', 'Intro')
+//   - getTitle      : fn(section, index) -> string titre
+//   - getDotColor   : fn(section, index) -> couleur CSS
+//   - getDotTitle   : fn(section, index) -> tooltip (optionnel)
+//   - hasContent    : fn(section, index) -> bool (sinon: pas de chevron, pas cliquable)
+//   - renderContent : fn(section, index) -> ReactNode
+function SvSectionsNav({ sections, openKey, onToggle, label,
+                         getKey, getNumber, getTitle, getDotColor, getDotTitle,
+                         hasContent, renderContent }) {
+  if (!sections || !sections.length) return null;
+  const kKey = getKey    || ((s, i) => 'sec-' + i);
+  const kNum = getNumber || (() => '');
+  const kTit = getTitle  || (s => s.titre || '');
+  const kDot = getDotColor || (() => 'var(--accent)');
+  const kDotT = getDotTitle || (() => '');
+  const kHas = hasContent || (() => true);
+  const kRen = renderContent || (() => null);
+  return <div className="sv-sections-nav">
+    {label && <div className="sv-sections-nav-label">{label}</div>}
+    {sections.map((s, i) => {
+      const key = kKey(s, i);
+      const isOpen = openKey === key;
+      const expandable = kHas(s, i);
+      return <div key={i} className="sv-sections-nav-row-wrap">
+        <div className={'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '')}
+             onClick={expandable ? () => onToggle(isOpen ? null : key) : undefined}>
+          <span className="sv-sections-nav-dot" style={{background: kDot(s, i)}} title={kDotT(s, i)}></span>
+          <span className="sv-sections-nav-num">{kNum(s, i)}</span>
+          <span className="sv-sections-nav-title">{kTit(s, i)}</span>
+          {expandable && <span className={'sv-sections-nav-chev' + (isOpen ? ' open' : '')}>▸</span>}
+        </div>
+        {isOpen && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
+      </div>;
+    })}
+  </div>;
+}
+
 
 
 
