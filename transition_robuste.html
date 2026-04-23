@@ -3648,7 +3648,7 @@ select.sv-input { color-scheme: light dark; }
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Transition robuste</h1>
   <div class="sv-subtitle">Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-21 01:10 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-23 01:06 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -4201,7 +4201,7 @@ function SvRichText({ text, onCardRef, skipPrefixes }) {
 //   progress   : nombre 0-100 (facultatif) — affiche une barre de progression
 //   open       : bool — état contrôlé
 //   onClick    : callback au clic sur la carte
-function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children }) {
+function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children, compact, chevron }) {
   const c = color || 'var(--text-secondary)';
   return <div onClick={onClick}
     style={{background: open ? c + '12' : 'var(--card-bg)',
@@ -4214,26 +4214,50 @@ function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open,
       height: '100%',
       boxSizing: 'border-box',
       boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'}}>
-    <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
-      {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
-        {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
-          width: '28px', height: '28px', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
-        {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
-      </div>}
-      <div style={{flex: 1, minWidth: 0}}>
-        {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
-        {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
-        {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
-          <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
-            <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
-          </div>
-          <span style={{fontSize: '0.65rem', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+    {compact ? (
+      // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
+      <div style={{display:'flex',flexDirection:'column',gap:'6px',height:'100%'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
+            width: '24px', height: '24px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-xs)', flexShrink:0}}>{badge}</span>}
+          {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1,flexShrink:0}}>{icon}</span>}
+          {title && <div style={{fontWeight: 700, fontSize: 'var(--font-sm)', color: 'var(--text)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{title}</div>}
+          <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{flexShrink:0,color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+        </div>
+        {(subtitle || progress != null) && <div style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'var(--font-xs)',color:'var(--text-secondary)'}}>
+          {subtitle && <span style={{whiteSpace:'nowrap'}}>{subtitle}</span>}
+          {progress != null && <>
+            <div style={{flex:1, height:'4px', background:'var(--border)', borderRadius:'2px', overflow:'hidden'}}>
+              <div style={{width: progress + '%', height:'100%', background: c, transition:'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'0.65rem',fontWeight:600,minWidth:'26px',textAlign:'right'}}>{progress}%</span>
+          </>}
         </div>}
         {children}
       </div>
-      <span className={'sv-collapse-chevron' + (open ? ' open' : '')}>▸</span>
-    </div>
+    ) : (
+      <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
+        {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
+            width: '28px', height: '28px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
+          {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
+        </div>}
+        <div style={{flex: 1, minWidth: 0}}>
+          {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
+          {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
+          {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
+              <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize: '0.65rem', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+          </div>}
+          {children}
+        </div>
+        <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+      </div>
+    )}
   </div>;
 }
 

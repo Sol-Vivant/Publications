@@ -63,7 +63,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (8)** :
+**Règles actuellement en base (9)** :
 
 ### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
 
@@ -143,11 +143,29 @@ Recherche au fil de l'eau, pas chargement en bloc.
   bq_query.py --modules <code>      # charge un module entier (plusieurs entrées utiles)
   bq_query.py --list                # inventaire
 
+ETAPE 3 OBLIGATOIRE du workflow session (BQ #128) :
+Entre "comprendre la demande JMJ" et "faire", TOUJOURS lancer
+  bq_query.py --search <terme>
+sur les mots-cles de la demande. Skip interdit. Si la recherche revient
+vide, documenter explicitement ("BQ search '<kw>' -> 0 resultat, pas de
+pattern existant") avant d'agir.
+
 Triggers obligatoires — Claude lance --search AVANT de :
   • toucher un nouveau type d'artefact (page web, fiche, prompt, chaîne)
   • décider d'une convention (casse, format, préfixe, tri)
-  • commettre un UPDATE structurel en DB
+  • commettre un UPDATE structurel en DB (incluant integration docx Jenni,
+    resolution orphelines, merge de termes, patch citations)
   • diagnostiquer un script qui échoue de manière inattendue
+  • lancer un script qui fait potentiellement des operations destructives
+    (resolve_import_conflicts, dedupe_thesaurus, DELETE, MERGE)
+
+Anti-pattern detecte (session 2026-04-21) : sauter de l'etape 2
+"comprendre" a l'etape 4 "faire" sans etape 3 BQ --search. JMJ a du
+rappeler 5 fois "tu lis les BQ avant" sur une meme session. Consequence :
+merge destructif evite de justesse (Thaumarchaeota #25 et Nitrosomonas
+#23 allaient etre supprimes par resolve_import_conflicts avec apostrophe
+ASCII mal matchee). Cause : traitement de la BQ comme ressource optionnelle
+au lieu de checkpoint non-negociable du workflow.
 ```
 
 ### `fiche_docx_production` — Regles de production du .docx pour fiches (evite repetitions session apres session)
@@ -255,6 +273,31 @@ initiale de 216 termes (Antifragilite, Biofilms, Bioturbation...). Corrige
 commit 86408df. Cette erreur NE DOIT JAMAIS se reproduire.
 
 Voir BQ #138 (claude/pas_modif_fr_canonique) pour les details.
+```
+
+### `redaction_documents_jenni` — redaction_documents_jenni
+
+```
+Un seul texte de référence pour TOUTE rédaction destinée à Jenni,
+valable pour tous les types de documents (prompt strate, fiche, validation,
+thésaurus, docx de reprise). Consulter BQ #146 « Règles de rédaction des
+documents Jenni — référence unique ».
+
+12 règles couvertes :
+  1. Le document = le document lui-même (pas de métaphrases, pas de [à compléter])
+  2. La proposition = état du corpus à l'instant t (prose continue, pas d'italique brouillon)
+  3. Contenu issu du corpus uniquement (pas de sources externes non sourcées)
+  4. **Zéro méta-vocab** (pas de card/fiche/chaîne/doc X, pas de corpus/strate/thésaurus)
+  5. Structure Word native (Title + H1/H2/H3 max, pas de décoration ASCII)
+  6. Termes canoniques intégrés dans le texte (pas en liste séparée)
+  7. Citations APA inline + biblio DOI/URL (format Google Doc cross-refs)
+  8. Bloc de 10 max pour listes d'items
+  9. Listes triées `lower(fr)`
+  10. Pas de conseils rédactionnels redondants
+  11. Refs et sources — cadre de vérification (pas d'invention)
+  12. Cycle itératif Claude → Jenni → JMJ (proposition, pas vérité finale)
+
+Vérif avant tout commit : scan regex FORBIDDEN (cf. règle #4 dans la BQ).
 ```
 
 ## Bibliothèque de Connaissances (BQ)
