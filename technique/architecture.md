@@ -20,7 +20,7 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 4980 |
+| `audit_log` | Journal des operations | 5027 |
 
 ### Tables web et outils interactifs
 
@@ -31,7 +31,7 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 | `concept_cards` | Fiches conceptuelles synthétiques | 91 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
-| `illustration_prompts` | Diagrammes Mermaid générés | 15 |
+| `illustration_prompts` | Diagrammes Mermaid générés | 16 |
 | `refs` (kind=matiere) | Matières organiques (C/N, k1, NPK) | 113 |
 | `refs` (kind=texture) | Classes texturales GEPPA | 14 |
 
