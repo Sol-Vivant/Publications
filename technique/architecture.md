@@ -11,16 +11,16 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1141 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 6931 |
-| `chains_causales` | 16 chaines causales reliant les documents | 16 |
-| `chain_etapes` | Etapes des chaines | 121 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1153 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 6981 |
+| `chains_causales` | 26 chaines causales reliant les documents | 26 |
+| `chain_etapes` | Etapes des chaines | 173 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 96 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 97 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 5088 |
+| `audit_log` | Journal des operations | 5393 |
 
 ### Tables web et outils interactifs
 
@@ -28,7 +28,7 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 13 |
 | `html_templates` | Templates CSS/JS par page + partagés | 41 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 91 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 100 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -55,7 +55,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | min_bigram_chars, warn_docs_isoles, warn_terms_sans_def |
 | `cahier` | chapitres, onglets, tab_descriptions |
-| `claude_rules` | agent_runner_reflexe, archivage_fiches, audit_cards_first, bq_access, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, redaction_documents_jenni |
+| `claude_rules` | agent_runner_reflexe, archivage_fiches, audit_cards_first, audit_reflex, bq_access, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, redaction_documents_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |

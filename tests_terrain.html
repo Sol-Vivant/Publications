@@ -3693,7 +3693,7 @@ select.sv-input { color-scheme: light dark; }
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Tests terrain</h1>
   <div class="sv-subtitle">Diagnostiquer son sol au champ avec 20 protocoles simples</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-23 20:48 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-04-26 10:53 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -4458,16 +4458,10 @@ function SvCascadeGrid({ titre, sujet, projection }) {
 //     ]
 //   }
 function SvComprendreFiche({ fiche }) {
+  // Délègue à SvFicheCard (lecteur unifié), mode sans header car déjà
+  // wrappé par SvComprendreSection (accordion de l'onglet Comprendre).
   if (!fiche) return null;
-  return <>
-    <div className="sv-richtext">
-      <SvRichText text={fiche.contenu} />
-    </div>
-    {fiche.refs && fiche.refs.length > 0 && <div style={{marginTop:'1rem',paddingTop:'0.75rem',borderTop:'1px solid var(--border)'}}>
-      <div style={{fontSize:'var(--font-sm)',fontWeight:600,color:'var(--text-secondary)',marginBottom:'0.5rem'}}>Références</div>
-      <SvSourceList sources={fiche.refs} />
-    </div>}
-  </>;
+  return <SvFicheCard fiche={fiche} showHeader={false} defaultOpen={true} />;
 }
 
 function SvComprendreCards({ items }) {
@@ -4532,6 +4526,146 @@ function SvComprendre({ data }) {
       {sections.map((s, i) => <SvComprendreSection key={i} section={s} index={i} />)}
     </div>
   </div>;
+}
+
+// ── SvFicheCard : lecteur unifié de fiche (cahier + onglets Comprendre) ──
+// Rend une fiche complète : header (badge #ID + titre + tags type/statut),
+// liseuse 3 régimes (blocks JSON / contexte_sci prompt / contenu_integre
+// monolithique fallback), bloc Concept Cards inline (pedago_links), bloc
+// Glossaire (top 20 termes du thésaurus), bloc Sources APA.
+//
+// Props :
+//   - fiche       : payload enrichi (sections, pedago_links, glossaire, refs,
+//                   contenu_integre, statut, type, titre, id)
+//   - color       : couleur d'accent du badge (défaut : FICHE_TYPE_COLORS[type])
+//   - defaultOpen : déplier l'encart au montage (défaut : true en mono-fiche)
+//   - open        : prop contrôlée — si fourni, fiche déplie contrôlée par le parent
+//   - onToggle    : handler associé (parent gère openFicheId)
+//   - openSecKey  : prop contrôlée — section dépliée (parent gère navigation entre fiches)
+//   - setOpenSecKey
+//   - showHeader  : afficher SvAccordionItem wrap (défaut true). false = render
+//                   pour une seule fiche déjà dépliée par le contexte (ex: tab Comprendre).
+function SvFicheCard({ fiche, color, defaultOpen,
+                       open, onToggle, openSecKey, setOpenSecKey,
+                       showHeader }) {
+  const _showHeader = showHeader !== false;
+  const f = fiche;
+  if (!f) return null;
+  // Etat local en mode autonome
+  const [openLocal, setOpenLocal] = React.useState(defaultOpen !== false);
+  const [secKeyLocal, setSecKeyLocal] = React.useState(null);
+  const isOpen = (typeof open === 'boolean') ? open : openLocal;
+  const onToggleEff = onToggle || (() => setOpenLocal(v => !v));
+  const secKey = (openSecKey !== undefined) ? openSecKey : secKeyLocal;
+  const setSecKey = setOpenSecKey || setSecKeyLocal;
+
+  const labels = (typeof FICHE_TYPE_LABELS !== 'undefined') ? FICHE_TYPE_LABELS : {};
+  const colors = (typeof FICHE_TYPE_COLORS !== 'undefined') ? FICHE_TYPE_COLORS : {};
+  const accentColor = color || colors[f.type] || 'var(--info)';
+  const partial = f.statut === 'integre_partiel';
+
+  // Pre-calcul des numéros affichés (Intro / 1 / 2 / ... / Conclu)
+  const secs = f.sections || [];
+  let nSec = 0;
+  const navSecs = secs.map(s => {
+    let num;
+    if (s.type === 'intro') num = 'Intro';
+    else if (s.type === 'conclusion') num = 'Conclu';
+    else { nSec += 1; num = String(nSec); }
+    return Object.assign({}, s, { _num: num });
+  });
+
+  const body = <div className="sv-text-column">
+    <div style={{padding:'0.5rem 0'}}>
+      <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.75rem',fontSize:'var(--font-xs)',flexWrap:'wrap'}}>
+        <span className="sv-tag sv-tag-info">{labels[f.type] || f.type}</span>
+        {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+      </div>
+      {(() => {
+        const hasAnyContent = navSecs.some(s =>
+          (s.blocks && s.blocks.length > 0) || s.contexte_sci);
+        if (hasAnyContent) {
+          return <SvSectionsNav
+            sections={navSecs}
+            label={'SECTIONS (' + navSecs.length + ')'}
+            openKey={secKey}
+            onToggle={setSecKey}
+            getKey={(s, i) => 'fsec-' + f.id + '-' + i}
+            getNumber={s => s._num}
+            getTitle={s => s.titre}
+            getDotColor={s => s.blocks && s.blocks.length > 0 ? 'var(--success)'
+                              : (s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)')}
+            hasContent={s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci}
+            renderContent={s => {
+              if (s.blocks && s.blocks.length > 0) return <SvFicheBlocks blocks={s.blocks} />;
+              if (s.contexte_sci) return <SvRichText text={s.contexte_sci} />;
+              return <div style={{color:'var(--color-text-muted)',fontStyle:'italic'}}>Section vide.</div>;
+            }}
+          />;
+        }
+        if (f.contenu_integre) {
+          return <div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem',fontStyle:'italic',padding:'0.5rem 0.75rem',background:'var(--color-bg-muted)',borderRadius:'4px'}}>
+              ⚠ Affichage monolithique — découpage par sections en attente de cycle Jenni MAJ.
+            </div>
+            <SvRichText text={f.contenu_integre} />
+          </div>;
+        }
+        return <div style={{color:'var(--color-text-muted)',fontStyle:'italic',padding:'1rem 0'}}>
+          Contenu non disponible — fiche en cours d'intégration.
+        </div>;
+      })()}
+      {f.pedago_links && f.pedago_links.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')'} icon="🧭" defaultOpen={false}>
+          <div style={{display:'flex',flexDirection:'column',gap:'8px',padding:'0.5rem 0',width:'100%'}}>
+            {f.pedago_links.map(pl => <SvAccordionItem key={pl.card_id}
+              badge={'#' + pl.card_id}
+              color={pl.role === 'primaire' ? 'var(--info)' : 'var(--color-text-muted)'}
+              title={pl.title}
+              subtitle={[pl.role === 'primaire' ? 'card primaire' : 'card référence',
+                        pl.dimension, pl.category].filter(Boolean).join(' · ')}>
+              <div className="sv-text-column" style={{padding:'0.75rem 0'}}>
+                {pl.description
+                  ? <SvRichText text={pl.description} />
+                  : <div style={{color:'var(--color-text-muted)',fontStyle:'italic'}}>Description non disponible.</div>}
+              </div>
+            </SvAccordionItem>)}
+          </div>
+        </SvCollapse>
+      </div>}
+      {f.glossaire && f.glossaire.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Glossaire (' + f.glossaire.length + ')'} icon="📖" defaultOpen={false}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2, minmax(0, 1fr))',gap:'6px 14px',padding:'0.5rem 0'}}>
+            {f.glossaire.map(t => <div key={t.id} style={{padding:'0.6rem 0.8rem',borderLeft:'3px solid var(--info)',background:'var(--paper-bg,var(--bg))',border:'1px solid var(--border-color,var(--info))',borderRadius:'4px',fontSize:'var(--font-sm)',color:'var(--text)'}}>
+              <div style={{fontWeight:700,color:'var(--text)'}}>
+                {t.fr}
+                {t.en && <span style={{fontWeight:500,color:'var(--info)',marginLeft:'0.4rem',fontSize:'var(--font-xs)'}}>({t.en})</span>}
+              </div>
+              {t.definition && <div style={{color:'var(--text)',opacity:0.85,fontSize:'var(--font-xs)',marginTop:'0.35rem',lineHeight:1.5}}>{t.definition}</div>}
+            </div>)}
+          </div>
+        </SvCollapse>
+      </div>}
+      {f.refs && f.refs.length > 0 && <div className="sv-fiche-view-refs" style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Sources (' + f.refs.length + ')'} icon="📚" defaultOpen={false}>
+          <SvSourceList sources={f.refs} />
+        </SvCollapse>
+      </div>}
+    </div>
+  </div>;
+
+  if (!_showHeader) return body;
+
+  return <SvAccordionItem
+    badge={'#' + f.id}
+    color={accentColor}
+    title={f.titre}
+    subtitle={partial ? 'Intégration partielle' : null}
+    open={isOpen}
+    onToggle={onToggleEff}
+    contentStyle={{padding:'1rem 0 1.5rem'}}>
+    {body}
+  </SvAccordionItem>;
 }
 
 // ── SvFicheView : rendu d'une fiche / document intégré (sections structurées DB) ──

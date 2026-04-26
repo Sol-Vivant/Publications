@@ -63,7 +63,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (9)** :
+**Règles actuellement en base (10)** :
 
 ### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
 
@@ -71,7 +71,7 @@ UPDATE config SET valeur = '<nouveau texte>'
 # Reflexe agent_runner — pour N items LLM independants
 
 Quand une tache repetitive porte sur N items independants (analyse de
-fiches, audit, attribution Zotero, validation RIS, extraction sources),
+fiches, audit, attribution sources, validation RIS, extraction sources),
 **ne jamais lancer les agents Task un par un**. Utiliser le pattern
 `tools/lib/agent_runner.py` en 3 phases :
 
@@ -132,6 +132,37 @@ Triggers obligatoires — Claude lance cet audit AVANT de :
 Si une carte/terme/fiche existante couvre le sujet (même partiellement), LA MOBILISER avant de proposer une création. Création uniquement si l'audit revient vide OU si la synthèse justifie explicitement une pièce complémentaire non redondante.
 
 Justification : règle instituée suite à la session 2026-04-11 (sol sableux) où Claude a proposé de créer 2 cartes existantes (Card #17 'Mode d'application' et terme 'ration du sol'), a manqué la contradiction pré-existante entre Card #11 et Card #17, et a traité 48 cartes 'archive' legacy comme si elles étaient 'active'. Le système concept_cards contient plus de matière qu'il n'en expose par défaut — le réflexe de vérification est la condition pour le rendre utilisable.
+```
+
+### `audit_reflex` — audit_reflex
+
+```
+# Réflexe audit régulier — thésaurus + corpus + intégrité DB
+
+Toutes les 3-5 sessions, ou systématiquement avant un consolidé éditorial
+majeur (publication, revue, cycle d'envoi Jenni > 50 termes), lancer le
+triptyque d'audit :
+
+1. **`check_integrity.py`** — sanity check technique (FK, doublons schema)
+   → BQ #74 audit_integrite_db
+2. **Audit thésaurus** (passes T1/T2/B1/A1/M1) → BQ audit_thesaurus
+   → axes A (nouveaux candidats), B (incomplets), C (relations cassées),
+     D (doublons latents), E (méta-vocab), F (pseudoscience), G (anglicismes
+     en strate FR), H (couverture)
+3. **Audit corpus** (passes S1/S2/C1/C2/K1/K2/B1) → BQ audit_corpus
+   → axes C1-C3 (chaînes), K1-K4 (cards comme outil d'audit), F1-F4 (fiches)
+
+Déclencheurs immédiats :
+- Après import thésaurus massif → re-passe T2 + relations
+- Après intégration de fiche → mini-audit phase 4bis (BQ #147)
+- Après refonte d'une chaîne → C1 + C2 + K2
+- Avant publication / regen_all → check_integrity strict
+
+Pattern agent_runner obligatoire pour passes lourdes (T1, S1, K2) avec
+écriture progressive et split par strate (anti-timeout BQ #132 + #140).
+
+Sortie : rapports `jmj/rapports/audit/audit_{thesaurus,corpus}_<date>.md`
++ section synthèse "actions priorisées (top 10)".
 ```
 
 ### `bq_access` — Doctrine d'accès à la Bibliothèque de Connaissances — recherche au fil de l'eau
