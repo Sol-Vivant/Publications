@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source unique de verite. SQLite, 58 tables, 7 vues.
+Source unique de verite. SQLite, 59 tables, 7 vues.
 
 ### Tables principales
 
@@ -12,15 +12,15 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
 | `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1153 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 6981 |
-| `chains_causales` | 26 chaines causales reliant les documents | 26 |
-| `chain_etapes` | Etapes des chaines | 173 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 7170 |
+| `chains_causales` | 28 chaines causales reliant les documents | 28 |
+| `chain_etapes` | Etapes des chaines | 184 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
 | `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 97 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `scripts` | Registre des scripts avec versions | 42 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 5445 |
+| `audit_log` | Journal des operations | 6748 |
 
 ### Tables web et outils interactifs
 
@@ -28,7 +28,7 @@ Source unique de verite. SQLite, 58 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 13 |
 | `html_templates` | Templates CSS/JS par page + partagés | 41 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 100 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 105 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |

@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 58 tables, 7 vues, 42 scripts
+- 59 tables, 7 vues, 42 scripts
 
 ## Scripts
 
