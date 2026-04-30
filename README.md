@@ -14,11 +14,11 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **1153 termes** canoniques (français/anglais) — 65.0% documentés, 100.0% définis
+- **1195 termes** canoniques (français/anglais) — 65.8% documentés, 100.0% définis
 - **28 chaînes causales** et **118 renvois** inter-documents
 - **105 fiches conceptuelles** et **191 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **59 tables** SQLite, 42 scripts Python
+- **59 tables** SQLite, 50 scripts Python
 
 ### Les forces de cette architecture
 
@@ -44,11 +44,11 @@ Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie,
 Tools/
 ├── sol_vivant.db              Source unique de vérité (SQLite)
 ├── tools/
-│   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, integrate_doc_docx, session_start
+│   ├── admin/                  audit_opus, backfill_biblio, bq_query, check_integrity, deploy_publications, explorer, export_biblio, export_tools, fix_titres, integrate_doc_docx, relink_fiche_refs, session_end, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
+│   ├── docs/                   gen_archive, gen_cahier, gen_concept_cards, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
-│   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
+│   ├── lib/                    agent_runner, biblio_format, cli, concept_cards, config, db, glossary, jenni_format, pub_path, repair_json, web_template
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
 └── Publications/web/           Pages web (→ rsync vers dépôt Pages)

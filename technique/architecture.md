@@ -11,16 +11,16 @@ Source unique de verite. SQLite, 59 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1153 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 7170 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1195 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 7186 |
 | `chains_causales` | 28 chaines causales reliant les documents | 28 |
 | `chain_etapes` | Etapes des chaines | 184 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 118 |
 | `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 97 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `scripts` | Registre des scripts avec versions | 42 |
+| `scripts` | Registre des scripts avec versions | 50 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 10 |
-| `audit_log` | Journal des operations | 6748 |
+| `audit_log` | Journal des operations | 7365 |
 
 ### Tables web et outils interactifs
 
@@ -82,17 +82,22 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `regen_all.py` | root | Régénère tous les outputs depuis la DB (script unifié) |
 | `sync_scripts.py` | root | Sync scripts DB ↔ fichiers. |
 | `audit_opus.py` | admin | Audit Opus v3.1. |
+| `backfill_biblio.py` | admin | Consolidation jenni_sources : extrait refs APA des docx + prompts, complète les champs manquants par matching DOI/URL/signature |
 | `bq_query.py` | admin | Consultation BQ on-demand — modules, recherche, filtres |
 | `check_integrity.py` | admin | Validation intégrité DB (termes orphelins, FK, doublons) |
 | `deploy_publications.py` | admin | Synchronise Publications/web/ vers ../Publications/ (dépôt GitHub Pages séparé) via rsync. |
 | `explorer.py` | admin | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
+| `export_biblio.py` | admin | Export biblio jenni_sources au format RIS (Zotero) ou APA, avec filtres (--all/--missing-journal/--orphan/--fiche/--doc) |
 | `export_tools.py` | admin | Exporteur scripts v1.5. |
 | `fix_titres.py` | admin | Correction titres jenni_doc_specs |
 | `integrate_doc_docx.py` | admin | Integration docx redige (document de strate) -> doc_contenus.contenu_integre. |
+| `relink_fiche_refs.py` | admin | Reconnecte fiche_contenus.refs (JSON) vers jenni_sources.id et garantit source_usages |
+| `session_end.py` | admin | Rituel de clôture de session Claude Code : regen, integrity, session_recap insert (BQ #119), commit, push, merge FF main |
 | `session_start.py` | admin | Contexte session v2.3. |
 | `analyse_corpus.py` | batch | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | docs | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
 | `gen_cahier.py` | docs | Cahier de Science — livre pédagogique multi-chapitres (MO/POM-MAOM, Textures, Fermentations) |
+| `gen_concept_cards.py` | docs | Concept Cards — page interactive ; rend les cartes via SvConceptCardList unifié |
 | `gen_esclaves_calc.py` | docs | Calculateur Esclaves Energetiques : web page avec saisie combustible + quantite annuelle, calcul du nombre d equivalents humains au travail. |
 | `gen_explorer.py` | docs | Génération page Explorer DB statique |
 | `gen_lifofer.py` | docs | Calculateur interactif LiFoFer v1 |
@@ -113,9 +118,12 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_prompt_thesaurus.py` | jenni | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | jenni | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
 | `agent_runner.py` | lib | Pattern préparateur → agents Task → consolidateur. |
+| `biblio_format.py` | lib | Parsing/format APA + Zotero report + RIS pour biblio Sol Vivant |
 | `cli.py` | lib | Helpers CLI partagés (add_db_arg, check_db) |
+| `concept_cards.py` | lib | Builder unifié des payloads de cartes conceptuelles (build_card_payloads) — single source of truth pour SvConceptCardList |
 | `config.py` | lib | Accès centralisé à la table config (get, get_json) |
 | `db.py` | lib | Connexion DB centralisée (get_connection) |
+| `glossary.py` | lib | Builder unifié des payloads glossaire (build_term_payloads + glossary_for_text) — single source pour SvGlossary |
 | `jenni_format.py` | lib | Formatage des prompts Jenni (markdown, sections) |
 | `pub_path.py` | lib | Chemins de publication (Publications/web/, Publications/cartographie/) |
 | `repair_json.py` | lib | Module partagé : repair_json() — réparation JSON tronqué/malformé des réponses LLM. |

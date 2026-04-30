@@ -82,6 +82,7 @@ git branch -d test-nouveau-truc
 cd ~/Documents/Sol_Vivant/GitHub/Tools
 python3 tools/docs/gen_archive.py --db sol_vivant.db
 python3 tools/docs/gen_cahier.py --db sol_vivant.db
+python3 tools/docs/gen_concept_cards.py --db sol_vivant.db
 python3 tools/docs/gen_esclaves_calc.py --db sol_vivant.db
 python3 tools/docs/gen_explorer.py --db sol_vivant.db
 python3 tools/docs/gen_lifofer.py --db sol_vivant.db

@@ -2,7 +2,7 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite unique
-- 59 tables, 7 vues, 42 scripts
+- 59 tables, 7 vues, 50 scripts
 
 ## Scripts
 
@@ -11,17 +11,22 @@
 | `regen_all.py` | v1.0 | `tools/` | Régénère tous les outputs depuis la DB (script unifié) |
 | `sync_scripts.py` | v1.0 | `tools/` | Sync scripts DB ↔ fichiers. |
 | `audit_opus.py` | v3.0 | `tools/admin/` | Audit Opus v3.1. |
+| `backfill_biblio.py` | v1.0 | `tools/admin/` | Consolidation jenni_sources : extrait refs APA des docx + prompts, complète les champs manquants par matching DOI/URL/signature |
 | `bq_query.py` | v1.0 | `tools/admin/` | Consultation BQ on-demand — modules, recherche, filtres |
 | `check_integrity.py` | v1.0 | `tools/admin/` | Validation intégrité DB (termes orphelins, FK, doublons) |
 | `deploy_publications.py` | v1.0 | `tools/admin/` | Synchronise Publications/web/ vers ../Publications/ (dépôt GitHub Pages séparé) via rsync. |
 | `explorer.py` | v1.0 | `tools/admin/` | Interface web locale pour consulter sol_vivant.db (tables, BQ, sessions) |
+| `export_biblio.py` | v1.0 | `tools/admin/` | Export biblio jenni_sources au format RIS (Zotero) ou APA, avec filtres (--all/--missing-journal/--orphan/--fiche/--doc) |
 | `export_tools.py` | v1.5 | `tools/admin/` | Exporteur scripts v1.5. |
 | `fix_titres.py` | v1.0 | `tools/admin/` | Correction titres jenni_doc_specs |
 | `integrate_doc_docx.py` | v1.0 | `tools/admin/` | Integration docx redige (document de strate) -> doc_contenus.contenu_integre. |
+| `relink_fiche_refs.py` | v1.0 | `tools/admin/` | Reconnecte fiche_contenus.refs (JSON) vers jenni_sources.id et garantit source_usages |
+| `session_end.py` | v1.1 | `tools/admin/` | Rituel de clôture de session Claude Code : regen, integrity, session_recap insert (BQ #119), commit, push, merge FF main |
 | `session_start.py` | v3.0 | `tools/admin/` | Contexte session v2.3. |
 | `analyse_corpus.py` | v4.1 | `tools/batch/` | Analyse modulaire corpus v4.1. |
 | `gen_archive.py` | v1.0 | `tools/docs/` | Génère une archive ZIP hors-ligne du site Sol Vivant (pages + vendor + images) |
 | `gen_cahier.py` | v1.0 | `tools/docs/` | Cahier de Science — livre pédagogique multi-chapitres (MO/POM-MAOM, Textures, Fermentations) |
+| `gen_concept_cards.py` | v1.0 | `tools/docs/` | Concept Cards — page interactive ; rend les cartes via SvConceptCardList unifié |
 | `gen_esclaves_calc.py` | v1.0 | `tools/docs/` | Calculateur Esclaves Energetiques : web page avec saisie combustible + quantite annuelle, calcul du nombre d equivalents humains au travail. |
 | `gen_explorer.py` | v1.0 | `tools/docs/` | Génération page Explorer DB statique |
 | `gen_lifofer.py` | v1.0 | `tools/docs/` | Calculateur interactif LiFoFer v1 |
@@ -42,9 +47,12 @@
 | `gen_prompt_thesaurus.py` | v1.0 | `tools/jenni/` | Génère un prompt Jenni UNIFIÉ par strate (nouveaux termes + termes à compléter en un seul fichier). |
 | `import_enrichissement.py` | v1.0 | `tools/jenni/` | Import semi-auto réponses Jenni (parse→preview→insert avec --confirm) |
 | `agent_runner.py` | v1.0 | `tools/lib/` | Pattern préparateur → agents Task → consolidateur. |
+| `biblio_format.py` | v1.0 | `tools/lib/` | Parsing/format APA + Zotero report + RIS pour biblio Sol Vivant |
 | `cli.py` | v1.0 | `tools/lib/` | Helpers CLI partagés (add_db_arg, check_db) |
+| `concept_cards.py` | v1.0 | `tools/lib/` | Builder unifié des payloads de cartes conceptuelles (build_card_payloads) — single source of truth pour SvConceptCardList |
 | `config.py` | v1.0 | `tools/lib/` | Accès centralisé à la table config (get, get_json) |
 | `db.py` | v1.0 | `tools/lib/` | Connexion DB centralisée (get_connection) |
+| `glossary.py` | v1.0 | `tools/lib/` | Builder unifié des payloads glossaire (build_term_payloads + glossary_for_text) — single source pour SvGlossary |
 | `jenni_format.py` | v1.0 | `tools/lib/` | Formatage des prompts Jenni (markdown, sections) |
 | `pub_path.py` | v1.0 | `tools/lib/` | Chemins de publication (Publications/web/, Publications/cartographie/) |
 | `repair_json.py` | v1.0 | `tools/lib/` | Module partagé : repair_json() — réparation JSON tronqué/malformé des réponses LLM. |
@@ -60,11 +68,11 @@ projet/
 ├── MANIFEST.md            # ce fichier
 ├── tools/
 │   ├── sync_scripts.py
-│   ├── admin/                  audit_opus, bq_query, check_integrity, deploy_publications, explorer, export_tools, fix_titres, integrate_doc_docx, session_start
+│   ├── admin/                  audit_opus, backfill_biblio, bq_query, check_integrity, deploy_publications, explorer, export_biblio, export_tools, fix_titres, integrate_doc_docx, relink_fiche_refs, session_end, session_start
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
+│   ├── docs/                   gen_archive, gen_cahier, gen_concept_cards, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
-│   ├── lib/                    agent_runner, cli, config, db, jenni_format, pub_path, repair_json, web_template
+│   ├── lib/                    agent_runner, biblio_format, cli, concept_cards, config, db, glossary, jenni_format, pub_path, repair_json, web_template
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
 └── Publications/
