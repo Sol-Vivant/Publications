@@ -4,7 +4,7 @@ Ce guide documente le cycle complet d'une session de travail sur le corpus Sol V
 
 ## Contexte
 
-Le projet est **mono-utilisateur** avec une DB SQLite binaire (`sol_vivant.db`) qui est la **source de vérité unique**. Les pages HTML, les README et les exports ne sont que des projections régénérables. Ce qui n'est pas en base n'existe pas.
+Le projet est **mono-utilisateur** avec une DB SQLite binaire (`sol_vivant.db`) qui est la **source de vérité données** (le code des scripts est versionné par git). Les pages HTML, les README et les exports ne sont que des projections régénérables. Ce qui n'est pas en base n'existe pas.
 
 Chaque session Claude Code est un **RESET** : l'état local peut contenir des commits fantômes de sessions précédentes (règle n°6 de CLAUDE.md), mais seul `origin/main` fait foi. Le script de démarrage les écrase automatiquement.
 
@@ -26,12 +26,7 @@ Le script fait, dans l'ordre :
 
 La plateforme Claude Code web impose une branche `claude/<nom-session>`. Toutes les modifications (DB, scripts, templates) s'y accumulent.
 
-**Règle** : on modifie la DB (tables, templates `html_templates`, config), **jamais** les fichiers générés (HTML, README, MD). Les scripts Python sont synchronisés dans les deux sens via :
-```bash
-python3 tools/sync_scripts.py --db sol_vivant.db --diff     # comparer
-python3 tools/sync_scripts.py --db sol_vivant.db --inject   # disque → DB
-python3 tools/sync_scripts.py --db sol_vivant.db --extract  # DB → disque
-```
+**Regle** : on modifie la DB (tables, templates `html_templates`, config), **jamais** les fichiers generes (HTML, README, MD). Les scripts Python sont versionnes par git directement dans `tools/` (plus de table `scripts` ni de sync DB↔fichiers depuis Session B).
 
 ### 3. Clôture
 
@@ -63,7 +58,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (10)** :
+**Règles actuellement en base (14)** :
 
 ### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
 
@@ -85,6 +80,37 @@ resultat trop volumineux pour le contexte.
 
 Exemples : audit_opus, attribution, analyse_corpus, analyse_fiches.
 Doctrine complete : `bq_query.py --search "strategie_agents"` (BQ #132).
+```
+
+### `agents_opus_default` — Toujours passer model='opus' aux Agent Task (jugement nuance)
+
+```
+# Agents Task : passer model="opus" par defaut
+
+Quand je lance un agent (Agent tool / Task), je dois TOUJOURS specifier
+`model="opus"` sauf si je sais explicitement que la tache est triviale
+(ex: lecture rapide d'un seul fichier court).
+
+**Pourquoi** : les agents Explore et general-purpose ont Haiku 4.5 en
+frontmatter par defaut, ce qui sous-dimensionne les analyses fines
+(jugement doctrinal, audit nuance, refactor multi-fichiers). Constat
+session 2026-05-05 : un agent Haiku a trouve 2 residus mineurs la ou
+Opus en a trouve plus.
+
+**Comment** : dans l'invocation Agent :
+```
+Agent(
+    description="...",
+    subagent_type="Explore",
+    model="opus",   # <-- toujours
+    prompt="..."
+)
+```
+
+**Exception** : tasks vraiment triviales (recherche d'un fichier connu,
+grep simple) peuvent rester sur le default. Mais en cas de doute, opus.
+
+JMJ a explicitement demande Opus par defaut (2026-05-05).
 ```
 
 ### `archivage_fiches` — Archivage auto docx + prompts post-intégration pour fiches
@@ -165,13 +191,69 @@ Sortie : rapports `jmj/rapports/audit/audit_{thesaurus,corpus}_<date>.md`
 + section synthèse "actions priorisées (top 10)".
 ```
 
+### `audit_status_lecture` — Doctrine de lecture des audits : status non-ok = suspect par défaut, ne pas dire « tout va bien »
+
+```
+# Lecture du status des audits — doctrine anti-rassurisme
+
+**Règle absolue** — un audit qui ne tourne pas ou qui est `degraded`/`failed`
+n'est PAS un succès. Le bon prior est « suspect tant que prouvé non-suspect ».
+
+## Status à lire (audit_meta.py + session_start.py)
+
+- **`ok`** : audit a tourné, toutes les assertions passent → OK
+- **`degraded`** : assertions important/souhaitable/info en échec, 0 critique →
+  signale qu'il y a quelque chose à regarder, même si ce n'est pas bloquant
+- **`failed`** : erreurs d'exécution OU au moins 1 assertion critique en échec
+  → bloquant, à corriger AVANT toute autre action métier
+- **`missing`** : pas de `_latest.json` du tout → l'audit n'a jamais tourné
+  ou il a été supprimé → bloquant équivalent
+- **`stale`** : audit `ok` mais trop ancien (au-delà de `--max-age-hours`) →
+  status `ok` non significatif, à relancer
+
+## Anti-pattern silence-fail
+
+Avant Phase D, `enrich_thesaurus.py --audit` plantait silencieusement
+depuis la migration `terms.bt` v1→v2. Les sessions précédentes ont
+déclaré le BT « réglé » via d'autres canaux sans s'apercevoir que
+l'outil de monitoring lui-même était cassé. Cas concret de silence-fail
+qui motive l'introduction du module `tools/lib/audit_report.py`.
+
+## Comportement attendu de Claude
+
+- À chaque démarrage de session, **lire la section ÉTAT DES AUDITS** du
+  dashboard `session_start.py`. Si `degraded`/`failed`/`missing`/`stale`,
+  signaler explicitement à JMJ AVANT d'attaquer le travail métier.
+- Ne **jamais** dire « tout va bien » si un audit est non-`ok`. Toujours
+  qualifier : « degraded sur audit_X, voici les assertions en échec : ... ».
+- Si Claude exécute un audit lui-même pendant une session, **lire le
+  rapport JSON** produit (`audit_reports/json/<script>_latest.json`),
+  pas seulement la sortie texte (qui peut être tronquée ou trompeuse).
+- Si un script d'audit plante, ne pas le silencier — capturer dans
+  `errors[]` via le module `audit_report.AuditReport` (pattern context
+  manager ou try/except explicite) et faire passer le status à `failed`.
+
+## Pipeline canonique
+
+```
+tools/lib/audit_report.py      # module pivot (AuditReport)
+tools/admin/check_integrity.py # premier pilote refactoré
+tools/admin/audit_meta.py      # méta-audit (lit tous les _latest.json)
+session_start.py               # affiche ÉTAT DES AUDITS
+```
+
+Audits attendus (cf. `EXPECTED_AUDITS` dans `audit_meta.py`) :
+- check_integrity, check_forbidden_jenni, audit_sources_orphelines,
+  audit_anglicismes, audit_fiches, enrich_thesaurus_audit, audit_opus
+```
+
 ### `bq_access` — Doctrine d'accès à la Bibliothèque de Connaissances — recherche au fil de l'eau
 
 ```
 Recherche au fil de l'eau, pas chargement en bloc.
 
   bq_query.py --search "<terme>"    # trouve les entrées pertinentes
-  bq_query.py --modules <code>      # charge un module entier (plusieurs entrées utiles)
+  bq_query.py --domaine <slug>      # charge un module entier (plusieurs entrées utiles)
   bq_query.py --list                # inventaire
 
 ETAPE 3 OBLIGATOIRE du workflow session (BQ #128) :
@@ -197,6 +279,51 @@ merge destructif evite de justesse (Thaumarchaeota #25 et Nitrosomonas
 #23 allaient etre supprimes par resolve_import_conflicts avec apostrophe
 ASCII mal matchee). Cause : traitement de la BQ comme ressource optionnelle
 au lieu de checkpoint non-negociable du workflow.
+```
+
+### `cloture_pending_recap` — Reflexe doctrine : pending session_recap obligatoire avant session_end.py (BQ #119). Garde-fou ajoute 2026-04-30 dans session_end.py.
+
+```
+# Cloture session : pending session_recap OBLIGATOIRE avant session_end.py
+
+**Reflexe non negociable** — avant de lancer `python3 tools/admin/session_end.py`,
+ECRIRE le pending session_recap :
+
+```
+jmj/.pending_session_recap.md
+```
+
+Format : YAML frontmatter + body markdown (cf. BQ #119 pour le format exact).
+
+**Pourquoi** : `session_end.py` est idempotent. S'il trouve un session_recap pour la
+date du jour mais pas de pending file, il SKIP silencieusement l'etape (cas d'une
+relance apres cloture interrompue). Ce skip est trompeur si du travail metier a ete
+fait depuis le dernier recap.
+
+**Garde-fou ajoute 2026-04-30** : `session_end.py` refuse desormais le skip si des
+commits metier (hors `session_end : ...`) ont ete pousses depuis le `ts_end` du
+dernier `maintenance_sessions`. Mais cette protection est un filet de securite —
+le reflexe doctrinaire reste : ECRIRE le recap AVANT.
+
+**Triggers obligatoires** — Claude redige le pending recap AVANT `session_end.py` quand :
+  - la session a produit > 3 commits sur main
+  - la session a touche au schema DB (ALTER TABLE, nouvelles tables)
+  - la session a modifie des scripts ou de la doctrine BQ
+  - la session a cree ou refondu des fiches/cards/chains
+  - JMJ a explicitement demande la cloture
+
+**Anti-pattern detecte 2026-04-30** : refonte massive de 26 fiches + creation de 5
+nouvelles fiches close sans pending recap. JMJ a du le rappeler. Cause : asymetrie
+d'attention en fin de session, skip silencieux trompeur.
+
+**Workflow correct** :
+  1. Travail metier de la session (commits multiples sur main)
+  2. AVANT cloture : rediger `jmj/.pending_session_recap.md`
+  3. `python3 tools/admin/session_end.py --db sol_vivant.db`
+  4. Le script consomme le pending file -> insert audit_reports + maintenance_sessions
+  5. Commit des regenerations + push
+
+Voir BQ #119 (cle session) pour le format complet du pending recap.
 ```
 
 ### `fiche_docx_production` — Regles de production du .docx pour fiches (evite repetitions session apres session)
@@ -306,6 +433,52 @@ commit 86408df. Cette erreur NE DOIT JAMAIS se reproduire.
 Voir BQ #138 (claude/pas_modif_fr_canonique) pour les details.
 ```
 
+### `pratiques_typees_hors_jenni` — pratiques_typees_hors_jenni
+
+```
+# Pratiques naturelles typees hors-perimetre Jenni (BQ #158)
+
+Le corpus documente des **mecanismes scientifiques generiques**, pas des **recettes praticiennes**.
+
+## Liste pratiques typees (hors-Jenni)
+
+- KNF (Cho Han Kyu) : IMO, FAA, FPJ, FFJ, OHN, BRV, LAB, WCA, WCP, BIO-9, SA-N
+- JADAM (Cho Youngsang) : JMS, JLF, JNP
+- EM-Higa / Bokashi
+- LiFoFer (Lithuanian Forest Fermentation)
+- Ferments traditionnels (kefir, kimchi, choucroute, ensilage)
+- Biofertilisants paysans sud-americains
+
+## Workflow obligatoire
+
+- Sources : PDFs jmj/pdf/ (Cho Han Kyu, Cho Youngsang, manuels praticiens)
+- Redaction : JMJ ou Claude (extraction PDF) - JAMAIS Jenni
+- Angle : MECANISME generique > recette typee
+  - Ex. fiche "Fermentation lactique" qui mentionne KNF-LAB, LiFoFer, kefir comme instances
+  - Pas de fiche "LAB-KNF" ni "JMS"
+- Acronymes-recettes : en clair dans cards/fiches, pas indexes au thesaurus
+
+## Garde-fous techniques
+
+- Table terms : flag_pratique_typee=1 exclut des exports Jenni
+  (enrich_thesaurus.py, gen_prompt_completion.py, export_thesaurus_incomplets.py)
+- Gate integration (integrate_fiche.py) :
+  - PSEUDOSCIENCE (biodynamie/anthroposophie/BD500-507) = violation CRITIQUE
+    non bypassable meme avec --partial -> JMJ rejette ou reedite
+  - RECETTE_TYPEE (FAA/FPJ/JMS/JLF/OHN/BRV/WCA/WCP/BIO-9/JADAM/KNF) = warning
+    -> JMJ arbitre (mention contextualisee OK, sinon reediter)
+  - STEINER_MENTION (Steiner hors Steinernema) = warning -> JMJ arbitre
+
+## Mode degrade existant
+
+Les fiches DIY actuelles integrees AVANT cette doctrine restent en l'etat.
+A revoir lors d'une session dediee a partir des documents officiels :
+- KNF : KNF - chos-global-natural-farming-sarra.pdf, KNF - Dr Hoon Park III - IMO.pdf
+- JADAM : youngsang-cho-jadam-organic-farming-2016-1.pdf
+- LiFoFer : guide-lff-2018.pdf, Lifofer_10.12.2024_Rezomes(5).pdf
+- EM/Bokashi : Agriton EM Fermentation, Bokashi 3 years, em-cuba.pdf
+```
+
 ### `redaction_documents_jenni` — redaction_documents_jenni
 
 ```
@@ -352,12 +525,13 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 
 | Slug | Nom | Catégorie | Description |
 |------|-----|-----------|-------------|
-| `concept-cards` | Cartes de concept | corpus | filtre de rigueur entre captation et intégration |
-| `chaines` | Chaînes causales | corpus | chains_causales, étapes, workflow v4 |
 | `thesaurus` | Pipeline thesaurus | pipeline | prompt termes → Jenni → import en DB |
 | `fiches` | Pipeline fiches | pipeline | prompt → Jenni → .docx → intégration → rendu Cahier |
 | `docs` | Pipeline docs strate | pipeline | prompts F1/S2/V1/P13… clôturés → passe finale Jenni |
+| `concept-cards` | Cartes de concept | corpus | filtre de rigueur entre captation et intégration |
 | `validations` | Pipeline validations | pipeline | prompt validation → Jenni → intégration (combler lacunes) |
+| `chaines` | Chaînes causales | corpus | chains_causales, étapes, workflow v4 |
+| `web` | Pages web (toutes) | web | site, pages, charte CSS, dark mode, calculateurs, templates, React |
 | `bq` | BQ elle-même | technique | architecture BQ, consultation, doctrine |
 | `session` | Gestion de session | technique | démarrage, clôture, git, propagation main |
 | `integrite` | Intégrité DB | technique | check_integrity, audit structurel, FK, orphelins |
@@ -365,7 +539,6 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 | `archivage` | Archivage post-intégration | technique | règles fichiers/fiches/prompts traités |
 | `jenni-workflow` | Workflow Jenni | technique | prompts docx, OMML, charte rédaction, refs APA |
 | `sources-autoritaires` | Sources autoritaires externes | technique | doctrines de référence (INRAE, Shift, etc.) utilisées pour aligner le corpus |
-| `web` | Pages web (toutes) | web | site, pages, charte CSS, dark mode, calculateurs, templates, React |
 
 ## Cheat-sheet — commandes usuelles
 
@@ -379,10 +552,10 @@ python3 tools/admin/session_start.py --db sol_vivant.db --claude-md
 # Chercher dans la BQ
 python3 tools/admin/bq_query.py --db sol_vivant.db --search "<terme>"
 
-# Vérifier la cohérence scripts DB ↔ disque
-python3 tools/sync_scripts.py --db sol_vivant.db --diff
+# Inventaire des scripts (depuis le filesystem)
+python3 -c "from tools.lib.scripts_inventory import list_scripts; [print(s['folder'], s['nom']) for s in list_scripts()]"
 
-# Régénérer toutes les pages web (après modif DB)
+# Regenerer toutes les pages web (apres modif DB)
 python3 tools/regen_all.py --db sol_vivant.db
 
 # Régénérer tous les README et guides techniques

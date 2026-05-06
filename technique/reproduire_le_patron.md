@@ -4,7 +4,7 @@
 
 L'architecture Sol Vivant est un **patron generique** pour construire un corpus de connaissances structure. Elle n'est pas limitee a l'agriculture : tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser.
 
-Le patron Sol Vivant gere actuellement 1195 termes, 191 prompts, 28 chaines causales, 118 renvois inter-documents et 10 pages web interactives, avec 50 scripts Python.
+Le patron Sol Vivant gere actuellement 1496 termes, 191 prompts, 29 chaines causales, 0 renvois inter-documents et 10 pages web interactives, avec 94 scripts Python.
 
 ## Architecture modulaire
 
@@ -45,14 +45,14 @@ Dans tous les cas, le workflow est le meme : une DB unique + Claude Code pour to
 ### 1. Creer la base
 
 ```sql
--- Les 4 tables essentielles
+-- Les 3 tables essentielles (donnees du corpus)
 CREATE TABLE documents (code TEXT PRIMARY KEY, strate TEXT, titre TEXT, note TEXT);
 CREATE TABLE terms (id INTEGER PRIMARY KEY, fr TEXT, en TEXT, definition TEXT, doc_code TEXT);
 CREATE TABLE config (categorie TEXT, cle TEXT, valeur TEXT, type TEXT DEFAULT 'text',
     description TEXT, PRIMARY KEY (categorie, cle));
-CREATE TABLE scripts (id INTEGER PRIMARY KEY, nom TEXT, description TEXT,
-    contenu TEXT, version TEXT, folder TEXT, updated_at TEXT);
 ```
+
+**Pas de table `scripts`** : les scripts Python vivent dans `tools/` versionnes par git. L'inventaire est obtenu via `tools/lib/scripts_inventory.py` qui scanne le filesystem (lecon Session B 2026-05-05 : la sync DB↔fichiers se desynchronisait silencieusement, le filesystem-only est plus robuste).
 
 Pour les pages web interactives, ajouter `web_pages` et `html_templates` (Claude Code les cree automatiquement quand on lui demande une page).
 

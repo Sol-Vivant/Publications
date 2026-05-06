@@ -14,15 +14,15 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **1195 termes** canoniques (français/anglais) — 65.8% documentés, 100.0% définis
-- **28 chaînes causales** et **118 renvois** inter-documents
-- **105 fiches conceptuelles** et **191 prompts** structurés
+- **1496 termes** canoniques (français/anglais) — 70.9% documentés, 100.0% définis
+- **29 chaînes causales** et **0 renvois** inter-documents
+- **146 fiches conceptuelles** et **191 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **59 tables** SQLite, 50 scripts Python
+- **50 tables** SQLite, 94 scripts Python
 
 ### Les forces de cette architecture
 
-- **Source unique de vérité** : tout est dans `sol_vivant.db` — pas de fichiers éparpillés, pas de doublons
+- **DB = source de vérité données** (`sol_vivant.db`) ; **scripts versionnés par git** dans `tools/`
 - **Zéro hardcodage** : les textes, formules et données des pages web viennent de la DB, pas du code
 - **Claude Code intégré** : développement, audit, analyse et maintenance du corpus en conversation directe
 - **Hors-ligne natif** : toutes les pages fonctionnent sans internet (vendor local)
@@ -42,13 +42,13 @@ Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie,
 
 ```
 Tools/
-├── sol_vivant.db              Source unique de vérité (SQLite)
+├── sol_vivant.db              Source de vérité données (SQLite)
 ├── tools/
-│   ├── admin/                  audit_opus, backfill_biblio, bq_query, check_integrity, deploy_publications, explorer, export_biblio, export_tools, fix_titres, integrate_doc_docx, relink_fiche_refs, session_end, session_start
+│   ├── admin/                  analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, insert_lacunes_lot2, insert_lacunes_lot3, integrate_doc_docx, integrate_fiche_docx, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, session_end, session_start, sync_syn_inrae, triage_ris
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_cahier, gen_concept_cards, gen_esclaves_calc, gen_explorer, gen_lifofer, gen_mo_calc, gen_readme, gen_reports, gen_technique, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  enrich_thesaurus, export_fiche, export_jenni_doc, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement
-│   ├── lib/                    agent_runner, biblio_format, cli, concept_cards, config, db, glossary, jenni_format, pub_path, repair_json, web_template
+│   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
+│   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, resolve_import_conflicts
+│   ├── lib/                    agent_runner, audit_persist, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, sources, term_rels, thesaurus_completion, web_template
 ├── docx/                      Documents .docx et .ris
 ├── jmj/                       Documents de travail
 └── Publications/web/           Pages web (→ rsync vers dépôt Pages)

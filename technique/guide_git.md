@@ -81,15 +81,19 @@ git branch -d test-nouveau-truc
 # Generer les fichiers dans Publications/
 cd ~/Documents/Sol_Vivant/GitHub/Tools
 python3 tools/docs/gen_archive.py --db sol_vivant.db
+python3 tools/docs/gen_bq_page.py --db sol_vivant.db
 python3 tools/docs/gen_cahier.py --db sol_vivant.db
 python3 tools/docs/gen_concept_cards.py --db sol_vivant.db
+python3 tools/docs/gen_dashboard.py --db sol_vivant.db
 python3 tools/docs/gen_esclaves_calc.py --db sol_vivant.db
 python3 tools/docs/gen_explorer.py --db sol_vivant.db
+python3 tools/docs/gen_illustration_prompts.py --db sol_vivant.db
 python3 tools/docs/gen_lifofer.py --db sol_vivant.db
 python3 tools/docs/gen_mo_calc.py --db sol_vivant.db
 python3 tools/docs/gen_readme.py --db sol_vivant.db
-python3 tools/docs/gen_reports.py --db sol_vivant.db
 python3 tools/docs/gen_technique.py --db sol_vivant.db
+python3 tools/docs/gen_tests_terrain.py --db sol_vivant.db
+python3 tools/docs/gen_transition_robuste.py --db sol_vivant.db
 python3 tools/docs/gen_triangle_textures.py --db sol_vivant.db
 python3 tools/docs/gen_web.py --db sol_vivant.db
 python3 tools/docs/gen_workflows.py --db sol_vivant.db
