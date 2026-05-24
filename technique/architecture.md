@@ -11,15 +11,15 @@ Source de verite donnees. SQLite, 50 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 1496 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 8722 |
-| `chains_causales` | 29 chaines causales reliant les documents | 29 |
-| `chain_etapes` | Etapes des chaines | 193 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 2559 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 18288 |
+| `chains_causales` | 30 chaines causales reliant les documents | 30 |
+| `chain_etapes` | Etapes des chaines | 202 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 157 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 158 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 9335 |
+| `audit_log` | Journal des operations | 10892 |
 
 ### Tables web et outils interactifs
 
@@ -55,7 +55,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `audit` | def_max_chars, def_min_chars, def_truncate_chars, max_age_hours_meta, min_bigram_chars, min_chars_contenu_fiche, min_chars_definition_terme, min_chars_refs_fiche, preview_chars_card, seuil_avancement_bas, seuil_avancement_haut, warn_docs_isoles, warn_terms_sans_def |
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
 | `cahier` | chapitres, onglets, tab_descriptions |
-| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, cloture_pending_recap, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni |
+| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, cloture_pending_recap, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
@@ -84,6 +84,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 |--------|--------|------|
 | `regen_all.py` | root | Régénère tous les outputs depuis la DB |
 | `analyse_fiches.py` | admin | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
+| `arbitrage_collisions_20260515.py` | admin | Arbitrage des 25 collisions syn↔fr post-audit 2026-05-15. |
 | `audit_anglicismes.py` | admin | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | admin | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | admin | Détection des canoniques FR qui sont en |
@@ -109,10 +110,12 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `insert_lacunes_lot3.py` | admin | Insertion en DB des 8 fiches a_faire du Lot 3 lacunes. |
 | `integrate_doc_docx.py` | admin | Pipeline d'integration d'un document de strate (.docx) en DB. |
 | `integrate_fiche_docx.py` | admin | Pipeline d'intégration d'une fiche Jenni (.docx) dans la DB. |
+| `migrate_docx_index.py` | admin | Migration one-shot : renomme les docx archivés des |
 | `pedago_links_apply.py` | admin | Insère dans pedago_links les suggestions générées par |
 | `pedago_links_suggest.py` | admin | Suggestion de cards pédagogiques à lier aux fiches/docs |
 | `reintegrate_fiches_sections.py` | admin | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | admin | reconnecte les refs JSON de fiche_contenus.refs |
+| `resolve_sources_crossref.py` | admin | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
 | `session_end.py` | admin | Rituel de clôture de session Claude Code web. |
 | `session_start.py` | admin | Dashboard de démarrage de session Claude Code |
 | `sync_syn_inrae.py` | admin | Enrichit syn_fr/syn_en du thésaurus corpus depuis INRAE. |
@@ -155,6 +158,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_doc_ebauche.py` | jenni/archives | Génère un .docx d'ébauche pour un document de strate. |
 | `agent_runner.py` | lib | Pattern « préparateur → agents Task → consolidateur » |
 | `audit_persist.py` | lib | Persistance des rapports d'audit sur filesystem. |
+| `audit_post_import.py` | lib | BQ #146 §H.7. |
 | `audit_report.py` | lib | Module commun pour rapports d'audit JSON structurés. |
 | `biblio_format.py` | lib | parsing et formatage des références bibliographiques. |
 | `bq_inventory.py` | lib | Inventaire/lecture des entrees BQ filesystem. |
@@ -162,6 +166,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `concept_cards.py` | lib | builder unifié des payloads de cartes conceptuelles. |
 | `config.py` | lib | Lecture centralisée de la table config. |
 | `db.py` | lib | Connexion DB standardisée. |
+| `docx_index.py` | lib | Source de vérité du mapping fiche ↔ docx archivé. |
 | `glossary.py` | lib | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | lib | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | lib | Fonctions partagées de formatage des prompts Jenni |

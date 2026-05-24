@@ -58,7 +58,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (14)** :
+**Règles actuellement en base (15)** :
 
 ### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
 
@@ -131,6 +131,37 @@ JMJ a explicitement demande Opus par defaut (2026-05-05).
 - Journalisée dans `audit_log` (operation='ARCHIVE', table='files').
 
 **Pour les scripts ad-hoc (intégrations en direct par Claude)** : TOUJOURS importer et appeler `archive_fiche_files(fiche, docx_path)` à la fin du script d'intégration. La règle s'applique à tous les pipelines, pas seulement au script canonique.
+```
+
+### `archive_git_mv` — archive_git_mv
+
+```
+# Archivage docx post-intégration — utiliser `git mv` (pas `mv`)
+
+**Règle opérationnelle** — quand on archive un docx Jenni intégré :
+
+```bash
+# OUI — git mv stage rename + delete + add en une commande
+git mv docx/thesaurus_<date>.docx docx/archives/thesaurus_<date>.docx
+```
+
+```bash
+# NON — mv + git add stage l'add mais OUBLIE le delete
+# → working tree pollué, hook stop-git-check refuse
+mv docx/thesaurus_<date>.docx docx/archives/
+git add docx/archives/thesaurus_<date>.docx   # ⚠ delete non staged
+```
+
+Si le `mv` est déjà fait (oubli) : `git add -A docx/` capture le delete + l'add.
+
+**Justification** : pattern à corriger après 2 incidents cette session
+(lots 3 et 20260508) qui ont chacun nécessité un commit chore correctif
+suite à un working tree pollué.
+
+S'applique à : archivage docx thésaurus, fiches, prompts. Pour les fiches,
+`tools/admin/integrate_fiche_docx.py::archive_fiche_files()` automatise déjà
+proprement via shutil.move + git tracking — pour le thésaurus, Claude le fait
+manuellement, d'où le rappel.
 ```
 
 ### `audit_cards_first` — Audit concept_cards obligatoire avant toute création ou update
@@ -329,20 +360,33 @@ Voir BQ #119 (cle session) pour le format complet du pending recap.
 ### `fiche_docx_production` — Regles de production du .docx pour fiches (evite repetitions session apres session)
 
 ```
-Production docx fiches (rappels pratiques) :
+Production docx fiches -- regles anti-derive :
 
-1. AUCUNE consigne dans le docx — pas de "Dimensions attendues", pas de "Jenni rédige...", pas de "[à compléter]". Seulement du contenu (même amorce).
-2. AMORCES EN TEXTE NORMAL (pas d'italique gris) — l'amorce est du CONTENU incomplet de document, pas une note editoriale. Les refs inline doivent rester lisibles.
-3. ACCENTS francais corrects partout — jamais d'ascii dépouillé. évolution, écologie, é/è/ê/à.
-4. TERMES CANONIQUES dans le texte avec EN entre parenthèses à la 1re mention. Pas de tableau final.
-5. TITLE court sans accent (Jenni l'utilise comme nom de fichier).
-6. REFS INLINE (Auteur, année) + section 'Références' en fin, format APA, une par paragraphe, tri alpha. CHAQUE REF DOIT AVOIR DOI ET/OU URL (resoluble). Si DOI seul : https://doi.org/<doi> est utilise. Si les deux differents : afficher les deux. Alerte script si ref sans lien. Meme pattern que Jenni.
-7. PAS DE DECORATION ASCII (---, ===, banderoles).
-8. Le docx = état du document, pas discussion avec Jenni.
+0. JENNI NE SAIT RIEN DE L'ORGANISATION DU CORPUS -- le docx est un document autonome.
+   ZERO meta-vocab : pas de fiche #N, card #N, chaine C1, corpus, strate, thesaurus, sol_vivant, codes docs (S2, V1...).
+   Ces renvois restent dans fiches.notes (brief editorial), jamais dans le docx.
+   Scan regex obligatoire avant commit : check_forbidden_jenni.py ou regex manuelle.
 
-9. SECTIONS BODY EN H1 NUMÉROTÉES (`1.`, `2.`, ...). Introduction et Résumé sans numéro. Sous-sections H2 (`1.1.`, `1.2.`...) si justifié (plusieurs sous-thèmes distincts, comparaison structurée, volume dense) — pas systématique. H3 max. Numérotation portée par les titres DB (fiche_sections.titre), pas ajoutée par le script.
+1. PLAN H1+H2 OBLIGATOIRES dans fiche_sections avant generation.
+   Un brief avec seulement H1 --> Jenni invente H3/H4 --> violations gate HEADING_LEVEL.
+   Lister explicitement les H2 prevus dans chaque section.
+   H3 = details internes Jenni (libres mais limites). H4 = jamais.
 
-Voir BQ #130 wf_fiche pour détails.
+2. GRAINES ~600 chars/section (100-150 mots) -- pas de prose finie.
+   Contenu : angle + 2-3 mecanismes clefs + termes canoniques (terms.fr exact) + perimetre.
+   Pas de citations APA inline, pas de bloc References pre-pose, pas de placeholders [a completer].
+   Volume cible docx total : 5-8k chars. Modele : fiche #37 agroforesterie-temperee-fonctions-sol.
+
+3. AUCUNE consigne dans le docx -- pas de 'Jenni redige...', pas de '[a completer]'.
+4. AMORCES EN TEXTE NORMAL (pas d'italique gris).
+5. ACCENTS francais corrects partout.
+6. TERMES CANONIQUES dans le texte avec EN entre parentheses a la 1re mention. Pas de tableau final.
+7. TITLE court sans accent (Jenni l'utilise comme nom de fichier).
+8. PAS DE DECORATION ASCII (---, ===, banderoles).
+9. SECTIONS BODY EN H1 NUMEROTEES (1., 2., ...). Introduction et Resume sans numero.
+   Numerotion portee par les titres DB (fiche_sections.titre), pas ajoutee par le script.
+
+Voir BQ wf_fiche_production (#130) pour le workflow complet.
 ```
 
 ### `parser_docx_omath` — Parseur docx doit extraire oMath (formules chimiques Jenni)

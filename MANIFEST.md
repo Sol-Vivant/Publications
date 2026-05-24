@@ -3,7 +3,7 @@
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
 - 50 tables, 7 vues
-- Scripts : 94 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- Scripts : 99 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
@@ -11,6 +11,7 @@
 |---|---|---|
 | `regen_all.py` | `tools/` | Régénère tous les outputs depuis la DB |
 | `analyse_fiches.py` | `tools/admin/` | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
+| `arbitrage_collisions_20260515.py` | `tools/admin/` | Arbitrage des 25 collisions syn↔fr post-audit 2026-05-15. |
 | `audit_anglicismes.py` | `tools/admin/` | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | `tools/admin/` | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | `tools/admin/` | Détection des canoniques FR qui sont en |
@@ -36,10 +37,12 @@
 | `insert_lacunes_lot3.py` | `tools/admin/` | Insertion en DB des 8 fiches a_faire du Lot 3 lacunes. |
 | `integrate_doc_docx.py` | `tools/admin/` | Pipeline d'integration d'un document de strate (.docx) en DB. |
 | `integrate_fiche_docx.py` | `tools/admin/` | Pipeline d'intégration d'une fiche Jenni (.docx) dans la DB. |
+| `migrate_docx_index.py` | `tools/admin/` | Migration one-shot : renomme les docx archivés des |
 | `pedago_links_apply.py` | `tools/admin/` | Insère dans pedago_links les suggestions générées par |
 | `pedago_links_suggest.py` | `tools/admin/` | Suggestion de cards pédagogiques à lier aux fiches/docs |
 | `reintegrate_fiches_sections.py` | `tools/admin/` | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | `tools/admin/` | reconnecte les refs JSON de fiche_contenus.refs |
+| `resolve_sources_crossref.py` | `tools/admin/` | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
 | `session_end.py` | `tools/admin/` | Rituel de clôture de session Claude Code web. |
 | `session_start.py` | `tools/admin/` | Dashboard de démarrage de session Claude Code |
 | `sync_syn_inrae.py` | `tools/admin/` | Enrichit syn_fr/syn_en du thésaurus corpus depuis INRAE. |
@@ -82,6 +85,7 @@
 | `gen_doc_ebauche.py` | `tools/jenni/archives/` | Génère un .docx d'ébauche pour un document de strate. |
 | `agent_runner.py` | `tools/lib/` | Pattern « préparateur → agents Task → consolidateur » |
 | `audit_persist.py` | `tools/lib/` | Persistance des rapports d'audit sur filesystem. |
+| `audit_post_import.py` | `tools/lib/` | BQ #146 §H.7. |
 | `audit_report.py` | `tools/lib/` | Module commun pour rapports d'audit JSON structurés. |
 | `biblio_format.py` | `tools/lib/` | parsing et formatage des références bibliographiques. |
 | `bq_inventory.py` | `tools/lib/` | Inventaire/lecture des entrees BQ filesystem. |
@@ -89,6 +93,7 @@
 | `concept_cards.py` | `tools/lib/` | builder unifié des payloads de cartes conceptuelles. |
 | `config.py` | `tools/lib/` | Lecture centralisée de la table config. |
 | `db.py` | `tools/lib/` | Connexion DB standardisée. |
+| `docx_index.py` | `tools/lib/` | Source de vérité du mapping fiche ↔ docx archivé. |
 | `glossary.py` | `tools/lib/` | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | `tools/lib/` | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | `tools/lib/` | Fonctions partagées de formatage des prompts Jenni |
@@ -112,11 +117,11 @@ projet/
 ├── CLAUDE.md              # contexte persistent Claude Code
 ├── MANIFEST.md            # ce fichier
 ├── tools/
-│   ├── admin/                  analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, insert_lacunes_lot2, insert_lacunes_lot3, integrate_doc_docx, integrate_fiche_docx, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, session_end, session_start, sync_syn_inrae, triage_ris
+│   ├── admin/                  analyse_fiches, arbitrage_collisions_20260515, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, insert_lacunes_lot2, insert_lacunes_lot3, integrate_doc_docx, integrate_fiche_docx, migrate_docx_index, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, resolve_sources_crossref, session_end, session_start, sync_syn_inrae, triage_ris
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, resolve_import_conflicts
-│   ├── lib/                    agent_runner, audit_persist, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, sources, term_rels, thesaurus_completion, web_template
+│   ├── lib/                    agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, docx_index, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, sources, term_rels, thesaurus_completion, web_template
 │   ├── veille/                 weekly_scan
 │   ├── regen_all.py
 ├── docx/                      Documents .docx et .ris
