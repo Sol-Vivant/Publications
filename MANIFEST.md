@@ -3,7 +3,7 @@
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
 - 50 tables, 7 vues
-- Scripts : 99 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- Scripts : 101 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
@@ -55,10 +55,12 @@
 | `gen_dashboard.py` | `tools/docs/` | Génère le tableau de bord Claude/Sol Vivant. |
 | `gen_esclaves_calc.py` | `tools/docs/` | Generer Publications/web/esclaves_calculateur.html |
 | `gen_explorer.py` | `tools/docs/` | Génère la page Explorer DB statique |
+| `gen_fiches_index.py` | `tools/docs/` | Régénère recherches/fiches/INDEX.md depuis la DB. |
 | `gen_illustration_prompts.py` | `tools/docs/` | Export les prompts d'illustration depuis la DB. |
 | `gen_lifofer.py` | `tools/docs/` | Calculateur interactif LiFoFer |
 | `gen_mo_calc.py` | `tools/docs/` | Calculateur interactif Matière Organique |
 | `gen_readme.py` | `tools/docs/` | gen_readme.py v1.1 |
+| `gen_scripts.py` | `tools/docs/` | Génère Publications/web/scripts.html |
 | `gen_technique.py` | `tools/docs/` | Guide Technique (Publications/web/technique/index.html) |
 | `gen_tests_terrain.py` | `tools/docs/` | Genere Publications/web/tests_terrain.html |
 | `gen_transition_robuste.py` | `tools/docs/` | Genere Publications/web/transition_robuste.html |
@@ -119,7 +121,7 @@ projet/
 ├── tools/
 │   ├── admin/                  analyse_fiches, arbitrage_collisions_20260515, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, insert_lacunes_lot2, insert_lacunes_lot3, integrate_doc_docx, integrate_fiche_docx, migrate_docx_index, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, resolve_sources_crossref, session_end, session_start, sync_syn_inrae, triage_ris
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
+│   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, resolve_import_conflicts
 │   ├── lib/                    agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, docx_index, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, sources, term_rels, thesaurus_completion, web_template
 │   ├── veille/                 weekly_scan
@@ -138,7 +140,7 @@ projet/
 
 ## Pages web interactives
 
-10 pages, 41 templates (2 partagés), vendor local (hors-ligne).
+10 pages, 44 templates (2 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|

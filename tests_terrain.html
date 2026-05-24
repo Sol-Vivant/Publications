@@ -1648,6 +1648,18 @@ select.sv-input { color-scheme: light dark; }
 }
 
 
+.sv-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+.sv-sections-nav-header { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; }
+.sv-sections-toggle-all { background:none; border:1px solid var(--border); border-radius:6px; color:var(--text-secondary); font-size:var(--font-xs); cursor:pointer; padding:0.15rem 0.55rem; white-space:nowrap; transition:border-color 0.15s,color 0.15s; }
+.sv-sections-toggle-all:hover { border-color:var(--accent); color:var(--accent); }
+
+/* Filet dark mode : champs nus suivent le thème (spécificité faible, .sv-input et styles spécifiques priment) */
+input[type="text"], input[type="search"], input[type="number"], input[type="email"], input:not([type]), textarea, select {
+  background: var(--card-bg);
+  color: var(--text);
+}
+
 
 :root {
   --bg: #f4f6f8;
@@ -3278,6 +3290,18 @@ select.sv-input { color-scheme: light dark; }
 }
 
 
+.sv-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+.sv-sections-nav-header { display:flex; align-items:center; justify-content:space-between; gap:0.5rem; }
+.sv-sections-toggle-all { background:none; border:1px solid var(--border); border-radius:6px; color:var(--text-secondary); font-size:var(--font-xs); cursor:pointer; padding:0.15rem 0.55rem; white-space:nowrap; transition:border-color 0.15s,color 0.15s; }
+.sv-sections-toggle-all:hover { border-color:var(--accent); color:var(--accent); }
+
+/* Filet dark mode : champs nus suivent le thème (spécificité faible, .sv-input et styles spécifiques priment) */
+input[type="text"], input[type="search"], input[type="number"], input[type="email"], input:not([type]), textarea, select {
+  background: var(--card-bg);
+  color: var(--text);
+}
+
 /* ── tests_terrain : layout grille de SvTestCard ── */
 .tt-page {
   padding-top: 0.5rem;
@@ -3433,7 +3457,7 @@ select.sv-input { color-scheme: light dark; }
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Tests terrain</h1>
   <div class="sv-subtitle">Diagnostiquer son sol au champ avec 20 protocoles simples</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-05-24 00:59 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-05-24 22:48 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -4015,6 +4039,23 @@ function SvRichText({ text, onCardRef, skipPrefixes }) {
 //   progress   : nombre 0-100 (facultatif) — affiche une barre de progression
 //   open       : bool — état contrôlé
 //   onClick    : callback au clic sur la carte
+// ── SvSearchInput : champ de recherche unifié + bouton d'effacement ──
+// Factorisé pour toutes les pages. Props : value, onChange(str), placeholder.
+function SvSearchInput({ value, onChange, placeholder, autoFocus }) {
+  return <div style={{position:'relative', marginBottom:'12px'}}>
+    <input type="search" className="sv-input" value={value || ''}
+      autoFocus={!!autoFocus}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder || 'Rechercher…'}
+      style={{width:'100%', paddingRight:'2rem', boxSizing:'border-box'}} />
+    {value && <button type="button" aria-label="Effacer la recherche"
+      onClick={() => onChange('')}
+      style={{position:'absolute', right:'0.45rem', top:'50%', transform:'translateY(-50%)',
+              background:'none', border:'none', cursor:'pointer', color:'var(--text-secondary)',
+              fontSize:'1.1rem', lineHeight:1, padding:'0 0.2rem'}}>×</button>}
+  </div>;
+}
+
 function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children, compact, chevron }) {
   const c = color || 'var(--text-secondary)';
   return <div onClick={onClick}
@@ -4032,8 +4073,8 @@ function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open,
       // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
       <div style={{display:'flex',flexDirection:'column',gap:'6px',height:'100%'}}>
         <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
-          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
-            width: '24px', height: '24px', display: 'flex', alignItems: 'center',
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '24px', display: 'flex', alignItems: 'center',
             justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-xs)', flexShrink:0}}>{badge}</span>}
           {title && <div title={title} style={{fontWeight: 700, fontSize: 'var(--font-sm)', color: 'var(--text)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{title}</div>}
           <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{flexShrink:0,color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
@@ -4053,8 +4094,8 @@ function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open,
     ) : (
       <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
         {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
-          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '50%',
-            width: '28px', height: '28px', display: 'flex', alignItems: 'center',
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '28px', display: 'flex', alignItems: 'center',
             justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
           {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
         </div>}
@@ -4460,7 +4501,7 @@ function SvFicheCard({ fiche, color, defaultOpen,
         const hasAnyContent = navSecs.some(s =>
           (s.blocks && s.blocks.length > 0) || s.contexte_sci);
         if (hasAnyContent) {
-          return <SvSectionsNav
+          return <SvSectionsNav multi
             sections={navSecs}
             label={'SECTIONS (' + navSecs.length + ')'}
             openKey={secKey}
@@ -4620,7 +4661,7 @@ function SvFicheView({ fiche, typeLabel, typeVariant, showTypeTag, numberSection
 //   - getDotTitle   : fn(section, index) -> tooltip (optionnel)
 //   - hasContent    : fn(section, index) -> bool (sinon: pas de chevron, pas cliquable)
 //   - renderContent : fn(section, index) -> ReactNode
-function SvSectionsNav({ sections, openKey, onToggle, label,
+function SvSectionsNav({ sections, openKey, onToggle, label, multi,
                          getKey, getNumber, getTitle, getDotColor, getDotTitle,
                          hasContent, renderContent }) {
   if (!sections || !sections.length) return null;
@@ -4631,21 +4672,34 @@ function SvSectionsNav({ sections, openKey, onToggle, label,
   const kDotT = getDotTitle || (() => '');
   const kHas = hasContent || (() => true);
   const kRen = renderContent || (() => null);
+  const [openSet, setOpenSet] = React.useState(() => new Set());
+  const expKeys = sections.map((s, i) => kHas(s, i) ? kKey(s, i) : null).filter(k => k !== null);
+  const isOpen = multi ? (key => openSet.has(key)) : (key => openKey === key);
+  const toggle = multi
+    ? (key => setOpenSet(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; }))
+    : (key => onToggle(openKey === key ? null : key));
+  const allOpen = multi && expKeys.length > 0 && expKeys.every(k => openSet.has(k));
   return <div className="sv-sections-nav">
-    {label && <div className="sv-sections-nav-label">{label}</div>}
+    {(label || multi) && <div className="sv-sections-nav-header">
+      {label && <div className="sv-sections-nav-label">{label}</div>}
+      {multi && expKeys.length > 0 && <button type="button" className="sv-sections-toggle-all"
+        onClick={() => setOpenSet(allOpen ? new Set() : new Set(expKeys))}>
+        {allOpen ? '⊖ Tout replier' : '⊕ Tout déployer'}
+      </button>}
+    </div>}
     {sections.map((s, i) => {
       const key = kKey(s, i);
-      const isOpen = openKey === key;
+      const open = isOpen(key);
       const expandable = kHas(s, i);
       return <div key={i} className="sv-sections-nav-row-wrap">
         <div className={'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '')}
-             onClick={expandable ? () => onToggle(isOpen ? null : key) : undefined}>
+             onClick={expandable ? () => toggle(key) : undefined}>
           <span className="sv-sections-nav-dot" style={{background: kDot(s, i)}} title={kDotT(s, i)}></span>
           <span className="sv-sections-nav-num">{kNum(s, i)}</span>
           <span className="sv-sections-nav-title">{kTit(s, i)}</span>
-          {expandable && <span className={'sv-sections-nav-chev' + (isOpen ? ' open' : '')}>▸</span>}
+          {expandable && <span className={'sv-sections-nav-chev' + (open ? ' open' : '')}>▸</span>}
         </div>
-        {isOpen && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
+        {open && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
       </div>;
     })}
   </div>;

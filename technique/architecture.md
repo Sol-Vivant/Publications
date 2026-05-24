@@ -16,17 +16,17 @@ Source de verite donnees. SQLite, 50 tables, 7 vues.
 | `chains_causales` | 30 chaines causales reliant les documents | 30 |
 | `chain_etapes` | Etapes des chaines | 202 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 158 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 160 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 10892 |
+| `audit_log` | Journal des operations | 11121 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `web_pages` | Pages web (slug, titre, OG tags) | 13 |
-| `html_templates` | Templates CSS/JS par page + partagés | 41 (2 partagés) |
+| `web_pages` | Pages web (slug, titre, OG tags) | 14 |
+| `html_templates` | Templates CSS/JS par page + partagés | 44 (2 partagés) |
 | `concept_cards` | Fiches conceptuelles synthétiques | 146 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
@@ -54,7 +54,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | def_max_chars, def_min_chars, def_truncate_chars, max_age_hours_meta, min_bigram_chars, min_chars_contenu_fiche, min_chars_definition_terme, min_chars_refs_fiche, preview_chars_card, seuil_avancement_bas, seuil_avancement_haut, warn_docs_isoles, warn_terms_sans_def |
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
-| `cahier` | chapitres, onglets, tab_descriptions |
+| `cahier` | chapitres, chapter_fiches, onglets, tab_descriptions, tool_pages |
 | `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, cloture_pending_recap, fiche_docx_production, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
@@ -128,10 +128,12 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_dashboard.py` | docs | Génère le tableau de bord Claude/Sol Vivant. |
 | `gen_esclaves_calc.py` | docs | Generer Publications/web/esclaves_calculateur.html |
 | `gen_explorer.py` | docs | Génère la page Explorer DB statique |
+| `gen_fiches_index.py` | docs | Régénère recherches/fiches/INDEX.md depuis la DB. |
 | `gen_illustration_prompts.py` | docs | Export les prompts d'illustration depuis la DB. |
 | `gen_lifofer.py` | docs | Calculateur interactif LiFoFer |
 | `gen_mo_calc.py` | docs | Calculateur interactif Matière Organique |
 | `gen_readme.py` | docs | gen_readme.py v1.1 |
+| `gen_scripts.py` | docs | Génère Publications/web/scripts.html |
 | `gen_technique.py` | docs | Guide Technique (Publications/web/technique/index.html) |
 | `gen_tests_terrain.py` | docs | Genere Publications/web/tests_terrain.html |
 | `gen_transition_robuste.py` | docs | Genere Publications/web/transition_robuste.html |
