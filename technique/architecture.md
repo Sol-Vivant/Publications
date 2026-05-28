@@ -2,7 +2,7 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source de verite donnees. SQLite, 50 tables, 7 vues.
+Source de verite donnees. SQLite, 51 tables, 7 vues.
 
 ### Tables principales
 
@@ -11,15 +11,15 @@ Source de verite donnees. SQLite, 50 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 191 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 2559 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 18288 |
-| `chains_causales` | 30 chaines causales reliant les documents | 30 |
-| `chain_etapes` | Etapes des chaines | 202 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 2571 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 18451 |
+| `chains_causales` | 34 chaines causales reliant les documents | 34 |
+| `chain_etapes` | Etapes des chaines | 222 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
 | `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 160 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 11121 |
+| `audit_log` | Journal des operations | 11899 |
 
 ### Tables web et outils interactifs
 
@@ -27,7 +27,7 @@ Source de verite donnees. SQLite, 50 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
 | `html_templates` | Templates CSS/JS par page + partagés | 44 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 146 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 147 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -84,7 +84,6 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 |--------|--------|------|
 | `regen_all.py` | root | Régénère tous les outputs depuis la DB |
 | `analyse_fiches.py` | admin | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
-| `arbitrage_collisions_20260515.py` | admin | Arbitrage des 25 collisions syn↔fr post-audit 2026-05-15. |
 | `audit_anglicismes.py` | admin | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | admin | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | admin | Détection des canoniques FR qui sont en |
@@ -106,20 +105,15 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `export_termes_candidats.py` | admin | Export des termes candidats non insérés pour validation. |
 | `export_tools.py` | admin | Exporte les scripts depuis le filesystem (tools/lib/scripts_inventory.py) vers un ZIP versionné |
 | `fix_titres.py` | admin | » par « I. |
-| `insert_lacunes_lot2.py` | admin | Insertion en DB des 21 fiches a_faire du Lot 2 lacunes. |
-| `insert_lacunes_lot3.py` | admin | Insertion en DB des 8 fiches a_faire du Lot 3 lacunes. |
-| `integrate_doc_docx.py` | admin | Pipeline d'integration d'un document de strate (.docx) en DB. |
-| `integrate_fiche_docx.py` | admin | Pipeline d'intégration d'une fiche Jenni (.docx) dans la DB. |
-| `migrate_docx_index.py` | admin | Migration one-shot : renomme les docx archivés des |
 | `pedago_links_apply.py` | admin | Insère dans pedago_links les suggestions générées par |
 | `pedago_links_suggest.py` | admin | Suggestion de cards pédagogiques à lier aux fiches/docs |
 | `reintegrate_fiches_sections.py` | admin | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | admin | reconnecte les refs JSON de fiche_contenus.refs |
 | `resolve_sources_crossref.py` | admin | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
+| `resolve_term_relations.py` | admin | Résout les relations orphelines du thésaurus. |
 | `session_end.py` | admin | Rituel de clôture de session Claude Code web. |
 | `session_start.py` | admin | Dashboard de démarrage de session Claude Code |
 | `sync_syn_inrae.py` | admin | Enrichit syn_fr/syn_en du thésaurus corpus depuis INRAE. |
-| `triage_ris.py` | admin | Triage semi-automatique d'un export RIS. |
 | `analyse_corpus.py` | batch | Analyse modulaire du corpus  v4.1 |
 | `gen_archive.py` | docs | Génère une archive ZIP hors-ligne du site Sol Vivant. |
 | `gen_bq_page.py` | docs | page HTML cartographique simple des BQ. |
@@ -169,6 +163,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `config.py` | lib | Lecture centralisée de la table config. |
 | `db.py` | lib | Connexion DB standardisée. |
 | `docx_index.py` | lib | Source de vérité du mapping fiche ↔ docx archivé. |
+| `fiche_archive.py` | lib | archivage des fichiers sources post-intégration d'une fiche. |
 | `glossary.py` | lib | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | lib | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | lib | Fonctions partagées de formatage des prompts Jenni |
@@ -178,7 +173,6 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `repair_json.py` | lib | Robust JSON repair for truncated or fenced LLM output. |
 | `reports_inventory.py` | lib | Inventaire et lecture/ecriture des rapports filesystem. |
 | `scripts_inventory.py` | lib | Inventaire des scripts depuis le filesystem. |
-| `sources.py` | lib | gestion des sources bibliographiques du corpus. |
 | `term_rels.py` | lib | Helpers pour écrire dans `term_relations` (source de vérité |
 | `thesaurus_completion.py` | lib | Critère canonique de complétude du thésaurus. |
 | `web_template.py` | lib | Template HTML partagé pour les pages outils Sol Vivant. |

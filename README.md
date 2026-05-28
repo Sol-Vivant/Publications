@@ -14,11 +14,11 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **2559 termes** canoniques (français/anglais) — 85.3% documentés, 100.0% définis
-- **30 chaînes causales** et **0 renvois** inter-documents
-- **146 fiches conceptuelles** et **191 prompts** structurés
+- **2571 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **34 chaînes causales** et **0 renvois** inter-documents
+- **147 fiches conceptuelles** et **191 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **50 tables** SQLite, 101 scripts Python
+- **51 tables** SQLite, 95 scripts Python
 
 ### Les forces de cette architecture
 
@@ -44,12 +44,12 @@ Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie,
 Tools/
 ├── sol_vivant.db              Source de vérité données (SQLite)
 ├── tools/
-│   ├── admin/                  analyse_fiches, arbitrage_collisions_20260515, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, insert_lacunes_lot2, insert_lacunes_lot3, integrate_doc_docx, integrate_fiche_docx, migrate_docx_index, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, resolve_sources_crossref, session_end, session_start, sync_syn_inrae, triage_ris
+│   ├── admin/                  analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, resolve_sources_crossref, resolve_term_relations, session_end, session_start, sync_syn_inrae
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_completion, gen_prompt_enrichissement, gen_prompt_thesaurus, import_enrichissement, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, resolve_import_conflicts
-│   ├── lib/                    agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, docx_index, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, sources, term_rels, thesaurus_completion, web_template
-├── docx/                      Documents .docx et .ris
+│   ├── lib/                    agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, thesaurus_completion, web_template
+├── docx/                      Documents .docx (retours Jenni)
 ├── jmj/                       Documents de travail
 └── Publications/web/           Pages web (→ rsync vers dépôt Pages)
     ├── vendor/                Dépendances JS/CSS (hors-ligne)
