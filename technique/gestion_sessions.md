@@ -58,28 +58,12 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (15)** :
+**Règles actuellement en base (21)** :
 
-### `agent_runner_reflexe` — Rappel systematique : utiliser agent_runner plutot que spawning d agents un a un.
+### `agent_runner_reflexe` — N>5 items LLM independants -> pattern agent_runner.py 3 phases (jamais agent par agent)
 
 ```
-# Reflexe agent_runner — pour N items LLM independants
-
-Quand une tache repetitive porte sur N items independants (analyse de
-fiches, audit, attribution sources, validation RIS, extraction sources),
-**ne jamais lancer les agents Task un par un**. Utiliser le pattern
-`tools/lib/agent_runner.py` en 3 phases :
-
-  1. Script `--prepare` -> batches/<cid>.json + state.json + README
-  2. Claude Code lance les agents Task dans **un seul message**
-     (plusieurs Agent() calls en parallele) -> responses/<cid>.json
-  3. Script `--consolidate` -> ingere responses/ en DB ou artefact
-
-Declencheurs obligatoires : N > 5 items similaires, reprise souhaitable,
-resultat trop volumineux pour le contexte.
-
-Exemples : audit_opus, attribution, analyse_corpus, analyse_fiches.
-Doctrine complete : `bq_query.py --search "strategie_agents"` (BQ #132).
+Reflexe : des N>5 items LLM independants -> pattern `agent_runner.py` en 3 phases (--prepare -> agents Task en parallele dans un seul message -> --consolidate), jamais les agents un par un. Doctrine complete : BQ `strategie_agents` + `agent_runner_garde_fous` (fait foi).
 ```
 
 ### `agents_opus_default` — Toujours passer model='opus' aux Agent Task (jugement nuance)
@@ -113,24 +97,26 @@ grep simple) peuvent rester sur le default. Mais en cas de doute, opus.
 JMJ a explicitement demande Opus par defaut (2026-05-05).
 ```
 
-### `archivage_fiches` — Archivage auto docx + prompts post-intégration pour fiches
+### `archivage_fiches` — Archivage auto post-intégration (docx réponse + pendant recherches/) — factorisé sur 3 lanes : fiche, question/validation, thésaurus
 
 ```
-# Archivage automatique des fichiers sources post-intégration
+# Archivage automatique des fichiers sources post-intégration (toutes lanes)
 
-**Règle absolue** — dès qu'une fiche passe en statut `integre` ou `integre_partiel`, les fichiers sources associés DOIVENT être déplacés dans leurs dossiers `archives/` respectifs :
+**Règle absolue** — dès qu'un document de `docx/` (réponse Jenni) est INTÉGRÉ au corpus, il est déplacé dans `docx/archives/`, ET son **pendant** (le document envoyé à Jenni, dans `recherches/<lane>/`) dans `recherches/<lane>/archives/`. Sans ça, `docx/` et `recherches/` accumulent le traité — on ne distingue plus l'actif du fait.
 
-1. **Docx source (retour Jenni)** : `docx/<name>.docx` → `docx/archives/<name>.docx`
-2. **Prompts générés** : `recherches/fiches/prompt_fiche_*_<slug>_*.docx` → `recherches/fiches/archives/...`
+**Le principe couvre les 3 lanes d'intégration** :
 
-**Raison** : sans archivage automatique, `docx/` et `recherches/fiches/` accumulent les fichiers traités, on ne distingue plus ce qui est actif vs ce qui est fait. Obligation d'archiver en fin de session ce qui aurait dû l'être au fil de l'eau.
+| Lane | Script | Réponse (docx/) | Pendant envoyé (recherches/) | Helper |
+|---|---|---|---|---|
+| Fiche | `integrate_fiche.py` | `fiche_<id>.docx` | `recherches/fiches/fiche_<id>.docx` | `lib/fiche_archive.py::archive_fiche_files()` (nommage canonique + index docx + versions vN) |
+| Question / validation | `integrate_validation_refs.py` | `<réponse>.docx` | `recherches/questions/question_<topic>_*.docx` | `lib/doc_archive.py::archive_integrated_docx()` (pendant deviné par slug, ou `--question-docx`) |
+| Thésaurus | `import_termes_jenni.py` | `thesaurus_*.docx` | `recherches/thesaurus/<liste>.txt` (passer `--sent`) | `lib/doc_archive.py::archive_integrated_docx()` |
 
-**Implémentation** :
-- `tools/admin/integrate_fiche_docx.py::archive_fiche_files()` — appelée automatiquement à la fin de `apply_integration()` après `con.commit()`.
-- Idempotente (re-passe sans écrasement).
-- Journalisée dans `audit_log` (operation='ARCHIVE', table='files').
+**Helper factorisé** : `lib/doc_archive.py::archive_integrated_docx(response_docx, pendant_docx)` — déplace docx + pendant vers leurs `archives/` respectifs (idempotent, non bloquant, agnostique `.docx`/`.txt`, suffixe `_vN` si collision). Câblé à l'apply de chaque script, **après `con.commit()`**. La lane fiche garde son implémentation dédiée (`fiche_archive.py`) car elle porte une sémantique de versions ; les deux matérialisent le même principe.
 
-**Pour les scripts ad-hoc (intégrations en direct par Claude)** : TOUJOURS importer et appeler `archive_fiche_files(fiche, docx_path)` à la fin du script d'intégration. La règle s'applique à tous les pipelines, pas seulement au script canonique.
+**Git** : `shutil.move` + `git add -A` capture le rename (delete+add) — pas besoin de `git mv` dans les scripts (cf. réflexe `archive_git_mv` pour l'archivage à la main).
+
+**Scripts ad-hoc / intégration en direct** : importer `archive_integrated_docx` (ou `archive_fiche_files` pour une fiche) et l'appeler en fin de script. La règle s'applique à TOUS les pipelines, pas seulement au canonique.
 ```
 
 ### `archive_git_mv` — archive_git_mv
@@ -191,91 +177,62 @@ Si une carte/terme/fiche existante couvre le sujet (même partiellement), LA MOB
 Justification : règle instituée suite à la session 2026-04-11 (sol sableux) où Claude a proposé de créer 2 cartes existantes (Card #17 'Mode d'application' et terme 'ration du sol'), a manqué la contradiction pré-existante entre Card #11 et Card #17, et a traité 48 cartes 'archive' legacy comme si elles étaient 'active'. Le système concept_cards contient plus de matière qu'il n'en expose par défaut — le réflexe de vérification est la condition pour le rendre utilisable.
 ```
 
-### `audit_reflex` — audit_reflex
+### `audit_reflex` — Toutes les 3-5 sessions / avant gros consolide : triptyque check_integrity + thesaurus + corpus
 
 ```
-# Réflexe audit régulier — thésaurus + corpus + intégrité DB
-
-Toutes les 3-5 sessions, ou systématiquement avant un consolidé éditorial
-majeur (publication, revue, cycle d'envoi Jenni > 50 termes), lancer le
-triptyque d'audit :
-
-1. **`check_integrity.py`** — sanity check technique (FK, doublons schema)
-   → BQ #74 audit_integrite_db
-2. **Audit thésaurus** (passes T1/T2/B1/A1/M1) → BQ audit_thesaurus
-   → axes A (nouveaux candidats), B (incomplets), C (relations cassées),
-     D (doublons latents), E (méta-vocab), F (pseudoscience), G (anglicismes
-     en strate FR), H (couverture)
-3. **Audit corpus** (passes S1/S2/C1/C2/K1/K2/B1) → BQ audit_corpus
-   → axes C1-C3 (chaînes), K1-K4 (cards comme outil d'audit), F1-F4 (fiches)
-
-Déclencheurs immédiats :
-- Après import thésaurus massif → re-passe T2 + relations
-- Après intégration de fiche → mini-audit phase 4bis (BQ #147)
-- Après refonte d'une chaîne → C1 + C2 + K2
-- Avant publication / regen_all → check_integrity strict
-
-Pattern agent_runner obligatoire pour passes lourdes (T1, S1, K2) avec
-écriture progressive et split par strate (anti-timeout BQ #132 + #140).
-
-Sortie : rapports `jmj/rapports/audit/audit_{thesaurus,corpus}_<date>.md`
-+ section synthèse "actions priorisées (top 10)".
+Reflexe : toutes les 3-5 sessions ou avant un consolide editorial majeur -> triptyque d'audit `check_integrity` + audit thesaurus + audit corpus. Doctrine complete : BQ `audit_conscient` / `audit_thesaurus` / `audit_corpus` (fait foi).
 ```
 
-### `audit_status_lecture` — Doctrine de lecture des audits : status non-ok = suspect par défaut, ne pas dire « tout va bien »
+### `audit_status_lecture` — Lecture des audits : degraded = NON bloquant (1 ligne puis objectif de session) ; seul failed/missing/critique bloque ; jauges de préférence (anglicismes) ≠ casse, pas une urgence.
 
 ```
-# Lecture du status des audits — doctrine anti-rassurisme
+# Lecture du status des audits — anti-rassurisme ET anti-squat
 
-**Règle absolue** — un audit qui ne tourne pas ou qui est `degraded`/`failed`
-n'est PAS un succès. Le bon prior est « suspect tant que prouvé non-suspect ».
+**Deux pièges symétriques :**
+- *Rassurisme* — déclarer « tout va bien » alors qu'un audit est non-`ok`.
+- *Squat* — laisser un `degraded` détourner la session alors que JMJ a un autre
+  objectif. `degraded` n'est PAS bloquant (voir définitions).
 
-## Status à lire (audit_meta.py + session_start.py)
+## Status (audit_meta.py / session_start.py)
+- **`ok`** — toutes les assertions passent.
+- **`degraded`** — échecs important/souhaitable/info, **0 critique → NON BLOQUANT**.
+  Indique « peut-être à regarder un jour », pas une urgence.
+- **`failed`** — erreur d'exécution OU ≥1 assertion **critique → BLOQUANT**.
+- **`missing`** — pas de `_latest.json` → jamais tourné → bloquant.
+- **`stale`** — `ok` mais trop ancien → relancer.
 
-- **`ok`** : audit a tourné, toutes les assertions passent → OK
-- **`degraded`** : assertions important/souhaitable/info en échec, 0 critique →
-  signale qu'il y a quelque chose à regarder, même si ce n'est pas bloquant
-- **`failed`** : erreurs d'exécution OU au moins 1 assertion critique en échec
-  → bloquant, à corriger AVANT toute autre action métier
-- **`missing`** : pas de `_latest.json` du tout → l'audit n'a jamais tourné
-  ou il a été supprimé → bloquant équivalent
-- **`stale`** : audit `ok` mais trop ancien (au-delà de `--max-age-hours`) →
-  status `ok` non significatif, à relancer
+## Deux natures d'audit — ne pas confondre
+- **Audits d'intégrité** (FK, doc_code, méta-vocab, orphelins, doublons) :
+  un rouge = un **défaut réel** à corriger.
+- **Jauges de préférence / qualité** (ex. `audit_anglicismes` : le corpus
+  privilégie le français) : `degraded` est un **régime normal**, PAS une casse.
+  Un anglicisme résiduel ne « casse » rien — préférence éditoriale traitée au fil
+  de l'eau via Jenni. NE JAMAIS présenter une jauge `degraded` comme un problème
+  bloquant ou un corpus « cassé ».
+
+## Comportement au démarrage
+1. Lire ÉTAT DES AUDITS et **signaler en UNE phrase** tout non-`ok` (jamais
+   « tout va bien » : qualifier — « degraded sur audit_X »).
+2. Puis **faire l'OBJECTIF DE SESSION fixé par JMJ.** Sur un `degraded` : ne pas
+   enquêter, ne pas lire les rapports, ne pas proposer d'audit de sa propre
+   initiative. Traiter les audits UNIQUEMENT si JMJ en fait la demande explicite.
+3. **Seul `failed`/`missing`/critique** prend le pas sur le travail métier.
+
+## Quand Claude audite (sur demande)
+- Lire le **JSON** (`audit_reports/json/<script>_latest.json`), pas la sortie
+  texte (tronquée/trompeuse).
+- *Défaut corpus* vs *outil trop strict/cassé* : trancher avant de « corriger ».
+- Script qui plante : ne pas silencier → `errors[]` (AuditReport), status `failed`.
 
 ## Anti-pattern silence-fail
+`enrich_thesaurus.py --audit` plantait silencieusement (migration `terms.bt`
+v1→v2) ; des sessions ont déclaré le BT « réglé » sans voir l'outil cassé. Motive
+`tools/lib/audit_report.py`.
 
-Avant Phase D, `enrich_thesaurus.py --audit` plantait silencieusement
-depuis la migration `terms.bt` v1→v2. Les sessions précédentes ont
-déclaré le BT « réglé » via d'autres canaux sans s'apercevoir que
-l'outil de monitoring lui-même était cassé. Cas concret de silence-fail
-qui motive l'introduction du module `tools/lib/audit_report.py`.
-
-## Comportement attendu de Claude
-
-- À chaque démarrage de session, **lire la section ÉTAT DES AUDITS** du
-  dashboard `session_start.py`. Si `degraded`/`failed`/`missing`/`stale`,
-  signaler explicitement à JMJ AVANT d'attaquer le travail métier.
-- Ne **jamais** dire « tout va bien » si un audit est non-`ok`. Toujours
-  qualifier : « degraded sur audit_X, voici les assertions en échec : ... ».
-- Si Claude exécute un audit lui-même pendant une session, **lire le
-  rapport JSON** produit (`audit_reports/json/<script>_latest.json`),
-  pas seulement la sortie texte (qui peut être tronquée ou trompeuse).
-- Si un script d'audit plante, ne pas le silencier — capturer dans
-  `errors[]` via le module `audit_report.AuditReport` (pattern context
-  manager ou try/except explicite) et faire passer le status à `failed`.
-
-## Pipeline canonique
-
-```
-tools/lib/audit_report.py      # module pivot (AuditReport)
-tools/admin/check_integrity.py # premier pilote refactoré
-tools/admin/audit_meta.py      # méta-audit (lit tous les _latest.json)
-session_start.py               # affiche ÉTAT DES AUDITS
-```
-
-Audits attendus (cf. `EXPECTED_AUDITS` dans `audit_meta.py`) :
-- check_integrity, check_forbidden_jenni, audit_sources_orphelines,
-  audit_anglicismes, audit_fiches, enrich_thesaurus_audit, audit_opus
+## Pipeline
+`audit_report.py` · `check_integrity.py` · `audit_meta.py` · `session_start.py`.
+Attendus : check_integrity, check_forbidden_jenni, audit_sources_orphelines,
+audit_anglicismes, audit_fiches, enrich_thesaurus_audit, audit_opus.
 ```
 
 ### `bq_access` — Doctrine d'accès à la Bibliothèque de Connaissances — recherche au fil de l'eau
@@ -355,38 +312,51 @@ d'attention en fin de session, skip silencieux trompeur.
   5. Commit des regenerations + push
 
 Voir BQ #119 (cle session) pour le format complet du pending recap.
+
+## Synthèse réflexive — bloc OBLIGATOIRE du recap (2026-06-01)
+
+Le body du recap inclut TOUJOURS une synthèse réflexive en 4 sections :
+- Frictions (ou Claude s'est trompe pendant la session + cause)
+- Anomalies (incoherences du corpus revelees)
+- Ce que j'ai compris (doctrine internalisee, mots propres)
+- Reflexes (a faire differemment la prochaine fois)
+
+But : capitaliser sur les frictions pour ne pas les reproduire.
+Modele : jmj/rapports/synthese/synthese_session_2026-06-01_frictions_apprentissages.md
 ```
 
-### `fiche_docx_production` — Regles de production du .docx pour fiches (evite repetitions session apres session)
+### `environnement_web` — Env web : sqlite3 CLI absent -> python3 / bq_query.py (jamais sqlite3 shell)
 
 ```
-Production docx fiches -- regles anti-derive :
+Conteneur ephemere ; `requirements.txt` pas joue d'office -> `pip install -r requirements.txt` si un import manque. Seul piege env VERIFIE : le binaire `sqlite3` CLI est absent -> requetes DB via le module python / `bq_query.py`, jamais `sqlite3 db "..."`. Doctrine : BQ `environnement_pas_de_binaire_sqlite3_utiliser_pyth`. (Le "masquage de python-docx par le dossier docx/" est un faux probleme, verifie 2026-05-31.)
+```
 
-0. JENNI NE SAIT RIEN DE L'ORGANISATION DU CORPUS -- le docx est un document autonome.
-   ZERO meta-vocab : pas de fiche #N, card #N, chaine C1, corpus, strate, thesaurus, sol_vivant, codes docs (S2, V1...).
-   Ces renvois restent dans fiches.notes (brief editorial), jamais dans le docx.
-   Scan regex obligatoire avant commit : check_forbidden_jenni.py ou regex manuelle.
+### `fiche_docx_production` — Docx fiches : zero meta-vocab, structure plate H1 (pas de H2 impose), graines ~600 chars, 5-8k total
 
-1. PLAN H1+H2 OBLIGATOIRES dans fiche_sections avant generation.
-   Un brief avec seulement H1 --> Jenni invente H3/H4 --> violations gate HEADING_LEVEL.
-   Lister explicitement les H2 prevus dans chaque section.
-   H3 = details internes Jenni (libres mais limites). H4 = jamais.
+```
+Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1, pas de H2 impose), graines ~600 chars/section, 5-8k chars total, amorces en texte normal. Doctrine complete : BQ `wf_fiche_production` (fait foi).
+```
 
-2. GRAINES ~600 chars/section (100-150 mots) -- pas de prose finie.
-   Contenu : angle + 2-3 mecanismes clefs + termes canoniques (terms.fr exact) + perimetre.
-   Pas de citations APA inline, pas de bloc References pre-pose, pas de placeholders [a completer].
-   Volume cible docx total : 5-8k chars. Modele : fiche #37 agroforesterie-temperee-fonctions-sol.
+### `fichiers_jmj_sur_github` — Fichiers poussés par JMJ = sur origin (GitHub), JAMAIS dans le conteneur local. Réflexe : git fetch origin + inspecter origin/main (git log/diff), pas de recherche locale d'abord.
 
-3. AUCUNE consigne dans le docx -- pas de 'Jenni redige...', pas de '[a completer]'.
-4. AMORCES EN TEXTE NORMAL (pas d'italique gris).
-5. ACCENTS francais corrects partout.
-6. TERMES CANONIQUES dans le texte avec EN entre parentheses a la 1re mention. Pas de tableau final.
-7. TITLE court sans accent (Jenni l'utilise comme nom de fichier).
-8. PAS DE DECORATION ASCII (---, ===, banderoles).
-9. SECTIONS BODY EN H1 NUMEROTEES (1., 2., ...). Introduction et Resume sans numero.
-   Numerotion portee par les titres DB (fiche_sections.titre), pas ajoutee par le script.
+```
+## Les fichiers poussés par JMJ sont sur GitHub, pas en local
 
-Voir BQ wf_fiche_production (#130) pour le workflow complet.
+JMJ développe sur sa machine et **pousse sur le remote** (origin / GitHub). Il **ne peut pas** déposer un fichier dans le conteneur éphémère de Claude. Donc tout fichier qu'il annonce (« j'ai poussé le docx / la liste / le retour Jenni… ») est un **commit sur origin**, le plus souvent sur `origin/main`.
+
+**Réflexe obligatoire** : `git fetch origin` puis inspecter `origin/main` (`git log --oneline origin/main`, `git diff --stat <base>..origin/main`) — ou relancer `session_start.py` qui resynchronise `main` sur `origin/main`. **Ne jamais** chercher d'abord dans le filesystem local du conteneur, ni conclure « fichier introuvable » sans avoir fetché origin au préalable.
+```
+
+### `integration_reponse_sourcage` — Intégration d'une réponse de sourçage Jenni (refs -> corpus, pendant de l'intégration fiche). Cf. BQ #160.
+
+```
+Réponse Jenni à une question/validation de SOURÇAGE (docx prose + biblio en fin) -> NE PAS utiliser integrate_source.py (1 source) ni intégrer à la main. Pipeline dédié : tools/jenni/integrate_validation_refs.py --validation <slug> --docx docx/<reponse>.docx (dry-run, puis --apply) : extrait les refs, dédup contre jenni_sources, rattache aux prompts_cibles de la validation, clôt la validation (integre). PUIS conscient : harmoniser les valeurs SI le doc cible a du contenu rédigé ; sinon (graines) c'est un pré-sourçage = rien à harmoniser. Format Jenni : biblio toujours en fin (JenniRefBody), citations inline (Auteur, Année) en hyperliens dummy-citation à nettoyer (parse_docx gère). Doctrine complète : BQ #160 integration_reponse_sourcage_refs.
+```
+
+### `metaanalyse_croise_sourcages` — Méta-analyse fiche : croiser les mécanismes des réponses de sourçage (volet H audit croisé) — ne pas perdre la matière non captée en DB
+
+```
+Méta-analyse d'intégration de fiche (audit croisé) -> VOLET H obligatoire : croiser les MÉCANISMES décrits dans les réponses aux questions de sourçage (validations statut=integre). Depuis 2026-06-02, integrate_validation_refs CAPTE la prose-réponse dans validation_contenus.contenu_brut (requêtable) : SELECT contenu_brut FROM validation_contenus WHERE validation_id IN (...). Exception : les sourçages intégrés AVANT le correctif (faune #15) n'ont que les refs en DB -> prose dans docx/archives/QS-*.docx + validation_sections. Action volet H : (1) recenser les sourçages intégrés recoupant la fiche ; (2) croiser explicitement les mécanismes (lien réel, sinon le noter) ; (3) signaler les croisements À VENIR (sourçages en_cours que la fiche nourrira). Demande JMJ 2026-06-02 : « il serait dommage de perdre cette matière ». Doctrine : BQ wf_fiche_integration volet H.
 ```
 
 ### `parser_docx_omath` — Parseur docx doit extraire oMath (formules chimiques Jenni)
@@ -416,136 +386,103 @@ WHERE definition GLOB '*(*)*'
 Si résultats non vides → parseur défaillant ou bug Jenni.
 ```
 
-### `pas_agent_redacteur` — Pas d'agents redacteurs - rediction c'est JMJ/Claude/Jenni uniquement
+### `pas_agent_redacteur` — Redaction editoriale du corpus = JMJ + Claude (sur demande directe) + Jenni UNIQUEMENT
 
 ```
-# Pas d'agents rédacteurs — la rédaction c'est JMJ + Claude + Jenni
-
-**Règle absolue** — la rédaction de contenu éditorial du corpus est STRICTEMENT limitée à :
-- **Jenni** (workflow docx : prompt → Jenni rédige → retour docx → import contrôlé)
-- **JMJ** (directement)
-- **Claude** (moi) SEULEMENT quand JMJ me le demande explicitement en direct
-
-**Sont interdits** :
-- Lancer un agent Task pour rédiger définitions, synonymes, contenus de fiches, contenus de prompts, descriptions de concept_cards, contenus BQ ou tout autre contenu éditorial du corpus
-- Demander à un agent de "produire des définitions courtes", "rédiger une synthèse", "écrire une amorce"
-- Inventer des définitions ou contenus sans base docx/prompt Jenni ou indication explicite de JMJ
-
-**Sont autorisés pour les agents Task** :
-- Classification, extraction, analyse (ex: normaliser la casse, détecter des orphelins, trier des termes)
-- Recherche dans le code ou la DB
-- Parsing/formatage de données existantes
-- Audit/comparaison
-
-**Workflow correct pour créer un terme** :
-1. Identifier le besoin (ex: hyperonyme manquant, terme orphelin à raccrocher)
-2. Écrire le nom du terme dans une liste à passer par Jenni
-3. Exporter via `export_thesaurus_incomplets.py` ou `gen_prompt_thesaurus.py`
-4. Jenni rédige la définition
-5. Réimport via `import_termes_jenni.py --replace`
-
-**Justification** : JMJ passe des heures à faire rédiger Jenni avec soin. Toute définition Claude-made sabote ce travail et pollue le thésaurus avec du contenu non validé. Violation détectée 2026-04-20 (14 termes créés avec def Claude en commit af35413 — supprimés et à refaire via Jenni).
+Reflexe : la redaction editoriale (definitions, synonymes, fiches, cards, amorces) = JMJ + Claude (sur demande explicite) + Jenni. Agents Task INTERDITS pour rediger ; autorises pour classer/extraire/auditer. Doctrine complete : BQ `pas_agent_redacteur` (fait foi).
 ```
 
-### `pas_modif_fr_canonique` — Ne pas modifier automatiquement le fr canonique (cycle Jenni)
+### `pas_modif_fr_canonique` — Ne JAMAIS modifier le fr canonique d'un terme (cle d'aller-retour Jenni)
 
 ```
-# Ne pas modifier le libelle fr canonique d'un terme (regle absolue)
-
-Le champ `terms.fr` est la CLE editoriale qui fait l'aller-retour avec Jenni.
-Toute modification automatique (casse, ponctuation, espaces) cree un cycle vicieux :
-
-1. Export : Jenni recoit la version modifiee
-2. Retour Jenni : docx a la version modifiee (Jenni recopie verbatim)
-3. Reimport : DB reste avec la version modifiee
-4. Perte definitive de la forme d'origine
-
-**INTERDIT** :
-- Scripts de normalisation automatique de casse/ponctuation sur le `fr`
-- Agents Task qui DECIDENT d'un changement de libelle (classification OK, modification NON)
-- Regles typographiques abstraites (francais, ISO) appliquees au `fr` existant
-
-**AUTORISE** :
-- Modifications ciblees d'UN terme apres validation explicite JMJ
-- Normalisations dans les champs secondaires (definition, syn_*, bt, rt)
-- Parser math-aware pour preserver les formules OMML
-
-**Incident 2026-04-20** : Chantier A (commit 5970137) avait baisse la Maj
-initiale de 216 termes (Antifragilite, Biofilms, Bioturbation...). Corrige
-commit 86408df. Cette erreur NE DOIT JAMAIS se reproduire.
-
-Voir BQ #138 (claude/pas_modif_fr_canonique) pour les details.
+Reflexe : `terms.fr` est la cle editoriale d'aller-retour Jenni -> aucune normalisation auto (casse, ponctuation, espaces). BT/NT/RT -> `term_relations`, jamais en colonnes `terms`. Doctrine complete : BQ `pas_modif_fr_canonique` (fait foi).
 ```
 
-### `pratiques_typees_hors_jenni` — pratiques_typees_hors_jenni
+### `pratiques_typees_hors_jenni` — Pratiques typees (KNF/JADAM/EM/LiFoFer) hors-perimetre Jenni - angle mecanisme
 
 ```
-# Pratiques naturelles typees hors-perimetre Jenni (BQ #158)
-
-Le corpus documente des **mecanismes scientifiques generiques**, pas des **recettes praticiennes**.
-
-## Liste pratiques typees (hors-Jenni)
-
-- KNF (Cho Han Kyu) : IMO, FAA, FPJ, FFJ, OHN, BRV, LAB, WCA, WCP, BIO-9, SA-N
-- JADAM (Cho Youngsang) : JMS, JLF, JNP
-- EM-Higa / Bokashi
-- LiFoFer (Lithuanian Forest Fermentation)
-- Ferments traditionnels (kefir, kimchi, choucroute, ensilage)
-- Biofertilisants paysans sud-americains
-
-## Workflow obligatoire
-
-- Sources : PDFs jmj/pdf/ (Cho Han Kyu, Cho Youngsang, manuels praticiens)
-- Redaction : JMJ ou Claude (extraction PDF) - JAMAIS Jenni
-- Angle : MECANISME generique > recette typee
-  - Ex. fiche "Fermentation lactique" qui mentionne KNF-LAB, LiFoFer, kefir comme instances
-  - Pas de fiche "LAB-KNF" ni "JMS"
-- Acronymes-recettes : en clair dans cards/fiches, pas indexes au thesaurus
-
-## Garde-fous techniques
-
-- Table terms : flag_pratique_typee=1 exclut des exports Jenni
-  (enrich_thesaurus.py, gen_prompt_completion.py, export_thesaurus_incomplets.py)
-- Gate integration (integrate_fiche.py) :
-  - PSEUDOSCIENCE (biodynamie/anthroposophie/BD500-507) = violation CRITIQUE
-    non bypassable meme avec --partial -> JMJ rejette ou reedite
-  - RECETTE_TYPEE (FAA/FPJ/JMS/JLF/OHN/BRV/WCA/WCP/BIO-9/JADAM/KNF) = warning
-    -> JMJ arbitre (mention contextualisee OK, sinon reediter)
-  - STEINER_MENTION (Steiner hors Steinernema) = warning -> JMJ arbitre
-
-## Mode degrade existant
-
-Les fiches DIY actuelles integrees AVANT cette doctrine restent en l'etat.
-A revoir lors d'une session dediee a partir des documents officiels :
-- KNF : KNF - chos-global-natural-farming-sarra.pdf, KNF - Dr Hoon Park III - IMO.pdf
-- JADAM : youngsang-cho-jadam-organic-farming-2016-1.pdf
-- LiFoFer : guide-lff-2018.pdf, Lifofer_10.12.2024_Rezomes(5).pdf
-- EM/Bokashi : Agriton EM Fermentation, Bokashi 3 years, em-cuba.pdf
+Reflexe : les pratiques typees (KNF, JADAM, EM/Bokashi, LiFoFer) sont hors-perimetre Jenni -> redaction JMJ/Claude depuis PDF, angle MECANISME generique > recette ; `flag_pratique_typee=1` exclut des exports. Doctrine complete : BQ `pratiques_typees_hors_jenni` (fait foi).
 ```
 
-### `redaction_documents_jenni` — redaction_documents_jenni
+### `redaction_documents_jenni` — Doctrine UNIQUE de toute rédaction Jenni (#146) — À ACTIVER avant de produire tout doc Jenni (fiche, graine, validation, question) ; produire depuis la doctrine, jamais copier un output
 
 ```
 Un seul texte de référence pour TOUTE rédaction destinée à Jenni,
-valable pour tous les types de documents (prompt strate, fiche, validation,
-thésaurus, docx de reprise). Consulter BQ #146 « Règles de rédaction des
-documents Jenni — référence unique ».
+valable pour tous les types de documents (prompt strate, fiche, graine,
+validation, thésaurus, question de sourçage, docx de reprise).
+Référence complète : BQ #146 « Règles de rédaction des documents Jenni ».
 
-12 règles couvertes :
+═══ ACTIVATION OBLIGATOIRE ═══
+Claude LIT et APPLIQUE cette doctrine AVANT de produire ou éditer le moindre
+document destiné à Jenni. Déclencheurs :
+  • fiche / graine (gen_fiche_docx)
+  • validation / renforcement / comblement
+  • question de sourçage (docx chargeable dans Jenni → recherches/questions/)
+  • prompt de strate, liste thésaurus, docx de reprise
+Produire DEPUIS la doctrine — JAMAIS rétro-concevoir le format en imitant un
+output déjà produit (un artefact n'est pas la doctrine ; au mieux un masque).
+
+12 règles (BQ #146) :
   1. Le document = le document lui-même (pas de métaphrases, pas de [à compléter])
-  2. La proposition = état du corpus à l'instant t (prose continue, pas d'italique brouillon)
-  3. Contenu issu du corpus uniquement (pas de sources externes non sourcées)
-  4. **Zéro méta-vocab** (pas de card/fiche/chaîne/doc X, pas de corpus/strate/thésaurus)
-  5. Structure Word native (Title + H1/H2/H3 max, pas de décoration ASCII)
-  6. Termes canoniques intégrés dans le texte (pas en liste séparée)
-  7. Citations APA inline + biblio DOI/URL (format Google Doc cross-refs)
+  2. Proposition = état du corpus à l'instant t (prose continue)
+  3. Contenu issu du corpus uniquement
+  4. ZÉRO méta-vocab (pas de card/fiche/chaîne/doc X, pas de corpus/strate/thésaurus)
+  5. Structure Word native (Title + H1/H2/H3 max, pas de déco ASCII)
+  6. Termes canoniques INTÉGRÉS dans le texte (jamais en liste séparée)
+  7. Citations APA inline + biblio DOI/URL
   8. Bloc de 10 max pour listes d'items
-  9. Listes triées `lower(fr)`
+  9. Listes triées lower(fr)
   10. Pas de conseils rédactionnels redondants
-  11. Refs et sources — cadre de vérification (pas d'invention)
+  11. Refs et sources = cadre de vérification (pas d'invention)
   12. Cycle itératif Claude → Jenni → JMJ (proposition, pas vérité finale)
 
-Vérif avant tout commit : scan regex FORBIDDEN (cf. règle #4 dans la BQ).
+Vérif AVANT tout commit : scan regex FORBIDDEN (règle #4). Le hook pre-commit
+check_forbidden_jenni.py est le filet automatique.
+
+Justification (session 2026-06-02) : pour sourcer la faune du sol, Claude a
+enchaîné 3 formats faux (md ad hoc plein de méta-vocab → .txt validation
+surchargé avec dump de termes → copie de l'output question_carbone) avant de
+lire cette doctrine. Cause racine : doctrine non activée au moment de produire.
+D'où ce déclencheur.
+```
+
+### `wal_checkpoint` — DB en mode WAL : PRAGMA wal_checkpoint(TRUNCATE) AVANT chaque git add sol_vivant.db (sinon perte silencieuse au reset)
+
+```
+sol_vivant.db est en mode WAL (propriete persistante du fichier, pas du code). Une ecriture peut rester dans sol_vivant.db-wal, INVISIBLE de git : le fichier .db principal reste byte-identique a HEAD (git add committe une DB perimee), puis l'ecriture est PERDUE au prochain session_start (reset --hard). Cause racine PROBABLE du symptome historique 'le travail de Claude n'est jamais le meme d'une session a l'autre' (bug 68a36486, 2026-06-02 : session_end lui-meme en a ete victime). Parade : PRAGMA wal_checkpoint(TRUNCATE) AVANT chaque git add sol_vivant.db (flushe puis vide le -wal). session_end.py le fait a l'etape 5 ; pour un commit manuel en cours de session, checkpoint d'abord. Verif : `ls -la sol_vivant.db-wal` a 0 octet.
+```
+
+### `web_nav_ancres` — Deep-link #card-N/#fiche-N : émetteur (CardLink/refs/pedago_links) ET cible (lecture hash + ouverture conteneur + scrollIntoView + scrollMarginTop)
+
+```
+Navigation par ancres entre/dans les pages web — convention #card-N / #fiche-N.
+
+PRINCIPE : toute entité du corpus exposée sur le site est adressable par une ancre
+URL stable — concept_cards.html#card-<id>, cahier.html#fiche-<id>. Vaut pour les
+liens INTER-pages (depuis une fiche/doc) ET INTRA-page (carte->carte).
+
+CÔTÉ ÉMETTEUR (le lien) :
+- SvRichText reconnaît « Card #N » / « Card "titre" » -> onCardRef, et « fiche N »
+  -> lien cahier.html#fiche-N. CardLink (SvConceptCardList) route par le hash : donc
+  toujours cliquable, même inter-dimensions (fini le texte gris mort hors-pool).
+- Réutiliser pedago_links (entity<->card, générique fiche/doc/regle/terme/matiere)
+  pour les blocs de liens. JAMAIS de table de relation dédiée : pedago_links existe.
+
+CÔTÉ CIBLE (l'atterrissage) — SANS quoi le lien arrive MORT :
+- La page DOIT lire window.location.hash au mount ET sur 'hashchange' (useEffect +
+  addEventListener), OUVRIR le conteneur replié (dimension repliée / onglet / groupe
+  de type) PUIS scrollIntoView après un petit setTimeout (le noeud React n'existe
+  qu'une fois le conteneur ouvert).
+- L'ancre porte id={'card-'+id} / id={'fiche-'+id} + style scrollMarginTop:'5rem'
+  (le header collant ne doit pas masquer la cible).
+- Neutraliser filtres/recherche actifs à l'arrivée par hash (sinon cible filtrée donc
+  cachée).
+
+PIÈGE VÉCU (2026-06-03) : la fonctionnalité existait à MOITIÉ — émetteurs câblés
+(onCardRef cahier, blocs « Pour aller plus loin », 203 liens pedago vers #card-N)
+mais concept_cards.html ne lisait jamais le hash -> tout arrivait mort, et 257/432
+related_to inter-dimensions étaient non-cliquables. Toujours vérifier les DEUX côtés
+(émetteur ET cible) d'un deep-link.
 ```
 
 ## Bibliothèque de Connaissances (BQ)
@@ -589,9 +526,6 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 ```bash
 # Démarrer une session
 python3 tools/admin/session_start.py --db sol_vivant.db
-
-# Regénérer CLAUDE.md depuis la DB
-python3 tools/admin/session_start.py --db sol_vivant.db --claude-md
 
 # Chercher dans la BQ
 python3 tools/admin/bq_query.py --db sol_vivant.db --search "<terme>"
