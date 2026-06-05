@@ -11,15 +11,15 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 192 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3205 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 21871 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3302 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 22571 |
 | `chains_causales` | 36 chaines causales reliant les documents | 36 |
 | `chain_etapes` | Etapes des chaines | 235 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 171 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 172 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 14103 |
+| `audit_log` | Journal des operations | 15828 |
 
 ### Tables web et outils interactifs
 
@@ -27,7 +27,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
 | `html_templates` | Templates CSS/JS par page + partagés | 44 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 153 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 167 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -75,6 +75,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `strates` | couleurs, couleurs_cascade, couleurs_light, descriptions, noms, ordre |
 | `technique` | chapitres |
 | `tests_terrain` | tab_intros |
+| `thesaurus` | def_enrich_min_chars |
 | `transition_robuste` | tab_intros |
 | `triangle` | comprendre, sections_didactiques, tab_intros, test_bocal, test_boudin |
 | `veille` | efetch_batch_size, hot_topics, scholar_alerts, throttle_sec, urlopen_timeout_s |
@@ -96,6 +97,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `audit_opus.py` | admin | Audit approfondi du corpus via agents Task Claude Code |
 | `audit_repartition.py` | admin | Audit de répartition par strate. |
 | `audit_sources_orphelines.py` | admin | Audit des sources sans DOI ni URL avec |
+| `audit_thesaurus.py` | admin | Rapport d'audit consolidé du thésaurus (axes A→H, doctrine BQ #155). |
 | `backfill_biblio.py` | admin | consolidation jenni_sources depuis docx + prompts. |
 | `bq_query.py` | admin | Consultation BQ on-demand (filesystem) |
 | `check_forbidden_jenni.py` | admin | Scan méta-vocab interdit dans tout contenu destiné à Jenni. |
@@ -139,7 +141,6 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `gen_triangle_textures.py` | docs | gen_triangle_textures.py v2.0 |
 | `gen_web.py` | docs | Cartographie React interactive (consultation publique web) |
 | `gen_workflows.py` | docs | Génère un fichier MD de workflow par domaine technique. |
-| `gen_ebauches_web.py` | docs/archives | Génère la page web de consultation des ébauches. |
 | `edit_fiche_note.py` | jenni | Édition chirurgicale des notes H2 de fiches. |
 | `enrich_thesaurus.py` | jenni | Pipeline unifie d'enrichissement du thesaurus. |
 | `export_fiche.py` | jenni | Génération des prompts de fiches depuis fiche_sections |
@@ -147,10 +148,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `export_thesaurus_incomplets.py` | jenni | Génère des docx Jenni pour termes incomplets. |
 | `export_validation.py` | jenni | Génération des prompts de validations depuis validation_sections |
 | `gen_fiche_docx.py` | jenni | Genere le .docx d'une fiche au format "document dans son etat courant". |
-| `gen_prompt_completion.py` | jenni | [DÉPRÉCIÉ 2026-04-14] |
-| `gen_prompt_enrichissement.py` | jenni | Génère un prompt Jenni d'enrichissement du thésaurus |
 | `gen_prompt_thesaurus.py` | jenni | Document de travail Jenni UNIFIÉ par strate |
-| `import_enrichissement.py` | jenni | Import semi-automatique des réponses Jenni |
 | `import_termes_jenni.py` | jenni | Import des listes de termes Jenni avec contrôle strict. |
 | `integrate_fiche.py` | jenni | Pipeline unifie d'integration d'une fiche Jenni. |
 | `integrate_fiche_refs.py` | jenni | Intégration des refs biblio d'une fiche intégrée dans jenni_sources + source_usages. |
@@ -158,7 +156,6 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `integrate_validation_refs.py` | jenni | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
 | `refresh_retour_text.py` | jenni | répare CHIRURGICALEMENT le texte des sections de |
 | `resolve_import_conflicts.py` | jenni | Résout les blocs Jenni bloqués par multiples matches. |
-| `gen_doc_ebauche.py` | jenni/archives | Génère un .docx d'ébauche pour un document de strate. |
 | `agent_guards.py` | lib | Garde-fous pour scripts agent_runner. |
 | `agent_runner.py` | lib | Pattern « préparateur → agents Task → consolidateur » |
 | `audit_persist.py` | lib | Persistance des rapports d'audit sur filesystem. |

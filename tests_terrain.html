@@ -241,7 +241,7 @@ body {
 .sv-header {
   background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
   color: #fff;
-  padding: 1.5rem 1.25rem;
+  padding: 0.7rem 1.25rem;
   box-shadow: 0 2px 20px rgba(37,99,235,0.12);
 }
 .sv-header .sv-corpus-link {
@@ -824,6 +824,72 @@ select.sv-input { color-scheme: light dark; }
   .sv-sidebar { width: 100%; position: static; height: auto; max-height: 350px; }
 }
 
+/* ── Modèle liste-détail : liste de navigation sélectionnable (master-detail) ──
+   À placer dans une colonne .sv-sidebar (cadre) ; pilote un panneau de lecture
+   .sv-main séparé. Items compacts ≤ 2 lignes (doctrine UI #152), interligne
+   resserré. Cf. composant React SvNavList. */
+.sv-navlist { display: flex; flex-direction: column; gap: 2px; }
+.sv-navlist-label {
+  font-size: var(--font-2xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+  padding: 0 0.25rem;
+}
+.sv-navlist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0.3rem 0.5rem 0.3rem 0.35rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.sv-navlist-item:hover { background: var(--color-bg-subtle); }
+.sv-navlist-item.active {
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-color: var(--border);
+}
+.sv-navlist-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.sv-navlist-code {
+  font-size: var(--font-2xs);
+  font-weight: 700;
+  font-family: monospace;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 4ch;
+  text-align: left;
+}
+.sv-navlist-item.active .sv-navlist-code { color: var(--accent); }
+.sv-navlist-main { flex: 1; min-width: 0; }
+.sv-navlist-title {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sv-navlist-item.has-sub .sv-navlist-title { -webkit-line-clamp: 1; }
+.sv-navlist-item.active .sv-navlist-title { font-weight: 600; }
+.sv-navlist-sub {
+  font-size: var(--font-xs);
+  color: var(--color-text-muted);
+  line-height: 1.2;
+  margin-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sv-navlist-meta { font-size: var(--font-xs); color: var(--color-text-muted); flex-shrink: 0; margin-top: 2px; }
+.sv-navlist-empty { font-size: var(--font-sm); color: var(--color-text-muted); font-style: italic; padding: 0.5rem; }
+
 /* ── Zone de contenu d'onglet (pleine largeur uniforme) ── */
 .sv-tab-content {
   padding: 0 0 1rem;
@@ -1336,6 +1402,24 @@ select.sv-input { color-scheme: light dark; }
   font-weight: 500;
   font-size: 0.95em;
 }
+.sv-code {
+  background: var(--color-bg-muted, #f4f4f3);
+  border: 1px solid var(--color-border, #e2e0dd);
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  margin: 0.6rem 0 0.85rem 1rem;
+  overflow-x: auto;
+}
+
+.sv-code code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: var(--font-2xs, 0.8rem);
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre;
+  display: block;
+}
+
 .sv-emphasis {
   font-weight: 700;
   color: var(--text);
@@ -1454,9 +1538,11 @@ select.sv-input { color-scheme: light dark; }
 .sv-richtext p.sv-prose {
   font-size: var(--font-sm);
   color: var(--text);
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.5rem;
   padding-left: 1rem;
 }
+.sv-richtext > p:last-child,
+.sv-richtext > *:last-child > p:last-child { margin-bottom: 0; }
 .sv-richtext .sv-section-label {
   font-size: var(--font-2xs);
   margin-bottom: 0.35rem;
@@ -1475,8 +1561,8 @@ select.sv-input { color-scheme: light dark; }
 }
 .sv-richtext .sv-section-title.sv-section-title-h3 {
   padding-left: 0.25rem;
-  margin-top: 1.25rem;
-  margin-bottom: 0.35rem;
+  margin-top: 0.9rem;
+  margin-bottom: 0.3rem;
 }
 
 /* ── Bloc de section unifié (SvSection) ── */
@@ -1487,7 +1573,7 @@ select.sv-input { color-scheme: light dark; }
   margin-top: 2rem;
 }
 .sv-section-title {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.45rem;
   color: var(--text);
   font-weight: 700;
   line-height: 1.25;
@@ -1566,9 +1652,13 @@ select.sv-input { color-scheme: light dark; }
 .sv-sections-nav-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   padding: 5px 0;
 }
+/* Lignes de niveau racine (H1) : Introduction/Conclusion, chapitres, sections
+   principales — repère structurel en gras, numéro plus marqué. */
+.sv-sections-nav-row-h1 .sv-sections-nav-title { font-weight: 600; }
+.sv-sections-nav-row-h1 .sv-sections-nav-num { color: var(--text); }
 .sv-sections-nav-row-expandable { cursor: pointer; }
 .sv-sections-nav-row-expandable:hover .sv-sections-nav-title { color: var(--accent); }
 .sv-sections-nav-dot {
@@ -1577,12 +1667,13 @@ select.sv-input { color-scheme: light dark; }
   border-radius: 50%;
   flex-shrink: 0;
 }
+/* Numéro à largeur de contenu (pas de min-width) : l'écart numéro↔titre reste
+   le gap constant de la ligne (~2 espaces), identique quel que soit le niveau
+   (« 1 », « 1.1 », « 10.2 ») et identique entre fiches et documents. */
 .sv-sections-nav-num {
   font-size: var(--font-xs);
   color: var(--color-text-muted);
   font-family: monospace;
-  width: 40px;
-  text-align: right;
   flex-shrink: 0;
 }
 .sv-sections-nav-title {
@@ -1599,14 +1690,14 @@ select.sv-input { color-scheme: light dark; }
 }
 .sv-sections-nav-chev.open { transform: rotate(90deg); }
 .sv-sections-nav-content {
-  margin-left: 48px;
-  padding: 8px 12px;
+  margin-left: 1.6rem;
+  padding: 6px 12px 7px;
   background: var(--color-bg-subtle);
   border-radius: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   font-size: var(--font-sm);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Contenus riches dans le nav-content : meme echelle compacte */
@@ -1626,6 +1717,21 @@ select.sv-input { color-scheme: light dark; }
   color: var(--text);
   padding: 0.15rem 0 0.15rem 1.2rem;
   border-bottom: none;
+}
+
+/* ── Liste numérotée (markdown « 1. ») — pendant numéroté de sv-bullet-list ── */
+.sv-ordered-list {
+  list-style: decimal;
+  margin: 0.5rem 0 0;
+  padding-left: 1.5rem;
+}
+.sv-ordered-list li::marker { color: var(--success); font-weight: 700; }
+.sv-richtext .sv-ordered-list { margin: 0.35rem 0 0.85rem; padding-left: 1.5rem; }
+.sv-richtext .sv-ordered-list li {
+  font-size: var(--font-sm);
+  color: var(--text);
+  line-height: 1.55;
+  padding: 0.2rem 0;
 }
 .sv-sections-nav-content .sv-section-title.sv-section-title-h3 {
   font-size: var(--font-base);
@@ -1657,6 +1763,8 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
   background: var(--card-bg);
   color: var(--text);
 }
+
+.sv-header .sv-h1-sub { opacity: 0.7; font-weight: 400; }
 
 
 /* ── tests_terrain : layout grille de SvTestCard ── */
@@ -1812,9 +1920,8 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
-  <h1>Tests terrain</h1>
-  <div class="sv-subtitle">Diagnostiquer son sol au champ avec 20 protocoles simples</div>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-03 10:05 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <h1>Tests terrain<span class="sv-h1-sub"> : Diagnostiquer son sol au champ avec 20 protocoles simples</span></h1>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-05 19:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1839,6 +1946,57 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 // ═══════════════════════════════════════════════════════════════════
 
 // ── SvCollapse : section compactable/décompactable ──
+// ── useFillHeight : zone liste/lecture à hauteur de viewport, scroll interne ──
+// Mode « appli » : le layout occupe la hauteur restante sous l'en-tête (mesurée
+// sur la position document du layout — capte nav-pages, onglets, pastilles et
+// marges au-dessus), et chaque panneau scrolle indépendamment, sans scroll de la
+// page. Recalcul sur resize, zoom typo cross-onglet (storage) et tout reflux de la
+// page (ResizeObserver sur body : zoom A-/A/A+ même onglet, pastilles repliées).
+// Partagé par les onglets cartographie (index) et Concept Cards.
+function useFillHeight() {
+  const ref = React.useRef(null);
+  const [bodyTop, setBodyTop] = React.useState(null);
+  React.useEffect(() => {
+    const calc = () => {
+      const el = ref.current;
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      if (top > 60) setBodyTop(top);
+    };
+    calc();
+    const t1 = setTimeout(calc, 150);
+    const t2 = setTimeout(calc, 450);
+    window.addEventListener('resize', calc);
+    window.addEventListener('storage', calc);
+    let ro;
+    if (window.ResizeObserver) {
+      ro = new ResizeObserver(calc);
+      ro.observe(document.body);
+    }
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener('resize', calc);
+      window.removeEventListener('storage', calc);
+      if (ro) ro.disconnect();
+    };
+  }, []);
+  return {
+    ref,
+    layoutStyle: {
+      padding: 0,
+      gap: '1.25rem',
+      height: 'calc(100vh - ' + (bodyTop || 150) + 'px)',
+      minHeight: '520px',
+      overflow: 'hidden'
+    },
+    paneStyle: {
+      height: '100%',
+      maxHeight: 'none',
+      overflowY: 'auto'
+    }
+  };
+}
 function SvCollapse({
   title,
   icon,
@@ -2522,7 +2680,8 @@ function SvRichText({
 }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
-  const rawLines = text.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
+  const src0 = text;
+  const rawLines = src0.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
 
   // Détecte une ligne label : MAJUSCULES en tête + ':' final. Le complément
   // après un séparateur (—, -, (, :) est ignoré pour le ratio de majuscules,
@@ -2550,6 +2709,25 @@ function SvRichText({
     const trimmed = line.trim();
     if (!trimmed) {
       i++;
+      continue;
+    }
+
+    // Bloc de code clôturé par ``` (option : ```lang) — rendu monospace verbatim,
+    // SANS interprétation markdown (un commentaire # n'est pas un titre).
+    if (trimmed.startsWith('```')) {
+      const lang = trimmed.slice(3).trim();
+      const codeLines = [];
+      i++;
+      while (i < rawLines.length && rawLines[i].trim() !== '```') {
+        codeLines.push(rawLines[i]);
+        i++;
+      }
+      if (i < rawLines.length) i++; // consomme la clôture ```
+      blocks.push({
+        type: 'code',
+        lang,
+        lines: codeLines
+      });
       continue;
     }
 
@@ -2610,12 +2788,31 @@ function SvRichText({
       });
       continue;
     }
+
+    // Liste numérotée « 1. 2. 3. » (markdown ordered list). Capte le numéro de
+    // départ pour respecter une numérotation ne commençant pas à 1 (rare).
+    if (/^\d+\.\s+/.test(trimmed)) {
+      const items = [];
+      const start = parseInt(/^(\d+)\./.exec(trimmed)[1], 10);
+      while (i < rawLines.length && /^\d+\.\s+/.test(rawLines[i].trim())) {
+        items.push(rawLines[i].trim().replace(/^\d+\.\s*/, ''));
+        i++;
+      }
+      blocks.push({
+        type: 'ordered',
+        items,
+        start
+      });
+      continue;
+    }
     // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
     const paraLines = [];
     while (i < rawLines.length) {
       const t = rawLines[i].trim();
       if (!t) break;
+      if (t.startsWith('```')) break;
       if (t.startsWith('• ') || t.startsWith('- ')) break;
+      if (/^\d+\.\s+/.test(t)) break;
       if (/^#{1,6}\s+/.test(t)) break;
       if (/^\|.*\|$/.test(t) && i + 1 < rawLines.length && /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) break;
       if (isLabelLine(t) && paraLines.length > 0) break;
@@ -2729,6 +2926,15 @@ function SvRichText({
         key: j
       }, renderInline(it, idx + '-' + j))));
     }
+    if (b.type === 'ordered') {
+      return /*#__PURE__*/React.createElement("ol", {
+        key: idx,
+        className: "sv-ordered-list",
+        start: b.start || 1
+      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
+        key: j
+      }, renderInline(it, idx + '-' + j))));
+    }
     if (b.type === 'table') {
       return /*#__PURE__*/React.createElement("table", {
         key: idx,
@@ -2743,6 +2949,12 @@ function SvRichText({
       }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
         key: j
       }, renderInline(cell, 'td' + idx + '-' + r + '-' + j)))))));
+    }
+    if (b.type === 'code') {
+      return /*#__PURE__*/React.createElement("pre", {
+        key: idx,
+        className: "sv-code"
+      }, /*#__PURE__*/React.createElement("code", null, (b.lines || []).join('\n')));
     }
     return /*#__PURE__*/React.createElement("p", {
       key: idx,
@@ -3069,6 +3281,196 @@ function SvAccordionItem({
 // tous les contextes (page concept_cards, fiches, calculateurs).
 // Renvois inline (#N, Card "...") : scroll interne vers l'autre carte
 // si elle est dans le pool ; sinon rendu en texte non cliquable.
+// SvConceptCardDetail — corps de lecture d'une concept card (description +
+// chaînes / cascade / liens / tests / refs / fiches). Utilisé par le panneau
+// de lecture maître-détail de concept_cards. Miroir du corps de
+// SvConceptCardList (accordéon) — garder les deux synchrones.
+function SvConceptCardDetail({
+  card,
+  onCardRef
+}) {
+  if (!card) return null;
+  const Section = ({
+    label,
+    children
+  }) => /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '0.75rem'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sv-section-label"
+  }, label), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: '0.35rem'
+    }
+  }, children));
+  const CardLink = ({
+    id,
+    title
+  }) => /*#__PURE__*/React.createElement("a", {
+    onClick: () => onCardRef && onCardRef(id),
+    style: {
+      cursor: 'pointer',
+      color: 'var(--accent)',
+      textDecoration: 'underline'
+    }
+  }, "#", id, " ", title || '');
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-text-column",
+    style: {
+      padding: '0.25rem 0 0.75rem'
+    }
+  }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
+    text: card.description,
+    onCardRef: onCardRef
+  }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: "Cha\xEEnes causales"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px 8px',
+      fontSize: 'var(--font-sm)'
+    }
+  }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("a", {
+    key: i,
+    href: 'index.html#chaine-' + ch.chain_id,
+    style: {
+      color: 'var(--accent)',
+      textDecoration: 'underline',
+      cursor: 'pointer'
+    },
+    title: (ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
+  }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: "Niveau cascade pr\xE9requis"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px 8px'
+    }
+  }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    style: {
+      background: c.level_couleur + '22',
+      borderLeft: '3px solid ' + c.level_couleur,
+      padding: '2px 8px',
+      borderRadius: '4px',
+      fontSize: 'var(--font-xs)'
+    }
+  }, /*#__PURE__*/React.createElement("strong", {
+    style: {
+      color: c.level_couleur
+    }
+  }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: 'var(--text-secondary)'
+    }
+  }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: 'Liens (' + card.links.length + ')'
+  }, card.links.map((l, i) => {
+    const isFrom = l.from_id === card.id;
+    const otherId = isFrom ? l.to_id : l.from_id;
+    const otherTitle = isFrom ? l.to_title : l.from_title;
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        display: 'flex',
+        gap: '8px',
+        alignItems: 'baseline',
+        marginTop: '2px',
+        fontSize: 'var(--font-sm)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-secondary)',
+        fontStyle: 'italic',
+        minWidth: '100px'
+      }
+    }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
+      id: otherId,
+      title: otherTitle
+    }));
+  })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: 'Tests terrain (' + card.tests.length + ')'
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px 8px'
+    }
+  }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "sv-tag",
+    title: t.usage || ''
+  }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: 'Refs renforçantes (' + card.refs.length + ')'
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '4px 8px'
+    }
+  }, (() => {
+    const groups = {};
+    card.refs.forEach(r => {
+      (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
+    });
+    return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
+      key: kind,
+      style: {
+        padding: '4px 8px',
+        borderRadius: '8px',
+        background: 'var(--color-bg-subtle, var(--bg))',
+        fontSize: 'var(--font-xs)'
+      }
+    }, /*#__PURE__*/React.createElement("strong", {
+      style: {
+        color: 'var(--color-text-muted, var(--text-secondary))',
+        marginRight: '8px',
+        fontSize: 'var(--font-2xs)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.04em',
+        fontWeight: 700,
+        whiteSpace: 'nowrap'
+      }
+    }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
+      key: i,
+      title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
+      style: {
+        display: 'inline-block',
+        padding: '1px 6px',
+        margin: '1px 3px',
+        borderRadius: '10px',
+        background: 'var(--accent-light, var(--bg))',
+        color: 'var(--accent-dark, var(--accent))',
+        whiteSpace: 'nowrap'
+      }
+    }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--text-secondary)'
+      }
+    }, " \u2026 +", items.length - 8)));
+  })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
+    label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '4px'
+    }
+  }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
+    key: i,
+    href: 'cahier.html#fiche-' + f.id,
+    style: {
+      color: 'var(--accent)',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+      fontSize: 'var(--font-sm)'
+    },
+    title: f.role ? 'rôle : ' + f.role : ''
+  }, "\uD83D\uDCC4 ", f.titre)))));
+}
 function SvConceptCardList({
   cards
 }) {
@@ -3260,10 +3662,15 @@ function SvConceptCardList({
         }
       }, /*#__PURE__*/React.createElement("strong", {
         style: {
-          color: 'var(--text-secondary)',
-          marginRight: '6px'
+          color: 'var(--color-text-muted, var(--text-secondary))',
+          marginRight: '8px',
+          fontSize: 'var(--font-2xs)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.04em',
+          fontWeight: 700,
+          whiteSpace: 'nowrap'
         }
-      }, kind, " (", items.length, ")"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
+      }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
         key: i,
         title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
         style: {
@@ -3285,16 +3692,17 @@ function SvConceptCardList({
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
+        flexDirection: 'column',
+        gap: '4px'
       }
     }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
       key: i,
       href: 'cahier.html#fiche-' + f.id,
-      className: "sv-tag",
       style: {
-        textDecoration: 'none',
-        cursor: 'pointer'
+        color: 'var(--accent)',
+        textDecoration: 'underline',
+        cursor: 'pointer',
+        fontSize: 'var(--font-sm)'
       },
       title: f.role ? 'rôle : ' + f.role : ''
     }, "\uD83D\uDCC4 ", f.titre)))))));
@@ -3356,30 +3764,13 @@ function SvTagButton({
   }, stat));
 }
 
-// ── SvTabIntro : résumé + détail accordéon pour présenter un onglet/une page ──
-// Props :
-//   resume : texte court affiché en ligne
-//   detail : texte long révélé par 'en savoir plus'
-// Sert aussi de point de référence d'alignement horizontal sous le bandeau.
+// ── SvTabIntro : intro déroulante d'onglet — composant neutralisé (objet abandonné, 2026-06) ──
 function SvTabIntro({
   resume,
   detail
 }) {
-  const [open, setOpen] = React.useState(false);
-  if (!resume && !detail) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro-row"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-tab-intro-resume"
-  }, resume), detail && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sv-tab-intro-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? 'masquer' : 'en savoir plus')), open && detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-intro-detail"
-  }, detail));
+  // Objet d'intro déroulante abandonné (JMJ 2026-06) : neutralisé partout.
+  return null;
 }
 
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
@@ -3610,9 +4001,13 @@ function SvFicheCard({
   onToggle,
   openSecKey,
   setOpenSecKey,
-  showHeader
+  showHeader,
+  showMeta
 }) {
   const _showHeader = showHeader !== false;
+  // showMeta=false : masque le tag de type + le label « SECTIONS (N) » — utilisé
+  // quand l'appelant affiche déjà ces infos dans son propre en-tête (onglet Fiches).
+  const _showMeta = showMeta !== false;
   const f = fiche;
   if (!f) return null;
   // Etat local en mode autonome
@@ -3627,17 +4022,40 @@ function SvFicheCard({
   const accentColor = color || colors[f.type] || 'var(--info)';
   const partial = f.statut === 'integre_partiel';
 
-  // Pre-calcul des numéros affichés (Intro / 1 / 2 / ... / Conclu)
+  // Plan hierarchique : le numero et le niveau sont derives du TYPE de section
+  // (intro/section/conclusion = racine ; body_h2 = sous-section indentee) et du
+  // numero deja porte par le titre (« 1. », « 1.1. »), qu'on extrait pour ne pas
+  // l'afficher deux fois. Les sous-sections narratives (sans numero) restent
+  // indentees sans numero. Remplace l'ancien compteur plat qui produisait des
+  // numeros decorreles du titre (« 4 | 1.1 Adhesion »).
   const secs = f.sections || [];
-  let nSec = 0;
+  let mainN = 0;
   const navSecs = secs.map(s => {
-    let num;
-    if (s.type === 'intro') num = 'Intro';else if (s.type === 'conclusion') num = 'Conclu';else {
-      nSec += 1;
-      num = String(nSec);
+    const t = s.titre || '';
+    const m = t.match(/^(\d+(?:\.\d+)*)\.?\s+(.*)$/);
+    const numTitle = m ? m[1] : null;
+    const rest = m ? m[2] : t;
+    let num = '',
+      lvl = 1,
+      title = rest;
+    if (s.type === 'intro') {
+      lvl = 1;
+      title = rest || 'Introduction';
+    } else if (s.type === 'conclusion') {
+      lvl = 1;
+      title = rest || 'Conclusion';
+    } else if (s.type === 'body_h2') {
+      lvl = 2;
+      num = numTitle || '';
+    } else {
+      lvl = 1;
+      mainN += 1;
+      num = numTitle || String(mainN);
     }
     return Object.assign({}, s, {
-      _num: num
+      _num: num,
+      _lvl: lvl,
+      _title: title
     });
   });
   const body = /*#__PURE__*/React.createElement("div", {
@@ -3646,7 +4064,7 @@ function SvFicheCard({
     style: {
       padding: '0.5rem 0'
     }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, (_showMeta || partial) && /*#__PURE__*/React.createElement("div", {
     style: {
       display: 'flex',
       gap: '0.5rem',
@@ -3654,7 +4072,7 @@ function SvFicheCard({
       fontSize: 'var(--font-xs)',
       flexWrap: 'wrap'
     }
-  }, /*#__PURE__*/React.createElement("span", {
+  }, _showMeta && /*#__PURE__*/React.createElement("span", {
     className: "sv-tag sv-tag-info"
   }, labels[f.type] || f.type), partial && /*#__PURE__*/React.createElement("span", {
     className: "sv-tag sv-tag-warning"
@@ -3664,12 +4082,13 @@ function SvFicheCard({
       return /*#__PURE__*/React.createElement(SvSectionsNav, {
         multi: true,
         sections: navSecs,
-        label: 'SECTIONS (' + navSecs.length + ')',
+        label: _showMeta ? 'SECTIONS (' + navSecs.length + ')' : null,
         openKey: secKey,
         onToggle: setSecKey,
         getKey: (s, i) => 'fsec-' + f.id + '-' + i,
         getNumber: s => s._num,
-        getTitle: s => s.titre,
+        getTitle: s => s._title,
+        getLevel: s => s._lvl,
         getDotColor: s => s.blocks && s.blocks.length > 0 ? 'var(--success)' : s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)',
         hasContent: s => s.blocks && s.blocks.length > 0 || !!s.contexte_sci,
         renderContent: s => {
@@ -3910,6 +4329,7 @@ function SvSectionsNav({
   getTitle,
   getDotColor,
   getDotTitle,
+  getLevel,
   hasContent,
   renderContent
 }) {
@@ -3919,6 +4339,8 @@ function SvSectionsNav({
   const kTit = getTitle || (s => s.titre || '');
   const kDot = getDotColor || (() => 'var(--accent)');
   const kDotT = getDotTitle || (() => '');
+  const kLvl = getLevel || (() => 1); // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
+  const hasLevels = typeof getLevel === 'function'; // hierarchie explicite -> style H1
   const kHas = hasContent || (() => true);
   const kRen = renderContent || (() => null);
   const [openSet, setOpenSet] = React.useState(() => new Set());
@@ -3944,11 +4366,18 @@ function SvSectionsNav({
     const key = kKey(s, i);
     const open = isOpen(key);
     const expandable = kHas(s, i);
+    const level = kLvl(s, i) || 1;
+    // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
+    // principales — meme traitement visuel quelle que soit l'expansion.
+    const h1 = hasLevels && level === 1;
     return /*#__PURE__*/React.createElement("div", {
       key: i,
-      className: "sv-sections-nav-row-wrap"
+      className: "sv-sections-nav-row-wrap",
+      style: level > 1 ? {
+        paddingLeft: (level - 1) * 1.25 + 'rem'
+      } : undefined
     }, /*#__PURE__*/React.createElement("div", {
-      className: 'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : ''),
+      className: 'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : ''),
       onClick: expandable ? () => toggle(key) : undefined
     }, /*#__PURE__*/React.createElement("span", {
       className: "sv-sections-nav-dot",
@@ -3965,6 +4394,80 @@ function SvSectionsNav({
     }, "\u25B8")), open && expandable && /*#__PURE__*/React.createElement("div", {
       className: "sv-sections-nav-content"
     }, kRen(s, i)));
+  }));
+}
+
+// SvNavList — liste de navigation sélectionnable (modèle master-détail).
+// À placer dans une colonne .sv-sidebar (cadre) ; pilote un panneau de
+// lecture .sv-main séparé. Items compacts ≤ 2 lignes (doctrine UI #152).
+// Props : items, isActive(it,i), onSelect(it,i), getKey(it,i) [clé React],
+//   getCode (badge mono gauche), getDotColor (pastille), getTitle (ligne 1),
+//   getSub (ligne 2, ellipsée), getMeta (badge droite), label, empty.
+// colorCode : masque la pastille et colore le code (numéro) avec getDotColor —
+// alignement plus net du titre (utilisé par Concept Cards).
+function SvNavList({
+  items,
+  isActive,
+  onSelect,
+  getKey,
+  getCode,
+  getDotColor,
+  getTitle,
+  getSub,
+  getMeta,
+  label,
+  empty,
+  colorCode,
+  frameColor
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "sv-navlist"
+  }, label && /*#__PURE__*/React.createElement("div", {
+    className: "sv-navlist-label"
+  }, label), (!items || !items.length) && /*#__PURE__*/React.createElement("div", {
+    className: "sv-navlist-empty"
+  }, empty || 'Aucun élément.'), (items || []).map((it, i) => {
+    const active = isActive ? isActive(it, i) : false;
+    const sub = getSub ? getSub(it, i) : null;
+    const dot = getDotColor ? getDotColor(it, i) : null;
+    const code = getCode ? getCode(it, i) : null;
+    const meta = getMeta ? getMeta(it, i) : null;
+    const tinted = (colorCode || frameColor) && dot;
+    const codeStyle = frameColor && dot ? {
+      color: dot,
+      fontSize: 'var(--font-sm)',
+      fontWeight: 700,
+      fontFamily: 'inherit',
+      width: 'auto'
+    } : colorCode && dot ? {
+      color: dot
+    } : undefined;
+    const itemStyle = frameColor && dot && active ? {
+      borderColor: dot,
+      boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'
+    } : undefined;
+    return /*#__PURE__*/React.createElement("div", {
+      key: getKey ? getKey(it, i) : i,
+      onClick: () => onSelect && onSelect(it, i),
+      className: 'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : ''),
+      style: itemStyle
+    }, dot && !tinted && /*#__PURE__*/React.createElement("span", {
+      className: "sv-navlist-dot",
+      style: {
+        background: dot
+      }
+    }), code && /*#__PURE__*/React.createElement("span", {
+      className: "sv-navlist-code",
+      style: codeStyle
+    }, code), /*#__PURE__*/React.createElement("div", {
+      className: "sv-navlist-main"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "sv-navlist-title"
+    }, getTitle ? getTitle(it, i) : ''), sub && /*#__PURE__*/React.createElement("div", {
+      className: "sv-navlist-sub"
+    }, sub)), meta && /*#__PURE__*/React.createElement("span", {
+      className: "sv-navlist-meta"
+    }, meta));
   }));
 }
 
@@ -4071,7 +4574,7 @@ function App() {
     }, {
       id: 'comprendre',
       icon: '📚',
-      label: 'Comprendre'
+      label: 'Guide'
     }],
     active: tab,
     onChange: setTab

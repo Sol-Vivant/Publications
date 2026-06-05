@@ -334,7 +334,7 @@ Conteneur ephemere ; `requirements.txt` pas joue d'office -> `pip install -r req
 ### `fiche_docx_production` — Docx fiches : zero meta-vocab, structure plate H1 (pas de H2 impose), graines ~600 chars, 5-8k total
 
 ```
-Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1, pas de H2 impose), graines ~600 chars/section, 5-8k chars total, amorces en texte normal. Doctrine complete : BQ `wf_fiche_production` (fait foi).
+Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1, pas de H2 impose), graines ~600 chars/section, 5-8k chars total (zoom tres sous-sectionne peut monter, jamais >=12k). Citations (Auteur, annee) INLINE au mot pres (#146.7), puisees dans les source_usages ventiles par section ; PAS de gabarit « Mecanismes: »/« Termes: » (termes integres au texte, #146.6). gen_fiche_docx : bloc References dedoublonne par oeuvre, lignes recap auto supprimees. REDO d'une fiche integree = regenerer une graine corpus-aware re-sourcee sans toucher l'integre affiche (modeles #84 trophobiose, #219 AGCC). Redaction = Claude direct, jamais d'agent. Doctrine complete : BQ `wf_fiche_production` (fait foi).
 ```
 
 ### `fichiers_jmj_sur_github` — Fichiers poussés par JMJ = sur origin (GitHub), JAMAIS dans le conteneur local. Réflexe : git fetch origin + inspecter origin/main (git log/diff), pas de recherche locale d'abord.
