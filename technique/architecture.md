@@ -11,15 +11,15 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 192 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3302 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 22571 |
-| `chains_causales` | 36 chaines causales reliant les documents | 36 |
-| `chain_etapes` | Etapes des chaines | 235 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3374 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 23043 |
+| `chains_causales` | 38 chaines causales reliant les documents | 38 |
+| `chain_etapes` | Etapes des chaines | 246 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 172 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 173 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 15828 |
+| `audit_log` | Journal des operations | 16150 |
 
 ### Tables web et outils interactifs
 
@@ -27,7 +27,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
 | `html_templates` | Templates CSS/JS par page + partagés | 44 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 167 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 174 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -57,7 +57,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
 | `cahier` | chapitres, chapter_fiches, onglets, tab_descriptions, tool_pages |
 | `claude_notes` | fiches_biblio_cassee_marathon, fiches_marathon_filtre_origine |
-| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, cloture_pending_recap, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, integration_reponse_sourcage, metaanalyse_croise_sourcages, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni, wal_checkpoint, web_nav_ancres |
+| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, integration_reponse_sourcage, metaanalyse_croise_sourcages, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni, wal_checkpoint, web_nav_ancres |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
@@ -180,6 +180,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `reports_inventory.py` | lib | Inventaire et lecture/ecriture des rapports filesystem. |
 | `scripts_inventory.py` | lib | Inventaire des scripts depuis le filesystem. |
 | `term_rels.py` | lib | Helpers pour écrire dans `term_relations` (source de vérité |
+| `text_norm.py` | lib | Normalisation canonique pour le matching des termes du thésaurus. |
 | `thesaurus_completion.py` | lib | Critère canonique de complétude du thésaurus. |
 | `web_template.py` | lib | Template HTML partagé pour les pages outils Sol Vivant. |
 | `weekly_scan.py` | veille | Veille PubMed hebdomadaire. |

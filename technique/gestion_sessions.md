@@ -58,7 +58,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (21)** :
+**Règles actuellement en base (22)** :
 
 ### `agent_runner_reflexe` — N>5 items LLM independants -> pattern agent_runner.py 3 phases (jamais agent par agent)
 
@@ -267,6 +267,24 @@ merge destructif evite de justesse (Thaumarchaeota #25 et Nitrosomonas
 #23 allaient etre supprimes par resolve_import_conflicts avec apostrophe
 ASCII mal matchee). Cause : traitement de la BQ comme ressource optionnelle
 au lieu de checkpoint non-negociable du workflow.
+```
+
+### `bq_source_verite` — Source de vérité = BQ, pas les fichiers/runs précédents (anti reverse-engineering / effet mémoire)
+
+```
+La BQ est la source de vérité du WORKFLOW (corrigée, canonique) — PAS les fichiers ni les runs précédents.
+Avant d'agir : lire la BQ gouvernante et exécuter DEPUIS sa checklist / ses étapes.
+
+INTERDIT pour déterminer QUOI faire :
+  (1) lire le source d'un script pour « comprendre le workflow » — un script EXÉCUTE la doctrine, il ne la définit pas ;
+  (2) deviner le schéma DB via sqlite_master → lire BQ #57 (architecture) ;
+  (3) calquer une fiche / session précédente (template d'un run passé).
+
+POURQUOI : ces artefacts portent des bugs souvent DÉJÀ corrigés ; les répliquer = EFFET MÉMOIRE qui ressuscite des correctifs perdus.
+Cas réel 2026-06-06 : fiche #248 calquée sur #247 → a hérité des MÊMES lacunes (#155, liens trans-fiches manqués) que BQ #147 spécifie pourtant.
+
+Si la BQ n'explique pas un point requis → l'AJOUTER (réflexe config.claude_rules ou entrée tools/bq/*.md) — jamais improviser depuis les fichiers.
+Reverse-engineering du code admis UNIQUEMENT pour debugger une vraie erreur, BQ lue d'abord.
 ```
 
 ### `cloture_pending_recap` — Reflexe doctrine : pending session_recap obligatoire avant session_end.py (BQ #119). Garde-fou ajoute 2026-04-30 dans session_end.py.

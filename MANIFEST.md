@@ -3,7 +3,7 @@
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
 - 52 tables, 7 vues
-- Scripts : 98 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- Scripts : 99 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
@@ -104,6 +104,7 @@
 | `reports_inventory.py` | `tools/lib/` | Inventaire et lecture/ecriture des rapports filesystem. |
 | `scripts_inventory.py` | `tools/lib/` | Inventaire des scripts depuis le filesystem. |
 | `term_rels.py` | `tools/lib/` | Helpers pour écrire dans `term_relations` (source de vérité |
+| `text_norm.py` | `tools/lib/` | Normalisation canonique pour le matching des termes du thésaurus. |
 | `thesaurus_completion.py` | `tools/lib/` | Critère canonique de complétude du thésaurus. |
 | `web_template.py` | `tools/lib/` | Template HTML partagé pour les pages outils Sol Vivant. |
 | `weekly_scan.py` | `tools/veille/` | Veille PubMed hebdomadaire. |
@@ -120,7 +121,7 @@ projet/
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, refresh_retour_text, resolve_import_conflicts
-│   ├── lib/                    agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, thesaurus_completion, web_template
+│   ├── lib/                    agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
 │   ├── veille/                 weekly_scan
 │   ├── regen_all.py
 ├── docx/                      Documents .docx (retours Jenni)

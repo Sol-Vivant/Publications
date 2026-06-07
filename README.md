@@ -14,11 +14,11 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **3302 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
-- **36 chaînes causales** et **0 renvois** inter-documents
-- **167 fiches conceptuelles** et **192 prompts** structurés
+- **3374 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **38 chaînes causales** et **0 renvois** inter-documents
+- **174 fiches conceptuelles** et **192 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **52 tables** SQLite, 98 scripts Python
+- **52 tables** SQLite, 99 scripts Python
 
 ### Les forces de cette architecture
 
@@ -48,7 +48,7 @@ Tools/
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, refresh_retour_text, resolve_import_conflicts
-│   ├── lib/                    agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, thesaurus_completion, web_template
+│   ├── lib/                    agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
 ├── docx/                      Documents .docx (retours Jenni)
 ├── jmj/                       Documents de travail
 └── Publications/web/           Pages web (→ rsync vers dépôt Pages)
