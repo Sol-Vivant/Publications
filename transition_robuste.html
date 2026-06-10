@@ -51,6 +51,7 @@
   --font-lg:   calc(1.15rem * var(--font-scale));
   --font-xl:   calc(1.5rem  * var(--font-scale));
   --font-2xl:  calc(1.8rem  * var(--font-scale));
+    --font-3xl:  calc(2.94rem * var(--font-scale)); /* heroes/resultats : ~2.5rem a l echelle par defaut, suit le zoom */
   --font-1-4:  calc(1.4rem  * var(--font-scale));
   /* Echelle d'espacement (source unique pour paddings/margins) */
   --space-2xs: 0.25rem;
@@ -1771,6 +1772,9 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 
 .sv-header .sv-h1-sub { opacity: 0.7; font-weight: 400; }
 
+/* Couleurs strates — source unique config[strates].couleurs (injecté par get_charter_css) */
+:root{--strate-F:#8B5CF6; --strate-F-bg:#8B5CF622; --strate-F-bg-dark:#8B5CF633; --strate-S:#3B82F6; --strate-S-bg:#3B82F622; --strate-S-bg-dark:#3B82F633; --strate-V:#10B981; --strate-V-bg:#10B98122; --strate-V-bg-dark:#10B98133; --strate-P:#F59E0B; --strate-P-bg:#F59E0B22; --strate-P-bg-dark:#F59E0B33; --strate-H:#EF4444; --strate-H-bg:#EF444422; --strate-H-bg-dark:#EF444433;}
+
 
 /* Transition robuste — utilise la charte sv-* unifiée, pas de CSS spécifique */
 
@@ -1877,7 +1881,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Transition robuste<span class="sv-h1-sub"> : Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-06 16:19 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-10 21:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2975,7 +2979,7 @@ function SvSearchInput({
       border: 'none',
       cursor: 'pointer',
       color: 'var(--text-secondary)',
-      fontSize: '1.1rem',
+      fontSize: 'var(--font-lg)',
       lineHeight: 1,
       padding: '0 0.2rem'
     }
@@ -3092,7 +3096,7 @@ function SvExpandableCard({
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: '0.65rem',
+      fontSize: 'var(--font-xs)',
       fontWeight: 600,
       minWidth: '26px',
       textAlign: 'right'
@@ -3171,7 +3175,7 @@ function SvExpandableCard({
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: '0.65rem',
+      fontSize: 'var(--font-xs)',
       color: 'var(--text-secondary)',
       fontWeight: 600,
       minWidth: '26px',

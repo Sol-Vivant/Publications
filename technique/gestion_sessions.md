@@ -58,7 +58,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (22)** :
+**Règles actuellement en base (31)** :
 
 ### `agent_runner_reflexe` — N>5 items LLM independants -> pattern agent_runner.py 3 phases (jamais agent par agent)
 
@@ -343,6 +343,20 @@ But : capitaliser sur les frictions pour ne pas les reproduire.
 Modele : jmj/rapports/synthese/synthese_session_2026-06-01_frictions_apprentissages.md
 ```
 
+### `conseil_contradicteur` — Tout Conseil se clôt par un contradicteur de la synthèse du chairman AVANT arbitrage JMJ — la synthèse est sinon le seul maillon non audité
+
+```
+Le dispositif du **Conseil** (advisors indépendants → synthèse du chairman/Claude → arbitrage JMJ) se clôt OBLIGATOIREMENT par un **agent contradicteur de la synthèse**, lancé AVANT l'arbitrage de JMJ.
+
+**Pourquoi** : les advisors s'auditent mutuellement, mais la synthèse du chairman est sinon le **seul maillon non audité** du dispositif — exposée aux faux positifs Opus (BQ #55), au **faux consensus** (empiler les avis au lieu de trancher une vraie divergence), et aux **acquis non vérifiés** (affirmer qu'un champ/mécanisme existe sans le constater en DB).
+
+**Mandat du contradicteur** : il ne rejoue pas le débat, il attaque LA SYNTHÈSE — qu'a-t-elle lissé, sur-vendu, omis ? quels acquis non vérifiés ? quelle sur-ingénierie au regard du besoin réel ? qu'est-ce qui ne survivra pas à l'usage quotidien ?
+
+**Après le contradicteur** : Claude VÉRIFIE lui-même les affirmations factuelles du contradicteur (BQ #55 vaut aussi pour lui) avant de présenter à JMJ synthèse + critique vérifiée pour arbitrage.
+
+Validé à l'usage (2026-06-10) : a rattrapé « cards_reinforce existe déjà » (faux — inexistant en DB) et « couverture cards→axes » (réelle : 31 %) dans une synthèse de design avant qu'elle n'atteigne JMJ.
+```
+
 ### `environnement_web` — Env web : sqlite3 CLI absent -> python3 / bq_query.py (jamais sqlite3 shell)
 
 ```
@@ -375,6 +389,12 @@ Réponse Jenni à une question/validation de SOURÇAGE (docx prose + biblio en f
 
 ```
 Méta-analyse d'intégration de fiche (audit croisé) -> VOLET H obligatoire : croiser les MÉCANISMES décrits dans les réponses aux questions de sourçage (validations statut=integre). Depuis 2026-06-02, integrate_validation_refs CAPTE la prose-réponse dans validation_contenus.contenu_brut (requêtable) : SELECT contenu_brut FROM validation_contenus WHERE validation_id IN (...). Exception : les sourçages intégrés AVANT le correctif (faune #15) n'ont que les refs en DB -> prose dans docx/archives/QS-*.docx + validation_sections. Action volet H : (1) recenser les sourçages intégrés recoupant la fiche ; (2) croiser explicitement les mécanismes (lien réel, sinon le noter) ; (3) signaler les croisements À VENIR (sourçages en_cours que la fiche nourrira). Demande JMJ 2026-06-02 : « il serait dommage de perdre cette matière ». Doctrine : BQ wf_fiche_integration volet H.
+```
+
+### `ouverture_conseil` — Rituel d'ouverture (JMJ 2026-06-10) : réamorçage → lire le handoff de clôture → invoquer le Conseil sur les arbitrages ouverts (contrôle anti-dérive, cadré handoff+fil). Pendant de cloture_pending_recap.
+
+```
+Rituel d'ouverture de session — contrôle anti-dérive (pendant de cloture_pending_recap). Après le réamorçage (fil directeur affiché par le hook SessionStart) : (1) LIRE le dernier handoff de clôture (jmj/rapports/session/ le plus récent, bloc « CONSEIL D'OUVERTURE » : arbitrages_ouverts / routé / décliné / prochains_candidats / fil_snapshot) ; (2) INVOQUER LE CONSEIL (3 lentilles indépendantes + contradicteur, cf. conseil_contradicteur) sur les arbitrages_ouverts et prochains_candidats, CADRÉ sur le handoff + le fil (pas un ré-audit complet) ; (3) n'AGIR qu'après cet arbitrage vérifié-source. Le Conseil interroge la DB/BQ : c'est lui qui empêche de prendre le rapport pour argent comptant (cf. source_verite_data_avant_absence). En pratique une session démarre toujours avec quelque chose à solder → le rituel est systématique.
 ```
 
 ### `parser_docx_omath` — Parseur docx doit extraire oMath (formules chimiques Jenni)
@@ -416,10 +436,34 @@ Reflexe : la redaction editoriale (definitions, synonymes, fiches, cards, amorce
 Reflexe : `terms.fr` est la cle editoriale d'aller-retour Jenni -> aucune normalisation auto (casse, ponctuation, espaces). BT/NT/RT -> `term_relations`, jamais en colonnes `terms`. Doctrine complete : BQ `pas_modif_fr_canonique` (fait foi).
 ```
 
+### `path_docx_jenni` — Path docx : recherches/fiches/=graine POUR Jenni, docx/=retour DE Jenni. Le dossier fait foi, pas le nom.
+
+```
+# Path docx Jenni — le dossier fait foi, pas le nom
+
+**Règle** : deux dossiers, ne jamais les confondre —
+- `recherches/fiches/` (et `recherches/<lane>/`) = **graine / prompt POUR Jenni** (ce que Claude génère et envoie)
+- `docx/` = **retour DE Jenni** (ce qui revient, à intégrer via le pipeline)
+
+Le **dossier** désambiguïse, **jamais le nom** : un même `fiche_N.docx` peut exister dans les deux (graine + retour). Avant d'intégrer, vérifier le dossier source.
+
+Réflexe associé : quand JMJ **pousse un retour sur la branche de session**, faire `git pull` avant d'agir — le conteneur web éphémère ne voit que ce qui est dans git.
+```
+
 ### `pratiques_typees_hors_jenni` — Pratiques typees (KNF/JADAM/EM/LiFoFer) hors-perimetre Jenni - angle mecanisme
 
 ```
-Reflexe : les pratiques typees (KNF, JADAM, EM/Bokashi, LiFoFer) sont hors-perimetre Jenni -> redaction JMJ/Claude depuis PDF, angle MECANISME generique > recette ; `flag_pratique_typee=1` exclut des exports. Doctrine complete : BQ `pratiques_typees_hors_jenni` (fait foi).
+Reflexe : les pratiques typees (KNF, JADAM, EM/Bokashi, LiFoFer) sont hors-perimetre Jenni a l'ENVOI -> on n'envoie pas de recette a Jenni ; redaction JMJ/Claude depuis PDF, angle MECANISME generique > recette ; `flag_pratique_typee=1` exclut des exports.
+
+AU RETOUR / A L'AUDIT (precision 2026-06-09) : ne PAS rejeter le DIY que Jenni renvoie quand il est cite comme INSTANCE d'un mecanisme generique ACADEMIQUEMENT SOURCE. Jenni ne mobilise une pratique DIY que si elle est sourcee (open access) -- sa presence avec citation (Auteur, annee) atteste du sourçage et de l'angle mecanisme. Le warning RECETTE_TYPEE du gate (regex acronymes FAA/KNF/JADAM...) est un SIGNAL A VERIFIER (source + angle), PAS un rejet automatique ; JMJ arbitre. Une fiche is_diy=0 contenant des mentions DIY contextualisees sourcees est LEGITIME et doit etre auditee normalement (critere de rejet = is_diy=1 recette pure, pas la presence d'acronymes). Cas attesté : fiche #224 sections 4.4/5 (DIY sourcé Gong2025/Brom2023/Thompson2025) -> faux positif.
+
+Doctrine complete : BQ `pratiques_typees_hors_jenni` (fait foi).
+```
+
+### `principes_generatifs_avant_labels_reactifs` — Doctrine éditoriale (JMJ, 2026-06-10, Conseil endophytisme) : principes génératifs avant labels réactifs (One Health, décarbonation = conséquences, pas axes).
+
+```
+Le corpus met en avant les PRINCIPES GÉNÉRATIFS (le vivant qui construit), pas les LABELS RÉACTIFS nés de la réparation des dégâts. One Health, décarbonation et semblables sont des CONSÉQUENCES d'un système vivant remis en marche — ou des symptômes qu'on n'a nommés que parce qu'on a cassé au nom du fric — pas des axes ni des bannières. Ne jamais promouvoir un label réactif au rang de thèse/axe ; le formuler, s'il le faut, comme conséquence en aval du principe positif.
 ```
 
 ### `redaction_documents_jenni` — Doctrine UNIQUE de toute rédaction Jenni (#146) — À ACTIVER avant de produire tout doc Jenni (fiche, graine, validation, question) ; produire depuis la doctrine, jamais copier un output
@@ -464,6 +508,51 @@ lire cette doctrine. Cause racine : doctrine non activée au moment de produire.
 D'où ce déclencheur.
 ```
 
+### `retour_jenni_autonome` — Retour Jenni = liste demandée par Claude → intégration autonome de bout en bout (tissage via BQ, jamais de question JMJ sauf relabel fr #138)
+
+```
+Le workflow Jenni est PILOTÉ par Claude : c'est Claude qui ÉMET la liste (termes manquants révélés par un audit / une intégration de fiche, ou fiche à enrichir), JMJ la passe à Jenni, Jenni remplit les champs définis, et rend le docx à Claude pour intégration.
+
+CONSÉQUENCE : un retour Jenni n'est JAMAIS une énigme à décoder. Claude connaît déjà le contexte (pourquoi ces termes/cette fiche, leur provenance, le placement attendu) → intégration DE BOUT EN BOUT, en autonomie. Ne pas être « en plein questionnement » au retour de ce qu'on a soi-même demandé.
+
+TOUT LE TISSAGE EST DANS LES BQ → Claude DÉCIDE selon la doctrine, il ne renvoie pas la décision à JMJ :
+  • placement strate/doc_code → remonter-le-fil terme→fiche/sujet (wf_source_integration, wf_fiche_integration)
+  • fusion de doublons → #53 (garder le plus complet) + #116 (dédup sémantique, résolution non destructive)
+  • collisions syn↔fr, relations BT/RT → #116, term_relations
+Claude TRANCHE puis DOCUMENTE ses arbitrages (audit_log + rapport) pour que JMJ corrige a posteriori si besoin — il ne BLOQUE pas avec des AskUserQuestion.
+
+SEULE exception réservée à JMJ : le relabel d'un fr canonique existant (#138, pas_modif_fr_canonique). Et même là Claude SIGNALE (FYI), sans bloquer l'intégration.
+
+ANTI-PATTERN (corrigé 2026-06-09) : poser des questions sur des arbitrages (placement, fusion doublons, tissage) dont la doctrine est dans les BQ. Si la liste/fiche préexiste (héritée d'une session antérieure), RECONSTRUIRE la provenance (rapport de session, audit_log, fiche source) plutôt que questionner.
+```
+
+### `source_verite_data_avant_absence` — Réflexe source-de-vérité (JMJ 2026-06-10) : vérifier la DATA réelle (pas schéma/rapport/compact) avant toute conclusion d'absence/impossibilité. Complète bq_source_verite.
+
+```
+Avant toute conclusion d'ABSENCE ou d'IMPOSSIBILITÉ (« X n'existe pas », « aucun lien », « non dérivable », « rien en base »), interroger la DATA réelle de la DB — pas seulement le schéma (PRAGMA), pas un rapport, pas le résumé de session/compact, pas le réamorçage. L'absence d'une STRUCTURE (table de jointure, FK, colonne dédiée) ne prouve PAS l'absence de la DONNÉE : elle peut vivre dans un champ texte (ex. concept_cards.source = « fiche_30_… » → provenance card↔fiche bien réelle), dans des notes, ou dans audit_log. Symptôme de dérive : raisonner depuis un modèle/rapport cohérent au lieu de grep le contenu réel. La source de vérité est la DB (et la BQ pour la doctrine) ; les rapports dérivent (téléphone arabe), surtout après reprise depuis un compact. Incident fondateur : « fiches_contributrices non dérivable » — faux, la provenance était dans concept_cards.source (2026-06-10).
+```
+
+### `termes_fichier_unique` — Un seul fichier termes : recherches/thesaurus/termes_a_definir.txt. Tout workflow y verse, jamais de copie datée.
+
+```
+# Termes à définir — UN SEUL fichier, tous workflows confondus
+
+**Règle absolue (doctrine §0 `thesaurus_workflow`, JMJ 2026-06-06)** : il n'existe qu'**un seul** fichier de termes candidats : `recherches/thesaurus/termes_a_definir.txt`. **Jamais** de copie datée/numérotée (`termes_candidats_*.txt`, `*_<date>.txt`, `*_lotN.txt`) — c'est la source historique des candidats orphelins et de la confusion.
+
+Tout workflow qui révèle un terme absent **VERSE dans ce fichier** (intégration fiche Étape 7.4 `wf_fiche_integration`, `analyse_fiches`, solde audit corpus, import thésaurus orphelins BT/RT, notes volantes) :
+- dédup vs DB (`terms` fr/en/syn_fr/syn_en via `term_rels.norm`) **ET** vs fichier ;
+- tri alpha accent-insensible (NFKD, règle #115) ;
+- format brut : un terme par ligne, sans puce/numéro/préfixe/annotation.
+
+Purge→archives **uniquement** par `import_termes_jenni.py --sent` (fin de cycle Jenni). Maintenance : `export_thesaurus_incomplets --single-txt` (réécrit en place, préserve les candidats manuels).
+```
+
+### `thesaurus_carte` — Le thésaurus (entrées + relations BT/NT/RT) = carte du corpus, source première pour termes ET raccordements ; l'instinct ne tranche jamais seul
+
+```
+Le thésaurus est la **carte du corpus**, pas un dico. Avant tout arbitrage terminologique OU raccordement de fiche : partir des entrées (`fr`/`syn`) ET des relations (`BT`/`NT`/`RT`) — elles donnent le terme canonique ET les cards/fiches voisines. L'instinct ne tranche jamais un terme seul ; un « RAS / distincts » se VERIFIE dans le thésaurus, il ne se suppose pas. Toute substitution lexicale en fiche se relit **phrase par phrase** (un anglicisme peut avoir plusieurs référents). Cas types : « pool » -> syn_fr donnait reservoir [stock global] vs compartiment [fraction MAOC/POC] ; MAOC vs MAOM -> les relations ont revele que #4438 etait un doublon parasite du pivot #33 (~35 liens).
+```
+
 ### `wal_checkpoint` — DB en mode WAL : PRAGMA wal_checkpoint(TRUNCATE) AVANT chaque git add sol_vivant.db (sinon perte silencieuse au reset)
 
 ```
@@ -501,6 +590,14 @@ PIÈGE VÉCU (2026-06-03) : la fonctionnalité existait à MOITIÉ — émetteur
 mais concept_cards.html ne lisait jamais le hash -> tout arrivait mort, et 257/432
 related_to inter-dimensions étaient non-cliquables. Toujours vérifier les DEUX côtés
 (émetteur ET cible) d'un deep-link.
+```
+
+### `wf_arbitrage_jenni` — wf_arbitrage_jenni
+
+```
+# Arbitrage Jenni — corrige le corpus, PAS le HTML
+
+**Règle** : un *arbitrage* Jenni (synthèse sourcée open access — jamais Zotero) sert à **CORRIGER LE FOND** : insertions **conscientes et chirurgicales** dans les `concept_cards` (append ciblé, si nécessaire) + versement des réfs au bank `jenni_sources` (dédup DOI). **Il n'apparaît PAS en HTML tel quel.** Si la synthèse est conservée → **fiche claude** (`origine='claude'`, `is_diy=0`, `transversale`, `integree`) raccordée à l'audit (`pedago_links` vers les cards + `fiche_contenus.refs`) + chapitre Cahier adossé via `config.cahier.chapter_fiches` (modèle fiche #41). Toujours archiver le docx d'arbitrage dans son dossier dédié : `git mv` → `docx/archives/arbitrages/Arbitrage-NN.docx` (PAS `fiche_<id>.docx`, réservé aux fiches). Doctrine complète : BQ `wf_arbitrage_jenni`.
 ```
 
 ## Bibliothèque de Connaissances (BQ)

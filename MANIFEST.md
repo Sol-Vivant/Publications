@@ -3,20 +3,23 @@
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
 - 52 tables, 7 vues
-- Scripts : 99 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- Scripts : 107 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
 | Script | Dossier | Description |
 |---|---|---|
 | `regen_all.py` | `tools/` | Régénère tous les outputs depuis la DB |
+| `analyse_emergences.py` | `tools/admin/` | Détecteur de tensions transversales (phase 1 du « conseil ») |
 | `analyse_fiches.py` | `tools/admin/` | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
 | `audit_anglicismes.py` | `tools/admin/` | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | `tools/admin/` | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | `tools/admin/` | Détection des canoniques FR qui sont en |
+| `audit_center.py` | `tools/admin/` | Centre d'audit du corpus : le FIL DIRECTEUR, tiré au démarrage. |
 | `audit_corpus_relations.py` | `tools/admin/` | Audit dynamique des relations du corpus. |
 | `audit_fiches.py` | `tools/admin/` | Audit complet des fiches integrees. |
 | `audit_focus.py` | `tools/admin/` | Audits focalisés via agent_runner (Opus, 3 phases). |
+| `audit_graines.py` | `tools/admin/` | Contrôle qualité des graines (fiche_sections) AVANT envoi Jenni. |
 | `audit_meta.py` | `tools/admin/` | Méta-audit : lit tous les audit_reports/json/*_latest.json |
 | `audit_opus.py` | `tools/admin/` | Audit approfondi du corpus via agents Task Claude Code |
 | `audit_repartition.py` | `tools/admin/` | Audit de répartition par strate. |
@@ -26,6 +29,7 @@
 | `bq_query.py` | `tools/admin/` | Consultation BQ on-demand (filesystem) |
 | `check_forbidden_jenni.py` | `tools/admin/` | Scan méta-vocab interdit dans tout contenu destiné à Jenni. |
 | `check_integrity.py` | `tools/admin/` | Validation d'intégrité de la DB sol_vivant.db |
+| `conseil_emergences.py` | `tools/admin/` | Phase 2 du dispositif « conseil » : délibération multi-agents. |
 | `dedupe_thesaurus.py` | `tools/admin/` | Détecte et fusionne les doublons du thésaurus. |
 | `deploy_publications.py` | `tools/admin/` | Synchronise Publications/web/ vers ../Publications/ |
 | `explorer.py` | `tools/admin/` | Interface web locale pour consulter sol_vivant.db |
@@ -34,8 +38,10 @@
 | `export_termes_candidats.py` | `tools/admin/` | Export des termes candidats non insérés pour validation. |
 | `export_tools.py` | `tools/admin/` | Exporte les scripts depuis le filesystem (tools/lib/scripts_inventory.py) vers un ZIP versionné |
 | `fix_titres.py` | `tools/admin/` | » par « I. |
+| `ingest_structured_links.py` | `tools/admin/` | Câblage des cards orphelines depuis le travail |
 | `pedago_links_apply.py` | `tools/admin/` | Insère dans pedago_links les suggestions générées par |
 | `pedago_links_suggest.py` | `tools/admin/` | Suggestion de cards pédagogiques à lier aux fiches/docs |
+| `purge_audit_log.py` | `tools/admin/` | Rétention du journal audit_log. |
 | `reintegrate_fiches_sections.py` | `tools/admin/` | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | `tools/admin/` | reconnecte les refs JSON de fiche_contenus.refs |
 | `repair_usages_collision_millesime.py` | `tools/admin/` | purge des source_usages parasites créés |
@@ -80,6 +86,7 @@
 | `integrate_validation_refs.py` | `tools/jenni/` | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
 | `refresh_retour_text.py` | `tools/jenni/` | répare CHIRURGICALEMENT le texte des sections de |
 | `resolve_import_conflicts.py` | `tools/jenni/` | Résout les blocs Jenni bloqués par multiples matches. |
+| `agent_context.py` | `tools/lib/` | Contexte agent FRAIS et tracé (anti « effet mémoire »). |
 | `agent_guards.py` | `tools/lib/` | Garde-fous pour scripts agent_runner. |
 | `agent_runner.py` | `tools/lib/` | Pattern « préparateur → agents Task → consolidateur » |
 | `audit_persist.py` | `tools/lib/` | Persistance des rapports d'audit sur filesystem. |
@@ -94,6 +101,7 @@
 | `doc_archive.py` | `tools/lib/` | archivage générique d'un docx intégré + son pendant envoyé. |
 | `docx_index.py` | `tools/lib/` | Source de vérité du mapping fiche ↔ docx archivé. |
 | `fiche_archive.py` | `tools/lib/` | archivage des fichiers sources post-intégration d'une fiche. |
+| `fiche_text.py` | `tools/lib/` | Source de vérité unique du « texte intégré » d'une fiche. |
 | `glossary.py` | `tools/lib/` | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | `tools/lib/` | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | `tools/lib/` | Fonctions partagées de formatage des prompts Jenni |
@@ -117,11 +125,11 @@ projet/
 ├── CLAUDE.md              # contexte persistent Claude Code
 ├── MANIFEST.md            # ce fichier
 ├── tools/
-│   ├── admin/                  analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_corpus_relations, audit_fiches, audit_focus, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, pedago_links_apply, pedago_links_suggest, reintegrate_fiches_sections, relink_fiche_refs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae
+│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_fiches, audit_focus, audit_graines, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, ingest_structured_links, pedago_links_apply, pedago_links_suggest, purge_audit_log, reintegrate_fiches_sections, relink_fiche_refs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
 │   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, refresh_retour_text, resolve_import_conflicts
-│   ├── lib/                    agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
+│   ├── lib/                    agent_context, agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, fiche_text, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
 │   ├── veille/                 weekly_scan
 │   ├── regen_all.py
 ├── docx/                      Documents .docx (retours Jenni)
@@ -138,7 +146,7 @@ projet/
 
 ## Pages web interactives
 
-10 pages, 44 templates (2 partagés), vendor local (hors-ligne).
+10 pages, 35 templates (2 partagés), vendor local (hors-ligne).
 
 | Page | Slug | Fichier |
 |------|------|---------|

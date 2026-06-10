@@ -49,6 +49,7 @@
   --font-lg:   calc(1.15rem * var(--font-scale));
   --font-xl:   calc(1.5rem  * var(--font-scale));
   --font-2xl:  calc(1.8rem  * var(--font-scale));
+    --font-3xl:  calc(2.94rem * var(--font-scale)); /* heroes/resultats : ~2.5rem a l echelle par defaut, suit le zoom */
   --font-1-4:  calc(1.4rem  * var(--font-scale));
   /* Echelle d'espacement (source unique pour paddings/margins) */
   --space-2xs: 0.25rem;
@@ -1769,6 +1770,9 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 
 .sv-header .sv-h1-sub { opacity: 0.7; font-weight: 400; }
 
+/* Couleurs strates — source unique config[strates].couleurs (injecté par get_charter_css) */
+:root{--strate-F:#8B5CF6; --strate-F-bg:#8B5CF622; --strate-F-bg-dark:#8B5CF633; --strate-S:#3B82F6; --strate-S-bg:#3B82F622; --strate-S-bg-dark:#3B82F633; --strate-V:#10B981; --strate-V-bg:#10B98122; --strate-V-bg-dark:#10B98133; --strate-P:#F59E0B; --strate-P-bg:#F59E0B22; --strate-P-bg-dark:#F59E0B33; --strate-H:#EF4444; --strate-H-bg:#EF444422; --strate-H-bg-dark:#EF444433;}
+
 
 
 .ec-layout { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; margin-top: 1rem; }
@@ -1779,7 +1783,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 .ec-input-group label { display: block; font-size: var(--font-sm); font-weight: 600; margin-bottom: 0.35rem; color: var(--text); }
 .ec-input-group input, .ec-input-group select { width: 100%; padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: var(--font-base); background: var(--bg); color: var(--text); }
 .ec-result { background: var(--warning-light); border-left: 4px solid var(--warning); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; color: var(--color-warning-text); }
-.ec-result-value { font-size: 2.5rem; font-weight: 700; color: var(--warning); line-height: 1; margin-bottom: 0.35rem; }
+.ec-result-value { font-size: var(--font-3xl); font-weight: 700; color: var(--warning); line-height: 1; margin-bottom: 0.35rem; }
 .ec-result-label { font-size: var(--font-sm); color: var(--color-warning-text); opacity: 0.85; }
 .ec-breakdown { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
 .ec-breakdown-row { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px dashed var(--border); font-size: var(--font-sm); }
@@ -1893,7 +1897,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Esclaves énergétiques<span class="sv-h1-sub"> : Quantification de la dépendance énergétique fossile</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-06 16:19 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-10 21:11 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2987,7 +2991,7 @@ function SvSearchInput({
       border: 'none',
       cursor: 'pointer',
       color: 'var(--text-secondary)',
-      fontSize: '1.1rem',
+      fontSize: 'var(--font-lg)',
       lineHeight: 1,
       padding: '0 0.2rem'
     }
@@ -3104,7 +3108,7 @@ function SvExpandableCard({
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: '0.65rem',
+      fontSize: 'var(--font-xs)',
       fontWeight: 600,
       minWidth: '26px',
       textAlign: 'right'
@@ -3183,7 +3187,7 @@ function SvExpandableCard({
     }
   })), /*#__PURE__*/React.createElement("span", {
     style: {
-      fontSize: '0.65rem',
+      fontSize: 'var(--font-xs)',
       color: 'var(--text-secondary)',
       fontWeight: 600,
       minWidth: '26px',

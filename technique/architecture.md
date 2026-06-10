@@ -11,23 +11,23 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 192 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3374 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 23043 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3773 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 25186 |
 | `chains_causales` | 38 chaines causales reliant les documents | 38 |
 | `chain_etapes` | Etapes des chaines | 246 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 173 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 187 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `db_meta` | Historique (audits, scores, todos, idees) | 19 |
-| `audit_log` | Journal des operations | 16150 |
+| `db_meta` | Historique (audits, scores, todos, idees) | 25 |
+| `audit_log` | Journal des operations | 6032 |
 
 ### Tables web et outils interactifs
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
-| `html_templates` | Templates CSS/JS par page + partagés | 44 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 174 |
+| `html_templates` | Templates CSS/JS par page + partagés | 35 (2 partagés) |
+| `concept_cards` | Fiches conceptuelles synthétiques | 181 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -53,11 +53,11 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `agent_runner` | max_concurrent, work_dir_root |
 | `analyse` | groupes, passes, template_passe2 |
 | `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
-| `audit` | def_max_chars, def_min_chars, def_truncate_chars, max_age_hours_meta, min_bigram_chars, min_chars_contenu_fiche, min_chars_definition_terme, min_chars_refs_fiche, preview_chars_card, seuil_avancement_bas, seuil_avancement_haut, warn_docs_isoles, warn_terms_sans_def |
+| `audit` | def_max_chars, def_min_chars, def_truncate_chars, fil_derniere_regen, fil_seuil_integrations, max_age_hours_meta, min_bigram_chars, min_chars_contenu_fiche, min_chars_definition_terme, min_chars_refs_fiche, preview_chars_card, seuil_avancement_bas, seuil_avancement_haut, warn_docs_isoles, warn_terms_sans_def |
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
-| `cahier` | chapitres, chapter_fiches, onglets, tab_descriptions, tool_pages |
+| `cahier` | chapitres, chapter_colors, chapter_fiches, fiche_type_colors, onglets, tab_descriptions, tool_pages |
 | `claude_notes` | fiches_biblio_cassee_marathon, fiches_marathon_filtre_origine |
-| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, integration_reponse_sourcage, metaanalyse_croise_sourcages, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, pratiques_typees_hors_jenni, redaction_documents_jenni, wal_checkpoint, web_nav_ancres |
+| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, conseil_contradicteur, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, integration_reponse_sourcage, metaanalyse_croise_sourcages, ouverture_conseil, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, path_docx_jenni, pratiques_typees_hors_jenni, principes_generatifs_avant_labels_reactifs, redaction_documents_jenni, retour_jenni_autonome, source_verite_data_avant_absence, termes_fichier_unique, thesaurus_carte, wal_checkpoint, web_nav_ancres, wf_arbitrage_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
@@ -67,6 +67,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
 | `lifofer` | comprendre, data, sources_sucre, tab_intros, ui |
+| `maintenance` | audit_log_retention_mois |
 | `matching` | min_token_score, pedago_min_score, pedago_top_n, pedago_w_content, pedago_w_title, prefix_chars_min, prefix_ratio_min, score_contient, score_inclus, score_seuil_bas, score_seuil_haut, title_threshold, top_n_default, triage_top_n |
 | `mo_calc` | cat_colors, modes_transformation, zones_eh_fallback |
 | `mo_calculateur` | comprendre, tab_intros |
@@ -86,13 +87,16 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | Script | Module | Role |
 |--------|--------|------|
 | `regen_all.py` | root | Régénère tous les outputs depuis la DB |
+| `analyse_emergences.py` | admin | Détecteur de tensions transversales (phase 1 du « conseil ») |
 | `analyse_fiches.py` | admin | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
 | `audit_anglicismes.py` | admin | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | admin | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | admin | Détection des canoniques FR qui sont en |
+| `audit_center.py` | admin | Centre d'audit du corpus : le FIL DIRECTEUR, tiré au démarrage. |
 | `audit_corpus_relations.py` | admin | Audit dynamique des relations du corpus. |
 | `audit_fiches.py` | admin | Audit complet des fiches integrees. |
 | `audit_focus.py` | admin | Audits focalisés via agent_runner (Opus, 3 phases). |
+| `audit_graines.py` | admin | Contrôle qualité des graines (fiche_sections) AVANT envoi Jenni. |
 | `audit_meta.py` | admin | Méta-audit : lit tous les audit_reports/json/*_latest.json |
 | `audit_opus.py` | admin | Audit approfondi du corpus via agents Task Claude Code |
 | `audit_repartition.py` | admin | Audit de répartition par strate. |
@@ -102,6 +106,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `bq_query.py` | admin | Consultation BQ on-demand (filesystem) |
 | `check_forbidden_jenni.py` | admin | Scan méta-vocab interdit dans tout contenu destiné à Jenni. |
 | `check_integrity.py` | admin | Validation d'intégrité de la DB sol_vivant.db |
+| `conseil_emergences.py` | admin | Phase 2 du dispositif « conseil » : délibération multi-agents. |
 | `dedupe_thesaurus.py` | admin | Détecte et fusionne les doublons du thésaurus. |
 | `deploy_publications.py` | admin | Synchronise Publications/web/ vers ../Publications/ |
 | `explorer.py` | admin | Interface web locale pour consulter sol_vivant.db |
@@ -110,8 +115,10 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `export_termes_candidats.py` | admin | Export des termes candidats non insérés pour validation. |
 | `export_tools.py` | admin | Exporte les scripts depuis le filesystem (tools/lib/scripts_inventory.py) vers un ZIP versionné |
 | `fix_titres.py` | admin | » par « I. |
+| `ingest_structured_links.py` | admin | Câblage des cards orphelines depuis le travail |
 | `pedago_links_apply.py` | admin | Insère dans pedago_links les suggestions générées par |
 | `pedago_links_suggest.py` | admin | Suggestion de cards pédagogiques à lier aux fiches/docs |
+| `purge_audit_log.py` | admin | Rétention du journal audit_log. |
 | `reintegrate_fiches_sections.py` | admin | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | admin | reconnecte les refs JSON de fiche_contenus.refs |
 | `repair_usages_collision_millesime.py` | admin | purge des source_usages parasites créés |
@@ -156,6 +163,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `integrate_validation_refs.py` | jenni | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
 | `refresh_retour_text.py` | jenni | répare CHIRURGICALEMENT le texte des sections de |
 | `resolve_import_conflicts.py` | jenni | Résout les blocs Jenni bloqués par multiples matches. |
+| `agent_context.py` | lib | Contexte agent FRAIS et tracé (anti « effet mémoire »). |
 | `agent_guards.py` | lib | Garde-fous pour scripts agent_runner. |
 | `agent_runner.py` | lib | Pattern « préparateur → agents Task → consolidateur » |
 | `audit_persist.py` | lib | Persistance des rapports d'audit sur filesystem. |
@@ -170,6 +178,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `doc_archive.py` | lib | archivage générique d'un docx intégré + son pendant envoyé. |
 | `docx_index.py` | lib | Source de vérité du mapping fiche ↔ docx archivé. |
 | `fiche_archive.py` | lib | archivage des fichiers sources post-intégration d'une fiche. |
+| `fiche_text.py` | lib | Source de vérité unique du « texte intégré » d'une fiche. |
 | `glossary.py` | lib | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | lib | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | lib | Fonctions partagées de formatage des prompts Jenni |
