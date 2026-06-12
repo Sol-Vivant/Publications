@@ -870,6 +870,7 @@ select.sv-input { color-scheme: light dark; }
   margin-top: 2px;
   width: 4ch;
   text-align: left;
+  white-space: nowrap;
 }
 .sv-navlist-item.active .sv-navlist-code { color: var(--accent); }
 .sv-navlist-main { flex: 1; min-width: 0; }
@@ -1696,8 +1697,8 @@ select.sv-input { color-scheme: light dark; }
 }
 .sv-sections-nav-chev.open { transform: rotate(90deg); }
 .sv-sections-nav-content {
-  margin-left: 1.6rem;
-  padding: 6px 12px 7px;
+  margin-left: 0.5rem;
+  padding: 6px 0.75rem 7px;
   background: var(--color-bg-subtle);
   border-radius: 6px;
   margin-bottom: 5px;
@@ -1707,6 +1708,14 @@ select.sv-input { color-scheme: light dark; }
 }
 
 /* Contenus riches dans le nav-content : meme echelle compacte */
+/* C6 : corps de section aligné sur le titre — neutralise les retraits internes
+   de .sv-richtext dans l'accordéon (sinon .sv-richtext p{padding-left:1rem}
+   plus spécifique repousse le texte de 16px). */
+.sv-sections-nav-content .sv-richtext p,
+.sv-sections-nav-content .sv-richtext p.sv-prose,
+.sv-sections-nav-content .sv-richtext .sv-section-label,
+.sv-sections-nav-content .sv-richtext .sv-bullet-list,
+.sv-sections-nav-content .sv-richtext .sv-ordered-list { padding-left: 0; }
 .sv-sections-nav-content p {
   font-size: var(--font-sm);
   color: var(--text);
@@ -1881,7 +1890,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Transition robuste<span class="sv-h1-sub"> : Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-10 21:12 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-11 22:36 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1910,22 +1919,32 @@ const DATA = {"chantiers": [{"numero": "1", "famille": "transports", "titre": "D
 // ═══════════════════════════════════════════════════════════════════
 
 // ── SvCollapse : section compactable/décompactable ──
-// ── useFillHeight : zone liste/lecture à hauteur de viewport, scroll interne ──
-// Mode « appli » : le layout occupe la hauteur restante sous l'en-tête (mesurée
-// sur la position document du layout — capte nav-pages, onglets, pastilles et
-// marges au-dessus), et chaque panneau scrolle indépendamment, sans scroll de la
-// page. Recalcul sur resize, zoom typo cross-onglet (storage) et tout reflux de la
-// page (ResizeObserver sur body : zoom A-/A/A+ même onglet, pastilles repliées).
-// Partagé par les onglets cartographie (index) et Concept Cards.
-function useFillHeight() {
+// ── useFixedFillHeight : hauteur FIXE des zones N/L, incluant le bandeau ──
+// Variante de useFillHeight (demande JMJ 2026-06-11). La hauteur des panneaux
+// est CONSTANTE et ne soustrait PAS le bandeau .sv-header : seules les barres
+// persistantes au-dessus du layout (nav-pages, onglets, pastilles de rubriques)
+// comptent. Le bandeau reste dans le flux et s'efface au scroll ; le layout est
+// `position:sticky` -> une fois le bandeau masque, N et L remplissent l'ecran et
+// scrollent EN INTERNE (l'environnement de navigation — N + onglets + pastilles —
+// reste fige). offsetTop cumule = position document stable meme sous sticky.
+function useFixedFillHeight() {
   const ref = React.useRef(null);
-  const [bodyTop, setBodyTop] = React.useState(null);
+  const [stickyTop, setStickyTop] = React.useState(null);
+  const [mobile, setMobile] = React.useState(false);
   React.useEffect(() => {
     const calc = () => {
+      setMobile(window.innerWidth <= 1024);
       const el = ref.current;
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      if (top > 60) setBodyTop(top);
+      let top = 0,
+        n = el;
+      while (n) {
+        top += n.offsetTop;
+        n = n.offsetParent;
+      }
+      const header = document.querySelector('.sv-header');
+      const hH = header ? header.offsetHeight : 0;
+      if (top > 0) setStickyTop(Math.max(0, Math.round(top - hH)));
     };
     calc();
     const t1 = setTimeout(calc, 150);
@@ -1945,17 +1964,35 @@ function useFillHeight() {
       if (ro) ro.disconnect();
     };
   }, []);
+  const st = stickyTop == null ? 100 : stickyTop;
+  if (mobile) {
+    // Mobile (<=1024px) : ni hauteur fixe ni sticky -> la media query de la
+    // charte reprend (colonne unique, scroll de page naturel).
+    return {
+      ref,
+      layoutStyle: {
+        padding: 0,
+        gap: '1.25rem'
+      },
+      paneStyle: {}
+    };
+  }
   return {
     ref,
     layoutStyle: {
+      position: 'sticky',
+      top: st + 'px',
       padding: 0,
       gap: '1.25rem',
-      height: 'calc(100vh - ' + (bodyTop || 150) + 'px)',
+      alignItems: 'stretch',
+      height: 'calc(100vh - ' + st + 'px)',
       minHeight: '520px',
       overflow: 'hidden'
     },
     paneStyle: {
-      height: '100%',
+      position: 'static',
+      height: 'auto',
+      minHeight: '0',
       maxHeight: 'none',
       overflowY: 'auto'
     }
@@ -4401,8 +4438,7 @@ function SvNavList({
       color: dot,
       fontSize: 'var(--font-sm)',
       fontWeight: 700,
-      fontFamily: 'inherit',
-      width: 'auto'
+      fontFamily: 'inherit'
     } : colorCode && dot ? {
       color: dot
     } : undefined;

@@ -13,13 +13,13 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
 | `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3773 |
 | `term_relations` | Relations entre termes (BT, NT, RT) | 25186 |
-| `chains_causales` | 38 chaines causales reliant les documents | 38 |
-| `chain_etapes` | Etapes des chaines | 246 |
+| `chains_causales` | 42 chaines causales reliant les documents | 42 |
+| `chain_etapes` | Etapes des chaines | 280 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
 | `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 187 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 25 |
-| `audit_log` | Journal des operations | 6032 |
+| `audit_log` | Journal des operations | 9208 |
 
 ### Tables web et outils interactifs
 
@@ -27,7 +27,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
 | `html_templates` | Templates CSS/JS par page + partagés | 35 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 181 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 183 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -121,6 +121,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `purge_audit_log.py` | admin | Rétention du journal audit_log. |
 | `reintegrate_fiches_sections.py` | admin | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
 | `relink_fiche_refs.py` | admin | reconnecte les refs JSON de fiche_contenus.refs |
+| `repair_thesaurus_defs.py` | admin | Répare deux corruptions héritées du champ terms.definition. |
 | `repair_usages_collision_millesime.py` | admin | purge des source_usages parasites créés |
 | `resolve_sources_crossref.py` | admin | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
 | `resolve_term_relations.py` | admin | Résout les relations orphelines du thésaurus. |
@@ -161,6 +162,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `integrate_fiche_refs.py` | jenni | Intégration des refs biblio d'une fiche intégrée dans jenni_sources + source_usages. |
 | `integrate_source.py` | jenni | Integration consciente d'un rapport de source. |
 | `integrate_validation_refs.py` | jenni | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
+| `raccorde_refs_cache.py` | jenni | raccorde les source_usages d'une fiche depuis son |
 | `refresh_retour_text.py` | jenni | répare CHIRURGICALEMENT le texte des sections de |
 | `resolve_import_conflicts.py` | jenni | Résout les blocs Jenni bloqués par multiples matches. |
 | `agent_context.py` | lib | Contexte agent FRAIS et tracé (anti « effet mémoire »). |

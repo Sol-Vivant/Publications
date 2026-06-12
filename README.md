@@ -15,10 +15,10 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 
 - **18 documents** répartis en 5 strates
 - **3773 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
-- **38 chaînes causales** et **0 renvois** inter-documents
-- **181 fiches conceptuelles** et **192 prompts** structurés
+- **42 chaînes causales** et **0 renvois** inter-documents
+- **183 fiches conceptuelles** et **192 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **52 tables** SQLite, 107 scripts Python
+- **52 tables** SQLite, 109 scripts Python
 
 ### Les forces de cette architecture
 
@@ -44,10 +44,10 @@ Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie,
 Tools/
 ├── sol_vivant.db              Source de vérité données (SQLite)
 ├── tools/
-│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_fiches, audit_focus, audit_graines, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, ingest_structured_links, pedago_links_apply, pedago_links_suggest, purge_audit_log, reintegrate_fiches_sections, relink_fiche_refs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae
+│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_fiches, audit_focus, audit_graines, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, fix_titres, ingest_structured_links, pedago_links_apply, pedago_links_suggest, purge_audit_log, reintegrate_fiches_sections, relink_fiche_refs, repair_thesaurus_defs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, refresh_retour_text, resolve_import_conflicts
+│   ├── jenni/                  edit_fiche_note, enrich_thesaurus, export_fiche, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, raccorde_refs_cache, refresh_retour_text, resolve_import_conflicts
 │   ├── lib/                    agent_context, agent_guards, agent_runner, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, fiche_text, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
 ├── docx/                      Documents .docx (retours Jenni)
 ├── jmj/                       Documents de travail
