@@ -1048,9 +1048,9 @@ select.sv-input { color-scheme: light dark; }
   color: var(--color-success-text);
   margin-bottom: 0.25rem;
 }
-.sv-rule p, .sv-rule span {
+.sv-rule p, .sv-rule span, .sv-rule > div:not(.sv-rule-title) {
   font-size: var(--font-base);
-  color: var(--color-success-text);
+  color: var(--text);
   line-height: 1.5;
 }
 
@@ -1396,13 +1396,20 @@ select.sv-input { color-scheme: light dark; }
 }
 
 /* ── Inline emphasis / highlight unifiés ── */
+.sv-gloss {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(120,120,120,0.55);
+  cursor: help;
+}
+
 .sv-mark {
   background: var(--accent-light);
   color: var(--accent-dark);
   padding: 0.05em 0.35em;
   border-radius: 4px;
   font-weight: 500;
-  font-size: 0.95em;
 }
 .sv-code {
   background: var(--color-bg-muted, #f4f4f3);
@@ -1677,6 +1684,8 @@ select.sv-input { color-scheme: light dark; }
   color: var(--color-text-muted);
   font-family: monospace;
   flex-shrink: 0;
+  min-width: 2.6ch;   /* largeur réservée → titres alignés (1 / 1.1 / 10.2) */
+  text-align: left;
 }
 .sv-sections-nav-title {
   font-size: var(--font-sm);
@@ -1775,6 +1784,11 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 }
 
 .sv-header .sv-h1-sub { opacity: 0.7; font-weight: 400; }
+
+.sv-highlight-box > div:not(.sv-highlight-box-title) {
+  font-size: var(--font-base);
+  line-height: 1.5;
+}
 
 /* Couleurs strates — source unique config[strates].couleurs (injecté par get_charter_css) */
 :root{--strate-F:#8B5CF6; --strate-F-bg:#8B5CF622; --strate-F-bg-dark:#8B5CF633; --strate-S:#3B82F6; --strate-S-bg:#3B82F622; --strate-S-bg-dark:#3B82F633; --strate-V:#10B981; --strate-V-bg:#10B98122; --strate-V-bg-dark:#10B98133; --strate-P:#F59E0B; --strate-P-bg:#F59E0B22; --strate-P-bg-dark:#F59E0B33; --strate-H:#EF4444; --strate-H-bg:#EF444422; --strate-H-bg-dark:#EF444433;}
@@ -1934,7 +1948,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Tests terrain<span class="sv-h1-sub"> : Diagnostiquer son sol au champ avec 20 protocoles simples</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-11 22:36 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-12 17:00 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1952,7 +1966,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 
 
 <script>
-const DATA = {"tests": [{"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "docs_codes": ["P1", "S1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "docs_codes": ["P1", "S2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "docs_codes": ["P1", "S2", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "docs_codes": ["P1", "P2"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "docs_codes": ["P1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "docs_codes": ["P1", "V1"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "docs_codes": ["P1", "S4", "S0"], "source": "base_obsolete_v1", "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "docs_codes": ["S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "docs_codes": ["P1", "S1", "S4"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "docs_codes": ["P1", "S1", "S0"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "docs_codes": ["P1", "S1"], "source": "base_obsolete_v1", "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};
+const DATA = {"tests": [{"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};
 </script>
 
 
@@ -2718,13 +2732,109 @@ function SvSection({
 //         termes entre backticks `...`.
 // Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
 // Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+// -- Glossaire auto (infobulle discrete) : souligne en pointille les termes de
+// DATA.glossary presents dans le texte (tokenisation par mots ; apostrophe et
+// espace = separateurs, tiret interne garde). Definition au survol (title natif).
+// Active par la prop autoGloss (fiches). 1re occurrence par rendu. Index Set/Map
+// -> scan quasi lineaire (rapide : ~2ms / 16k car. vs ~400ms pour un mega-regex).
+let _glossIdx;
+function _glossIndex() {
+  if (_glossIdx !== undefined) return _glossIdx;
+  _glossIdx = null;
+  try {
+    const g = typeof DATA !== 'undefined' && DATA.glossary || {};
+    const single = new Map(),
+      multi = new Map();
+    const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
+    for (const k of Object.keys(g)) {
+      if (!k || k.length < 4) continue;
+      const p = k.match(tok) || [];
+      if (p.length === 1) single.set(p[0], k);else if (p.length > 1) {
+        if (!multi.has(p[0])) multi.set(p[0], []);
+        multi.get(p[0]).push({
+          parts: p,
+          key: k
+        });
+      }
+    }
+    for (const a of multi.values()) a.sort((x, y) => y.parts.length - x.parts.length);
+    _glossIdx = {
+      single,
+      multi
+    };
+  } catch (e) {
+    _glossIdx = null;
+  }
+  return _glossIdx;
+}
+function _svMarkGloss(s, keyPrefix, seen) {
+  const idx = s ? _glossIndex() : null;
+  if (!idx) return [s];
+  const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
+  const toks = [];
+  let m;
+  while ((m = tok.exec(s)) !== null) toks.push({
+    lc: m[0].toLowerCase(),
+    start: m.index,
+    end: m.index + m[0].length
+  });
+  if (!toks.length) return [s];
+  const out = [];
+  let cursor = 0,
+    n = 0,
+    i = 0;
+  while (i < toks.length) {
+    let L = 0,
+      key = null;
+    const cand = idx.multi.get(toks[i].lc);
+    if (cand) for (const c of cand) {
+      const p = c.parts;
+      if (i + p.length <= toks.length) {
+        let ok = true;
+        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) {
+          ok = false;
+          break;
+        }
+        if (ok) {
+          L = p.length;
+          key = c.key;
+          break;
+        }
+      }
+    }
+    if (!L && idx.single.has(toks[i].lc)) {
+      L = 1;
+      key = idx.single.get(toks[i].lc);
+    }
+    const def = L && key ? (DATA.glossary || {})[key] : null;
+    if (def && !seen.has(key)) {
+      seen.add(key);
+      const st = toks[i].start,
+        en = toks[i + L - 1].end;
+      if (st > cursor) out.push(s.substring(cursor, st));
+      out.push(/*#__PURE__*/React.createElement("span", {
+        key: keyPrefix + '-gl-' + n++,
+        className: "sv-gloss",
+        title: def
+      }, s.substring(st, en)));
+      cursor = en;
+      i += L;
+    } else {
+      i += 1;
+    }
+  }
+  if (cursor < s.length) out.push(s.substring(cursor));
+  return out.length ? out : [s];
+}
 function SvRichText({
   text,
   onCardRef,
-  skipPrefixes
+  skipPrefixes,
+  autoGloss
 }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
+  const gseen = new Set();
   const src0 = text;
   const rawLines = src0.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
 
@@ -2879,7 +2989,10 @@ function SvRichText({
       m,
       n = 0;
     while ((m = regex.exec(s)) !== null) {
-      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m.index > last) {
+        const _seg = s.substring(last, m.index);
+        if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen));else out.push(_seg);
+      }
       if (m[1]) {
         const id = parseInt(m[1]);
         out.push(/*#__PURE__*/React.createElement("a", {
@@ -2910,7 +3023,8 @@ function SvRichText({
       } else if (m[3]) {
         out.push(/*#__PURE__*/React.createElement("span", {
           key: keyPrefix + '-term-' + n++,
-          className: "sv-mark"
+          className: "sv-mark",
+          title: (DATA.glossary || {})[m[3].toLowerCase()] || undefined
         }, m[3]));
       } else if (m[4]) {
         out.push(/*#__PURE__*/React.createElement("span", {
@@ -2935,7 +3049,10 @@ function SvRichText({
       }
       last = m.index + m[0].length;
     }
-    if (last < s.length) out.push(s.substring(last));
+    if (last < s.length) {
+      const _tl = s.substring(last);
+      if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen));else out.push(_tl);
+    }
     return out;
   };
   return /*#__PURE__*/React.createElement("div", {
@@ -3992,7 +4109,8 @@ function SvComprendreSection({
   }), (section.type === 'cahier' || section.type === 'richtext') && /*#__PURE__*/React.createElement("div", {
     className: "sv-richtext"
   }, /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.contenu
+    text: section.contenu,
+    autoGloss: true
   })));
 }
 function SvComprendre({
@@ -4141,7 +4259,8 @@ function SvFicheCard({
             blocks: s.blocks
           });
           if (s.contexte_sci) return /*#__PURE__*/React.createElement(SvRichText, {
-            text: s.contexte_sci
+            text: s.contexte_sci,
+            autoGloss: true
           });
           return /*#__PURE__*/React.createElement("div", {
             style: {
@@ -4164,7 +4283,8 @@ function SvFicheCard({
           borderRadius: '4px'
         }
       }, "\u26A0 Affichage monolithique \u2014 d\xE9coupage par sections en attente de cycle Jenni MAJ."), /*#__PURE__*/React.createElement(SvRichText, {
-        text: f.contenu_integre
+        text: f.contenu_integre,
+        autoGloss: true
       }));
     }
     return /*#__PURE__*/React.createElement("div", {
@@ -4249,7 +4369,8 @@ function SvFicheBlock({
   // 'richtext' (section retour Jenni en un bloc) ou 'p' legacy -> SvRichText
   // (tableaux markdown, gras, italic, sous-titres). SvRichText est hoiste.
   return /*#__PURE__*/React.createElement(SvRichText, {
-    text: block.text
+    text: block.text,
+    autoGloss: true
   });
 }
 

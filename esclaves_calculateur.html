@@ -1051,9 +1051,9 @@ select.sv-input { color-scheme: light dark; }
   color: var(--color-success-text);
   margin-bottom: 0.25rem;
 }
-.sv-rule p, .sv-rule span {
+.sv-rule p, .sv-rule span, .sv-rule > div:not(.sv-rule-title) {
   font-size: var(--font-base);
-  color: var(--color-success-text);
+  color: var(--text);
   line-height: 1.5;
 }
 
@@ -1399,13 +1399,20 @@ select.sv-input { color-scheme: light dark; }
 }
 
 /* ── Inline emphasis / highlight unifiés ── */
+.sv-gloss {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(120,120,120,0.55);
+  cursor: help;
+}
+
 .sv-mark {
   background: var(--accent-light);
   color: var(--accent-dark);
   padding: 0.05em 0.35em;
   border-radius: 4px;
   font-weight: 500;
-  font-size: 0.95em;
 }
 .sv-code {
   background: var(--color-bg-muted, #f4f4f3);
@@ -1680,6 +1687,8 @@ select.sv-input { color-scheme: light dark; }
   color: var(--color-text-muted);
   font-family: monospace;
   flex-shrink: 0;
+  min-width: 2.6ch;   /* largeur réservée → titres alignés (1 / 1.1 / 10.2) */
+  text-align: left;
 }
 .sv-sections-nav-title {
   font-size: var(--font-sm);
@@ -1778,6 +1787,11 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 }
 
 .sv-header .sv-h1-sub { opacity: 0.7; font-weight: 400; }
+
+.sv-highlight-box > div:not(.sv-highlight-box-title) {
+  font-size: var(--font-base);
+  line-height: 1.5;
+}
 
 /* Couleurs strates — source unique config[strates].couleurs (injecté par get_charter_css) */
 :root{--strate-F:#8B5CF6; --strate-F-bg:#8B5CF622; --strate-F-bg-dark:#8B5CF633; --strate-S:#3B82F6; --strate-S-bg:#3B82F622; --strate-S-bg-dark:#3B82F633; --strate-V:#10B981; --strate-V-bg:#10B98122; --strate-V-bg-dark:#10B98133; --strate-P:#F59E0B; --strate-P-bg:#F59E0B22; --strate-P-bg-dark:#F59E0B33; --strate-H:#EF4444; --strate-H-bg:#EF444422; --strate-H-bg-dark:#EF444433;}
@@ -1906,7 +1920,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Esclaves énergétiques<span class="sv-h1-sub"> : Quantification de la dépendance énergétique fossile</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-11 22:36 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-12 14:54 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2686,13 +2700,109 @@ function SvSection({
 //         termes entre backticks `...`.
 // Output : JSX avec <p>, <SvBulletList>, sv-section-label, liens cards, tags termes.
 // Props: text, onCardRef (fn id → void), skipPrefixes (default ['[2026-'])
+// -- Glossaire auto (infobulle discrete) : souligne en pointille les termes de
+// DATA.glossary presents dans le texte (tokenisation par mots ; apostrophe et
+// espace = separateurs, tiret interne garde). Definition au survol (title natif).
+// Active par la prop autoGloss (fiches). 1re occurrence par rendu. Index Set/Map
+// -> scan quasi lineaire (rapide : ~2ms / 16k car. vs ~400ms pour un mega-regex).
+let _glossIdx;
+function _glossIndex() {
+  if (_glossIdx !== undefined) return _glossIdx;
+  _glossIdx = null;
+  try {
+    const g = typeof DATA !== 'undefined' && DATA.glossary || {};
+    const single = new Map(),
+      multi = new Map();
+    const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
+    for (const k of Object.keys(g)) {
+      if (!k || k.length < 4) continue;
+      const p = k.match(tok) || [];
+      if (p.length === 1) single.set(p[0], k);else if (p.length > 1) {
+        if (!multi.has(p[0])) multi.set(p[0], []);
+        multi.get(p[0]).push({
+          parts: p,
+          key: k
+        });
+      }
+    }
+    for (const a of multi.values()) a.sort((x, y) => y.parts.length - x.parts.length);
+    _glossIdx = {
+      single,
+      multi
+    };
+  } catch (e) {
+    _glossIdx = null;
+  }
+  return _glossIdx;
+}
+function _svMarkGloss(s, keyPrefix, seen) {
+  const idx = s ? _glossIndex() : null;
+  if (!idx) return [s];
+  const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
+  const toks = [];
+  let m;
+  while ((m = tok.exec(s)) !== null) toks.push({
+    lc: m[0].toLowerCase(),
+    start: m.index,
+    end: m.index + m[0].length
+  });
+  if (!toks.length) return [s];
+  const out = [];
+  let cursor = 0,
+    n = 0,
+    i = 0;
+  while (i < toks.length) {
+    let L = 0,
+      key = null;
+    const cand = idx.multi.get(toks[i].lc);
+    if (cand) for (const c of cand) {
+      const p = c.parts;
+      if (i + p.length <= toks.length) {
+        let ok = true;
+        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) {
+          ok = false;
+          break;
+        }
+        if (ok) {
+          L = p.length;
+          key = c.key;
+          break;
+        }
+      }
+    }
+    if (!L && idx.single.has(toks[i].lc)) {
+      L = 1;
+      key = idx.single.get(toks[i].lc);
+    }
+    const def = L && key ? (DATA.glossary || {})[key] : null;
+    if (def && !seen.has(key)) {
+      seen.add(key);
+      const st = toks[i].start,
+        en = toks[i + L - 1].end;
+      if (st > cursor) out.push(s.substring(cursor, st));
+      out.push(/*#__PURE__*/React.createElement("span", {
+        key: keyPrefix + '-gl-' + n++,
+        className: "sv-gloss",
+        title: def
+      }, s.substring(st, en)));
+      cursor = en;
+      i += L;
+    } else {
+      i += 1;
+    }
+  }
+  if (cursor < s.length) out.push(s.substring(cursor));
+  return out.length ? out : [s];
+}
 function SvRichText({
   text,
   onCardRef,
-  skipPrefixes
+  skipPrefixes,
+  autoGloss
 }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
+  const gseen = new Set();
   const src0 = text;
   const rawLines = src0.split('\n').filter(l => !skips.some(p => l.trim().startsWith(p)));
 
@@ -2847,7 +2957,10 @@ function SvRichText({
       m,
       n = 0;
     while ((m = regex.exec(s)) !== null) {
-      if (m.index > last) out.push(s.substring(last, m.index));
+      if (m.index > last) {
+        const _seg = s.substring(last, m.index);
+        if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen));else out.push(_seg);
+      }
       if (m[1]) {
         const id = parseInt(m[1]);
         out.push(/*#__PURE__*/React.createElement("a", {
@@ -2878,7 +2991,8 @@ function SvRichText({
       } else if (m[3]) {
         out.push(/*#__PURE__*/React.createElement("span", {
           key: keyPrefix + '-term-' + n++,
-          className: "sv-mark"
+          className: "sv-mark",
+          title: (DATA.glossary || {})[m[3].toLowerCase()] || undefined
         }, m[3]));
       } else if (m[4]) {
         out.push(/*#__PURE__*/React.createElement("span", {
@@ -2903,7 +3017,10 @@ function SvRichText({
       }
       last = m.index + m[0].length;
     }
-    if (last < s.length) out.push(s.substring(last));
+    if (last < s.length) {
+      const _tl = s.substring(last);
+      if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen));else out.push(_tl);
+    }
     return out;
   };
   return /*#__PURE__*/React.createElement("div", {
@@ -3960,7 +4077,8 @@ function SvComprendreSection({
   }), (section.type === 'cahier' || section.type === 'richtext') && /*#__PURE__*/React.createElement("div", {
     className: "sv-richtext"
   }, /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.contenu
+    text: section.contenu,
+    autoGloss: true
   })));
 }
 function SvComprendre({
@@ -4109,7 +4227,8 @@ function SvFicheCard({
             blocks: s.blocks
           });
           if (s.contexte_sci) return /*#__PURE__*/React.createElement(SvRichText, {
-            text: s.contexte_sci
+            text: s.contexte_sci,
+            autoGloss: true
           });
           return /*#__PURE__*/React.createElement("div", {
             style: {
@@ -4132,7 +4251,8 @@ function SvFicheCard({
           borderRadius: '4px'
         }
       }, "\u26A0 Affichage monolithique \u2014 d\xE9coupage par sections en attente de cycle Jenni MAJ."), /*#__PURE__*/React.createElement(SvRichText, {
-        text: f.contenu_integre
+        text: f.contenu_integre,
+        autoGloss: true
       }));
     }
     return /*#__PURE__*/React.createElement("div", {
@@ -4217,7 +4337,8 @@ function SvFicheBlock({
   // 'richtext' (section retour Jenni en un bloc) ou 'p' legacy -> SvRichText
   // (tableaux markdown, gras, italic, sous-titres). SvRichText est hoiste.
   return /*#__PURE__*/React.createElement(SvRichText, {
-    text: block.text
+    text: block.text,
+    autoGloss: true
   });
 }
 

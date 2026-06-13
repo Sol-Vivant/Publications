@@ -346,15 +346,17 @@ Modele : jmj/rapports/synthese/synthese_session_2026-06-01_frictions_apprentissa
 ### `conseil_contradicteur` — Tout Conseil se clôt par un contradicteur de la synthèse du chairman AVANT arbitrage JMJ — la synthèse est sinon le seul maillon non audité
 
 ```
-Le dispositif du **Conseil** (advisors indépendants → synthèse du chairman/Claude → arbitrage JMJ) se clôt OBLIGATOIREMENT par un **agent contradicteur de la synthèse**, lancé AVANT l'arbitrage de JMJ.
+Le **Conseil** est LE dispositif de délibération du corpus. Protocole en 3 temps — le **contradicteur est un checkpoint NON-NÉGOCIABLE** (oublié 2-3 fois : à ne PLUS jamais sauter), présent à DEUX moments :
 
-**Pourquoi** : les advisors s'auditent mutuellement, mais la synthèse du chairman est sinon le **seul maillon non audité** du dispositif — exposée aux faux positifs Opus (BQ #55), au **faux consensus** (empiler les avis au lieu de trancher une vraie divergence), et aux **acquis non vérifiés** (affirmer qu'un champ/mécanisme existe sans le constater en DB).
+**1. DÉLIBÉRATION CONFRONTÉE** — 3 conseillers (lentilles indépendantes, regards complémentaires) + 1 contradicteur siègent. Chacun rend d'abord un avis indépendant, PUIS ils **échangent entre eux** : chaque siège lit les autres, concède ou maintient, nomme l'angle mort collectif et la vraie convergence. Le contradicteur, dès cette phase, traque la faille fatale, le faux consensus, l'artefact de comptage.
 
-**Mandat du contradicteur** : il ne rejoue pas le débat, il attaque LA SYNTHÈSE — qu'a-t-elle lissé, sur-vendu, omis ? quels acquis non vérifiés ? quelle sur-ingénierie au regard du besoin réel ? qu'est-ce qui ne survivra pas à l'usage quotidien ?
+**2. SYNTHÈSE + CONTRADICTION** — le chairman (Claude) tire une **synthèse** de la délibération confrontée. Un **contradicteur attaque LA SYNTHÈSE** — le seul maillon autrement non audité, exposé aux faux positifs Opus (BQ #55), au faux consensus (empiler les avis au lieu de trancher une vraie divergence), aux acquis non vérifiés (affirmer qu'un champ/mécanisme existe sans le constater en DB). Mandat : il ne rejoue pas le débat, il attaque la synthèse — qu'a-t-elle lissé, sur-vendu, omis ? quelle sur-ingénierie au regard du besoin réel ? qu'est-ce qui ne survivra pas à l'usage quotidien ? Claude VÉRIFIE lui-même en DB les affirmations factuelles du contradicteur (BQ #55 vaut aussi pour lui) avant de conclure.
 
-**Après le contradicteur** : Claude VÉRIFIE lui-même les affirmations factuelles du contradicteur (BQ #55 vaut aussi pour lui) avant de présenter à JMJ synthèse + critique vérifiée pour arbitrage.
+**3. VERDICT** — le chairman rend à JMJ le **verdict final** : synthèse + critique vérifiée + arbitrages ouverts. JMJ tranche.
 
-Validé à l'usage (2026-06-10) : a rattrapé « cards_reinforce existe déjà » (faux — inexistant en DB) et « couverture cards→axes » (réelle : 31 %) dans une synthèse de design avant qu'elle n'atteigne JMJ.
+Les agents du Conseil font du JUGEMENT / CRITIQUE, JAMAIS de rédaction éditoriale (pas_agent_redacteur) : ils proposent des positions/intitulés, ils ne rédigent pas le contenu du corpus.
+
+Validé 2026-06-10 : a rattrapé « cards_reinforce existe déjà » (faux — inexistant en DB) et « couverture cards→axes 31% » avant qu'une synthèse de design n'atteigne JMJ. Renforcé 2026-06-12 (JMJ) : structure des DEUX contradicteurs explicitée (confrontation inter-conseillers + attaque de la synthèse) après oublis répétés du maillon.
 ```
 
 ### `environnement_web` — Env web : sqlite3 CLI absent -> python3 / bq_query.py (jamais sqlite3 shell)
@@ -366,7 +368,7 @@ Conteneur ephemere ; `requirements.txt` pas joue d'office -> `pip install -r req
 ### `fiche_docx_production` — Docx fiches : zero meta-vocab, structure plate H1 (pas de H2 impose), graines ~600 chars, 5-8k total
 
 ```
-Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1, pas de H2 impose), graines ~600 chars/section, 5-8k chars total (zoom tres sous-sectionne peut monter, jamais >=12k). Citations (Auteur, annee) INLINE au mot pres (#146.7), puisees dans les source_usages ventiles par section ; PAS de gabarit « Mecanismes: »/« Termes: » (termes integres au texte, #146.6). gen_fiche_docx : bloc References dedoublonne par oeuvre, lignes recap auto supprimees. REDO d'une fiche integree = regenerer une graine corpus-aware re-sourcee sans toucher l'integre affiche (modeles #84 trophobiose, #219 AGCC). Redaction = Claude direct, jamais d'agent. Doctrine complete : BQ `wf_fiche_production` (fait foi).
+Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1 numerotes, pas de H2 ; Jenni narrativise en H2 au retour = normal). 2 CAS a ne pas confondre : (1) fiche neuve/refonte -> GRAINE en puces denses ~1000-1200 chars/section (3-5 puces mecanistiques + chiffre [a sourcer], jamais valeur finale sinon Jenni recopie sans source), 6-10k total, jamais >=12k ; (2) fiche INTEGREE -> docx COMPLET regenere depuis la BASE (gen_fiche_docx mode reprise, lit contenu), JAMAIS l'archive (perimee : corrections base absentes du docx). CHAPEAU obligatoire = couvrir les grands axes du theme (mineral->nutrition/grain-a-l'humain ; pratique->mecanisme ; microbien->statut contextuel) : un check, pas un template. Citations (Auteur, annee) INLINE au mot pres (#146.7) depuis source_usages ; PAS de gabarit « Mecanismes: »/« Termes: » (#146.6). Redaction = Claude direct, jamais d'agent. Workflow detaille : BQ `fiche_plan_graine_propre` (#163) ; pipeline : `wf_fiche_production` (#130).
 ```
 
 ### `fichiers_jmj_sur_github` — Fichiers poussés par JMJ = sur origin (GitHub), JAMAIS dans le conteneur local. Réflexe : git fetch origin + inspecter origin/main (git log/diff), pas de recherche locale d'abord.
@@ -394,7 +396,7 @@ Méta-analyse d'intégration de fiche (audit croisé) -> VOLET H obligatoire : c
 ### `ouverture_conseil` — Rituel d'ouverture (JMJ 2026-06-10) : réamorçage → lire le handoff de clôture → invoquer le Conseil sur les arbitrages ouverts (contrôle anti-dérive, cadré handoff+fil). Pendant de cloture_pending_recap.
 
 ```
-Rituel d'ouverture de session — contrôle anti-dérive (pendant de cloture_pending_recap). Après le réamorçage (fil directeur affiché par le hook SessionStart) : (1) LIRE le dernier handoff de clôture (jmj/rapports/session/ le plus récent, bloc « CONSEIL D'OUVERTURE » : arbitrages_ouverts / routé / décliné / prochains_candidats / fil_snapshot) ; (2) INVOQUER LE CONSEIL (3 lentilles indépendantes + contradicteur, cf. conseil_contradicteur) sur les arbitrages_ouverts et prochains_candidats, CADRÉ sur le handoff + le fil (pas un ré-audit complet) ; (3) n'AGIR qu'après cet arbitrage vérifié-source. Le Conseil interroge la DB/BQ : c'est lui qui empêche de prendre le rapport pour argent comptant (cf. source_verite_data_avant_absence). En pratique une session démarre toujours avec quelque chose à solder → le rituel est systématique.
+Rituel d'ouverture de session — contrôle anti-dérive (pendant de cloture_pending_recap). Après le réamorçage (fil directeur affiché par le hook SessionStart) : (1) LIRE le dernier handoff de clôture (jmj/rapports/session/ le plus récent, bloc « CONSEIL D'OUVERTURE » : arbitrages_ouverts / routé / décliné / prochains_candidats / fil_snapshot) ; (2) INVOQUER LE CONSEIL (3 lentilles + contradicteur qui échangent → synthèse + contradicteur → verdict, cf. conseil_contradicteur) sur les arbitrages_ouverts et prochains_candidats, CADRÉ sur le handoff + le fil (pas un ré-audit complet) ; (3) n'AGIR qu'après cet arbitrage vérifié-source. Le Conseil interroge la DB/BQ : c'est lui qui empêche de prendre le rapport pour argent comptant (cf. source_verite_data_avant_absence). En pratique une session démarre toujours avec quelque chose à solder → le rituel est systématique.
 ```
 
 ### `parser_docx_omath` — Parseur docx doit extraire oMath (formules chimiques Jenni)
