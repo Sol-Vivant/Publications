@@ -11,15 +11,15 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `documents` | 18 documents du corpus | 18 |
 | `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 192 |
 | `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3772 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 25180 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3920 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 25859 |
 | `chains_causales` | 42 chaines causales reliant les documents | 42 |
 | `chain_etapes` | Etapes des chaines | 280 |
 | `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 189 |
+| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 191 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `db_meta` | Historique (audits, scores, todos, idees) | 25 |
-| `audit_log` | Journal des operations | 9243 |
+| `db_meta` | Historique (audits, scores, todos, idees) | 32 |
+| `audit_log` | Journal des operations | 9153 |
 
 ### Tables web et outils interactifs
 
@@ -27,7 +27,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 |-------|------|-----------------|
 | `web_pages` | Pages web (slug, titre, OG tags) | 14 |
 | `html_templates` | Templates CSS/JS par page + partagés | 35 (2 partagés) |
-| `concept_cards` | Fiches conceptuelles synthétiques | 184 |
+| `concept_cards` | Fiches conceptuelles synthétiques | 185 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
 | `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
@@ -57,7 +57,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
 | `cahier` | chapitres, chapter_colors, chapter_fiches, fiche_type_colors, onglets, pedago_fiches, tab_descriptions, tool_pages |
 | `claude_notes` | fiches_biblio_cassee_marathon, fiches_marathon_filtre_origine |
-| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, conseil_contradicteur, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, integration_reponse_sourcage, metaanalyse_croise_sourcages, ouverture_conseil, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, path_docx_jenni, pratiques_typees_hors_jenni, principes_generatifs_avant_labels_reactifs, redaction_documents_jenni, retour_jenni_autonome, source_verite_data_avant_absence, termes_fichier_unique, thesaurus_carte, wal_checkpoint, web_nav_ancres, wf_arbitrage_jenni |
+| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, conseil_contradicteur, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, graines_docs_maj_en_lot, integration_conseil_audit, integration_reponse_sourcage, metaanalyse_croise_sourcages, ouverture_conseil, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, path_docx_jenni, pratiques_typees_hors_jenni, principes_generatifs_avant_labels_reactifs, redaction_documents_jenni, retour_jenni_autonome, source_verite_data_avant_absence, termes_fichier_unique, thesaurus_carte, wal_checkpoint, web_nav_ancres, wf_arbitrage_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |

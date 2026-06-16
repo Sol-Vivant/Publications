@@ -58,7 +58,7 @@ UPDATE config SET valeur = '<nouveau texte>'
  WHERE categorie = 'claude_rules' AND cle = '<clé>';
 ```
 
-**Règles actuellement en base (31)** :
+**Règles actuellement en base (33)** :
 
 ### `agent_runner_reflexe` — N>5 items LLM independants -> pattern agent_runner.py 3 phases (jamais agent par agent)
 
@@ -379,6 +379,34 @@ Reflexe : production docx fiches -> zero meta-vocab, structure PLATE (titres H1 
 JMJ développe sur sa machine et **pousse sur le remote** (origin / GitHub). Il **ne peut pas** déposer un fichier dans le conteneur éphémère de Claude. Donc tout fichier qu'il annonce (« j'ai poussé le docx / la liste / le retour Jenni… ») est un **commit sur origin**, le plus souvent sur `origin/main`.
 
 **Réflexe obligatoire** : `git fetch origin` puis inspecter `origin/main` (`git log --oneline origin/main`, `git diff --stat <base>..origin/main`) — ou relancer `session_start.py` qui resynchronise `main` sur `origin/main`. **Ne jamais** chercher d'abord dans le filesystem local du conteneur, ni conclure « fichier introuvable » sans avoir fetché origin au préalable.
+```
+
+### `graines_docs_maj_en_lot` — Graines des docs de strate = maj EN LOT (pas fiche par fiche). Graine non sync ≠ dette : ne pas auditer/refondre, statut a_completer/a_rediger normal.
+
+```
+# Graines des documents de strate : actualisation EN LOT
+
+Les graines des documents de strate (`prompts.contexte_sci` / `.enrichissement`)
+sont actualisées **en lot**, PAS à chaque intégration de fiche.
+
+Une graine non strictement synchronisée avec les dernières fiches intégrées
+**n'est ni une dette ni une incohérence** : c'est l'état nominal. Ne JAMAIS
+lancer audit / refonte / « mise à niveau » des graines de documents sur ce
+motif, ni traiter un statut `a_completer` / `a_rediger` de doc/prompt comme un
+bug (l'affichage « EN COURS DE RÉDACTION » d'index.html est correct).
+
+La maj en lot est **planifiée et déclenchée explicitement par JMJ** quand assez
+de fiches sont intégrées.
+
+Cas vécu (2026-06-14) : une maj partielle de F1 3.1/3.2 laissée non commitée a
+déclenché une longue psychose statut / fiches / vues SQL. Repartir du cours
+normal (production + intégration de fiches et de termes) sans rouvrir le sujet.
+```
+
+### `integration_conseil_audit` — Intégration d'un retour Jenni = Conseil d'audit OBLIGATOIRE (étape 3 de wf_fiche_integration #147), pas seulement le câblage. integrate_fiche.py ne fait que VALIDER un câblage préétabli (matching cards/axes existants, scoring d'overlap) — aveugle au neuf par construction : un concept absent, un renversement de cadre, une tension d'axe ont 0 overlap avec l'existant. Détecter le neuf exige une lecture analytique (pas un score) = Conseil complet (R1 : 3 lentilles + contradicteur + anti-marteau en agents opus → R2 échange → synthèse chairman → contradicteur de synthèse + anti-marteau → vérif DB #55 → verdict JMJ ; cf. conseil_modele #161). Mandat : concepts/cadres neufs (0 card/terme), renversements de paradigme, tensions, termes de fond. NE PAS confondre le tissage des axes/cards EXISTANTS (propagation, étape 7) avec l'analyse intégrative (étape 3). Institué 2026-06-13 après #264 : câblage vert mais 'Microbial Village' (0 card, Wilpiszeski 2019) et renversement anoxie-relique→norme ratés.
+
+```
+Integration d'un retour Jenni = Conseil d'audit (detection du neuf), PAS seulement le cablage integrate_fiche qui ne valide que l'existant (aveugle au neuf). Dispositif complet R1/R2 + contradicteur + anti-marteau (conseil_modele #161). Cas fondateur #264.
 ```
 
 ### `integration_reponse_sourcage` — Intégration d'une réponse de sourçage Jenni (refs -> corpus, pendant de l'intégration fiche). Cf. BQ #160.
