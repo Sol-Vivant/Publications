@@ -19,7 +19,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 191 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
 | `db_meta` | Historique (audits, scores, todos, idees) | 32 |
-| `audit_log` | Journal des operations | 9153 |
+| `audit_log` | Journal des operations | 9158 |
 
 ### Tables web et outils interactifs
 
