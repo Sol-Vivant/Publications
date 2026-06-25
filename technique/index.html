@@ -16,6 +16,15 @@
 
 <script src="../vendor/react.production.min.js"></script>
 <script src="../vendor/react-dom.production.min.js"></script>
+<script src="../vendor/babel.min.js"></script>
+<script src="../vendor/mermaid.min.js"></script>
+<script>
+  var _svMt = (document.documentElement.getAttribute('data-theme') === 'dark') ||
+              (document.documentElement.getAttribute('data-theme') !== 'light' &&
+               window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  mermaid.initialize({ startOnLoad: false, theme: _svMt ? 'dark' : 'default', flowchart: { padding: 15, useMaxWidth: false } });
+</script>
+
 <style>
 :root {
   --bg: #f4f6f8;
@@ -1928,6 +1937,11 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
   text-align: center;
 }
 
+/* ── Schémas de flux Mermaid (section.diagram) ── */
+.tech-diagram { margin: 1rem 0; padding: 1rem; background: var(--color-bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); overflow-x: auto; }
+.tech-diagram .mermaid { display: flex; justify-content: center; }
+.tech-diagram .mermaid svg { max-width: 100%; height: auto; }
+
 
 </style>
 </head>
@@ -2031,7 +2045,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="../index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Guide Technique — Sol Vivant<span class="sv-h1-sub"> : Architecture, méthode et portabilité</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-12 14:54 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-25 19:36 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="../index.html">🗺️ Cartographie</a>  ·  <a href="../mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="../lifofer.html">🌿 LiFoFer</a>  ·  <a href="../triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="../tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="../cahier.html">📚 Cahier de Science</a>  ·  <a href="../esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="../transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="../concept_cards.html">📋 Concept Cards</a></nav>
@@ -2048,8 +2062,10 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <div id="sv-tooltip" class="sv-tooltip"></div>
 
 
-<script>const DATA = {"version": 1, "chapitres": [{"id": "architecture", "titre": "Architecture du corpus", "icone": "🏗️", "intro": "Le corpus Sol Vivant est construit autour d'une **base de données SQLite unique** (`sol_vivant.db`) qui est la source de vérité. Tout ce qui est dans un fichier sur disque (HTML, README, prompts Jenni, workflows) est une **vue régénérable** depuis la DB. Ce chapitre présente la structure interne du corpus.", "sections": [{"id": "db_source", "titre": "La DB comme source de vérité unique", "content": "**Principe** : rien n'existe tant que ce n'est pas en base. Les fichiers générés (HTML, Markdown, docx, JSON) sont des projections qui peuvent être régénérées à tout moment sans perte d'information.\n\nCONSÉQUENCES PRATIQUES :\n\n• On ne modifie jamais un fichier généré directement — toujours la DB puis régénération\n• Les scripts peuvent être réinjectés depuis la DB (`sync_scripts.py --extract`) sur toute machine fraîche\n• Un backup = un seul fichier `.db` (binaire, versionné en git)\n• L'intégrité est garantie par les FK, CHECK et UNIQUE au niveau SQL\n\nCONTREPARTIE :\n\nLe `.db` est binaire donc non-mergeable. Mais en workflow mono-utilisateur, ça ne pose aucun problème — `origin/main` fait foi, `session_start.py` reset tout ce qui diverge au démarrage.", "highlight": {"title": "Pourquoi SQLite et pas PostgreSQL / MongoDB / JSON ?", "color": "info", "text": "SQLite est un fichier. Pas de serveur, pas de config réseau, pas de dépendance système. Il se versionne en git, se sauvegarde d'un cp, se transporte d'un scp. Pour un corpus mono-utilisateur jusqu'à quelques Go, il n'y a aucune raison d'aller plus loin."}}, {"id": "tables", "titre": "Inventaire des tables (56 tables, 10 vues)", "content": "Le schéma couvre 4 grandes familles :\n\nFAMILLE — CORPUS SCIENTIFIQUE :\n\n• `documents` (18) — les 18 documents finaux du corpus (F1-F2, S0-S4, V1-V3, P1-P5, H1-H3)\n• `prompts` (191) — sections de rédaction (type, chapitre, contexte_sci, instructions)\n• `prompt_contenus` — contenu Jenni intégré par Claude\n• `terms` (874) — thésaurus canonique (FR/EN, définitions, strates)\n• `term_relations` (3635) — BT/NT/RT entre termes\n• `fiches`, `fiche_sections`, `fiche_contenus` — zooms proactifs\n• `validations`, `validation_sections` — vérifications et comblements réactifs\n\nFAMILLE — FILTRE DE RIGUEUR :\n\n• `concept_cards` (73) — atomes rigoureux filtrés, organisés en 12 dimensions\n• `concept_card_links` — relations entre cartes (complete, derives_from, related_to, prerequisite)\n• `concept_card_tests` — ancrage sur tests terrain\n• `chains_causales` (16) — récits mécanistes transdisciplinaires\n• `chain_etapes` — étapes des chaînes\n• `cascade_prerequis` — les 6 niveaux N0-N5 de la colonne vertébrale\n• `doc_cross_refs` (118) — renvois inter-documents bidirectionnels\n\nFAMILLE — INFRASTRUCTURE WEB :\n\n• `web_pages` (9) — métadonnées des pages (slug, title, status, icon)\n• `html_templates` (28) — head/css/js par page + composants React partagés\n• `ref_matieres`, `ref_textures` — données de référence pour les calculateurs\n\nFAMILLE — MÉTA / MÉMOIRE :\n\n• `bq_entries` (83) — Bibliothèque de Connaissances (règles, conventions, méta-doctrine)\n• `config` — paramètres centralisés (catégorie/clé/valeur JSON)\n• `scripts` (41) — registre des scripts Python avec contenu versionné\n• `audit_log` (902) — journal horodaté des opérations DB\n• `maintenance_sessions` (21) — rapports structurés par session Claude\n• `audit_reports` — rapports markdown (session_recap, chaînes, audits)"}, {"id": "scripts", "titre": "Les scripts comme vues (41 scripts)", "content": "Les scripts Python dans `tools/` sont organisés en sous-dossiers thématiques et **enregistrés en DB** dans la table `scripts` (avec contenu versionné). La sync disque↔DB est pilotée par `tools/sync_scripts.py`.\n\nARBORESCENCE :\n\n• `tools/admin/` — démarrage session, intégrité, dédupe, audits\n• `tools/batch/` — traitements en masse (`jenni_sources`, attribution)\n• `tools/docs/` — générateurs `gen_*.py` (pages HTML, README, rapports)\n• `tools/jenni/` — exports prompts Jenni (fiches, validations, thésaurus)\n• `tools/lib/` — modules partagés (web_template, db, cli, pub_path, config)\n• `` — attribution, RIS, sync\n\nRÈGLE :\n\nTout script peut être régénéré depuis la DB sur une machine fraîche. Inversement, toute modification locale d'un script doit être injectée (`sync_scripts.py --inject`) avant `git push`, sinon l'état DB et disque divergent.", "rule": {"title": "Orchestrateur", "text": "`tools/regen_all.py` régénère toutes les pages HTML + README + rapports + workflows en une commande. Utile en fin de session pour s'assurer que tous les fichiers sur disque reflètent l'état actuel de la DB."}}, {"id": "web_pages_overview", "titre": "Pages web et outils interactifs (9 pages)", "content": "Chaque page web suit le même pattern 4 couches : entrée `web_pages` (métadonnées), templates `html_templates` (head + css + js), script `gen_*.py` (extrait DATA depuis la DB, appelle render_page), et le module `tools/lib/web_template.py` (charte CSS, composants React partagés, pré-compilation JSX).\n\nPAGES PUBLIQUES :\n\n• 🗺️ **Cartographie interactive** (`index.html`) — exploration documents, chaînes causales, thésaurus, cross-refs\n• 🧪 **Calculateur Matière Organique** — formule de Kirkby, ratios C/N, k₁/k₂ Hénin-Dupuis, 110 matières référencées\n• 🌿 **Calculateur LiFoFer** — conversions mélasse/sucres, dilutions, recettes\n• 🔺 **Triangle des Textures GEPPA** — classification USDA interactive, test du bocal\n• 📚 **Cahier de Science** — livre pédagogique multi-chapitres (MO, Textures, Fermentations, Méthodologie)\n• 📋 **Concept Cards** — grille interactive des 69 cartes actives\n\nPAGES INTERNES (hors nav, outils de pilotage) :\n\n• 📊 **Dashboard** — vision rapide pour Claude\n• 📝 **Ébauches** — lecture web des retours Jenni (via mammoth)\n• 🔍 **Explorer DB** — inspection tables + intégrité"}, {"id": "workflow_production", "titre": "Workflow de production des documents", "content": "Chaîne de production d'un document final (par exemple S4 — Le Carbone et les Grands Cycles), en 7 étapes :\n\n1. **Audit initial** — `analyse_corpus.py` identifie les manques (termes, chaînes, sections). Produit un rapport `audit_reports`.\n2. **Identification des trous** — termes manquants → enrichissement thésaurus ; sujets transversaux → nouvelles fiches ; lacunes → nouvelles validations.\n3. **Filtre de rigueur** — chaque hypothèse passe par une concept card (positionnement dans 12 dimensions, confrontation aux tests terrain).\n4. **Production des prompts Jenni** — `export_fiche.py`, `export_validation.py`, `gen_prompt_enrichissement.py` génèrent des `.txt` envoyés à Jenni.\n5. **Cycle Jenni** — envoye → recu : les `.docx` reviennent, sont stockés dans `jmj/docx_recu/`.\n6. **Intégration Claude** — extraction termes → `terms`, contenu fiches → `fiche_contenus` + `prompts.contexte_sci/.enrichissement`, mise à jour des statuts.\n7. **Clôture des prompts** — une vue SQL auto-déduit qu'un prompt est `cloture` quand aucune fiche/validation ouverte ne le référence plus. Quand tous les prompts d'un doc sont clôturés → le doc passe en `pret_a_rediger` → passe finale Jenni → doc rédigé.", "source": "Modèle conceptuel détaillé dans la BQ #... (module projet)"}, {"id": "maintenance", "titre": "Maintenance et intégrité", "content": "Le projet intègre nativement ses mécanismes de rigueur :\n\n• **`session_start.py`** — reset `origin/main`, backup DB journalier, dashboard synthétique avec santé / documents / chaînes / intégrité / règles actives chargées depuis la DB\n• **`check_integrity.py`** — FK orphelines, termes sans définition, prompts doc manquants, chain_etapes orphelines, doublons sémantiques\n• **`audit_log`** — toute opération DB structurelle (INSERT/UPDATE/DELETE impactante) est horodatée avec détail\n• **`maintenance_sessions`** — rapport structuré par session (objectif, actions, décisions, état avant/après, reste à faire)\n• **BQ active** — les règles (doctrine BQ #53, audit concept_cards obligatoire, zéro texte hardcodé, etc.) sont stockées en DB et affichées par `session_start.py` au démarrage — pas un snapshot Markdown qui périme"}]}, {"id": "methode", "titre": "La méthode en rupture", "icone": "✨", "intro": "Les outils classiques de gestion de corpus (Word, Notion, wikis, Obsidian, `jenni_sources`) sont pensés pour des humains qui lisent. Le patron Sol Vivant est pensé pour une collaboration homme + IA agentique (Claude Code). Ce chapitre explicite les ruptures et leurs effets pratiques, notamment sur la consommation de tokens.", "sections": [{"id": "problematique", "titre": "Le problème des outils classiques face à une IA agentique", "content": "Les outils documentaires classiques posent trois problèmes quand on veut faire collaborer un agent IA :\n\n• **Pas interrogeables** — un fichier Word, une page Notion ou un note Obsidian se lisent, mais ne se requêtent pas. L'agent doit tout charger pour chercher quelque chose.\n• **Pas versionnables proprement** — formats binaires ou propriétaires, merges pénibles, historique opaque.\n• **Pas de source de vérité** — doublons entre README, docs, commentaires code, issues GitHub, discussions Slack. L'agent doit reconstituer l'état cohérent à chaque interaction.\n\nRésultat : l'agent **re-découvre le projet** à chaque session. Il doit charger les dossiers, relire la doctrine, reconstituer l'historique, deviner ce qui a bougé. Ce coût s'exprime en **tokens consommés** — et il n'est pas petit.", "highlight": {"title": "Les plans Pro/Max qui fondent", "color": "warning", "text": "Beaucoup d'utilisateurs observent que Claude Code (ou équivalents) consomme leurs plans forfaitaires très vite. L'enquête rapide pointe la même cause récurrente : l'agent passe 50-70% de son budget à re-explorer, re-lire, re-contextualiser ce qu'il devrait pouvoir consulter de façon ciblée."}}, {"id": "pattern_db_driven", "titre": "Pattern DB-driven + scripts comme vues", "content": "Le patron Sol Vivant renverse la logique : **la DB est la source, les fichiers sont des vues**.\n\nCONSÉQUENCES :\n\n• Un agent ne charge jamais un gros fichier pour chercher — il fait une requête SQL ciblée qui renvoie quelques lignes\n• Les modifications sont ciblées : `UPDATE table SET field=… WHERE id=…` au lieu de réécrire un fichier de 50 ko\n• La régénération est explicite et réversible : les fichiers n'accumulent pas de dérive silencieuse\n• L'audit est natif : `audit_log` horodate chaque opération structurante\n\nMATÉRIELLEMENT :\n\n• Source de vérité : 1 fichier (`sol_vivant.db`, quelques Mo)\n• Sorties régénérables : HTML (9 pages), Markdown (README × 13), prompts Jenni (.txt × N), rapports audit (.md × N)\n• Commandes de régénération : `regen_all.py` en 1 minute, `sync_scripts.py --extract` pour les scripts"}, {"id": "claude_code_github", "titre": "Claude Code + GitHub : workflow mono-utilisateur", "content": "La plateforme Claude Code web impose une branche `claude/<nom-session>` par session. Le patron Sol Vivant assume ce workflow mono-utilisateur et l'optimise :\n\n• **Pas de Pull Request**, pas de review humaine — JMJ + Claude sont les deux acteurs, point\n• **Propagation main en fast-forward strict** à chaque fin de session (jamais de merge commit)\n• **Reset agressif au démarrage** — `session_start.py` fait un `git reset --hard origin/main` et supprime les branches `claude/*` fantômes\n• **La DB binaire n'est pas un problème** — un seul writer à la fois, source de vérité claire\n\nRésultat : pas de conflits de merge, pas de divergence git, pas de discussions sur qui a raison. Le workflow file tout droit.", "rule": {"title": "Règle de clôture obligatoire", "text": "Avant de rendre la main à JMJ, Claude propage systématiquement sur `main` : `git checkout main && git merge --ff-only claude/<branche> && git push origin main`. Cette clôture évite que JMJ ne manipule les branches manuellement dans GitKraken pendant les tests — cause principale des collisions working tree / merges parasites."}}, {"id": "tokens_synthese", "titre": "Observation : consommation de tokens (franchise)", "content": "**Constat subjectif** : la conso de tokens ressentie en Claude Code sur ce projet est notablement inférieure à ce qu'on entend chez d'autres utilisateurs. On ne dispose pas de mesures rigoureuses (les plans forfaitaires Claude Code ne détaillent pas l'usage par session), mais les **mécanismes structurels** qui justifient cette économie sont identifiables.\n\nCE QUI NE VIENT PAS DE SQLITE EN SOI :\n\nBeaucoup de gens supposent « utilisez une DB, vous économiserez des tokens ». C'est approximatif. On aurait pu avoir le même résultat avec des JSON bien indexés pour un corpus petit/moyen. La DB ne devient objectivement supérieure qu'à partir de plusieurs dizaines de Mo, avec besoin de jointures ou de recherche full-text.\n\nCE QUI ÉCONOMISE VRAIMENT LES TOKENS :\n\nQuatre pratiques, qui sont **portables** quel que soit le format de stockage sous-jacent. Voir section suivante.", "highlight": {"title": "Honnêteté", "color": "info", "text": "Sans chiffres mesurés, on ne peut pas affirmer « ça coûte X fois moins » que les workflows classiques. Mais les mécanismes ci-dessous sont identifiables, reproductibles et explicables. L'économie de tokens en est la conséquence logique, pas un effet magique du choix SQLite."}}, {"id": "quatre_pratiques", "titre": "Les 4 pratiques qui économisent les tokens", "content": "PRATIQUE 1 — DOCTRINE STRUCTURÉE ET INTERROGEABLE :\n\nPas un CLAUDE.md de 50 ko qui doit être chargé intégralement à chaque conversation. Plutôt une structure interrogeable : chez nous, la BQ (Bibliothèque de Connaissances, 83 entrées actives) avec modules et `bq_query.py --search \"<terme>\"`. L'agent charge **la règle pertinente** au bon moment, pas toutes les règles tout le temps.\n\nTypique : 200-500 tokens par consultation au lieu de 12-15k tokens re-chargés à chaque conversation.\n\nPRATIQUE 2 — BOOTSTRAP DE SESSION AVEC DASHBOARD SYNTHÉTIQUE :\n\nChez nous, `session_start.py` produit en ~2k tokens : santé du thésaurus, statut des 18 documents, règles actives, intégrité, historique récent. L'agent n'a **jamais** besoin d'explorer l'arborescence pour comprendre l'état du projet.\n\nÀ comparer aux 5-15k tokens typiquement dépensés en `ls + cat README + cat package.json + ls src/ + cat src/...` dans les projets non pré-structurés.\n\nPRATIQUE 3 — HISTORIQUE STRUCTURÉ :\n\n`audit_log` + `maintenance_sessions` + `audit_reports` donnent à l'agent une vue structurée de ce qui s'est passé, sans avoir à relire `git log` en détail ni à reconstituer le contexte à partir des diffs.\n\nPRATIQUE 4 — SORTIES RÉGÉNÉRABLES, MODIFS CIBLÉES :\n\nModifier un template via `UPDATE html_templates SET contenu=... WHERE id=...` coûte ~500 tokens en output. Réécrire le HTML généré correspondant en coûterait 50k+. Même principe pour tous les exports (prompts, READMEs, rapports) : on touche à la source, on régénère, on ne réécrit jamais un gros output à la main.\n\nSYNTHÈSE PORTABLE :\n\n**Pré-structurer ce que l'agent doit savoir. Ne jamais lui demander de re-découvrir à chaque session.**", "rule": {"title": "Applicable quel que soit le domaine", "text": "Ces 4 pratiques s'implémentent en SQLite (comme ici), en JSON indexés (pour corpus petit/moyen), ou même en fichiers plats bien organisés avec un script de synthèse. Le format sous-jacent n'est pas le point de rupture. Le point de rupture est l'intention de **pré-structurer** pour l'agent au lieu de le laisser explorer."}}, {"id": "regles_bq_vivantes", "titre": "Les règles actives comme source vivante", "content": "Un principe clé du patron : les règles de travail sont **en DB et affichées au démarrage de chaque session**, pas dans un Markdown qui périme.\n\nExemples de règles actives (extraites de la BQ `claude_rules`) :\n\n• **Audit concept_cards obligatoire avant toute création** — Claude vérifie qu'une carte équivalente n'existe pas déjà avant de proposer d'en créer une nouvelle\n• **Doctrine BQ — recherche au fil de l'eau** — pas de chargement en bloc, requêtes ciblées selon le besoin\n• **Zéro texte hardcodé** dans les templates JS — tout vient de DATA injecté depuis la DB\n• **Zéro liste brute, zéro titre brut** — utiliser SvBulletList, SvSection, SvRichText\n• **Clôture de session obligatoire** — propagation main en fast-forward strict\n\nCes règles sont ajoutables/modifiables à la volée via `UPDATE config SET valeur=… WHERE categorie='claude_rules' AND cle=…`. Effet immédiat au prochain `session_start.py`. Pas de redéploiement, pas de re-chargement, pas de redite dans les prompts."}]}, {"id": "patron", "titre": "Reproduire le patron", "icone": "🔄", "intro": "Le patron Sol Vivant n'est pas lié à l'agriculture. C'est une architecture modulaire pour construire un corpus de connaissances structuré avec un agent IA. Tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser. Ce chapitre liste les composants réutilisables et l'ordre d'adaptation.", "sections": [{"id": "noyau", "titre": "Le noyau : Claude Code + SQLite + Python", "content": "Le minimum viable pour démarrer :\n\n• **Claude Code** (ou équivalent agent IA) pour orchestrer\n• **SQLite** comme source de vérité\n• **Python** pour les scripts de génération / maintenance / sync\n• **Git + GitHub** pour le versionnement et éventuellement la publication\n\nAucune autre dépendance obligatoire. Les couches optionnelles ci-dessous s'ajoutent selon le besoin.\n\nSCHÉMA DB MINIMAL À PRÉVOIR :\n\n• Une ou plusieurs tables de **contenu** (documents, termes, fiches, cartes…)\n• Une table `config` pour les paramètres (catégorie/clé/valeur JSON)\n• Une table `bq_entries` pour la doctrine interrogeable\n• Une table `scripts` qui versionne les scripts Python eux-mêmes\n• Une table `audit_log` pour l'historique des opérations\n• Une table `maintenance_sessions` pour les rapports structurés par session\n\nLes tables de contenu dépendent du domaine. Le reste est transposable tel quel."}, {"id": "couches_optionnelles", "titre": "Couches optionnelles", "content": "Chaque couche s'active indépendamment selon la nature du projet :\n\n• **Jenni AI** — rédaction longue avec citations intégrées. Utile pour un corpus académique avec bibliographie dense. Sinon rédiger directement via Claude Code ou autre.\n\n• **`jenni_sources`** — gestion bibliographique (RIS, attribution). Utile si on cite des publications scientifiques. Le pipeline normalise → attribution → validate est dans ``.\n\n• **API Anthropic (batch)** — analyse en masse (audit, attribution) pour gros volumes de traitement automatisé. Utile pour des passes initiales sur des corpus existants.\n\n• **GitHub Pages** — publication web publique. Dépôt `Publications/` séparé, déployé par `deploy_publications.py` via rsync.\n\n• **React + Babel + vendor local** — pour les pages interactives (calculateurs, triangle, cahier, concept cards). Pas nécessaire si le projet ne publie que du Markdown."}, {"id": "exemples", "titre": "Exemples de domaines applicables", "content": "Le patron s'applique à tout projet qui a :\n\n• Un **corpus textuel** à organiser (documents, fiches, concepts)\n• Un **vocabulaire technique** à stabiliser (thésaurus, glossaire)\n• Des **relations structurelles** entre objets (chaînes, arbres de décision)\n• Des **outils interactifs** à publier (calculateurs, diagnostics, filtres)", "bullets": ["**Solutions low-tech** — matériaux, énergie, eau, alimentation, habitat. Outils : calculateurs de consommation, fiches techniques de construction.", "**Guide de permaculture** — sol, plantes, eau, design, animaux. Outils : calendrier d'implantation, associations de cultures, diagnostic sol.", "**Base médicale TDAH** — fondements, diagnostic, traitements, famille, outils. Outils : fiches FALC, échelles d'évaluation, arbres décisionnels.", "**Patrimoine architectural** — époques, matériaux, techniques, réglementations. Outils : cartographie, fiches bâtiment, check-lists intervention.", "**Cuisine et nutrition** — ingrédients, techniques, nutrition, recettes. Outils : calculateur nutritionnel, saisonnalité, substitutions.", "**Documentation technique d'entreprise** — architecture, API, runbooks, incidents. Outils : fiches incidents réversibles, arbre de décision d'escalade, diagrammes régénérés."]}, {"id": "demarrage_4_etapes", "titre": "Démarrage en 4 étapes", "content": "ÉTAPE 1 — CRÉER LA BASE :\n\nDéfinir les tables de contenu propres au domaine (ex: documents, termes, fiches) et installer le squelette transverse (config, bq_entries, scripts, audit_log, maintenance_sessions). Écrire un schéma SQL dans `schema.sql` et un script `init_db.py` qui le joue sur une DB vierge.\n\nÉTAPE 2 — DÉFINIR LES STRATES / LA STRUCTURE :\n\nQuels sont les grands axes d'organisation du corpus ? Chez Sol Vivant, ce sont F/S/V/P/H (Fondements/Sol/Vivant/Pratique/Humain). Dans un autre domaine : Contexte/Diagnostic/Intervention/Suivi, par exemple. Ces strates remplissent une table `strates` ou équivalent.\n\nÉTAPE 3 — PEUPLER INITIALEMENT :\n\nIntroduire le premier vocabulaire (20-50 termes), les premiers documents (quelques sections), les premières règles en BQ. On peut démarrer très petit — le patron se remplit au fur et à mesure.\n\nÉTAPE 4 — GÉNÉRER LES PREMIÈRES VUES :\n\nUn script `gen_web.py` qui produit une page HTML de consultation. Un `session_start.py` qui affiche un dashboard de santé. À partir de là, le patron s'auto-alimente : les vues aident à voir les trous, Claude aide à les combler, les règles s'affinent.", "rule": {"title": "Démarrer très petit", "text": "Erreur classique : vouloir définir le schéma parfait avant de commencer. Démarrer avec 3-4 tables minimales, les règles évidentes, une seule vue HTML. Le patron se révèle par l'usage, pas par la spécification amont."}}, {"id": "adaptations", "titre": "Adaptations domain-specific", "content": "Quelques éléments à adapter lors de la réutilisation :\n\n• **Charte graphique** — `tools/lib/web_template.py` contient CHARTER_CSS (variables couleurs, classes `.sv-*`). Renommer le préfixe et ajuster les couleurs primaires.\n• **Icônes** — la table `config.web.icon_library` centralise les emojis par catégorie (navigation, onglets, thématiques, strates). À redéfinir selon le domaine.\n• **Composants React partagés** — les 18+ composants `Sv*` (SvCollapse, SvBulletList, SvCascadeGrid, etc.) sont génériques et se réutilisent tels quels. Ajuster au besoin.\n• **Workflow Jenni / `jenni_sources` / batch API** — optionnels, à activer seulement si le domaine a besoin de rédaction longue avec citations ou de traitement en masse.\n• **Charte pédagogique** — classes `.sv-cahier`, `.sv-formula`, `.sv-rule`, etc. Utiles si le corpus inclut des explications scientifiques. Inutiles si c'est un corpus plus opérationnel."}, {"id": "invitation", "titre": "Invitation à réutiliser", "content": "Le code du patron (hors contenu agronomique spécifique) est libre à réutiliser. Les scripts transverses — `session_start.py`, `sync_scripts.py`, `check_integrity.py`, `regen_all.py`, `deploy_publications.py`, `bq_query.py`, la charte CSS et les composants React — sont génériques.\n\nLes tables transverses (`config`, `bq_entries`, `scripts`, `audit_log`, `maintenance_sessions`, `audit_reports`) sont transposables tel quel.\n\nSi vous reprenez le patron, un retour d'expérience (ce qui a bien marché, ce qui a été adapté, ce qui a été supprimé) serait précieux pour faire évoluer la doctrine.", "highlight": {"title": "Un outil devient un patron quand il a été copié au moins une fois", "color": "success", "text": "Le patron Sol Vivant n'est pas encore un « patron » au sens strict — il n'a été instancié qu'une fois (pour Sol Vivant lui-même). Il le deviendra quand un second corpus l'adoptera et le critiquera sur ce qui n'était pas assez générique."}}]}], "intro": "Ce guide technique présente le patron Sol Vivant — architecture, méthode et portabilité. Il s'adresse aux développeurs, agronomes ou chercheurs qui veulent comprendre comment le corpus est construit, pourquoi ce choix d'architecture, et comment réutiliser le patron pour un autre projet."};</script>
-<script>
+<script>const DATA = {"version": 5, "chapitres": [{"id": "philosophie", "icone": "⚖️", "titre": "Philosophie architecturale — les invariants", "intro": "Trois invariants gouvernent tout le corpus : une seule source de vérité, trois régimes de vérité distincts, et le refus de dissoudre les tensions productives. Tout le reste en découle.", "sections": [{"id": "vue-ensemble", "titre": "Vue d'ensemble — les blocs du système et leurs interactions", "content": "Avant d'entrer dans les principes, l'image d'ensemble. Le corpus repose sur cinq familles de blocs qui dialoguent :\n\n- la **base de données** SQLite — l'unique source de vérité (détaillée dans la section suivante).\n- les **agents LLM** — trois rôles distincts : l'**agent d'orchestration** (pilote le corpus, lit et écrit la base), l'**agent rédactionnel externe** (enrichit les fiches à partir de la littérature académique) et l'**agent de vérification factuelle** (juge la vérité des affirmations avec ses connaissances du monde).\n- le **dépôt Git** — versionne le code des scripts et, sous forme compressée, le contenu de la base (dump SQL).\n- la **bibliothèque bibliographique Zotero** — stocke les métadonnées des sources académiques (auteurs, année, DOI, résumé).\n- la **recherche académique ScholarAI** et le **registre des DOI** — retrouvent les papiers, vérifient leur existence, et accèdent au texte intégral pour confronter les affirmations au contenu réel.\n\n**Interactions entre les agents LLM et les API externes** — l'agent d'orchestration ne dialogue pas directement avec le web : il délègue, et c'est cette délégation qui structure le système.\n\n- À l'**agent rédactionnel**, il confie une *graine* (un plan contraint) ; l'agent enrichit en mobilisant sa connaissance de la littérature et renvoie un texte scientifiquement étayé. L'agent ignore tout de la topologie du corpus (zéro méta-vocabulaire).\n- À l'**agent de vérification factuelle**, il transmet le **texte brut** de la fiche et une consigne de rôle — jamais son interprétation (garde-pilot : s'il reformule, il filtre, et l'audit est biaisé). L'agent factuel s'appuie alors sur ScholarAI et le registre DOI pour confirmer l'**existence** des sources citées, puis, quand le texte intégral est accessible, pour vérifier le **contenu** (la source dit-elle ce qu'on prétend ?).\n- Les **métadonnées des sources** transitent par Zotero, synchronisé avec la base : une œuvre y est décrite une fois, et chaque citation dans une fiche pointe vers elle.\n- Le **dépôt Git** reçoit le code (scripts) et, à chaque clôture de session, un dump SQL compressé de la base — seul canal de versionnage du contenu, la base binaire étant exclue du dépôt.\n\nAinsi, des trois rôles LLM, un seul (l'agent d'orchestration) touche la base ; les deux autres sont des périphériques spécialisés, isolés du corpus par construction.", "diagram": "flowchart LR\n    DB[(Base SQLite)]\n    AO[Agent d'orchestration]\n    AR[Agent rédactionnel externe]\n    AF[Agent de vérification factuelle]\n    GIT[(Dépôt Git)]\n    ZOT[(Zotero)]\n    SCH[(ScholarAI + registre DOI)]\n    DB <-->|lue / écrite| AO\n    AO -->|graines| AR\n    AR -->|retours enrichis| AO\n    AO -->|texte brut, garde-pilot| AF\n    AF -->|vérif existence + contenu| SCH\n    AO <-->|métadonnées sources| ZOT\n    DB -->|dump SQL versionné| GIT", "highlight": {"title": "Un seul agent touche la base", "color": "info", "text": "L'agent d'orchestration est le seul à lire/écrire la base. L'agent rédactionnel et l'agent factuel sont isolés du corpus — l'un reçoit une graine, l'autre un texte brut. Cette isolation est la condition même de la confiance : aucun des deux ne peut contaminer le corpus avec sa propre interprétation de la topologie."}}, {"id": "db_source_verite", "titre": "La base de données comme seul oracle", "content": "**Principe** : dans ce corpus, rien n'existe tant que ce n'est pas en base. Les fichiers que vous consultez — pages web, documents, calculateurs — sont des *projections* régénérées depuis une base de données unique. Ils peuvent être détruits et reconstruits à l'identique ; la base, elle, est l'unique source de vérité.\n\nUne **base de données** est un classeur unique où chaque information est rangée à sa place et retrouvable par requête. Ici, c'est une base **SQLite** : un seul fichier qui contient tout — termes, fiches, relations, configuration. Pas de serveur à installer, pas de réseau à configurer : le fichier se copie, se sauvegarde, se transporte comme un document ordinaire.\n\nLe corpus y organise 4417 termes reliés par 26387 relations, 185 concept cards, 42 chaînes causales et 18 documents structurants. Tous ces chiffres sont mesurés en direct à chaque génération — aucun n'est figé dans le texte.", "highlight": {"title": "Pourquoi un fichier unique plutôt qu'un serveur ?", "color": "info", "text": "SQLite tient dans un seul fichier. Pas de PostgreSQL, pas de MongoDB, pas de compte cloud. On travaille hors-ligne, on versionne le fichier, on le transporte. Pour un projet mono-auteur, c'est la simplicité maximale."}}, {"id": "trois_regimes", "titre": "Trois régimes de vérité", "content": "Toute affirmation du corpus est soumise à trois regards distincts, qu'il faut absolument ne pas confondre :\n\n- **Fécondité** — le pont est-il *génératif* ? Ouvre-t-il une possibilité nouvelle, un lien inédit ?\n- **Justesse & nécessité** — faut-il *s'y engager* ? Est-ce correct, et est-ce nécessaire maintenant ?\n- **Vérité** — est-ce *académiquement vrai* ? Cette question, le corpus ne la tranche pas lui-même : il la **promeut** vers un juge externe.\n\nCes trois régimes ne s'appliquent pas au même moment. La génération se juge à la fécondité (un pont inédit ne se valide pas contre un corpus où il n'existe pas encore) ; la validation se juge à la justesse. Entre les deux, une **valve à sens unique** : ce qui ne passe pas ne remonte pas, pour que la critique stricte n'étrangle pas la génération à la naissance. La vérité, elle, reste l'apanage d'un arbitrage externe — jamais du dispositif lui-même.", "diagram": "flowchart LR\n    P[Proposition] --> F1{Fécondité<br/>génératif ?}\n    F1 -->|non| X[écartée]\n    F1 -->|oui| V[Valve à sens unique]\n    V --> F2{Justesse & nécessité<br/>faut-il s'engager ?}\n    F2 -->|non| X\n    F2 -->|oui| PR[Promotion]\n    PR --> F3{Vérité<br/>académiquement vrai ?}\n    F3 -->|juge externe| J[Arbitrage externe]", "highlight": {"title": "Pourquoi séparer les régimes ?", "color": "warning", "text": "Mélanger les trois, c'est soit étouffer la création (juger la fécondité à la justesse), soit court-circuiter le juge externe (trancher la vérité soi-même). Chaque régime a son siège, son moment, son juge."}}, {"id": "garde_friction", "titre": "Garde-friction : le statu quo comme verdict", "content": "Leçon fondatrice (M0) : un bon lien — comme une bonne synthèse — **nomme** la tension productive, il ne la **dissout** jamais. Fondre deux contraires féconds en un méta-récit lisse éteint la friction : c'est stérilisant, pas fécond, même si « ça compresse ».\n\nCorollaire opérationnel : le **statu quo est un verdict de plein droit**. Ne rien faire n'est ni un échec ni une attente — c'est une décision. Quand le dispositif hésite, l'option par défaut est de *garder* la tension vivante plutôt que de la résoudre prématurément. L'« anti-marteau » veille : on ne force pas une synthèse pour cocher une case.", "highlight": {"title": "M0 en une phrase", "color": "success", "text": "Nommer la tension, pas la dissoudre. La friction est une ressource, pas un défaut à lisser."}}]}, {"id": "moteur-semantic", "icone": "🧬", "titre": "Le moteur sémantique — le modèle de données", "intro": "Le corpus n'est pas un texte : c'est un graphe. Trois dispositifs en organisent la sémantique — un thésaurus qui normalise le vocabulaire, un référencement qui distingue l'œuvre de sa citation, et un fil directeur qui relie la doctrine aux entités concrètes.", "sections": [{"id": "thesaurus_graphe", "titre": "Le thésaurus : un graphe normalisé", "content": "Le **thésaurus** est le cœur sémantique. Loin d'une liste de mots, c'est une structure de **graphe** : chaque terme est un nœud, relié aux autres par trois types de relations — **BT** (hyperonyme, « plus général »), **NT** (hyponyme, « plus spécifique ») et **RT** (terme associé). Cette modélisation permet de naviguer du général au particulier et de croiser les associations.\n\nLe thésaurus compte 4417 termes reliés par 26387 relations. Chaque terme possède un libellé français canonique, une traduction anglaise, des synonymes et une définition. Son rôle est la **normalisation** : un même concept ne doit pas être désigné par cinq variantes éparses — une seule forme canonique, et les synonymes pointent vers elle.", "diagram": "flowchart LR\n    A[terme] -->|BT| B[hyperonyme]\n    B -->|NT| A\n    A -->|RT| C[associé]\n    A -->|NT| D[hyponyme]\n    D -->|BT| A", "highlight": {"title": "Pourquoi un graphe et pas une liste ?", "color": "info", "text": "Une liste plate perd la hiérarchie et les associations. Le graphe BT/NT/RT préserve la structure du sens : on remonte vers le général, on descend vers le spécifique, on saute vers le voisin."}}, {"id": "source_vs_usage", "titre": "Référencement : la Source et l'Usage", "content": "Le corpus distingue rigoureusement deux choses que beaucoup confondent :\n\n- la **Source** — l'œuvre académique elle-même (un article, un livre), décrite une fois pour toutes par ses métadonnées (auteurs, année, DOI, résumé).\n- l'**Usage** — la **citation** de cette source dans un contexte précis : tel paragraphe de telle fiche l'invoque pour appuyer telle affirmation.\n\nUne Source unique peut avoir des dizaines d'Usages dispersés dans le corpus. Cette séparation évite la duplication des métadonnées et permet de traquer où chaque œuvre est réellement mobilisée. La base compte 9385 sources pour 18725 usages contextualisés.", "highlight": {"title": "L'erreur classique", "color": "warning", "text": "Stocker citations et métadonnées ensemble, c'est dupliquer l'œuvre à chaque citation. Séparer Source et Usage : une œuvre = une fiche source ; chaque citation = un usage pointant vers elle."}}, {"id": "fil_directeur", "titre": "Le fil directeur : doctrine et entités", "content": "Le corpus relie des **concepts abstraits** (la doctrine — grands chantiers, tensions paradigmatiques) à des **entités concrètes** (fiches, chaînes causales, concept cards). C'est le **fil directeur** : il assure qu'un débat doctrinal reste ancré dans des objets manipulables, et qu'une fiche reste rattachée à un enjeu doctrinal.\n\nLes 24 chantiers doctrinaux fédèrent ainsi cards, fiches et chaînes ; les 185 concept cards et 42 chaînes causales tissent le tissu qui relie le concret à l'abstrait."}]}, {"id": "cycle-vie-fiche", "icone": "🌱", "titre": "Le cycle de vie d'une fiche", "intro": "Une fiche n'est pas écrite d'un coup : elle suit une machine à états en quatre phases, de la graine jusqu'à la propagation. Chaque phase a sa discipline — et la phase d'intégration abrite le dispositif d'audit factuel qui garantit la justesse des sources.", "sections": [{"id": "germination", "titre": "Germination", "content": "Tout commence par un **besoin** identifié dans le corpus : une lacune, une contradiction, un angle à approfondir. Un **brief éditorial** cadre ce besoin (type de manque, sources autoritaires à mobiliser, données chiffrées attendues, articulation avec le reste du corpus).\n\nDe ce brief naît la **graine** : un plan structuré de la fiche, avec des mécanismes-clés, des termes canoniques et un périmètre délimité. La graine n'est pas un brouillon rédigé — c'est un schéma directionnel, volontairement synthétique, destiné à être enrichi ailleurs."}, {"id": "enrichissement", "titre": "Enrichissement externe", "content": "La graine est confiée à un **agent rédactionnel externe** qui l'enrichit en mobilisant des sources académiques. Le format est strictement contraint : le document transmis à l'agent est autonome, sans aucune référence à l'organisation interne du corpus (pas de codes, pas de renvois à des fiches voisines, pas de méta-vocabulaire de chantier). L'agent ignore tout de la topologie du corpus — il ne fait que rédiger, à partir de la graine, un contenu scientifiquement étayé.", "highlight": {"title": "Zéro méta-vocabulaire", "color": "warning", "text": "L'agent rédactionnel ne doit jamais voir les codes internes, les numéros de fiches, les chaînes ou le vocabulaire de chantier. Le document est une graine autonome, pas une pièce d'un puzzle qu'on lui demanderait d'assembler."}}, {"id": "integration_consciente", "titre": "Intégration consciente et audit factuel", "content": "Le retour de l'agent est **parsé** puis **intégré** — mais jamais mécaniquement. Le câblage automatique (matcher le retour contre les cards et axes existants) est aveugle au **neuf** : un concept absent, un renversement de cadre, une tension inédite n'ont aucun score de recouvrement avec l'existant et restent invisibles.\n\nC'est pourquoi l'intégration passe par un **audit factuel en trois gâches fail-fast** :\n\n1. **Gâche structurelle** — le câblage est-il valide (liens internes cohérents, pas de référence morte) ?\n2. **Gâche doctrinale** — la friction productive est-elle préservée (pas de tension dissoute sous une synthèse lisse) ?\n3. **Gâche factuelle** — les affirmations et les sources sont-elles **vraies dans le monde réel** ?\n\nLes deux premières gâches relèvent de l'agent d'orchestration (cartographie interne). La troisième mobilise un **agent de vérification factuelle externe** (connaissances monde) : il flage les affirmations suspectes, puis la **vérification live** confirme l'existence des sources (registre DOI, recherche académique) et, quand le texte intégral est accessible, confronte l'affirmation au contenu réel du papier. Le **garde-pilot** garantit que l'agent externe reçoit le texte brut, jamais une interprétation — sinon il filtre, et l'audit est biaisé.", "diagram": "flowchart TD\n    R[Retour agent] --> G1{Gâche 1\\nstructurel}\n    G1 -->|anomalie| S1[STOP]\n    G1 -->|ok| G2{Gâche 2\\ndoctrinal}\n    G2 -->|friction dissoute| S1\n    G2 -->|ok| G3{Gâche 3\\nfactuel}\n    G3 -->|alerte| J[Promotion juge externe]\n    G3 -->|ok| INT[Intégration]\n    J --> INT", "highlight": {"title": "Coût de confiance", "color": "info", "text": "La gâche 3 implique deux couches LLM (l'agent d'orchestration pilote + l'agent factuel exécute) — confiance plus faible. Une alerte factuelle ne déclenche donc jamais un rejet auto : elle est promue vers le juge externe pour arbitrage."}}, {"id": "propagation", "titre": "Propagation", "content": "Une fois intégrée, la fiche **propage** son effet : liens pédagogiques vers les fiches voisines, alertes sur les chaînes affectées, mise à jour des index. L'intégration n'est jamais isolée — elle reconfigure une partie du graphe."}]}, {"id": "conseil", "icone": "🏛️", "titre": "Le dispositif de délibération — le Conseil", "intro": "Quand le corpus doit trancher un arbitrage de fond (créer une card, refondre une chaîne, arbitrer une contradiction), il convoque le **Conseil** : un dispositif de délibération à trois juges, une valve et une garde. Le Conseil ne tranche jamais la vérité — il la promeut.", "sections": [{"id": "trois_juges", "titre": "Trois juges, une valve", "content": "Le Conseil repose sur trois juges **non interchangeables** :\n\n- **Fécondité** — le pont est-il génératif ?\n- **Justesse & nécessité** — faut-il s'y engager ?\n- **Vérité** — est-ce académiquement vrai ? Ce dernier juge est **externe** au Conseil (arbitrage d'un juge hors corpus).\n\nEntre la génération (jugée à la fécondité) et la validation (jugée à la justesse), une **valve à sens unique** : ce qui ne passe pas ne remonte pas. On ne juge jamais un pont inédit à la justesse contre un corpus où il n'existe pas encore — ce serait étrangler la création à la naissance.", "diagram": "flowchart LR\n    P[Proposition] --> T1[Temps 1\\nGénération]\n    T1 -->|jugée| F[Fécondité]\n    F -->|féconde| V[Valve]\n    V --> T2[Temps 2\\nValidation]\n    T2 -->|jugée| JN[Justesse & nécessité]\n    JN -->|juste + nécessaire| PR[Promotion vérité]\n    PR --> EXT[Juge externe]"}, {"id": "chairman", "titre": "Le Chairman et la vérification des agents", "content": "Le **Chairman** (agent d'orchestration) anime la délibération : il instruit le dossier, distribue les rôles, condense les avis dans un procès-verbal qui **nomme les tensions**, et surtout **vérifie les agents**. Un agent synthétiseur est lui-même un LLM faillible — ses faux positifs doivent être contre-vérifiés. Le Chairman n'est pas souverain : il orchestre, il ne tranche pas.", "highlight": {"title": "Anti-faux-positifs LLM", "color": "warning", "text": "Un agent qui résume N avis peut inventer une convergence ou masquer une dissidence. Le Chairman re-vérifie chaque affirmation de la synthèse — la méta-critique n'échappe pas à la règle de vérification."}}, {"id": "audit_hybride", "titre": "L'audit conscient hybride", "content": "L'audit factuel (gâche 3 du cycle de fiche) met en œuvre une **architecture hybride** qui exploite la complémentarité de deux types d'agents :\n\n- l'**agent d'orchestration** (gâches structurelle + doctrinale) — seul à pouvoir tenir la topologie complète du graphe interne et la mémoire des tensions doctrinales.\n- l'**agent de vérification factuelle externe** (gâche factuelle) — seul à disposer des connaissances monde nécessaires pour juger si une affirmation est vraie hors du corpus.\n\nLe **garde-pilot** est absolu : l'agent d'orchestration transmet à l'agent factuel le **texte brut** de la fiche et une consigne de rôle — jamais son interprétation. S'il reformule, il filtre ; s'il filtre, il est souverain ; si l'agent factuel juge sur un texte filtré, l'audit est invalide."}]}, {"id": "topologie", "icone": "🗂️", "titre": "Topologie opérationnelle et gouvernance", "intro": "Le corpus vit au rythme des sessions. Cette topologie décrit le rituel de session, le versionnage de la base, et la séparation entre le cœur actif, la maintenance et le rendu.", "sections": [{"id": "rituel_session", "titre": "Le rituel de session", "content": "Chaque session suit un rituel en deux temps :\n\n- **Démarrage** : état git (branche, working tree, avance/retard), sauvegarde de la base, tableau de bord de santé. L'agent **ne modifie jamais la topologie git** — pas de reset, pas de checkout forcé : l'utilisateur gère sa synchronisation lui-même.\n- **Clôture** : régénération de tous les outputs, contrôle d'intégrité, **dump SQL compressé** de la base, commit et push.\n\nLes **règles actives** (réflexes, conventions, pièges) vivent dans un fichier versionné Git — lisible, éditable, effet immédiat au prochain démarrage.", "diagram": "flowchart LR\n    D[Démarrage\\nétat git + backup + dashboard] --> T[Travail\\nédition DB + scripts] --> C[Clôture\\nregen + intégrité + dump + commit + push]"}, {"id": "db_versioning", "titre": "Le versionnage de la base", "content": "La base de données est un fichier **binaire** (environ une cinquantaine de mégaoctets) — peu propice au versionnage Git classique (diffs illisibles, conflits ingérables). Elle est donc **exclue du dépôt Git** et versionnée via un **dump SQL compressé** : une représentation texte de toute la base, compressée, légère, au diff lisible.\n\nLa restauration depuis un clone propre se fait en une commande : on décompresse le dump et on le rejoue dans une base neuve. Le contenu du corpus n'est jamais qu'« état courant » — on ne versionne pas l'historique des révisions, on **archive** les états significatifs dans des fichiers.", "highlight": {"title": "Dernier état uniquement", "color": "info", "text": "Le corpus garde l'état courant, pas l'historique des révisions. Le versionnage fin est abandonné au profit de l'archivage fichier : on snapshotte ce qui compte, on ne trace pas chaque modification."}}, {"id": "regimes_travail", "titre": "Cœur, maintenance, rendu", "content": "Le travail se répartit en trois régimes :\n\n- le **Cœur actif** — le pipeline nominal (production de fiches, intégration, audit, délibération) ;\n- la **Maintenance** — réparations ponctuelles (corrections de termes, fixes de scripts, nettoyages) ;\n- le **Rendu** — la génération des outputs (pages web, documents, calculateurs) depuis la base.\n\nLe Rendu ne fait que projeter la base : il ne la modifie jamais. Toute édition du contenu se fait en base, puis le Rendu régénère les outputs à l'identique."}]}], "intro": "Ce guide technique présente l'architecture du corpus « Le Sol Vivant cet Holobionte » : comment il est conçu, pourquoi, et comment on y travaille. Il s'adresse à un lecteur qui découvre le projet — développeur, agronome, chercheur ou simple curieux. Aucun prérequis technique : chaque concept est posé avant d'être employé."};</script>
+<script type="text/babel">
+
+
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
 // Tous les textes arrivent via props (jamais hardcodés)
@@ -2073,297 +2089,158 @@ function useFixedFillHeight() {
       setMobile(window.innerWidth <= 1024);
       const el = ref.current;
       if (!el) return;
-      let top = 0,
-        n = el;
-      while (n) {
-        top += n.offsetTop;
-        n = n.offsetParent;
-      }
+      let top = 0, n = el;
+      while (n) { top += n.offsetTop; n = n.offsetParent; }
       const header = document.querySelector('.sv-header');
       const hH = header ? header.offsetHeight : 0;
       if (top > 0) setStickyTop(Math.max(0, Math.round(top - hH)));
     };
     calc();
-    const t1 = setTimeout(calc, 150);
-    const t2 = setTimeout(calc, 450);
+    const t1 = setTimeout(calc, 150); const t2 = setTimeout(calc, 450);
     window.addEventListener('resize', calc);
     window.addEventListener('storage', calc);
     let ro;
-    if (window.ResizeObserver) {
-      ro = new ResizeObserver(calc);
-      ro.observe(document.body);
-    }
+    if (window.ResizeObserver) { ro = new ResizeObserver(calc); ro.observe(document.body); }
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      window.removeEventListener('resize', calc);
-      window.removeEventListener('storage', calc);
+      clearTimeout(t1); clearTimeout(t2);
+      window.removeEventListener('resize', calc); window.removeEventListener('storage', calc);
       if (ro) ro.disconnect();
     };
   }, []);
-  const st = stickyTop == null ? 100 : stickyTop;
+  const st = (stickyTop == null) ? 100 : stickyTop;
   if (mobile) {
     // Mobile (<=1024px) : ni hauteur fixe ni sticky -> la media query de la
     // charte reprend (colonne unique, scroll de page naturel).
-    return {
-      ref,
-      layoutStyle: {
-        padding: 0,
-        gap: '1.25rem'
-      },
-      paneStyle: {}
-    };
+    return { ref, layoutStyle: {padding:0, gap:'1.25rem'}, paneStyle: {} };
   }
   return {
     ref,
-    layoutStyle: {
-      position: 'sticky',
-      top: st + 'px',
-      padding: 0,
-      gap: '1.25rem',
-      alignItems: 'stretch',
-      height: 'calc(100vh - ' + st + 'px)',
-      minHeight: '520px',
-      overflow: 'hidden'
-    },
-    paneStyle: {
-      position: 'static',
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'none',
-      overflowY: 'auto'
-    }
+    layoutStyle: {position:'sticky', top: st + 'px', padding:0, gap:'1.25rem', alignItems:'stretch',
+                  height:'calc(100vh - ' + st + 'px)', minHeight:'520px', overflow:'hidden'},
+    paneStyle: {position:'static', height:'auto', minHeight:'0', maxHeight:'none', overflowY:'auto'},
   };
 }
-function SvCollapse({
-  title,
-  icon,
-  defaultOpen = false,
-  children,
-  id
-}) {
+
+function SvCollapse({ title, icon, defaultOpen = false, children, id }) {
   const [open, setOpen] = React.useState(defaultOpen);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse",
-    id: id
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "sv-collapse-header",
-    onClick: () => setOpen(!open)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-collapse-title"
-  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
-    className: `sv-collapse-chevron ${open ? 'open' : ''}`
-  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse-body"
-  }, children));
+  return <div className="sv-collapse" id={id}>
+    <button className="sv-collapse-header" onClick={() => setOpen(!open)}>
+      <span className="sv-collapse-title">{icon && <span>{icon}</span>}{title}</span>
+      <span className={`sv-collapse-chevron ${open ? 'open' : ''}`}>▸</span>
+    </button>
+    {open && <div className="sv-collapse-body">{children}</div>}
+  </div>;
 }
 
 // ── SvFormula : formule scientifique avec source optionnelle ──
-function SvFormula({
-  children,
-  source
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula"
-  }, children, source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula-source"
-  }, source));
+function SvFormula({ children, source }) {
+  return <div className="sv-formula">
+    {children}
+    {source && <div className="sv-formula-source">{source}</div>}
+  </div>;
 }
 
 // ── SvRule : règle pratique "à retenir" ──
-function SvRule({
-  children,
-  title
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvRule({ children, title }) {
+  return <div className="sv-rule">
+    {title && <div className="sv-rule-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvScienceNote : encart cahier de science ──
-function SvScienceNote({
-  children,
-  title,
-  icon
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note",
-    "data-icon": icon || ''
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvScienceNote({ children, title, icon }) {
+  return <div className="sv-science-note" data-icon={icon || ''}>
+    {title && <div className="sv-science-note-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvKPI : indicateur clé ──
-function SvKPI({
-  value,
-  unit,
-  label,
-  color,
-  detail,
-  style
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi",
-    style: style
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-value",
-    style: color ? {
-      color
-    } : undefined
-  }, value), unit && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-unit"
-  }, unit), /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-label",
-    style: color ? {
-      color
-    } : undefined
-  }, label), detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-detail"
-  }, detail));
+function SvKPI({ value, unit, label, color, detail, style }) {
+  return <div className="sv-kpi" style={style}>
+    <div className="sv-kpi-value" style={color ? {color} : undefined}>{value}</div>
+    {unit && <div className="sv-kpi-unit">{unit}</div>}
+    <div className="sv-kpi-label" style={color ? {color} : undefined}>{label}</div>
+    {detail && <div className="sv-kpi-detail">{detail}</div>}
+  </div>;
 }
 
 // ── SvKPIGrid : grille de KPIs ──
-function SvKPIGrid({
-  children,
-  cols
-}) {
-  const style = cols ? {
-    gridTemplateColumns: `repeat(${cols}, 1fr)`
-  } : undefined;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-grid",
-    style: style
-  }, children);
+function SvKPIGrid({ children, cols }) {
+  const style = cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined;
+  return <div className="sv-kpi-grid" style={style}>{children}</div>;
 }
 
 // ── SvTimeline : frise chronologique ──
-function SvTimeline({
-  items,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, children);
+function SvTimeline({ items, children }) {
+  if (children) return <div className="sv-timeline">{children}</div>;
   if (!items || !items.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-timeline-item"
-  }, item.date && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-date"
-  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-place"
-  }, item.place), /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-text"
-  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-tags"
-  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "sv-timeline-tag"
-  }, t))))));
+  return <div className="sv-timeline">
+    {items.map((item, i) => <div key={i} className="sv-timeline-item">
+      {item.date && <div className="sv-timeline-date">{item.date}</div>}
+      {item.place && <div className="sv-timeline-place">{item.place}</div>}
+      <div className="sv-timeline-text">{item.text}</div>
+      {item.tags && <div className="sv-timeline-tags">
+        {item.tags.map((t, j) => <span key={j} className="sv-timeline-tag">{t}</span>)}
+      </div>}
+    </div>)}
+  </div>;
 }
 
 // ── SvPhaseCard : phase/étape colorée ──
-function SvPhaseCard({
-  title,
-  color,
-  label,
-  stats,
-  tags,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-card",
-    style: {
-      borderLeftColor: color || 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-header",
-    style: {
-      color: color || 'var(--accent)'
-    }
-  }, label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-label"
-  }, label), /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-name"
-  }, title)), stats && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-stats"
-  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
-    key: i
-  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-tags"
-  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-phase-tag"
-  }, t))), children && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-text"
-  }, children));
+function SvPhaseCard({ title, color, label, stats, tags, children }) {
+  return <div className="sv-phase-card" style={{ borderLeftColor: color || 'var(--accent)' }}>
+    <div className="sv-phase-header" style={{ color: color || 'var(--accent)' }}>
+      {label && <span className="sv-phase-label">{label}</span>}
+      <span className="sv-phase-name">{title}</span>
+    </div>
+    {stats && <div className="sv-phase-stats">{stats.map((s, i) =>
+      <span key={i}><strong>{s.label}</strong> {s.value}</span>
+    )}</div>}
+    {tags && <div className="sv-phase-tags">{tags.map((t, i) =>
+      <span key={i} className="sv-phase-tag">{t}</span>
+    )}</div>}
+    {children && <div className="sv-phase-text">{children}</div>}
+  </div>;
 }
 
 // ── SvCompare : comparaison bon/mauvais ──
-function SvCompare({
-  good,
-  bad
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-good"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-bad"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvCompare({ good, bad }) {
+  return <div className="sv-compare">
+    <div className="sv-compare-good">
+      <div className="sv-compare-title">{good.title}</div>
+      {good.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{good.text}</div>}
+      {good.items && <ul className="sv-compare-list">
+        {good.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+    <div className="sv-compare-bad">
+      <div className="sv-compare-title">{bad.title}</div>
+      {bad.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{bad.text}</div>}
+      {bad.items && <ul className="sv-compare-list">
+        {bad.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+  </div>;
 }
 
 // ── SvDiagnostic : grille diagnostic OK/KO ──
-function SvDiagnostic({
-  ok,
-  ko
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-grid"
-  }, ok && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ok"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ko"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvDiagnostic({ ok, ko }) {
+  return <div className="sv-diag-grid">
+    {ok && <div className="sv-diag-card sv-diag-ok">
+      <div className="sv-diag-title">{ok.title}</div>
+      {ok.items && <ul className="sv-diag-list">
+        {ok.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+    {ko && <div className="sv-diag-card sv-diag-ko">
+      <div className="sv-diag-title">{ko.title}</div>
+      {ko.items && <ul className="sv-diag-list">
+        {ko.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+  </div>;
 }
 
 // ── SvGlossary : liste de termes du thésaurus, accordéon par terme ──
@@ -2375,184 +2252,127 @@ function SvDiagnostic({
 // Composant unifié pour fiches (Cahier), calculateurs (onglet Comprendre),
 // page Concept Cards (glossaire automatique des termes mobilisés), et
 // blocs glossaire sous documents de strate dans la cartographie.
-function SvGlossary({
-  terms
-}) {
+function SvGlossary({ terms }) {
   const [openIds, setOpenIds] = React.useState({});
   if (!terms || !terms.length) return null;
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
   // Tri alphabétique FR (locale-aware) sur le libellé fr ; convention glossaire.
-  const sorted = [...terms].sort((a, b) => (a.fr || '').localeCompare(b.fr || '', 'fr', {
-    sensitivity: 'base'
-  }));
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px',
-      width: '100%'
-    }
-  }, sorted.map(t => {
-    const isOpen = !!openIds[t.id];
-    const subtitleParts = [];
-    if (t.en) subtitleParts.push(t.en);
-    if (t.doc_code) subtitleParts.push(t.doc_code);
-    return /*#__PURE__*/React.createElement("div", {
-      key: t.id,
-      id: 'term-' + t.id
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      color: "var(--info)",
-      title: t.fr,
-      subtitle: subtitleParts.join(' · ') || null,
-      open: isOpen,
-      onToggle: () => toggle(t.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: '0.25rem 0 0.5rem',
-        fontSize: 'var(--font-sm)'
-      }
-    }, t.definition && /*#__PURE__*/React.createElement(SvRichText, {
-      text: t.definition
-    }), (t.syn_fr || t.syn_en) && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: '0.5rem',
-        fontSize: 'var(--font-xs)',
-        color: 'var(--color-text-muted)'
-      }
-    }, t.syn_fr && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes FR :"), " ", t.syn_fr), t.syn_en && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes EN :"), " ", t.syn_en)))));
-  }));
+  const sorted = [...terms].sort((a, b) =>
+    (a.fr || '').localeCompare(b.fr || '', 'fr', { sensitivity: 'base' })
+  );
+  return <div style={{display:'flex', flexDirection:'column', gap:'4px', width:'100%'}}>
+    {sorted.map(t => {
+      const isOpen = !!openIds[t.id];
+      const subtitleParts = [];
+      if (t.en) subtitleParts.push(t.en);
+      if (t.doc_code) subtitleParts.push(t.doc_code);
+      return <div key={t.id} id={'term-' + t.id}>
+        <SvAccordionItem
+          color="var(--info)"
+          title={t.fr}
+          subtitle={subtitleParts.join(' · ') || null}
+          open={isOpen}
+          onToggle={() => toggle(t.id)}>
+          <div style={{padding:'0.25rem 0 0.5rem', fontSize:'var(--font-sm)'}}>
+            {t.definition && <SvRichText text={t.definition} />}
+            {(t.syn_fr || t.syn_en) && <div style={{marginTop:'0.5rem', fontSize:'var(--font-xs)', color:'var(--color-text-muted)'}}>
+              {t.syn_fr && <div><strong>Synonymes FR :</strong> {t.syn_fr}</div>}
+              {t.syn_en && <div><strong>Synonymes EN :</strong> {t.syn_en}</div>}
+            </div>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
 
 // ── SvSourceList : liste de sources biblio ──
-function SvSourceList({
-  sources
-}) {
+function SvSourceList({ sources }) {
   if (!sources || !sources.length) return null;
-  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-source"
-  }, s.year && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-year"
-  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-title"
-  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
-    href: s.url,
-    target: "_blank",
-    rel: "noopener",
-    className: "sv-source-link"
-  }, "[lien]")))));
+  return <div>
+    {sources.map((s, i) => <div key={i} className="sv-source">
+      {s.year && <span className="sv-source-year">{s.year} — </span>}
+      {s.authors && <strong>{s.authors}</strong>}{s.authors && ' '}
+      {s.title && <span className="sv-source-title">{s.title}</span>}
+      {s.url && <> <a href={s.url} target="_blank" rel="noopener" className="sv-source-link">[lien]</a></>}
+    </div>)}
+  </div>;
 }
 
 // ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
 // Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
-function SvTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-tab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvTabs({ tabs, active, onChange }) {
+  return <div className="sv-tabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-tab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
 // A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
 // Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
 // Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
-function SvSubTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-subtabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvSubTabs({ tabs, active, onChange }) {
+  return <div className="sv-subtabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-subtab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
 // Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
 // Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
-function SvCallout({
-  variant,
-  title,
-  icon,
-  children
-}) {
+function SvCallout({ variant, title, icon, children }) {
   const v = variant || 'info';
   const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cls
-  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout-title"
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-callout-icon"
-  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={cls}>
+    {(title || icon) && <div className="sv-callout-title">
+      {icon && <span className="sv-callout-icon">{icon}</span>}
+      {title && <span>{title}</span>}
+    </div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
-function SvAlert({
-  variant,
-  title,
-  children
-}) {
+function SvAlert({ variant, title, children }) {
   const v = variant || 'info';
-  return /*#__PURE__*/React.createElement("div", {
-    className: `sv-alert sv-alert-${v}`
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      marginBottom: '0.25rem'
-    }
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={`sv-alert sv-alert-${v}`}>
+    {title && <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvImageCard : image illustrative avec legende et styles standardises ──
 // Resout le bug "double style" + manque de max-width responsive.
 // Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
-function SvImageCard({
-  src,
-  alt,
-  caption,
-  maxHeight,
-  maxWidth
-}) {
+function SvImageCard({ src, alt, caption, maxHeight, maxWidth }) {
   const mh = maxHeight || '320px';
   const mw = maxWidth || '100%';
-  return /*#__PURE__*/React.createElement("figure", {
-    className: "sv-image-card"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: src,
-    alt: alt || '',
-    style: {
-      width: '100%',
-      maxWidth: mw,
-      maxHeight: mh,
-      objectFit: 'contain',
-      borderRadius: 'var(--radius)',
-      border: '1px solid var(--border)',
-      boxShadow: 'var(--shadow)',
-      display: 'block'
-    }
-  }), caption && /*#__PURE__*/React.createElement("figcaption", {
-    className: "sv-image-caption"
-  }, caption));
+  return <figure className="sv-image-card">
+    <img src={src} alt={alt || ''}
+      style={{
+        width: '100%',
+        maxWidth: mw,
+        maxHeight: mh,
+        objectFit: 'contain',
+        borderRadius: 'var(--radius)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow)',
+        display: 'block'
+      }} />
+    {caption && <figcaption className="sv-image-caption">{caption}</figcaption>}
+  </figure>;
 }
 
 // ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
@@ -2562,189 +2382,107 @@ function SvImageCard({
 //   materiel : array de strings (optionnel)
 //   duree : string (optionnel)
 //   title : string (optionnel)
-function SvProcedureSteps({
-  title,
-  steps,
-  materiel,
-  duree
-}) {
+function SvProcedureSteps({ title, steps, materiel, duree }) {
   if (!steps || !steps.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-title"
-  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-meta"
-  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
-    className: "sv-procedure-steps"
-  }, steps.map((s, i) => {
-    const label = typeof s === 'string' ? s : s.label;
-    const detail = typeof s === 'string' ? null : s.detail;
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-label"
-    }, label), detail && /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-detail"
-    }, " \u2014 ", detail));
-  })));
+  return <div className="sv-procedure">
+    {title && <div className="sv-procedure-title">{title}</div>}
+    {(materiel || duree) && <div className="sv-procedure-meta">
+      {materiel && materiel.length > 0 && <div>
+        <strong>Materiel : </strong>{materiel.join(' · ')}
+      </div>}
+      {duree && <div><strong>Duree : </strong>{duree}</div>}
+    </div>}
+    <ol className="sv-procedure-steps">
+      {steps.map((s, i) => {
+        const label = typeof s === 'string' ? s : s.label;
+        const detail = typeof s === 'string' ? null : s.detail;
+        return <li key={i}>
+          <span className="sv-procedure-label">{label}</span>
+          {detail && <span className="sv-procedure-detail"> — {detail}</span>}
+        </li>;
+      })}
+    </ol>
+  </div>;
 }
 
 // ── SvTestCard : carte standardisee pour un terrain_test ──
 // Reutilisable dans la page Triangle (section test du bocal) ET pour la
 // future page autonome tests_terrain.
 // Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
-function SvTestCard({
-  test
-}) {
+function SvTestCard({ test }) {
   if (!test) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-title"
-  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-test-card-dim"
-  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-desc"
-  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
-    src: test.image_url,
-    alt: test.title,
-    caption: null,
-    maxHeight: "220px"
-  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
-    title: null,
-    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
-    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
-    duree: test.duree
-  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
-    variant: "success",
-    title: "Interpretation"
-  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-source"
-  }, "Source : ", test.source));
+  return <div className="sv-test-card">
+    <div className="sv-test-card-header">
+      <div className="sv-test-card-title">{test.title}</div>
+      {test.dimension_label && <span className="sv-test-card-dim">{test.dimension_label}</span>}
+    </div>
+    {test.description && <div className="sv-test-card-desc">{test.description}</div>}
+    {test.image_url && <SvImageCard src={test.image_url} alt={test.title} caption={null} maxHeight="220px" />}
+    {(test.procedure || test.materiel || test.duree) && <SvProcedureSteps
+      title={null}
+      steps={test.procedure ? (Array.isArray(test.procedure) ? test.procedure : [test.procedure]) : []}
+      materiel={test.materiel ? (Array.isArray(test.materiel) ? test.materiel : [test.materiel]) : null}
+      duree={test.duree}
+    />}
+    {test.interpretation && <SvCallout variant="success" title="Interpretation">{test.interpretation}</SvCallout>}
+    {test.source && <div className="sv-test-card-source">Source : {test.source}</div>}
+  </div>;
 }
 
+
 // ── SvNoteAccordion : mini-note inline ──
-function SvNoteAccordion({
-  text,
-  label
-}) {
+function SvNoteAccordion({ text, label }) {
   const [open, setOpen] = React.useState(false);
   if (!text) return null;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content"
-  }, text));
+  return <div>
+    <span className="sv-note-toggle" onClick={() => setOpen(!open)}>
+      {open ? '\u25BE' : '\u25B8'} {open ? '' : (label || 'note')}
+    </span>
+    {open && <div className="sv-note-content">{text}</div>}
+  </div>;
 }
 
 // ── SvRefBox : encart de référence chiffrée ──
-function SvRefBox({
-  title,
-  items,
-  note,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box-title"
-  }, title), items && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-grid"
-  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-ref-item"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-num"
-  }, it.value), /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-label"
-  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--color-warning-text)',
-      lineHeight: 1.45,
-      fontStyle: 'italic'
-    }
-  }, note), children);
+function SvRefBox({ title, items, note, children }) {
+  return <div className="sv-ref-box">
+    {title && <div className="sv-ref-box-title">{title}</div>}
+    {items && <div className="sv-ref-grid">
+      {items.map((it, i) => <div key={i} className="sv-ref-item">
+        <div className="sv-ref-num">{it.value}</div>
+        <div className="sv-ref-label">{it.label}</div>
+      </div>)}
+    </div>}
+    {note && <div style={{fontSize:'var(--font-xs)',color:'var(--color-warning-text)',lineHeight:1.45,fontStyle:'italic'}}>{note}</div>}
+    {children}
+  </div>;
 }
 
 // ── SvHighlightBox : conclusion / point clé ──
-function SvHighlightBox({
-  title,
-  children,
-  color
-}) {
+function SvHighlightBox({ title, children, color }) {
   const c = color || 'success';
   const colors = {
-    success: {
-      bg: 'var(--success-light)',
-      border: 'var(--success)',
-      text: 'var(--color-success-text)'
-    },
-    warning: {
-      bg: 'var(--warning-light)',
-      border: 'var(--warning)',
-      text: 'var(--color-warning-text)'
-    },
-    info: {
-      bg: 'var(--info-light)',
-      border: 'var(--accent)',
-      text: 'var(--accent-dark)'
-    },
-    purple: {
-      bg: 'var(--purple-light)',
-      border: 'var(--purple)',
-      text: 'var(--purple-dark)'
-    }
+    success: { bg: 'var(--success-light)', border: 'var(--success)', text: 'var(--color-success-text)' },
+    warning: { bg: 'var(--warning-light)', border: 'var(--warning)', text: 'var(--color-warning-text)' },
+    info:    { bg: 'var(--info-light)',    border: 'var(--accent)',  text: 'var(--accent-dark)' },
+    purple:  { bg: 'var(--purple-light)',  border: 'var(--purple)',  text: 'var(--purple-dark)' },
   };
   const s = colors[c] || colors.success;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box",
-    style: {
-      background: s.bg,
-      borderLeftColor: s.border
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box-title",
-    style: {
-      color: s.text
-    }
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, children));
+  return <div className="sv-highlight-box" style={{background: s.bg, borderLeftColor: s.border}}>
+    {title && <div className="sv-highlight-box-title" style={{color: s.text}}>{title}</div>}
+    <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{children}</div>
+  </div>;
 }
 
 // ── SvDataTable : table de données stylisée ──
-function SvDataTable({
-  headers,
-  rows,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, children);
+function SvDataTable({ headers, rows, children }) {
+  if (children) return <table className="sv-data-table">{children}</table>;
   if (!headers || !rows) return null;
-  return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
-    key: i,
-    style: h.align ? {
-      textAlign: h.align
-    } : undefined
-  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-    key: j,
-    style: headers[j] && headers[j].align ? {
-      textAlign: headers[j].align
-    } : undefined
-  }, cell))))));
+  return <table className="sv-data-table">
+    <thead><tr>{headers.map((h, i) => <th key={i} style={h.align ? {textAlign: h.align} : undefined}>{h.label || h}</th>)}</tr></thead>
+    <tbody>{rows.map((row, i) => <tr key={i}>
+      {row.map((cell, j) => <td key={j} style={headers[j] && headers[j].align ? {textAlign: headers[j].align} : undefined}>{cell}</td>)}
+    </tr>)}</tbody>
+  </table>;
 }
 
 // ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
@@ -2752,31 +2490,24 @@ function SvDataTable({
 // - Chaîne simple : rendue telle quelle
 // - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
 //   `strong` met en gras inline avec .sv-emphasis
-function SvBulletList({
-  items,
-  dense
-}) {
+function SvBulletList({ items, dense }) {
   if (!items || !items.length) return null;
   const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
-  return /*#__PURE__*/React.createElement("ul", {
-    className: cls
-  }, items.map((it, i) => {
-    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, it);
-    if (it && typeof it === 'object') {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i
-      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
-        className: "sv-mark"
-      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
-        className: "sv-emphasis"
-      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
-    }
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, String(it));
-  }));
+  return <ul className={cls}>
+    {items.map((it, i) => {
+      if (typeof it === 'string') return <li key={i}>{it}</li>;
+      if (it && typeof it === 'object') {
+        return <li key={i}>
+          {it.emphasis && <span className="sv-mark">{it.emphasis}</span>}
+          {it.emphasis && it.text ? ' ' : ''}
+          {it.strong && <span className="sv-emphasis">{it.strong}</span>}
+          {it.strong && it.text ? ' ' : ''}
+          {it.text}
+        </li>;
+      }
+      return <li key={i}>{String(it)}</li>;
+    })}
+  </ul>;
 }
 
 // ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
@@ -2784,25 +2515,15 @@ function SvBulletList({
 // - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
 // - `level` : 2 (défaut) ou 3
 // - `icon` (optionnel) : emoji en préfixe du titre
-function SvSection({
-  title,
-  label,
-  level,
-  icon,
-  id,
-  children
-}) {
-  const H = level === 3 ? 'h3' : 'h2';
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block",
-    id: id
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), title && /*#__PURE__*/React.createElement(H, {
-    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-section-icon"
-  }, icon), title), children);
+function SvSection({ title, label, level, icon, id, children }) {
+  const H = (level === 3) ? 'h3' : 'h2';
+  return <section className="sv-section-block" id={id}>
+    {label && <div className="sv-section-label">{label}</div>}
+    {title && <H className={`sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`}>
+      {icon && <span className="sv-section-icon">{icon}</span>}{title}
+    </H>}
+    {children}
+  </section>;
 }
 
 // ── SvRichText : rendu pédagogique de texte semi-structuré ──
@@ -2821,96 +2542,54 @@ function _glossIndex() {
   if (_glossIdx !== undefined) return _glossIdx;
   _glossIdx = null;
   try {
-    const g = typeof DATA !== 'undefined' && DATA.glossary || {};
-    const single = new Map(),
-      multi = new Map();
+    const g = (typeof DATA !== 'undefined' && DATA.glossary) || {};
+    const single = new Map(), multi = new Map();
     const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
     for (const k of Object.keys(g)) {
       if (!k || k.length < 4) continue;
       const p = k.match(tok) || [];
-      if (p.length === 1) single.set(p[0], k);else if (p.length > 1) {
-        if (!multi.has(p[0])) multi.set(p[0], []);
-        multi.get(p[0]).push({
-          parts: p,
-          key: k
-        });
-      }
+      if (p.length === 1) single.set(p[0], k);
+      else if (p.length > 1) { if (!multi.has(p[0])) multi.set(p[0], []); multi.get(p[0]).push({ parts: p, key: k }); }
     }
     for (const a of multi.values()) a.sort((x, y) => y.parts.length - x.parts.length);
-    _glossIdx = {
-      single,
-      multi
-    };
-  } catch (e) {
-    _glossIdx = null;
-  }
+    _glossIdx = { single, multi };
+  } catch (e) { _glossIdx = null; }
   return _glossIdx;
 }
 function _svMarkGloss(s, keyPrefix, seen) {
   const idx = s ? _glossIndex() : null;
   if (!idx) return [s];
   const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
-  const toks = [];
-  let m;
-  while ((m = tok.exec(s)) !== null) toks.push({
-    lc: m[0].toLowerCase(),
-    start: m.index,
-    end: m.index + m[0].length
-  });
+  const toks = []; let m;
+  while ((m = tok.exec(s)) !== null) toks.push({ lc: m[0].toLowerCase(), start: m.index, end: m.index + m[0].length });
   if (!toks.length) return [s];
-  const out = [];
-  let cursor = 0,
-    n = 0,
-    i = 0;
+  const out = []; let cursor = 0, n = 0, i = 0;
   while (i < toks.length) {
-    let L = 0,
-      key = null;
+    let L = 0, key = null;
     const cand = idx.multi.get(toks[i].lc);
     if (cand) for (const c of cand) {
       const p = c.parts;
       if (i + p.length <= toks.length) {
         let ok = true;
-        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) {
-          ok = false;
-          break;
-        }
-        if (ok) {
-          L = p.length;
-          key = c.key;
-          break;
-        }
+        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) { ok = false; break; }
+        if (ok) { L = p.length; key = c.key; break; }
       }
     }
-    if (!L && idx.single.has(toks[i].lc)) {
-      L = 1;
-      key = idx.single.get(toks[i].lc);
-    }
-    const def = L && key ? (DATA.glossary || {})[key] : null;
+    if (!L && idx.single.has(toks[i].lc)) { L = 1; key = idx.single.get(toks[i].lc); }
+    const def = (L && key) ? (DATA.glossary || {})[key] : null;
     if (def && !seen.has(key)) {
       seen.add(key);
-      const st = toks[i].start,
-        en = toks[i + L - 1].end;
+      const st = toks[i].start, en = toks[i + L - 1].end;
       if (st > cursor) out.push(s.substring(cursor, st));
-      out.push(/*#__PURE__*/React.createElement("span", {
-        key: keyPrefix + '-gl-' + n++,
-        className: "sv-gloss",
-        title: def
-      }, s.substring(st, en)));
-      cursor = en;
-      i += L;
-    } else {
-      i += 1;
-    }
+      out.push(<span key={keyPrefix + '-gl-' + (n++)} className="sv-gloss" title={def}>{s.substring(st, en)}</span>);
+      cursor = en; i += L;
+    } else { i += 1; }
   }
   if (cursor < s.length) out.push(s.substring(cursor));
   return out.length ? out : [s];
 }
-function SvRichText({
-  text,
-  onCardRef,
-  skipPrefixes,
-  autoGloss
-}) {
+
+function SvRichText({ text, onCardRef, skipPrefixes, autoGloss }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
   const gseen = new Set();
@@ -2920,7 +2599,7 @@ function SvRichText({
   // Détecte une ligne label : MAJUSCULES en tête + ':' final. Le complément
   // après un séparateur (—, -, (, :) est ignoré pour le ratio de majuscules,
   // ce qui capte aussi les labels mixed-case ("LEVIER ORGANIQUE — côté flux :").
-  const isLabelLine = line => {
+  const isLabelLine = (line) => {
     if (!line.endsWith(':') && !line.endsWith(' :')) return false;
     const body = line.replace(/:$/, '').trim();
     if (body.length < 4 || body.length > 200) return false;
@@ -2941,10 +2620,7 @@ function SvRichText({
   while (i < rawLines.length) {
     const line = rawLines[i];
     const trimmed = line.trim();
-    if (!trimmed) {
-      i++;
-      continue;
-    }
+    if (!trimmed) { i++; continue; }
 
     // Bloc de code clôturé par ``` (option : ```lang) — rendu monospace verbatim,
     // SANS interprétation markdown (un commentaire # n'est pas un titre).
@@ -2957,11 +2633,7 @@ function SvRichText({
         i++;
       }
       if (i < rawLines.length) i++; // consomme la clôture ```
-      blocks.push({
-        type: 'code',
-        lang,
-        lines: codeLines
-      });
+      blocks.push({ type: 'code', lang, lines: codeLines });
       continue;
     }
 
@@ -2973,28 +2645,21 @@ function SvRichText({
     if (mH) {
       const hashes = mH[1].length;
       const level = hashes <= 2 ? 2 : 3;
-      blocks.push({
-        type: 'heading',
-        level,
-        text: mH[2].trim()
-      });
+      blocks.push({ type: 'heading', level, text: mH[2].trim() });
       i++;
       continue;
     }
 
     // Tableau markdown : ligne « | ... | » suivie d'un separateur « | --- | »
-    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length && /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
+    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length &&
+        /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
       const trows = [];
       while (i < rawLines.length && /^\|.*\|$/.test(rawLines[i].trim())) {
         trows.push(rawLines[i].trim());
         i++;
       }
-      const splitRow = r => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
-      blocks.push({
-        type: 'table',
-        header: splitRow(trows[0]),
-        rows: trows.slice(2).map(splitRow)
-      });
+      const splitRow = (r) => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
+      blocks.push({ type: 'table', header: splitRow(trows[0]), rows: trows.slice(2).map(splitRow) });
       continue;
     }
 
@@ -3002,10 +2667,7 @@ function SvRichText({
     // mixed-case après un séparateur (—, -, () qui ne compte pas dans le ratio.
     // Exemples : "COMPATIBILITÉS MAJEURES :" / "LEVIER ORGANIQUE — côté flux :"
     if (isLabelLine(trimmed)) {
-      blocks.push({
-        type: 'label',
-        text: trimmed.replace(/:$/, '').trim()
-      });
+      blocks.push({ type: 'label', text: trimmed.replace(/:$/, '').trim() });
       i++;
       continue;
     }
@@ -3016,10 +2678,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'bullets',
-        items
-      });
+      blocks.push({ type: 'bullets', items });
       continue;
     }
 
@@ -3032,11 +2691,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^\d+\.\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'ordered',
-        items,
-        start
-      });
+      blocks.push({ type: 'ordered', items, start });
       continue;
     }
     // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
@@ -3053,10 +2708,7 @@ function SvRichText({
       paraLines.push(rawLines[i]);
       i++;
     }
-    if (paraLines.length) blocks.push({
-      type: 'para',
-      lines: paraLines.slice()
-    });
+    if (paraLines.length) blocks.push({ type: 'para', lines: paraLines.slice() });
   }
 
   // Rendu inline d'un texte : Card refs, backticks → sv-mark, **gras** → sv-emphasis
@@ -3064,150 +2716,80 @@ function SvRichText({
     if (!s) return null;
     const out = [];
     const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|\*([^*\n]+?)\*|fiche (\d+)/g;
-    let last = 0,
-      m,
-      n = 0;
+    let last = 0, m, n = 0;
     while ((m = regex.exec(s)) !== null) {
-      if (m.index > last) {
-        const _seg = s.substring(last, m.index);
-        if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen));else out.push(_seg);
-      }
+      if (m.index > last) { const _seg = s.substring(last, m.index); if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen)); else out.push(_seg); }
       if (m[1]) {
         const id = parseInt(m[1]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-ref-' + n++,
-          onClick: () => onCardRef && onCardRef(id),
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, "#", id));
+        out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(id)}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>#{id}</a>);
       } else if (m[2]) {
         const title = m[2];
         const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
         if (found) {
-          out.push(/*#__PURE__*/React.createElement("a", {
-            key: keyPrefix + '-ref-' + n++,
-            onClick: () => onCardRef && onCardRef(found.id),
-            style: {
-              color: 'var(--accent)',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }
-          }, title));
+          out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(found.id)}
+                       style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{title}</a>);
         } else {
           out.push(title);
         }
       } else if (m[3]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-term-' + n++,
-          className: "sv-mark",
-          title: (DATA.glossary || {})[m[3].toLowerCase()] || undefined
-        }, m[3]));
+        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark" title={(DATA.glossary || {})[m[3].toLowerCase()] || undefined}>{m[3]}</span>);
       } else if (m[4]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-em-' + n++,
-          className: "sv-emphasis"
-        }, m[4]));
+        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[4]}</span>);
       } else if (m[5]) {
-        out.push(/*#__PURE__*/React.createElement("em", {
-          key: keyPrefix + '-it-' + n++
-        }, m[5]));
+        out.push(<em key={keyPrefix + '-it-' + (n++)}>{m[5]}</em>);
       } else if (m[6]) {
         const fid = parseInt(m[6]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-fiche-' + n++,
-          href: 'cahier.html#fiche-' + fid,
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, m[0]));
+        out.push(<a key={keyPrefix + '-fiche-' + (n++)} href={'cahier.html#fiche-' + fid}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{m[0]}</a>);
       }
       last = m.index + m[0].length;
     }
-    if (last < s.length) {
-      const _tl = s.substring(last);
-      if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen));else out.push(_tl);
-    }
+    if (last < s.length) { const _tl = s.substring(last); if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen)); else out.push(_tl); }
     return out;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, blocks.map((b, idx) => {
-    if (b.type === 'heading') {
-      const Tag = b.level === 2 ? 'h2' : 'h3';
-      const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
-      const mt = b.level === 2 ? '1.25rem' : '1rem';
-      return /*#__PURE__*/React.createElement(Tag, {
-        key: idx,
-        className: cls,
-        style: {
-          marginTop: idx > 0 ? mt : 0,
-          marginBottom: '0.5rem'
-        }
-      }, renderInline(b.text, 'h' + idx));
-    }
-    if (b.type === 'label') {
-      return /*#__PURE__*/React.createElement("div", {
-        key: idx,
-        className: "sv-section-label",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, b.text);
-    }
-    if (b.type === 'bullets') {
-      return /*#__PURE__*/React.createElement("ul", {
-        key: idx,
-        className: "sv-bullet-list"
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'ordered') {
-      return /*#__PURE__*/React.createElement("ol", {
-        key: idx,
-        className: "sv-ordered-list",
-        start: b.start || 1
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'table') {
-      return /*#__PURE__*/React.createElement("table", {
-        key: idx,
-        className: "sv-data-table",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, b.header.map((h, j) => /*#__PURE__*/React.createElement("th", {
-        key: j
-      }, renderInline(h, 'th' + idx + '-' + j))))), /*#__PURE__*/React.createElement("tbody", null, b.rows.map((row, r) => /*#__PURE__*/React.createElement("tr", {
-        key: r
-      }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-        key: j
-      }, renderInline(cell, 'td' + idx + '-' + r + '-' + j)))))));
-    }
-    if (b.type === 'code') {
-      return /*#__PURE__*/React.createElement("pre", {
-        key: idx,
-        className: "sv-code"
-      }, /*#__PURE__*/React.createElement("code", null, (b.lines || []).join('\n')));
-    }
-    return /*#__PURE__*/React.createElement("p", {
-      key: idx,
-      className: "sv-prose",
-      style: {
-        margin: '0.35rem 0'
+
+  return <div className="sv-richtext">
+    {blocks.map((b, idx) => {
+      if (b.type === 'heading') {
+        const Tag = b.level === 2 ? 'h2' : 'h3';
+        const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
+        const mt = b.level === 2 ? '1.25rem' : '1rem';
+        return <Tag key={idx} className={cls} style={{marginTop: idx > 0 ? mt : 0, marginBottom: '0.5rem'}}>
+          {renderInline(b.text, 'h' + idx)}
+        </Tag>;
       }
-    }, (b.lines || [b.text]).map((ln, li) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: li
-    }, li > 0 ? /*#__PURE__*/React.createElement("br", null) : null, renderInline(ln, 'p' + idx + '-' + li))));
-  }));
+      if (b.type === 'label') {
+        return <div key={idx} className="sv-section-label" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>{b.text}</div>;
+      }
+      if (b.type === 'bullets') {
+        return <ul key={idx} className="sv-bullet-list">
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ul>;
+      }
+
+      if (b.type === 'ordered') {
+        return <ol key={idx} className="sv-ordered-list" start={b.start || 1}>
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ol>;
+      }
+      if (b.type === 'table') {
+        return <table key={idx} className="sv-data-table" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>
+          <thead><tr>{b.header.map((h, j) => <th key={j}>{renderInline(h, 'th' + idx + '-' + j)}</th>)}</tr></thead>
+          <tbody>{b.rows.map((row, r) => <tr key={r}>{row.map((cell, j) => <td key={j}>{renderInline(cell, 'td' + idx + '-' + r + '-' + j)}</td>)}</tr>)}</tbody>
+        </table>;
+      }
+      if (b.type === 'code') {
+        return <pre key={idx} className="sv-code"><code>{(b.lines || []).join('\n')}</code></pre>;
+      }
+      return <p key={idx} className="sv-prose" style={{margin: '0.35rem 0'}}>
+        {(b.lines || [b.text]).map((ln, li) => <React.Fragment key={li}>{li > 0 ? <br/> : null}{renderInline(ln, 'p' + idx + '-' + li)}</React.Fragment>)}
+      </p>;
+    })}
+  </div>;
 }
+
+
 
 // ── SvExpandableCard : carte colorée expansible (pattern cartographie) ──
 // Props :
@@ -3220,66 +2802,25 @@ function SvRichText({
 //   onClick    : callback au clic sur la carte
 // ── SvSearchInput : champ de recherche unifié + bouton d'effacement ──
 // Factorisé pour toutes les pages. Props : value, onChange(str), placeholder.
-function SvSearchInput({
-  value,
-  onChange,
-  placeholder,
-  autoFocus
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      marginBottom: '12px'
-    }
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "search",
-    className: "sv-input",
-    value: value || '',
-    autoFocus: !!autoFocus,
-    onChange: e => onChange(e.target.value),
-    placeholder: placeholder || 'Rechercher…',
-    style: {
-      width: '100%',
-      paddingRight: '2rem',
-      boxSizing: 'border-box'
-    }
-  }), value && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    "aria-label": "Effacer la recherche",
-    onClick: () => onChange(''),
-    style: {
-      position: 'absolute',
-      right: '0.45rem',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: 'var(--text-secondary)',
-      fontSize: 'var(--font-lg)',
-      lineHeight: 1,
-      padding: '0 0.2rem'
-    }
-  }, "\xD7"));
+function SvSearchInput({ value, onChange, placeholder, autoFocus }) {
+  return <div style={{position:'relative', marginBottom:'12px'}}>
+    <input type="search" className="sv-input" value={value || ''}
+      autoFocus={!!autoFocus}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder || 'Rechercher…'}
+      style={{width:'100%', paddingRight:'2rem', boxSizing:'border-box'}} />
+    {value && <button type="button" aria-label="Effacer la recherche"
+      onClick={() => onChange('')}
+      style={{position:'absolute', right:'0.45rem', top:'50%', transform:'translateY(-50%)',
+              background:'none', border:'none', cursor:'pointer', color:'var(--text-secondary)',
+              fontSize:'var(--font-lg)', lineHeight:1, padding:'0 0.2rem'}}>×</button>}
+  </div>;
 }
-function SvExpandableCard({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  open,
-  onClick,
-  children,
-  compact,
-  chevron
-}) {
+
+function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children, compact, chevron }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("div", {
-    onClick: onClick,
-    style: {
-      background: open ? c + '12' : 'var(--card-bg)',
+  return <div onClick={onClick}
+    style={{background: open ? c + '12' : 'var(--card-bg)',
       border: '1px solid ' + (open ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       borderRadius: 'var(--radius)',
@@ -3288,202 +2829,61 @@ function SvExpandableCard({
       transition: 'all 0.15s',
       height: '100%',
       boxSizing: 'border-box',
-      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'
-    }
-  }, compact ?
-  /*#__PURE__*/
-  // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
-  React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      height: '100%'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-xs)',
-      flexShrink: 0
-    }
-  }, badge), title && /*#__PURE__*/React.createElement("div", {
-    title: title,
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text)',
-      flex: 1,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, title), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      flexShrink: 0,
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)), (subtitle || progress != null || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-base)',
-      lineHeight: 1,
-      flexShrink: 0
-    }
-  }, icon), subtitle && /*#__PURE__*/React.createElement("span", {
-    style: {
-      whiteSpace: 'nowrap'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%"))), children) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      height: '100%'
-    }
-  }, (badge || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '4px',
-      flexShrink: 0,
-      width: '32px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '28px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)'
-    }
-  }, badge), icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-md)',
-      lineHeight: 1
-    }
-  }, icon)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-base)',
-      color: 'var(--text)'
-    }
-  }, title), subtitle && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '5px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%")), children), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)));
+      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'}}>
+    {compact ? (
+      // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
+      <div style={{display:'flex',flexDirection:'column',gap:'6px',height:'100%'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '24px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-xs)', flexShrink:0}}>{badge}</span>}
+          {title && <div title={title} style={{fontWeight: 700, fontSize: 'var(--font-sm)', color: 'var(--text)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{title}</div>}
+          <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{flexShrink:0,color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+        </div>
+        {(subtitle || progress != null || icon) && <div style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'var(--font-xs)',color:'var(--text-secondary)'}}>
+          {icon && <span style={{fontSize:'var(--font-base)',lineHeight:1,flexShrink:0}}>{icon}</span>}
+          {subtitle && <span style={{whiteSpace:'nowrap'}}>{subtitle}</span>}
+          {progress != null && <>
+            <div style={{flex:1, height:'4px', background:'var(--border)', borderRadius:'2px', overflow:'hidden'}}>
+              <div style={{width: progress + '%', height:'100%', background: c, transition:'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)',fontWeight:600,minWidth:'26px',textAlign:'right'}}>{progress}%</span>
+          </>}
+        </div>}
+        {children}
+      </div>
+    ) : (
+      <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
+        {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '28px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
+          {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
+        </div>}
+        <div style={{flex: 1, minWidth: 0}}>
+          {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
+          {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
+          {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
+              <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+          </div>}
+          {children}
+        </div>
+        <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+      </div>
+    )}
+  </div>;
 }
+
 
 // ── SvAccordionItem : wrapper accordéon compact (SvExpandableCard + contenu déplié inline) ──
 // Pattern partagé : grille de cards compactes (Pédagogie, Fiches, Comprendre) où chaque
 // item se déploie inline avec son contenu. State local par défaut ; state contrôlé
 // possible via props `open` + `onToggle` (utilisé par Fiches pour "1 seule ouverte").
-function SvAccordionItem({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  chevron,
-  open,
-  onToggle,
-  children,
-  contentStyle
-}) {
+function SvAccordionItem({ badge, icon, color, title, subtitle, progress, chevron,
+                          open, onToggle, children, contentStyle }) {
   const [localOpen, setLocalOpen] = React.useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : localOpen;
@@ -3494,24 +2894,16 @@ function SvAccordionItem({
       setLocalOpen(!localOpen);
     }
   };
-  const defaultContentStyle = {
-    padding: '1rem 0 1.5rem'
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SvExpandableCard, {
-    compact: true,
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: title,
-    subtitle: subtitle,
-    progress: progress,
-    chevron: chevron,
-    open: isOpen,
-    onClick: handleClick
-  }), isOpen && children && /*#__PURE__*/React.createElement("div", {
-    style: contentStyle || defaultContentStyle
-  }, children));
+  const defaultContentStyle = {padding: '1rem 0 1.5rem'};
+  return <React.Fragment>
+    <SvExpandableCard compact
+      badge={badge} icon={icon} color={color}
+      title={title} subtitle={subtitle} progress={progress} chevron={chevron}
+      open={isOpen} onClick={handleClick} />
+    {isOpen && children && <div style={contentStyle || defaultContentStyle}>{children}</div>}
+  </React.Fragment>;
 }
+
 
 // ── SvConceptCardList : rendu unifié d'une liste de concept cards ──
 // API : <SvConceptCardList cards={payloads} />
@@ -3526,217 +2918,106 @@ function SvAccordionItem({
 // chaînes / cascade / liens / tests / refs / fiches). Utilisé par le panneau
 // de lecture maître-détail de concept_cards. Miroir du corps de
 // SvConceptCardList (accordéon) — garder les deux synchrones.
-function SvConceptCardDetail({
-  card,
-  onCardRef
-}) {
+function SvConceptCardDetail({ card, onCardRef }) {
   if (!card) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => onCardRef && onCardRef(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column",
-    style: {
-      padding: '0.25rem 0 0.75rem'
-    }
-  }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-    text: card.description,
-    onCardRef: onCardRef
-  }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Cha\xEEnes causales"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px',
-      fontSize: 'var(--font-sm)'
-    }
-  }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'index.html#chaine-' + ch.chain_id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    },
-    title: (ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-  }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Niveau cascade pr\xE9requis"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    style: {
-      background: c.level_couleur + '22',
-      borderLeft: '3px solid ' + c.level_couleur,
-      padding: '2px 8px',
-      borderRadius: '4px',
-      fontSize: 'var(--font-xs)'
-    }
-  }, /*#__PURE__*/React.createElement("strong", {
-    style: {
-      color: c.level_couleur
-    }
-  }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-secondary)'
-    }
-  }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Liens (' + card.links.length + ')'
-  }, card.links.map((l, i) => {
-    const isFrom = l.from_id === card.id;
-    const otherId = isFrom ? l.to_id : l.from_id;
-    const otherTitle = isFrom ? l.to_title : l.from_title;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        gap: '8px',
-        alignItems: 'baseline',
-        marginTop: '2px',
-        fontSize: 'var(--font-sm)'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)',
-        fontStyle: 'italic',
-        minWidth: '100px'
-      }
-    }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-      id: otherId,
-      title: otherTitle
-    }));
-  })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Tests terrain (' + card.tests.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-tag",
-    title: t.usage || ''
-  }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Refs renforçantes (' + card.refs.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, (() => {
-    const groups = {};
-    card.refs.forEach(r => {
-      (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-    });
-    return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-      key: kind,
-      style: {
-        padding: '4px 8px',
-        borderRadius: '8px',
-        background: 'var(--color-bg-subtle, var(--bg))',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: 'var(--color-text-muted, var(--text-secondary))',
-        marginRight: '8px',
-        fontSize: 'var(--font-2xs)',
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-        fontWeight: 700,
-        whiteSpace: 'nowrap'
-      }
-    }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-      style: {
-        display: 'inline-block',
-        padding: '1px 6px',
-        margin: '1px 3px',
-        borderRadius: '10px',
-        background: 'var(--accent-light, var(--bg))',
-        color: 'var(--accent-dark, var(--accent))',
-        whiteSpace: 'nowrap'
-      }
-    }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \u2026 +", items.length - 8)));
-  })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px'
-    }
-  }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'cahier.html#fiche-' + f.id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer',
-      fontSize: 'var(--font-sm)'
-    },
-    title: f.role ? 'rôle : ' + f.role : ''
-  }, "\uD83D\uDCC4 ", f.titre)))));
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => onCardRef && onCardRef(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+  return <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+    {card.description && <SvRichText text={card.description} onCardRef={onCardRef} />}
+
+    {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px',fontSize:'var(--font-sm)'}}>
+        {card.chains.map((ch, i) => <a key={i} href={'index.html#chaine-' + ch.chain_id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer'}}
+            title={(ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+          <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+        </a>)}
+      </div>
+    </Section>}
+
+    {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.cascade.map((c, i) => <span key={i}
+            style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                    padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+          <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+          {c.level_label && <span> — {c.level_label}</span>}
+          {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+        </span>)}
+      </div>
+    </Section>}
+
+    {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+      {card.links.map((l, i) => {
+        const isFrom = l.from_id === card.id;
+        const otherId = isFrom ? l.to_id : l.from_id;
+        const otherTitle = isFrom ? l.to_title : l.from_title;
+        return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+          <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+          <CardLink id={otherId} title={otherTitle} />
+        </div>;
+      })}
+    </Section>}
+
+    {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.tests.map((t, i) => <span key={i} className="sv-tag"
+            title={t.usage || ''}>{t.test_title}</span>)}
+      </div>
+    </Section>}
+
+    {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {(() => {
+          const groups = {};
+          card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+          return Object.entries(groups).map(([kind, items]) => (
+            <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                      background:'var(--color-bg-subtle, var(--bg))',
+                                      fontSize:'var(--font-xs)'}}>
+              <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+              {items.slice(0,8).map((r, i) => <span key={i}
+                  title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                  style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                          borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                          color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+              {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+            </div>
+          ));
+        })()}
+      </div>
+    </Section>}
+
+    {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+        {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+            title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+      </div>
+    </Section>}
+  </div>;
 }
-function SvConceptCardList({
-  cards
-}) {
+
+function SvConceptCardList({ cards }) {
   const [openIds, setOpenIds] = React.useState({});
   const inPool = React.useMemo(() => {
     const s = new Set();
     (cards || []).forEach(c => s.add(c.id));
     return s;
   }, [cards]);
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
-  const scrollToCard = id => {
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
+  const scrollToCard = (id) => {
     if (inPool.has(id)) {
-      setOpenIds(p => ({
-        ...p,
-        [id]: true
-      }));
+      setOpenIds(p => ({ ...p, [id]: true }));
       setTimeout(() => {
         const el = document.getElementById('card-' + id);
-        if (el) el.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 60);
       return;
     }
@@ -3749,206 +3030,108 @@ function SvConceptCardList({
     }
   };
   if (!cards || !cards.length) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => scrollToCard(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      width: '100%'
-    }
-  }, cards.map(card => {
-    const dim = card.dimension;
-    const dimColor = dim && dim.couleur || 'var(--accent)';
-    const isOpen = !!openIds[card.id];
-    return /*#__PURE__*/React.createElement("div", {
-      key: card.id,
-      id: 'card-' + card.id,
-      style: {
-        scrollMarginTop: '5rem'
-      }
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      badge: '#' + card.id,
-      color: dimColor,
-      title: card.title,
-      subtitle: dim && dim.nom,
-      open: isOpen,
-      onToggle: () => toggle(card.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-text-column",
-      style: {
-        padding: '0.25rem 0 0.75rem'
-      }
-    }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-      text: card.description,
-      onCardRef: scrollToCard
-    }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Cha\xEEnes causales"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: (ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-    }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Niveau cascade pr\xE9requis"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      style: {
-        background: c.level_couleur + '22',
-        borderLeft: '3px solid ' + c.level_couleur,
-        padding: '2px 8px',
-        borderRadius: '4px',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: c.level_couleur
-      }
-    }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Liens (' + card.links.length + ')'
-    }, card.links.map((l, i) => {
-      const isFrom = l.from_id === card.id;
-      const otherId = isFrom ? l.to_id : l.from_id;
-      const otherTitle = isFrom ? l.to_title : l.from_title;
-      return /*#__PURE__*/React.createElement("div", {
-        key: i,
-        style: {
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'baseline',
-          marginTop: '2px',
-          fontSize: 'var(--font-sm)'
-        }
-      }, /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)',
-          fontStyle: 'italic',
-          minWidth: '100px'
-        }
-      }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-        id: otherId,
-        title: otherTitle
-      }));
-    })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Tests terrain (' + card.tests.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: t.usage || ''
-    }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Refs renforçantes (' + card.refs.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, (() => {
-      const groups = {};
-      card.refs.forEach(r => {
-        (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-      });
-      return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-        key: kind,
-        style: {
-          padding: '4px 8px',
-          borderRadius: '8px',
-          background: 'var(--color-bg-subtle, var(--bg))',
-          fontSize: 'var(--font-xs)'
-        }
-      }, /*#__PURE__*/React.createElement("strong", {
-        style: {
-          color: 'var(--color-text-muted, var(--text-secondary))',
-          marginRight: '8px',
-          fontSize: 'var(--font-2xs)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.04em',
-          fontWeight: 700,
-          whiteSpace: 'nowrap'
-        }
-      }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-        key: i,
-        title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-        style: {
-          display: 'inline-block',
-          padding: '1px 6px',
-          margin: '1px 3px',
-          borderRadius: '10px',
-          background: 'var(--accent-light, var(--bg))',
-          color: 'var(--accent-dark, var(--accent))',
-          whiteSpace: 'nowrap'
-        }
-      }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)'
-        }
-      }, " \u2026 +", items.length - 8)));
-    })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '4px'
-      }
-    }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-      key: i,
-      href: 'cahier.html#fiche-' + f.id,
-      style: {
-        color: 'var(--accent)',
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        fontSize: 'var(--font-sm)'
-      },
-      title: f.role ? 'rôle : ' + f.role : ''
-    }, "\uD83D\uDCC4 ", f.titre)))))));
-  }));
+
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => scrollToCard(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+
+  return <div style={{display:'flex', flexDirection:'column', gap:'6px', width:'100%'}}>
+    {cards.map(card => {
+      const dim = card.dimension;
+      const dimColor = (dim && dim.couleur) || 'var(--accent)';
+      const isOpen = !!openIds[card.id];
+      return <div key={card.id} id={'card-' + card.id} style={{scrollMarginTop:'5rem'}}>
+        <SvAccordionItem
+          badge={'#' + card.id}
+          color={dimColor}
+          title={card.title}
+          subtitle={dim && dim.nom}
+          open={isOpen}
+          onToggle={() => toggle(card.id)}>
+          <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+            {card.description && <SvRichText text={card.description} onCardRef={scrollToCard} />}
+
+            {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.chains.map((ch, i) => <span key={i} className="sv-tag"
+                    title={(ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+                  <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.cascade.map((c, i) => <span key={i}
+                    style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                            padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+                  <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+                  {c.level_label && <span> — {c.level_label}</span>}
+                  {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+              {card.links.map((l, i) => {
+                const isFrom = l.from_id === card.id;
+                const otherId = isFrom ? l.to_id : l.from_id;
+                const otherTitle = isFrom ? l.to_title : l.from_title;
+                return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+                  <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+                  <CardLink id={otherId} title={otherTitle} />
+                </div>;
+              })}
+            </Section>}
+
+            {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.tests.map((t, i) => <span key={i} className="sv-tag"
+                    title={t.usage || ''}>{t.test_title}</span>)}
+              </div>
+            </Section>}
+
+            {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {(() => {
+                  const groups = {};
+                  card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+                  return Object.entries(groups).map(([kind, items]) => (
+                    <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                              background:'var(--color-bg-subtle, var(--bg))',
+                                              fontSize:'var(--font-xs)'}}>
+                      <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+                      {items.slice(0,8).map((r, i) => <span key={i}
+                          title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                          style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                                  borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                                  color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+                      {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+                    </div>
+                  ));
+                })()}
+              </div>
+            </Section>}
+
+            {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+              <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+                {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+                    style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+                    title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+              </div>
+            </Section>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
+
 
 // ── SvTagButton : pill pour sous-item (code + label + stat) ──
 // Props :
@@ -3958,58 +3141,29 @@ function SvConceptCardList({
 //   color    : couleur de l'accent (border-left + bg quand actif)
 //   active   : bool
 //   onClick  : callback
-function SvTagButton({
-  code,
-  label,
-  stat,
-  color,
-  active,
-  onClick
-}) {
+function SvTagButton({ code, label, stat, color, active, onClick }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: onClick,
-    style: {
-      padding: '8px 14px',
-      borderRadius: 'var(--radius)',
-      cursor: 'pointer',
+  return <button onClick={onClick}
+    style={{padding: '8px 14px', borderRadius: 'var(--radius)', cursor: 'pointer',
       border: '2px solid ' + (active ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       background: active ? c + '15' : 'var(--card-bg)',
       fontWeight: active ? 700 : 600,
       fontSize: 'var(--font-sm)',
       color: active ? c : 'var(--text)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px',
-      transition: 'all 0.15s'
-    }
-  }, code && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700
-    }
-  }, code), label && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      maxWidth: '200px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, label), stat && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, stat));
+      display: 'flex', alignItems: 'center', gap: '6px',
+      transition: 'all 0.15s'}}>
+    {code && <span style={{fontWeight: 700}}>{code}</span>}
+    {label && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)',
+      maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{label}</span>}
+    {stat && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{stat}</span>}
+  </button>;
 }
 
+
+
 // ── SvTabIntro : intro déroulante d'onglet — composant neutralisé (objet abandonné, 2026-06) ──
-function SvTabIntro({
-  resume,
-  detail
-}) {
+function SvTabIntro({ resume, detail }) {
   // Objet d'intro déroulante abandonné (JMJ 2026-06) : neutralisé partout.
   return null;
 }
@@ -4017,19 +3171,12 @@ function SvTabIntro({
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
 // Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
 // Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
-function SvCahierLink({
-  chapitre,
-  titre
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cahier-link"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-icon"
-  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-text"
-  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
-    href: 'cahier.html#chap-' + chapitre
-  }, "Cahier de Science \u2192 ", titre));
+function SvCahierLink({ chapitre, titre }) {
+  return <div className="sv-cahier-link">
+    <span className="sv-cahier-link-icon">📚</span>
+    <span className="sv-cahier-link-text">Pour comprendre les concepts en profondeur :</span>
+    <a href={'cahier.html#chap-' + chapitre}>Cahier de Science → {titre}</a>
+  </div>;
 }
 
 // ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
@@ -4044,77 +3191,44 @@ function SvCahierLink({
 //     }}
 //   />
 // Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
-function SvCascadeGrid({
-  titre,
-  sujet,
-  projection
-}) {
+function SvCascadeGrid({ titre, sujet, projection }) {
   if (!projection) return null;
-  const AXES = [{
-    key: 'biophysique',
-    icon: '🧱',
-    label: 'Biophysique',
-    color: 'var(--success)'
-  }, {
-    key: 'temporelle',
-    icon: '⏱️',
-    label: 'Temporelle',
-    color: 'var(--accent)'
-  }, {
-    key: 'couts',
-    icon: '💶',
-    label: 'Coûts cachés',
-    color: 'var(--warning)'
-  }, {
-    key: 'consequences',
-    icon: '🌍',
-    label: 'Conséquences',
-    color: 'var(--purple)'
-  }];
+  const AXES = [
+    { key: 'biophysique',  icon: '🧱', label: 'Biophysique',  color: 'var(--success)'  },
+    { key: 'temporelle',   icon: '⏱️', label: 'Temporelle',   color: 'var(--accent)'   },
+    { key: 'couts',        icon: '💶', label: 'Coûts cachés', color: 'var(--warning)'  },
+    { key: 'consequences', icon: '🌍', label: 'Conséquences', color: 'var(--purple)'   },
+  ];
   const renderBadge = (it, axeColor) => {
-    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
-    return /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge",
-      style: {
-        borderLeftColor: impactColor,
-        color: impactColor
-      },
-      title: it.detail || it.niveau + ' — ' + (it.label || '')
-    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge-label"
-    }, it.label));
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' :
+                        it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return <span className="sv-cascade-badge" style={{borderLeftColor: impactColor, color: impactColor}}
+      title={it.detail || (it.niveau + ' — ' + (it.label || ''))}>
+      <strong>{it.niveau}</strong>
+      {it.label && <span className="sv-cascade-badge-label">{it.label}</span>}
+    </span>;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid"
-  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-head"
-  }, titre && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-title"
-  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-sujet"
-  }, sujet)), /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-rows"
-  }, AXES.map(ax => {
-    const items = projection[ax.key];
-    if (!items || !items.length) return null;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ax.key,
-      className: "sv-cascade-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-head",
-      style: {
-        color: ax.color
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-icon"
-    }, ax.icon), /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-label"
-    }, ax.label)), /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-items"
-    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: i
-    }, renderBadge(it, ax.color)))));
-  })));
+  return <div className="sv-cascade-grid">
+    {(titre || sujet) && <div className="sv-cascade-grid-head">
+      {titre && <div className="sv-cascade-grid-title">{titre}</div>}
+      {sujet && <div className="sv-cascade-grid-sujet">{sujet}</div>}
+    </div>}
+    <div className="sv-cascade-grid-rows">
+      {AXES.map(ax => {
+        const items = projection[ax.key];
+        if (!items || !items.length) return null;
+        return <div key={ax.key} className="sv-cascade-row">
+          <div className="sv-cascade-row-head" style={{color: ax.color}}>
+            <span className="sv-cascade-row-icon">{ax.icon}</span>
+            <span className="sv-cascade-row-label">{ax.label}</span>
+          </div>
+          <div className="sv-cascade-row-items">
+            {items.map((it, i) => <React.Fragment key={i}>{renderBadge(it, ax.color)}</React.Fragment>)}
+          </div>
+        </div>;
+      })}
+    </div>
+  </div>;
 }
 
 // ── SvComprendre : onglet Comprendre unifié, piloté par DATA.comprendre ──
@@ -4131,91 +3245,56 @@ function SvCascadeGrid({
 //       { type: 'richtext', titre, icon?, defaultOpen?, contenu },
 //     ]
 //   }
-function SvComprendreFiche({
-  fiche
-}) {
+function SvComprendreFiche({ fiche }) {
   // Délègue à SvFicheCard (lecteur unifié), mode sans header car déjà
   // wrappé par SvComprendreSection (accordion de l'onglet Comprendre).
   if (!fiche) return null;
-  return /*#__PURE__*/React.createElement(SvFicheCard, {
-    fiche: fiche,
-    showHeader: false,
-    defaultOpen: true
-  });
+  return <SvFicheCard fiche={fiche} showHeader={false} defaultOpen={true} />;
 }
-function SvComprendreCards({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: items
-  });
+
+function SvComprendreCards({ items }) {
+  return <SvConceptCardList cards={items} />;
 }
-function SvComprendreTerms({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: items
-  });
+
+function SvComprendreTerms({ items }) {
+  return <SvGlossary terms={items} />;
 }
-function SvComprendreSection({
-  section,
-  index
-}) {
+
+function SvComprendreSection({ section, index }) {
   const icon = section.icon || '🔬';
   // Badge : numéro d'ordre si index fourni, sinon 1er caractère du type (F/C/T/R/K)
-  const badge = index !== undefined ? String(index + 1) : (section.type || '?').charAt(0).toUpperCase();
+  const badge = index !== undefined ? String(index + 1)
+    : (section.type || '?').charAt(0).toUpperCase();
   // Couleur par type (cohérent avec la charte)
   const colorByType = {
-    'fiche': 'var(--info)',
-    'cards': 'var(--purple, #7c3aed)',
-    'terms': 'var(--success)',
-    'cahier': 'var(--warning)',
-    'richtext': 'var(--color-text-muted)'
+    'fiche':    'var(--info)',
+    'cards':    'var(--purple, #7c3aed)',
+    'terms':    'var(--success)',
+    'cahier':   'var(--warning)',
+    'richtext': 'var(--color-text-muted)',
   };
   const color = colorByType[section.type] || 'var(--accent)';
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: section.titre,
-    subtitle: section.type
-  }, section.type === 'fiche' && /*#__PURE__*/React.createElement(SvComprendreFiche, {
-    fiche: section.fiche
-  }), section.type === 'cards' && /*#__PURE__*/React.createElement(SvComprendreCards, {
-    items: section.items
-  }), section.type === 'terms' && /*#__PURE__*/React.createElement(SvComprendreTerms, {
-    items: section.items
-  }), (section.type === 'cahier' || section.type === 'richtext') && /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.contenu,
-    autoGloss: true
-  })));
+  return <SvAccordionItem
+    badge={badge} icon={icon} color={color}
+    title={section.titre} subtitle={section.type}>
+    {section.type === 'fiche' && <SvComprendreFiche fiche={section.fiche} />}
+    {section.type === 'cards' && <SvComprendreCards items={section.items} />}
+    {section.type === 'terms' && <SvComprendreTerms items={section.items} />}
+    {(section.type === 'cahier' || section.type === 'richtext') && <div className="sv-richtext">
+      <SvRichText text={section.contenu} autoGloss />
+    </div>}
+  </SvAccordionItem>;
 }
-function SvComprendre({
-  data
-}) {
-  if (!data) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout"
-  }, "Contenu p\xE9dagogique non d\xE9fini pour cette page.");
+
+function SvComprendre({ data }) {
+  if (!data) return <div className="sv-callout">Contenu pédagogique non défini pour cette page.</div>;
   const sections = data.sections || [];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, data.cahier_link && /*#__PURE__*/React.createElement(SvCahierLink, {
-    chapitre: data.cahier_link.chapitre,
-    titre: data.cahier_link.titre
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      marginTop: '0.75rem'
-    }
-  }, sections.map((s, i) => /*#__PURE__*/React.createElement(SvComprendreSection, {
-    key: i,
-    section: s,
-    index: i
-  }))));
+  return <div className="sv-text-column">
+    {data.cahier_link && <SvCahierLink chapitre={data.cahier_link.chapitre} titre={data.cahier_link.titre} />}
+    <div style={{display:'flex',flexDirection:'column',gap:'6px',marginTop:'0.75rem'}}>
+      {sections.map((s, i) => <SvComprendreSection key={i} section={s} index={i} />)}
+    </div>
+  </div>;
 }
 
 // ── SvFicheCard : lecteur unifié de fiche (cahier + onglets Comprendre) ──
@@ -4235,17 +3314,9 @@ function SvComprendre({
 //   - setOpenSecKey
 //   - showHeader  : afficher SvAccordionItem wrap (défaut true). false = render
 //                   pour une seule fiche déjà dépliée par le contexte (ex: tab Comprendre).
-function SvFicheCard({
-  fiche,
-  color,
-  defaultOpen,
-  open,
-  onToggle,
-  openSecKey,
-  setOpenSecKey,
-  showHeader,
-  showMeta
-}) {
+function SvFicheCard({ fiche, color, defaultOpen,
+                       open, onToggle, openSecKey, setOpenSecKey,
+                       showHeader, showMeta }) {
   const _showHeader = showHeader !== false;
   // showMeta=false : masque le tag de type + le label « SECTIONS (N) » — utilisé
   // quand l'appelant affiche déjà ces infos dans son propre en-tête (onglet Fiches).
@@ -4255,12 +3326,13 @@ function SvFicheCard({
   // Etat local en mode autonome
   const [openLocal, setOpenLocal] = React.useState(defaultOpen !== false);
   const [secKeyLocal, setSecKeyLocal] = React.useState(null);
-  const isOpen = typeof open === 'boolean' ? open : openLocal;
+  const isOpen = (typeof open === 'boolean') ? open : openLocal;
   const onToggleEff = onToggle || (() => setOpenLocal(v => !v));
-  const secKey = openSecKey !== undefined ? openSecKey : secKeyLocal;
+  const secKey = (openSecKey !== undefined) ? openSecKey : secKeyLocal;
   const setSecKey = setOpenSecKey || setSecKeyLocal;
-  const labels = typeof FICHE_TYPE_LABELS !== 'undefined' ? FICHE_TYPE_LABELS : {};
-  const colors = typeof FICHE_TYPE_COLORS !== 'undefined' ? FICHE_TYPE_COLORS : {};
+
+  const labels = (typeof FICHE_TYPE_LABELS !== 'undefined') ? FICHE_TYPE_LABELS : {};
+  const colors = (typeof FICHE_TYPE_COLORS !== 'undefined') ? FICHE_TYPE_COLORS : {};
   const accentColor = color || colors[f.type] || 'var(--info)';
   const partial = f.statut === 'integre_partiel';
 
@@ -4277,146 +3349,85 @@ function SvFicheCard({
     const m = t.match(/^(\d+(?:\.\d+)*)\.?\s+(.*)$/);
     const numTitle = m ? m[1] : null;
     const rest = m ? m[2] : t;
-    let num = '',
-      lvl = 1,
-      title = rest;
-    if (s.type === 'intro') {
-      lvl = 1;
-      title = rest || 'Introduction';
-    } else if (s.type === 'conclusion') {
-      lvl = 1;
-      title = rest || 'Conclusion';
-    } else if (s.type === 'body_h2') {
-      lvl = 2;
-      num = numTitle || '';
-    } else {
-      lvl = 1;
-      mainN += 1;
-      num = numTitle || String(mainN);
-    }
-    return Object.assign({}, s, {
-      _num: num,
-      _lvl: lvl,
-      _title: title
-    });
+    let num = '', lvl = 1, title = rest;
+    if (s.type === 'intro')           { lvl = 1; title = rest || 'Introduction'; }
+    else if (s.type === 'conclusion') { lvl = 1; title = rest || 'Conclusion'; }
+    else if (s.type === 'body_h2')    { lvl = 2; num = numTitle || ''; }
+    else                              { lvl = 1; mainN += 1; num = numTitle || String(mainN); }
+    return Object.assign({}, s, { _num: num, _lvl: lvl, _title: title });
   });
-  const body = /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0.5rem 0'
-    }
-  }, (_showMeta || partial) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: '0.5rem',
-      marginBottom: '0.75rem',
-      fontSize: 'var(--font-xs)',
-      flexWrap: 'wrap'
-    }
-  }, _showMeta && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-info"
-  }, labels[f.type] || f.type), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), (() => {
-    const hasAnyContent = navSecs.some(s => s.blocks && s.blocks.length > 0 || s.contexte_sci);
-    if (hasAnyContent) {
-      return /*#__PURE__*/React.createElement(SvSectionsNav, {
-        multi: true,
-        sections: navSecs,
-        label: _showMeta ? 'SECTIONS (' + navSecs.length + ')' : null,
-        openKey: secKey,
-        onToggle: setSecKey,
-        getKey: (s, i) => 'fsec-' + f.id + '-' + i,
-        getNumber: s => s._num,
-        getTitle: s => s._title,
-        getLevel: s => s._lvl,
-        getDotColor: s => s.blocks && s.blocks.length > 0 ? 'var(--success)' : s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)',
-        hasContent: s => s.blocks && s.blocks.length > 0 || !!s.contexte_sci,
-        renderContent: s => {
-          if (s.blocks && s.blocks.length > 0) return /*#__PURE__*/React.createElement(SvFicheBlocks, {
-            blocks: s.blocks
-          });
-          if (s.contexte_sci) return /*#__PURE__*/React.createElement(SvRichText, {
-            text: s.contexte_sci,
-            autoGloss: true
-          });
-          return /*#__PURE__*/React.createElement("div", {
-            style: {
-              color: 'var(--color-text-muted)',
-              fontStyle: 'italic'
-            }
-          }, "Section vide.");
+
+  const body = <div className="sv-text-column">
+    <div style={{padding:'0.5rem 0'}}>
+      {(_showMeta || partial) && <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.75rem',fontSize:'var(--font-xs)',flexWrap:'wrap'}}>
+        {_showMeta && <span className="sv-tag sv-tag-info">{labels[f.type] || f.type}</span>}
+        {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+      </div>}
+      {(() => {
+        const hasAnyContent = navSecs.some(s =>
+          (s.blocks && s.blocks.length > 0) || s.contexte_sci);
+        if (hasAnyContent) {
+          return <SvSectionsNav multi
+            sections={navSecs}
+            label={_showMeta ? ('SECTIONS (' + navSecs.length + ')') : null}
+            openKey={secKey}
+            onToggle={setSecKey}
+            getKey={(s, i) => 'fsec-' + f.id + '-' + i}
+            getNumber={s => s._num}
+            getTitle={s => s._title}
+            getLevel={s => s._lvl}
+            getDotColor={s => s.blocks && s.blocks.length > 0 ? 'var(--success)'
+                              : (s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)')}
+            hasContent={s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci}
+            renderContent={s => {
+              if (s.blocks && s.blocks.length > 0) return <SvFicheBlocks blocks={s.blocks} />;
+              if (s.contexte_sci) return <SvRichText text={s.contexte_sci} autoGloss />;
+              return <div style={{color:'var(--color-text-muted)',fontStyle:'italic'}}>Section vide.</div>;
+            }}
+          />;
         }
-      });
-    }
-    if (f.contenu_integre) {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 'var(--font-xs)',
-          color: 'var(--color-text-muted)',
-          marginBottom: '0.75rem',
-          fontStyle: 'italic',
-          padding: '0.5rem 0.75rem',
-          background: 'var(--color-bg-muted)',
-          borderRadius: '4px'
+        if (f.contenu_integre) {
+          return <div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem',fontStyle:'italic',padding:'0.5rem 0.75rem',background:'var(--color-bg-muted)',borderRadius:'4px'}}>
+              ⚠ Affichage monolithique — découpage par sections en attente de cycle Jenni MAJ.
+            </div>
+            <SvRichText text={f.contenu_integre} autoGloss />
+          </div>;
         }
-      }, "\u26A0 Affichage monolithique \u2014 d\xE9coupage par sections en attente de cycle Jenni MAJ."), /*#__PURE__*/React.createElement(SvRichText, {
-        text: f.contenu_integre,
-        autoGloss: true
-      }));
-    }
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        color: 'var(--color-text-muted)',
-        fontStyle: 'italic',
-        padding: '1rem 0'
-      }
-    }, "Contenu non disponible \u2014 fiche en cours d'int\xE9gration.");
-  })(), f.pedago_links && f.pedago_links.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')',
-    icon: "\uD83E\uDDED",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: f.pedago_links
-  }))), f.glossaire && f.glossaire.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Glossaire (' + f.glossaire.length + ')',
-    icon: "\uD83D\uDCD6",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: f.glossaire
-  }))), f.refs && f.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs",
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Sources (' + f.refs.length + ')',
-    icon: "\uD83D\uDCDA",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: f.refs
-  })))));
+        return <div style={{color:'var(--color-text-muted)',fontStyle:'italic',padding:'1rem 0'}}>
+          Contenu non disponible — fiche en cours d'intégration.
+        </div>;
+      })()}
+      {f.pedago_links && f.pedago_links.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')'} icon="🧭" defaultOpen={false}>
+          <SvConceptCardList cards={f.pedago_links} />
+        </SvCollapse>
+      </div>}
+      {f.glossaire && f.glossaire.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Glossaire (' + f.glossaire.length + ')'} icon="📖" defaultOpen={false}>
+          <SvGlossary terms={f.glossaire} />
+        </SvCollapse>
+      </div>}
+      {f.refs && f.refs.length > 0 && <div className="sv-fiche-view-refs" style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Sources (' + f.refs.length + ')'} icon="📚" defaultOpen={false}>
+          <SvSourceList sources={f.refs} />
+        </SvCollapse>
+      </div>}
+    </div>
+  </div>;
+
   if (!_showHeader) return body;
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: '#' + f.id,
-    color: accentColor,
-    title: f.titre,
-    subtitle: partial ? 'Intégration partielle' : null,
-    open: isOpen,
-    onToggle: onToggleEff,
-    contentStyle: {
-      padding: '1rem 0 1.5rem'
-    }
-  }, body);
+
+  return <SvAccordionItem
+    badge={'#' + f.id}
+    color={accentColor}
+    title={f.titre}
+    subtitle={partial ? 'Intégration partielle' : null}
+    open={isOpen}
+    onToggle={onToggleEff}
+    contentStyle={{padding:'1rem 0 1.5rem'}}>
+    {body}
+  </SvAccordionItem>;
 }
 
 // ── SvFicheView : rendu d'une fiche / document intégré (sections structurées DB) ──
@@ -4433,118 +3444,74 @@ function SvFicheCard({
 //   - showTypeTag    : afficher le badge type (défaut true)
 //   - numberSections : préfixer les sections type='section' par leur n° (1., 2., ...) — défaut true
 //   - onCardRef      : callback(cardId) pour les liens Card #N
-function SvFicheBlock({
-  block
-}) {
+function SvFicheBlock({ block }) {
   if (!block || !block.text) return null;
   if (block.kind === 'h3') {
-    return /*#__PURE__*/React.createElement("h3", {
-      className: "sv-section-title sv-section-title-h3"
-    }, block.text);
+    return <h3 className="sv-section-title sv-section-title-h3">{block.text}</h3>;
   }
   if (block.kind === 'bullet') {
-    return /*#__PURE__*/React.createElement("li", null, block.text);
+    return <li>{block.text}</li>;
   }
   // 'richtext' (section retour Jenni en un bloc) ou 'p' legacy -> SvRichText
   // (tableaux markdown, gras, italic, sous-titres). SvRichText est hoiste.
-  return /*#__PURE__*/React.createElement(SvRichText, {
-    text: block.text,
-    autoGloss: true
-  });
+  return <SvRichText text={block.text} autoGloss />;
 }
 
 // SvFicheBlocks : rend la liste de blocks (para / h3 / bullet) sans titre de section.
 // Regroupe les bullets consecutifs dans un <ul>.
-function SvFicheBlocks({
-  blocks
-}) {
+function SvFicheBlocks({ blocks }) {
   if (!blocks || !blocks.length) return null;
   const groups = [];
   let buf = null;
   for (const b of blocks) {
     if (b.kind === 'bullet') {
-      if (!buf) {
-        buf = {
-          kind: 'ul',
-          items: []
-        };
-        groups.push(buf);
-      }
+      if (!buf) { buf = { kind: 'ul', items: [] }; groups.push(buf); }
       buf.items.push(b);
     } else {
       buf = null;
       groups.push(b);
     }
   }
-  return /*#__PURE__*/React.createElement(React.Fragment, null, groups.map((g, i) => g.kind === 'ul' ? /*#__PURE__*/React.createElement("ul", {
-    key: i,
-    className: "sv-bullet-list"
-  }, g.items.map((b, j) => /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: j,
-    block: b
-  }))) : /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: i,
-    block: g
-  })));
+  return <>{groups.map((g, i) => g.kind === 'ul'
+    ? <ul key={i} className="sv-bullet-list">{g.items.map((b, j) => <SvFicheBlock key={j} block={b} />)}</ul>
+    : <SvFicheBlock key={i} block={g} />
+  )}</>;
 }
-function SvFicheSection({
-  section
-}) {
+
+function SvFicheSection({ section }) {
   if (!section || !section.blocks || section.blocks.length === 0) return null;
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sv-section-title sv-section-title-h2"
-  }, section.titre), /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvFicheBlocks, {
-    blocks: section.blocks
-  })));
+  return <section className="sv-section-block">
+    <h2 className="sv-section-title sv-section-title-h2">{section.titre}</h2>
+    <div className="sv-richtext">
+      <SvFicheBlocks blocks={section.blocks} />
+    </div>
+  </section>;
 }
-function SvFicheView({
-  fiche,
-  typeLabel,
-  typeVariant,
-  showTypeTag,
-  numberSections,
-  onCardRef
-}) {
+
+function SvFicheView({ fiche, typeLabel, typeVariant, showTypeTag, numberSections, onCardRef }) {
   if (!fiche) return null;
   const partial = fiche.statut === 'integre_partiel';
   const sections = fiche.sections || [];
   const variant = typeVariant || 'info';
   const showTag = showTypeTag !== false;
   const numSec = numberSections !== false;
-  const hasTagRow = showTag && typeLabel || partial;
+  const hasTagRow = (showTag && typeLabel) || partial;
   let n = 0;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view"
-  }, hasTagRow && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-tags"
-  }, showTag && typeLabel && /*#__PURE__*/React.createElement("span", {
-    className: 'sv-tag sv-tag-' + variant
-  }, typeLabel), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), sections.map(sec => {
-    let displayTitre = sec.titre;
-    if (numSec && sec.type === 'section') {
-      n += 1;
-      displayTitre = n + '. ' + sec.titre;
-    }
-    return /*#__PURE__*/React.createElement(SvFicheSection, {
-      key: sec.ordre,
-      section: {
-        ...sec,
-        titre: displayTitre
-      }
-    });
-  }), fiche.refs && fiche.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, "\uD83D\uDCDA Sources (", fiche.refs.length, ")"), /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: fiche.refs
-  })));
+  return <div className="sv-fiche-view">
+    {hasTagRow && <div className="sv-fiche-view-tags">
+      {showTag && typeLabel && <span className={'sv-tag sv-tag-' + variant}>{typeLabel}</span>}
+      {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+    </div>}
+    {sections.map(sec => {
+      let displayTitre = sec.titre;
+      if (numSec && sec.type === 'section') { n += 1; displayTitre = n + '. ' + sec.titre; }
+      return <SvFicheSection key={sec.ordre} section={{ ...sec, titre: displayTitre }} />;
+    })}
+    {fiche.refs && fiche.refs.length > 0 && <div className="sv-fiche-view-refs">
+      <div className="sv-section-label">📚 Sources ({fiche.refs.length})</div>
+      <SvSourceList sources={fiche.refs} />
+    </div>}
+  </div>;
 }
 
 // ── SvSectionsNav : navigation compacte de sections (accordeon exclusif) ──
@@ -4563,83 +3530,55 @@ function SvFicheView({
 //   - getDotTitle   : fn(section, index) -> tooltip (optionnel)
 //   - hasContent    : fn(section, index) -> bool (sinon: pas de chevron, pas cliquable)
 //   - renderContent : fn(section, index) -> ReactNode
-function SvSectionsNav({
-  sections,
-  openKey,
-  onToggle,
-  label,
-  multi,
-  getKey,
-  getNumber,
-  getTitle,
-  getDotColor,
-  getDotTitle,
-  getLevel,
-  hasContent,
-  renderContent
-}) {
+function SvSectionsNav({ sections, openKey, onToggle, label, multi,
+                         getKey, getNumber, getTitle, getDotColor, getDotTitle,
+                         getLevel, hasContent, renderContent }) {
   if (!sections || !sections.length) return null;
-  const kKey = getKey || ((s, i) => 'sec-' + i);
+  const kKey = getKey    || ((s, i) => 'sec-' + i);
   const kNum = getNumber || (() => '');
-  const kTit = getTitle || (s => s.titre || '');
+  const kTit = getTitle  || (s => s.titre || '');
   const kDot = getDotColor || (() => 'var(--accent)');
   const kDotT = getDotTitle || (() => '');
-  const kLvl = getLevel || (() => 1); // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
-  const hasLevels = typeof getLevel === 'function'; // hierarchie explicite -> style H1
+  const kLvl = getLevel  || (() => 1);   // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
+  const hasLevels = typeof getLevel === 'function';  // hierarchie explicite -> style H1
   const kHas = hasContent || (() => true);
   const kRen = renderContent || (() => null);
   const [openSet, setOpenSet] = React.useState(() => new Set());
   const expKeys = sections.map((s, i) => kHas(s, i) ? kKey(s, i) : null).filter(k => k !== null);
-  const isOpen = multi ? key => openSet.has(key) : key => openKey === key;
-  const toggle = multi ? key => setOpenSet(prev => {
-    const n = new Set(prev);
-    n.has(key) ? n.delete(key) : n.add(key);
-    return n;
-  }) : key => onToggle(openKey === key ? null : key);
+  const isOpen = multi ? (key => openSet.has(key)) : (key => openKey === key);
+  const toggle = multi
+    ? (key => setOpenSet(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; }))
+    : (key => onToggle(openKey === key ? null : key));
   const allOpen = multi && expKeys.length > 0 && expKeys.every(k => openSet.has(k));
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav"
-  }, (label || multi) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-header"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-label"
-  }, label), multi && expKeys.length > 0 && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sv-sections-toggle-all",
-    onClick: () => setOpenSet(allOpen ? new Set() : new Set(expKeys))
-  }, allOpen ? '⊖ Tout replier' : '⊕ Tout déployer')), sections.map((s, i) => {
-    const key = kKey(s, i);
-    const open = isOpen(key);
-    const expandable = kHas(s, i);
-    const level = kLvl(s, i) || 1;
-    // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
-    // principales — meme traitement visuel quelle que soit l'expansion.
-    const h1 = hasLevels && level === 1;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "sv-sections-nav-row-wrap",
-      style: level > 1 ? {
-        paddingLeft: (level - 1) * 1.25 + 'rem'
-      } : undefined
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : ''),
-      onClick: expandable ? () => toggle(key) : undefined
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-dot",
-      style: {
-        background: kDot(s, i)
-      },
-      title: kDotT(s, i)
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-num"
-    }, kNum(s, i)), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-title"
-    }, kTit(s, i)), expandable && /*#__PURE__*/React.createElement("span", {
-      className: 'sv-sections-nav-chev' + (open ? ' open' : '')
-    }, "\u25B8")), open && expandable && /*#__PURE__*/React.createElement("div", {
-      className: "sv-sections-nav-content"
-    }, kRen(s, i)));
-  }));
+  return <div className="sv-sections-nav">
+    {(label || multi) && <div className="sv-sections-nav-header">
+      {label && <div className="sv-sections-nav-label">{label}</div>}
+      {multi && expKeys.length > 0 && <button type="button" className="sv-sections-toggle-all"
+        onClick={() => setOpenSet(allOpen ? new Set() : new Set(expKeys))}>
+        {allOpen ? '⊖ Tout replier' : '⊕ Tout déployer'}
+      </button>}
+    </div>}
+    {sections.map((s, i) => {
+      const key = kKey(s, i);
+      const open = isOpen(key);
+      const expandable = kHas(s, i);
+      const level = kLvl(s, i) || 1;
+      // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
+      // principales — meme traitement visuel quelle que soit l'expansion.
+      const h1 = hasLevels && level === 1;
+      return <div key={i} className="sv-sections-nav-row-wrap"
+        style={level > 1 ? {paddingLeft: ((level - 1) * 1.25) + 'rem'} : undefined}>
+        <div className={'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : '')}
+             onClick={expandable ? () => toggle(key) : undefined}>
+          <span className="sv-sections-nav-dot" style={{background: kDot(s, i)}} title={kDotT(s, i)}></span>
+          <span className="sv-sections-nav-num">{kNum(s, i)}</span>
+          <span className="sv-sections-nav-title">{kTit(s, i)}</span>
+          {expandable && <span className={'sv-sections-nav-chev' + (open ? ' open' : '')}>▸</span>}
+        </div>
+        {open && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
+      </div>;
+    })}
+  </div>;
 }
 
 // SvNavList — liste de navigation sélectionnable (modèle master-détail).
@@ -4650,182 +3589,149 @@ function SvSectionsNav({
 //   getSub (ligne 2, ellipsée), getMeta (badge droite), label, empty.
 // colorCode : masque la pastille et colore le code (numéro) avec getDotColor —
 // alignement plus net du titre (utilisé par Concept Cards).
-function SvNavList({
-  items,
-  isActive,
-  onSelect,
-  getKey,
-  getCode,
-  getDotColor,
-  getTitle,
-  getSub,
-  getMeta,
-  label,
-  empty,
-  colorCode,
-  frameColor
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-label"
-  }, label), (!items || !items.length) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-empty"
-  }, empty || 'Aucun élément.'), (items || []).map((it, i) => {
-    const active = isActive ? isActive(it, i) : false;
-    const sub = getSub ? getSub(it, i) : null;
-    const dot = getDotColor ? getDotColor(it, i) : null;
-    const code = getCode ? getCode(it, i) : null;
-    const meta = getMeta ? getMeta(it, i) : null;
-    const tinted = (colorCode || frameColor) && dot;
-    const codeStyle = frameColor && dot ? {
-      color: dot,
-      fontSize: 'var(--font-sm)',
-      fontWeight: 700,
-      fontFamily: 'inherit'
-    } : colorCode && dot ? {
-      color: dot
-    } : undefined;
-    const itemStyle = frameColor && dot && active ? {
-      borderColor: dot,
-      boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'
-    } : undefined;
-    return /*#__PURE__*/React.createElement("div", {
-      key: getKey ? getKey(it, i) : i,
-      onClick: () => onSelect && onSelect(it, i),
-      className: 'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : ''),
-      style: itemStyle
-    }, dot && !tinted && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-dot",
-      style: {
-        background: dot
-      }
-    }), code && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-code",
-      style: codeStyle
-    }, code), /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-main"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-title"
-    }, getTitle ? getTitle(it, i) : ''), sub && /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-sub"
-    }, sub)), meta && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-meta"
-    }, meta));
-  }));
+function SvNavList({ items, isActive, onSelect, getKey, getCode, getDotColor,
+                    getTitle, getSub, getMeta, label, empty, colorCode, frameColor }) {
+  return <div className="sv-navlist">
+    {label && <div className="sv-navlist-label">{label}</div>}
+    {(!items || !items.length) && <div className="sv-navlist-empty">{empty || 'Aucun élément.'}</div>}
+    {(items || []).map((it, i) => {
+      const active = isActive ? isActive(it, i) : false;
+      const sub  = getSub      ? getSub(it, i)      : null;
+      const dot  = getDotColor ? getDotColor(it, i) : null;
+      const code = getCode     ? getCode(it, i)     : null;
+      const meta = getMeta     ? getMeta(it, i)     : null;
+      const tinted = (colorCode || frameColor) && dot;
+      const codeStyle = (frameColor && dot)
+        ? {color: dot, fontSize: 'var(--font-sm)', fontWeight: 700, fontFamily: 'inherit'}
+        : ((colorCode && dot) ? {color: dot} : undefined);
+      const itemStyle = (frameColor && dot && active) ? {borderColor: dot, boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'} : undefined;
+      return <div key={getKey ? getKey(it, i) : i} onClick={() => onSelect && onSelect(it, i)}
+        className={'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : '')}
+        style={itemStyle}>
+        {dot && !tinted && <span className="sv-navlist-dot" style={{background: dot}}></span>}
+        {code && <span className="sv-navlist-code" style={codeStyle}>{code}</span>}
+        <div className="sv-navlist-main">
+          <div className="sv-navlist-title">{getTitle ? getTitle(it, i) : ''}</div>
+          {sub && <div className="sv-navlist-sub">{sub}</div>}
+        </div>
+        {meta && <span className="sv-navlist-meta">{meta}</span>}
+      </div>;
+    })}
+  </div>;
 }
+
+
+
 
 // ═══════════════════════════════════════════════════════════════════
 // Guide Technique — doc multi-chapitres (source config.technique.chapitres)
 // ═══════════════════════════════════════════════════════════════════
 
-function Section({
-  section,
-  chapId
-}) {
-  const anchor = 'sec-' + chapId + '-' + section.id;
-  return /*#__PURE__*/React.createElement("section", {
-    className: "tech-section",
-    id: anchor
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: section.titre,
-    icon: "\uD83D\uDD2C"
-  }, section.content && /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.content
-  }), section.bullets && /*#__PURE__*/React.createElement(SvBulletList, {
-    items: section.bullets
-  }), section.formula && /*#__PURE__*/React.createElement(SvFormula, {
-    source: section.formula.source
-  }, section.formula.expr), section.rule && /*#__PURE__*/React.createElement(SvRule, {
-    title: section.rule.title
-  }, section.rule.text), section.highlight && /*#__PURE__*/React.createElement(SvHighlightBox, {
-    title: section.highlight.title,
-    color: section.highlight.color || 'info'
-  }, section.highlight.text), section.source && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      fontStyle: 'italic',
-      marginTop: '0.5rem'
+// ── MermaidDiagram : schéma de flux rendu à l'ouverture, theme-aware ──
+// Suit data-theme sur <html> (toolbar ☾/☀) + fallback prefers-color-scheme.
+function _svMermaidTheme() {
+  var dt = document.documentElement.getAttribute('data-theme');
+  if (dt === 'dark') return 'dark';
+  if (dt === 'light') return 'default';
+  return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'default';
+}
+
+function MermaidDiagram({ code }) {
+  const ref = React.useRef(null);
+  const [theme, setTheme] = React.useState(_svMermaidTheme);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (el && window.mermaid) {
+      el.removeAttribute('data-processed');
+      el.textContent = code;
+      window.mermaid.initialize({ startOnLoad: false, theme: theme, flowchart: { padding: 15, useMaxWidth: false } });
+      window.mermaid.run({ nodes: [el] }).catch(() => { el.textContent = code; });
     }
-  }, "\uD83D\uDCD6 ", section.source)));
+  }, [code, theme]);
+  // Re-rend au toggle de thème (data-theme change sur <html>)
+  React.useEffect(() => {
+    const obs = new MutationObserver(function () { setTheme(_svMermaidTheme()); });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return function () { obs.disconnect(); };
+  }, []);
+  return <div className="tech-diagram"><div className="mermaid" ref={ref}>{code}</div></div>;
 }
-function Chapter({
-  chap,
-  num
-}) {
-  return /*#__PURE__*/React.createElement("article", {
-    className: "tech-chapter",
-    id: 'chap-' + chap.id
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "tech-chapter-head"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-num"
-  }, num), /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-icon"
-  }, chap.icone), /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-titles"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-label"
-  }, "Chapitre ", num), /*#__PURE__*/React.createElement("h2", {
-    className: "tech-chapter-title"
-  }, chap.titre))), chap.intro && /*#__PURE__*/React.createElement("div", {
-    className: "tech-chapter-intro"
-  }, chap.intro), /*#__PURE__*/React.createElement("div", null, chap.sections.map(sec => /*#__PURE__*/React.createElement(Section, {
-    key: sec.id,
-    section: sec,
-    chapId: chap.id
-  }))));
+
+function Section({ section, chapId }) {
+  const anchor = 'sec-' + chapId + '-' + section.id;
+  return <section className="tech-section" id={anchor}>
+    <SvCollapse title={section.titre} icon="🔬">
+      {section.content && <SvRichText text={section.content} />}
+      {section.bullets && <SvBulletList items={section.bullets} />}
+      {section.formula && <SvFormula source={section.formula.source}>
+        {section.formula.expr}
+      </SvFormula>}
+      {section.rule && <SvRule title={section.rule.title}>{section.rule.text}</SvRule>}
+      {section.highlight && <SvHighlightBox title={section.highlight.title} color={section.highlight.color || 'info'}>
+        {section.highlight.text}
+      </SvHighlightBox>}
+      {section.diagram && <MermaidDiagram code={section.diagram} />}
+      {section.source && <div style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',fontStyle:'italic',marginTop:'0.5rem'}}>📖 {section.source}</div>}
+    </SvCollapse>
+  </section>;
 }
-function TOC({
-  chapitres
-}) {
-  const scrollTo = id => {
+
+function Chapter({ chap, num }) {
+  return <article className="tech-chapter" id={'chap-' + chap.id}>
+    <header className="tech-chapter-head">
+      <div className="tech-chapter-num">{num}</div>
+      <div className="tech-chapter-icon">{chap.icone}</div>
+      <div className="tech-chapter-titles">
+        <div className="tech-chapter-label">Chapitre {num}</div>
+        <h2 className="tech-chapter-title">{chap.titre}</h2>
+      </div>
+    </header>
+    {chap.intro && <div className="tech-chapter-intro">{chap.intro}</div>}
+    <div>
+      {chap.sections.map(sec => <Section key={sec.id} section={sec} chapId={chap.id} />)}
+    </div>
+  </article>;
+}
+
+function TOC({ chapitres }) {
+  const scrollTo = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
   };
-  return /*#__PURE__*/React.createElement("nav", {
-    className: "tech-sidebar"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tech-toc-title"
-  }, "Sommaire"), chapitres.map((chap, i) => /*#__PURE__*/React.createElement("div", {
-    key: chap.id
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "tech-toc-chapter",
-    onClick: () => scrollTo('chap-' + chap.id)
-  }, i + 1 + '. ' + chap.icone + ' ' + chap.titre), /*#__PURE__*/React.createElement("ul", {
-    className: "tech-toc-sections"
-  }, chap.sections.map(sec => /*#__PURE__*/React.createElement("li", {
-    key: sec.id
-  }, /*#__PURE__*/React.createElement("a", {
-    className: "tech-toc-section",
-    onClick: () => scrollTo('sec-' + chap.id + '-' + sec.id)
-  }, sec.titre)))))));
+  return <nav className="tech-sidebar">
+    <div className="tech-toc-title">Sommaire</div>
+    {chapitres.map((chap, i) => <div key={chap.id}>
+      <a className="tech-toc-chapter" onClick={() => scrollTo('chap-' + chap.id)}>
+        {(i+1) + '. ' + chap.icone + ' ' + chap.titre}
+      </a>
+      <ul className="tech-toc-sections">
+        {chap.sections.map(sec => <li key={sec.id}>
+          <a className="tech-toc-section" onClick={() => scrollTo('sec-' + chap.id + '-' + sec.id)}>
+            {sec.titre}
+          </a>
+        </li>)}
+      </ul>
+    </div>)}
+  </nav>;
 }
+
 function App() {
   const chapitres = DATA.chapitres || [];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-page"
-  }, DATA.intro && /*#__PURE__*/React.createElement("div", {
-    className: "tech-intro"
-  }, DATA.intro), /*#__PURE__*/React.createElement("div", {
-    className: "tech-layout"
-  }, /*#__PURE__*/React.createElement(TOC, {
-    chapitres: chapitres
-  }), /*#__PURE__*/React.createElement("main", {
-    className: "tech-main"
-  }, chapitres.map((chap, i) => /*#__PURE__*/React.createElement(Chapter, {
-    key: chap.id,
-    chap: chap,
-    num: i + 1
-  })))), /*#__PURE__*/React.createElement("footer", {
-    className: "tech-footer"
-  }, "Guide Technique \xB7 Sol Vivant cet Holobionte \xB7 Jean-Michel Juzan \xB7 avril 2026"));
+  return <div className="sv-page">
+    {DATA.intro && <div className="tech-intro">{DATA.intro}</div>}
+    <div className="tech-layout">
+      <TOC chapitres={chapitres} />
+      <main className="tech-main">
+        {chapitres.map((chap, i) => <Chapter key={chap.id} chap={chap} num={i+1} />)}
+      </main>
+    </div>
+    <footer className="tech-footer">
+      Guide Technique · Sol Vivant cet Holobionte · Jean-Michel Juzan · avril 2026
+    </footer>
+  </div>;
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 
 

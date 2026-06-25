@@ -7,8 +7,7 @@
 git clone {GITHUB_TOOLS_URL}.git
 cd Tools
 
-# Cloner Publications dedans (depot separe pour le site web)
-git clone {GITHUB_PUB_URL}.git
+# Publications/ fait partie du depot principal — rien d'autre a cloner
 ```
 
 ## Commandes quotidiennes
@@ -75,42 +74,17 @@ git merge test-nouveau-truc
 git branch -d test-nouveau-truc
 ```
 
-## Publications (depot separe)
+## Regenerer le site (Publications/)
+
+Publications/ est versionne dans le depot principal — il se commit avec le reste (pas de second depot). La regeneration et la propagation vers `main` sont prises en charge par `session_end.py`.
 
 ```bash
-# Generer les fichiers dans Publications/
-cd ~/Documents/Sol_Vivant/GitHub/Tools
-python3 tools/docs/gen_archive.py --db sol_vivant.db
-python3 tools/docs/gen_bq_page.py --db sol_vivant.db
-python3 tools/docs/gen_cahier.py --db sol_vivant.db
-python3 tools/docs/gen_concept_cards.py --db sol_vivant.db
-python3 tools/docs/gen_dashboard.py --db sol_vivant.db
-python3 tools/docs/gen_esclaves_calc.py --db sol_vivant.db
-python3 tools/docs/gen_explorer.py --db sol_vivant.db
-python3 tools/docs/gen_fiches_index.py --db sol_vivant.db
-python3 tools/docs/gen_illustration_prompts.py --db sol_vivant.db
-python3 tools/docs/gen_lifofer.py --db sol_vivant.db
-python3 tools/docs/gen_mo_calc.py --db sol_vivant.db
-python3 tools/docs/gen_readme.py --db sol_vivant.db
-python3 tools/docs/gen_scripts.py --db sol_vivant.db
-python3 tools/docs/gen_technique.py --db sol_vivant.db
-python3 tools/docs/gen_tests_terrain.py --db sol_vivant.db
-python3 tools/docs/gen_transition_robuste.py --db sol_vivant.db
-python3 tools/docs/gen_triangle_textures.py --db sol_vivant.db
-python3 tools/docs/gen_web.py --db sol_vivant.db
-python3 tools/docs/gen_workflows.py --db sol_vivant.db
-python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --all
+# Regenerer toutes les pages et docs depuis la DB
+python3 tools/regen_all.py --db sol_vivant.db
 
-# Verifier les fichiers generes
+# Verifier puis commiter normalement
 ls Publications/web/
-ls Publications/cartographie/
-ls Publications/prompts/
-
-# Copier vers le depot Pages et pousser
-cd Publications
-git add -A
-git commit -m "Mise a jour du site"
-git push origin main
+git add -A && git commit -m "Regeneration site"
 ```
 
 ## Situations courantes
@@ -163,10 +137,26 @@ git stash pop
 git stash drop
 ```
 
+## Hooks (activation, une seule fois)
+
+```bash
+git config core.hooksPath .githooks/   # active le pre-commit du projet
+```
+
+Le pre-commit `.githooks/pre-commit` lance `check_forbidden_jenni.py` : il **bloque** le commit si du meta-vocab interdit apparait dans un contenu destine a Jenni. Sur session web, les `.llm/hooks/` (SessionStart) provisionnent l'environnement automatiquement (pip/npm + `core.hooksPath`).
+
+## Workflow de session (web)
+
+1. **Demarrage** — `session_start.py` (sync git + backup DB + dashboard) ; saute sur le web (assure par les hooks SessionStart).
+2. **Travail** — edition DB + scripts sur la branche `llm/<session>` imposee par la plateforme.
+3. **Cloture** — `session_end.py` : regen pages + `check_integrity` + merge `--ff-only` vers main + push.
+
+Detail complet : `gestion_sessions.md`.
+
 ## Regles du projet
 
-1. **main = production** — on travaille directement sur main
+1. **main = production** — sessions web : on travaille sur la branche `llm/<session>` imposee par la plateforme, propagee vers main en `--ff-only` par `session_end.py`
 2. **Branches = exploration** — pour tester sans risque
 3. **La DB est binaire** — pas de merge possible, un seul editeur a la fois
-4. **Publications/ est dans .gitignore** — c'est un depot separe
-5. **Toujours commiter avant de quitter** — `git add -A && git commit -m "WIP" && git push`
+4. **Publications/ est versionne dans le depot principal** — pages generees (`gen_*.py`), ne pas editer a la main
+5. **Cloture par `session_end.py`** — regen + integrity + merge `--ff-only` + push (pas de commit `WIP` manuel)

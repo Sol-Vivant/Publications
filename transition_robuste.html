@@ -19,6 +19,7 @@
 
 <script src="vendor/react.production.min.js"></script>
 <script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/babel.min.js"></script>
 <meta name="theme-color" content="#3f6b3a">
 
 <style>
@@ -1904,7 +1905,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Transition robuste<span class="sv-h1-sub"> : Synthèse PREF Shift Project 2026 (20 chantiers décarbonation)</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-12 14:54 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-21 00:45 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <span class="sv-nav-current">🌱 Transition robuste</span>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1926,7 +1927,8 @@ const DATA = {"chantiers": [{"numero": "1", "famille": "transports", "titre": "D
 </script>
 
 
-<script>
+<script type="text/babel">
+
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
 // Tous les textes arrivent via props (jamais hardcodés)
@@ -1950,297 +1952,158 @@ function useFixedFillHeight() {
       setMobile(window.innerWidth <= 1024);
       const el = ref.current;
       if (!el) return;
-      let top = 0,
-        n = el;
-      while (n) {
-        top += n.offsetTop;
-        n = n.offsetParent;
-      }
+      let top = 0, n = el;
+      while (n) { top += n.offsetTop; n = n.offsetParent; }
       const header = document.querySelector('.sv-header');
       const hH = header ? header.offsetHeight : 0;
       if (top > 0) setStickyTop(Math.max(0, Math.round(top - hH)));
     };
     calc();
-    const t1 = setTimeout(calc, 150);
-    const t2 = setTimeout(calc, 450);
+    const t1 = setTimeout(calc, 150); const t2 = setTimeout(calc, 450);
     window.addEventListener('resize', calc);
     window.addEventListener('storage', calc);
     let ro;
-    if (window.ResizeObserver) {
-      ro = new ResizeObserver(calc);
-      ro.observe(document.body);
-    }
+    if (window.ResizeObserver) { ro = new ResizeObserver(calc); ro.observe(document.body); }
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      window.removeEventListener('resize', calc);
-      window.removeEventListener('storage', calc);
+      clearTimeout(t1); clearTimeout(t2);
+      window.removeEventListener('resize', calc); window.removeEventListener('storage', calc);
       if (ro) ro.disconnect();
     };
   }, []);
-  const st = stickyTop == null ? 100 : stickyTop;
+  const st = (stickyTop == null) ? 100 : stickyTop;
   if (mobile) {
     // Mobile (<=1024px) : ni hauteur fixe ni sticky -> la media query de la
     // charte reprend (colonne unique, scroll de page naturel).
-    return {
-      ref,
-      layoutStyle: {
-        padding: 0,
-        gap: '1.25rem'
-      },
-      paneStyle: {}
-    };
+    return { ref, layoutStyle: {padding:0, gap:'1.25rem'}, paneStyle: {} };
   }
   return {
     ref,
-    layoutStyle: {
-      position: 'sticky',
-      top: st + 'px',
-      padding: 0,
-      gap: '1.25rem',
-      alignItems: 'stretch',
-      height: 'calc(100vh - ' + st + 'px)',
-      minHeight: '520px',
-      overflow: 'hidden'
-    },
-    paneStyle: {
-      position: 'static',
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'none',
-      overflowY: 'auto'
-    }
+    layoutStyle: {position:'sticky', top: st + 'px', padding:0, gap:'1.25rem', alignItems:'stretch',
+                  height:'calc(100vh - ' + st + 'px)', minHeight:'520px', overflow:'hidden'},
+    paneStyle: {position:'static', height:'auto', minHeight:'0', maxHeight:'none', overflowY:'auto'},
   };
 }
-function SvCollapse({
-  title,
-  icon,
-  defaultOpen = false,
-  children,
-  id
-}) {
+
+function SvCollapse({ title, icon, defaultOpen = false, children, id }) {
   const [open, setOpen] = React.useState(defaultOpen);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse",
-    id: id
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "sv-collapse-header",
-    onClick: () => setOpen(!open)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-collapse-title"
-  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
-    className: `sv-collapse-chevron ${open ? 'open' : ''}`
-  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse-body"
-  }, children));
+  return <div className="sv-collapse" id={id}>
+    <button className="sv-collapse-header" onClick={() => setOpen(!open)}>
+      <span className="sv-collapse-title">{icon && <span>{icon}</span>}{title}</span>
+      <span className={`sv-collapse-chevron ${open ? 'open' : ''}`}>▸</span>
+    </button>
+    {open && <div className="sv-collapse-body">{children}</div>}
+  </div>;
 }
 
 // ── SvFormula : formule scientifique avec source optionnelle ──
-function SvFormula({
-  children,
-  source
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula"
-  }, children, source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula-source"
-  }, source));
+function SvFormula({ children, source }) {
+  return <div className="sv-formula">
+    {children}
+    {source && <div className="sv-formula-source">{source}</div>}
+  </div>;
 }
 
 // ── SvRule : règle pratique "à retenir" ──
-function SvRule({
-  children,
-  title
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvRule({ children, title }) {
+  return <div className="sv-rule">
+    {title && <div className="sv-rule-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvScienceNote : encart cahier de science ──
-function SvScienceNote({
-  children,
-  title,
-  icon
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note",
-    "data-icon": icon || ''
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvScienceNote({ children, title, icon }) {
+  return <div className="sv-science-note" data-icon={icon || ''}>
+    {title && <div className="sv-science-note-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvKPI : indicateur clé ──
-function SvKPI({
-  value,
-  unit,
-  label,
-  color,
-  detail,
-  style
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi",
-    style: style
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-value",
-    style: color ? {
-      color
-    } : undefined
-  }, value), unit && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-unit"
-  }, unit), /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-label",
-    style: color ? {
-      color
-    } : undefined
-  }, label), detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-detail"
-  }, detail));
+function SvKPI({ value, unit, label, color, detail, style }) {
+  return <div className="sv-kpi" style={style}>
+    <div className="sv-kpi-value" style={color ? {color} : undefined}>{value}</div>
+    {unit && <div className="sv-kpi-unit">{unit}</div>}
+    <div className="sv-kpi-label" style={color ? {color} : undefined}>{label}</div>
+    {detail && <div className="sv-kpi-detail">{detail}</div>}
+  </div>;
 }
 
 // ── SvKPIGrid : grille de KPIs ──
-function SvKPIGrid({
-  children,
-  cols
-}) {
-  const style = cols ? {
-    gridTemplateColumns: `repeat(${cols}, 1fr)`
-  } : undefined;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-grid",
-    style: style
-  }, children);
+function SvKPIGrid({ children, cols }) {
+  const style = cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined;
+  return <div className="sv-kpi-grid" style={style}>{children}</div>;
 }
 
 // ── SvTimeline : frise chronologique ──
-function SvTimeline({
-  items,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, children);
+function SvTimeline({ items, children }) {
+  if (children) return <div className="sv-timeline">{children}</div>;
   if (!items || !items.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-timeline-item"
-  }, item.date && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-date"
-  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-place"
-  }, item.place), /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-text"
-  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-tags"
-  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "sv-timeline-tag"
-  }, t))))));
+  return <div className="sv-timeline">
+    {items.map((item, i) => <div key={i} className="sv-timeline-item">
+      {item.date && <div className="sv-timeline-date">{item.date}</div>}
+      {item.place && <div className="sv-timeline-place">{item.place}</div>}
+      <div className="sv-timeline-text">{item.text}</div>
+      {item.tags && <div className="sv-timeline-tags">
+        {item.tags.map((t, j) => <span key={j} className="sv-timeline-tag">{t}</span>)}
+      </div>}
+    </div>)}
+  </div>;
 }
 
 // ── SvPhaseCard : phase/étape colorée ──
-function SvPhaseCard({
-  title,
-  color,
-  label,
-  stats,
-  tags,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-card",
-    style: {
-      borderLeftColor: color || 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-header",
-    style: {
-      color: color || 'var(--accent)'
-    }
-  }, label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-label"
-  }, label), /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-name"
-  }, title)), stats && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-stats"
-  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
-    key: i
-  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-tags"
-  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-phase-tag"
-  }, t))), children && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-text"
-  }, children));
+function SvPhaseCard({ title, color, label, stats, tags, children }) {
+  return <div className="sv-phase-card" style={{ borderLeftColor: color || 'var(--accent)' }}>
+    <div className="sv-phase-header" style={{ color: color || 'var(--accent)' }}>
+      {label && <span className="sv-phase-label">{label}</span>}
+      <span className="sv-phase-name">{title}</span>
+    </div>
+    {stats && <div className="sv-phase-stats">{stats.map((s, i) =>
+      <span key={i}><strong>{s.label}</strong> {s.value}</span>
+    )}</div>}
+    {tags && <div className="sv-phase-tags">{tags.map((t, i) =>
+      <span key={i} className="sv-phase-tag">{t}</span>
+    )}</div>}
+    {children && <div className="sv-phase-text">{children}</div>}
+  </div>;
 }
 
 // ── SvCompare : comparaison bon/mauvais ──
-function SvCompare({
-  good,
-  bad
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-good"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-bad"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvCompare({ good, bad }) {
+  return <div className="sv-compare">
+    <div className="sv-compare-good">
+      <div className="sv-compare-title">{good.title}</div>
+      {good.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{good.text}</div>}
+      {good.items && <ul className="sv-compare-list">
+        {good.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+    <div className="sv-compare-bad">
+      <div className="sv-compare-title">{bad.title}</div>
+      {bad.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{bad.text}</div>}
+      {bad.items && <ul className="sv-compare-list">
+        {bad.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+  </div>;
 }
 
 // ── SvDiagnostic : grille diagnostic OK/KO ──
-function SvDiagnostic({
-  ok,
-  ko
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-grid"
-  }, ok && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ok"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ko"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvDiagnostic({ ok, ko }) {
+  return <div className="sv-diag-grid">
+    {ok && <div className="sv-diag-card sv-diag-ok">
+      <div className="sv-diag-title">{ok.title}</div>
+      {ok.items && <ul className="sv-diag-list">
+        {ok.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+    {ko && <div className="sv-diag-card sv-diag-ko">
+      <div className="sv-diag-title">{ko.title}</div>
+      {ko.items && <ul className="sv-diag-list">
+        {ko.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+  </div>;
 }
 
 // ── SvGlossary : liste de termes du thésaurus, accordéon par terme ──
@@ -2252,184 +2115,127 @@ function SvDiagnostic({
 // Composant unifié pour fiches (Cahier), calculateurs (onglet Comprendre),
 // page Concept Cards (glossaire automatique des termes mobilisés), et
 // blocs glossaire sous documents de strate dans la cartographie.
-function SvGlossary({
-  terms
-}) {
+function SvGlossary({ terms }) {
   const [openIds, setOpenIds] = React.useState({});
   if (!terms || !terms.length) return null;
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
   // Tri alphabétique FR (locale-aware) sur le libellé fr ; convention glossaire.
-  const sorted = [...terms].sort((a, b) => (a.fr || '').localeCompare(b.fr || '', 'fr', {
-    sensitivity: 'base'
-  }));
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px',
-      width: '100%'
-    }
-  }, sorted.map(t => {
-    const isOpen = !!openIds[t.id];
-    const subtitleParts = [];
-    if (t.en) subtitleParts.push(t.en);
-    if (t.doc_code) subtitleParts.push(t.doc_code);
-    return /*#__PURE__*/React.createElement("div", {
-      key: t.id,
-      id: 'term-' + t.id
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      color: "var(--info)",
-      title: t.fr,
-      subtitle: subtitleParts.join(' · ') || null,
-      open: isOpen,
-      onToggle: () => toggle(t.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: '0.25rem 0 0.5rem',
-        fontSize: 'var(--font-sm)'
-      }
-    }, t.definition && /*#__PURE__*/React.createElement(SvRichText, {
-      text: t.definition
-    }), (t.syn_fr || t.syn_en) && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: '0.5rem',
-        fontSize: 'var(--font-xs)',
-        color: 'var(--color-text-muted)'
-      }
-    }, t.syn_fr && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes FR :"), " ", t.syn_fr), t.syn_en && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes EN :"), " ", t.syn_en)))));
-  }));
+  const sorted = [...terms].sort((a, b) =>
+    (a.fr || '').localeCompare(b.fr || '', 'fr', { sensitivity: 'base' })
+  );
+  return <div style={{display:'flex', flexDirection:'column', gap:'4px', width:'100%'}}>
+    {sorted.map(t => {
+      const isOpen = !!openIds[t.id];
+      const subtitleParts = [];
+      if (t.en) subtitleParts.push(t.en);
+      if (t.doc_code) subtitleParts.push(t.doc_code);
+      return <div key={t.id} id={'term-' + t.id}>
+        <SvAccordionItem
+          color="var(--info)"
+          title={t.fr}
+          subtitle={subtitleParts.join(' · ') || null}
+          open={isOpen}
+          onToggle={() => toggle(t.id)}>
+          <div style={{padding:'0.25rem 0 0.5rem', fontSize:'var(--font-sm)'}}>
+            {t.definition && <SvRichText text={t.definition} />}
+            {(t.syn_fr || t.syn_en) && <div style={{marginTop:'0.5rem', fontSize:'var(--font-xs)', color:'var(--color-text-muted)'}}>
+              {t.syn_fr && <div><strong>Synonymes FR :</strong> {t.syn_fr}</div>}
+              {t.syn_en && <div><strong>Synonymes EN :</strong> {t.syn_en}</div>}
+            </div>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
 
 // ── SvSourceList : liste de sources biblio ──
-function SvSourceList({
-  sources
-}) {
+function SvSourceList({ sources }) {
   if (!sources || !sources.length) return null;
-  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-source"
-  }, s.year && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-year"
-  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-title"
-  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
-    href: s.url,
-    target: "_blank",
-    rel: "noopener",
-    className: "sv-source-link"
-  }, "[lien]")))));
+  return <div>
+    {sources.map((s, i) => <div key={i} className="sv-source">
+      {s.year && <span className="sv-source-year">{s.year} — </span>}
+      {s.authors && <strong>{s.authors}</strong>}{s.authors && ' '}
+      {s.title && <span className="sv-source-title">{s.title}</span>}
+      {s.url && <> <a href={s.url} target="_blank" rel="noopener" className="sv-source-link">[lien]</a></>}
+    </div>)}
+  </div>;
 }
 
 // ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
 // Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
-function SvTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-tab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvTabs({ tabs, active, onChange }) {
+  return <div className="sv-tabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-tab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
 // A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
 // Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
 // Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
-function SvSubTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-subtabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvSubTabs({ tabs, active, onChange }) {
+  return <div className="sv-subtabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-subtab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
 // Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
 // Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
-function SvCallout({
-  variant,
-  title,
-  icon,
-  children
-}) {
+function SvCallout({ variant, title, icon, children }) {
   const v = variant || 'info';
   const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cls
-  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout-title"
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-callout-icon"
-  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={cls}>
+    {(title || icon) && <div className="sv-callout-title">
+      {icon && <span className="sv-callout-icon">{icon}</span>}
+      {title && <span>{title}</span>}
+    </div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
-function SvAlert({
-  variant,
-  title,
-  children
-}) {
+function SvAlert({ variant, title, children }) {
   const v = variant || 'info';
-  return /*#__PURE__*/React.createElement("div", {
-    className: `sv-alert sv-alert-${v}`
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      marginBottom: '0.25rem'
-    }
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={`sv-alert sv-alert-${v}`}>
+    {title && <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvImageCard : image illustrative avec legende et styles standardises ──
 // Resout le bug "double style" + manque de max-width responsive.
 // Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
-function SvImageCard({
-  src,
-  alt,
-  caption,
-  maxHeight,
-  maxWidth
-}) {
+function SvImageCard({ src, alt, caption, maxHeight, maxWidth }) {
   const mh = maxHeight || '320px';
   const mw = maxWidth || '100%';
-  return /*#__PURE__*/React.createElement("figure", {
-    className: "sv-image-card"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: src,
-    alt: alt || '',
-    style: {
-      width: '100%',
-      maxWidth: mw,
-      maxHeight: mh,
-      objectFit: 'contain',
-      borderRadius: 'var(--radius)',
-      border: '1px solid var(--border)',
-      boxShadow: 'var(--shadow)',
-      display: 'block'
-    }
-  }), caption && /*#__PURE__*/React.createElement("figcaption", {
-    className: "sv-image-caption"
-  }, caption));
+  return <figure className="sv-image-card">
+    <img src={src} alt={alt || ''}
+      style={{
+        width: '100%',
+        maxWidth: mw,
+        maxHeight: mh,
+        objectFit: 'contain',
+        borderRadius: 'var(--radius)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow)',
+        display: 'block'
+      }} />
+    {caption && <figcaption className="sv-image-caption">{caption}</figcaption>}
+  </figure>;
 }
 
 // ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
@@ -2439,189 +2245,107 @@ function SvImageCard({
 //   materiel : array de strings (optionnel)
 //   duree : string (optionnel)
 //   title : string (optionnel)
-function SvProcedureSteps({
-  title,
-  steps,
-  materiel,
-  duree
-}) {
+function SvProcedureSteps({ title, steps, materiel, duree }) {
   if (!steps || !steps.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-title"
-  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-meta"
-  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
-    className: "sv-procedure-steps"
-  }, steps.map((s, i) => {
-    const label = typeof s === 'string' ? s : s.label;
-    const detail = typeof s === 'string' ? null : s.detail;
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-label"
-    }, label), detail && /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-detail"
-    }, " \u2014 ", detail));
-  })));
+  return <div className="sv-procedure">
+    {title && <div className="sv-procedure-title">{title}</div>}
+    {(materiel || duree) && <div className="sv-procedure-meta">
+      {materiel && materiel.length > 0 && <div>
+        <strong>Materiel : </strong>{materiel.join(' · ')}
+      </div>}
+      {duree && <div><strong>Duree : </strong>{duree}</div>}
+    </div>}
+    <ol className="sv-procedure-steps">
+      {steps.map((s, i) => {
+        const label = typeof s === 'string' ? s : s.label;
+        const detail = typeof s === 'string' ? null : s.detail;
+        return <li key={i}>
+          <span className="sv-procedure-label">{label}</span>
+          {detail && <span className="sv-procedure-detail"> — {detail}</span>}
+        </li>;
+      })}
+    </ol>
+  </div>;
 }
 
 // ── SvTestCard : carte standardisee pour un terrain_test ──
 // Reutilisable dans la page Triangle (section test du bocal) ET pour la
 // future page autonome tests_terrain.
 // Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
-function SvTestCard({
-  test
-}) {
+function SvTestCard({ test }) {
   if (!test) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-title"
-  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-test-card-dim"
-  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-desc"
-  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
-    src: test.image_url,
-    alt: test.title,
-    caption: null,
-    maxHeight: "220px"
-  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
-    title: null,
-    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
-    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
-    duree: test.duree
-  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
-    variant: "success",
-    title: "Interpretation"
-  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-source"
-  }, "Source : ", test.source));
+  return <div className="sv-test-card">
+    <div className="sv-test-card-header">
+      <div className="sv-test-card-title">{test.title}</div>
+      {test.dimension_label && <span className="sv-test-card-dim">{test.dimension_label}</span>}
+    </div>
+    {test.description && <div className="sv-test-card-desc">{test.description}</div>}
+    {test.image_url && <SvImageCard src={test.image_url} alt={test.title} caption={null} maxHeight="220px" />}
+    {(test.procedure || test.materiel || test.duree) && <SvProcedureSteps
+      title={null}
+      steps={test.procedure ? (Array.isArray(test.procedure) ? test.procedure : [test.procedure]) : []}
+      materiel={test.materiel ? (Array.isArray(test.materiel) ? test.materiel : [test.materiel]) : null}
+      duree={test.duree}
+    />}
+    {test.interpretation && <SvCallout variant="success" title="Interpretation">{test.interpretation}</SvCallout>}
+    {test.source && <div className="sv-test-card-source">Source : {test.source}</div>}
+  </div>;
 }
 
+
 // ── SvNoteAccordion : mini-note inline ──
-function SvNoteAccordion({
-  text,
-  label
-}) {
+function SvNoteAccordion({ text, label }) {
   const [open, setOpen] = React.useState(false);
   if (!text) return null;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content"
-  }, text));
+  return <div>
+    <span className="sv-note-toggle" onClick={() => setOpen(!open)}>
+      {open ? '\u25BE' : '\u25B8'} {open ? '' : (label || 'note')}
+    </span>
+    {open && <div className="sv-note-content">{text}</div>}
+  </div>;
 }
 
 // ── SvRefBox : encart de référence chiffrée ──
-function SvRefBox({
-  title,
-  items,
-  note,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box-title"
-  }, title), items && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-grid"
-  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-ref-item"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-num"
-  }, it.value), /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-label"
-  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--color-warning-text)',
-      lineHeight: 1.45,
-      fontStyle: 'italic'
-    }
-  }, note), children);
+function SvRefBox({ title, items, note, children }) {
+  return <div className="sv-ref-box">
+    {title && <div className="sv-ref-box-title">{title}</div>}
+    {items && <div className="sv-ref-grid">
+      {items.map((it, i) => <div key={i} className="sv-ref-item">
+        <div className="sv-ref-num">{it.value}</div>
+        <div className="sv-ref-label">{it.label}</div>
+      </div>)}
+    </div>}
+    {note && <div style={{fontSize:'var(--font-xs)',color:'var(--color-warning-text)',lineHeight:1.45,fontStyle:'italic'}}>{note}</div>}
+    {children}
+  </div>;
 }
 
 // ── SvHighlightBox : conclusion / point clé ──
-function SvHighlightBox({
-  title,
-  children,
-  color
-}) {
+function SvHighlightBox({ title, children, color }) {
   const c = color || 'success';
   const colors = {
-    success: {
-      bg: 'var(--success-light)',
-      border: 'var(--success)',
-      text: 'var(--color-success-text)'
-    },
-    warning: {
-      bg: 'var(--warning-light)',
-      border: 'var(--warning)',
-      text: 'var(--color-warning-text)'
-    },
-    info: {
-      bg: 'var(--info-light)',
-      border: 'var(--accent)',
-      text: 'var(--accent-dark)'
-    },
-    purple: {
-      bg: 'var(--purple-light)',
-      border: 'var(--purple)',
-      text: 'var(--purple-dark)'
-    }
+    success: { bg: 'var(--success-light)', border: 'var(--success)', text: 'var(--color-success-text)' },
+    warning: { bg: 'var(--warning-light)', border: 'var(--warning)', text: 'var(--color-warning-text)' },
+    info:    { bg: 'var(--info-light)',    border: 'var(--accent)',  text: 'var(--accent-dark)' },
+    purple:  { bg: 'var(--purple-light)',  border: 'var(--purple)',  text: 'var(--purple-dark)' },
   };
   const s = colors[c] || colors.success;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box",
-    style: {
-      background: s.bg,
-      borderLeftColor: s.border
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box-title",
-    style: {
-      color: s.text
-    }
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, children));
+  return <div className="sv-highlight-box" style={{background: s.bg, borderLeftColor: s.border}}>
+    {title && <div className="sv-highlight-box-title" style={{color: s.text}}>{title}</div>}
+    <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{children}</div>
+  </div>;
 }
 
 // ── SvDataTable : table de données stylisée ──
-function SvDataTable({
-  headers,
-  rows,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, children);
+function SvDataTable({ headers, rows, children }) {
+  if (children) return <table className="sv-data-table">{children}</table>;
   if (!headers || !rows) return null;
-  return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
-    key: i,
-    style: h.align ? {
-      textAlign: h.align
-    } : undefined
-  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-    key: j,
-    style: headers[j] && headers[j].align ? {
-      textAlign: headers[j].align
-    } : undefined
-  }, cell))))));
+  return <table className="sv-data-table">
+    <thead><tr>{headers.map((h, i) => <th key={i} style={h.align ? {textAlign: h.align} : undefined}>{h.label || h}</th>)}</tr></thead>
+    <tbody>{rows.map((row, i) => <tr key={i}>
+      {row.map((cell, j) => <td key={j} style={headers[j] && headers[j].align ? {textAlign: headers[j].align} : undefined}>{cell}</td>)}
+    </tr>)}</tbody>
+  </table>;
 }
 
 // ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
@@ -2629,31 +2353,24 @@ function SvDataTable({
 // - Chaîne simple : rendue telle quelle
 // - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
 //   `strong` met en gras inline avec .sv-emphasis
-function SvBulletList({
-  items,
-  dense
-}) {
+function SvBulletList({ items, dense }) {
   if (!items || !items.length) return null;
   const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
-  return /*#__PURE__*/React.createElement("ul", {
-    className: cls
-  }, items.map((it, i) => {
-    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, it);
-    if (it && typeof it === 'object') {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i
-      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
-        className: "sv-mark"
-      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
-        className: "sv-emphasis"
-      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
-    }
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, String(it));
-  }));
+  return <ul className={cls}>
+    {items.map((it, i) => {
+      if (typeof it === 'string') return <li key={i}>{it}</li>;
+      if (it && typeof it === 'object') {
+        return <li key={i}>
+          {it.emphasis && <span className="sv-mark">{it.emphasis}</span>}
+          {it.emphasis && it.text ? ' ' : ''}
+          {it.strong && <span className="sv-emphasis">{it.strong}</span>}
+          {it.strong && it.text ? ' ' : ''}
+          {it.text}
+        </li>;
+      }
+      return <li key={i}>{String(it)}</li>;
+    })}
+  </ul>;
 }
 
 // ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
@@ -2661,25 +2378,15 @@ function SvBulletList({
 // - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
 // - `level` : 2 (défaut) ou 3
 // - `icon` (optionnel) : emoji en préfixe du titre
-function SvSection({
-  title,
-  label,
-  level,
-  icon,
-  id,
-  children
-}) {
-  const H = level === 3 ? 'h3' : 'h2';
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block",
-    id: id
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), title && /*#__PURE__*/React.createElement(H, {
-    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-section-icon"
-  }, icon), title), children);
+function SvSection({ title, label, level, icon, id, children }) {
+  const H = (level === 3) ? 'h3' : 'h2';
+  return <section className="sv-section-block" id={id}>
+    {label && <div className="sv-section-label">{label}</div>}
+    {title && <H className={`sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`}>
+      {icon && <span className="sv-section-icon">{icon}</span>}{title}
+    </H>}
+    {children}
+  </section>;
 }
 
 // ── SvRichText : rendu pédagogique de texte semi-structuré ──
@@ -2698,96 +2405,54 @@ function _glossIndex() {
   if (_glossIdx !== undefined) return _glossIdx;
   _glossIdx = null;
   try {
-    const g = typeof DATA !== 'undefined' && DATA.glossary || {};
-    const single = new Map(),
-      multi = new Map();
+    const g = (typeof DATA !== 'undefined' && DATA.glossary) || {};
+    const single = new Map(), multi = new Map();
     const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
     for (const k of Object.keys(g)) {
       if (!k || k.length < 4) continue;
       const p = k.match(tok) || [];
-      if (p.length === 1) single.set(p[0], k);else if (p.length > 1) {
-        if (!multi.has(p[0])) multi.set(p[0], []);
-        multi.get(p[0]).push({
-          parts: p,
-          key: k
-        });
-      }
+      if (p.length === 1) single.set(p[0], k);
+      else if (p.length > 1) { if (!multi.has(p[0])) multi.set(p[0], []); multi.get(p[0]).push({ parts: p, key: k }); }
     }
     for (const a of multi.values()) a.sort((x, y) => y.parts.length - x.parts.length);
-    _glossIdx = {
-      single,
-      multi
-    };
-  } catch (e) {
-    _glossIdx = null;
-  }
+    _glossIdx = { single, multi };
+  } catch (e) { _glossIdx = null; }
   return _glossIdx;
 }
 function _svMarkGloss(s, keyPrefix, seen) {
   const idx = s ? _glossIndex() : null;
   if (!idx) return [s];
   const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
-  const toks = [];
-  let m;
-  while ((m = tok.exec(s)) !== null) toks.push({
-    lc: m[0].toLowerCase(),
-    start: m.index,
-    end: m.index + m[0].length
-  });
+  const toks = []; let m;
+  while ((m = tok.exec(s)) !== null) toks.push({ lc: m[0].toLowerCase(), start: m.index, end: m.index + m[0].length });
   if (!toks.length) return [s];
-  const out = [];
-  let cursor = 0,
-    n = 0,
-    i = 0;
+  const out = []; let cursor = 0, n = 0, i = 0;
   while (i < toks.length) {
-    let L = 0,
-      key = null;
+    let L = 0, key = null;
     const cand = idx.multi.get(toks[i].lc);
     if (cand) for (const c of cand) {
       const p = c.parts;
       if (i + p.length <= toks.length) {
         let ok = true;
-        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) {
-          ok = false;
-          break;
-        }
-        if (ok) {
-          L = p.length;
-          key = c.key;
-          break;
-        }
+        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) { ok = false; break; }
+        if (ok) { L = p.length; key = c.key; break; }
       }
     }
-    if (!L && idx.single.has(toks[i].lc)) {
-      L = 1;
-      key = idx.single.get(toks[i].lc);
-    }
-    const def = L && key ? (DATA.glossary || {})[key] : null;
+    if (!L && idx.single.has(toks[i].lc)) { L = 1; key = idx.single.get(toks[i].lc); }
+    const def = (L && key) ? (DATA.glossary || {})[key] : null;
     if (def && !seen.has(key)) {
       seen.add(key);
-      const st = toks[i].start,
-        en = toks[i + L - 1].end;
+      const st = toks[i].start, en = toks[i + L - 1].end;
       if (st > cursor) out.push(s.substring(cursor, st));
-      out.push(/*#__PURE__*/React.createElement("span", {
-        key: keyPrefix + '-gl-' + n++,
-        className: "sv-gloss",
-        title: def
-      }, s.substring(st, en)));
-      cursor = en;
-      i += L;
-    } else {
-      i += 1;
-    }
+      out.push(<span key={keyPrefix + '-gl-' + (n++)} className="sv-gloss" title={def}>{s.substring(st, en)}</span>);
+      cursor = en; i += L;
+    } else { i += 1; }
   }
   if (cursor < s.length) out.push(s.substring(cursor));
   return out.length ? out : [s];
 }
-function SvRichText({
-  text,
-  onCardRef,
-  skipPrefixes,
-  autoGloss
-}) {
+
+function SvRichText({ text, onCardRef, skipPrefixes, autoGloss }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
   const gseen = new Set();
@@ -2797,7 +2462,7 @@ function SvRichText({
   // Détecte une ligne label : MAJUSCULES en tête + ':' final. Le complément
   // après un séparateur (—, -, (, :) est ignoré pour le ratio de majuscules,
   // ce qui capte aussi les labels mixed-case ("LEVIER ORGANIQUE — côté flux :").
-  const isLabelLine = line => {
+  const isLabelLine = (line) => {
     if (!line.endsWith(':') && !line.endsWith(' :')) return false;
     const body = line.replace(/:$/, '').trim();
     if (body.length < 4 || body.length > 200) return false;
@@ -2818,10 +2483,7 @@ function SvRichText({
   while (i < rawLines.length) {
     const line = rawLines[i];
     const trimmed = line.trim();
-    if (!trimmed) {
-      i++;
-      continue;
-    }
+    if (!trimmed) { i++; continue; }
 
     // Bloc de code clôturé par ``` (option : ```lang) — rendu monospace verbatim,
     // SANS interprétation markdown (un commentaire # n'est pas un titre).
@@ -2834,11 +2496,7 @@ function SvRichText({
         i++;
       }
       if (i < rawLines.length) i++; // consomme la clôture ```
-      blocks.push({
-        type: 'code',
-        lang,
-        lines: codeLines
-      });
+      blocks.push({ type: 'code', lang, lines: codeLines });
       continue;
     }
 
@@ -2850,28 +2508,21 @@ function SvRichText({
     if (mH) {
       const hashes = mH[1].length;
       const level = hashes <= 2 ? 2 : 3;
-      blocks.push({
-        type: 'heading',
-        level,
-        text: mH[2].trim()
-      });
+      blocks.push({ type: 'heading', level, text: mH[2].trim() });
       i++;
       continue;
     }
 
     // Tableau markdown : ligne « | ... | » suivie d'un separateur « | --- | »
-    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length && /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
+    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length &&
+        /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
       const trows = [];
       while (i < rawLines.length && /^\|.*\|$/.test(rawLines[i].trim())) {
         trows.push(rawLines[i].trim());
         i++;
       }
-      const splitRow = r => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
-      blocks.push({
-        type: 'table',
-        header: splitRow(trows[0]),
-        rows: trows.slice(2).map(splitRow)
-      });
+      const splitRow = (r) => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
+      blocks.push({ type: 'table', header: splitRow(trows[0]), rows: trows.slice(2).map(splitRow) });
       continue;
     }
 
@@ -2879,10 +2530,7 @@ function SvRichText({
     // mixed-case après un séparateur (—, -, () qui ne compte pas dans le ratio.
     // Exemples : "COMPATIBILITÉS MAJEURES :" / "LEVIER ORGANIQUE — côté flux :"
     if (isLabelLine(trimmed)) {
-      blocks.push({
-        type: 'label',
-        text: trimmed.replace(/:$/, '').trim()
-      });
+      blocks.push({ type: 'label', text: trimmed.replace(/:$/, '').trim() });
       i++;
       continue;
     }
@@ -2893,10 +2541,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'bullets',
-        items
-      });
+      blocks.push({ type: 'bullets', items });
       continue;
     }
 
@@ -2909,11 +2554,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^\d+\.\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'ordered',
-        items,
-        start
-      });
+      blocks.push({ type: 'ordered', items, start });
       continue;
     }
     // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
@@ -2930,10 +2571,7 @@ function SvRichText({
       paraLines.push(rawLines[i]);
       i++;
     }
-    if (paraLines.length) blocks.push({
-      type: 'para',
-      lines: paraLines.slice()
-    });
+    if (paraLines.length) blocks.push({ type: 'para', lines: paraLines.slice() });
   }
 
   // Rendu inline d'un texte : Card refs, backticks → sv-mark, **gras** → sv-emphasis
@@ -2941,150 +2579,80 @@ function SvRichText({
     if (!s) return null;
     const out = [];
     const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|\*([^*\n]+?)\*|fiche (\d+)/g;
-    let last = 0,
-      m,
-      n = 0;
+    let last = 0, m, n = 0;
     while ((m = regex.exec(s)) !== null) {
-      if (m.index > last) {
-        const _seg = s.substring(last, m.index);
-        if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen));else out.push(_seg);
-      }
+      if (m.index > last) { const _seg = s.substring(last, m.index); if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen)); else out.push(_seg); }
       if (m[1]) {
         const id = parseInt(m[1]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-ref-' + n++,
-          onClick: () => onCardRef && onCardRef(id),
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, "#", id));
+        out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(id)}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>#{id}</a>);
       } else if (m[2]) {
         const title = m[2];
         const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
         if (found) {
-          out.push(/*#__PURE__*/React.createElement("a", {
-            key: keyPrefix + '-ref-' + n++,
-            onClick: () => onCardRef && onCardRef(found.id),
-            style: {
-              color: 'var(--accent)',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }
-          }, title));
+          out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(found.id)}
+                       style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{title}</a>);
         } else {
           out.push(title);
         }
       } else if (m[3]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-term-' + n++,
-          className: "sv-mark",
-          title: (DATA.glossary || {})[m[3].toLowerCase()] || undefined
-        }, m[3]));
+        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark" title={(DATA.glossary || {})[m[3].toLowerCase()] || undefined}>{m[3]}</span>);
       } else if (m[4]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-em-' + n++,
-          className: "sv-emphasis"
-        }, m[4]));
+        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[4]}</span>);
       } else if (m[5]) {
-        out.push(/*#__PURE__*/React.createElement("em", {
-          key: keyPrefix + '-it-' + n++
-        }, m[5]));
+        out.push(<em key={keyPrefix + '-it-' + (n++)}>{m[5]}</em>);
       } else if (m[6]) {
         const fid = parseInt(m[6]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-fiche-' + n++,
-          href: 'cahier.html#fiche-' + fid,
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, m[0]));
+        out.push(<a key={keyPrefix + '-fiche-' + (n++)} href={'cahier.html#fiche-' + fid}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{m[0]}</a>);
       }
       last = m.index + m[0].length;
     }
-    if (last < s.length) {
-      const _tl = s.substring(last);
-      if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen));else out.push(_tl);
-    }
+    if (last < s.length) { const _tl = s.substring(last); if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen)); else out.push(_tl); }
     return out;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, blocks.map((b, idx) => {
-    if (b.type === 'heading') {
-      const Tag = b.level === 2 ? 'h2' : 'h3';
-      const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
-      const mt = b.level === 2 ? '1.25rem' : '1rem';
-      return /*#__PURE__*/React.createElement(Tag, {
-        key: idx,
-        className: cls,
-        style: {
-          marginTop: idx > 0 ? mt : 0,
-          marginBottom: '0.5rem'
-        }
-      }, renderInline(b.text, 'h' + idx));
-    }
-    if (b.type === 'label') {
-      return /*#__PURE__*/React.createElement("div", {
-        key: idx,
-        className: "sv-section-label",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, b.text);
-    }
-    if (b.type === 'bullets') {
-      return /*#__PURE__*/React.createElement("ul", {
-        key: idx,
-        className: "sv-bullet-list"
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'ordered') {
-      return /*#__PURE__*/React.createElement("ol", {
-        key: idx,
-        className: "sv-ordered-list",
-        start: b.start || 1
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'table') {
-      return /*#__PURE__*/React.createElement("table", {
-        key: idx,
-        className: "sv-data-table",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, b.header.map((h, j) => /*#__PURE__*/React.createElement("th", {
-        key: j
-      }, renderInline(h, 'th' + idx + '-' + j))))), /*#__PURE__*/React.createElement("tbody", null, b.rows.map((row, r) => /*#__PURE__*/React.createElement("tr", {
-        key: r
-      }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-        key: j
-      }, renderInline(cell, 'td' + idx + '-' + r + '-' + j)))))));
-    }
-    if (b.type === 'code') {
-      return /*#__PURE__*/React.createElement("pre", {
-        key: idx,
-        className: "sv-code"
-      }, /*#__PURE__*/React.createElement("code", null, (b.lines || []).join('\n')));
-    }
-    return /*#__PURE__*/React.createElement("p", {
-      key: idx,
-      className: "sv-prose",
-      style: {
-        margin: '0.35rem 0'
+
+  return <div className="sv-richtext">
+    {blocks.map((b, idx) => {
+      if (b.type === 'heading') {
+        const Tag = b.level === 2 ? 'h2' : 'h3';
+        const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
+        const mt = b.level === 2 ? '1.25rem' : '1rem';
+        return <Tag key={idx} className={cls} style={{marginTop: idx > 0 ? mt : 0, marginBottom: '0.5rem'}}>
+          {renderInline(b.text, 'h' + idx)}
+        </Tag>;
       }
-    }, (b.lines || [b.text]).map((ln, li) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: li
-    }, li > 0 ? /*#__PURE__*/React.createElement("br", null) : null, renderInline(ln, 'p' + idx + '-' + li))));
-  }));
+      if (b.type === 'label') {
+        return <div key={idx} className="sv-section-label" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>{b.text}</div>;
+      }
+      if (b.type === 'bullets') {
+        return <ul key={idx} className="sv-bullet-list">
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ul>;
+      }
+
+      if (b.type === 'ordered') {
+        return <ol key={idx} className="sv-ordered-list" start={b.start || 1}>
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ol>;
+      }
+      if (b.type === 'table') {
+        return <table key={idx} className="sv-data-table" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>
+          <thead><tr>{b.header.map((h, j) => <th key={j}>{renderInline(h, 'th' + idx + '-' + j)}</th>)}</tr></thead>
+          <tbody>{b.rows.map((row, r) => <tr key={r}>{row.map((cell, j) => <td key={j}>{renderInline(cell, 'td' + idx + '-' + r + '-' + j)}</td>)}</tr>)}</tbody>
+        </table>;
+      }
+      if (b.type === 'code') {
+        return <pre key={idx} className="sv-code"><code>{(b.lines || []).join('\n')}</code></pre>;
+      }
+      return <p key={idx} className="sv-prose" style={{margin: '0.35rem 0'}}>
+        {(b.lines || [b.text]).map((ln, li) => <React.Fragment key={li}>{li > 0 ? <br/> : null}{renderInline(ln, 'p' + idx + '-' + li)}</React.Fragment>)}
+      </p>;
+    })}
+  </div>;
 }
+
+
 
 // ── SvExpandableCard : carte colorée expansible (pattern cartographie) ──
 // Props :
@@ -3097,66 +2665,25 @@ function SvRichText({
 //   onClick    : callback au clic sur la carte
 // ── SvSearchInput : champ de recherche unifié + bouton d'effacement ──
 // Factorisé pour toutes les pages. Props : value, onChange(str), placeholder.
-function SvSearchInput({
-  value,
-  onChange,
-  placeholder,
-  autoFocus
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      marginBottom: '12px'
-    }
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "search",
-    className: "sv-input",
-    value: value || '',
-    autoFocus: !!autoFocus,
-    onChange: e => onChange(e.target.value),
-    placeholder: placeholder || 'Rechercher…',
-    style: {
-      width: '100%',
-      paddingRight: '2rem',
-      boxSizing: 'border-box'
-    }
-  }), value && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    "aria-label": "Effacer la recherche",
-    onClick: () => onChange(''),
-    style: {
-      position: 'absolute',
-      right: '0.45rem',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: 'var(--text-secondary)',
-      fontSize: 'var(--font-lg)',
-      lineHeight: 1,
-      padding: '0 0.2rem'
-    }
-  }, "\xD7"));
+function SvSearchInput({ value, onChange, placeholder, autoFocus }) {
+  return <div style={{position:'relative', marginBottom:'12px'}}>
+    <input type="search" className="sv-input" value={value || ''}
+      autoFocus={!!autoFocus}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder || 'Rechercher…'}
+      style={{width:'100%', paddingRight:'2rem', boxSizing:'border-box'}} />
+    {value && <button type="button" aria-label="Effacer la recherche"
+      onClick={() => onChange('')}
+      style={{position:'absolute', right:'0.45rem', top:'50%', transform:'translateY(-50%)',
+              background:'none', border:'none', cursor:'pointer', color:'var(--text-secondary)',
+              fontSize:'var(--font-lg)', lineHeight:1, padding:'0 0.2rem'}}>×</button>}
+  </div>;
 }
-function SvExpandableCard({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  open,
-  onClick,
-  children,
-  compact,
-  chevron
-}) {
+
+function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children, compact, chevron }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("div", {
-    onClick: onClick,
-    style: {
-      background: open ? c + '12' : 'var(--card-bg)',
+  return <div onClick={onClick}
+    style={{background: open ? c + '12' : 'var(--card-bg)',
       border: '1px solid ' + (open ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       borderRadius: 'var(--radius)',
@@ -3165,202 +2692,61 @@ function SvExpandableCard({
       transition: 'all 0.15s',
       height: '100%',
       boxSizing: 'border-box',
-      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'
-    }
-  }, compact ?
-  /*#__PURE__*/
-  // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
-  React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      height: '100%'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-xs)',
-      flexShrink: 0
-    }
-  }, badge), title && /*#__PURE__*/React.createElement("div", {
-    title: title,
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text)',
-      flex: 1,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, title), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      flexShrink: 0,
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)), (subtitle || progress != null || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-base)',
-      lineHeight: 1,
-      flexShrink: 0
-    }
-  }, icon), subtitle && /*#__PURE__*/React.createElement("span", {
-    style: {
-      whiteSpace: 'nowrap'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%"))), children) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      height: '100%'
-    }
-  }, (badge || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '4px',
-      flexShrink: 0,
-      width: '32px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '28px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)'
-    }
-  }, badge), icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-md)',
-      lineHeight: 1
-    }
-  }, icon)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-base)',
-      color: 'var(--text)'
-    }
-  }, title), subtitle && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '5px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%")), children), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)));
+      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'}}>
+    {compact ? (
+      // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
+      <div style={{display:'flex',flexDirection:'column',gap:'6px',height:'100%'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '24px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-xs)', flexShrink:0}}>{badge}</span>}
+          {title && <div title={title} style={{fontWeight: 700, fontSize: 'var(--font-sm)', color: 'var(--text)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{title}</div>}
+          <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{flexShrink:0,color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+        </div>
+        {(subtitle || progress != null || icon) && <div style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'var(--font-xs)',color:'var(--text-secondary)'}}>
+          {icon && <span style={{fontSize:'var(--font-base)',lineHeight:1,flexShrink:0}}>{icon}</span>}
+          {subtitle && <span style={{whiteSpace:'nowrap'}}>{subtitle}</span>}
+          {progress != null && <>
+            <div style={{flex:1, height:'4px', background:'var(--border)', borderRadius:'2px', overflow:'hidden'}}>
+              <div style={{width: progress + '%', height:'100%', background: c, transition:'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)',fontWeight:600,minWidth:'26px',textAlign:'right'}}>{progress}%</span>
+          </>}
+        </div>}
+        {children}
+      </div>
+    ) : (
+      <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
+        {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '28px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
+          {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
+        </div>}
+        <div style={{flex: 1, minWidth: 0}}>
+          {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
+          {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
+          {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
+              <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+          </div>}
+          {children}
+        </div>
+        <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+      </div>
+    )}
+  </div>;
 }
+
 
 // ── SvAccordionItem : wrapper accordéon compact (SvExpandableCard + contenu déplié inline) ──
 // Pattern partagé : grille de cards compactes (Pédagogie, Fiches, Comprendre) où chaque
 // item se déploie inline avec son contenu. State local par défaut ; state contrôlé
 // possible via props `open` + `onToggle` (utilisé par Fiches pour "1 seule ouverte").
-function SvAccordionItem({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  chevron,
-  open,
-  onToggle,
-  children,
-  contentStyle
-}) {
+function SvAccordionItem({ badge, icon, color, title, subtitle, progress, chevron,
+                          open, onToggle, children, contentStyle }) {
   const [localOpen, setLocalOpen] = React.useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : localOpen;
@@ -3371,24 +2757,16 @@ function SvAccordionItem({
       setLocalOpen(!localOpen);
     }
   };
-  const defaultContentStyle = {
-    padding: '1rem 0 1.5rem'
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SvExpandableCard, {
-    compact: true,
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: title,
-    subtitle: subtitle,
-    progress: progress,
-    chevron: chevron,
-    open: isOpen,
-    onClick: handleClick
-  }), isOpen && children && /*#__PURE__*/React.createElement("div", {
-    style: contentStyle || defaultContentStyle
-  }, children));
+  const defaultContentStyle = {padding: '1rem 0 1.5rem'};
+  return <React.Fragment>
+    <SvExpandableCard compact
+      badge={badge} icon={icon} color={color}
+      title={title} subtitle={subtitle} progress={progress} chevron={chevron}
+      open={isOpen} onClick={handleClick} />
+    {isOpen && children && <div style={contentStyle || defaultContentStyle}>{children}</div>}
+  </React.Fragment>;
 }
+
 
 // ── SvConceptCardList : rendu unifié d'une liste de concept cards ──
 // API : <SvConceptCardList cards={payloads} />
@@ -3403,217 +2781,106 @@ function SvAccordionItem({
 // chaînes / cascade / liens / tests / refs / fiches). Utilisé par le panneau
 // de lecture maître-détail de concept_cards. Miroir du corps de
 // SvConceptCardList (accordéon) — garder les deux synchrones.
-function SvConceptCardDetail({
-  card,
-  onCardRef
-}) {
+function SvConceptCardDetail({ card, onCardRef }) {
   if (!card) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => onCardRef && onCardRef(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column",
-    style: {
-      padding: '0.25rem 0 0.75rem'
-    }
-  }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-    text: card.description,
-    onCardRef: onCardRef
-  }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Cha\xEEnes causales"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px',
-      fontSize: 'var(--font-sm)'
-    }
-  }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'index.html#chaine-' + ch.chain_id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    },
-    title: (ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-  }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Niveau cascade pr\xE9requis"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    style: {
-      background: c.level_couleur + '22',
-      borderLeft: '3px solid ' + c.level_couleur,
-      padding: '2px 8px',
-      borderRadius: '4px',
-      fontSize: 'var(--font-xs)'
-    }
-  }, /*#__PURE__*/React.createElement("strong", {
-    style: {
-      color: c.level_couleur
-    }
-  }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-secondary)'
-    }
-  }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Liens (' + card.links.length + ')'
-  }, card.links.map((l, i) => {
-    const isFrom = l.from_id === card.id;
-    const otherId = isFrom ? l.to_id : l.from_id;
-    const otherTitle = isFrom ? l.to_title : l.from_title;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        gap: '8px',
-        alignItems: 'baseline',
-        marginTop: '2px',
-        fontSize: 'var(--font-sm)'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)',
-        fontStyle: 'italic',
-        minWidth: '100px'
-      }
-    }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-      id: otherId,
-      title: otherTitle
-    }));
-  })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Tests terrain (' + card.tests.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-tag",
-    title: t.usage || ''
-  }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Refs renforçantes (' + card.refs.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, (() => {
-    const groups = {};
-    card.refs.forEach(r => {
-      (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-    });
-    return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-      key: kind,
-      style: {
-        padding: '4px 8px',
-        borderRadius: '8px',
-        background: 'var(--color-bg-subtle, var(--bg))',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: 'var(--color-text-muted, var(--text-secondary))',
-        marginRight: '8px',
-        fontSize: 'var(--font-2xs)',
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-        fontWeight: 700,
-        whiteSpace: 'nowrap'
-      }
-    }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-      style: {
-        display: 'inline-block',
-        padding: '1px 6px',
-        margin: '1px 3px',
-        borderRadius: '10px',
-        background: 'var(--accent-light, var(--bg))',
-        color: 'var(--accent-dark, var(--accent))',
-        whiteSpace: 'nowrap'
-      }
-    }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \u2026 +", items.length - 8)));
-  })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px'
-    }
-  }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'cahier.html#fiche-' + f.id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer',
-      fontSize: 'var(--font-sm)'
-    },
-    title: f.role ? 'rôle : ' + f.role : ''
-  }, "\uD83D\uDCC4 ", f.titre)))));
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => onCardRef && onCardRef(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+  return <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+    {card.description && <SvRichText text={card.description} onCardRef={onCardRef} />}
+
+    {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px',fontSize:'var(--font-sm)'}}>
+        {card.chains.map((ch, i) => <a key={i} href={'index.html#chaine-' + ch.chain_id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer'}}
+            title={(ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+          <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+        </a>)}
+      </div>
+    </Section>}
+
+    {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.cascade.map((c, i) => <span key={i}
+            style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                    padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+          <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+          {c.level_label && <span> — {c.level_label}</span>}
+          {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+        </span>)}
+      </div>
+    </Section>}
+
+    {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+      {card.links.map((l, i) => {
+        const isFrom = l.from_id === card.id;
+        const otherId = isFrom ? l.to_id : l.from_id;
+        const otherTitle = isFrom ? l.to_title : l.from_title;
+        return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+          <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+          <CardLink id={otherId} title={otherTitle} />
+        </div>;
+      })}
+    </Section>}
+
+    {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.tests.map((t, i) => <span key={i} className="sv-tag"
+            title={t.usage || ''}>{t.test_title}</span>)}
+      </div>
+    </Section>}
+
+    {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {(() => {
+          const groups = {};
+          card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+          return Object.entries(groups).map(([kind, items]) => (
+            <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                      background:'var(--color-bg-subtle, var(--bg))',
+                                      fontSize:'var(--font-xs)'}}>
+              <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+              {items.slice(0,8).map((r, i) => <span key={i}
+                  title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                  style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                          borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                          color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+              {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+            </div>
+          ));
+        })()}
+      </div>
+    </Section>}
+
+    {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+        {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+            title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+      </div>
+    </Section>}
+  </div>;
 }
-function SvConceptCardList({
-  cards
-}) {
+
+function SvConceptCardList({ cards }) {
   const [openIds, setOpenIds] = React.useState({});
   const inPool = React.useMemo(() => {
     const s = new Set();
     (cards || []).forEach(c => s.add(c.id));
     return s;
   }, [cards]);
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
-  const scrollToCard = id => {
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
+  const scrollToCard = (id) => {
     if (inPool.has(id)) {
-      setOpenIds(p => ({
-        ...p,
-        [id]: true
-      }));
+      setOpenIds(p => ({ ...p, [id]: true }));
       setTimeout(() => {
         const el = document.getElementById('card-' + id);
-        if (el) el.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 60);
       return;
     }
@@ -3626,206 +2893,108 @@ function SvConceptCardList({
     }
   };
   if (!cards || !cards.length) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => scrollToCard(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      width: '100%'
-    }
-  }, cards.map(card => {
-    const dim = card.dimension;
-    const dimColor = dim && dim.couleur || 'var(--accent)';
-    const isOpen = !!openIds[card.id];
-    return /*#__PURE__*/React.createElement("div", {
-      key: card.id,
-      id: 'card-' + card.id,
-      style: {
-        scrollMarginTop: '5rem'
-      }
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      badge: '#' + card.id,
-      color: dimColor,
-      title: card.title,
-      subtitle: dim && dim.nom,
-      open: isOpen,
-      onToggle: () => toggle(card.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-text-column",
-      style: {
-        padding: '0.25rem 0 0.75rem'
-      }
-    }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-      text: card.description,
-      onCardRef: scrollToCard
-    }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Cha\xEEnes causales"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: (ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-    }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Niveau cascade pr\xE9requis"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      style: {
-        background: c.level_couleur + '22',
-        borderLeft: '3px solid ' + c.level_couleur,
-        padding: '2px 8px',
-        borderRadius: '4px',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: c.level_couleur
-      }
-    }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Liens (' + card.links.length + ')'
-    }, card.links.map((l, i) => {
-      const isFrom = l.from_id === card.id;
-      const otherId = isFrom ? l.to_id : l.from_id;
-      const otherTitle = isFrom ? l.to_title : l.from_title;
-      return /*#__PURE__*/React.createElement("div", {
-        key: i,
-        style: {
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'baseline',
-          marginTop: '2px',
-          fontSize: 'var(--font-sm)'
-        }
-      }, /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)',
-          fontStyle: 'italic',
-          minWidth: '100px'
-        }
-      }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-        id: otherId,
-        title: otherTitle
-      }));
-    })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Tests terrain (' + card.tests.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: t.usage || ''
-    }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Refs renforçantes (' + card.refs.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, (() => {
-      const groups = {};
-      card.refs.forEach(r => {
-        (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-      });
-      return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-        key: kind,
-        style: {
-          padding: '4px 8px',
-          borderRadius: '8px',
-          background: 'var(--color-bg-subtle, var(--bg))',
-          fontSize: 'var(--font-xs)'
-        }
-      }, /*#__PURE__*/React.createElement("strong", {
-        style: {
-          color: 'var(--color-text-muted, var(--text-secondary))',
-          marginRight: '8px',
-          fontSize: 'var(--font-2xs)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.04em',
-          fontWeight: 700,
-          whiteSpace: 'nowrap'
-        }
-      }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-        key: i,
-        title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-        style: {
-          display: 'inline-block',
-          padding: '1px 6px',
-          margin: '1px 3px',
-          borderRadius: '10px',
-          background: 'var(--accent-light, var(--bg))',
-          color: 'var(--accent-dark, var(--accent))',
-          whiteSpace: 'nowrap'
-        }
-      }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)'
-        }
-      }, " \u2026 +", items.length - 8)));
-    })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '4px'
-      }
-    }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-      key: i,
-      href: 'cahier.html#fiche-' + f.id,
-      style: {
-        color: 'var(--accent)',
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        fontSize: 'var(--font-sm)'
-      },
-      title: f.role ? 'rôle : ' + f.role : ''
-    }, "\uD83D\uDCC4 ", f.titre)))))));
-  }));
+
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => scrollToCard(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+
+  return <div style={{display:'flex', flexDirection:'column', gap:'6px', width:'100%'}}>
+    {cards.map(card => {
+      const dim = card.dimension;
+      const dimColor = (dim && dim.couleur) || 'var(--accent)';
+      const isOpen = !!openIds[card.id];
+      return <div key={card.id} id={'card-' + card.id} style={{scrollMarginTop:'5rem'}}>
+        <SvAccordionItem
+          badge={'#' + card.id}
+          color={dimColor}
+          title={card.title}
+          subtitle={dim && dim.nom}
+          open={isOpen}
+          onToggle={() => toggle(card.id)}>
+          <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+            {card.description && <SvRichText text={card.description} onCardRef={scrollToCard} />}
+
+            {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.chains.map((ch, i) => <span key={i} className="sv-tag"
+                    title={(ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+                  <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.cascade.map((c, i) => <span key={i}
+                    style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                            padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+                  <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+                  {c.level_label && <span> — {c.level_label}</span>}
+                  {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+              {card.links.map((l, i) => {
+                const isFrom = l.from_id === card.id;
+                const otherId = isFrom ? l.to_id : l.from_id;
+                const otherTitle = isFrom ? l.to_title : l.from_title;
+                return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+                  <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+                  <CardLink id={otherId} title={otherTitle} />
+                </div>;
+              })}
+            </Section>}
+
+            {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.tests.map((t, i) => <span key={i} className="sv-tag"
+                    title={t.usage || ''}>{t.test_title}</span>)}
+              </div>
+            </Section>}
+
+            {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {(() => {
+                  const groups = {};
+                  card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+                  return Object.entries(groups).map(([kind, items]) => (
+                    <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                              background:'var(--color-bg-subtle, var(--bg))',
+                                              fontSize:'var(--font-xs)'}}>
+                      <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+                      {items.slice(0,8).map((r, i) => <span key={i}
+                          title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                          style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                                  borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                                  color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+                      {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+                    </div>
+                  ));
+                })()}
+              </div>
+            </Section>}
+
+            {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+              <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+                {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+                    style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+                    title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+              </div>
+            </Section>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
+
 
 // ── SvTagButton : pill pour sous-item (code + label + stat) ──
 // Props :
@@ -3835,58 +3004,29 @@ function SvConceptCardList({
 //   color    : couleur de l'accent (border-left + bg quand actif)
 //   active   : bool
 //   onClick  : callback
-function SvTagButton({
-  code,
-  label,
-  stat,
-  color,
-  active,
-  onClick
-}) {
+function SvTagButton({ code, label, stat, color, active, onClick }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: onClick,
-    style: {
-      padding: '8px 14px',
-      borderRadius: 'var(--radius)',
-      cursor: 'pointer',
+  return <button onClick={onClick}
+    style={{padding: '8px 14px', borderRadius: 'var(--radius)', cursor: 'pointer',
       border: '2px solid ' + (active ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       background: active ? c + '15' : 'var(--card-bg)',
       fontWeight: active ? 700 : 600,
       fontSize: 'var(--font-sm)',
       color: active ? c : 'var(--text)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px',
-      transition: 'all 0.15s'
-    }
-  }, code && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700
-    }
-  }, code), label && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      maxWidth: '200px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, label), stat && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, stat));
+      display: 'flex', alignItems: 'center', gap: '6px',
+      transition: 'all 0.15s'}}>
+    {code && <span style={{fontWeight: 700}}>{code}</span>}
+    {label && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)',
+      maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{label}</span>}
+    {stat && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{stat}</span>}
+  </button>;
 }
 
+
+
 // ── SvTabIntro : intro déroulante d'onglet — composant neutralisé (objet abandonné, 2026-06) ──
-function SvTabIntro({
-  resume,
-  detail
-}) {
+function SvTabIntro({ resume, detail }) {
   // Objet d'intro déroulante abandonné (JMJ 2026-06) : neutralisé partout.
   return null;
 }
@@ -3894,19 +3034,12 @@ function SvTabIntro({
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
 // Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
 // Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
-function SvCahierLink({
-  chapitre,
-  titre
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cahier-link"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-icon"
-  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-text"
-  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
-    href: 'cahier.html#chap-' + chapitre
-  }, "Cahier de Science \u2192 ", titre));
+function SvCahierLink({ chapitre, titre }) {
+  return <div className="sv-cahier-link">
+    <span className="sv-cahier-link-icon">📚</span>
+    <span className="sv-cahier-link-text">Pour comprendre les concepts en profondeur :</span>
+    <a href={'cahier.html#chap-' + chapitre}>Cahier de Science → {titre}</a>
+  </div>;
 }
 
 // ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
@@ -3921,77 +3054,44 @@ function SvCahierLink({
 //     }}
 //   />
 // Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
-function SvCascadeGrid({
-  titre,
-  sujet,
-  projection
-}) {
+function SvCascadeGrid({ titre, sujet, projection }) {
   if (!projection) return null;
-  const AXES = [{
-    key: 'biophysique',
-    icon: '🧱',
-    label: 'Biophysique',
-    color: 'var(--success)'
-  }, {
-    key: 'temporelle',
-    icon: '⏱️',
-    label: 'Temporelle',
-    color: 'var(--accent)'
-  }, {
-    key: 'couts',
-    icon: '💶',
-    label: 'Coûts cachés',
-    color: 'var(--warning)'
-  }, {
-    key: 'consequences',
-    icon: '🌍',
-    label: 'Conséquences',
-    color: 'var(--purple)'
-  }];
+  const AXES = [
+    { key: 'biophysique',  icon: '🧱', label: 'Biophysique',  color: 'var(--success)'  },
+    { key: 'temporelle',   icon: '⏱️', label: 'Temporelle',   color: 'var(--accent)'   },
+    { key: 'couts',        icon: '💶', label: 'Coûts cachés', color: 'var(--warning)'  },
+    { key: 'consequences', icon: '🌍', label: 'Conséquences', color: 'var(--purple)'   },
+  ];
   const renderBadge = (it, axeColor) => {
-    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
-    return /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge",
-      style: {
-        borderLeftColor: impactColor,
-        color: impactColor
-      },
-      title: it.detail || it.niveau + ' — ' + (it.label || '')
-    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge-label"
-    }, it.label));
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' :
+                        it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return <span className="sv-cascade-badge" style={{borderLeftColor: impactColor, color: impactColor}}
+      title={it.detail || (it.niveau + ' — ' + (it.label || ''))}>
+      <strong>{it.niveau}</strong>
+      {it.label && <span className="sv-cascade-badge-label">{it.label}</span>}
+    </span>;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid"
-  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-head"
-  }, titre && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-title"
-  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-sujet"
-  }, sujet)), /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-rows"
-  }, AXES.map(ax => {
-    const items = projection[ax.key];
-    if (!items || !items.length) return null;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ax.key,
-      className: "sv-cascade-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-head",
-      style: {
-        color: ax.color
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-icon"
-    }, ax.icon), /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-label"
-    }, ax.label)), /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-items"
-    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: i
-    }, renderBadge(it, ax.color)))));
-  })));
+  return <div className="sv-cascade-grid">
+    {(titre || sujet) && <div className="sv-cascade-grid-head">
+      {titre && <div className="sv-cascade-grid-title">{titre}</div>}
+      {sujet && <div className="sv-cascade-grid-sujet">{sujet}</div>}
+    </div>}
+    <div className="sv-cascade-grid-rows">
+      {AXES.map(ax => {
+        const items = projection[ax.key];
+        if (!items || !items.length) return null;
+        return <div key={ax.key} className="sv-cascade-row">
+          <div className="sv-cascade-row-head" style={{color: ax.color}}>
+            <span className="sv-cascade-row-icon">{ax.icon}</span>
+            <span className="sv-cascade-row-label">{ax.label}</span>
+          </div>
+          <div className="sv-cascade-row-items">
+            {items.map((it, i) => <React.Fragment key={i}>{renderBadge(it, ax.color)}</React.Fragment>)}
+          </div>
+        </div>;
+      })}
+    </div>
+  </div>;
 }
 
 // ── SvComprendre : onglet Comprendre unifié, piloté par DATA.comprendre ──
@@ -4008,91 +3108,56 @@ function SvCascadeGrid({
 //       { type: 'richtext', titre, icon?, defaultOpen?, contenu },
 //     ]
 //   }
-function SvComprendreFiche({
-  fiche
-}) {
+function SvComprendreFiche({ fiche }) {
   // Délègue à SvFicheCard (lecteur unifié), mode sans header car déjà
   // wrappé par SvComprendreSection (accordion de l'onglet Comprendre).
   if (!fiche) return null;
-  return /*#__PURE__*/React.createElement(SvFicheCard, {
-    fiche: fiche,
-    showHeader: false,
-    defaultOpen: true
-  });
+  return <SvFicheCard fiche={fiche} showHeader={false} defaultOpen={true} />;
 }
-function SvComprendreCards({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: items
-  });
+
+function SvComprendreCards({ items }) {
+  return <SvConceptCardList cards={items} />;
 }
-function SvComprendreTerms({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: items
-  });
+
+function SvComprendreTerms({ items }) {
+  return <SvGlossary terms={items} />;
 }
-function SvComprendreSection({
-  section,
-  index
-}) {
+
+function SvComprendreSection({ section, index }) {
   const icon = section.icon || '🔬';
   // Badge : numéro d'ordre si index fourni, sinon 1er caractère du type (F/C/T/R/K)
-  const badge = index !== undefined ? String(index + 1) : (section.type || '?').charAt(0).toUpperCase();
+  const badge = index !== undefined ? String(index + 1)
+    : (section.type || '?').charAt(0).toUpperCase();
   // Couleur par type (cohérent avec la charte)
   const colorByType = {
-    'fiche': 'var(--info)',
-    'cards': 'var(--purple, #7c3aed)',
-    'terms': 'var(--success)',
-    'cahier': 'var(--warning)',
-    'richtext': 'var(--color-text-muted)'
+    'fiche':    'var(--info)',
+    'cards':    'var(--purple, #7c3aed)',
+    'terms':    'var(--success)',
+    'cahier':   'var(--warning)',
+    'richtext': 'var(--color-text-muted)',
   };
   const color = colorByType[section.type] || 'var(--accent)';
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: section.titre,
-    subtitle: section.type
-  }, section.type === 'fiche' && /*#__PURE__*/React.createElement(SvComprendreFiche, {
-    fiche: section.fiche
-  }), section.type === 'cards' && /*#__PURE__*/React.createElement(SvComprendreCards, {
-    items: section.items
-  }), section.type === 'terms' && /*#__PURE__*/React.createElement(SvComprendreTerms, {
-    items: section.items
-  }), (section.type === 'cahier' || section.type === 'richtext') && /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.contenu,
-    autoGloss: true
-  })));
+  return <SvAccordionItem
+    badge={badge} icon={icon} color={color}
+    title={section.titre} subtitle={section.type}>
+    {section.type === 'fiche' && <SvComprendreFiche fiche={section.fiche} />}
+    {section.type === 'cards' && <SvComprendreCards items={section.items} />}
+    {section.type === 'terms' && <SvComprendreTerms items={section.items} />}
+    {(section.type === 'cahier' || section.type === 'richtext') && <div className="sv-richtext">
+      <SvRichText text={section.contenu} autoGloss />
+    </div>}
+  </SvAccordionItem>;
 }
-function SvComprendre({
-  data
-}) {
-  if (!data) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout"
-  }, "Contenu p\xE9dagogique non d\xE9fini pour cette page.");
+
+function SvComprendre({ data }) {
+  if (!data) return <div className="sv-callout">Contenu pédagogique non défini pour cette page.</div>;
   const sections = data.sections || [];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, data.cahier_link && /*#__PURE__*/React.createElement(SvCahierLink, {
-    chapitre: data.cahier_link.chapitre,
-    titre: data.cahier_link.titre
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      marginTop: '0.75rem'
-    }
-  }, sections.map((s, i) => /*#__PURE__*/React.createElement(SvComprendreSection, {
-    key: i,
-    section: s,
-    index: i
-  }))));
+  return <div className="sv-text-column">
+    {data.cahier_link && <SvCahierLink chapitre={data.cahier_link.chapitre} titre={data.cahier_link.titre} />}
+    <div style={{display:'flex',flexDirection:'column',gap:'6px',marginTop:'0.75rem'}}>
+      {sections.map((s, i) => <SvComprendreSection key={i} section={s} index={i} />)}
+    </div>
+  </div>;
 }
 
 // ── SvFicheCard : lecteur unifié de fiche (cahier + onglets Comprendre) ──
@@ -4112,17 +3177,9 @@ function SvComprendre({
 //   - setOpenSecKey
 //   - showHeader  : afficher SvAccordionItem wrap (défaut true). false = render
 //                   pour une seule fiche déjà dépliée par le contexte (ex: tab Comprendre).
-function SvFicheCard({
-  fiche,
-  color,
-  defaultOpen,
-  open,
-  onToggle,
-  openSecKey,
-  setOpenSecKey,
-  showHeader,
-  showMeta
-}) {
+function SvFicheCard({ fiche, color, defaultOpen,
+                       open, onToggle, openSecKey, setOpenSecKey,
+                       showHeader, showMeta }) {
   const _showHeader = showHeader !== false;
   // showMeta=false : masque le tag de type + le label « SECTIONS (N) » — utilisé
   // quand l'appelant affiche déjà ces infos dans son propre en-tête (onglet Fiches).
@@ -4132,12 +3189,13 @@ function SvFicheCard({
   // Etat local en mode autonome
   const [openLocal, setOpenLocal] = React.useState(defaultOpen !== false);
   const [secKeyLocal, setSecKeyLocal] = React.useState(null);
-  const isOpen = typeof open === 'boolean' ? open : openLocal;
+  const isOpen = (typeof open === 'boolean') ? open : openLocal;
   const onToggleEff = onToggle || (() => setOpenLocal(v => !v));
-  const secKey = openSecKey !== undefined ? openSecKey : secKeyLocal;
+  const secKey = (openSecKey !== undefined) ? openSecKey : secKeyLocal;
   const setSecKey = setOpenSecKey || setSecKeyLocal;
-  const labels = typeof FICHE_TYPE_LABELS !== 'undefined' ? FICHE_TYPE_LABELS : {};
-  const colors = typeof FICHE_TYPE_COLORS !== 'undefined' ? FICHE_TYPE_COLORS : {};
+
+  const labels = (typeof FICHE_TYPE_LABELS !== 'undefined') ? FICHE_TYPE_LABELS : {};
+  const colors = (typeof FICHE_TYPE_COLORS !== 'undefined') ? FICHE_TYPE_COLORS : {};
   const accentColor = color || colors[f.type] || 'var(--info)';
   const partial = f.statut === 'integre_partiel';
 
@@ -4154,146 +3212,85 @@ function SvFicheCard({
     const m = t.match(/^(\d+(?:\.\d+)*)\.?\s+(.*)$/);
     const numTitle = m ? m[1] : null;
     const rest = m ? m[2] : t;
-    let num = '',
-      lvl = 1,
-      title = rest;
-    if (s.type === 'intro') {
-      lvl = 1;
-      title = rest || 'Introduction';
-    } else if (s.type === 'conclusion') {
-      lvl = 1;
-      title = rest || 'Conclusion';
-    } else if (s.type === 'body_h2') {
-      lvl = 2;
-      num = numTitle || '';
-    } else {
-      lvl = 1;
-      mainN += 1;
-      num = numTitle || String(mainN);
-    }
-    return Object.assign({}, s, {
-      _num: num,
-      _lvl: lvl,
-      _title: title
-    });
+    let num = '', lvl = 1, title = rest;
+    if (s.type === 'intro')           { lvl = 1; title = rest || 'Introduction'; }
+    else if (s.type === 'conclusion') { lvl = 1; title = rest || 'Conclusion'; }
+    else if (s.type === 'body_h2')    { lvl = 2; num = numTitle || ''; }
+    else                              { lvl = 1; mainN += 1; num = numTitle || String(mainN); }
+    return Object.assign({}, s, { _num: num, _lvl: lvl, _title: title });
   });
-  const body = /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0.5rem 0'
-    }
-  }, (_showMeta || partial) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: '0.5rem',
-      marginBottom: '0.75rem',
-      fontSize: 'var(--font-xs)',
-      flexWrap: 'wrap'
-    }
-  }, _showMeta && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-info"
-  }, labels[f.type] || f.type), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), (() => {
-    const hasAnyContent = navSecs.some(s => s.blocks && s.blocks.length > 0 || s.contexte_sci);
-    if (hasAnyContent) {
-      return /*#__PURE__*/React.createElement(SvSectionsNav, {
-        multi: true,
-        sections: navSecs,
-        label: _showMeta ? 'SECTIONS (' + navSecs.length + ')' : null,
-        openKey: secKey,
-        onToggle: setSecKey,
-        getKey: (s, i) => 'fsec-' + f.id + '-' + i,
-        getNumber: s => s._num,
-        getTitle: s => s._title,
-        getLevel: s => s._lvl,
-        getDotColor: s => s.blocks && s.blocks.length > 0 ? 'var(--success)' : s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)',
-        hasContent: s => s.blocks && s.blocks.length > 0 || !!s.contexte_sci,
-        renderContent: s => {
-          if (s.blocks && s.blocks.length > 0) return /*#__PURE__*/React.createElement(SvFicheBlocks, {
-            blocks: s.blocks
-          });
-          if (s.contexte_sci) return /*#__PURE__*/React.createElement(SvRichText, {
-            text: s.contexte_sci,
-            autoGloss: true
-          });
-          return /*#__PURE__*/React.createElement("div", {
-            style: {
-              color: 'var(--color-text-muted)',
-              fontStyle: 'italic'
-            }
-          }, "Section vide.");
+
+  const body = <div className="sv-text-column">
+    <div style={{padding:'0.5rem 0'}}>
+      {(_showMeta || partial) && <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.75rem',fontSize:'var(--font-xs)',flexWrap:'wrap'}}>
+        {_showMeta && <span className="sv-tag sv-tag-info">{labels[f.type] || f.type}</span>}
+        {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+      </div>}
+      {(() => {
+        const hasAnyContent = navSecs.some(s =>
+          (s.blocks && s.blocks.length > 0) || s.contexte_sci);
+        if (hasAnyContent) {
+          return <SvSectionsNav multi
+            sections={navSecs}
+            label={_showMeta ? ('SECTIONS (' + navSecs.length + ')') : null}
+            openKey={secKey}
+            onToggle={setSecKey}
+            getKey={(s, i) => 'fsec-' + f.id + '-' + i}
+            getNumber={s => s._num}
+            getTitle={s => s._title}
+            getLevel={s => s._lvl}
+            getDotColor={s => s.blocks && s.blocks.length > 0 ? 'var(--success)'
+                              : (s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)')}
+            hasContent={s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci}
+            renderContent={s => {
+              if (s.blocks && s.blocks.length > 0) return <SvFicheBlocks blocks={s.blocks} />;
+              if (s.contexte_sci) return <SvRichText text={s.contexte_sci} autoGloss />;
+              return <div style={{color:'var(--color-text-muted)',fontStyle:'italic'}}>Section vide.</div>;
+            }}
+          />;
         }
-      });
-    }
-    if (f.contenu_integre) {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 'var(--font-xs)',
-          color: 'var(--color-text-muted)',
-          marginBottom: '0.75rem',
-          fontStyle: 'italic',
-          padding: '0.5rem 0.75rem',
-          background: 'var(--color-bg-muted)',
-          borderRadius: '4px'
+        if (f.contenu_integre) {
+          return <div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem',fontStyle:'italic',padding:'0.5rem 0.75rem',background:'var(--color-bg-muted)',borderRadius:'4px'}}>
+              ⚠ Affichage monolithique — découpage par sections en attente de cycle Jenni MAJ.
+            </div>
+            <SvRichText text={f.contenu_integre} autoGloss />
+          </div>;
         }
-      }, "\u26A0 Affichage monolithique \u2014 d\xE9coupage par sections en attente de cycle Jenni MAJ."), /*#__PURE__*/React.createElement(SvRichText, {
-        text: f.contenu_integre,
-        autoGloss: true
-      }));
-    }
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        color: 'var(--color-text-muted)',
-        fontStyle: 'italic',
-        padding: '1rem 0'
-      }
-    }, "Contenu non disponible \u2014 fiche en cours d'int\xE9gration.");
-  })(), f.pedago_links && f.pedago_links.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')',
-    icon: "\uD83E\uDDED",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: f.pedago_links
-  }))), f.glossaire && f.glossaire.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Glossaire (' + f.glossaire.length + ')',
-    icon: "\uD83D\uDCD6",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: f.glossaire
-  }))), f.refs && f.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs",
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Sources (' + f.refs.length + ')',
-    icon: "\uD83D\uDCDA",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: f.refs
-  })))));
+        return <div style={{color:'var(--color-text-muted)',fontStyle:'italic',padding:'1rem 0'}}>
+          Contenu non disponible — fiche en cours d'intégration.
+        </div>;
+      })()}
+      {f.pedago_links && f.pedago_links.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')'} icon="🧭" defaultOpen={false}>
+          <SvConceptCardList cards={f.pedago_links} />
+        </SvCollapse>
+      </div>}
+      {f.glossaire && f.glossaire.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Glossaire (' + f.glossaire.length + ')'} icon="📖" defaultOpen={false}>
+          <SvGlossary terms={f.glossaire} />
+        </SvCollapse>
+      </div>}
+      {f.refs && f.refs.length > 0 && <div className="sv-fiche-view-refs" style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Sources (' + f.refs.length + ')'} icon="📚" defaultOpen={false}>
+          <SvSourceList sources={f.refs} />
+        </SvCollapse>
+      </div>}
+    </div>
+  </div>;
+
   if (!_showHeader) return body;
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: '#' + f.id,
-    color: accentColor,
-    title: f.titre,
-    subtitle: partial ? 'Intégration partielle' : null,
-    open: isOpen,
-    onToggle: onToggleEff,
-    contentStyle: {
-      padding: '1rem 0 1.5rem'
-    }
-  }, body);
+
+  return <SvAccordionItem
+    badge={'#' + f.id}
+    color={accentColor}
+    title={f.titre}
+    subtitle={partial ? 'Intégration partielle' : null}
+    open={isOpen}
+    onToggle={onToggleEff}
+    contentStyle={{padding:'1rem 0 1.5rem'}}>
+    {body}
+  </SvAccordionItem>;
 }
 
 // ── SvFicheView : rendu d'une fiche / document intégré (sections structurées DB) ──
@@ -4310,118 +3307,74 @@ function SvFicheCard({
 //   - showTypeTag    : afficher le badge type (défaut true)
 //   - numberSections : préfixer les sections type='section' par leur n° (1., 2., ...) — défaut true
 //   - onCardRef      : callback(cardId) pour les liens Card #N
-function SvFicheBlock({
-  block
-}) {
+function SvFicheBlock({ block }) {
   if (!block || !block.text) return null;
   if (block.kind === 'h3') {
-    return /*#__PURE__*/React.createElement("h3", {
-      className: "sv-section-title sv-section-title-h3"
-    }, block.text);
+    return <h3 className="sv-section-title sv-section-title-h3">{block.text}</h3>;
   }
   if (block.kind === 'bullet') {
-    return /*#__PURE__*/React.createElement("li", null, block.text);
+    return <li>{block.text}</li>;
   }
   // 'richtext' (section retour Jenni en un bloc) ou 'p' legacy -> SvRichText
   // (tableaux markdown, gras, italic, sous-titres). SvRichText est hoiste.
-  return /*#__PURE__*/React.createElement(SvRichText, {
-    text: block.text,
-    autoGloss: true
-  });
+  return <SvRichText text={block.text} autoGloss />;
 }
 
 // SvFicheBlocks : rend la liste de blocks (para / h3 / bullet) sans titre de section.
 // Regroupe les bullets consecutifs dans un <ul>.
-function SvFicheBlocks({
-  blocks
-}) {
+function SvFicheBlocks({ blocks }) {
   if (!blocks || !blocks.length) return null;
   const groups = [];
   let buf = null;
   for (const b of blocks) {
     if (b.kind === 'bullet') {
-      if (!buf) {
-        buf = {
-          kind: 'ul',
-          items: []
-        };
-        groups.push(buf);
-      }
+      if (!buf) { buf = { kind: 'ul', items: [] }; groups.push(buf); }
       buf.items.push(b);
     } else {
       buf = null;
       groups.push(b);
     }
   }
-  return /*#__PURE__*/React.createElement(React.Fragment, null, groups.map((g, i) => g.kind === 'ul' ? /*#__PURE__*/React.createElement("ul", {
-    key: i,
-    className: "sv-bullet-list"
-  }, g.items.map((b, j) => /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: j,
-    block: b
-  }))) : /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: i,
-    block: g
-  })));
+  return <>{groups.map((g, i) => g.kind === 'ul'
+    ? <ul key={i} className="sv-bullet-list">{g.items.map((b, j) => <SvFicheBlock key={j} block={b} />)}</ul>
+    : <SvFicheBlock key={i} block={g} />
+  )}</>;
 }
-function SvFicheSection({
-  section
-}) {
+
+function SvFicheSection({ section }) {
   if (!section || !section.blocks || section.blocks.length === 0) return null;
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sv-section-title sv-section-title-h2"
-  }, section.titre), /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvFicheBlocks, {
-    blocks: section.blocks
-  })));
+  return <section className="sv-section-block">
+    <h2 className="sv-section-title sv-section-title-h2">{section.titre}</h2>
+    <div className="sv-richtext">
+      <SvFicheBlocks blocks={section.blocks} />
+    </div>
+  </section>;
 }
-function SvFicheView({
-  fiche,
-  typeLabel,
-  typeVariant,
-  showTypeTag,
-  numberSections,
-  onCardRef
-}) {
+
+function SvFicheView({ fiche, typeLabel, typeVariant, showTypeTag, numberSections, onCardRef }) {
   if (!fiche) return null;
   const partial = fiche.statut === 'integre_partiel';
   const sections = fiche.sections || [];
   const variant = typeVariant || 'info';
   const showTag = showTypeTag !== false;
   const numSec = numberSections !== false;
-  const hasTagRow = showTag && typeLabel || partial;
+  const hasTagRow = (showTag && typeLabel) || partial;
   let n = 0;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view"
-  }, hasTagRow && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-tags"
-  }, showTag && typeLabel && /*#__PURE__*/React.createElement("span", {
-    className: 'sv-tag sv-tag-' + variant
-  }, typeLabel), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), sections.map(sec => {
-    let displayTitre = sec.titre;
-    if (numSec && sec.type === 'section') {
-      n += 1;
-      displayTitre = n + '. ' + sec.titre;
-    }
-    return /*#__PURE__*/React.createElement(SvFicheSection, {
-      key: sec.ordre,
-      section: {
-        ...sec,
-        titre: displayTitre
-      }
-    });
-  }), fiche.refs && fiche.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, "\uD83D\uDCDA Sources (", fiche.refs.length, ")"), /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: fiche.refs
-  })));
+  return <div className="sv-fiche-view">
+    {hasTagRow && <div className="sv-fiche-view-tags">
+      {showTag && typeLabel && <span className={'sv-tag sv-tag-' + variant}>{typeLabel}</span>}
+      {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+    </div>}
+    {sections.map(sec => {
+      let displayTitre = sec.titre;
+      if (numSec && sec.type === 'section') { n += 1; displayTitre = n + '. ' + sec.titre; }
+      return <SvFicheSection key={sec.ordre} section={{ ...sec, titre: displayTitre }} />;
+    })}
+    {fiche.refs && fiche.refs.length > 0 && <div className="sv-fiche-view-refs">
+      <div className="sv-section-label">📚 Sources ({fiche.refs.length})</div>
+      <SvSourceList sources={fiche.refs} />
+    </div>}
+  </div>;
 }
 
 // ── SvSectionsNav : navigation compacte de sections (accordeon exclusif) ──
@@ -4440,83 +3393,55 @@ function SvFicheView({
 //   - getDotTitle   : fn(section, index) -> tooltip (optionnel)
 //   - hasContent    : fn(section, index) -> bool (sinon: pas de chevron, pas cliquable)
 //   - renderContent : fn(section, index) -> ReactNode
-function SvSectionsNav({
-  sections,
-  openKey,
-  onToggle,
-  label,
-  multi,
-  getKey,
-  getNumber,
-  getTitle,
-  getDotColor,
-  getDotTitle,
-  getLevel,
-  hasContent,
-  renderContent
-}) {
+function SvSectionsNav({ sections, openKey, onToggle, label, multi,
+                         getKey, getNumber, getTitle, getDotColor, getDotTitle,
+                         getLevel, hasContent, renderContent }) {
   if (!sections || !sections.length) return null;
-  const kKey = getKey || ((s, i) => 'sec-' + i);
+  const kKey = getKey    || ((s, i) => 'sec-' + i);
   const kNum = getNumber || (() => '');
-  const kTit = getTitle || (s => s.titre || '');
+  const kTit = getTitle  || (s => s.titre || '');
   const kDot = getDotColor || (() => 'var(--accent)');
   const kDotT = getDotTitle || (() => '');
-  const kLvl = getLevel || (() => 1); // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
-  const hasLevels = typeof getLevel === 'function'; // hierarchie explicite -> style H1
+  const kLvl = getLevel  || (() => 1);   // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
+  const hasLevels = typeof getLevel === 'function';  // hierarchie explicite -> style H1
   const kHas = hasContent || (() => true);
   const kRen = renderContent || (() => null);
   const [openSet, setOpenSet] = React.useState(() => new Set());
   const expKeys = sections.map((s, i) => kHas(s, i) ? kKey(s, i) : null).filter(k => k !== null);
-  const isOpen = multi ? key => openSet.has(key) : key => openKey === key;
-  const toggle = multi ? key => setOpenSet(prev => {
-    const n = new Set(prev);
-    n.has(key) ? n.delete(key) : n.add(key);
-    return n;
-  }) : key => onToggle(openKey === key ? null : key);
+  const isOpen = multi ? (key => openSet.has(key)) : (key => openKey === key);
+  const toggle = multi
+    ? (key => setOpenSet(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; }))
+    : (key => onToggle(openKey === key ? null : key));
   const allOpen = multi && expKeys.length > 0 && expKeys.every(k => openSet.has(k));
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav"
-  }, (label || multi) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-header"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-label"
-  }, label), multi && expKeys.length > 0 && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sv-sections-toggle-all",
-    onClick: () => setOpenSet(allOpen ? new Set() : new Set(expKeys))
-  }, allOpen ? '⊖ Tout replier' : '⊕ Tout déployer')), sections.map((s, i) => {
-    const key = kKey(s, i);
-    const open = isOpen(key);
-    const expandable = kHas(s, i);
-    const level = kLvl(s, i) || 1;
-    // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
-    // principales — meme traitement visuel quelle que soit l'expansion.
-    const h1 = hasLevels && level === 1;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "sv-sections-nav-row-wrap",
-      style: level > 1 ? {
-        paddingLeft: (level - 1) * 1.25 + 'rem'
-      } : undefined
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : ''),
-      onClick: expandable ? () => toggle(key) : undefined
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-dot",
-      style: {
-        background: kDot(s, i)
-      },
-      title: kDotT(s, i)
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-num"
-    }, kNum(s, i)), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-title"
-    }, kTit(s, i)), expandable && /*#__PURE__*/React.createElement("span", {
-      className: 'sv-sections-nav-chev' + (open ? ' open' : '')
-    }, "\u25B8")), open && expandable && /*#__PURE__*/React.createElement("div", {
-      className: "sv-sections-nav-content"
-    }, kRen(s, i)));
-  }));
+  return <div className="sv-sections-nav">
+    {(label || multi) && <div className="sv-sections-nav-header">
+      {label && <div className="sv-sections-nav-label">{label}</div>}
+      {multi && expKeys.length > 0 && <button type="button" className="sv-sections-toggle-all"
+        onClick={() => setOpenSet(allOpen ? new Set() : new Set(expKeys))}>
+        {allOpen ? '⊖ Tout replier' : '⊕ Tout déployer'}
+      </button>}
+    </div>}
+    {sections.map((s, i) => {
+      const key = kKey(s, i);
+      const open = isOpen(key);
+      const expandable = kHas(s, i);
+      const level = kLvl(s, i) || 1;
+      // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
+      // principales — meme traitement visuel quelle que soit l'expansion.
+      const h1 = hasLevels && level === 1;
+      return <div key={i} className="sv-sections-nav-row-wrap"
+        style={level > 1 ? {paddingLeft: ((level - 1) * 1.25) + 'rem'} : undefined}>
+        <div className={'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : '')}
+             onClick={expandable ? () => toggle(key) : undefined}>
+          <span className="sv-sections-nav-dot" style={{background: kDot(s, i)}} title={kDotT(s, i)}></span>
+          <span className="sv-sections-nav-num">{kNum(s, i)}</span>
+          <span className="sv-sections-nav-title">{kTit(s, i)}</span>
+          {expandable && <span className={'sv-sections-nav-chev' + (open ? ' open' : '')}>▸</span>}
+        </div>
+        {open && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
+      </div>;
+    })}
+  </div>;
 }
 
 // SvNavList — liste de navigation sélectionnable (modèle master-détail).
@@ -4527,72 +3452,40 @@ function SvSectionsNav({
 //   getSub (ligne 2, ellipsée), getMeta (badge droite), label, empty.
 // colorCode : masque la pastille et colore le code (numéro) avec getDotColor —
 // alignement plus net du titre (utilisé par Concept Cards).
-function SvNavList({
-  items,
-  isActive,
-  onSelect,
-  getKey,
-  getCode,
-  getDotColor,
-  getTitle,
-  getSub,
-  getMeta,
-  label,
-  empty,
-  colorCode,
-  frameColor
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-label"
-  }, label), (!items || !items.length) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-empty"
-  }, empty || 'Aucun élément.'), (items || []).map((it, i) => {
-    const active = isActive ? isActive(it, i) : false;
-    const sub = getSub ? getSub(it, i) : null;
-    const dot = getDotColor ? getDotColor(it, i) : null;
-    const code = getCode ? getCode(it, i) : null;
-    const meta = getMeta ? getMeta(it, i) : null;
-    const tinted = (colorCode || frameColor) && dot;
-    const codeStyle = frameColor && dot ? {
-      color: dot,
-      fontSize: 'var(--font-sm)',
-      fontWeight: 700,
-      fontFamily: 'inherit'
-    } : colorCode && dot ? {
-      color: dot
-    } : undefined;
-    const itemStyle = frameColor && dot && active ? {
-      borderColor: dot,
-      boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'
-    } : undefined;
-    return /*#__PURE__*/React.createElement("div", {
-      key: getKey ? getKey(it, i) : i,
-      onClick: () => onSelect && onSelect(it, i),
-      className: 'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : ''),
-      style: itemStyle
-    }, dot && !tinted && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-dot",
-      style: {
-        background: dot
-      }
-    }), code && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-code",
-      style: codeStyle
-    }, code), /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-main"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-title"
-    }, getTitle ? getTitle(it, i) : ''), sub && /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-sub"
-    }, sub)), meta && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-meta"
-    }, meta));
-  }));
+function SvNavList({ items, isActive, onSelect, getKey, getCode, getDotColor,
+                    getTitle, getSub, getMeta, label, empty, colorCode, frameColor }) {
+  return <div className="sv-navlist">
+    {label && <div className="sv-navlist-label">{label}</div>}
+    {(!items || !items.length) && <div className="sv-navlist-empty">{empty || 'Aucun élément.'}</div>}
+    {(items || []).map((it, i) => {
+      const active = isActive ? isActive(it, i) : false;
+      const sub  = getSub      ? getSub(it, i)      : null;
+      const dot  = getDotColor ? getDotColor(it, i) : null;
+      const code = getCode     ? getCode(it, i)     : null;
+      const meta = getMeta     ? getMeta(it, i)     : null;
+      const tinted = (colorCode || frameColor) && dot;
+      const codeStyle = (frameColor && dot)
+        ? {color: dot, fontSize: 'var(--font-sm)', fontWeight: 700, fontFamily: 'inherit'}
+        : ((colorCode && dot) ? {color: dot} : undefined);
+      const itemStyle = (frameColor && dot && active) ? {borderColor: dot, boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'} : undefined;
+      return <div key={getKey ? getKey(it, i) : i} onClick={() => onSelect && onSelect(it, i)}
+        className={'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : '')}
+        style={itemStyle}>
+        {dot && !tinted && <span className="sv-navlist-dot" style={{background: dot}}></span>}
+        {code && <span className="sv-navlist-code" style={codeStyle}>{code}</span>}
+        <div className="sv-navlist-main">
+          <div className="sv-navlist-title">{getTitle ? getTitle(it, i) : ''}</div>
+          {sub && <div className="sv-navlist-sub">{sub}</div>}
+        </div>
+        {meta && <span className="sv-navlist-meta">{meta}</span>}
+      </div>;
+    })}
+  </div>;
 }
+
+
 </script>
-<script>
+<script type="text/babel">
 // Transition robuste — 20 chantiers Shift PREF 2026
 // Utilise la charte Sol Vivant (SvTabs, SvCollapse, SvKPI, SvSection, SvDataTable)
 
@@ -4601,559 +3494,310 @@ const FRANCE = DATA.france;
 
 // ═════════ Vue Chantiers (tableau) ═════════
 
-function ChantierDetail({
-  c
-}) {
-  const badgeFor = pertinence => {
+function ChantierDetail({c}) {
+  const badgeFor = (pertinence) => {
     if (!pertinence) return null;
-    if (pertinence.startsWith('CŒUR')) return {
-      label: 'CŒUR CORPUS',
-      bg: 'var(--success-light)',
-      col: 'var(--success)'
-    };
-    if (pertinence.startsWith('PARTIEL')) return {
-      label: 'PARTIEL',
-      bg: 'var(--warning-light)',
-      col: 'var(--warning-text)'
-    };
-    return {
-      label: 'Hors scope',
-      bg: 'var(--color-bg-muted)',
-      col: 'var(--text-secondary)'
-    };
+    if (pertinence.startsWith('CŒUR')) return {label: 'CŒUR CORPUS', bg: 'var(--success-light)', col: 'var(--success)'};
+    if (pertinence.startsWith('PARTIEL')) return {label: 'PARTIEL', bg: 'var(--warning-light)', col: 'var(--warning-text)'};
+    return {label: 'Hors scope', bg: 'var(--color-bg-muted)', col: 'var(--text-secondary)'};
   };
   const badge = badgeFor(c.pertinence_corpus);
-  const header = /*#__PURE__*/React.createElement("span", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.6rem',
-      flexWrap: 'wrap'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700,
-      color: 'var(--accent-dark)',
-      fontSize: 'var(--font-lg)'
-    }
-  }, "#", c.numero), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 600
-    }
-  }, c.titre), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      textTransform: 'uppercase'
-    }
-  }, c.famille.replace(/_/g, ' ')), badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: badge.bg,
-      color: badge.col,
-      padding: '2px 8px',
-      borderRadius: '4px',
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600
-    }
-  }, badge.label), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-muted)'
-    }
-  }, "p. ", c.pages));
+
+  const header = <span style={{display:'flex',alignItems:'center',gap:'0.6rem',flexWrap:'wrap'}}>
+    <span style={{fontWeight:700,color:'var(--accent-dark)',fontSize:'var(--font-lg)'}}>#{c.numero}</span>
+    <span style={{fontWeight:600}}>{c.titre}</span>
+    <span style={{fontSize:'var(--font-xs)',color:'var(--text-secondary)',textTransform:'uppercase'}}>{c.famille.replace(/_/g, ' ')}</span>
+    {badge && <span style={{background:badge.bg,color:badge.col,padding:'2px 8px',borderRadius:'4px',fontSize:'var(--font-xs)',fontWeight:600}}>{badge.label}</span>}
+    <span style={{fontSize:'var(--font-xs)',color:'var(--text-muted)'}}>p. {c.pages}</span>
+  </span>;
 
   // Parse chiffres_cles (markdown bullet list) en items
-  const parseChiffres = txt => {
+  const parseChiffres = (txt) => {
     if (!txt) return [];
     return txt.split('\n').filter(l => l.startsWith('-')).map(l => l.replace(/^-\s*/, '').trim());
   };
   const chiffres = parseChiffres(c.chiffres_cles);
-  return /*#__PURE__*/React.createElement(SvCollapse, {
-    title: header,
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '1rem',
-      marginBottom: '1rem'
-    }
-  }, c.objectif_2050 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      textTransform: 'uppercase',
-      color: 'var(--text-secondary)',
-      letterSpacing: '0.04em'
-    }
-  }, "Objectif 2050"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.objectif_2050)), c.etat_2025 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      textTransform: 'uppercase',
-      color: 'var(--text-secondary)',
-      letterSpacing: '0.04em'
-    }
-  }, "\xC9tat 2025"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.etat_2025))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      gap: '0.6rem',
-      marginBottom: '1rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-card",
-    style: {
-      borderLeft: '4px solid var(--success)',
-      padding: '0.7rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      color: 'var(--success)'
-    }
-  }, "Haute"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.variante_haute || '—')), /*#__PURE__*/React.createElement("div", {
-    className: "sv-card",
-    style: {
-      borderLeft: '4px solid var(--warning)',
-      padding: '0.7rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      color: 'var(--warning)'
-    }
-  }, "Interm\xE9diaire"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.variante_intermediaire || '—')), /*#__PURE__*/React.createElement("div", {
-    className: "sv-card",
-    style: {
-      borderLeft: '4px solid var(--danger)',
-      padding: '0.7rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      color: 'var(--danger)'
-    }
-  }, "Basse"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.variante_basse || '—'))), chiffres.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginBottom: '1rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      textTransform: 'uppercase',
-      color: 'var(--text-secondary)',
-      letterSpacing: '0.04em',
-      marginBottom: '0.4rem'
-    }
-  }, "Chiffres-cl\xE9s"), /*#__PURE__*/React.createElement(SvBulletList, {
-    items: chiffres,
-    dense: true
-  })), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '1rem',
-      fontSize: 'var(--font-sm)'
-    }
-  }, c.leviers && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      color: 'var(--success)',
-      marginBottom: '0.3rem'
-    }
-  }, "\u2191 Leviers"), /*#__PURE__*/React.createElement("div", null, c.leviers)), c.verrous && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      color: 'var(--danger)',
-      marginBottom: '0.3rem'
-    }
-  }, "\u2193 Verrous"), /*#__PURE__*/React.createElement("div", null, c.verrous))), c.pertinence_corpus && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1rem',
-      padding: '0.7rem',
-      background: 'var(--color-bg-subtle)',
-      borderRadius: 'var(--radius)',
-      fontSize: 'var(--font-sm)'
-    }
-  }, /*#__PURE__*/React.createElement("b", null, "Pertinence Sol Vivant :"), " ", c.pertinence_corpus));
+
+  return <SvCollapse title={header} defaultOpen={false}>
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem',marginBottom:'1rem'}}>
+      {c.objectif_2050 && <div>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,textTransform:'uppercase',color:'var(--text-secondary)',letterSpacing:'0.04em'}}>Objectif 2050</div>
+        <div style={{fontSize:'var(--font-sm)'}}>{c.objectif_2050}</div>
+      </div>}
+      {c.etat_2025 && <div>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,textTransform:'uppercase',color:'var(--text-secondary)',letterSpacing:'0.04em'}}>État 2025</div>
+        <div style={{fontSize:'var(--font-sm)'}}>{c.etat_2025}</div>
+      </div>}
+    </div>
+
+    <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'0.6rem',marginBottom:'1rem'}}>
+      <div className="sv-card" style={{borderLeft:'4px solid var(--success)',padding:'0.7rem'}}>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--success)'}}>Haute</div>
+        <div style={{fontSize:'var(--font-sm)'}}>{c.variante_haute || '—'}</div>
+      </div>
+      <div className="sv-card" style={{borderLeft:'4px solid var(--warning)',padding:'0.7rem'}}>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--warning)'}}>Intermédiaire</div>
+        <div style={{fontSize:'var(--font-sm)'}}>{c.variante_intermediaire || '—'}</div>
+      </div>
+      <div className="sv-card" style={{borderLeft:'4px solid var(--danger)',padding:'0.7rem'}}>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--danger)'}}>Basse</div>
+        <div style={{fontSize:'var(--font-sm)'}}>{c.variante_basse || '—'}</div>
+      </div>
+    </div>
+
+    {chiffres.length > 0 && <div style={{marginBottom:'1rem'}}>
+      <div style={{fontSize:'var(--font-xs)',fontWeight:600,textTransform:'uppercase',color:'var(--text-secondary)',letterSpacing:'0.04em',marginBottom:'0.4rem'}}>Chiffres-clés</div>
+      <SvBulletList items={chiffres} dense={true} />
+    </div>}
+
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem',fontSize:'var(--font-sm)'}}>
+      {c.leviers && <div>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--success)',marginBottom:'0.3rem'}}>↑ Leviers</div>
+        <div>{c.leviers}</div>
+      </div>}
+      {c.verrous && <div>
+        <div style={{fontSize:'var(--font-xs)',fontWeight:600,color:'var(--danger)',marginBottom:'0.3rem'}}>↓ Verrous</div>
+        <div>{c.verrous}</div>
+      </div>}
+    </div>
+
+    {c.pertinence_corpus && <div style={{marginTop:'1rem',padding:'0.7rem',background:'var(--color-bg-subtle)',borderRadius:'var(--radius)',fontSize:'var(--font-sm)'}}>
+      <b>Pertinence Sol Vivant :</b> {c.pertinence_corpus}
+    </div>}
+  </SvCollapse>;
 }
+
 function ChantiersView() {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0.85rem 1rem',
-      background: 'var(--accent-light)',
-      border: '1px solid var(--accent)',
-      borderRadius: 'var(--radius)',
-      marginBottom: '1rem',
-      fontSize: 'var(--font-sm)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      color: 'var(--accent-dark)',
-      marginBottom: '0.4rem'
-    }
-  }, "\uD83D\uDCDA Pour approfondir"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      lineHeight: 1.55
-    }
-  }, "Cadre conceptuel complet dans le ", /*#__PURE__*/React.createElement("strong", null, "Cahier de Sciences"), ", chapitre ", /*#__PURE__*/React.createElement("strong", null, "Transition robuste (Shift Project PREF)"), " \u2014 terme canonique, cards du corpus et leviers associ\xE9s.", /*#__PURE__*/React.createElement("a", {
-    href: "cahier.html#chap-transition",
-    style: {
-      display: 'inline-block',
-      marginTop: '0.5rem',
-      color: 'var(--accent-dark)',
-      fontWeight: 600,
-      textDecoration: 'underline'
-    }
-  }, "Ouvrir le chapitre \u2192"))), /*#__PURE__*/React.createElement(SvSection, {
-    title: "Les chantiers Shift \u2014 PREF 2026",
-    icon: "\uD83D\uDEE0\uFE0F",
-    level: 2
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "20 chantiers de d\xE9carbonation + 2 transverses (emploi, cuivre). Chaque chantier se d\xE9cline en 3 variantes (Haute / Interm\xE9diaire / Basse) et contient les chiffres-cl\xE9s extraits du rapport. 4 chantiers touchent directement le corpus Sol Vivant (c\u0153ur), 1 partiel (bio\xE9nergies), 15 sont hors scope direct mais \xE9clairent les \xE9quilibres \xE9nerg\xE9tiques globaux.")), CHANTIERS.map(c => /*#__PURE__*/React.createElement(ChantierDetail, {
-    key: c.numero,
-    c: c
-  })));
+  return <div className="sv-tab-content">
+
+      {/* Lien vers Cahier de Sciences — chapitre dedie */}
+      <div style={{padding:'0.85rem 1rem',background:'var(--accent-light)',border:'1px solid var(--accent)',borderRadius:'var(--radius)',marginBottom:'1rem',fontSize:'var(--font-sm)'}}>
+        <div style={{fontWeight:600,color:'var(--accent-dark)',marginBottom:'0.4rem'}}>📚 Pour approfondir</div>
+        <div style={{lineHeight:1.55}}>
+          Cadre conceptuel complet dans le <strong>Cahier de Sciences</strong>, chapitre <strong>Transition robuste (Shift Project PREF)</strong> — terme canonique, cards du corpus et leviers associés.
+          <a href="cahier.html#chap-transition" style={{display:'inline-block',marginTop:'0.5rem',color:'var(--accent-dark)',fontWeight:600,textDecoration:'underline'}}>Ouvrir le chapitre →</a>
+        </div>
+      </div>
+    <SvSection title="Les chantiers Shift — PREF 2026" icon="🛠️" level={2}>
+      <p className="sv-prose">
+        20 chantiers de décarbonation + 2 transverses (emploi, cuivre). Chaque chantier se décline
+        en 3 variantes (Haute / Intermédiaire / Basse) et contient les chiffres-clés extraits du rapport.
+        4 chantiers touchent directement le corpus Sol Vivant (cœur), 1 partiel (bioénergies),
+        15 sont hors scope direct mais éclairent les équilibres énergétiques globaux.
+      </p>
+    </SvSection>
+
+    {CHANTIERS.map(c => <ChantierDetail key={c.numero} c={c} />)}
+  </div>;
 }
 
 // ═════════ Vue Agricole ═════════
 
 function AgriView() {
-  const sections = [{
-    key: 'france_agriculture',
-    title: 'Ch.14 Azote — engrais, légumineuses, recyclage',
-    icon: '🌱'
-  }, {
-    key: 'france_elevage',
-    title: 'Ch.15 Élevage — bovins, revenus, CH4',
-    icon: '🐄'
-  }, {
-    key: 'france_puits_c',
-    title: 'Ch.19 Puits C agricoles — prairies, couverts, haies',
-    icon: '🌾'
-  }, {
-    key: 'france_foret',
-    title: 'Ch.19 Puits C forestiers — mortalité, essences, sols',
-    icon: '🌳'
-  }];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, /*#__PURE__*/React.createElement(SvSection, {
-    title: "Zoom agricole \u2014 c\u0153ur du corpus Sol Vivant",
-    icon: "\uD83C\uDF3F",
-    level: 2
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Trois chantiers Shift touchent directement l'agriculture r\xE9g\xE9n\xE9ratrice : azote (ch.14), \xE9levage (ch.15), puits de carbone (ch.19). 62 param\xE8tres chiffr\xE9s int\xE9gr\xE9s en DB, sections ", /*#__PURE__*/React.createElement("code", null, "france_*"), ".")), sections.map(s => {
-    const items = (FRANCE[s.key] || []).slice(0, 10);
-    if (!items.length) return null;
-    return /*#__PURE__*/React.createElement(SvCollapse, {
-      key: s.key,
-      title: s.title,
-      icon: s.icon,
-      defaultOpen: true
-    }, /*#__PURE__*/React.createElement("ul", {
-      className: "sv-bullet-list"
-    }, items.map(p => {
-      const val = p.valeur !== null && p.valeur !== undefined ? `${p.valeur.toLocaleString('fr-FR')} ${p.unite || ''}`.trim() : '—';
-      return /*#__PURE__*/React.createElement("li", {
-        key: p.code
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "sv-emphasis"
-      }, val), " \u2014 ", p.nom, p.commentaire && /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 'var(--font-xs)',
-          color: 'var(--text-secondary)',
-          marginTop: '0.2rem'
-        }
-      }, p.commentaire));
-    })));
-  }));
+  const sections = [
+    {key: 'france_agriculture', title: 'Ch.14 Azote — engrais, légumineuses, recyclage', icon: '🌱'},
+    {key: 'france_elevage', title: 'Ch.15 Élevage — bovins, revenus, CH4', icon: '🐄'},
+    {key: 'france_puits_c', title: 'Ch.19 Puits C agricoles — prairies, couverts, haies', icon: '🌾'},
+    {key: 'france_foret', title: 'Ch.19 Puits C forestiers — mortalité, essences, sols', icon: '🌳'},
+  ];
+
+  return <div className="sv-tab-content">
+    <SvSection title="Zoom agricole — cœur du corpus Sol Vivant" icon="🌿" level={2}>
+      <p className="sv-prose">
+        Trois chantiers Shift touchent directement l'agriculture régénératrice :
+        azote (ch.14), élevage (ch.15), puits de carbone (ch.19). 62 paramètres
+        chiffrés intégrés en DB, sections <code>france_*</code>.
+      </p>
+    </SvSection>
+
+    {sections.map(s => {
+      const items = (FRANCE[s.key] || []).slice(0, 10);
+      if (!items.length) return null;
+      return <SvCollapse key={s.key} title={s.title} icon={s.icon} defaultOpen={true}>
+        <ul className="sv-bullet-list">
+          {items.map(p => {
+            const val = p.valeur !== null && p.valeur !== undefined
+              ? `${p.valeur.toLocaleString('fr-FR')} ${p.unite || ''}`.trim()
+              : '—';
+            return <li key={p.code}>
+              <span className="sv-emphasis">{val}</span> — {p.nom}
+              {p.commentaire && <div style={{fontSize:'var(--font-xs)', color:'var(--text-secondary)', marginTop:'0.2rem'}}>
+                {p.commentaire}
+              </div>}
+            </li>;
+          })}
+        </ul>
+      </SvCollapse>;
+    })}
+  </div>;
 }
 
 // ═════════ Vue Chiffres France ═════════
 
 function ChiffresView() {
-  const sections = [{
-    key: 'france_macro',
-    title: 'Macro France 2025-2050'
-  }, {
-    key: 'france_energie',
-    title: 'Énergie'
-  }, {
-    key: 'france_secteurs',
-    title: 'Secteurs'
-  }, {
-    key: 'france_scenarios_2050',
-    title: 'Scénarios 2050'
-  }];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, /*#__PURE__*/React.createElement(SvSection, {
-    title: "Chiffres cl\xE9s France",
-    icon: "\uD83D\uDCCA",
-    level: 2
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "sv-prose"
-  }, "Les donn\xE9es chiffr\xE9es France extraites du rapport PREF 2026 Shift Project, regroup\xE9es en sections th\xE9matiques. Total : 84 param\xE8tres valid\xE9s par le Shift.")), sections.map(s => {
-    const items = FRANCE[s.key] || [];
-    if (!items.length) return null;
-    return /*#__PURE__*/React.createElement(SvCollapse, {
-      key: s.key,
-      title: s.title,
-      icon: "\uD83D\uDD22",
-      defaultOpen: false
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-kpi-grid"
-    }, items.map(p => {
-      const val = p.valeur !== null && p.valeur !== undefined ? p.valeur.toLocaleString('fr-FR') : '—';
-      return /*#__PURE__*/React.createElement(SvKPI, {
-        key: p.code,
-        value: val,
-        unit: p.unite,
-        label: p.nom,
-        detail: (p.commentaire || '').slice(0, 150)
-      });
-    })));
-  }));
+  const sections = [
+    {key: 'france_macro', title: 'Macro France 2025-2050'},
+    {key: 'france_energie', title: 'Énergie'},
+    {key: 'france_secteurs', title: 'Secteurs'},
+    {key: 'france_scenarios_2050', title: 'Scénarios 2050'},
+  ];
+
+  return <div className="sv-tab-content">
+    <SvSection title="Chiffres clés France" icon="📊" level={2}>
+      <p className="sv-prose">
+        Les données chiffrées France extraites du rapport PREF 2026 Shift Project,
+        regroupées en sections thématiques. Total : 84 paramètres validés par le Shift.
+      </p>
+    </SvSection>
+
+    {sections.map(s => {
+      const items = FRANCE[s.key] || [];
+      if (!items.length) return null;
+      return <SvCollapse key={s.key} title={s.title} icon="🔢" defaultOpen={false}>
+        <div className="sv-kpi-grid">
+          {items.map(p => {
+            const val = p.valeur !== null && p.valeur !== undefined
+              ? p.valeur.toLocaleString('fr-FR')
+              : '—';
+            return <SvKPI key={p.code}
+              value={val}
+              unit={p.unite}
+              label={p.nom}
+              detail={(p.commentaire || '').slice(0, 150)}
+            />;
+          })}
+        </div>
+      </SvCollapse>;
+    })}
+  </div>;
 }
 
 // ═════════ Vue Comprendre ═════════
 
 function ComprendreView() {
-  const scenarios = [{
-    key: 'haute',
-    titre: 'Réussite haute',
-    em: '≈ 0 MtCO2e',
-    fossile: '~100 TWh',
-    budget: '60 % préservé',
-    desc: 'Neutralité CO2 atteinte. Budget carbone +2°C préservé à 60 %. Consommation fossile réduite de 1100 à ~100 TWh (usages matière résiduels).',
-    color: 'var(--success)'
-  }, {
-    key: 'inter',
-    titre: 'Réussite intermédiaire',
-    em: '50 MtCO2',
-    fossile: '~200 TWh',
-    budget: '1/3 restant',
-    desc: 'Neutralité non atteinte mais baisse significative (÷4 vs 2025). Budget carbone proche de la limite. Dépendance gaz fossile ~100 TWh.',
-    color: 'var(--warning)'
-  }, {
-    key: 'basse',
-    titre: 'Réussite basse',
-    em: '150 MtCO2',
-    fossile: '>450 TWh',
-    budget: '15 % restant',
-    desc: 'Insuffisant pour l\'Accord de Paris. Budget +2°C consommé dans la décennie 2050. Dépendance forte aux importations.',
-    color: 'var(--danger)'
-  }];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, /*#__PURE__*/React.createElement(SvSection, {
-    title: "Le Plan Robuste pour l'\xC9conomie Fran\xE7aise (PREF)",
-    icon: "\uD83D\uDCD8",
-    level: 2
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement("p", null, "Publi\xE9 en avril 2026, le ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "rapport final PREF du Shift Project"), "(340 pages) analyse 20 chantiers incontournables pour la d\xE9carbonation fran\xE7aise, chacun d\xE9clin\xE9 en trois variantes \u2014 r\xE9ussite ", /*#__PURE__*/React.createElement("em", null, "haute"), ", ", /*#__PURE__*/React.createElement("em", null, "interm\xE9diaire"), ", ", /*#__PURE__*/React.createElement("em", null, "basse"), ". Fond\xE9 par Jean-Marc Jancovici, le Shift Project est une r\xE9f\xE9rence autoritaire : les chiffres cit\xE9s ici ne n\xE9cessitent pas de re-v\xE9rification (doctrine corpus BQ #131)."))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Trois trajectoires 2050",
-    icon: "\uD83D\uDEE4\uFE0F",
-    defaultOpen: true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-grid",
-    style: {
-      gridTemplateColumns: 'repeat(3, 1fr)'
-    }
-  }, scenarios.map(s => /*#__PURE__*/React.createElement("div", {
-    key: s.key,
-    className: "sv-card",
-    style: {
-      borderLeft: `4px solid ${s.color}`,
-      padding: '1rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      marginBottom: '0.3rem'
-    }
-  }, s.titre), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xl)',
-      fontWeight: 700,
-      color: s.color
-    }
-  }, s.em), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      marginBottom: '0.5rem'
-    }
-  }, "\xC9missions nettes CO2 2050"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Fossiles :"), " ", s.fossile), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("b", null, "Budget +2\xB0C :"), " ", s.budget)), /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      marginTop: '0.7rem',
-      color: 'var(--text-secondary)'
-    }
-  }, s.desc))))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Les deux contraintes carbone",
-    icon: "\uD83C\uDFAF",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvBulletList, {
-    items: [{
-      text: 'Contrainte 1 — climat : tendre vers la neutralité carbone à 2050, respecter le budget +2°C, diviser les émissions brutes tous GES par 4.',
-      emphasis: 'Climat'
-    }, {
-      text: 'Contrainte 2 — souveraineté : sortir des importations d\'hydrocarbures, <1 % fossiles énergie finale 2050, <5 % par secteur.',
-      emphasis: 'Souveraineté'
-    }]
-  })), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Cinq familles de leviers",
-    icon: "\uD83E\uDDE9",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvBulletList, {
-    items: ['Préserver les puits de carbone (naturels + BECCS) : compensation maxi -55 MtCO2/an, soit 15 % des émissions actuelles.', 'Réduire les émissions non-énergétiques (CH4 agri, N2O agri, CO2 procédés industriels).', 'Électrifier les usages : VE, PLE, PAC, procédés industriels, H2 électrolytique.', 'Développer la production bas-carbone : nucléaire prolongé + EPR2 + EnR + bioénergies.', 'Maîtriser la consommation : rénovation, report modal, sobriété, maîtrise des volumes.']
-  })), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Les six enseignements cl\xE9s",
-    icon: "\uD83D\uDCA1",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvBulletList, {
-    items: ['La décarbonation française est encore possible — si l\'ambition est fixée dès maintenant.', 'Les puits de carbone naturels sont à préserver, mais non-fiables (climat incertain).', 'Les émissions non-énergétiques (agri, industrie) doivent être réduites significativement.', 'L\'électrification massive des équipements est incontournable (-220 TWh carburants liquides, -105 TWh gaz/fioul).', 'La production électrique bas-carbone doit augmenter : mener simultanément nucléaire et EnR.', 'Réduire fortement gaz et carburants liquides avant d\'espérer les couvrir par bioénergies (gisements limités).']
-  })), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Int\xE9gration dans le corpus Sol Vivant",
-    icon: "\uD83E\uDDEC",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement("p", null, "Les chapitres ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "14 (Azote)"), ", ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "15 (\xC9levage)"), ", ", /*#__PURE__*/React.createElement("span", {
-    className: "sv-emphasis"
-  }, "19 (Puits C)"), " du PREF constituent le", /*#__PURE__*/React.createElement("span", {
-    className: "sv-mark"
-  }, "c\u0153ur du corpus"), " \u2014 ils rejoignent directement les fiches existantes sur le cycle azote, les l\xE9gumineuses, les syst\xE8mes herbagers, les prairies permanentes, l'agroforesterie, les sols vivants. Les chapitres 18 (Bio\xE9nergies) et 12 (Hydrog\xE8ne) ont des liens partiels (m\xE9thanisation + digestats, d\xE9carbonation Haber-Bosch par H2)."), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("b", null, "Tables d\xE9riv\xE9es"), " : ", /*#__PURE__*/React.createElement("code", null, "ref_shift_chantiers"), " (20 chantiers \xD7 variantes) ;", /*#__PURE__*/React.createElement("code", null, "ref_esclaves_energetiques"), " sections ", /*#__PURE__*/React.createElement("code", null, "france_*"), " (62 params).", /*#__PURE__*/React.createElement("b", null, "Fiches d\xE9riv\xE9es"), " : #41 Transition robuste FR, #42 Azote-l\xE9gumineuses, #43 Puits C."))), /*#__PURE__*/React.createElement(SvCollapse, {
-    title: "Sources",
-    icon: "\uD83D\uDCDA",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: [{
-      authors: 'The Shift Project',
-      year: 2026,
-      title: 'Réussir la transition dans l\'incertitude : la méthode Shift en 20 chantiers — Rapport final',
-      pages: '340 p',
-      url: 'https://theshiftproject.org/publications/reussir-la-transition-dans-lincertitude/'
-    }, {
-      authors: 'The Shift Project',
-      year: 2026,
-      title: 'Synthèse PREF',
-      pages: '28 p'
-    }, {
-      authors: 'Carbone 4',
-      year: 2026,
-      title: 'Cabinet paire (Jancovici/Grandjean)'
-    }, {
-      authors: 'CITEPA',
-      year: 2023,
-      title: 'Inventaire national émissions GES France'
-    }, {
-      authors: 'HCC',
-      year: 2025,
-      title: 'Rapport annuel grand public'
-    }, {
-      authors: 'SDES',
-      year: 2025,
-      title: 'Chiffres clés de l\'énergie'
-    }, {
-      authors: 'IGN-FCBA',
-      year: 2025,
-      title: 'Étude référence puits forestier France'
-    }, {
-      authors: 'SNBC 3',
-      year: 2024,
-      title: 'Stratégie Nationale Bas Carbone troisième génération'
-    }, {
-      authors: 'GCA Shift Project',
-      year: 2024,
-      title: 'Grande Consultation des Agriculteurs 2024-2025'
-    }]
-  })));
+  const scenarios = [
+    {key: 'haute', titre: 'Réussite haute', em: '≈ 0 MtCO2e', fossile: '~100 TWh', budget: '60 % préservé',
+     desc: 'Neutralité CO2 atteinte. Budget carbone +2°C préservé à 60 %. Consommation fossile réduite de 1100 à ~100 TWh (usages matière résiduels).', color: 'var(--success)'},
+    {key: 'inter', titre: 'Réussite intermédiaire', em: '50 MtCO2', fossile: '~200 TWh', budget: '1/3 restant',
+     desc: 'Neutralité non atteinte mais baisse significative (÷4 vs 2025). Budget carbone proche de la limite. Dépendance gaz fossile ~100 TWh.', color: 'var(--warning)'},
+    {key: 'basse', titre: 'Réussite basse', em: '150 MtCO2', fossile: '>450 TWh', budget: '15 % restant',
+     desc: 'Insuffisant pour l\'Accord de Paris. Budget +2°C consommé dans la décennie 2050. Dépendance forte aux importations.', color: 'var(--danger)'},
+  ];
+
+  return <div className="sv-tab-content">
+    <SvSection title="Le Plan Robuste pour l'Économie Française (PREF)" icon="📘" level={2}>
+      <div className="sv-richtext">
+        <p>
+          Publié en avril 2026, le <span className="sv-emphasis">rapport final PREF du Shift Project</span>
+          (340 pages) analyse 20 chantiers incontournables pour la décarbonation française,
+          chacun décliné en trois variantes — réussite <em>haute</em>, <em>intermédiaire</em>, <em>basse</em>.
+          Fondé par Jean-Marc Jancovici, le Shift Project est une référence autoritaire :
+          les chiffres cités ici ne nécessitent pas de re-vérification (doctrine corpus BQ #131).
+        </p>
+      </div>
+    </SvSection>
+
+    <SvCollapse title="Trois trajectoires 2050" icon="🛤️" defaultOpen={true}>
+      <div className="sv-kpi-grid" style={{gridTemplateColumns:'repeat(3, 1fr)'}}>
+        {scenarios.map(s => <div key={s.key} className="sv-card" style={{borderLeft:`4px solid ${s.color}`, padding:'1rem'}}>
+          <div style={{fontWeight:700, marginBottom:'0.3rem'}}>{s.titre}</div>
+          <div style={{fontSize:'var(--font-xl)', fontWeight:700, color:s.color}}>{s.em}</div>
+          <div style={{fontSize:'var(--font-xs)', color:'var(--text-secondary)', marginBottom:'0.5rem'}}>Émissions nettes CO2 2050</div>
+          <div style={{fontSize:'var(--font-sm)'}}>
+            <div><b>Fossiles :</b> {s.fossile}</div>
+            <div><b>Budget +2°C :</b> {s.budget}</div>
+          </div>
+          <p style={{fontSize:'var(--font-xs)', marginTop:'0.7rem', color:'var(--text-secondary)'}}>{s.desc}</p>
+        </div>)}
+      </div>
+    </SvCollapse>
+
+    <SvCollapse title="Les deux contraintes carbone" icon="🎯" defaultOpen={false}>
+      <SvBulletList items={[
+        {text: 'Contrainte 1 — climat : tendre vers la neutralité carbone à 2050, respecter le budget +2°C, diviser les émissions brutes tous GES par 4.', emphasis: 'Climat'},
+        {text: 'Contrainte 2 — souveraineté : sortir des importations d\'hydrocarbures, <1 % fossiles énergie finale 2050, <5 % par secteur.', emphasis: 'Souveraineté'},
+      ]} />
+    </SvCollapse>
+
+    <SvCollapse title="Cinq familles de leviers" icon="🧩" defaultOpen={false}>
+      <SvBulletList items={[
+        'Préserver les puits de carbone (naturels + BECCS) : compensation maxi -55 MtCO2/an, soit 15 % des émissions actuelles.',
+        'Réduire les émissions non-énergétiques (CH4 agri, N2O agri, CO2 procédés industriels).',
+        'Électrifier les usages : VE, PLE, PAC, procédés industriels, H2 électrolytique.',
+        'Développer la production bas-carbone : nucléaire prolongé + EPR2 + EnR + bioénergies.',
+        'Maîtriser la consommation : rénovation, report modal, sobriété, maîtrise des volumes.',
+      ]} />
+    </SvCollapse>
+
+    <SvCollapse title="Les six enseignements clés" icon="💡" defaultOpen={false}>
+      <SvBulletList items={[
+        'La décarbonation française est encore possible — si l\'ambition est fixée dès maintenant.',
+        'Les puits de carbone naturels sont à préserver, mais non-fiables (climat incertain).',
+        'Les émissions non-énergétiques (agri, industrie) doivent être réduites significativement.',
+        'L\'électrification massive des équipements est incontournable (-220 TWh carburants liquides, -105 TWh gaz/fioul).',
+        'La production électrique bas-carbone doit augmenter : mener simultanément nucléaire et EnR.',
+        'Réduire fortement gaz et carburants liquides avant d\'espérer les couvrir par bioénergies (gisements limités).',
+      ]} />
+    </SvCollapse>
+
+    <SvCollapse title="Intégration dans le corpus Sol Vivant" icon="🧬" defaultOpen={false}>
+      <div className="sv-richtext">
+        <p>
+          Les chapitres <span className="sv-emphasis">14 (Azote)</span>, <span className="sv-emphasis">15 (Élevage)</span>, <span className="sv-emphasis">19 (Puits C)</span> du PREF constituent le
+          <span className="sv-mark">cœur du corpus</span> — ils rejoignent directement les fiches existantes sur le cycle
+          azote, les légumineuses, les systèmes herbagers, les prairies permanentes,
+          l'agroforesterie, les sols vivants. Les chapitres 18 (Bioénergies) et 12 (Hydrogène)
+          ont des liens partiels (méthanisation + digestats, décarbonation Haber-Bosch par H2).
+        </p>
+        <p>
+          <b>Tables dérivées</b> : <code>ref_shift_chantiers</code> (20 chantiers × variantes) ;
+          <code>ref_esclaves_energetiques</code> sections <code>france_*</code> (62 params).
+          <b>Fiches dérivées</b> : #41 Transition robuste FR, #42 Azote-légumineuses, #43 Puits C.
+        </p>
+      </div>
+    </SvCollapse>
+
+    <SvCollapse title="Sources" icon="📚" defaultOpen={false}>
+      <SvSourceList sources={[
+        {authors: 'The Shift Project', year: 2026, title: 'Réussir la transition dans l\'incertitude : la méthode Shift en 20 chantiers — Rapport final', pages: '340 p', url: 'https://theshiftproject.org/publications/reussir-la-transition-dans-lincertitude/'},
+        {authors: 'The Shift Project', year: 2026, title: 'Synthèse PREF', pages: '28 p'},
+        {authors: 'Carbone 4', year: 2026, title: 'Cabinet paire (Jancovici/Grandjean)'},
+        {authors: 'CITEPA', year: 2023, title: 'Inventaire national émissions GES France'},
+        {authors: 'HCC', year: 2025, title: 'Rapport annuel grand public'},
+        {authors: 'SDES', year: 2025, title: 'Chiffres clés de l\'énergie'},
+        {authors: 'IGN-FCBA', year: 2025, title: 'Étude référence puits forestier France'},
+        {authors: 'SNBC 3', year: 2024, title: 'Stratégie Nationale Bas Carbone troisième génération'},
+        {authors: 'GCA Shift Project', year: 2024, title: 'Grande Consultation des Agriculteurs 2024-2025'},
+      ]} />
+    </SvCollapse>
+  </div>;
 }
 
 // ═════════ App ═════════
 
+
+
 function App() {
   const [tab, setTab] = React.useState('chantiers');
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-page"
-  }, /*#__PURE__*/React.createElement(SvTabs, {
-    tabs: [{
-      id: 'chantiers',
-      icon: '🛠️',
-      label: '20 chantiers'
-    }, {
-      id: 'agri',
-      icon: '🌿',
-      label: 'Zoom agricole'
-    }, {
-      id: 'chiffres',
-      icon: '📊',
-      label: 'Chiffres France'
-    }, {
-      id: 'comprendre',
-      icon: '📚',
-      label: 'Guide'
-    }],
-    active: tab,
-    onChange: setTab
-  }), (() => {
-    const _intros = typeof DATA !== 'undefined' && DATA.tab_intros || {};
-    const _i = _intros[tab];
-    return _i ? /*#__PURE__*/React.createElement(SvTabIntro, {
-      resume: _i.resume,
-      detail: _i.detail
-    }) : null;
-  })(), /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, tab === 'chantiers' ? /*#__PURE__*/React.createElement(ChantiersView, null) : tab === 'agri' ? /*#__PURE__*/React.createElement(AgriView, null) : tab === 'chiffres' ? /*#__PURE__*/React.createElement(ChiffresView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
+  return <div className="sv-page">
+    
+    <SvTabs tabs={[
+      {id:'chantiers', icon:'🛠️', label:'20 chantiers'},
+      {id:'agri', icon:'🌿', label:'Zoom agricole'},
+      {id:'chiffres', icon:'📊', label:'Chiffres France'},
+      {id:'comprendre', icon:'📚', label:'Guide'}
+    ]} active={tab} onChange={setTab} />
+      {(() => { const _intros = (typeof DATA !== 'undefined' && DATA.tab_intros) || {}; const _i = _intros[tab]; return _i ? <SvTabIntro resume={_i.resume} detail={_i.detail} /> : null; })()}
+    <div className="sv-tab-content">
+      {tab === 'chantiers' ? <ChantiersView /> :
+       tab === 'agri' ? <AgriView /> :
+       tab === 'chiffres' ? <ChiffresView /> : <ComprendreView />}
+    </div>
+  </div>;
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
 </script>
 
 

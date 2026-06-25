@@ -2,24 +2,48 @@
 
 ## Base de donnees : sol_vivant.db
 
-Source de verite donnees. SQLite, 52 tables, 7 vues.
+Source de verite donnees. SQLite, 49 tables, 7 vues.
 
 ### Tables principales
 
 | Table | Role | Enregistrements |
 |-------|------|-----------------|
-| `documents` | 18 documents du corpus | 18 |
-| `prompts` | Structure des sections (type, chapitre, section, titres, contexte, instructions) | 192 |
-| `prompt_contenus` | Contenu redige par Jenni, analyse par Claude (1:1 avec prompts) | 12 |
-| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3920 |
-| `term_relations` | Relations entre termes (BT, NT, RT) | 25859 |
+| `documents` | 18 documents de strate (ossature pédagogique) | 18 |
+| `prompts` | Structure des sections (héritage v3, ossature documents — gelé) | 192 |
+| `prompt_contenus` | Contenu Jenni v3 analysé par LLM (héritage — gelé) | 12 |
+| `terms` | Thesaurus canonique (FR/EN, definitions, relations) | 3982 |
+| `term_relations` | Relations entre termes (BT, NT, RT) | 26387 |
 | `chains_causales` | 42 chaines causales reliant les documents | 42 |
 | `chain_etapes` | Etapes des chaines | 280 |
-| `doc_cross_refs` | Renvois inter-documents bidirectionnels | 0 |
-| `config` | Parametres centralises (api, strates, analyse, batch, corpus) | 191 |
+| `config` | Parametres centralises (corpus, strates, analyse, web, RULES.md) | 163 |
 | `jenni_doc_specs` | Specifications document (titre Jenni, style) | 18 |
-| `db_meta` | Historique (audits, scores, todos, idees) | 32 |
-| `audit_log` | Journal des operations | 9158 |
+| `db_meta` | Historique (audits, scores, todos, idees) | 11 |
+| `audit_log` | Journal des operations | 33 |
+
+### Workflow fiches et sourçage
+
+| Table | Role | Enregistrements |
+|-------|------|-----------------|
+| `fiches` | Unité de production éditoriale (slug, type, statut, origine) | 260 |
+| `fiche_sections` | Plan structurel + graines (contexte_sci) envoyées à Jenni | 3583 |
+| `fiche_retour_sections` | Texte des retours Jenni intégrés, par section | 6144 |
+| `fiche_contenus` | Refs + notes LLM par fiche intégrée | 208 |
+| `fiche_articulations` | Articulations inter-fiches (pivot, direction) | 159 |
+| `graines` | Suivi d'état des graines docx (version, statut) | 270 |
+| `jenni_sources` | Bibliothèque bibliographique du corpus (DOI, auteurs) | 9385 |
+| `source_usages` | Citations inline rattachées aux entités | 18725 |
+| `validations` | Workflow de validation / questions de sourçage | 19 |
+
+### Fil directeur et graphe conceptuel
+
+| Table | Role | Enregistrements |
+|-------|------|-----------------|
+| `doctrine_chantiers` | **Fil directeur** : thèses fédératrices, principes racines, chantiers, tensions | 24 |
+| `concept_card_links` | Graphe de liens entre concept cards (from/to/type) | 830 |
+| `card_chain_links` | Rattachement cards ↔ chaînes causales | 556 |
+| `cascade_level_links` | Rattachement entités ↔ niveaux de cascade | 146 |
+| `pedago_links` | Liens pédagogiques card ↔ fiche/doc | 702 |
+| `concept_dimensions` | Dimensions transversales des cards | 12 |
 
 ### Tables web et outils interactifs
 
@@ -29,7 +53,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 | `html_templates` | Templates CSS/JS par page + partagés | 35 (2 partagés) |
 | `concept_cards` | Fiches conceptuelles synthétiques | 185 |
 | `diagnostic_rules` | Règles diagnostiques sol | 26 |
-| `cascade_niveaux` | Niveaux de la cascade prérequis | 6 |
+| `cascade_prerequis` | Niveaux de la cascade de prérequis (logique, seuils, leviers) | 6 |
 | `illustration_prompts` | Diagrammes Mermaid générés | 16 |
 | `refs` (kind=matiere) | Matières organiques (C/N, k1, NPK) | 113 |
 | `refs` (kind=texture) | Classes texturales GEPPA | 14 |
@@ -38,7 +62,7 @@ Source de verite donnees. SQLite, 52 tables, 7 vues.
 
 - **Vendor local** : `Publications/web/vendor/` (React, Babel, Tailwind — hors-ligne)
 - **Charte CSS** : `web_template.py` (CHARTER_CSS + composants pédagogiques sv-*)
-- **Composants React partagés** : `html_templates` (page_slug IS NULL, id=16)
+- **Composants React partagés** : `html_templates` (page_slug IS NULL — sv-shared-components, sv-charter-css)
 - **Déploiement** : `rsync -av Publications/web/ /Publications/` → GitHub Pages
 - **Archive** : `gen_archive.py` → ZIP autonome (~16 Mo)
 
@@ -52,12 +76,10 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 |-----------|------|
 | `agent_runner` | max_concurrent, work_dir_root |
 | `analyse` | groupes, passes, template_passe2 |
-| `api` | max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
+| `api` | deepseek_max_tokens, deepseek_model, deepseek_timeout_s, deepseek_url, max_abstract_chars, max_ctx_analyse_corpus, max_ctx_audit_corpus, max_ctx_audit_technique, max_tokens_attribution, max_tokens_defaut, max_tokens_validation, model |
 | `audit` | def_max_chars, def_min_chars, def_truncate_chars, fil_derniere_regen, fil_seuil_integrations, max_age_hours_meta, min_bigram_chars, min_chars_contenu_fiche, min_chars_definition_terme, min_chars_refs_fiche, preview_chars_card, seuil_avancement_bas, seuil_avancement_haut, tissage_inter_card_min, warn_docs_isoles, warn_terms_sans_def |
 | `batch` | analyse_corpus_chunk_half, analyse_corpus_max_chars, analyse_fiches_max_tokens, audit_opus_max_ctx_corpus, audit_opus_max_ctx_technique |
 | `cahier` | chapitres, chapter_colors, chapter_fiches, fiche_type_colors, onglets, pedago_fiches, tab_descriptions, tool_pages |
-| `claude_notes` | fiches_biblio_cassee_marathon, fiches_marathon_filtre_origine |
-| `claude_rules` | agent_runner_reflexe, agents_opus_default, archivage_fiches, archive_git_mv, audit_cards_first, audit_reflex, audit_status_lecture, bq_access, bq_source_verite, cloture_pending_recap, conseil_contradicteur, environnement_web, fiche_docx_production, fichiers_jmj_sur_github, graines_docs_maj_en_lot, integration_conseil_audit, integration_reponse_sourcage, metaanalyse_croise_sourcages, ouverture_conseil, parser_docx_omath, pas_agent_redacteur, pas_modif_fr_canonique, path_docx_jenni, pratiques_typees_hors_jenni, principes_generatifs_avant_labels_reactifs, redaction_documents_jenni, retour_jenni_autonome, source_verite_data_avant_absence, termes_fichier_unique, thesaurus_carte, wal_checkpoint, web_nav_ancres, wf_arbitrage_jenni |
 | `concept_cards` | page_intro, tab_intros |
 | `corpus` | auteur, nom, regle_jenni |
 | `deprecation` | fiche_section_h2_notes |
@@ -67,6 +89,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `index` | tab_cards, tab_cascade, tab_chaines, tab_connections, tab_crossrefs, tab_documents, tab_illustrations, tab_thesaurus |
 | `jenni` | prompt_enrichissement_definitions_vagues, prompt_enrichissement_thesaurus, prompt_redaction_pedagogique, prompt_resolution_doublons, prompt_validation_chaine_causale |
 | `lifofer` | comprendre, data, sources_sucre, tab_intros, ui |
+| `llm_notes` | fiches_biblio_cassee_marathon, fiches_marathon_filtre_origine |
 | `maintenance` | audit_log_retention_mois |
 | `matching` | min_token_score, pedago_min_score, pedago_top_n, pedago_w_content, pedago_w_title, prefix_chars_min, prefix_ratio_min, score_contient, score_inclus, score_seuil_bas, score_seuil_haut, title_threshold, top_n_default, triage_top_n |
 | `mo_calc` | cat_colors, modes_transformation, zones_eh_fallback |
@@ -79,7 +102,7 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `thesaurus` | def_enrich_min_chars |
 | `transition_robuste` | tab_intros |
 | `triangle` | comprendre, sections_didactiques, tab_intros, test_bocal, test_boudin |
-| `veille` | efetch_batch_size, hot_topics, scholar_alerts, throttle_sec, urlopen_timeout_s |
+| `veille` | efetch_batch_size, hot_topics, scholar_alerts, scholarai_enrich_throttle_s, throttle_sec, urlopen_timeout_s |
 | `web` | explorer_host, explorer_open_delay_s, explorer_port, icon_library, index_description_template |
 
 ## Scripts (tools/)
@@ -88,88 +111,97 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 |--------|--------|------|
 | `regen_all.py` | root | Régénère tous les outputs depuis la DB |
 | `analyse_emergences.py` | admin | Détecteur de tensions transversales (phase 1 du « conseil ») |
-| `analyse_fiches.py` | admin | analyse_fiches.py -- Analyse consciente des fiches via pattern agent_runner. |
+| `analyse_fiches.py` | admin | Analyse consciente des fiches via pattern agent_runner. |
 | `audit_anglicismes.py` | admin | Détecte les anglicismes résiduels dans le corpus. |
 | `audit_bt.py` | admin | Audit de l'arbre BT (hyperonymes) du thésaurus. |
-| `audit_canoniques_anglais.py` | admin | Détection des canoniques FR qui sont en |
+| `audit_canoniques_anglais.py` | admin | Détection des canoniques FR qui sont en réalité des termes anglais. |
 | `audit_center.py` | admin | Centre d'audit du corpus : le FIL DIRECTEUR, tiré au démarrage. |
 | `audit_corpus_relations.py` | admin | Audit dynamique des relations du corpus. |
+| `audit_factuel_arbitrage.py` | admin | Arbitrage des sources INCONNUABLES (gâche 3 + ScholarAI). |
+| `audit_factuel_deepseek.py` | admin | Gâche 3 de l'audit conscient (vérification factuelle DeepSeek). |
+| `audit_factuel_pdf.py` | admin | Vérification profonde : la source dit-elle ce qu'on prétend ? |
+| `audit_factuel_scholarai.py` | admin | Vérification live des sources flaggées par la gâche 3. |
 | `audit_fiches.py` | admin | Audit complet des fiches integrees. |
 | `audit_focus.py` | admin | Audits focalisés via agent_runner (Opus, 3 phases). |
 | `audit_graines.py` | admin | Contrôle qualité des graines (fiche_sections) AVANT envoi Jenni. |
 | `audit_meta.py` | admin | Méta-audit : lit tous les audit_reports/json/*_latest.json |
-| `audit_opus.py` | admin | Audit approfondi du corpus via agents Task Claude Code |
+| `audit_opus.py` | admin | Audit approfondi du corpus via agents Task LLM |
 | `audit_repartition.py` | admin | Audit de répartition par strate. |
-| `audit_sources_orphelines.py` | admin | Audit des sources sans DOI ni URL avec |
+| `audit_sources_orphelines.py` | admin | Audit des sources sans DOI ni URL, avec remontée au docx d'origine pour récupérer les RIS sources. |
 | `audit_thesaurus.py` | admin | Rapport d'audit consolidé du thésaurus (axes A→H, doctrine BQ #155). |
 | `backfill_biblio.py` | admin | consolidation jenni_sources depuis docx + prompts. |
+| `backup_rotation.py` | admin | Backup externe avec rotation 7 jours (rsync). |
 | `bq_query.py` | admin | Consultation BQ on-demand (filesystem) |
 | `check_forbidden_jenni.py` | admin | Scan méta-vocab interdit dans tout contenu destiné à Jenni. |
 | `check_integrity.py` | admin | Validation d'intégrité de la DB sol_vivant.db |
-| `conseil_emergences.py` | admin | Phase 2 du dispositif « conseil » : délibération multi-agents. |
+| `conseil_emergences.py` | admin | Phase 2 du dispositif « conseil » : délibération multi-agents (v3). |
 | `dedupe_thesaurus.py` | admin | Détecte et fusionne les doublons du thésaurus. |
 | `deploy_publications.py` | admin | Synchronise Publications/web/ vers ../Publications/ |
+| `dump_db_sql.py` | admin | Dump SQL compressé de sol_vivant.db → backups/sol_vivant.sql.gz. |
+| `enrich_jenni_sources_crossref.py` | admin | Enrichissement direct des jenni_sources via CrossRef. |
+| `enrich_scholarai.py` | admin | Enrichissement des jenni_sources via ScholarAI API. |
 | `explorer.py` | admin | Interface web locale pour consulter sol_vivant.db |
 | `export_biblio.py` | admin | exporte la biblio jenni_sources au format RIS ou APA. |
 | `export_mismatches_inrae.py` | admin | Export des mismatches corpus ↔ INRAE pour arbitrage. |
 | `export_termes_candidats.py` | admin | Export des termes candidats non insérés pour validation. |
 | `export_tools.py` | admin | Exporte les scripts depuis le filesystem (tools/lib/scripts_inventory.py) vers un ZIP versionné |
-| `fix_titres.py` | admin | » par « I. |
-| `ingest_structured_links.py` | admin | Câblage des cards orphelines depuis le travail |
-| `pedago_links_apply.py` | admin | Insère dans pedago_links les suggestions générées par |
+| `export_zotero.py` | admin | Export RIS pour import Zotero avec tags (strate/doc_code). |
+| `fix_titres.py` | admin | Remplace le tiret par un point après les numéros de chapitre romains (I à X max). |
+| `ingest_structured_links.py` | admin | Câblage des cards orphelines depuis le travail d'audit déjà structuré. |
+| `pedago_links_apply.py` | admin | Insère dans pedago_links les suggestions de pedago_links_suggest.py, selon des seuils par rôle. |
 | `pedago_links_suggest.py` | admin | Suggestion de cards pédagogiques à lier aux fiches/docs |
+| `pull_zotero.py` | admin | Met à jour jenni_sources depuis les items Zotero (pull retour). |
 | `purge_audit_log.py` | admin | Rétention du journal audit_log. |
-| `reintegrate_fiches_sections.py` | admin | reintegrate_fiches_sections.py -- Migration one-shot des fiches vers stockage par section. |
-| `relink_fiche_refs.py` | admin | reconnecte les refs JSON de fiche_contenus.refs |
+| `push_zotero.py` | admin | Pousse les jenni_sources vers Zotero via le connector local. |
+| `push_zotero_web.py` | admin | Push jenni_sources vers Zotero via API web (api.zotero.org). |
+| `relink_fiche_refs.py` | admin | Reconnecte les refs JSON de fiche_contenus.refs vers jenni_sources.id, et garantit la présence des source_usages. |
 | `repair_thesaurus_defs.py` | admin | Répare deux corruptions héritées du champ terms.definition. |
-| `repair_usages_collision_millesime.py` | admin | purge des source_usages parasites créés |
+| `repair_usages_collision_millesime.py` | admin | Purge des source_usages parasites créés par une collision de millésime (bug short_authors d'integrate_fiche.py). |
 | `resolve_sources_crossref.py` | admin | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
 | `resolve_term_relations.py` | admin | Résout les relations orphelines du thésaurus. |
 | `retag_source_usages.py` | admin | Rétro-tag des source_usages depuis les inline citations de fiche_retour_sections. |
-| `session_end.py` | admin | Rituel de clôture de session Claude Code web. |
-| `session_start.py` | admin | Dashboard de démarrage de session Claude Code |
+| `session_end.py` | admin | Clôture de session (CLI local). |
+| `session_start.py` | admin | Dashboard de démarrage de session (CLI local) |
 | `sync_syn_inrae.py` | admin | Enrichit syn_fr/syn_en du thésaurus corpus depuis INRAE. |
 | `analyse_corpus.py` | batch | Analyse modulaire du corpus  v4.1 |
 | `gen_archive.py` | docs | Génère une archive ZIP hors-ligne du site Sol Vivant. |
 | `gen_bq_page.py` | docs | page HTML cartographique simple des BQ. |
 | `gen_cahier.py` | docs | Cahier de Science (livre pédagogique multi-chapitres) |
 | `gen_concept_cards.py` | docs | Page interactive des concept cards |
-| `gen_dashboard.py` | docs | Génère le tableau de bord Claude/Sol Vivant. |
+| `gen_dashboard.py` | docs | Génère le tableau de bord LLM / Sol Vivant. |
 | `gen_esclaves_calc.py` | docs | Generer Publications/web/esclaves_calculateur.html |
 | `gen_explorer.py` | docs | Génère la page Explorer DB statique |
 | `gen_fiches_index.py` | docs | Régénère recherches/fiches/INDEX.md depuis la DB. |
 | `gen_illustration_prompts.py` | docs | Export les prompts d'illustration depuis la DB. |
 | `gen_lifofer.py` | docs | Calculateur interactif LiFoFer |
 | `gen_mo_calc.py` | docs | Calculateur interactif Matière Organique |
-| `gen_readme.py` | docs | gen_readme.py v1.1 |
+| `gen_readme.py` | docs | Génération dynamique de tous les README depuis la DB sol_vivant.db. |
 | `gen_scripts.py` | docs | Génère Publications/web/scripts.html |
 | `gen_technique.py` | docs | Guide Technique (Publications/web/technique/index.html) |
 | `gen_tests_terrain.py` | docs | Genere Publications/web/tests_terrain.html |
 | `gen_transition_robuste.py` | docs | Genere Publications/web/transition_robuste.html |
-| `gen_triangle_textures.py` | docs | gen_triangle_textures.py v2.0 |
+| `gen_triangle_textures.py` | docs | Génère une page HTML interactive du triangle des textures GEPPA/USDA, liée au corpus Sol Vivant. |
 | `gen_web.py` | docs | Cartographie React interactive (consultation publique web) |
 | `gen_workflows.py` | docs | Génère un fichier MD de workflow par domaine technique. |
-| `edit_fiche_note.py` | jenni | Édition chirurgicale des notes H2 de fiches. |
 | `enrich_thesaurus.py` | jenni | Pipeline unifie d'enrichissement du thesaurus. |
-| `export_fiche.py` | jenni | Génération des prompts de fiches depuis fiche_sections |
 | `export_jenni_doc.py` | jenni | Génération mécanique des prompts Jenni |
 | `export_thesaurus_incomplets.py` | jenni | Génère des docx Jenni pour termes incomplets. |
 | `export_validation.py` | jenni | Génération des prompts de validations depuis validation_sections |
-| `gen_fiche_docx.py` | jenni | Genere le .docx d'une fiche au format "document dans son etat courant". |
+| `gen_fiche_docx.py` | jenni | Génère le .docx d'une fiche au format « document dans son état courant ». |
 | `gen_prompt_thesaurus.py` | jenni | Document de travail Jenni UNIFIÉ par strate |
 | `import_termes_jenni.py` | jenni | Import des listes de termes Jenni avec contrôle strict. |
 | `integrate_fiche.py` | jenni | Pipeline unifie d'integration d'une fiche Jenni. |
 | `integrate_fiche_refs.py` | jenni | Intégration des refs biblio d'une fiche intégrée dans jenni_sources + source_usages. |
 | `integrate_source.py` | jenni | Integration consciente d'un rapport de source. |
 | `integrate_validation_refs.py` | jenni | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
-| `raccorde_refs_cache.py` | jenni | raccorde les source_usages d'une fiche depuis son |
-| `refresh_retour_text.py` | jenni | répare CHIRURGICALEMENT le texte des sections de |
+| `raccorde_refs_cache.py` | jenni | Raccorde les source_usages d'une fiche créée en direct depuis son cache fiche_contenus.refs (sans docx Jenni). |
 | `resolve_import_conflicts.py` | jenni | Résout les blocs Jenni bloqués par multiples matches. |
 | `agent_context.py` | lib | Contexte agent FRAIS et tracé (anti « effet mémoire »). |
 | `agent_guards.py` | lib | Garde-fous pour scripts agent_runner. |
 | `agent_runner.py` | lib | Pattern « préparateur → agents Task → consolidateur » |
+| `apa.py` | lib | Helpers partagés pour les citations APA et le matching jenni_sources. |
 | `audit_persist.py` | lib | Persistance des rapports d'audit sur filesystem. |
-| `audit_post_import.py` | lib | BQ #146 §H.7. |
+| `audit_post_import.py` | lib | Audit post-import du thésaurus (BQ #146 §H.7). |
 | `audit_report.py` | lib | Module commun pour rapports d'audit JSON structurés. |
 | `biblio_format.py` | lib | parsing et formatage des références bibliographiques. |
 | `bq_inventory.py` | lib | Inventaire/lecture des entrees BQ filesystem. |
@@ -184,9 +216,9 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `glossary.py` | lib | builder unifié des payloads glossaire (terms). |
 | `inrae.py` | lib | Thésaurus INRAE comme référentiel de contrôle et d'enrichissement. |
 | `jenni_format.py` | lib | Fonctions partagées de formatage des prompts Jenni |
-| `parse_jenni_docx.py` | lib | Parser docx Jenni -- extraction structuree par section. |
+| `parse_jenni_docx.py` | lib | Parser docx Jenni : extraction structurée par section. |
 | `pub_path.py` | lib | Résolution du chemin Publications/ et nommage horodaté. |
-| `refs.py` | lib | refs.py -- API unifiee pour la table 'refs' (ex 5 ref_* tables). |
+| `refs.py` | lib | API unifiee pour la table 'refs' (ex 5 ref_* tables). |
 | `repair_json.py` | lib | Robust JSON repair for truncated or fenced LLM output. |
 | `reports_inventory.py` | lib | Inventaire et lecture/ecriture des rapports filesystem. |
 | `scripts_inventory.py` | lib | Inventaire des scripts depuis le filesystem. |
@@ -194,16 +226,17 @@ SELECT categorie, cle, valeur, description FROM config ORDER BY categorie, cle;
 | `text_norm.py` | lib | Normalisation canonique pour le matching des termes du thésaurus. |
 | `thesaurus_completion.py` | lib | Critère canonique de complétude du thésaurus. |
 | `web_template.py` | lib | Template HTML partagé pour les pages outils Sol Vivant. |
+| `scholarai_search.py` | veille | Découverte de sources scientifiques via ScholarAI API. |
 | `weekly_scan.py` | veille | Veille PubMed hebdomadaire. |
 
 ## Reproduire le patron pour un autre corpus
 
-1. Creer une DB SQLite avec les tables : `documents`, `prompts`, `terms`, `config`
+1. Creer une DB SQLite avec les tables noyau : `terms`, `config`, `fiches`, `fiche_sections`
 2. Peupler le thesaurus avec les termes du domaine (FR/EN/definition)
-3. Ecrire les prompts (type, chapitre, section, titre_h1, titre_h2, contexte_sci, instructions)
+3. Definir le plan d'une fiche : `fiche_sections` (titres H1/H2 + graines `contexte_sci`)
 4. Alimenter la biblio interne (`jenni_sources`) avec les sources primaires
-5. Utiliser `export_jenni_doc.py` pour generer les prompts
-6. Copier-coller dans Jenni, recuperer le .docx
-7. Analyser avec Claude, integrer dans `prompt_contenus`
+5. Generer le docx graine : `gen_fiche_docx.py --fiche-id <N>`
+6. Copier-coller dans Jenni, recuperer le .docx enrichi
+7. Integrer avec LLM : `integrate_fiche.py` → `fiche_retour_sections` + refs
 
-L'architecture est independante du domaine. Seul le contenu change.
+Voir le guide dedie `reproduire_le_patron.md`. L'architecture est independante du domaine.

@@ -16,6 +16,8 @@
 
 <script src="vendor/react.production.min.js"></script>
 <script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/babel.min.js"></script>
+
 <style>
 :root {
   --bg: #f4f6f8;
@@ -1948,7 +1950,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Tests terrain<span class="sv-h1-sub"> : Diagnostiquer son sol au champ avec 20 protocoles simples</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-12 17:00 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-21 07:15 — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="Creative Commons BY-NC-SA 4.0">CC BY-NC-SA 4.0</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <span class="sv-nav-current">🧫 Tests terrain</span>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <a href="esclaves_calculateur.html">⚡ Esclaves énergétiques</a>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -1966,11 +1968,12 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 
 
 <script>
-const DATA = {"tests": [{"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};
+const DATA = {"tests": [{"id": 21, "code": "t21_test_brix_refractometre", "title": "Test Brix au réfractomètre — mesure du taux de matière sèche soluble (°Bx) dans la sève", "description": null, "dimension_id": null, "dimension_label": null, "dim_color": null}, {"id": 22, "code": "t22_test_sonde_redox_eh", "title": "Mesure du potentiel redox (Eh) in situ par sonde — cartographie des microzones oxiques/anoxiques", "description": null, "dimension_id": null, "dimension_label": null, "dim_color": null}, {"id": 23, "code": "t23_test_films_iris", "title": "Films IRIS (Indicators of Reduction in Soils) — imagerie 2D des microzones réduites", "description": null, "dimension_id": null, "dimension_label": null, "dim_color": null}, {"id": 24, "code": "t24_test_enzymatique_beta_glucosidase", "title": "Activité β-glucosidase / phosphatase / uréase — proxy fonctionnel de la minéralisation microbienne", "description": null, "dimension_id": null, "dimension_label": null, "dim_color": null}, {"id": 25, "code": "t25_test_calcaire_actif", "title": "Dosage du calcaire actif (CaCO3 réactif) — indicateur de risque de chlorose ferrique sur sols calcaires", "description": null, "dimension_id": null, "dimension_label": null, "dim_color": null}, {"id": 4, "code": "t04_test_dinfiltration", "title": "Test d’infiltration", "description": "Mesure du temps nécessaire à l’eau pour pénétrer dans le sol afin d’évaluer la porosité fonctionnelle et le risque de ruissellement.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 5, "code": "t05_test_de_stabilite_des_agregats", "title": "Test de stabilité des agrégats", "description": "Observation de la résistance des mottes du sol à la désagrégation dans l’eau, indicateur de sensibilité à l’érosion.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 6, "code": "t06_test_de_battance", "title": "Test de battance", "description": "Observation de la formation de croûtes de surface après mouillage ou pluie simulée.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 7, "code": "t07_comptage_des_vers_de_terre", "title": "Comptage des vers de terre", "description": "Dénombrement des lombrics pour estimer l’activité biologique et la structuration naturelle du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 13, "code": "t13_test_de_croute_de_surface", "title": "Test de croûte de surface", "description": "Observation de la présence et de l’épaisseur de croûtes limitant les échanges sol–air–eau.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 14, "code": "t14_test_dhumidite_au_toucher", "title": "Test d’humidité au toucher", "description": "Appréciation manuelle de l’état hydrique du sol.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 15, "code": "t15_test_de_respiration_du_sol_simplifie", "title": "Test de respiration du sol (simplifié)", "description": "Estimation de l’activité biologique par dégagement de CO₂ dans un dispositif simple.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 16, "code": "t16_test_de_decomposition_des_residus", "title": "Test de décomposition des résidus", "description": "Observation de la vitesse de dégradation de résidus organiques enfouis ou en surface.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 17, "code": "t17_test_de_couverture_du_sol", "title": "Test de couverture du sol", "description": "Évaluation visuelle de la proportion du sol protégée par des résidus ou couverts végétaux.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 19, "code": "t19_test_de_ruissellement", "title": "Test de ruissellement", "description": "Observation du comportement de l’eau en surface après pluie ou arrosage.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 20, "code": "t20_test_de_biodiversite_visible", "title": "Test de biodiversité visible", "description": "Observation globale de la faune et flore du sol visibles à l’œil nu.", "dimension_id": 1, "dimension_label": "Cadre — Eau", "dim_color": "#0ea5e9"}, {"id": 9, "code": "t09_test_olfactif_du_sol", "title": "Test olfactif du sol", "description": "Évaluation de l’odeur du sol pour détecter fermentation, putréfaction ou asphyxie.", "dimension_id": 2, "dimension_label": "Cadre — Redox", "dim_color": "#7c3aed"}, {"id": 3, "code": "t03_test_bocal_test_de_sedimentation", "title": "Test bocal (test de sédimentation)", "description": "Mise en suspension du sol dans l’eau pour observer la décantation et estimer les proportions sable, limon et argile.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 10, "code": "t10_test_de_couleur_du_sol", "title": "Test de couleur du sol", "description": "Observation visuelle de la couleur du sol pour inférer matière organique, hydromorphie ou oxydation.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 12, "code": "t12_test_de_friabilite", "title": "Test de friabilité", "description": "Évaluation de la facilité avec laquelle le sol se fragmente entre les doigts.", "dimension_id": 6, "dimension_label": "Types de sols", "dim_color": "#ea580c"}, {"id": 1, "code": "t01_test_beche", "title": "Test bêche", "description": "Observation directe du sol à la bêche pour évaluer la structure, la porosité, l’enracinement, la compaction et l’activité biologique visible.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 2, "code": "t02_profil_cultural", "title": "Profil cultural", "description": "Ouverture d’une fosse ou tranchée pour analyser les horizons du sol, l’historique des pratiques, les zones compactées et la dynamique racinaire.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 8, "code": "t08_test_racinaire", "title": "Test racinaire", "description": "Observation de la profondeur, de la densité et de l’orientation des racines pour diagnostiquer compaction et fertilité fonctionnelle.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 11, "code": "t11_test_de_portance", "title": "Test de portance", "description": "Appréciation de la résistance du sol au tassement sous une charge légère.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}, {"id": 18, "code": "t18_test_de_compactage_a_la_tige", "title": "Test de compactage à la tige", "description": "Enfoncement manuel d’une tige pour détecter des couches compactées.", "dimension_id": 10, "dimension_label": "Symptôme — Structure", "dim_color": "#dc2626"}], "dimensions": [{"id": 1, "nom": "Cadre — Eau", "couleur": "#0ea5e9", "ordre": 1}, {"id": 2, "nom": "Cadre — Redox", "couleur": "#7c3aed", "ordre": 2}, {"id": 6, "nom": "Types de sols", "couleur": "#ea580c", "ordre": 6}, {"id": 10, "nom": "Symptôme — Structure", "couleur": "#dc2626", "ordre": 10}], "tab_intros": {"pratique": {"resume": "20 tests terrain pour diagnostiquer son sol sans laboratoire : sediments (bocal, boudin), infiltration, vie biologique (vers, racines), structure (beche, profil), respiration, etc.", "detail": "Chaque test est un protocole reproductible avec materiel commun (bocal, beche, regle). Filtrer par dimension (eau, structure, types de sols, etc.) pour cibler le diagnostic. Chaque test renvoie vers les concept cards du corpus qui l'utilisent comme preuve empirique."}, "comprendre": {"resume": "Le diagnostic terrain est l'ancrage scientifique du corpus : pas d'affirmation sans test reproductible.", "detail": "Les 20 tests ont ete selectionnes parmi les protocoles AFES, OAB, Solvita, Husson, Pochon, et autres references. Ils servent de tests empiriques aux concept_cards (table concept_card_tests) : une carte qui n'est valide par aucun test descend en archive. La confrontation systematique tests/cartes evite les affirmations seduisantes mais non verifiees."}}};
 </script>
 
 
-<script>
+<script type="text/babel">
+
 // ═══════════════════════════════════════════════════════════════════
 // Composants React partagés — Charte pédagogique Sol Vivant
 // Tous les textes arrivent via props (jamais hardcodés)
@@ -1994,297 +1997,158 @@ function useFixedFillHeight() {
       setMobile(window.innerWidth <= 1024);
       const el = ref.current;
       if (!el) return;
-      let top = 0,
-        n = el;
-      while (n) {
-        top += n.offsetTop;
-        n = n.offsetParent;
-      }
+      let top = 0, n = el;
+      while (n) { top += n.offsetTop; n = n.offsetParent; }
       const header = document.querySelector('.sv-header');
       const hH = header ? header.offsetHeight : 0;
       if (top > 0) setStickyTop(Math.max(0, Math.round(top - hH)));
     };
     calc();
-    const t1 = setTimeout(calc, 150);
-    const t2 = setTimeout(calc, 450);
+    const t1 = setTimeout(calc, 150); const t2 = setTimeout(calc, 450);
     window.addEventListener('resize', calc);
     window.addEventListener('storage', calc);
     let ro;
-    if (window.ResizeObserver) {
-      ro = new ResizeObserver(calc);
-      ro.observe(document.body);
-    }
+    if (window.ResizeObserver) { ro = new ResizeObserver(calc); ro.observe(document.body); }
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      window.removeEventListener('resize', calc);
-      window.removeEventListener('storage', calc);
+      clearTimeout(t1); clearTimeout(t2);
+      window.removeEventListener('resize', calc); window.removeEventListener('storage', calc);
       if (ro) ro.disconnect();
     };
   }, []);
-  const st = stickyTop == null ? 100 : stickyTop;
+  const st = (stickyTop == null) ? 100 : stickyTop;
   if (mobile) {
     // Mobile (<=1024px) : ni hauteur fixe ni sticky -> la media query de la
     // charte reprend (colonne unique, scroll de page naturel).
-    return {
-      ref,
-      layoutStyle: {
-        padding: 0,
-        gap: '1.25rem'
-      },
-      paneStyle: {}
-    };
+    return { ref, layoutStyle: {padding:0, gap:'1.25rem'}, paneStyle: {} };
   }
   return {
     ref,
-    layoutStyle: {
-      position: 'sticky',
-      top: st + 'px',
-      padding: 0,
-      gap: '1.25rem',
-      alignItems: 'stretch',
-      height: 'calc(100vh - ' + st + 'px)',
-      minHeight: '520px',
-      overflow: 'hidden'
-    },
-    paneStyle: {
-      position: 'static',
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'none',
-      overflowY: 'auto'
-    }
+    layoutStyle: {position:'sticky', top: st + 'px', padding:0, gap:'1.25rem', alignItems:'stretch',
+                  height:'calc(100vh - ' + st + 'px)', minHeight:'520px', overflow:'hidden'},
+    paneStyle: {position:'static', height:'auto', minHeight:'0', maxHeight:'none', overflowY:'auto'},
   };
 }
-function SvCollapse({
-  title,
-  icon,
-  defaultOpen = false,
-  children,
-  id
-}) {
+
+function SvCollapse({ title, icon, defaultOpen = false, children, id }) {
   const [open, setOpen] = React.useState(defaultOpen);
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse",
-    id: id
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "sv-collapse-header",
-    onClick: () => setOpen(!open)
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-collapse-title"
-  }, icon && /*#__PURE__*/React.createElement("span", null, icon), title), /*#__PURE__*/React.createElement("span", {
-    className: `sv-collapse-chevron ${open ? 'open' : ''}`
-  }, "\u25B8")), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-collapse-body"
-  }, children));
+  return <div className="sv-collapse" id={id}>
+    <button className="sv-collapse-header" onClick={() => setOpen(!open)}>
+      <span className="sv-collapse-title">{icon && <span>{icon}</span>}{title}</span>
+      <span className={`sv-collapse-chevron ${open ? 'open' : ''}`}>▸</span>
+    </button>
+    {open && <div className="sv-collapse-body">{children}</div>}
+  </div>;
 }
 
 // ── SvFormula : formule scientifique avec source optionnelle ──
-function SvFormula({
-  children,
-  source
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula"
-  }, children, source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-formula-source"
-  }, source));
+function SvFormula({ children, source }) {
+  return <div className="sv-formula">
+    {children}
+    {source && <div className="sv-formula-source">{source}</div>}
+  </div>;
 }
 
 // ── SvRule : règle pratique "à retenir" ──
-function SvRule({
-  children,
-  title
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-rule-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvRule({ children, title }) {
+  return <div className="sv-rule">
+    {title && <div className="sv-rule-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvScienceNote : encart cahier de science ──
-function SvScienceNote({
-  children,
-  title,
-  icon
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note",
-    "data-icon": icon || ''
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-science-note-title"
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+function SvScienceNote({ children, title, icon }) {
+  return <div className="sv-science-note" data-icon={icon || ''}>
+    {title && <div className="sv-science-note-title">{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvKPI : indicateur clé ──
-function SvKPI({
-  value,
-  unit,
-  label,
-  color,
-  detail,
-  style
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi",
-    style: style
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-value",
-    style: color ? {
-      color
-    } : undefined
-  }, value), unit && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-unit"
-  }, unit), /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-label",
-    style: color ? {
-      color
-    } : undefined
-  }, label), detail && /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-detail"
-  }, detail));
+function SvKPI({ value, unit, label, color, detail, style }) {
+  return <div className="sv-kpi" style={style}>
+    <div className="sv-kpi-value" style={color ? {color} : undefined}>{value}</div>
+    {unit && <div className="sv-kpi-unit">{unit}</div>}
+    <div className="sv-kpi-label" style={color ? {color} : undefined}>{label}</div>
+    {detail && <div className="sv-kpi-detail">{detail}</div>}
+  </div>;
 }
 
 // ── SvKPIGrid : grille de KPIs ──
-function SvKPIGrid({
-  children,
-  cols
-}) {
-  const style = cols ? {
-    gridTemplateColumns: `repeat(${cols}, 1fr)`
-  } : undefined;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-kpi-grid",
-    style: style
-  }, children);
+function SvKPIGrid({ children, cols }) {
+  const style = cols ? { gridTemplateColumns: `repeat(${cols}, 1fr)` } : undefined;
+  return <div className="sv-kpi-grid" style={style}>{children}</div>;
 }
 
 // ── SvTimeline : frise chronologique ──
-function SvTimeline({
-  items,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, children);
+function SvTimeline({ items, children }) {
+  if (children) return <div className="sv-timeline">{children}</div>;
   if (!items || !items.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline"
-  }, items.map((item, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-timeline-item"
-  }, item.date && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-date"
-  }, item.date), item.place && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-place"
-  }, item.place), /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-text"
-  }, item.text), item.tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-timeline-tags"
-  }, item.tags.map((t, j) => /*#__PURE__*/React.createElement("span", {
-    key: j,
-    className: "sv-timeline-tag"
-  }, t))))));
+  return <div className="sv-timeline">
+    {items.map((item, i) => <div key={i} className="sv-timeline-item">
+      {item.date && <div className="sv-timeline-date">{item.date}</div>}
+      {item.place && <div className="sv-timeline-place">{item.place}</div>}
+      <div className="sv-timeline-text">{item.text}</div>
+      {item.tags && <div className="sv-timeline-tags">
+        {item.tags.map((t, j) => <span key={j} className="sv-timeline-tag">{t}</span>)}
+      </div>}
+    </div>)}
+  </div>;
 }
 
 // ── SvPhaseCard : phase/étape colorée ──
-function SvPhaseCard({
-  title,
-  color,
-  label,
-  stats,
-  tags,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-card",
-    style: {
-      borderLeftColor: color || 'var(--accent)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-header",
-    style: {
-      color: color || 'var(--accent)'
-    }
-  }, label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-label"
-  }, label), /*#__PURE__*/React.createElement("span", {
-    className: "sv-phase-name"
-  }, title)), stats && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-stats"
-  }, stats.map((s, i) => /*#__PURE__*/React.createElement("span", {
-    key: i
-  }, /*#__PURE__*/React.createElement("strong", null, s.label), " ", s.value))), tags && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-tags"
-  }, tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-phase-tag"
-  }, t))), children && /*#__PURE__*/React.createElement("div", {
-    className: "sv-phase-text"
-  }, children));
+function SvPhaseCard({ title, color, label, stats, tags, children }) {
+  return <div className="sv-phase-card" style={{ borderLeftColor: color || 'var(--accent)' }}>
+    <div className="sv-phase-header" style={{ color: color || 'var(--accent)' }}>
+      {label && <span className="sv-phase-label">{label}</span>}
+      <span className="sv-phase-name">{title}</span>
+    </div>
+    {stats && <div className="sv-phase-stats">{stats.map((s, i) =>
+      <span key={i}><strong>{s.label}</strong> {s.value}</span>
+    )}</div>}
+    {tags && <div className="sv-phase-tags">{tags.map((t, i) =>
+      <span key={i} className="sv-phase-tag">{t}</span>
+    )}</div>}
+    {children && <div className="sv-phase-text">{children}</div>}
+  </div>;
 }
 
 // ── SvCompare : comparaison bon/mauvais ──
-function SvCompare({
-  good,
-  bad
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-good"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, good.title), good.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, good.text), good.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, good.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-bad"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-compare-title"
-  }, bad.title), bad.text && /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, bad.text), bad.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-compare-list"
-  }, bad.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvCompare({ good, bad }) {
+  return <div className="sv-compare">
+    <div className="sv-compare-good">
+      <div className="sv-compare-title">{good.title}</div>
+      {good.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{good.text}</div>}
+      {good.items && <ul className="sv-compare-list">
+        {good.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+    <div className="sv-compare-bad">
+      <div className="sv-compare-title">{bad.title}</div>
+      {bad.text && <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{bad.text}</div>}
+      {bad.items && <ul className="sv-compare-list">
+        {bad.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>
+  </div>;
 }
 
 // ── SvDiagnostic : grille diagnostic OK/KO ──
-function SvDiagnostic({
-  ok,
-  ko
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-grid"
-  }, ok && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ok"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ok.title), ok.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ok.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))), ko && /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-card sv-diag-ko"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-diag-title"
-  }, ko.title), ko.items && /*#__PURE__*/React.createElement("ul", {
-    className: "sv-diag-list"
-  }, ko.items.map((it, i) => /*#__PURE__*/React.createElement("li", {
-    key: i
-  }, it)))));
+function SvDiagnostic({ ok, ko }) {
+  return <div className="sv-diag-grid">
+    {ok && <div className="sv-diag-card sv-diag-ok">
+      <div className="sv-diag-title">{ok.title}</div>
+      {ok.items && <ul className="sv-diag-list">
+        {ok.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+    {ko && <div className="sv-diag-card sv-diag-ko">
+      <div className="sv-diag-title">{ko.title}</div>
+      {ko.items && <ul className="sv-diag-list">
+        {ko.items.map((it, i) => <li key={i}>{it}</li>)}
+      </ul>}
+    </div>}
+  </div>;
 }
 
 // ── SvGlossary : liste de termes du thésaurus, accordéon par terme ──
@@ -2296,184 +2160,127 @@ function SvDiagnostic({
 // Composant unifié pour fiches (Cahier), calculateurs (onglet Comprendre),
 // page Concept Cards (glossaire automatique des termes mobilisés), et
 // blocs glossaire sous documents de strate dans la cartographie.
-function SvGlossary({
-  terms
-}) {
+function SvGlossary({ terms }) {
   const [openIds, setOpenIds] = React.useState({});
   if (!terms || !terms.length) return null;
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
   // Tri alphabétique FR (locale-aware) sur le libellé fr ; convention glossaire.
-  const sorted = [...terms].sort((a, b) => (a.fr || '').localeCompare(b.fr || '', 'fr', {
-    sensitivity: 'base'
-  }));
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px',
-      width: '100%'
-    }
-  }, sorted.map(t => {
-    const isOpen = !!openIds[t.id];
-    const subtitleParts = [];
-    if (t.en) subtitleParts.push(t.en);
-    if (t.doc_code) subtitleParts.push(t.doc_code);
-    return /*#__PURE__*/React.createElement("div", {
-      key: t.id,
-      id: 'term-' + t.id
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      color: "var(--info)",
-      title: t.fr,
-      subtitle: subtitleParts.join(' · ') || null,
-      open: isOpen,
-      onToggle: () => toggle(t.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        padding: '0.25rem 0 0.5rem',
-        fontSize: 'var(--font-sm)'
-      }
-    }, t.definition && /*#__PURE__*/React.createElement(SvRichText, {
-      text: t.definition
-    }), (t.syn_fr || t.syn_en) && /*#__PURE__*/React.createElement("div", {
-      style: {
-        marginTop: '0.5rem',
-        fontSize: 'var(--font-xs)',
-        color: 'var(--color-text-muted)'
-      }
-    }, t.syn_fr && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes FR :"), " ", t.syn_fr), t.syn_en && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Synonymes EN :"), " ", t.syn_en)))));
-  }));
+  const sorted = [...terms].sort((a, b) =>
+    (a.fr || '').localeCompare(b.fr || '', 'fr', { sensitivity: 'base' })
+  );
+  return <div style={{display:'flex', flexDirection:'column', gap:'4px', width:'100%'}}>
+    {sorted.map(t => {
+      const isOpen = !!openIds[t.id];
+      const subtitleParts = [];
+      if (t.en) subtitleParts.push(t.en);
+      if (t.doc_code) subtitleParts.push(t.doc_code);
+      return <div key={t.id} id={'term-' + t.id}>
+        <SvAccordionItem
+          color="var(--info)"
+          title={t.fr}
+          subtitle={subtitleParts.join(' · ') || null}
+          open={isOpen}
+          onToggle={() => toggle(t.id)}>
+          <div style={{padding:'0.25rem 0 0.5rem', fontSize:'var(--font-sm)'}}>
+            {t.definition && <SvRichText text={t.definition} />}
+            {(t.syn_fr || t.syn_en) && <div style={{marginTop:'0.5rem', fontSize:'var(--font-xs)', color:'var(--color-text-muted)'}}>
+              {t.syn_fr && <div><strong>Synonymes FR :</strong> {t.syn_fr}</div>}
+              {t.syn_en && <div><strong>Synonymes EN :</strong> {t.syn_en}</div>}
+            </div>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
 
 // ── SvSourceList : liste de sources biblio ──
-function SvSourceList({
-  sources
-}) {
+function SvSourceList({ sources }) {
   if (!sources || !sources.length) return null;
-  return /*#__PURE__*/React.createElement("div", null, sources.map((s, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-source"
-  }, s.year && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-year"
-  }, s.year, " \u2014 "), s.authors && /*#__PURE__*/React.createElement("strong", null, s.authors), s.authors && ' ', s.title && /*#__PURE__*/React.createElement("span", {
-    className: "sv-source-title"
-  }, s.title), s.url && /*#__PURE__*/React.createElement(React.Fragment, null, " ", /*#__PURE__*/React.createElement("a", {
-    href: s.url,
-    target: "_blank",
-    rel: "noopener",
-    className: "sv-source-link"
-  }, "[lien]")))));
+  return <div>
+    {sources.map((s, i) => <div key={i} className="sv-source">
+      {s.year && <span className="sv-source-year">{s.year} — </span>}
+      {s.authors && <strong>{s.authors}</strong>}{s.authors && ' '}
+      {s.title && <span className="sv-source-title">{s.title}</span>}
+      {s.url && <> <a href={s.url} target="_blank" rel="noopener" className="sv-source-link">[lien]</a></>}
+    </div>)}
+  </div>;
 }
 
 // ── SvTabs : navigation onglets niveau 1 (Pratique / Comprendre) ──
 // Look "vrais onglets" : coin arrondi haut, fond carte sur active, captif sous .sv-nav-pages.
-function SvTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-tabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-tab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvTabs({ tabs, active, onChange }) {
+  return <div className="sv-tabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-tab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvSubTabs : sous-onglets niveau 2 (pills compactes) ──
 // A utiliser quand un onglet de premier niveau contient lui-meme plusieurs vues.
 // Exemple : Triangle des Textures > Pratique > {Triangle, Bocal}.
 // Visuellement different de SvTabs pour ne pas creer de confusion hierarchique.
-function SvSubTabs({
-  tabs,
-  active,
-  onChange
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-subtabs",
-    role: "tablist"
-  }, tabs.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    role: "tab",
-    "aria-selected": active === t.id,
-    className: `sv-subtab ${active === t.id ? 'active' : ''}`,
-    onClick: () => onChange(t.id)
-  }, t.icon && /*#__PURE__*/React.createElement("span", null, t.icon, " "), t.label)));
+function SvSubTabs({ tabs, active, onChange }) {
+  return <div className="sv-subtabs" role="tablist">
+    {tabs.map(t => <button key={t.id}
+      role="tab"
+      aria-selected={active === t.id}
+      className={`sv-subtab ${active === t.id ? 'active' : ''}`}
+      onClick={() => onChange(t.id)}>
+      {t.icon && <span>{t.icon} </span>}{t.label}
+    </button>)}
+  </div>;
 }
 
 // ── SvCallout : encart semantique unifie (variants warning/success/danger/info) ──
 // Remplace les <div className="sv-callout sv-callout-warning"> bruts en JSX.
 // Variantes possibles : 'success', 'warning', 'danger', 'info' (defaut 'info').
-function SvCallout({
-  variant,
-  title,
-  icon,
-  children
-}) {
+function SvCallout({ variant, title, icon, children }) {
   const v = variant || 'info';
   const cls = v === 'info' ? 'sv-callout' : `sv-callout sv-callout-${v}`;
-  return /*#__PURE__*/React.createElement("div", {
-    className: cls
-  }, (title || icon) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout-title"
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-callout-icon"
-  }, icon), title && /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={cls}>
+    {(title || icon) && <div className="sv-callout-title">
+      {icon && <span className="sv-callout-icon">{icon}</span>}
+      {title && <span>{title}</span>}
+    </div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvAlert : alerte compacte (variants identiques a SvCallout, look plus dense) ──
-function SvAlert({
-  variant,
-  title,
-  children
-}) {
+function SvAlert({ variant, title, children }) {
   const v = variant || 'info';
-  return /*#__PURE__*/React.createElement("div", {
-    className: `sv-alert sv-alert-${v}`
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      marginBottom: '0.25rem'
-    }
-  }, title), /*#__PURE__*/React.createElement("div", null, children));
+  return <div className={`sv-alert sv-alert-${v}`}>
+    {title && <div style={{fontWeight: 600, marginBottom: '0.25rem'}}>{title}</div>}
+    <div>{children}</div>
+  </div>;
 }
 
 // ── SvImageCard : image illustrative avec legende et styles standardises ──
 // Resout le bug "double style" + manque de max-width responsive.
 // Props : src, alt (obligatoire), caption (optionnelle), maxHeight (defaut 320px), maxWidth (defaut 100%)
-function SvImageCard({
-  src,
-  alt,
-  caption,
-  maxHeight,
-  maxWidth
-}) {
+function SvImageCard({ src, alt, caption, maxHeight, maxWidth }) {
   const mh = maxHeight || '320px';
   const mw = maxWidth || '100%';
-  return /*#__PURE__*/React.createElement("figure", {
-    className: "sv-image-card"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: src,
-    alt: alt || '',
-    style: {
-      width: '100%',
-      maxWidth: mw,
-      maxHeight: mh,
-      objectFit: 'contain',
-      borderRadius: 'var(--radius)',
-      border: '1px solid var(--border)',
-      boxShadow: 'var(--shadow)',
-      display: 'block'
-    }
-  }), caption && /*#__PURE__*/React.createElement("figcaption", {
-    className: "sv-image-caption"
-  }, caption));
+  return <figure className="sv-image-card">
+    <img src={src} alt={alt || ''}
+      style={{
+        width: '100%',
+        maxWidth: mw,
+        maxHeight: mh,
+        objectFit: 'contain',
+        borderRadius: 'var(--radius)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow)',
+        display: 'block'
+      }} />
+    {caption && <figcaption className="sv-image-caption">{caption}</figcaption>}
+  </figure>;
 }
 
 // ── SvProcedureSteps : procedure pas-a-pas numerotee + materiel + duree ──
@@ -2483,189 +2290,107 @@ function SvImageCard({
 //   materiel : array de strings (optionnel)
 //   duree : string (optionnel)
 //   title : string (optionnel)
-function SvProcedureSteps({
-  title,
-  steps,
-  materiel,
-  duree
-}) {
+function SvProcedureSteps({ title, steps, materiel, duree }) {
   if (!steps || !steps.length) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-title"
-  }, title), (materiel || duree) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-procedure-meta"
-  }, materiel && materiel.length > 0 && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Materiel : "), materiel.join(' · ')), duree && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("strong", null, "Duree : "), duree)), /*#__PURE__*/React.createElement("ol", {
-    className: "sv-procedure-steps"
-  }, steps.map((s, i) => {
-    const label = typeof s === 'string' ? s : s.label;
-    const detail = typeof s === 'string' ? null : s.detail;
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-label"
-    }, label), detail && /*#__PURE__*/React.createElement("span", {
-      className: "sv-procedure-detail"
-    }, " \u2014 ", detail));
-  })));
+  return <div className="sv-procedure">
+    {title && <div className="sv-procedure-title">{title}</div>}
+    {(materiel || duree) && <div className="sv-procedure-meta">
+      {materiel && materiel.length > 0 && <div>
+        <strong>Materiel : </strong>{materiel.join(' · ')}
+      </div>}
+      {duree && <div><strong>Duree : </strong>{duree}</div>}
+    </div>}
+    <ol className="sv-procedure-steps">
+      {steps.map((s, i) => {
+        const label = typeof s === 'string' ? s : s.label;
+        const detail = typeof s === 'string' ? null : s.detail;
+        return <li key={i}>
+          <span className="sv-procedure-label">{label}</span>
+          {detail && <span className="sv-procedure-detail"> — {detail}</span>}
+        </li>;
+      })}
+    </ol>
+  </div>;
 }
 
 // ── SvTestCard : carte standardisee pour un terrain_test ──
 // Reutilisable dans la page Triangle (section test du bocal) ET pour la
 // future page autonome tests_terrain.
 // Props : test = {code, title, description, dimension_label?, procedure?, materiel?, duree?, interpretation?, image_url?, source?}
-function SvTestCard({
-  test
-}) {
+function SvTestCard({ test }) {
   if (!test) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-title"
-  }, test.title), test.dimension_label && /*#__PURE__*/React.createElement("span", {
-    className: "sv-test-card-dim"
-  }, test.dimension_label)), test.description && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-desc"
-  }, test.description), test.image_url && /*#__PURE__*/React.createElement(SvImageCard, {
-    src: test.image_url,
-    alt: test.title,
-    caption: null,
-    maxHeight: "220px"
-  }), (test.procedure || test.materiel || test.duree) && /*#__PURE__*/React.createElement(SvProcedureSteps, {
-    title: null,
-    steps: test.procedure ? Array.isArray(test.procedure) ? test.procedure : [test.procedure] : [],
-    materiel: test.materiel ? Array.isArray(test.materiel) ? test.materiel : [test.materiel] : null,
-    duree: test.duree
-  }), test.interpretation && /*#__PURE__*/React.createElement(SvCallout, {
-    variant: "success",
-    title: "Interpretation"
-  }, test.interpretation), test.source && /*#__PURE__*/React.createElement("div", {
-    className: "sv-test-card-source"
-  }, "Source : ", test.source));
+  return <div className="sv-test-card">
+    <div className="sv-test-card-header">
+      <div className="sv-test-card-title">{test.title}</div>
+      {test.dimension_label && <span className="sv-test-card-dim">{test.dimension_label}</span>}
+    </div>
+    {test.description && <div className="sv-test-card-desc">{test.description}</div>}
+    {test.image_url && <SvImageCard src={test.image_url} alt={test.title} caption={null} maxHeight="220px" />}
+    {(test.procedure || test.materiel || test.duree) && <SvProcedureSteps
+      title={null}
+      steps={test.procedure ? (Array.isArray(test.procedure) ? test.procedure : [test.procedure]) : []}
+      materiel={test.materiel ? (Array.isArray(test.materiel) ? test.materiel : [test.materiel]) : null}
+      duree={test.duree}
+    />}
+    {test.interpretation && <SvCallout variant="success" title="Interpretation">{test.interpretation}</SvCallout>}
+    {test.source && <div className="sv-test-card-source">Source : {test.source}</div>}
+  </div>;
 }
 
+
 // ── SvNoteAccordion : mini-note inline ──
-function SvNoteAccordion({
-  text,
-  label
-}) {
+function SvNoteAccordion({ text, label }) {
   const [open, setOpen] = React.useState(false);
   if (!text) return null;
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
-    className: "sv-note-toggle",
-    onClick: () => setOpen(!open)
-  }, open ? '\u25BE' : '\u25B8', " ", open ? '' : label || 'note'), open && /*#__PURE__*/React.createElement("div", {
-    className: "sv-note-content"
-  }, text));
+  return <div>
+    <span className="sv-note-toggle" onClick={() => setOpen(!open)}>
+      {open ? '\u25BE' : '\u25B8'} {open ? '' : (label || 'note')}
+    </span>
+    {open && <div className="sv-note-content">{text}</div>}
+  </div>;
 }
 
 // ── SvRefBox : encart de référence chiffrée ──
-function SvRefBox({
-  title,
-  items,
-  note,
-  children
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box"
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-box-title"
-  }, title), items && /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-grid"
-  }, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
-    key: i,
-    className: "sv-ref-item"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-num"
-  }, it.value), /*#__PURE__*/React.createElement("div", {
-    className: "sv-ref-label"
-  }, it.label)))), note && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--color-warning-text)',
-      lineHeight: 1.45,
-      fontStyle: 'italic'
-    }
-  }, note), children);
+function SvRefBox({ title, items, note, children }) {
+  return <div className="sv-ref-box">
+    {title && <div className="sv-ref-box-title">{title}</div>}
+    {items && <div className="sv-ref-grid">
+      {items.map((it, i) => <div key={i} className="sv-ref-item">
+        <div className="sv-ref-num">{it.value}</div>
+        <div className="sv-ref-label">{it.label}</div>
+      </div>)}
+    </div>}
+    {note && <div style={{fontSize:'var(--font-xs)',color:'var(--color-warning-text)',lineHeight:1.45,fontStyle:'italic'}}>{note}</div>}
+    {children}
+  </div>;
 }
 
 // ── SvHighlightBox : conclusion / point clé ──
-function SvHighlightBox({
-  title,
-  children,
-  color
-}) {
+function SvHighlightBox({ title, children, color }) {
   const c = color || 'success';
   const colors = {
-    success: {
-      bg: 'var(--success-light)',
-      border: 'var(--success)',
-      text: 'var(--color-success-text)'
-    },
-    warning: {
-      bg: 'var(--warning-light)',
-      border: 'var(--warning)',
-      text: 'var(--color-warning-text)'
-    },
-    info: {
-      bg: 'var(--info-light)',
-      border: 'var(--accent)',
-      text: 'var(--accent-dark)'
-    },
-    purple: {
-      bg: 'var(--purple-light)',
-      border: 'var(--purple)',
-      text: 'var(--purple-dark)'
-    }
+    success: { bg: 'var(--success-light)', border: 'var(--success)', text: 'var(--color-success-text)' },
+    warning: { bg: 'var(--warning-light)', border: 'var(--warning)', text: 'var(--color-warning-text)' },
+    info:    { bg: 'var(--info-light)',    border: 'var(--accent)',  text: 'var(--accent-dark)' },
+    purple:  { bg: 'var(--purple-light)',  border: 'var(--purple)',  text: 'var(--purple-dark)' },
   };
   const s = colors[c] || colors.success;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box",
-    style: {
-      background: s.bg,
-      borderLeftColor: s.border
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    className: "sv-highlight-box-title",
-    style: {
-      color: s.text
-    }
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "sv-prose",
-    style: {
-      fontSize: 'var(--font-sm)'
-    }
-  }, children));
+  return <div className="sv-highlight-box" style={{background: s.bg, borderLeftColor: s.border}}>
+    {title && <div className="sv-highlight-box-title" style={{color: s.text}}>{title}</div>}
+    <div className="sv-prose" style={{fontSize:'var(--font-sm)'}}>{children}</div>
+  </div>;
 }
 
 // ── SvDataTable : table de données stylisée ──
-function SvDataTable({
-  headers,
-  rows,
-  children
-}) {
-  if (children) return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, children);
+function SvDataTable({ headers, rows, children }) {
+  if (children) return <table className="sv-data-table">{children}</table>;
   if (!headers || !rows) return null;
-  return /*#__PURE__*/React.createElement("table", {
-    className: "sv-data-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, headers.map((h, i) => /*#__PURE__*/React.createElement("th", {
-    key: i,
-    style: h.align ? {
-      textAlign: h.align
-    } : undefined
-  }, h.label || h)))), /*#__PURE__*/React.createElement("tbody", null, rows.map((row, i) => /*#__PURE__*/React.createElement("tr", {
-    key: i
-  }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-    key: j,
-    style: headers[j] && headers[j].align ? {
-      textAlign: headers[j].align
-    } : undefined
-  }, cell))))));
+  return <table className="sv-data-table">
+    <thead><tr>{headers.map((h, i) => <th key={i} style={h.align ? {textAlign: h.align} : undefined}>{h.label || h}</th>)}</tr></thead>
+    <tbody>{rows.map((row, i) => <tr key={i}>
+      {row.map((cell, j) => <td key={j} style={headers[j] && headers[j].align ? {textAlign: headers[j].align} : undefined}>{cell}</td>)}
+    </tr>)}</tbody>
+  </table>;
 }
 
 // ── SvBulletList : liste à puces unifiée (chevron vert ▸ en CSS) ──
@@ -2673,31 +2398,24 @@ function SvDataTable({
 // - Chaîne simple : rendue telle quelle
 // - Objet {text, emphasis?, strong?} : `emphasis` surligne un fragment avec .sv-mark,
 //   `strong` met en gras inline avec .sv-emphasis
-function SvBulletList({
-  items,
-  dense
-}) {
+function SvBulletList({ items, dense }) {
   if (!items || !items.length) return null;
   const cls = dense ? 'sv-bullet-list sv-bullet-list-dense' : 'sv-bullet-list';
-  return /*#__PURE__*/React.createElement("ul", {
-    className: cls
-  }, items.map((it, i) => {
-    if (typeof it === 'string') return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, it);
-    if (it && typeof it === 'object') {
-      return /*#__PURE__*/React.createElement("li", {
-        key: i
-      }, it.emphasis && /*#__PURE__*/React.createElement("span", {
-        className: "sv-mark"
-      }, it.emphasis), it.emphasis && it.text ? ' ' : '', it.strong && /*#__PURE__*/React.createElement("span", {
-        className: "sv-emphasis"
-      }, it.strong), it.strong && it.text ? ' ' : '', it.text);
-    }
-    return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, String(it));
-  }));
+  return <ul className={cls}>
+    {items.map((it, i) => {
+      if (typeof it === 'string') return <li key={i}>{it}</li>;
+      if (it && typeof it === 'object') {
+        return <li key={i}>
+          {it.emphasis && <span className="sv-mark">{it.emphasis}</span>}
+          {it.emphasis && it.text ? ' ' : ''}
+          {it.strong && <span className="sv-emphasis">{it.strong}</span>}
+          {it.strong && it.text ? ' ' : ''}
+          {it.text}
+        </li>;
+      }
+      return <li key={i}>{String(it)}</li>;
+    })}
+  </ul>;
 }
 
 // ── SvSection : titre de section uniforme (remplace h2/h3 bruts) ──
@@ -2705,25 +2423,15 @@ function SvBulletList({
 // - `label` (optionnel) : petit badge uppercase au-dessus (sv-section-label)
 // - `level` : 2 (défaut) ou 3
 // - `icon` (optionnel) : emoji en préfixe du titre
-function SvSection({
-  title,
-  label,
-  level,
-  icon,
-  id,
-  children
-}) {
-  const H = level === 3 ? 'h3' : 'h2';
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block",
-    id: id
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), title && /*#__PURE__*/React.createElement(H, {
-    className: `sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    className: "sv-section-icon"
-  }, icon), title), children);
+function SvSection({ title, label, level, icon, id, children }) {
+  const H = (level === 3) ? 'h3' : 'h2';
+  return <section className="sv-section-block" id={id}>
+    {label && <div className="sv-section-label">{label}</div>}
+    {title && <H className={`sv-section-title sv-section-title-${level === 3 ? 'h3' : 'h2'}`}>
+      {icon && <span className="sv-section-icon">{icon}</span>}{title}
+    </H>}
+    {children}
+  </section>;
 }
 
 // ── SvRichText : rendu pédagogique de texte semi-structuré ──
@@ -2742,96 +2450,54 @@ function _glossIndex() {
   if (_glossIdx !== undefined) return _glossIdx;
   _glossIdx = null;
   try {
-    const g = typeof DATA !== 'undefined' && DATA.glossary || {};
-    const single = new Map(),
-      multi = new Map();
+    const g = (typeof DATA !== 'undefined' && DATA.glossary) || {};
+    const single = new Map(), multi = new Map();
     const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
     for (const k of Object.keys(g)) {
       if (!k || k.length < 4) continue;
       const p = k.match(tok) || [];
-      if (p.length === 1) single.set(p[0], k);else if (p.length > 1) {
-        if (!multi.has(p[0])) multi.set(p[0], []);
-        multi.get(p[0]).push({
-          parts: p,
-          key: k
-        });
-      }
+      if (p.length === 1) single.set(p[0], k);
+      else if (p.length > 1) { if (!multi.has(p[0])) multi.set(p[0], []); multi.get(p[0]).push({ parts: p, key: k }); }
     }
     for (const a of multi.values()) a.sort((x, y) => y.parts.length - x.parts.length);
-    _glossIdx = {
-      single,
-      multi
-    };
-  } catch (e) {
-    _glossIdx = null;
-  }
+    _glossIdx = { single, multi };
+  } catch (e) { _glossIdx = null; }
   return _glossIdx;
 }
 function _svMarkGloss(s, keyPrefix, seen) {
   const idx = s ? _glossIndex() : null;
   if (!idx) return [s];
   const tok = /[\p{L}\d]+(?:-[\p{L}\d]+)*/gu;
-  const toks = [];
-  let m;
-  while ((m = tok.exec(s)) !== null) toks.push({
-    lc: m[0].toLowerCase(),
-    start: m.index,
-    end: m.index + m[0].length
-  });
+  const toks = []; let m;
+  while ((m = tok.exec(s)) !== null) toks.push({ lc: m[0].toLowerCase(), start: m.index, end: m.index + m[0].length });
   if (!toks.length) return [s];
-  const out = [];
-  let cursor = 0,
-    n = 0,
-    i = 0;
+  const out = []; let cursor = 0, n = 0, i = 0;
   while (i < toks.length) {
-    let L = 0,
-      key = null;
+    let L = 0, key = null;
     const cand = idx.multi.get(toks[i].lc);
     if (cand) for (const c of cand) {
       const p = c.parts;
       if (i + p.length <= toks.length) {
         let ok = true;
-        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) {
-          ok = false;
-          break;
-        }
-        if (ok) {
-          L = p.length;
-          key = c.key;
-          break;
-        }
+        for (let j = 1; j < p.length; j++) if (toks[i + j].lc !== p[j]) { ok = false; break; }
+        if (ok) { L = p.length; key = c.key; break; }
       }
     }
-    if (!L && idx.single.has(toks[i].lc)) {
-      L = 1;
-      key = idx.single.get(toks[i].lc);
-    }
-    const def = L && key ? (DATA.glossary || {})[key] : null;
+    if (!L && idx.single.has(toks[i].lc)) { L = 1; key = idx.single.get(toks[i].lc); }
+    const def = (L && key) ? (DATA.glossary || {})[key] : null;
     if (def && !seen.has(key)) {
       seen.add(key);
-      const st = toks[i].start,
-        en = toks[i + L - 1].end;
+      const st = toks[i].start, en = toks[i + L - 1].end;
       if (st > cursor) out.push(s.substring(cursor, st));
-      out.push(/*#__PURE__*/React.createElement("span", {
-        key: keyPrefix + '-gl-' + n++,
-        className: "sv-gloss",
-        title: def
-      }, s.substring(st, en)));
-      cursor = en;
-      i += L;
-    } else {
-      i += 1;
-    }
+      out.push(<span key={keyPrefix + '-gl-' + (n++)} className="sv-gloss" title={def}>{s.substring(st, en)}</span>);
+      cursor = en; i += L;
+    } else { i += 1; }
   }
   if (cursor < s.length) out.push(s.substring(cursor));
   return out.length ? out : [s];
 }
-function SvRichText({
-  text,
-  onCardRef,
-  skipPrefixes,
-  autoGloss
-}) {
+
+function SvRichText({ text, onCardRef, skipPrefixes, autoGloss }) {
   if (!text) return null;
   const skips = skipPrefixes || ['[2026-'];
   const gseen = new Set();
@@ -2841,7 +2507,7 @@ function SvRichText({
   // Détecte une ligne label : MAJUSCULES en tête + ':' final. Le complément
   // après un séparateur (—, -, (, :) est ignoré pour le ratio de majuscules,
   // ce qui capte aussi les labels mixed-case ("LEVIER ORGANIQUE — côté flux :").
-  const isLabelLine = line => {
+  const isLabelLine = (line) => {
     if (!line.endsWith(':') && !line.endsWith(' :')) return false;
     const body = line.replace(/:$/, '').trim();
     if (body.length < 4 || body.length > 200) return false;
@@ -2862,10 +2528,7 @@ function SvRichText({
   while (i < rawLines.length) {
     const line = rawLines[i];
     const trimmed = line.trim();
-    if (!trimmed) {
-      i++;
-      continue;
-    }
+    if (!trimmed) { i++; continue; }
 
     // Bloc de code clôturé par ``` (option : ```lang) — rendu monospace verbatim,
     // SANS interprétation markdown (un commentaire # n'est pas un titre).
@@ -2878,11 +2541,7 @@ function SvRichText({
         i++;
       }
       if (i < rawLines.length) i++; // consomme la clôture ```
-      blocks.push({
-        type: 'code',
-        lang,
-        lines: codeLines
-      });
+      blocks.push({ type: 'code', lang, lines: codeLines });
       continue;
     }
 
@@ -2894,28 +2553,21 @@ function SvRichText({
     if (mH) {
       const hashes = mH[1].length;
       const level = hashes <= 2 ? 2 : 3;
-      blocks.push({
-        type: 'heading',
-        level,
-        text: mH[2].trim()
-      });
+      blocks.push({ type: 'heading', level, text: mH[2].trim() });
       i++;
       continue;
     }
 
     // Tableau markdown : ligne « | ... | » suivie d'un separateur « | --- | »
-    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length && /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
+    if (/^\|.*\|$/.test(trimmed) && i + 1 < rawLines.length &&
+        /^\|[\s:|-]+\|$/.test(rawLines[i + 1].trim())) {
       const trows = [];
       while (i < rawLines.length && /^\|.*\|$/.test(rawLines[i].trim())) {
         trows.push(rawLines[i].trim());
         i++;
       }
-      const splitRow = r => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
-      blocks.push({
-        type: 'table',
-        header: splitRow(trows[0]),
-        rows: trows.slice(2).map(splitRow)
-      });
+      const splitRow = (r) => r.replace(/^\||\|$/g, '').split('|').map(x => x.trim());
+      blocks.push({ type: 'table', header: splitRow(trows[0]), rows: trows.slice(2).map(splitRow) });
       continue;
     }
 
@@ -2923,10 +2575,7 @@ function SvRichText({
     // mixed-case après un séparateur (—, -, () qui ne compte pas dans le ratio.
     // Exemples : "COMPATIBILITÉS MAJEURES :" / "LEVIER ORGANIQUE — côté flux :"
     if (isLabelLine(trimmed)) {
-      blocks.push({
-        type: 'label',
-        text: trimmed.replace(/:$/, '').trim()
-      });
+      blocks.push({ type: 'label', text: trimmed.replace(/:$/, '').trim() });
       i++;
       continue;
     }
@@ -2937,10 +2586,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^[•-]\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'bullets',
-        items
-      });
+      blocks.push({ type: 'bullets', items });
       continue;
     }
 
@@ -2953,11 +2599,7 @@ function SvRichText({
         items.push(rawLines[i].trim().replace(/^\d+\.\s*/, ''));
         i++;
       }
-      blocks.push({
-        type: 'ordered',
-        items,
-        start
-      });
+      blocks.push({ type: 'ordered', items, start });
       continue;
     }
     // Paragraphe (lignes consécutives non-vides, non-bullets, non-label, non-heading)
@@ -2974,10 +2616,7 @@ function SvRichText({
       paraLines.push(rawLines[i]);
       i++;
     }
-    if (paraLines.length) blocks.push({
-      type: 'para',
-      lines: paraLines.slice()
-    });
+    if (paraLines.length) blocks.push({ type: 'para', lines: paraLines.slice() });
   }
 
   // Rendu inline d'un texte : Card refs, backticks → sv-mark, **gras** → sv-emphasis
@@ -2985,150 +2624,80 @@ function SvRichText({
     if (!s) return null;
     const out = [];
     const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|\*([^*\n]+?)\*|fiche (\d+)/g;
-    let last = 0,
-      m,
-      n = 0;
+    let last = 0, m, n = 0;
     while ((m = regex.exec(s)) !== null) {
-      if (m.index > last) {
-        const _seg = s.substring(last, m.index);
-        if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen));else out.push(_seg);
-      }
+      if (m.index > last) { const _seg = s.substring(last, m.index); if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen)); else out.push(_seg); }
       if (m[1]) {
         const id = parseInt(m[1]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-ref-' + n++,
-          onClick: () => onCardRef && onCardRef(id),
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, "#", id));
+        out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(id)}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>#{id}</a>);
       } else if (m[2]) {
         const title = m[2];
         const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
         if (found) {
-          out.push(/*#__PURE__*/React.createElement("a", {
-            key: keyPrefix + '-ref-' + n++,
-            onClick: () => onCardRef && onCardRef(found.id),
-            style: {
-              color: 'var(--accent)',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }
-          }, title));
+          out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(found.id)}
+                       style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{title}</a>);
         } else {
           out.push(title);
         }
       } else if (m[3]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-term-' + n++,
-          className: "sv-mark",
-          title: (DATA.glossary || {})[m[3].toLowerCase()] || undefined
-        }, m[3]));
+        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark" title={(DATA.glossary || {})[m[3].toLowerCase()] || undefined}>{m[3]}</span>);
       } else if (m[4]) {
-        out.push(/*#__PURE__*/React.createElement("span", {
-          key: keyPrefix + '-em-' + n++,
-          className: "sv-emphasis"
-        }, m[4]));
+        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[4]}</span>);
       } else if (m[5]) {
-        out.push(/*#__PURE__*/React.createElement("em", {
-          key: keyPrefix + '-it-' + n++
-        }, m[5]));
+        out.push(<em key={keyPrefix + '-it-' + (n++)}>{m[5]}</em>);
       } else if (m[6]) {
         const fid = parseInt(m[6]);
-        out.push(/*#__PURE__*/React.createElement("a", {
-          key: keyPrefix + '-fiche-' + n++,
-          href: 'cahier.html#fiche-' + fid,
-          style: {
-            color: 'var(--accent)',
-            cursor: 'pointer',
-            textDecoration: 'underline'
-          }
-        }, m[0]));
+        out.push(<a key={keyPrefix + '-fiche-' + (n++)} href={'cahier.html#fiche-' + fid}
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{m[0]}</a>);
       }
       last = m.index + m[0].length;
     }
-    if (last < s.length) {
-      const _tl = s.substring(last);
-      if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen));else out.push(_tl);
-    }
+    if (last < s.length) { const _tl = s.substring(last); if (autoGloss) out.push(..._svMarkGloss(_tl, keyPrefix + '-zg', gseen)); else out.push(_tl); }
     return out;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, blocks.map((b, idx) => {
-    if (b.type === 'heading') {
-      const Tag = b.level === 2 ? 'h2' : 'h3';
-      const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
-      const mt = b.level === 2 ? '1.25rem' : '1rem';
-      return /*#__PURE__*/React.createElement(Tag, {
-        key: idx,
-        className: cls,
-        style: {
-          marginTop: idx > 0 ? mt : 0,
-          marginBottom: '0.5rem'
-        }
-      }, renderInline(b.text, 'h' + idx));
-    }
-    if (b.type === 'label') {
-      return /*#__PURE__*/React.createElement("div", {
-        key: idx,
-        className: "sv-section-label",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, b.text);
-    }
-    if (b.type === 'bullets') {
-      return /*#__PURE__*/React.createElement("ul", {
-        key: idx,
-        className: "sv-bullet-list"
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'ordered') {
-      return /*#__PURE__*/React.createElement("ol", {
-        key: idx,
-        className: "sv-ordered-list",
-        start: b.start || 1
-      }, b.items.map((it, j) => /*#__PURE__*/React.createElement("li", {
-        key: j
-      }, renderInline(it, idx + '-' + j))));
-    }
-    if (b.type === 'table') {
-      return /*#__PURE__*/React.createElement("table", {
-        key: idx,
-        className: "sv-data-table",
-        style: {
-          marginTop: idx > 0 ? '0.75rem' : 0
-        }
-      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, b.header.map((h, j) => /*#__PURE__*/React.createElement("th", {
-        key: j
-      }, renderInline(h, 'th' + idx + '-' + j))))), /*#__PURE__*/React.createElement("tbody", null, b.rows.map((row, r) => /*#__PURE__*/React.createElement("tr", {
-        key: r
-      }, row.map((cell, j) => /*#__PURE__*/React.createElement("td", {
-        key: j
-      }, renderInline(cell, 'td' + idx + '-' + r + '-' + j)))))));
-    }
-    if (b.type === 'code') {
-      return /*#__PURE__*/React.createElement("pre", {
-        key: idx,
-        className: "sv-code"
-      }, /*#__PURE__*/React.createElement("code", null, (b.lines || []).join('\n')));
-    }
-    return /*#__PURE__*/React.createElement("p", {
-      key: idx,
-      className: "sv-prose",
-      style: {
-        margin: '0.35rem 0'
+
+  return <div className="sv-richtext">
+    {blocks.map((b, idx) => {
+      if (b.type === 'heading') {
+        const Tag = b.level === 2 ? 'h2' : 'h3';
+        const cls = 'sv-section-title sv-section-title-' + (b.level === 2 ? 'h2' : 'h3');
+        const mt = b.level === 2 ? '1.25rem' : '1rem';
+        return <Tag key={idx} className={cls} style={{marginTop: idx > 0 ? mt : 0, marginBottom: '0.5rem'}}>
+          {renderInline(b.text, 'h' + idx)}
+        </Tag>;
       }
-    }, (b.lines || [b.text]).map((ln, li) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: li
-    }, li > 0 ? /*#__PURE__*/React.createElement("br", null) : null, renderInline(ln, 'p' + idx + '-' + li))));
-  }));
+      if (b.type === 'label') {
+        return <div key={idx} className="sv-section-label" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>{b.text}</div>;
+      }
+      if (b.type === 'bullets') {
+        return <ul key={idx} className="sv-bullet-list">
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ul>;
+      }
+
+      if (b.type === 'ordered') {
+        return <ol key={idx} className="sv-ordered-list" start={b.start || 1}>
+          {b.items.map((it, j) => <li key={j}>{renderInline(it, idx + '-' + j)}</li>)}
+        </ol>;
+      }
+      if (b.type === 'table') {
+        return <table key={idx} className="sv-data-table" style={{marginTop: idx > 0 ? '0.75rem' : 0}}>
+          <thead><tr>{b.header.map((h, j) => <th key={j}>{renderInline(h, 'th' + idx + '-' + j)}</th>)}</tr></thead>
+          <tbody>{b.rows.map((row, r) => <tr key={r}>{row.map((cell, j) => <td key={j}>{renderInline(cell, 'td' + idx + '-' + r + '-' + j)}</td>)}</tr>)}</tbody>
+        </table>;
+      }
+      if (b.type === 'code') {
+        return <pre key={idx} className="sv-code"><code>{(b.lines || []).join('\n')}</code></pre>;
+      }
+      return <p key={idx} className="sv-prose" style={{margin: '0.35rem 0'}}>
+        {(b.lines || [b.text]).map((ln, li) => <React.Fragment key={li}>{li > 0 ? <br/> : null}{renderInline(ln, 'p' + idx + '-' + li)}</React.Fragment>)}
+      </p>;
+    })}
+  </div>;
 }
+
+
 
 // ── SvExpandableCard : carte colorée expansible (pattern cartographie) ──
 // Props :
@@ -3141,66 +2710,25 @@ function SvRichText({
 //   onClick    : callback au clic sur la carte
 // ── SvSearchInput : champ de recherche unifié + bouton d'effacement ──
 // Factorisé pour toutes les pages. Props : value, onChange(str), placeholder.
-function SvSearchInput({
-  value,
-  onChange,
-  placeholder,
-  autoFocus
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'relative',
-      marginBottom: '12px'
-    }
-  }, /*#__PURE__*/React.createElement("input", {
-    type: "search",
-    className: "sv-input",
-    value: value || '',
-    autoFocus: !!autoFocus,
-    onChange: e => onChange(e.target.value),
-    placeholder: placeholder || 'Rechercher…',
-    style: {
-      width: '100%',
-      paddingRight: '2rem',
-      boxSizing: 'border-box'
-    }
-  }), value && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    "aria-label": "Effacer la recherche",
-    onClick: () => onChange(''),
-    style: {
-      position: 'absolute',
-      right: '0.45rem',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: 'var(--text-secondary)',
-      fontSize: 'var(--font-lg)',
-      lineHeight: 1,
-      padding: '0 0.2rem'
-    }
-  }, "\xD7"));
+function SvSearchInput({ value, onChange, placeholder, autoFocus }) {
+  return <div style={{position:'relative', marginBottom:'12px'}}>
+    <input type="search" className="sv-input" value={value || ''}
+      autoFocus={!!autoFocus}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder || 'Rechercher…'}
+      style={{width:'100%', paddingRight:'2rem', boxSizing:'border-box'}} />
+    {value && <button type="button" aria-label="Effacer la recherche"
+      onClick={() => onChange('')}
+      style={{position:'absolute', right:'0.45rem', top:'50%', transform:'translateY(-50%)',
+              background:'none', border:'none', cursor:'pointer', color:'var(--text-secondary)',
+              fontSize:'var(--font-lg)', lineHeight:1, padding:'0 0.2rem'}}>×</button>}
+  </div>;
 }
-function SvExpandableCard({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  open,
-  onClick,
-  children,
-  compact,
-  chevron
-}) {
+
+function SvExpandableCard({ badge, icon, color, title, subtitle, progress, open, onClick, children, compact, chevron }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("div", {
-    onClick: onClick,
-    style: {
-      background: open ? c + '12' : 'var(--card-bg)',
+  return <div onClick={onClick}
+    style={{background: open ? c + '12' : 'var(--card-bg)',
       border: '1px solid ' + (open ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       borderRadius: 'var(--radius)',
@@ -3209,202 +2737,61 @@ function SvExpandableCard({
       transition: 'all 0.15s',
       height: '100%',
       boxSizing: 'border-box',
-      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'
-    }
-  }, compact ?
-  /*#__PURE__*/
-  // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
-  React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      height: '100%'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-xs)',
-      flexShrink: 0
-    }
-  }, badge), title && /*#__PURE__*/React.createElement("div", {
-    title: title,
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)',
-      color: 'var(--text)',
-      flex: 1,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, title), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      flexShrink: 0,
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)), (subtitle || progress != null || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-base)',
-      lineHeight: 1,
-      flexShrink: 0
-    }
-  }, icon), subtitle && /*#__PURE__*/React.createElement("span", {
-    style: {
-      whiteSpace: 'nowrap'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%"))), children) : /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      height: '100%'
-    }
-  }, (badge || icon) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '4px',
-      flexShrink: 0,
-      width: '32px'
-    }
-  }, badge && /*#__PURE__*/React.createElement("span", {
-    style: {
-      background: c,
-      color: 'var(--card-bg)',
-      borderRadius: '999px',
-      width: '38px',
-      height: '28px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 700,
-      fontSize: 'var(--font-sm)'
-    }
-  }, badge), icon && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-md)',
-      lineHeight: 1
-    }
-  }, icon)), /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      minWidth: 0
-    }
-  }, title && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 700,
-      fontSize: 'var(--font-base)',
-      color: 'var(--text)'
-    }
-  }, title), subtitle && /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, subtitle), progress != null && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '5px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      flex: 1,
-      height: '4px',
-      background: 'var(--border)',
-      borderRadius: '2px',
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: progress + '%',
-      height: '100%',
-      background: c,
-      transition: 'width 0.3s'
-    }
-  })), /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      fontWeight: 600,
-      minWidth: '26px',
-      textAlign: 'right'
-    }
-  }, progress, "%")), children), /*#__PURE__*/React.createElement("span", {
-    className: chevron === undefined ? 'sv-collapse-chevron' + (open ? ' open' : '') : '',
-    style: {
-      color: c,
-      fontSize: 'var(--font-sm)'
-    }
-  }, chevron === undefined ? '▸' : chevron)));
+      boxShadow: open ? '0 2px 8px rgba(0,0,0,0.06)' : 'none'}}>
+    {compact ? (
+      // Layout compact (vertical) : ligne 1 = badge + titre + chevron, ligne 2 = subtitle + progress
+      <div style={{display:'flex',flexDirection:'column',gap:'6px',height:'100%'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '24px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-xs)', flexShrink:0}}>{badge}</span>}
+          {title && <div title={title} style={{fontWeight: 700, fontSize: 'var(--font-sm)', color: 'var(--text)', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{title}</div>}
+          <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{flexShrink:0,color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+        </div>
+        {(subtitle || progress != null || icon) && <div style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'var(--font-xs)',color:'var(--text-secondary)'}}>
+          {icon && <span style={{fontSize:'var(--font-base)',lineHeight:1,flexShrink:0}}>{icon}</span>}
+          {subtitle && <span style={{whiteSpace:'nowrap'}}>{subtitle}</span>}
+          {progress != null && <>
+            <div style={{flex:1, height:'4px', background:'var(--border)', borderRadius:'2px', overflow:'hidden'}}>
+              <div style={{width: progress + '%', height:'100%', background: c, transition:'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)',fontWeight:600,minWidth:'26px',textAlign:'right'}}>{progress}%</span>
+          </>}
+        </div>}
+        {children}
+      </div>
+    ) : (
+      <div style={{display: 'flex', alignItems: 'center', gap: '10px', height: '100%'}}>
+        {(badge || icon) && <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'4px',flexShrink:0,width:'32px'}}>
+          {badge && <span style={{background: c, color: 'var(--card-bg)', borderRadius: '999px',
+            width: '38px', height: '28px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontWeight: 700, fontSize: 'var(--font-sm)'}}>{badge}</span>}
+          {icon && <span style={{fontSize:'var(--font-md)',lineHeight:1}}>{icon}</span>}
+        </div>}
+        <div style={{flex: 1, minWidth: 0}}>
+          {title && <div style={{fontWeight: 700, fontSize: 'var(--font-base)', color: 'var(--text)'}}>{title}</div>}
+          {subtitle && <div style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{subtitle}</div>}
+          {progress != null && <div style={{marginTop: '5px', display: 'flex', alignItems: 'center', gap: '6px'}}>
+            <div style={{flex: 1, height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden'}}>
+              <div style={{width: progress + '%', height: '100%', background: c, transition: 'width 0.3s'}}></div>
+            </div>
+            <span style={{fontSize:'var(--font-xs)', color: 'var(--text-secondary)', fontWeight: 600, minWidth: '26px', textAlign: 'right'}}>{progress}%</span>
+          </div>}
+          {children}
+        </div>
+        <span className={chevron === undefined ? ('sv-collapse-chevron' + (open ? ' open' : '')) : ''} style={{color:c,fontSize:'var(--font-sm)'}}>{chevron === undefined ? '▸' : chevron}</span>
+      </div>
+    )}
+  </div>;
 }
+
 
 // ── SvAccordionItem : wrapper accordéon compact (SvExpandableCard + contenu déplié inline) ──
 // Pattern partagé : grille de cards compactes (Pédagogie, Fiches, Comprendre) où chaque
 // item se déploie inline avec son contenu. State local par défaut ; state contrôlé
 // possible via props `open` + `onToggle` (utilisé par Fiches pour "1 seule ouverte").
-function SvAccordionItem({
-  badge,
-  icon,
-  color,
-  title,
-  subtitle,
-  progress,
-  chevron,
-  open,
-  onToggle,
-  children,
-  contentStyle
-}) {
+function SvAccordionItem({ badge, icon, color, title, subtitle, progress, chevron,
+                          open, onToggle, children, contentStyle }) {
   const [localOpen, setLocalOpen] = React.useState(false);
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : localOpen;
@@ -3415,24 +2802,16 @@ function SvAccordionItem({
       setLocalOpen(!localOpen);
     }
   };
-  const defaultContentStyle = {
-    padding: '1rem 0 1.5rem'
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SvExpandableCard, {
-    compact: true,
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: title,
-    subtitle: subtitle,
-    progress: progress,
-    chevron: chevron,
-    open: isOpen,
-    onClick: handleClick
-  }), isOpen && children && /*#__PURE__*/React.createElement("div", {
-    style: contentStyle || defaultContentStyle
-  }, children));
+  const defaultContentStyle = {padding: '1rem 0 1.5rem'};
+  return <React.Fragment>
+    <SvExpandableCard compact
+      badge={badge} icon={icon} color={color}
+      title={title} subtitle={subtitle} progress={progress} chevron={chevron}
+      open={isOpen} onClick={handleClick} />
+    {isOpen && children && <div style={contentStyle || defaultContentStyle}>{children}</div>}
+  </React.Fragment>;
 }
+
 
 // ── SvConceptCardList : rendu unifié d'une liste de concept cards ──
 // API : <SvConceptCardList cards={payloads} />
@@ -3447,217 +2826,106 @@ function SvAccordionItem({
 // chaînes / cascade / liens / tests / refs / fiches). Utilisé par le panneau
 // de lecture maître-détail de concept_cards. Miroir du corps de
 // SvConceptCardList (accordéon) — garder les deux synchrones.
-function SvConceptCardDetail({
-  card,
-  onCardRef
-}) {
+function SvConceptCardDetail({ card, onCardRef }) {
   if (!card) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => onCardRef && onCardRef(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column",
-    style: {
-      padding: '0.25rem 0 0.75rem'
-    }
-  }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-    text: card.description,
-    onCardRef: onCardRef
-  }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Cha\xEEnes causales"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px',
-      fontSize: 'var(--font-sm)'
-    }
-  }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'index.html#chaine-' + ch.chain_id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    },
-    title: (ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-  }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: "Niveau cascade pr\xE9requis"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    style: {
-      background: c.level_couleur + '22',
-      borderLeft: '3px solid ' + c.level_couleur,
-      padding: '2px 8px',
-      borderRadius: '4px',
-      fontSize: 'var(--font-xs)'
-    }
-  }, /*#__PURE__*/React.createElement("strong", {
-    style: {
-      color: c.level_couleur
-    }
-  }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: 'var(--text-secondary)'
-    }
-  }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Liens (' + card.links.length + ')'
-  }, card.links.map((l, i) => {
-    const isFrom = l.from_id === card.id;
-    const otherId = isFrom ? l.to_id : l.from_id;
-    const otherTitle = isFrom ? l.to_title : l.from_title;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      style: {
-        display: 'flex',
-        gap: '8px',
-        alignItems: 'baseline',
-        marginTop: '2px',
-        fontSize: 'var(--font-sm)'
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)',
-        fontStyle: 'italic',
-        minWidth: '100px'
-      }
-    }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-      id: otherId,
-      title: otherTitle
-    }));
-  })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Tests terrain (' + card.tests.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "sv-tag",
-    title: t.usage || ''
-  }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Refs renforçantes (' + card.refs.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '4px 8px'
-    }
-  }, (() => {
-    const groups = {};
-    card.refs.forEach(r => {
-      (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-    });
-    return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-      key: kind,
-      style: {
-        padding: '4px 8px',
-        borderRadius: '8px',
-        background: 'var(--color-bg-subtle, var(--bg))',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: 'var(--color-text-muted, var(--text-secondary))',
-        marginRight: '8px',
-        fontSize: 'var(--font-2xs)',
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-        fontWeight: 700,
-        whiteSpace: 'nowrap'
-      }
-    }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-      style: {
-        display: 'inline-block',
-        padding: '1px 6px',
-        margin: '1px 3px',
-        borderRadius: '10px',
-        background: 'var(--accent-light, var(--bg))',
-        color: 'var(--accent-dark, var(--accent))',
-        whiteSpace: 'nowrap'
-      }
-    }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \u2026 +", items.length - 8)));
-  })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-    label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '4px'
-    }
-  }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-    key: i,
-    href: 'cahier.html#fiche-' + f.id,
-    style: {
-      color: 'var(--accent)',
-      textDecoration: 'underline',
-      cursor: 'pointer',
-      fontSize: 'var(--font-sm)'
-    },
-    title: f.role ? 'rôle : ' + f.role : ''
-  }, "\uD83D\uDCC4 ", f.titre)))));
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => onCardRef && onCardRef(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+  return <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+    {card.description && <SvRichText text={card.description} onCardRef={onCardRef} />}
+
+    {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px',fontSize:'var(--font-sm)'}}>
+        {card.chains.map((ch, i) => <a key={i} href={'index.html#chaine-' + ch.chain_id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer'}}
+            title={(ch.notes ? ch.notes + ' — ' : '') + 'Ouvrir cette chaîne causale dans la cartographie' + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+          <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+        </a>)}
+      </div>
+    </Section>}
+
+    {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.cascade.map((c, i) => <span key={i}
+            style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                    padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+          <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+          {c.level_label && <span> — {c.level_label}</span>}
+          {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+        </span>)}
+      </div>
+    </Section>}
+
+    {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+      {card.links.map((l, i) => {
+        const isFrom = l.from_id === card.id;
+        const otherId = isFrom ? l.to_id : l.from_id;
+        const otherTitle = isFrom ? l.to_title : l.from_title;
+        return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+          <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+          <CardLink id={otherId} title={otherTitle} />
+        </div>;
+      })}
+    </Section>}
+
+    {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {card.tests.map((t, i) => <span key={i} className="sv-tag"
+            title={t.usage || ''}>{t.test_title}</span>)}
+      </div>
+    </Section>}
+
+    {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+      <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+        {(() => {
+          const groups = {};
+          card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+          return Object.entries(groups).map(([kind, items]) => (
+            <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                      background:'var(--color-bg-subtle, var(--bg))',
+                                      fontSize:'var(--font-xs)'}}>
+              <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+              {items.slice(0,8).map((r, i) => <span key={i}
+                  title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                  style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                          borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                          color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+              {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+            </div>
+          ));
+        })()}
+      </div>
+    </Section>}
+
+    {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+      <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+        {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+            style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+            title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+      </div>
+    </Section>}
+  </div>;
 }
-function SvConceptCardList({
-  cards
-}) {
+
+function SvConceptCardList({ cards }) {
   const [openIds, setOpenIds] = React.useState({});
   const inPool = React.useMemo(() => {
     const s = new Set();
     (cards || []).forEach(c => s.add(c.id));
     return s;
   }, [cards]);
-  const toggle = id => setOpenIds(p => ({
-    ...p,
-    [id]: !p[id]
-  }));
-  const scrollToCard = id => {
+  const toggle = (id) => setOpenIds(p => ({ ...p, [id]: !p[id] }));
+  const scrollToCard = (id) => {
     if (inPool.has(id)) {
-      setOpenIds(p => ({
-        ...p,
-        [id]: true
-      }));
+      setOpenIds(p => ({ ...p, [id]: true }));
       setTimeout(() => {
         const el = document.getElementById('card-' + id);
-        if (el) el.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 60);
       return;
     }
@@ -3670,206 +2938,108 @@ function SvConceptCardList({
     }
   };
   if (!cards || !cards.length) return null;
-  const Section = ({
-    label,
-    children
-  }) => /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.75rem'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, label), /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '0.35rem'
-    }
-  }, children));
-  const CardLink = ({
-    id,
-    title
-  }) => /*#__PURE__*/React.createElement("a", {
-    onClick: () => scrollToCard(id),
-    style: {
-      cursor: 'pointer',
-      color: 'var(--accent)',
-      textDecoration: 'underline'
-    }
-  }, "#", id, " ", title || '');
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      width: '100%'
-    }
-  }, cards.map(card => {
-    const dim = card.dimension;
-    const dimColor = dim && dim.couleur || 'var(--accent)';
-    const isOpen = !!openIds[card.id];
-    return /*#__PURE__*/React.createElement("div", {
-      key: card.id,
-      id: 'card-' + card.id,
-      style: {
-        scrollMarginTop: '5rem'
-      }
-    }, /*#__PURE__*/React.createElement(SvAccordionItem, {
-      badge: '#' + card.id,
-      color: dimColor,
-      title: card.title,
-      subtitle: dim && dim.nom,
-      open: isOpen,
-      onToggle: () => toggle(card.id)
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-text-column",
-      style: {
-        padding: '0.25rem 0 0.75rem'
-      }
-    }, card.description && /*#__PURE__*/React.createElement(SvRichText, {
-      text: card.description,
-      onCardRef: scrollToCard
-    }), card.chains && card.chains.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Cha\xEEnes causales"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.chains.map((ch, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: (ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')
-    }, /*#__PURE__*/React.createElement("strong", null, ch.chain_id), ch.chain_titre ? ' — ' + ch.chain_titre : '')))), card.cascade && card.cascade.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: "Niveau cascade pr\xE9requis"
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.cascade.map((c, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      style: {
-        background: c.level_couleur + '22',
-        borderLeft: '3px solid ' + c.level_couleur,
-        padding: '2px 8px',
-        borderRadius: '4px',
-        fontSize: 'var(--font-xs)'
-      }
-    }, /*#__PURE__*/React.createElement("strong", {
-      style: {
-        color: c.level_couleur
-      }
-    }, "N", c.niveau), c.level_label && /*#__PURE__*/React.createElement("span", null, " \u2014 ", c.level_label), c.role && /*#__PURE__*/React.createElement("span", {
-      style: {
-        color: 'var(--text-secondary)'
-      }
-    }, " \xB7 ", c.role))))), card.links && card.links.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Liens (' + card.links.length + ')'
-    }, card.links.map((l, i) => {
-      const isFrom = l.from_id === card.id;
-      const otherId = isFrom ? l.to_id : l.from_id;
-      const otherTitle = isFrom ? l.to_title : l.from_title;
-      return /*#__PURE__*/React.createElement("div", {
-        key: i,
-        style: {
-          display: 'flex',
-          gap: '8px',
-          alignItems: 'baseline',
-          marginTop: '2px',
-          fontSize: 'var(--font-sm)'
-        }
-      }, /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)',
-          fontStyle: 'italic',
-          minWidth: '100px'
-        }
-      }, l.link_type), /*#__PURE__*/React.createElement(CardLink, {
-        id: otherId,
-        title: otherTitle
-      }));
-    })), card.tests && card.tests.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Tests terrain (' + card.tests.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, card.tests.map((t, i) => /*#__PURE__*/React.createElement("span", {
-      key: i,
-      className: "sv-tag",
-      title: t.usage || ''
-    }, t.test_title)))), card.refs && card.refs.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Refs renforçantes (' + card.refs.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '4px 8px'
-      }
-    }, (() => {
-      const groups = {};
-      card.refs.forEach(r => {
-        (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r);
-      });
-      return Object.entries(groups).map(([kind, items]) => /*#__PURE__*/React.createElement("div", {
-        key: kind,
-        style: {
-          padding: '4px 8px',
-          borderRadius: '8px',
-          background: 'var(--color-bg-subtle, var(--bg))',
-          fontSize: 'var(--font-xs)'
-        }
-      }, /*#__PURE__*/React.createElement("strong", {
-        style: {
-          color: 'var(--color-text-muted, var(--text-secondary))',
-          marginRight: '8px',
-          fontSize: 'var(--font-2xs)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.04em',
-          fontWeight: 700,
-          whiteSpace: 'nowrap'
-        }
-      }, kind, " (", items.length, ") :"), items.slice(0, 8).map((r, i) => /*#__PURE__*/React.createElement("span", {
-        key: i,
-        title: (r.role ? '[' + r.role + '] ' : '') + (r.motif || ''),
-        style: {
-          display: 'inline-block',
-          padding: '1px 6px',
-          margin: '1px 3px',
-          borderRadius: '10px',
-          background: 'var(--accent-light, var(--bg))',
-          color: 'var(--accent-dark, var(--accent))',
-          whiteSpace: 'nowrap'
-        }
-      }, r.label)), items.length > 8 && /*#__PURE__*/React.createElement("span", {
-        style: {
-          color: 'var(--text-secondary)'
-        }
-      }, " \u2026 +", items.length - 8)));
-    })())), card.fiches && card.fiches.length > 0 && /*#__PURE__*/React.createElement(Section, {
-      label: 'Fiches qui la mobilisent (' + card.fiches.length + ')'
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '4px'
-      }
-    }, card.fiches.map((f, i) => /*#__PURE__*/React.createElement("a", {
-      key: i,
-      href: 'cahier.html#fiche-' + f.id,
-      style: {
-        color: 'var(--accent)',
-        textDecoration: 'underline',
-        cursor: 'pointer',
-        fontSize: 'var(--font-sm)'
-      },
-      title: f.role ? 'rôle : ' + f.role : ''
-    }, "\uD83D\uDCC4 ", f.titre)))))));
-  }));
+
+  const Section = ({ label, children }) => (
+    <div style={{marginTop:'0.75rem'}}>
+      <div className="sv-section-label">{label}</div>
+      <div style={{marginTop:'0.35rem'}}>{children}</div>
+    </div>
+  );
+  const CardLink = ({ id, title }) =>
+    <a onClick={() => scrollToCard(id)} style={{cursor:'pointer', color:'var(--accent)', textDecoration:'underline'}}>#{id} {title || ''}</a>;
+
+  return <div style={{display:'flex', flexDirection:'column', gap:'6px', width:'100%'}}>
+    {cards.map(card => {
+      const dim = card.dimension;
+      const dimColor = (dim && dim.couleur) || 'var(--accent)';
+      const isOpen = !!openIds[card.id];
+      return <div key={card.id} id={'card-' + card.id} style={{scrollMarginTop:'5rem'}}>
+        <SvAccordionItem
+          badge={'#' + card.id}
+          color={dimColor}
+          title={card.title}
+          subtitle={dim && dim.nom}
+          open={isOpen}
+          onToggle={() => toggle(card.id)}>
+          <div className="sv-text-column" style={{padding:'0.25rem 0 0.75rem'}}>
+            {card.description && <SvRichText text={card.description} onCardRef={scrollToCard} />}
+
+            {card.chains && card.chains.length > 0 && <Section label="Chaînes causales">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.chains.map((ch, i) => <span key={i} className="sv-tag"
+                    title={(ch.notes || '') + (ch.role ? ' (rôle : ' + ch.role + ')' : '')}>
+                  <strong>{ch.chain_id}</strong>{ch.chain_titre ? ' — ' + ch.chain_titre : ''}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.cascade && card.cascade.length > 0 && <Section label="Niveau cascade prérequis">
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.cascade.map((c, i) => <span key={i}
+                    style={{background: c.level_couleur + '22', borderLeft: '3px solid ' + c.level_couleur,
+                            padding:'2px 8px', borderRadius:'4px', fontSize:'var(--font-xs)'}}>
+                  <strong style={{color:c.level_couleur}}>N{c.niveau}</strong>
+                  {c.level_label && <span> — {c.level_label}</span>}
+                  {c.role && <span style={{color:'var(--text-secondary)'}}> · {c.role}</span>}
+                </span>)}
+              </div>
+            </Section>}
+
+            {card.links && card.links.length > 0 && <Section label={'Liens (' + card.links.length + ')'}>
+              {card.links.map((l, i) => {
+                const isFrom = l.from_id === card.id;
+                const otherId = isFrom ? l.to_id : l.from_id;
+                const otherTitle = isFrom ? l.to_title : l.from_title;
+                return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
+                  <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+                  <CardLink id={otherId} title={otherTitle} />
+                </div>;
+              })}
+            </Section>}
+
+            {card.tests && card.tests.length > 0 && <Section label={'Tests terrain (' + card.tests.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {card.tests.map((t, i) => <span key={i} className="sv-tag"
+                    title={t.usage || ''}>{t.test_title}</span>)}
+              </div>
+            </Section>}
+
+            {card.refs && card.refs.length > 0 && <Section label={'Refs renforçantes (' + card.refs.length + ')'}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 8px'}}>
+                {(() => {
+                  const groups = {};
+                  card.refs.forEach(r => { (groups[r.ref_table_label] = groups[r.ref_table_label] || []).push(r); });
+                  return Object.entries(groups).map(([kind, items]) => (
+                    <div key={kind} style={{padding:'4px 8px', borderRadius:'8px',
+                                              background:'var(--color-bg-subtle, var(--bg))',
+                                              fontSize:'var(--font-xs)'}}>
+                      <strong style={{color:'var(--color-text-muted, var(--text-secondary))', marginRight:'8px', fontSize:'var(--font-2xs)', textTransform:'uppercase', letterSpacing:'0.04em', fontWeight:700, whiteSpace:'nowrap'}}>{kind} ({items.length}) :</strong>
+                      {items.slice(0,8).map((r, i) => <span key={i}
+                          title={(r.role ? '['+r.role+'] ' : '') + (r.motif || '')}
+                          style={{display:'inline-block', padding:'1px 6px', margin:'1px 3px',
+                                  borderRadius:'10px', background:'var(--accent-light, var(--bg))',
+                                  color:'var(--accent-dark, var(--accent))', whiteSpace:'nowrap'}}>{r.label}</span>)}
+                      {items.length > 8 && <span style={{color:'var(--text-secondary)'}}> … +{items.length - 8}</span>}
+                    </div>
+                  ));
+                })()}
+              </div>
+            </Section>}
+
+            {card.fiches && card.fiches.length > 0 && <Section label={'Fiches qui la mobilisent (' + card.fiches.length + ')'}>
+              <div style={{display:'flex',flexDirection:'column',gap:'4px'}}>
+                {card.fiches.map((f, i) => <a key={i} href={'cahier.html#fiche-' + f.id}
+                    style={{color:'var(--accent)', textDecoration:'underline', cursor:'pointer', fontSize:'var(--font-sm)'}}
+                    title={f.role ? 'rôle : ' + f.role : ''}>📄 {f.titre}</a>)}
+              </div>
+            </Section>}
+          </div>
+        </SvAccordionItem>
+      </div>;
+    })}
+  </div>;
 }
+
 
 // ── SvTagButton : pill pour sous-item (code + label + stat) ──
 // Props :
@@ -3879,58 +3049,29 @@ function SvConceptCardList({
 //   color    : couleur de l'accent (border-left + bg quand actif)
 //   active   : bool
 //   onClick  : callback
-function SvTagButton({
-  code,
-  label,
-  stat,
-  color,
-  active,
-  onClick
-}) {
+function SvTagButton({ code, label, stat, color, active, onClick }) {
   const c = color || 'var(--text-secondary)';
-  return /*#__PURE__*/React.createElement("button", {
-    onClick: onClick,
-    style: {
-      padding: '8px 14px',
-      borderRadius: 'var(--radius)',
-      cursor: 'pointer',
+  return <button onClick={onClick}
+    style={{padding: '8px 14px', borderRadius: 'var(--radius)', cursor: 'pointer',
       border: '2px solid ' + (active ? c : 'var(--border)'),
       borderLeft: '4px solid ' + c,
       background: active ? c + '15' : 'var(--card-bg)',
       fontWeight: active ? 700 : 600,
       fontSize: 'var(--font-sm)',
       color: active ? c : 'var(--text)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '6px',
-      transition: 'all 0.15s'
-    }
-  }, code && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontWeight: 700
-    }
-  }, code), label && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)',
-      maxWidth: '200px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap'
-    }
-  }, label), stat && /*#__PURE__*/React.createElement("span", {
-    style: {
-      fontSize: 'var(--font-xs)',
-      color: 'var(--text-secondary)'
-    }
-  }, stat));
+      display: 'flex', alignItems: 'center', gap: '6px',
+      transition: 'all 0.15s'}}>
+    {code && <span style={{fontWeight: 700}}>{code}</span>}
+    {label && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)',
+      maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{label}</span>}
+    {stat && <span style={{fontSize: 'var(--font-xs)', color: 'var(--text-secondary)'}}>{stat}</span>}
+  </button>;
 }
 
+
+
 // ── SvTabIntro : intro déroulante d'onglet — composant neutralisé (objet abandonné, 2026-06) ──
-function SvTabIntro({
-  resume,
-  detail
-}) {
+function SvTabIntro({ resume, detail }) {
   // Objet d'intro déroulante abandonné (JMJ 2026-06) : neutralisé partout.
   return null;
 }
@@ -3938,19 +3079,12 @@ function SvTabIntro({
 // ── SvCahierLink : passerelle outil → Cahier de Science ──
 // Usage: <SvCahierLink chapitre="mo" titre="Matière Organique" />
 // Génère un encart accent-light avec lien vers cahier.html#chap-<chapitre>
-function SvCahierLink({
-  chapitre,
-  titre
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cahier-link"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-icon"
-  }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("span", {
-    className: "sv-cahier-link-text"
-  }, "Pour comprendre les concepts en profondeur :"), /*#__PURE__*/React.createElement("a", {
-    href: 'cahier.html#chap-' + chapitre
-  }, "Cahier de Science \u2192 ", titre));
+function SvCahierLink({ chapitre, titre }) {
+  return <div className="sv-cahier-link">
+    <span className="sv-cahier-link-icon">📚</span>
+    <span className="sv-cahier-link-text">Pour comprendre les concepts en profondeur :</span>
+    <a href={'cahier.html#chap-' + chapitre}>Cahier de Science → {titre}</a>
+  </div>;
 }
 
 // ── SvCascadeGrid : projection visuelle d'un sujet sur les 4 cascades ──
@@ -3965,77 +3099,44 @@ function SvCahierLink({
 //     }}
 //   />
 // Chaque item : {niveau: 'N1'|'T2'|'€0'|'E0', label: 'texte court', impact?: 'pos'|'neg'|'neu', detail?: '...'}
-function SvCascadeGrid({
-  titre,
-  sujet,
-  projection
-}) {
+function SvCascadeGrid({ titre, sujet, projection }) {
   if (!projection) return null;
-  const AXES = [{
-    key: 'biophysique',
-    icon: '🧱',
-    label: 'Biophysique',
-    color: 'var(--success)'
-  }, {
-    key: 'temporelle',
-    icon: '⏱️',
-    label: 'Temporelle',
-    color: 'var(--accent)'
-  }, {
-    key: 'couts',
-    icon: '💶',
-    label: 'Coûts cachés',
-    color: 'var(--warning)'
-  }, {
-    key: 'consequences',
-    icon: '🌍',
-    label: 'Conséquences',
-    color: 'var(--purple)'
-  }];
+  const AXES = [
+    { key: 'biophysique',  icon: '🧱', label: 'Biophysique',  color: 'var(--success)'  },
+    { key: 'temporelle',   icon: '⏱️', label: 'Temporelle',   color: 'var(--accent)'   },
+    { key: 'couts',        icon: '💶', label: 'Coûts cachés', color: 'var(--warning)'  },
+    { key: 'consequences', icon: '🌍', label: 'Conséquences', color: 'var(--purple)'   },
+  ];
   const renderBadge = (it, axeColor) => {
-    const impactColor = it.impact === 'neg' ? 'var(--danger)' : it.impact === 'pos' ? 'var(--success)' : axeColor;
-    return /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge",
-      style: {
-        borderLeftColor: impactColor,
-        color: impactColor
-      },
-      title: it.detail || it.niveau + ' — ' + (it.label || '')
-    }, /*#__PURE__*/React.createElement("strong", null, it.niveau), it.label && /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-badge-label"
-    }, it.label));
+    const impactColor = it.impact === 'neg' ? 'var(--danger)' :
+                        it.impact === 'pos' ? 'var(--success)' : axeColor;
+    return <span className="sv-cascade-badge" style={{borderLeftColor: impactColor, color: impactColor}}
+      title={it.detail || (it.niveau + ' — ' + (it.label || ''))}>
+      <strong>{it.niveau}</strong>
+      {it.label && <span className="sv-cascade-badge-label">{it.label}</span>}
+    </span>;
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid"
-  }, (titre || sujet) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-head"
-  }, titre && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-title"
-  }, titre), sujet && /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-sujet"
-  }, sujet)), /*#__PURE__*/React.createElement("div", {
-    className: "sv-cascade-grid-rows"
-  }, AXES.map(ax => {
-    const items = projection[ax.key];
-    if (!items || !items.length) return null;
-    return /*#__PURE__*/React.createElement("div", {
-      key: ax.key,
-      className: "sv-cascade-row"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-head",
-      style: {
-        color: ax.color
-      }
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-icon"
-    }, ax.icon), /*#__PURE__*/React.createElement("span", {
-      className: "sv-cascade-row-label"
-    }, ax.label)), /*#__PURE__*/React.createElement("div", {
-      className: "sv-cascade-row-items"
-    }, items.map((it, i) => /*#__PURE__*/React.createElement(React.Fragment, {
-      key: i
-    }, renderBadge(it, ax.color)))));
-  })));
+  return <div className="sv-cascade-grid">
+    {(titre || sujet) && <div className="sv-cascade-grid-head">
+      {titre && <div className="sv-cascade-grid-title">{titre}</div>}
+      {sujet && <div className="sv-cascade-grid-sujet">{sujet}</div>}
+    </div>}
+    <div className="sv-cascade-grid-rows">
+      {AXES.map(ax => {
+        const items = projection[ax.key];
+        if (!items || !items.length) return null;
+        return <div key={ax.key} className="sv-cascade-row">
+          <div className="sv-cascade-row-head" style={{color: ax.color}}>
+            <span className="sv-cascade-row-icon">{ax.icon}</span>
+            <span className="sv-cascade-row-label">{ax.label}</span>
+          </div>
+          <div className="sv-cascade-row-items">
+            {items.map((it, i) => <React.Fragment key={i}>{renderBadge(it, ax.color)}</React.Fragment>)}
+          </div>
+        </div>;
+      })}
+    </div>
+  </div>;
 }
 
 // ── SvComprendre : onglet Comprendre unifié, piloté par DATA.comprendre ──
@@ -4052,91 +3153,56 @@ function SvCascadeGrid({
 //       { type: 'richtext', titre, icon?, defaultOpen?, contenu },
 //     ]
 //   }
-function SvComprendreFiche({
-  fiche
-}) {
+function SvComprendreFiche({ fiche }) {
   // Délègue à SvFicheCard (lecteur unifié), mode sans header car déjà
   // wrappé par SvComprendreSection (accordion de l'onglet Comprendre).
   if (!fiche) return null;
-  return /*#__PURE__*/React.createElement(SvFicheCard, {
-    fiche: fiche,
-    showHeader: false,
-    defaultOpen: true
-  });
+  return <SvFicheCard fiche={fiche} showHeader={false} defaultOpen={true} />;
 }
-function SvComprendreCards({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: items
-  });
+
+function SvComprendreCards({ items }) {
+  return <SvConceptCardList cards={items} />;
 }
-function SvComprendreTerms({
-  items
-}) {
-  return /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: items
-  });
+
+function SvComprendreTerms({ items }) {
+  return <SvGlossary terms={items} />;
 }
-function SvComprendreSection({
-  section,
-  index
-}) {
+
+function SvComprendreSection({ section, index }) {
   const icon = section.icon || '🔬';
   // Badge : numéro d'ordre si index fourni, sinon 1er caractère du type (F/C/T/R/K)
-  const badge = index !== undefined ? String(index + 1) : (section.type || '?').charAt(0).toUpperCase();
+  const badge = index !== undefined ? String(index + 1)
+    : (section.type || '?').charAt(0).toUpperCase();
   // Couleur par type (cohérent avec la charte)
   const colorByType = {
-    'fiche': 'var(--info)',
-    'cards': 'var(--purple, #7c3aed)',
-    'terms': 'var(--success)',
-    'cahier': 'var(--warning)',
-    'richtext': 'var(--color-text-muted)'
+    'fiche':    'var(--info)',
+    'cards':    'var(--purple, #7c3aed)',
+    'terms':    'var(--success)',
+    'cahier':   'var(--warning)',
+    'richtext': 'var(--color-text-muted)',
   };
   const color = colorByType[section.type] || 'var(--accent)';
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: badge,
-    icon: icon,
-    color: color,
-    title: section.titre,
-    subtitle: section.type
-  }, section.type === 'fiche' && /*#__PURE__*/React.createElement(SvComprendreFiche, {
-    fiche: section.fiche
-  }), section.type === 'cards' && /*#__PURE__*/React.createElement(SvComprendreCards, {
-    items: section.items
-  }), section.type === 'terms' && /*#__PURE__*/React.createElement(SvComprendreTerms, {
-    items: section.items
-  }), (section.type === 'cahier' || section.type === 'richtext') && /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvRichText, {
-    text: section.contenu,
-    autoGloss: true
-  })));
+  return <SvAccordionItem
+    badge={badge} icon={icon} color={color}
+    title={section.titre} subtitle={section.type}>
+    {section.type === 'fiche' && <SvComprendreFiche fiche={section.fiche} />}
+    {section.type === 'cards' && <SvComprendreCards items={section.items} />}
+    {section.type === 'terms' && <SvComprendreTerms items={section.items} />}
+    {(section.type === 'cahier' || section.type === 'richtext') && <div className="sv-richtext">
+      <SvRichText text={section.contenu} autoGloss />
+    </div>}
+  </SvAccordionItem>;
 }
-function SvComprendre({
-  data
-}) {
-  if (!data) return /*#__PURE__*/React.createElement("div", {
-    className: "sv-callout"
-  }, "Contenu p\xE9dagogique non d\xE9fini pour cette page.");
+
+function SvComprendre({ data }) {
+  if (!data) return <div className="sv-callout">Contenu pédagogique non défini pour cette page.</div>;
   const sections = data.sections || [];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, data.cahier_link && /*#__PURE__*/React.createElement(SvCahierLink, {
-    chapitre: data.cahier_link.chapitre,
-    titre: data.cahier_link.titre
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-      marginTop: '0.75rem'
-    }
-  }, sections.map((s, i) => /*#__PURE__*/React.createElement(SvComprendreSection, {
-    key: i,
-    section: s,
-    index: i
-  }))));
+  return <div className="sv-text-column">
+    {data.cahier_link && <SvCahierLink chapitre={data.cahier_link.chapitre} titre={data.cahier_link.titre} />}
+    <div style={{display:'flex',flexDirection:'column',gap:'6px',marginTop:'0.75rem'}}>
+      {sections.map((s, i) => <SvComprendreSection key={i} section={s} index={i} />)}
+    </div>
+  </div>;
 }
 
 // ── SvFicheCard : lecteur unifié de fiche (cahier + onglets Comprendre) ──
@@ -4156,17 +3222,9 @@ function SvComprendre({
 //   - setOpenSecKey
 //   - showHeader  : afficher SvAccordionItem wrap (défaut true). false = render
 //                   pour une seule fiche déjà dépliée par le contexte (ex: tab Comprendre).
-function SvFicheCard({
-  fiche,
-  color,
-  defaultOpen,
-  open,
-  onToggle,
-  openSecKey,
-  setOpenSecKey,
-  showHeader,
-  showMeta
-}) {
+function SvFicheCard({ fiche, color, defaultOpen,
+                       open, onToggle, openSecKey, setOpenSecKey,
+                       showHeader, showMeta }) {
   const _showHeader = showHeader !== false;
   // showMeta=false : masque le tag de type + le label « SECTIONS (N) » — utilisé
   // quand l'appelant affiche déjà ces infos dans son propre en-tête (onglet Fiches).
@@ -4176,12 +3234,13 @@ function SvFicheCard({
   // Etat local en mode autonome
   const [openLocal, setOpenLocal] = React.useState(defaultOpen !== false);
   const [secKeyLocal, setSecKeyLocal] = React.useState(null);
-  const isOpen = typeof open === 'boolean' ? open : openLocal;
+  const isOpen = (typeof open === 'boolean') ? open : openLocal;
   const onToggleEff = onToggle || (() => setOpenLocal(v => !v));
-  const secKey = openSecKey !== undefined ? openSecKey : secKeyLocal;
+  const secKey = (openSecKey !== undefined) ? openSecKey : secKeyLocal;
   const setSecKey = setOpenSecKey || setSecKeyLocal;
-  const labels = typeof FICHE_TYPE_LABELS !== 'undefined' ? FICHE_TYPE_LABELS : {};
-  const colors = typeof FICHE_TYPE_COLORS !== 'undefined' ? FICHE_TYPE_COLORS : {};
+
+  const labels = (typeof FICHE_TYPE_LABELS !== 'undefined') ? FICHE_TYPE_LABELS : {};
+  const colors = (typeof FICHE_TYPE_COLORS !== 'undefined') ? FICHE_TYPE_COLORS : {};
   const accentColor = color || colors[f.type] || 'var(--info)';
   const partial = f.statut === 'integre_partiel';
 
@@ -4198,146 +3257,85 @@ function SvFicheCard({
     const m = t.match(/^(\d+(?:\.\d+)*)\.?\s+(.*)$/);
     const numTitle = m ? m[1] : null;
     const rest = m ? m[2] : t;
-    let num = '',
-      lvl = 1,
-      title = rest;
-    if (s.type === 'intro') {
-      lvl = 1;
-      title = rest || 'Introduction';
-    } else if (s.type === 'conclusion') {
-      lvl = 1;
-      title = rest || 'Conclusion';
-    } else if (s.type === 'body_h2') {
-      lvl = 2;
-      num = numTitle || '';
-    } else {
-      lvl = 1;
-      mainN += 1;
-      num = numTitle || String(mainN);
-    }
-    return Object.assign({}, s, {
-      _num: num,
-      _lvl: lvl,
-      _title: title
-    });
+    let num = '', lvl = 1, title = rest;
+    if (s.type === 'intro')           { lvl = 1; title = rest || 'Introduction'; }
+    else if (s.type === 'conclusion') { lvl = 1; title = rest || 'Conclusion'; }
+    else if (s.type === 'body_h2')    { lvl = 2; num = numTitle || ''; }
+    else                              { lvl = 1; mainN += 1; num = numTitle || String(mainN); }
+    return Object.assign({}, s, { _num: num, _lvl: lvl, _title: title });
   });
-  const body = /*#__PURE__*/React.createElement("div", {
-    className: "sv-text-column"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0.5rem 0'
-    }
-  }, (_showMeta || partial) && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: 'flex',
-      gap: '0.5rem',
-      marginBottom: '0.75rem',
-      fontSize: 'var(--font-xs)',
-      flexWrap: 'wrap'
-    }
-  }, _showMeta && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-info"
-  }, labels[f.type] || f.type), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), (() => {
-    const hasAnyContent = navSecs.some(s => s.blocks && s.blocks.length > 0 || s.contexte_sci);
-    if (hasAnyContent) {
-      return /*#__PURE__*/React.createElement(SvSectionsNav, {
-        multi: true,
-        sections: navSecs,
-        label: _showMeta ? 'SECTIONS (' + navSecs.length + ')' : null,
-        openKey: secKey,
-        onToggle: setSecKey,
-        getKey: (s, i) => 'fsec-' + f.id + '-' + i,
-        getNumber: s => s._num,
-        getTitle: s => s._title,
-        getLevel: s => s._lvl,
-        getDotColor: s => s.blocks && s.blocks.length > 0 ? 'var(--success)' : s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)',
-        hasContent: s => s.blocks && s.blocks.length > 0 || !!s.contexte_sci,
-        renderContent: s => {
-          if (s.blocks && s.blocks.length > 0) return /*#__PURE__*/React.createElement(SvFicheBlocks, {
-            blocks: s.blocks
-          });
-          if (s.contexte_sci) return /*#__PURE__*/React.createElement(SvRichText, {
-            text: s.contexte_sci,
-            autoGloss: true
-          });
-          return /*#__PURE__*/React.createElement("div", {
-            style: {
-              color: 'var(--color-text-muted)',
-              fontStyle: 'italic'
-            }
-          }, "Section vide.");
+
+  const body = <div className="sv-text-column">
+    <div style={{padding:'0.5rem 0'}}>
+      {(_showMeta || partial) && <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.75rem',fontSize:'var(--font-xs)',flexWrap:'wrap'}}>
+        {_showMeta && <span className="sv-tag sv-tag-info">{labels[f.type] || f.type}</span>}
+        {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+      </div>}
+      {(() => {
+        const hasAnyContent = navSecs.some(s =>
+          (s.blocks && s.blocks.length > 0) || s.contexte_sci);
+        if (hasAnyContent) {
+          return <SvSectionsNav multi
+            sections={navSecs}
+            label={_showMeta ? ('SECTIONS (' + navSecs.length + ')') : null}
+            openKey={secKey}
+            onToggle={setSecKey}
+            getKey={(s, i) => 'fsec-' + f.id + '-' + i}
+            getNumber={s => s._num}
+            getTitle={s => s._title}
+            getLevel={s => s._lvl}
+            getDotColor={s => s.blocks && s.blocks.length > 0 ? 'var(--success)'
+                              : (s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)')}
+            hasContent={s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci}
+            renderContent={s => {
+              if (s.blocks && s.blocks.length > 0) return <SvFicheBlocks blocks={s.blocks} />;
+              if (s.contexte_sci) return <SvRichText text={s.contexte_sci} autoGloss />;
+              return <div style={{color:'var(--color-text-muted)',fontStyle:'italic'}}>Section vide.</div>;
+            }}
+          />;
         }
-      });
-    }
-    if (f.contenu_integre) {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 'var(--font-xs)',
-          color: 'var(--color-text-muted)',
-          marginBottom: '0.75rem',
-          fontStyle: 'italic',
-          padding: '0.5rem 0.75rem',
-          background: 'var(--color-bg-muted)',
-          borderRadius: '4px'
+        if (f.contenu_integre) {
+          return <div>
+            <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginBottom:'0.75rem',fontStyle:'italic',padding:'0.5rem 0.75rem',background:'var(--color-bg-muted)',borderRadius:'4px'}}>
+              ⚠ Affichage monolithique — découpage par sections en attente de cycle Jenni MAJ.
+            </div>
+            <SvRichText text={f.contenu_integre} autoGloss />
+          </div>;
         }
-      }, "\u26A0 Affichage monolithique \u2014 d\xE9coupage par sections en attente de cycle Jenni MAJ."), /*#__PURE__*/React.createElement(SvRichText, {
-        text: f.contenu_integre,
-        autoGloss: true
-      }));
-    }
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        color: 'var(--color-text-muted)',
-        fontStyle: 'italic',
-        padding: '1rem 0'
-      }
-    }, "Contenu non disponible \u2014 fiche en cours d'int\xE9gration.");
-  })(), f.pedago_links && f.pedago_links.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')',
-    icon: "\uD83E\uDDED",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvConceptCardList, {
-    cards: f.pedago_links
-  }))), f.glossaire && f.glossaire.length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Glossaire (' + f.glossaire.length + ')',
-    icon: "\uD83D\uDCD6",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvGlossary, {
-    terms: f.glossaire
-  }))), f.refs && f.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs",
-    style: {
-      marginTop: '1.25rem'
-    }
-  }, /*#__PURE__*/React.createElement(SvCollapse, {
-    title: 'Sources (' + f.refs.length + ')',
-    icon: "\uD83D\uDCDA",
-    defaultOpen: false
-  }, /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: f.refs
-  })))));
+        return <div style={{color:'var(--color-text-muted)',fontStyle:'italic',padding:'1rem 0'}}>
+          Contenu non disponible — fiche en cours d'intégration.
+        </div>;
+      })()}
+      {f.pedago_links && f.pedago_links.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Pour aller plus loin — Concept Cards (' + f.pedago_links.length + ')'} icon="🧭" defaultOpen={false}>
+          <SvConceptCardList cards={f.pedago_links} />
+        </SvCollapse>
+      </div>}
+      {f.glossaire && f.glossaire.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Glossaire (' + f.glossaire.length + ')'} icon="📖" defaultOpen={false}>
+          <SvGlossary terms={f.glossaire} />
+        </SvCollapse>
+      </div>}
+      {f.refs && f.refs.length > 0 && <div className="sv-fiche-view-refs" style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Sources (' + f.refs.length + ')'} icon="📚" defaultOpen={false}>
+          <SvSourceList sources={f.refs} />
+        </SvCollapse>
+      </div>}
+    </div>
+  </div>;
+
   if (!_showHeader) return body;
-  return /*#__PURE__*/React.createElement(SvAccordionItem, {
-    badge: '#' + f.id,
-    color: accentColor,
-    title: f.titre,
-    subtitle: partial ? 'Intégration partielle' : null,
-    open: isOpen,
-    onToggle: onToggleEff,
-    contentStyle: {
-      padding: '1rem 0 1.5rem'
-    }
-  }, body);
+
+  return <SvAccordionItem
+    badge={'#' + f.id}
+    color={accentColor}
+    title={f.titre}
+    subtitle={partial ? 'Intégration partielle' : null}
+    open={isOpen}
+    onToggle={onToggleEff}
+    contentStyle={{padding:'1rem 0 1.5rem'}}>
+    {body}
+  </SvAccordionItem>;
 }
 
 // ── SvFicheView : rendu d'une fiche / document intégré (sections structurées DB) ──
@@ -4354,118 +3352,74 @@ function SvFicheCard({
 //   - showTypeTag    : afficher le badge type (défaut true)
 //   - numberSections : préfixer les sections type='section' par leur n° (1., 2., ...) — défaut true
 //   - onCardRef      : callback(cardId) pour les liens Card #N
-function SvFicheBlock({
-  block
-}) {
+function SvFicheBlock({ block }) {
   if (!block || !block.text) return null;
   if (block.kind === 'h3') {
-    return /*#__PURE__*/React.createElement("h3", {
-      className: "sv-section-title sv-section-title-h3"
-    }, block.text);
+    return <h3 className="sv-section-title sv-section-title-h3">{block.text}</h3>;
   }
   if (block.kind === 'bullet') {
-    return /*#__PURE__*/React.createElement("li", null, block.text);
+    return <li>{block.text}</li>;
   }
   // 'richtext' (section retour Jenni en un bloc) ou 'p' legacy -> SvRichText
   // (tableaux markdown, gras, italic, sous-titres). SvRichText est hoiste.
-  return /*#__PURE__*/React.createElement(SvRichText, {
-    text: block.text,
-    autoGloss: true
-  });
+  return <SvRichText text={block.text} autoGloss />;
 }
 
 // SvFicheBlocks : rend la liste de blocks (para / h3 / bullet) sans titre de section.
 // Regroupe les bullets consecutifs dans un <ul>.
-function SvFicheBlocks({
-  blocks
-}) {
+function SvFicheBlocks({ blocks }) {
   if (!blocks || !blocks.length) return null;
   const groups = [];
   let buf = null;
   for (const b of blocks) {
     if (b.kind === 'bullet') {
-      if (!buf) {
-        buf = {
-          kind: 'ul',
-          items: []
-        };
-        groups.push(buf);
-      }
+      if (!buf) { buf = { kind: 'ul', items: [] }; groups.push(buf); }
       buf.items.push(b);
     } else {
       buf = null;
       groups.push(b);
     }
   }
-  return /*#__PURE__*/React.createElement(React.Fragment, null, groups.map((g, i) => g.kind === 'ul' ? /*#__PURE__*/React.createElement("ul", {
-    key: i,
-    className: "sv-bullet-list"
-  }, g.items.map((b, j) => /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: j,
-    block: b
-  }))) : /*#__PURE__*/React.createElement(SvFicheBlock, {
-    key: i,
-    block: g
-  })));
+  return <>{groups.map((g, i) => g.kind === 'ul'
+    ? <ul key={i} className="sv-bullet-list">{g.items.map((b, j) => <SvFicheBlock key={j} block={b} />)}</ul>
+    : <SvFicheBlock key={i} block={g} />
+  )}</>;
 }
-function SvFicheSection({
-  section
-}) {
+
+function SvFicheSection({ section }) {
   if (!section || !section.blocks || section.blocks.length === 0) return null;
-  return /*#__PURE__*/React.createElement("section", {
-    className: "sv-section-block"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "sv-section-title sv-section-title-h2"
-  }, section.titre), /*#__PURE__*/React.createElement("div", {
-    className: "sv-richtext"
-  }, /*#__PURE__*/React.createElement(SvFicheBlocks, {
-    blocks: section.blocks
-  })));
+  return <section className="sv-section-block">
+    <h2 className="sv-section-title sv-section-title-h2">{section.titre}</h2>
+    <div className="sv-richtext">
+      <SvFicheBlocks blocks={section.blocks} />
+    </div>
+  </section>;
 }
-function SvFicheView({
-  fiche,
-  typeLabel,
-  typeVariant,
-  showTypeTag,
-  numberSections,
-  onCardRef
-}) {
+
+function SvFicheView({ fiche, typeLabel, typeVariant, showTypeTag, numberSections, onCardRef }) {
   if (!fiche) return null;
   const partial = fiche.statut === 'integre_partiel';
   const sections = fiche.sections || [];
   const variant = typeVariant || 'info';
   const showTag = showTypeTag !== false;
   const numSec = numberSections !== false;
-  const hasTagRow = showTag && typeLabel || partial;
+  const hasTagRow = (showTag && typeLabel) || partial;
   let n = 0;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view"
-  }, hasTagRow && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-tags"
-  }, showTag && typeLabel && /*#__PURE__*/React.createElement("span", {
-    className: 'sv-tag sv-tag-' + variant
-  }, typeLabel), partial && /*#__PURE__*/React.createElement("span", {
-    className: "sv-tag sv-tag-warning"
-  }, "Int\xE9gration partielle")), sections.map(sec => {
-    let displayTitre = sec.titre;
-    if (numSec && sec.type === 'section') {
-      n += 1;
-      displayTitre = n + '. ' + sec.titre;
-    }
-    return /*#__PURE__*/React.createElement(SvFicheSection, {
-      key: sec.ordre,
-      section: {
-        ...sec,
-        titre: displayTitre
-      }
-    });
-  }), fiche.refs && fiche.refs.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "sv-fiche-view-refs"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "sv-section-label"
-  }, "\uD83D\uDCDA Sources (", fiche.refs.length, ")"), /*#__PURE__*/React.createElement(SvSourceList, {
-    sources: fiche.refs
-  })));
+  return <div className="sv-fiche-view">
+    {hasTagRow && <div className="sv-fiche-view-tags">
+      {showTag && typeLabel && <span className={'sv-tag sv-tag-' + variant}>{typeLabel}</span>}
+      {partial && <span className="sv-tag sv-tag-warning">Intégration partielle</span>}
+    </div>}
+    {sections.map(sec => {
+      let displayTitre = sec.titre;
+      if (numSec && sec.type === 'section') { n += 1; displayTitre = n + '. ' + sec.titre; }
+      return <SvFicheSection key={sec.ordre} section={{ ...sec, titre: displayTitre }} />;
+    })}
+    {fiche.refs && fiche.refs.length > 0 && <div className="sv-fiche-view-refs">
+      <div className="sv-section-label">📚 Sources ({fiche.refs.length})</div>
+      <SvSourceList sources={fiche.refs} />
+    </div>}
+  </div>;
 }
 
 // ── SvSectionsNav : navigation compacte de sections (accordeon exclusif) ──
@@ -4484,83 +3438,55 @@ function SvFicheView({
 //   - getDotTitle   : fn(section, index) -> tooltip (optionnel)
 //   - hasContent    : fn(section, index) -> bool (sinon: pas de chevron, pas cliquable)
 //   - renderContent : fn(section, index) -> ReactNode
-function SvSectionsNav({
-  sections,
-  openKey,
-  onToggle,
-  label,
-  multi,
-  getKey,
-  getNumber,
-  getTitle,
-  getDotColor,
-  getDotTitle,
-  getLevel,
-  hasContent,
-  renderContent
-}) {
+function SvSectionsNav({ sections, openKey, onToggle, label, multi,
+                         getKey, getNumber, getTitle, getDotColor, getDotTitle,
+                         getLevel, hasContent, renderContent }) {
   if (!sections || !sections.length) return null;
-  const kKey = getKey || ((s, i) => 'sec-' + i);
+  const kKey = getKey    || ((s, i) => 'sec-' + i);
   const kNum = getNumber || (() => '');
-  const kTit = getTitle || (s => s.titre || '');
+  const kTit = getTitle  || (s => s.titre || '');
   const kDot = getDotColor || (() => 'var(--accent)');
   const kDotT = getDotTitle || (() => '');
-  const kLvl = getLevel || (() => 1); // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
-  const hasLevels = typeof getLevel === 'function'; // hierarchie explicite -> style H1
+  const kLvl = getLevel  || (() => 1);   // 1 = niveau racine (H1) ; 2 = sous-section (H2) indentee
+  const hasLevels = typeof getLevel === 'function';  // hierarchie explicite -> style H1
   const kHas = hasContent || (() => true);
   const kRen = renderContent || (() => null);
   const [openSet, setOpenSet] = React.useState(() => new Set());
   const expKeys = sections.map((s, i) => kHas(s, i) ? kKey(s, i) : null).filter(k => k !== null);
-  const isOpen = multi ? key => openSet.has(key) : key => openKey === key;
-  const toggle = multi ? key => setOpenSet(prev => {
-    const n = new Set(prev);
-    n.has(key) ? n.delete(key) : n.add(key);
-    return n;
-  }) : key => onToggle(openKey === key ? null : key);
+  const isOpen = multi ? (key => openSet.has(key)) : (key => openKey === key);
+  const toggle = multi
+    ? (key => setOpenSet(prev => { const n = new Set(prev); n.has(key) ? n.delete(key) : n.add(key); return n; }))
+    : (key => onToggle(openKey === key ? null : key));
   const allOpen = multi && expKeys.length > 0 && expKeys.every(k => openSet.has(k));
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav"
-  }, (label || multi) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-header"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-sections-nav-label"
-  }, label), multi && expKeys.length > 0 && /*#__PURE__*/React.createElement("button", {
-    type: "button",
-    className: "sv-sections-toggle-all",
-    onClick: () => setOpenSet(allOpen ? new Set() : new Set(expKeys))
-  }, allOpen ? '⊖ Tout replier' : '⊕ Tout déployer')), sections.map((s, i) => {
-    const key = kKey(s, i);
-    const open = isOpen(key);
-    const expandable = kHas(s, i);
-    const level = kLvl(s, i) || 1;
-    // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
-    // principales — meme traitement visuel quelle que soit l'expansion.
-    const h1 = hasLevels && level === 1;
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "sv-sections-nav-row-wrap",
-      style: level > 1 ? {
-        paddingLeft: (level - 1) * 1.25 + 'rem'
-      } : undefined
-    }, /*#__PURE__*/React.createElement("div", {
-      className: 'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : ''),
-      onClick: expandable ? () => toggle(key) : undefined
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-dot",
-      style: {
-        background: kDot(s, i)
-      },
-      title: kDotT(s, i)
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-num"
-    }, kNum(s, i)), /*#__PURE__*/React.createElement("span", {
-      className: "sv-sections-nav-title"
-    }, kTit(s, i)), expandable && /*#__PURE__*/React.createElement("span", {
-      className: 'sv-sections-nav-chev' + (open ? ' open' : '')
-    }, "\u25B8")), open && expandable && /*#__PURE__*/React.createElement("div", {
-      className: "sv-sections-nav-content"
-    }, kRen(s, i)));
-  }));
+  return <div className="sv-sections-nav">
+    {(label || multi) && <div className="sv-sections-nav-header">
+      {label && <div className="sv-sections-nav-label">{label}</div>}
+      {multi && expKeys.length > 0 && <button type="button" className="sv-sections-toggle-all"
+        onClick={() => setOpenSet(allOpen ? new Set() : new Set(expKeys))}>
+        {allOpen ? '⊖ Tout replier' : '⊕ Tout déployer'}
+      </button>}
+    </div>}
+    {sections.map((s, i) => {
+      const key = kKey(s, i);
+      const open = isOpen(key);
+      const expandable = kHas(s, i);
+      const level = kLvl(s, i) || 1;
+      // Niveau racine (H1) : Introduction/Conclusion, chapitres, sections
+      // principales — meme traitement visuel quelle que soit l'expansion.
+      const h1 = hasLevels && level === 1;
+      return <div key={i} className="sv-sections-nav-row-wrap"
+        style={level > 1 ? {paddingLeft: ((level - 1) * 1.25) + 'rem'} : undefined}>
+        <div className={'sv-sections-nav-row' + (expandable ? ' sv-sections-nav-row-expandable' : '') + (h1 ? ' sv-sections-nav-row-h1' : '')}
+             onClick={expandable ? () => toggle(key) : undefined}>
+          <span className="sv-sections-nav-dot" style={{background: kDot(s, i)}} title={kDotT(s, i)}></span>
+          <span className="sv-sections-nav-num">{kNum(s, i)}</span>
+          <span className="sv-sections-nav-title">{kTit(s, i)}</span>
+          {expandable && <span className={'sv-sections-nav-chev' + (open ? ' open' : '')}>▸</span>}
+        </div>
+        {open && expandable && <div className="sv-sections-nav-content">{kRen(s, i)}</div>}
+      </div>;
+    })}
+  </div>;
 }
 
 // SvNavList — liste de navigation sélectionnable (modèle master-détail).
@@ -4571,72 +3497,40 @@ function SvSectionsNav({
 //   getSub (ligne 2, ellipsée), getMeta (badge droite), label, empty.
 // colorCode : masque la pastille et colore le code (numéro) avec getDotColor —
 // alignement plus net du titre (utilisé par Concept Cards).
-function SvNavList({
-  items,
-  isActive,
-  onSelect,
-  getKey,
-  getCode,
-  getDotColor,
-  getTitle,
-  getSub,
-  getMeta,
-  label,
-  empty,
-  colorCode,
-  frameColor
-}) {
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist"
-  }, label && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-label"
-  }, label), (!items || !items.length) && /*#__PURE__*/React.createElement("div", {
-    className: "sv-navlist-empty"
-  }, empty || 'Aucun élément.'), (items || []).map((it, i) => {
-    const active = isActive ? isActive(it, i) : false;
-    const sub = getSub ? getSub(it, i) : null;
-    const dot = getDotColor ? getDotColor(it, i) : null;
-    const code = getCode ? getCode(it, i) : null;
-    const meta = getMeta ? getMeta(it, i) : null;
-    const tinted = (colorCode || frameColor) && dot;
-    const codeStyle = frameColor && dot ? {
-      color: dot,
-      fontSize: 'var(--font-sm)',
-      fontWeight: 700,
-      fontFamily: 'inherit'
-    } : colorCode && dot ? {
-      color: dot
-    } : undefined;
-    const itemStyle = frameColor && dot && active ? {
-      borderColor: dot,
-      boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'
-    } : undefined;
-    return /*#__PURE__*/React.createElement("div", {
-      key: getKey ? getKey(it, i) : i,
-      onClick: () => onSelect && onSelect(it, i),
-      className: 'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : ''),
-      style: itemStyle
-    }, dot && !tinted && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-dot",
-      style: {
-        background: dot
-      }
-    }), code && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-code",
-      style: codeStyle
-    }, code), /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-main"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-title"
-    }, getTitle ? getTitle(it, i) : ''), sub && /*#__PURE__*/React.createElement("div", {
-      className: "sv-navlist-sub"
-    }, sub)), meta && /*#__PURE__*/React.createElement("span", {
-      className: "sv-navlist-meta"
-    }, meta));
-  }));
+function SvNavList({ items, isActive, onSelect, getKey, getCode, getDotColor,
+                    getTitle, getSub, getMeta, label, empty, colorCode, frameColor }) {
+  return <div className="sv-navlist">
+    {label && <div className="sv-navlist-label">{label}</div>}
+    {(!items || !items.length) && <div className="sv-navlist-empty">{empty || 'Aucun élément.'}</div>}
+    {(items || []).map((it, i) => {
+      const active = isActive ? isActive(it, i) : false;
+      const sub  = getSub      ? getSub(it, i)      : null;
+      const dot  = getDotColor ? getDotColor(it, i) : null;
+      const code = getCode     ? getCode(it, i)     : null;
+      const meta = getMeta     ? getMeta(it, i)     : null;
+      const tinted = (colorCode || frameColor) && dot;
+      const codeStyle = (frameColor && dot)
+        ? {color: dot, fontSize: 'var(--font-sm)', fontWeight: 700, fontFamily: 'inherit'}
+        : ((colorCode && dot) ? {color: dot} : undefined);
+      const itemStyle = (frameColor && dot && active) ? {borderColor: dot, boxShadow: '0 0 0 1px ' + dot + ', var(--shadow)'} : undefined;
+      return <div key={getKey ? getKey(it, i) : i} onClick={() => onSelect && onSelect(it, i)}
+        className={'sv-navlist-item' + (active ? ' active' : '') + (sub ? ' has-sub' : '')}
+        style={itemStyle}>
+        {dot && !tinted && <span className="sv-navlist-dot" style={{background: dot}}></span>}
+        {code && <span className="sv-navlist-code" style={codeStyle}>{code}</span>}
+        <div className="sv-navlist-main">
+          <div className="sv-navlist-title">{getTitle ? getTitle(it, i) : ''}</div>
+          {sub && <div className="sv-navlist-sub">{sub}</div>}
+        </div>
+        {meta && <span className="sv-navlist-meta">{meta}</span>}
+      </div>;
+    })}
+  </div>;
 }
+
+
 </script>
-<script>
+<script type="text/babel">
 // ── Page tests_terrain — base de depart ──
 // 20 tests terrain organises par dimension, filtrables, branches sur SvTestCard.
 // Source : table terrain_tests (DB), liens concept_cards via concept_card_tests.
@@ -4644,114 +3538,74 @@ function SvNavList({
 function PratiqueView() {
   const [search, setSearch] = React.useState('');
   const [dimFilter, setDimFilter] = React.useState(null);
-  const tests = DATA && DATA.tests || [];
-  const dims = DATA && DATA.dimensions || [];
+
+  const tests = (DATA && DATA.tests) || [];
+  const dims = (DATA && DATA.dimensions) || [];
+
   const filtered = tests.filter(t => {
     if (dimFilter !== null && t.dimension_id !== dimFilter) return false;
     if (search) {
       const s = search.toLowerCase();
-      return (t.title || '').toLowerCase().includes(s) || (t.description || '').toLowerCase().includes(s) || (t.code || '').toLowerCase().includes(s);
+      return (t.title || '').toLowerCase().includes(s)
+          || (t.description || '').toLowerCase().includes(s)
+          || (t.code || '').toLowerCase().includes(s);
     }
     return true;
   });
-  return /*#__PURE__*/React.createElement("div", {
-    className: "tt-page"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tt-filters"
-  }, /*#__PURE__*/React.createElement("input", {
-    className: "sv-input",
-    placeholder: "Rechercher : bocal, infiltration, vers...",
-    value: search,
-    onChange: e => setSearch(e.target.value),
-    style: {
-      minWidth: '260px',
-      flex: '1 1 260px'
-    }
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "tt-filter-count"
-  }, filtered.length, " / ", tests.length, " test", tests.length > 1 ? 's' : '')), /*#__PURE__*/React.createElement("div", {
-    className: "tt-dim-pills"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "tt-dim-pill" + (dimFilter === null ? " active" : ""),
-    onClick: () => setDimFilter(null)
-  }, "Toutes"), dims.map(d => /*#__PURE__*/React.createElement("button", {
-    key: d.id,
-    className: "tt-dim-pill" + (dimFilter === d.id ? " active" : ""),
-    style: dimFilter === d.id && d.couleur ? {
-      background: d.couleur,
-      borderColor: d.couleur
-    } : undefined,
-    onClick: () => setDimFilter(d.id)
-  }, d.nom))), filtered.length === 0 ? /*#__PURE__*/React.createElement("div", {
-    className: "tt-empty"
-  }, "Aucun test ne correspond aux filtres.") : /*#__PURE__*/React.createElement("div", {
-    className: "tt-grid"
-  }, filtered.map(t => /*#__PURE__*/React.createElement(SvTestCard, {
-    key: t.id,
-    test: t
-  }))));
+
+  return <div className="tt-page">
+    <div className="tt-filters">
+      <input className="sv-input" placeholder="Rechercher : bocal, infiltration, vers..."
+        value={search} onChange={e => setSearch(e.target.value)} style={{minWidth:'260px', flex:'1 1 260px'}} />
+      <span className="tt-filter-count">{filtered.length} / {tests.length} test{tests.length>1?'s':''}</span>
+    </div>
+
+    <div className="tt-dim-pills">
+      <button className={"tt-dim-pill" + (dimFilter === null ? " active" : "")}
+        onClick={() => setDimFilter(null)}>Toutes</button>
+      {dims.map(d => <button key={d.id}
+        className={"tt-dim-pill" + (dimFilter === d.id ? " active" : "")}
+        style={dimFilter === d.id && d.couleur ? {background: d.couleur, borderColor: d.couleur} : undefined}
+        onClick={() => setDimFilter(d.id)}>{d.nom}</button>)}
+    </div>
+
+    {filtered.length === 0 ? <div className="tt-empty">Aucun test ne correspond aux filtres.</div> :
+      <div className="tt-grid">
+        {filtered.map(t => <SvTestCard key={t.id} test={t} />)}
+      </div>}
+  </div>;
 }
+
 function ComprendreView() {
-  return /*#__PURE__*/React.createElement("div", {
-    style: {
-      maxWidth: '860px'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      padding: '0.85rem 1rem',
-      background: 'var(--accent-light)',
-      border: '1px solid var(--accent)',
-      borderRadius: 'var(--radius)',
-      marginBottom: '1rem',
-      fontSize: 'var(--font-sm)'
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      fontWeight: 600,
-      color: 'var(--accent-dark)',
-      marginBottom: '0.4rem'
-    }
-  }, "\uD83D\uDCDA Pour approfondir le cadre conceptuel"), /*#__PURE__*/React.createElement("div", {
-    style: {
-      lineHeight: 1.55
-    }
-  }, "Les ", /*#__PURE__*/React.createElement("strong", null, "tests terrain"), " articulent le filtre de rigueur du corpus (une hypoth\xE8se doit \xEAtre v\xE9rifiable au champ pour rester active). Cours complet dans le ", /*#__PURE__*/React.createElement("strong", null, "Cahier de Sciences"), ", chapitre ", /*#__PURE__*/React.createElement("strong", null, "M\xE9thodologie \u2014 les outils de rigueur du corpus"), ".", /*#__PURE__*/React.createElement("a", {
-    href: "cahier.html#chap-methodologie",
-    style: {
-      display: 'inline-block',
-      marginTop: '0.5rem',
-      color: 'var(--accent-dark)',
-      fontWeight: 600,
-      textDecoration: 'underline'
-    }
-  }, "Ouvrir le chapitre M\xE9thodologie \u2192"))));
+  return <div style={{maxWidth:'860px'}}>
+    <div style={{padding:'0.85rem 1rem',background:'var(--accent-light)',border:'1px solid var(--accent)',borderRadius:'var(--radius)',marginBottom:'1rem',fontSize:'var(--font-sm)'}}>
+      <div style={{fontWeight:600,color:'var(--accent-dark)',marginBottom:'0.4rem'}}>📚 Pour approfondir le cadre conceptuel</div>
+      <div style={{lineHeight:1.55}}>
+        Les <strong>tests terrain</strong> articulent le filtre de rigueur du corpus (une hypothèse doit être vérifiable au champ pour rester active). Cours complet dans le <strong>Cahier de Sciences</strong>, chapitre <strong>Méthodologie — les outils de rigueur du corpus</strong>.
+        <a href="cahier.html#chap-methodologie" style={{display:'inline-block',marginTop:'0.5rem',color:'var(--accent-dark)',fontWeight:600,textDecoration:'underline'}}>Ouvrir le chapitre Méthodologie →</a>
+      </div>
+    </div>
+  </div>;
 }
+
 function App() {
   const [tab, setTab] = React.useState('pratique');
-  const intros = DATA && DATA.tab_intros || {};
+  const intros = (DATA && DATA.tab_intros) || {};
   const intro = intros[tab];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "sv-page"
-  }, /*#__PURE__*/React.createElement(SvTabs, {
-    tabs: [{
-      id: 'pratique',
-      icon: '🧫',
-      label: 'Pratique'
-    }, {
-      id: 'comprendre',
-      icon: '📚',
-      label: 'Guide'
-    }],
-    active: tab,
-    onChange: setTab
-  }), intro && /*#__PURE__*/React.createElement(SvTabIntro, {
-    resume: intro.resume,
-    detail: intro.detail
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "sv-tab-content"
-  }, tab === 'pratique' ? /*#__PURE__*/React.createElement(PratiqueView, null) : /*#__PURE__*/React.createElement(ComprendreView, null)));
+  return <div className="sv-page">
+    <SvTabs tabs={[
+      {id:'pratique', icon:'🧫', label:'Pratique'},
+      {id:'comprendre', icon:'📚', label:'Guide'}
+    ]} active={tab} onChange={setTab} />
+    {intro && <SvTabIntro resume={intro.resume} detail={intro.detail} />}
+    <div className="sv-tab-content">
+      {tab === 'pratique' ? <PratiqueView /> : <ComprendreView />}
+    </div>
+  </div>;
 }
-ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
 </script>
 
 
