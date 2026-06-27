@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outils — Low-tech &amp; Énergie</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#1a1714;--bg2:#211d18;--card:#282320;--card2:#312b25;--fg:#f0e6d8;--fg2:#c4b5a2;--muted:#8a7d6e;--accent:#c67a4b;--accent2:#d4956a;--accent3:#a35f33;--green:#7d9b76;--red:#c45c4a;--gold:#d4a843;--border:#3a332b;--blue:#5b8def;--orange:#ef8f5b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+header{height:64px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:.8rem;flex-shrink:0}
+header .logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center}
+header .logo i{color:var(--fg);font-size:.95rem}
+header h1{font-size:1.1rem;color:var(--fg)}
+header p{font-size:.62rem;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400}
+
+main{flex:1;max-width:900px;margin:0 auto;padding:2rem 1.2rem;width:100%}
+.subtitle{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:2rem;font-weight:600;font-family:'DM Sans',sans-serif}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;transition:all .3s;display:flex;flex-direction:column;gap:.6rem;cursor:pointer;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent3),var(--accent));opacity:0;transition:opacity .3s}
+.card:hover{border-color:var(--accent3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.card:hover::before{opacity:1}
+.card .icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.card .icon.wind{background:rgba(198,122,75,.15);color:var(--accent2)}
+.card .icon.sun{background:rgba(212,168,67,.15);color:var(--gold)}
+.card .icon.focus{background:rgba(239,143,91,.15);color:var(--orange)}
+.card h2{font-size:.95rem;color:var(--fg);line-height:1.25}
+.card p{font-size:.74rem;color:var(--fg2);line-height:1.5;flex:1}
+.card .tags{display:flex;gap:.35rem;flex-wrap:wrap;font-size:.6rem}
+.card .tags span{background:var(--card2);color:var(--muted);padding:.18rem .45rem;border-radius:4px;border:1px solid var(--border)}
+
+footer{text-align:center;padding:1.5rem;border-top:1px solid var(--border);font-size:.65rem;color:var(--muted)}
+footer a{color:var(--accent2);transition:color .2s}
+footer a:hover{color:var(--accent)}
+
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation:fi .4s ease}
+.card:nth-child(2){animation:fi .4s ease .1s both}
+.card:nth-child(3){animation:fi .4s ease .2s both}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+  <div>
+    <h1>Outils</h1>
+    <p>Low-tech &amp; énergie — simulateurs, dimensionnement et ateliers</p>
+  </div>
+</header>
+
+<main>
+  <div class="subtitle">Outils disponibles</div>
+  <div class="grid">
+
+    <a href="puitcanadien.html" class="card">
+      <div class="icon wind"><i class="fa-solid fa-wind"></i></div>
+      <h2>Concepteur Puits Canadien / Provençal</h2>
+      <p>Dimensionnement thermique d'un échangeur air-sol. Calculez les températures de sortie, les économies d'énergie, le plan d'implantation et obtenez des recommandations personnalisées.</p>
+      <div class="tags">
+        <span>thermique</span><span>ventilation</span><span>géothermie</span><span>économies</span>
+      </div>
+    </a>
+
+    <a href="foursolaire.html" class="card">
+      <div class="icon sun"><i class="fa-solid fa-sun"></i></div>
+      <h2>Four Solaire Personnel</h2>
+      <p>Atelier de fabrication pas à pas d'un four solaire. Plans de découpe, liste de matériaux, instructions de montage illustrées et principes de cuisson solaire.</p>
+      <div class="tags">
+        <span>atelier</span><span>cuisson</span><span>solaire</span><span>low-tech</span>
+      </div>
+    </a>
+
+    <a href="simulateurparabolle.html" class="card">
+      <div class="icon focus"><i class="fa-solid fa-bullseye"></i></div>
+      <h2>Simulateur de Focalisation Parabolique</h2>
+      <p>Visualisez la concentration des rayons solaires sur une surface parabolique. Ajustez les paramètres optiques et observez le point focal en temps réel.</p>
+      <div class="tags">
+        <span>optique</span><span>concentration</span><span>parabole</span><span>simulation</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <a href="https://github.com/anomalyco/Outils" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Outils</a> &mdash; Licence MIT &mdash; Jean-Michel Juzan
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concepteur Puits Canadien / Provençal v2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--bg:#1a1714;--bg2:#211d18;--card:#282320;--card2:#312b25;--fg:#f0e6d8;--fg2:#c4b5a2;--muted:#8a7d6e;--accent:#c67a4b;--accent2:#d4956a;--accent3:#a35f33;--green:#7d9b76;--red:#c45c4a;--gold:#d4a843;--border:#3a332b;--blue:#5b8def;--orange:#ef8f5b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--fg);overflow:hidden;height:100vh}
+h1,h2,h3{font-family:'Playfair Display',serif}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.sidebar{width:370px;min-width:370px;height:100%;overflow-y:auto;background:var(--bg2);border-right:1px solid var(--border)}
+.stitle{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.6rem;font-weight:600;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:.4rem}
+.cg{margin-bottom:.85rem}
+.cl{display:block;font-size:.78rem;color:var(--fg2);margin-bottom:.3rem;font-weight:500}
+.cv{color:var(--accent);font-weight:700}
+select,input[type=range]{width:100%;background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:7px;padding:.45rem .6rem;font-size:.8rem;font-family:inherit;outline:none;transition:border .2s}
+select:focus{border-color:var(--accent)}
+input[type=range]{-webkit-appearance:none;height:6px;padding:0;border:none;border-radius:3px;cursor:pointer;background:linear-gradient(90deg,var(--accent3),var(--accent2))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer;box-shadow:0 0 8px rgba(198,122,75,.5)}
+.rc{display:flex;gap:.4rem}
+.ri{flex:1;padding:.55rem .3rem;border:1px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .25s;font-size:.72rem;font-weight:500;background:var(--card)}
+.ri:hover{border-color:var(--accent3)}
+.ri.a{border-color:var(--accent);background:rgba(198,122,75,.12);color:var(--accent2)}
+.ri i{display:block;font-size:1rem;margin-bottom:.3rem}
+.tr{display:flex;align-items:center;justify-content:space-between;padding:.35rem 0}
+.tg{width:40px;height:22px;background:var(--border);border-radius:11px;cursor:pointer;position:relative;transition:background .3s;flex-shrink:0}
+.tg.on{background:var(--accent)}
+.tg::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:var(--fg);top:3px;left:3px;transition:transform .3s}
+.tg.on::after{transform:translateX(18px)}
+.kg{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+.kp{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:.65rem;transition:all .3s}
+.kp:hover{border-color:var(--accent3)}
+.kl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem}
+.kv{font-size:1.25rem;font-weight:700;line-height:1.2}
+.kr{font-size:.6rem;color:var(--muted);margin-top:.15rem}
+.kp.green .kv{color:var(--green)}.kp.warn .kv{color:var(--gold)}.kp.bad .kv{color:var(--red)}
+.rc2{display:flex;gap:.6rem;padding:.6rem;border-radius:7px;border-left:3px solid;margin-bottom:.45rem;font-size:.78rem;line-height:1.45;background:var(--card)}
+.rc2.ra{border-color:var(--red)}.rc2.ra i{color:var(--red)}
+.rc2.rc{border-color:var(--gold)}.rc2.rc i{color:var(--gold)}
+.rc2.rv{border-color:var(--green)}.rc2.rv i{color:var(--green)}
+.rc2 i{margin-top:2px;font-size:.85rem;min-width:16px}
+.rc2 strong{display:block;margin-bottom:.1rem;font-size:.75rem}
+.vt{padding:.4rem .8rem;border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:.73rem;font-weight:500;transition:all .25s;background:var(--card);color:var(--fg2)}
+.vt:hover{border-color:var(--accent3)}.vt.a{border-color:var(--accent);background:rgba(198,122,75,.12);color:var(--accent2)}
+.eb{height:5px;border-radius:3px;background:var(--border);overflow:hidden;margin-top:.2rem}
+.ef{height:100%;border-radius:3px;transition:width .5s ease}
+@keyframes gp{0%,100%{opacity:.3}50%{opacity:1}}.gd{animation:gp 2s ease-in-out infinite}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}.fin{animation:fi .4s ease}
+.slider-labels{display:flex;justify-content:space-between;font-size:.6rem;color:var(--muted);margin-top:.1rem}
+.tooltip-trigger{cursor:help;border-bottom:1px dotted var(--muted)}
+@media(max-width:1024px){.sidebar{width:100%;min-width:unset;height:auto;max-height:42vh;border-right:none;border-bottom:1px solid var(--border)}.af{flex-direction:column!important}.kg{grid-template-columns:repeat(2,1fr)}.pg{grid-template-columns:1fr!important}}
+</style>
+</head>
+<body>
+
+<header style="height:56px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.2rem;gap:.8rem;position:relative;z-index:50;flex-shrink:0">
+  <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent3));display:flex;align-items:center;justify-content:center">
+    <i class="fa-solid fa-wind" style="color:var(--fg);font-size:.9rem"></i>
+  </div>
+  <div>
+    <h1 style="font-size:1rem;color:var(--fg)">Concepteur Puits Canadien / Provençal</h1>
+    <p style="font-size:.6rem;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:400">Dimensionnement thermique, plan d'implantation et recommandations</p>
+  </div>
+</header>
+
+<div class="af" style="display:flex;height:calc(100vh - 56px)">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div style="padding:1rem">
+
+    <div style="margin-bottom:1.1rem">
+      <div class="stitle"><i class="fa-solid fa-wind" style="font-size:.55rem"></i> Type de puits</div>
+      <div class="rc" id="typePuits">
+        <div class="ri" data-val="canadien"><i class="fa-solid fa-snowflake"></i>Canadien</div>
+        <div class="ri a" data-val="hybride"><i class="fa-solid fa-arrows-rotate"></i>Hybride</div>
+        <div class="ri" data-val="provencal"><i class="fa-solid fa-sun"></i>Provençal</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.1rem">
+      <div class="stitle"><i class="fa-solid fa-house" style="font-size:.55rem"></i> Bâtiment</div>
+      <div class="cg">
+        <label class="cl">Surface habitable : <span class="cv" id="vS">100</span> m²</label>
+        <input type="range" id="iS" min="30" max="300" value="100" step="5">
+        <div class="slider-labels"><span>30</span><span>300 m²</span></div>
+      </div>
+      <div class="cg">
+        <label class="cl">Nombre d'étages</label>
+        <select id="iE"><option value="1">1 étage (plain-pied)</option><option value="2" selected>2 étages</option><option value="3">3 étages</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Standard de construction</label>
+        <select id="iStd"><option value="standard">Standard (avant 2012)</option><option value="rt2012">RT 2012</option><option value="re2020">RE 2020</option><option value="passif" selected>Passif (PHI)</option></select>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.1rem">
+      <div class="stitle"><i class="fa-solid fa-fan" style="font-size:.55rem"></i> Ventilation</div>
+      <div class="cg">
+        <label class="cl">Type</label>
+        <select id="iVt"><option value="sf">Simple flux</option><option value="df" selected>Double flux</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Débit d'air : <span class="cv" id="vD">150</span> m³/h <span style="font-size:.6rem;color:var(--muted)">(reco:&nbsp;<span id="vDr">150</span>)</span></label>
+        <input type="range" id="iD" min="30" max="600" value="150" step="10">
+        <div class="slider-labels"><span>30</span><span>600 m³/h</span></div>
+      </div>
+      <div class="tr">
+        <span class="cl" style="margin:0">By-pass automatique</span>
+        <div class="tg on" id="tBp" role="switch" aria-checked="true" tabindex="0"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.1rem">
+      <div class="stitle"><i class="fa-solid fa-pipe" style="font-size:.55rem"></i> Tuyauterie</div>
+      <div class="cg">
+        <label class="cl">Matériau</label>
+        <select id="iMat"><option value="pehd" selected>PEHD (polyéthylène)</option><option value="pvc">PVC</option><option value="beton">Béton</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Diamètre intérieur</label>
+        <select id="iDia"><option value="160">160 mm</option><option value="200" selected>200 mm</option><option value="250">250 mm</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Tuyaux en parallèle</label>
+        <select id="iNb"><option value="1">1 tuyau</option><option value="2" selected>2 tuyaux</option><option value="3">3 tuyaux</option><option value="4">4 tuyaux</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Longueur totale : <span class="cv" id="vL">40</span> m</label>
+        <input type="range" id="iL" min="15" max="80" value="40" step="5">
+        <div class="slider-labels"><span>15</span><span>80 m</span></div>
+      </div>
+      <div class="cg">
+        <label class="cl">Profondeur : <span class="cv" id="vP">2.0</span> m</label>
+        <input type="range" id="iP" min="1.0" max="3.5" value="2.0" step="0.1">
+        <div class="slider-labels"><span>1.0</span><span>3.5 m</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem">
+      <div class="stitle"><i class="fa-solid fa-mountain" style="font-size:.55rem"></i> Environnement</div>
+      <div class="cg">
+        <label class="cl">Type de sol</label>
+        <select id="iSol"><option value="argile" selected>Argile</option><option value="sable">Sable</option><option value="limon">Limon</option><option value="roche">Roche / Cailloux</option><option value="tourbe">Tourbe</option></select>
+      </div>
+      <div class="cg">
+        <label class="cl">Zone climatique</label>
+        <select id="iZ">
+          <option value="H1a">H1a — Nord / Alsace</option>
+          <option value="H1b">H1b — Bretagne / Pays de Loire</option>
+          <option value="H1c">H1c — Nord-Ouest</option>
+          <option value="H2a" selected>H2a — Centre / Île-de-France</option>
+          <option value="H2b">H2b — Sud-Ouest</option>
+          <option value="H2c">H2c — Sud-Est</option>
+          <option value="H3">H3 — Méditerranée</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main style="flex:1;overflow-y:auto;padding:1.2rem" id="mainContent">
+
+  <!-- KPI -->
+  <div class="kg" id="kpiG" style="margin-bottom:1rem"></div>
+
+  <!-- Simulateur instantané -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem" id="simCard">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;flex-wrap:wrap;gap:.4rem">
+      <h3 style="font-size:.85rem;color:var(--fg)"><i class="fa-solid fa-flask" style="margin-right:.4rem;color:var(--accent)"></i>Simulateur instantané</h3>
+      <span style="font-size:.6rem;color:var(--muted)">Choisissez un mois et une température extérieure</span>
+    </div>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:.8rem">
+      <div>
+        <label style="font-size:.65rem;color:var(--muted);display:block;margin-bottom:.2rem">Mois</label>
+        <select id="iSimMois" style="width:auto;min-width:110px">
+          <option value="0">Janvier</option><option value="1">Février</option><option value="2">Mars</option>
+          <option value="3">Avril</option><option value="4">Mai</option><option value="5">Juin</option>
+          <option value="6">Juillet</option><option value="7">Août</option><option value="8">Septembre</option>
+          <option value="9">Octobre</option><option value="10">Novembre</option><option value="11">Décembre</option>
+        </select>
+      </div>
+      <div style="flex:1;min-width:180px">
+        <label style="font-size:.65rem;color:var(--muted);display:block;margin-bottom:.2rem">T° extérieure : <span id="vSimT" style="color:var(--accent);font-weight:600">20</span> °C</label>
+        <input type="range" id="iSimT" min="-15" max="45" value="20" step="0.5">
+        <div class="slider-labels"><span>-15</span><span>45 °C</span></div>
+      </div>
+    </div>
+    <div id="simRes"></div>
+  </div>
+
+  <!-- Graphique -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;flex-wrap:wrap;gap:.4rem">
+      <div>
+        <h3 style="font-size:.9rem;color:var(--fg)">Performance saisonnière</h3>
+        <p style="font-size:.65rem;color:var(--muted)" id="chartSub">Températures mensuelles — <span id="chartSaison"></span></p>
+      </div>
+      <div style="display:flex;gap:.8rem;font-size:.6rem;color:var(--muted);flex-wrap:wrap">
+        <span id="legExt"><span style="display:inline-block;width:10px;height:2.5px;background:var(--red);vertical-align:middle;margin-right:.2rem;border-radius:2px"></span>Ext</span>
+        <span id="legPuits"><span style="display:inline-block;width:10px;height:2.5px;background:var(--accent);vertical-align:middle;margin-right:.2rem;border-radius:2px"></span>Puits</span>
+        <span id="legSol"><span style="display:inline-block;width:10px;height:2.5px;background:var(--green);vertical-align:middle;margin-right:.2rem;border-radius:2px;border-style:dashed"></span>Sol</span>
+        <span><span style="display:inline-block;width:10px;height:7px;background:rgba(125,155,118,.15);vertical-align:middle;margin-right:.2rem;border-radius:2px"></span>Confort</span>
+      </div>
+    </div>
+    <div style="height:220px;position:relative">
+      <canvas id="chartP"></canvas>
+    </div>
+  </div>
+
+  <!-- Recommandations + Coûts en grille -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem" class="pg2">
+    <div>
+      <h3 style="font-size:.9rem;margin-bottom:.6rem">Recommandations</h3>
+      <div id="recC"></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem">
+      <h3 style="font-size:.9rem;margin-bottom:.6rem">Estimation des coûts</h3>
+      <div id="coutC"></div>
+    </div>
+  </div>
+
+  <!-- PLAN D'IMPLANTATION -->
+  <div style="border-top:1px solid var(--border);padding-top:1rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;flex-wrap:wrap;gap:.5rem">
+      <div>
+        <h2 style="font-size:1.05rem">Plan d'implantation</h2>
+        <p style="font-size:.68rem;color:var(--muted)">Vue en plan et coupe — sélectionnez une variante</p>
+      </div>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap" id="vTabs"></div>
+    </div>
+    <div class="pg" style="display:grid;grid-template-columns:1fr 320px;gap:.8rem">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+        <svg id="svgP" viewBox="0 0 850 420" style="width:100%;display:block;min-height:350px"></svg>
+      </div>
+      <div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.85rem;margin-bottom:.6rem" id="vInfo"></div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <svg id="svgC" viewBox="0 0 300 220" style="width:100%;display:block"></svg>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:.8rem" id="vComp"></div>
+  </div>
+
+</main>
+</div>
+
+<script>
+/* ========================================
+   DOMAIN DATA
+   ======================================== */
+const REN = {standard:.8, rt2012:.5, re2020:.4, passif:.3};
+const HP = 2.5;
+
+const ZONES = {
+  H1a:{tSol:10, tHiv:-2, tEte:28, hC:2600, hF:150, tm:[-2,-1,3,7,12,16,18,18,14,9,4,0]},
+  H1b:{tSol:10.5,tHiv:0, tEte:28, hC:2400, hF:200, tm:[0,1,4,8,13,17,19,19,15,10,5,1]},
+  H1c:{tSol:11,  tHiv:1, tEte:30, hC:2300, hF:250, tm:[1,2,5,9,14,18,20,20,16,11,6,2]},
+  H2a:{tSol:12,  tHiv:3, tEte:30, hC:2100, hF:350, tm:[3,4,7,10,15,18,21,21,17,13,7,4]},
+  H2b:{tSol:12.5,tHiv:4, tEte:31, hC:1900, hF:450, tm:[4,5,8,11,16,19,22,22,18,14,8,5]},
+  H2c:{tSol:13,  tHiv:5, tEte:32, hC:1800, hF:550, tm:[5,6,9,12,17,20,23,23,19,15,9,6]},
+  H3: {tSol:14.5,tHiv:7, tEte:34, hC:1400, hF:850, tm:[7,8,11,14,18,22,25,25,21,17,11,8]}
+};
+
+const MAT = {
+  pehd:{nom:'PEHD',U:3.5,fd:.022,px:20,lb:'Polyéthylène haute densité'},
+  pvc: {nom:'PVC',U:3.0,fd:.028,px:12,lb:'Polychlorure de vinyle'},
+  beton:{nom:'Béton',U:4.5,fd:.035,px:35,lb:'Béton de ciment'}
+};
+
+const SOLS = {
+  argile:{nom:'Argile',c:.8,px:65, damp:2.5},
+  sable: {nom:'Sable',c:.5,px:45, damp:2.2},
+  limon: {nom:'Limon',c:.7,px:55, damp:2.4},
+  roche: {nom:'Roche',c:1.2,px:120, damp:3.5},
+  tourbe:{nom:'Tourbe',c:.3,px:40, damp:1.3}
+};
+
+const VAR = {
+  lineaire:{
+    nom:'Linéaire',ic:'fa-arrow-right-long',
+    desc:'Un seul trajet rectiligne entre la prise d\'air et la maison. Configuration simple, idéale pour terrains étroits.',
+    av:['Installation simple et rapide','Aucun coude','Perte de charge minimale','Facile à curer'],
+    inc:['Nécessite un terrain long','Pas de redondance','Un seul point de défaillance','Peu compact'],
+    ef:3,cx:1,co:1,rc:'Petits terrains étroits, projets à budget réduit.'
+  },
+  epingles:{
+    nom:'Épingles',ic:'fa-grip-lines',
+    desc:'Allers-retours parallèles en serpentin sous le terrain. La configuration la plus répandue et éprouvée.',
+    av:['Compact en largeur','Grande longueur d\'échange','Très répandu et éprouvé','Bonne efficacité thermique'],
+    inc:['Coudes à chaque retour','Espacement critique (>1m)','Terrassement important','Nécessite terrain régulier'],
+    ef:4,cx:3,co:2,rc:'Terrain rectangulaire, configuration standard recommandée.'
+  },
+  etoile:{
+    nom:'Étoile',ic:'fa-asterisk',
+    desc:'Plusieurs branches rayonnantes depuis un collecteur central. Très faible perte de charge.',
+    av:['Aucun coude sur branche','Très faible perte de charge','Modulation possible','Réseau extensible'],
+    inc:['Collecteur central volumineux','Nécessite terrain dégagé','Plus de raccords','Équilibrage des débits'],
+    ef:4,cx:4,co:3,rc:'Grands terrains ouverts, débits élevés, modulation saisonnière.'
+  },
+  dual:{
+    nom:'Circuit Dual',ic:'fa-code-branch',
+    desc:'Deux circuits indépendants optimisés pour l\'hiver et l\'été. Confort maximal, redondance totale.',
+    av:['Optimisation hiver/été','Redondance totale','Régulation fine','Profondeurs différentes'],
+    inc:['Coût ~doublé','Terrassement conséquent','Complexité de régulation','Encombrement important'],
+    ef:5,cx:5,co:5,rc:'Maisons passives, climats extrêmes, confort maximal.'
+  }
+};
+
+/* ========================================
+   STATE
+   ======================================== */
+const S = {
+  typePuits:'hybride', surface:100, etages:2, standard:'passif',
+  typeVent:'df', debit:150, bypass:true,
+  materiau:'pehd', diametre:200, nbTuyaux:2, longueur:40, profondeur:2.0,
+  typeSol:'argile', zoneClim:'H2a', variante:'epingles',
+  _manuallySetDebit: false
+};
+
+/* ========================================
+   CALCULATIONS
+   ======================================== */
+function cVol(){ return S.surface * HP * S.etages; }
+function cDRec(){ return Math.round(cVol() * REN[S.standard]); }
+
+/* Soil temperature at pipe depth for a given month (0=Jan..11=Dec) using sinusoidal annual model with phase lag */
+function cTSoilMonth(monthIdx){
+  const z = ZONES[S.zoneClim];
+  const D = SOLS[S.typeSol].damp;
+  const A0 = (z.tEte - z.tHiv) / 2;
+  const doy = [15,45,74,105,135,166,196,227,258,288,318,348][monthIdx];
+  const doyMax = 196;
+  const omega = 2 * Math.PI / 365;
+  return z.tSol + A0 * Math.exp(-S.profondeur / D) * Math.cos(omega * (doy - doyMax) - S.profondeur / D);
+}
+
+/* Outlet temperature for a given month */
+function cTOutMonth(monthIdx){
+  const L = cLPT();
+  const lam = cLam();
+  const tAir = ZONES[S.zoneClim].tm[monthIdx];
+  const tSol = cTSoilMonth(monthIdx);
+  return tSol + (tAir - tSol) * Math.exp(-L / lam);
+}
+
+/* Soil temperature at pipe depth for an extreme condition (hiver ou été) with phase lag */
+function cTSoilExt(isWinter){
+  const z = ZONES[S.zoneClim];
+  const D = SOLS[S.typeSol].damp;
+  const A0 = (z.tEte - z.tHiv) / 2;
+  const doy = isWinter ? 15 : 196;
+  const doyMax = 196;
+  const omega = 2 * Math.PI / 365;
+  return z.tSol + A0 * Math.exp(-S.profondeur / D) * Math.cos(omega * (doy - doyMax) - S.profondeur / D);
+}
+
+/* Outlet temperature for an extreme condition (hiver ou été) */
+function cTOutExt(isWinter){
+  const z = ZONES[S.zoneClim];
+  const tExt = isWinter ? z.tHiv : z.tEte;
+  const tSol = cTSoilExt(isWinter);
+  const L = cLPT();
+  const lam = cLam();
+  return tSol + (tExt - tSol) * Math.exp(-L / lam);
+}
+
+function cVit(){
+  const d = S.diametre / 1000;
+  const A = Math.PI * (d/2) * (d/2);
+  const v = (S.debit / 3600) / (S.nbTuyaux * Math.max(A, 1e-6));
+  return v;
+}
+
+function cLPT(){ return S.longueur / Math.max(S.nbTuyaux, 1); }
+
+function cLam(){
+  const d = S.diametre / 1000;
+  const A = Math.PI * (d/2) * (d/2);
+  const P = Math.PI * d;
+  const m = MAT[S.materiau];
+  const sf = SOLS[S.typeSol].c;
+  const U = Math.max(m.U * sf, 0.5);
+  const v = cVit();
+  return v > 0.01 ? (1.2 * 1005 * A * v) / (P * U) : 9999;
+}
+
+function cDP(){
+  const d = S.diametre / 1000;
+  const v = cVit();
+  const L = cLPT();
+  const m = MAT[S.materiau];
+  const nC = S.variante==='lineaire'?2 : S.variante==='epingles'?S.nbTuyaux*6 : S.variante==='etoile'?S.nbTuyaux*2 : S.nbTuyaux*6;
+  const dpL = m.fd * (L / Math.max(d, 0.01)) * (1.2 * v * v / 2);
+  const dpC = nC * 0.5 * (1.2 * v * v / 2);
+  return dpL + dpC;
+}
+
+function cPVent(){
+  const dp = cDP();
+  const Q = S.debit / 3600;
+  return Math.max(dp * Q / 0.6, 0);
+}
+
+/* Energy savings via monthly integration with comfort thresholds */
+function cEco(){
+  const z = ZONES[S.zoneClim];
+  const pV = cPVent();
+  const Q = S.debit / 3600;
+  const days = [31,28,31,30,31,30,31,31,30,31,30,31];
+  let hiv = 0, ete = 0, cV = 0;
+
+  for(let m = 0; m < 12; m++){
+    if(!isActiveMonth(m)) continue;
+    const tAir = z.tm[m];
+    const tOut = cTOutMonth(m);
+    const hours = days[m] * 24;
+    if(tOut > tAir && tAir < 20){ hiv += 1.2 * 1005 * Q * (tOut - tAir) * hours / 1000; }
+    if(tOut < tAir && tAir > 22){ ete += 1.2 * 1005 * Q * (tAir - tOut) * hours / 1000; }
+    cV += pV * hours / 1000;
+  }
+  return {hiv:Math.round(hiv), ete:Math.round(ete), cV:Math.round(cV), tot:Math.round(hiv+ete-cV)};
+}
+
+/* Outlet temperature for a custom air temperature in a given month (uses monthly soil temp with phase lag) */
+function cTOutSim(monthIdx, tAir){
+  const tSol = cTSoilMonth(monthIdx);
+  const L = cLPT();
+  const lam = cLam();
+  return tSol + (tAir - tSol) * Math.exp(-L / lam);
+}
+
+/* Simulator: which months are active per puits type */
+function isActiveForType(type, monthIdx){
+  if(type==='canadien') return [10,11,0,1,2].includes(monthIdx);
+  if(type==='provencal') return [4,5,6,7,8].includes(monthIdx);
+  return true;
+}
+
+function cCouts(){
+  const m = MAT[S.materiau], s = SOLS[S.typeSol];
+  const t = Math.round(S.longueur * s.px);
+  const tu = Math.round(S.longueur * m.px * S.nbTuyaux);
+  const col = Math.round(250 * S.nbTuyaux);
+  const gp = 120, bp = S.bypass ? 350 : 0;
+  const ra = Math.round(150 + S.nbTuyaux * 80);
+  const mainten = Math.round(S.longueur * 5 + 200);
+  return {t, tu, col, gp, bp, ra, mainten, tot: t+tu+col+gp+bp+ra+mainten};
+}
+
+/* ========================================
+   RECOMMENDATIONS GENERATION
+   ======================================== */
+function genRec(){
+  const r=[], v=cVit(), dp=cDP(), z=ZONES[S.zoneClim];
+  const tOH=cTOutExt(true), tOE=cTOutExt(false), L=cLPT(), eco=cEco();
+  const add=(t,i,ti,d)=>r.push({t,i,ti,d});
+
+  // Vitesse air
+  if(v<1){ add('a','fa-triangle-exclamation','Vitesse critique',
+    `${v.toFixed(1)} m/s : air stagnant, risque de condensation et moisissures. Réduisez le diamètre ou le nombre de tuyaux.`);}
+  else if(v<1.5){add('c','fa-gauge-simple','Vitesse faible',
+    `${v.toFixed(1)} m/s sous la plage optimale (1,5-3,5 m/s). Réduisez le diamètre ou le nombre de tuyaux.`);}
+  else if(v<=3.5){add('v','fa-check-circle','Vitesse optimale',
+    `${v.toFixed(1)} m/s dans la plage recommandée. Bon équilibre échange thermique / perte de charge.`);}
+  else{add('a','fa-triangle-exclamation','Vitesse excessive',
+    `${v.toFixed(1)} m/s : pertes de charge et bruit élevés. Ajoutez des tuyaux ou augmentez le diamètre.`);}
+
+  // Perte de charge
+  if(dp>400){add('a','fa-wind','Perte de charge critique',`${dp.toFixed(0)} Pa : la consommation ventilateur annulera les économies.`);}
+  else if(dp>200){add('c','fa-wind','Perte de charge élevée',`${dp.toFixed(0)} Pa nécessite un ventilateur puissant.`);}
+  else{add('v','fa-check-circle','Perte de charge excellente',`${dp.toFixed(0)} Pa : très faible consommation électrique.`);}
+
+  // Profondeur
+  const amplR = (1 - Math.exp(-S.profondeur / SOLS[S.typeSol].damp)) * 100;
+  if(S.profondeur<1.5){add('a','fa-arrow-down','Profondeur insuffisante',
+    `${S.profondeur.toFixed(1)} m : seulement ${amplR.toFixed(0)}% d'atténuation. Amplitude saisonnière trop élevée (>5°C).`);}
+  else if(S.profondeur>=2&&S.profondeur<=2.5){add('v','fa-check-circle','Profondeur idéale',
+    `${S.profondeur.toFixed(1)} m : ${amplR.toFixed(0)}% d'atténuation des variations saisonnières (<2°C d'amplitude).`);}
+  else if(S.profondeur>3){add('c','fa-arrow-down','Profondeur importante',
+    `${S.profondeur.toFixed(1)} m : coût de terrassement élevé pour un gain marginal.`);}
+  else {add('c','fa-arrow-down','Profondeur acceptable',
+    `${S.profondeur.toFixed(1)} m : ${amplR.toFixed(0)}% d'atténuation. Envisagez ≥2 m pour plus de stabilité.`);}
+
+  // Longueur par tuyau
+  if(L<25){add('c','fa-ruler','Longueur courte',`${L.toFixed(0)} m/tuyau limite l'échange thermique. Augmentez la longueur totale.`);}
+  else if(L>50){add('c','fa-ruler','Longueur longue',`${L.toFixed(0)} m/tuyau : rendement marginal faible au-delà de 50 m.`);}
+
+  // Matériau
+  if(S.materiau==='pvc'){add('c','fa-flask','PVC : attention','Surface rugueuse (+30% perte de charge), risque de migration de COV à chaud.');}
+  else if(S.materiau==='pehd'){add('v','fa-check-circle','PEHD : bon choix','Meilleur rapport performance/coût, surface lisse, aucune migration, durée de vie 50+ ans.');}
+  else if(S.materiau==='beton'){add('c','fa-flask','Béton : usage spécifique','Excellente inertie mais lourd, fissurable, perte de charge élevée.');}
+
+  // Sol
+  if(S.typeSol==='tourbe'){add('a','fa-mountain','Sol déconseillé','Très faible conductivité thermique et risque de tassement. Envisagez un remblaiement sableux.');}
+  else if(S.typeSol==='sable'){add('c','fa-mountain','Sol sablonneux','Conductivité réduite de ~40%. Augmentez la longueur de 15-20%.');}
+
+  // Type puits vs zone
+  if(S.typePuits==='canadien'){
+    if(['H2c','H3'].includes(S.zoneClim)){add('c','fa-snowflake','Canadien en zone chaude','En H2c/H3, le préchauffage hivernal est secondaire (hiver doux). Préférez hybride ou provençal.');}
+    else{add('v','fa-snowflake','Canadien : chauffage seul','Actif uniquement en hiver (Nov–Mar). L\'été, l\'air est by-passé. Pertinent pour les climats froids.');}
+  }
+  if(S.typePuits==='provencal'){
+    if(['H1a','H1b','H1c'].includes(S.zoneClim)){add('c','fa-sun','Provençal en zone froide','En H1, le rafraîchissement estival est limité (étés courts). Préférez canadien ou hybride.');}
+    else{add('v','fa-sun','Provençal : rafraîchissement seul','Actif uniquement en été (Mai–Sep). L\'hiver, l\'air est by-passé. Pertinent pour les climats chauds.');}
+  }
+  if(S.typePuits==='hybride'){
+    add('v','fa-arrows-rotate','Hybride : 2 saisons','Actif toute l\'année. Pré-chauffage en hiver + rafraîchissement en été. Solution la plus complète.');
+  }
+
+  // Ventilation
+  if(S.typeVent==='df'){add('c','fa-arrows-rotate','Double flux + puits','La VMC DF récupère déjà la chaleur en hiver. Le puits est surtout utile en été. By-pass indispensable.');}
+  else{add('c','fa-fan','Simple flux','Tout l\'air passe par le puits. Dimensionnement critique pour éviter les sous-débits.');}
+
+  // By-pass
+  if(!S.bypass){add('a','fa-code-branch','By-pass manquant','Sans by-pass, impossible de couper le puits hors saison. Le by-pass motorisé est indispensable.');}
+  else {
+    const bpMsg = S.typePuits==='canadien'?'By-pass été actif' : S.typePuits==='provencal'?'By-pass hiver actif' : 'By-pass mi-saison';
+    add('v','fa-code-branch',bpMsg,'Le by-pass permet de contourner le puits durant la saison inactive, évitant de réchauffer/refroidir l\'air à contre-temps.');
+  }
+  if(S.standard==='passif'){add('v','fa-leaf','Maison passive','Le puits est souvent la seule solution de rafraîchissement estival sans climatisation.');}
+
+  // Redondance
+  if(S.nbTuyaux===1){add('c','fa-circle-nodes','Tuyau unique','Pas de redondance. 2 tuyaux minimum recommandé pour une résidence principale.');}
+  else{add('v','fa-check-circle','Redondance assurée',`${S.nbTuyaux} tuyaux permettent un fonctionnement dégradé en cas d'obstruction.`);}
+
+  // Économie
+  let ecoMsg = `${eco.tot} kWh/an économisés`;
+  if(eco.hiv>0&&eco.ete>0) ecoMsg += ` (hiv: ${eco.hiv} + été: ${eco.ete})`;
+  else if(eco.hiv>0) ecoMsg += ` (chauffage hiver)`;
+  else if(eco.ete>0) ecoMsg += ` (rafraîchissement été)`;
+  ecoMsg += `, soit ~${(eco.tot*.15).toFixed(0)} €/an`;
+  if(eco.tot>500){add('v','fa-euro-sign','Bilan économique positif',ecoMsg);}
+  else if(eco.tot>0){add('c','fa-euro-sign','Bilan économique modeste',ecoMsg);}
+  else{add('a','fa-euro-sign','Bilan négatif','La consommation du ventilateur dépasse les gains thermiques. Révisez le dimensionnement.');}
+
+  return r;
+}
+
+/* ========================================
+   COLOR UTILITY
+   ======================================== */
+function tCol(t){
+  const cl = Math.max(-5, Math.min(35, t)), r = (cl + 5) / 40;
+  if(r < .5){ const r2 = r*2; return `rgb(${Math.round(30+r2*95)},${Math.round(100+r2*55)},${Math.round(200-r2*80)})`; }
+  const r2 = (r-.5)*2; return `rgb(${Math.round(125+r2*130)},${Math.round(155-r2*95)},${Math.round(120-r2*90)})`;
+}
+function tColHex(t){
+  const c = tCol(t).match(/\d+/g);
+  return '#' + c.map(n => parseInt(n).toString(16).padStart(2,'0')).join('');
+}
+
+/* ========================================
+   RENDER: KPIs
+   ======================================== */
+function rKPI(){
+  const z=ZONES[S.zoneClim], v=cVit(), dp=cDP(), tOH=cTOutExt(true), tOE=cTOutExt(false), dR=cDRec(), eco=cEco(), lam=cLam();
+  const kc=(val,good,warn)=>val>=good[0]&&val<=good[1]?'green':val>=warn[0]&&val<=warn[1]?'warn':'bad';
+  const tp = S.typePuits;
+  const hivActive = tp!=='provencal';
+  const eteActive = tp!=='canadien';
+  const d=[
+    {l:'Volume',v:cVol()+' m³',r:`${S.surface}m² × ${S.etages} ét.`,'c':'green'},
+    {l:'Débit',v:S.debit+' m³/h',r:'Reco : '+dR, c:Math.abs(S.debit-dR)<dR*.2?'green':'warn'},
+    {l:'Vitesse air',v:v.toFixed(2)+' m/s',r:'Idéal 1,5-3,5',c:kc(v,[1.5,3.5],[1,4.5])},
+    {l:'Perte charge',v:dp.toFixed(0)+' Pa',r:'Acceptable <200',c:kc(dp,[0,200],[0,400])},
+    {l:'T° hiver',v:hivActive?tOH.toFixed(1)+' °C':'bypassé',r:hivActive?`Ext ${z.tHiv}°C → Sol ${cTSoilExt(true).toFixed(1)}°C`:'Air ext. direct (by-pass)',c:hivActive?(tOH>z.tHiv+3?'green':'warn'):'warn'},
+    {l:'T° été',v:eteActive?tOE.toFixed(1)+' °C':'bypassé',r:eteActive?`Ext ${z.tEte}°C → Sol ${cTSoilExt(false).toFixed(1)}°C`:'Air ext. direct (by-pass)',c:eteActive?(tOE<z.tEte-3?'green':'warn'):'warn'},
+    {l:'λ (long.car.)',v:lam.toFixed(0)+' m',r:`Par tuyau: ${cLPT().toFixed(0)}m`,c:cLPT()>lam?'green':'warn'},
+    {l:'Économie',v:eco.tot+' kWh/an',r:`~${(eco.tot*.15).toFixed(0)} €/an`,c:eco.tot>200?'green':eco.tot>0?'warn':'bad'},
+  ];
+  document.getElementById('kpiG').innerHTML = d.map(k=>`<div class="kp ${k.c} fin"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="kr">${k.r}</div></div>`).join('');
+}
+
+/* ========================================
+   RENDER: CHART
+   ======================================== */
+let chart=null;
+function isActiveMonth(m){
+  if(S.typePuits==='canadien') return [10,11,0,1,2].includes(m);
+  if(S.typePuits==='provencal') return [4,5,6,7,8].includes(m);
+  return true;
+}
+function rChart(){
+  const z=ZONES[S.zoneClim];
+  const ms=['Jan','Fév','Mar','Avr','Mai','Jun','Jui','Aoû','Sep','Oct','Nov','Déc'];
+  const tE=z.tm;
+  const tS=z.tm.map((_,i)=>cTSoilMonth(i));
+  const tO=tE.map((_,i)=>cTOutMonth(i));
+
+  // Active season indicator (filled bands)
+  const yMin = Math.min(...tE)-3;
+  const yMax = Math.max(...tE)+3;
+  const actBg = tE.map((_,i) => isActiveMonth(i) ? yMax : yMin);
+
+  // Season labels
+  let saisonLabel = '';
+  if(S.typePuits==='canadien') saisonLabel = '<span style="color:#5b8def">Hiver actif</span> (Nov–Mar) — Été by-passé';
+  else if(S.typePuits==='provencal') saisonLabel = '<span style="color:#ef8f5b">Été actif</span> (Mai–Sep) — Hiver by-passé';
+  else saisonLabel = '<span style="color:var(--accent)">Annuel</span> (les 2 saisons)';
+  const elS = document.getElementById('chartSaison');
+  if(elS) elS.innerHTML = saisonLabel;
+
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('chartP'),{type:'line',
+    data:{labels:ms,datasets:[
+      {label:'Extérieur',data:tE,borderColor:'#c45c4a',borderWidth:2,pointRadius:2.5,pointBackgroundColor:'#c45c4a',tension:.4,fill:false},
+      {label:'Sortie puits',data:tO,borderColor:'#c67a4b',backgroundColor:'rgba(198,122,75,.08)',borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#c67a4b',tension:.4,fill:true},
+      {label:`Sol (${S.profondeur.toFixed(1)}m)`,data:tS,borderColor:'#7d9b76',borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:.4,fill:false},
+      {label:'Confort bas',data:Array(12).fill(18),borderColor:'transparent',backgroundColor:'rgba(125,155,118,.06)',pointRadius:0,fill:'+1',borderWidth:0},
+      {label:'Confort haut',data:Array(12).fill(26),borderColor:'transparent',backgroundColor:'transparent',pointRadius:0,fill:false,borderWidth:0}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},
+        tooltip:{backgroundColor:'#282320',titleColor:'#f0e6d8',bodyColor:'#c4b5a2',borderColor:'#3a332b',borderWidth:1,
+          callbacks:{label:function(c){if(c.datasetIndex>=3)return null;
+            const active=isActiveMonth(c.dataIndex);
+            let suffix = active ? '' : ' (by-passé)';
+            return c.dataset.label+' : '+c.parsed.y.toFixed(1)+' °C'+suffix;}}}},
+      scales:{x:{grid:{color:'rgba(58,51,43,.4)'},ticks:{color:'#8a7d6e',font:{size:10}}},
+        y:{grid:{color:'rgba(58,51,43,.4)'},ticks:{color:'#8a7d6e',font:{size:10},callback:v=>v+'°'},
+          min:yMin,max:yMax}}
+    }
+  });
+
+  // Update legend to indicate inactive style
+  const legPuits = document.getElementById('legPuits');
+  if(legPuits && S.typePuits!=='hybride'){
+    legPuits.innerHTML = `<span style="display:inline-block;width:10px;height:2.5px;background:var(--accent);vertical-align:middle;margin-right:.2rem;border-radius:2px"></span>Puits <span style="opacity:.5;font-size:.5rem">(— by-passé)</span>`;
+  }
+}
+
+/* ========================================
+   RENDER: RECOMMENDATIONS
+   ======================================== */
+function rRec(){
+  const rs=genRec(), cm={a:'ra',c:'rc',v:'rv'};
+  document.getElementById('recC').innerHTML = rs.map(r=>`<div class="rc2 ${cm[r.t]} fin"><i class="fa-solid ${r.i}"></i><div><strong>${r.ti}</strong><p>${r.d}</p></div></div>`).join('');
+}
+
+/* ========================================
+   RENDER: COSTS
+   ======================================== */
+function rCout(){
+  const c=cCouts(), eco=cEco();
+  const prixKWh = 0.15;
+  const roi=eco.tot>0?(c.tot/(eco.tot*prixKWh)).toFixed(1):'N/A';
+  const ls=[
+    ['Terrassement ('+S.longueur+'m × '+SOLS[S.typeSol].px+'€/m)',c.t],
+    ['Tuyauterie '+MAT[S.materiau].nom+' ('+S.longueur+'m × '+MAT[S.materiau].px+'€ × '+S.nbTuyaux+')',c.tu],
+    ['Collecteur(s) ×'+S.nbTuyaux,c.col],
+    ['Grille prise d\'air',c.gp],
+    ['By-pass motorisé',c.bp],
+    ['Raccords et accessoires',c.ra],
+    ['Provision maintenance / divers',c.mainten],
+  ];
+  let ecoDetail = '';
+  if(S.typePuits==='canadien') ecoDetail = ' (chauffage hiver seul)';
+  else if(S.typePuits==='provencal') ecoDetail = ' (rafraîchissement été seul)';
+  else ecoDetail = eco.hiv>0&&eco.ete>0 ? ` (hiv: ${eco.hiv} + été: ${eco.ete} kWh)` : '';
+
+  document.getElementById('coutC').innerHTML=`
+    <table style="width:100%;font-size:.78rem;border-collapse:collapse">
+      ${ls.map(l=>`<tr style="border-bottom:1px solid var(--border)"><td style="padding:.35rem 0;color:var(--fg2)">${l[0]}</td><td style="padding:.35rem 0;text-align:right;font-weight:600">${l[1].toLocaleString('fr-FR')} €</td></tr>`).join('')}
+      <tr><td style="padding:.5rem 0;font-weight:700;font-size:.82rem">Total estimé</td><td style="padding:.5rem 0;text-align:right;font-weight:700;font-size:.95rem;color:var(--accent)">${c.tot.toLocaleString('fr-FR')} €</td></tr>
+    </table>
+    <div style="margin-top:.6rem;display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.72rem;color:var(--fg2)">
+      <div>Économie : <strong style="color:var(--green)">${eco.tot} kWh/an</strong>${ecoDetail}</div>
+      <div>ROI : <strong style="color:var(--accent)">${roi!=='N/A'?roi+' ans':'N/A'}</strong></div>
+    </div>`;
+}
+
+/* ========================================
+   RENDER: SIMULATOR
+   ======================================== */
+function rSim(){
+  const mois = parseInt(document.getElementById('iSimMois').value);
+  const tAir = parseFloat(document.getElementById('iSimT').value);
+  document.getElementById('vSimT').textContent = tAir;
+
+  const tSol = cTSoilMonth(mois);
+  const tOut = cTOutSim(mois, tAir);
+  const delta = tOut - tAir;
+  const ms = ['Jan','Fév','Mar','Avr','Mai','Jun','Jui','Aoû','Sep','Oct','Nov','Déc'];
+
+  const types = [
+    {key:'canadien', nom:'Canadien', icon:'fa-snowflake', color:'#5b8def'},
+    {key:'hybride',   nom:'Hybride',   icon:'fa-arrows-rotate', color:'var(--accent2)'},
+    {key:'provencal', nom:'Provençal', icon:'fa-sun', color:'#ef8f5b'}
+  ];
+
+  let html = `<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
+    <div style="flex:1;min-width:100px;background:var(--card2);border-radius:7px;padding:.5rem;text-align:center">
+      <div style="font-size:.6rem;color:var(--muted)">T° sol à ${S.profondeur.toFixed(1)} m</div>
+      <div style="font-size:1.05rem;font-weight:700;color:var(--green)">${tSol.toFixed(1)} °C</div>
+      <div style="font-size:.55rem;color:var(--muted)">${ms[mois]} · ${SOLS[S.typeSol].nom}</div>
+    </div>
+    <div style="flex:1;min-width:100px;background:var(--card2);border-radius:7px;padding:.5rem;text-align:center">
+      <div style="font-size:.6rem;color:var(--muted)">T° sortie puits</div>
+      <div style="font-size:1.05rem;font-weight:700;color:var(--accent)">${tOut.toFixed(1)} °C</div>
+      <div style="font-size:.55rem;color:var(--muted)">${MAT[S.materiau].nom} · ${S.longueur}m</div>
+    </div>
+    <div style="flex:1;min-width:100px;background:var(--card2);border-radius:7px;padding:.5rem;text-align:center">
+      <div style="font-size:.6rem;color:var(--muted)">Écart</div>
+      <div style="font-size:1.05rem;font-weight:700;color:${delta>0?'var(--red)':delta<0?'var(--green)':'var(--muted)'}">${delta>0?'+':''}${delta.toFixed(1)} °C</div>
+      <div style="font-size:.55rem;color:var(--muted)">${delta>0.5?'réchauffement':delta<-0.5?'rafraîchissement':'neutre'}</div>
+    </div>
+  </div>`;
+
+  html += `<div style="display:flex;gap:.4rem;flex-wrap:wrap">`;
+  for(const t of types){
+    const active = isActiveForType(t.key, mois);
+    const isCurrent = t.key === S.typePuits;
+    const eff = active ? (delta>0?'+':'')+delta.toFixed(1)+' °C' : '—';
+    html += `<div style="flex:1;min-width:105px;background:${isCurrent?'rgba(198,122,75,.08)':'var(--card)'};border:1px solid ${isCurrent?'var(--accent)':active?'var(--green)':'var(--border)'};border-radius:7px;padding:.45rem;text-align:center;opacity:${active?1:.5}">
+      <div style="font-size:.68rem;font-weight:600;color:${t.color};margin-bottom:.15rem"><i class="fa-solid ${t.icon}" style="margin-right:.2rem;font-size:.6rem"></i>${t.nom}</div>
+      <div style="font-size:.62rem;color:${active?(delta>0?'var(--red)':delta<0?'var(--green)':'var(--fg2)'):'var(--muted)'}">${active?eff:'bypassé'}</div>
+      <div style="font-size:.5rem;color:var(--muted);margin-top:.1rem">${active?(delta>0?'préchauffe':delta<0?'rafraîchit':'neutre'):'saison inactive'}</div>
+    </div>`;
+  }
+  html += `</div>`;
+
+  document.getElementById('simRes').innerHTML = html;
+}
+
+/* ========================================
+   RENDER: PLAN (TOP VIEW)
+   ======================================== */
+function rPlan(){
+  const svg=document.getElementById('svgP');
+  const v=S.variante, z=ZONES[S.zoneClim];
+  const W=850, H=420;
+
+  // House dimensions (based on real footprint)
+  const footprint = S.surface / S.etages;
+  const hw = Math.min(Math.max(footprint * 1.8, 40), 200);
+  const hh = Math.min(hw * 0.55, 120);
+  const cx = 440, cy = 70; // house center
+  const hx = cx - hw/2, hy = cy - hh/2;
+  const houseBot = cy + hh/2;
+
+  // Pipe zone starts below house
+  const pipeMargin = 15;
+  const pipeTop = houseBot + pipeMargin + 10;
+  const pipeBot = H - 55;
+
+  // Pipe width
+  const pw = Math.max(3, (S.diametre / 200) * 4.5);
+
+  // Temperature coloring
+  const isWinter = v!=='provencal';
+  const tIn = isWinter ? z.tHiv : z.tEte;
+  const tOu = cTOutExt(isWinter);
+  const c1 = tCol(tIn), c2 = tCol(tOu);
+
+  // Gradient ID
+  const gId = 'pG_'+Math.random().toString(36).slice(2);
+
+  let elems = '';
+  let grpPipes = '';
+  let grpArrows = '';
+  let grpLabels = '';
+
+  // --- Background grid ---
+  elems += `<rect width="${W}" height="${H}" fill="var(--bg)"/>`;
+  elems += `<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40,0 L0,0 0,40" fill="none" stroke="rgba(58,51,43,.2)" stroke-width=".5"/></pattern></defs>`;
+  elems += `<rect width="${W}" height="${H}" fill="url(#grid)"/>`;
+
+  // --- Gradient definition ---
+  elems += `<defs><linearGradient id="${gId}" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>`;
+
+  // --- House ---
+  elems += `<rect x="${hx}" y="${hy}" width="${hw}" height="${hh}" rx="4" fill="var(--card2)" stroke="var(--fg2)" stroke-width="1.8"/>`;
+  elems += `<text x="${cx}" y="${cy-7}" text-anchor="middle" fill="var(--fg)" font-size="11" font-weight="700" font-family="Playfair Display,serif">HABITATION</text>`;
+  elems += `<text x="${cx}" y="${cy+10}" text-anchor="middle" fill="var(--muted)" font-size="8">${S.surface} m² · ${S.etages} ét. · ${S.standard==='passif'?'Passif':S.standard.toUpperCase()}</text>`;
+
+  // VMC / connection
+  const vmcX = cx;
+  const vmcY = houseBot - 3;
+  elems += `<rect x="${vmcX-14}" y="${vmcY-7}" width="28" height="12" rx="3" fill="var(--accent)" opacity=".6"/>`;
+  elems += `<text x="${vmcX}" y="${vmcY+2}" text-anchor="middle" fill="var(--fg)" font-size="7" font-weight="700">VMC</text>`;
+
+  // By-pass indicator
+  if(S.bypass){
+    elems += `<rect x="${vmcX+18}" y="${vmcY-5}" width="22" height="8" rx="2" fill="none" stroke="var(--gold)" stroke-width="1"/>`;
+    elems += `<text x="${vmcX+29}" y="${vmcY+1}" fill="var(--gold)" font-size="6" font-weight="600">BP</text>`;
+    elems += `<line x1="${vmcX}" y1="${vmcY+5}" x2="${vmcX+18}" y2="${vmcY-1}" stroke="var(--gold)" stroke-width=".8" stroke-dasharray="2,2"/>`;
+  }
+
+  // --- Pipe layouts ---
+  const actY = houseBot + 8;
+  const roomW = pipeBot - pipeTop;
+
+  if(v==='lineaire'){
+    const px1 = 60, px2 = hx - 20;
+    const py = pipeTop + roomW * 0.5;
+    grpPipes += `<line x1="${px1}" y1="${py}" x2="${px2}" y2="${py}" stroke="url(#${gId})" stroke-width="${pw}" stroke-linecap="round"/>`;
+    // Air intake
+    grpPipes += `<rect x="${px1-12}" y="${py-10}" width="12" height="20" rx="3" fill="var(--card2)" stroke="var(--green)" stroke-width="1.5"/>`;
+    grpPipes += `<text x="${px1-6}" y="${py-3}" text-anchor="middle" fill="var(--green)" font-size="6" font-weight="700">P</text><text x="${px1-6}" y="${py+8}" text-anchor="middle" fill="var(--green)" font-size="6" font-weight="700">A</text>`;
+    // Conduit to VMC
+    grpPipes += `<line x1="${px2+4}" y1="${py}" x2="${vmcX}" y2="${vmcY}" stroke="${c2}" stroke-width="${pw*0.7}" stroke-dasharray="5,3" stroke-linecap="round"/>`;
+    // Arrow
+    grpPipes += `<polygon points="${vmcX-5},${vmcY+4} ${vmcX+3},${vmcY} ${vmcX-5},${vmcY-4}" fill="${c2}" opacity=".9"/>`;
+    // Dimension
+    grpLabels += `<line x1="${px1}" y1="${py-16}" x2="${px2}" y2="${py-16}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<line x1="${px1}" y1="${py-18}" x2="${px1}" y2="${py-14}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<line x1="${px2}" y1="${py-18}" x2="${px2}" y2="${py-14}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<text x="${(px1+px2)/2}" y="${py-20}" text-anchor="middle" fill="var(--muted)" font-size="7">${S.longueur} m</text>`;
+    // Flow dots
+    const amt = 5;
+    for(let i=0;i<amt;i++){
+      grpArrows += `<circle r="3" fill="${c2}" opacity=".7" class="gd" style="animation-delay:${i*0.6}s"><animateMotion dur="${amt*0.6}s" repeatCount="indefinite" path="M${px1},${py} L${px2},${py}" begin="${i*0.6}s"/></circle>`;
+    }
+  }
+  else if(v==='epingles'){
+    const rows = Math.min(S.nbTuyaux * 2, 4);
+    const sp = Math.min(roomW / (rows + 1), 36);
+    const halfW = hw * 0.4 + 100;
+    const x1 = cx - halfW, x2 = cx + halfW;
+    const startY = pipeTop + (roomW - (rows-1)*sp) / 2;
+    let path = `M${x1},${startY} L${x2},${startY}`;
+    for(let i=1;i<rows;i++){
+      path += ` L${x2},${startY + i*sp} L${x1},${startY + i*sp}`;
+    }
+    const endY = startY + (rows-1)*sp;
+
+    grpPipes += `<path d="${path}" fill="none" stroke="url(#${gId})" stroke-width="${pw}" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    // Air intake at start
+    grpPipes += `<rect x="${x1-14}" y="${startY-10}" width="12" height="20" rx="3" fill="var(--card2)" stroke="var(--green)" stroke-width="1.5"/>`;
+    grpPipes += `<text x="${x1-8}" y="${startY-3}" text-anchor="middle" fill="var(--green)" font-size="6" font-weight="700">P</text><text x="${x1-8}" y="${startY+8}" text-anchor="middle" fill="var(--green)" font-size="6" font-weight="700">A</text>`;
+
+    // Conduit from end to house
+    const ex = x1, ey = endY;
+    grpPipes += `<line x1="${ex}" y1="${ey}" x2="${ex}" y2="${actY}" stroke="${c2}" stroke-width="${pw*0.7}" stroke-linecap="round"/>`;
+    grpPipes += `<line x1="${ex}" y1="${actY}" x2="${vmcX}" y2="${vmcY}" stroke="${c2}" stroke-width="${pw*0.7}" stroke-linecap="round" stroke-dasharray="5,3"/>`;
+    grpPipes += `<polygon points="${vmcX-5},${vmcY+4} ${vmcX+3},${vmcY} ${vmcX-5},${vmcY-4}" fill="${c2}" opacity=".9"/>`;
+
+    // Dimension
+    grpLabels += `<line x1="${x2+8}" y1="${startY}" x2="${x2+8}" y2="${endY}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<line x1="${x2+5}" y1="${startY}" x2="${x2+11}" y2="${startY}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<line x1="${x2+5}" y1="${endY}" x2="${x2+11}" y2="${endY}" stroke="var(--muted)" stroke-width=".7"/>`;
+    grpLabels += `<text x="${x2+18}" y="${(startY+endY)/2+3}" fill="var(--muted)" font-size="7">${rows} nappes</text>`;
+    grpLabels += `<text x="${(x1+x2)/2}" y="${endY+16}" text-anchor="middle" fill="var(--muted)" font-size="7">${S.longueur} m total · ${S.nbTuyaux} tuyau(x)</text>`;
+
+    // Flow dots
+    const amt = 5;
+    for(let i=0;i<amt;i++){
+      grpArrows += `<circle r="3" fill="${c2}" opacity=".7" class="gd" style="animation-delay:${i*1}s"><animateMotion dur="${amt*1}s" repeatCount="indefinite" path="${path.replace(/"/g,'&quot;')}" begin="${i*1}s"/></circle>`;
+    }
+  }
+  else if(v==='etoile'){
+    const colX = cx, colY = pipeTop + roomW * 0.6;
+    const branches = Math.max(S.nbTuyaux, 2);
+    const maxLen = roomW * 0.6;
+
+    // Collecteur
+    grpPipes += `<circle cx="${colX}" cy="${colY}" r="10" fill="var(--card2)" stroke="${c2}" stroke-width="1.8"/>`;
+    grpPipes += `<text x="${colX}" y="${colY+4}" text-anchor="middle" fill="var(--muted)" font-size="8" font-weight="700">C</text>`;
+
+    for(let i=0;i<branches;i++){
+      let angle = (branches===1) ? -Math.PI/2 : -(i/(branches-1))*Math.PI;
+      const len = maxLen;
+      const ex = colX + Math.cos(angle)*len;
+      const ey = colY + Math.sin(angle)*len;
+      grpPipes += `<line x1="${colX}" y1="${colY}" x2="${ex}" y2="${ey}" stroke="url(#${gId})" stroke-width="${pw}" stroke-linecap="round"/>`;
+      // Air intake at branch end
+      grpPipes += `<circle cx="${ex}" cy="${ey}" r="6" fill="var(--card2)" stroke="var(--green)" stroke-width="1.2"/>`;
+      grpPipes += `<text x="${ex}" y="${ey+1}" text-anchor="middle" fill="var(--green)" font-size="5.5" font-weight="700">PA</text>`;
+      // Label
+      const mx=(colX+ex)/2, my=(colY+ey)/2;
+      grpLabels += `<text x="${mx+6}" y="${my-2}" fill="var(--muted)" font-size="6">${cLPT().toFixed(0)}m</text>`;
+      // Flow dots
+      for(let j=0;j<2;j++){
+        grpArrows += `<circle r="2.5" fill="${c2}" opacity=".7" class="gd" style="animation-delay:${j*1.2+i*0.3}s"><animateMotion dur="3s" repeatCount="indefinite" path="M${ex},${ey} L${colX},${colY}" begin="${j*1.2+i*0.3}s"/></circle>`;
+      }
+    }
+    // Conduit collecteur -> maison
+    grpPipes += `<line x1="${colX}" y1="${colY-10}" x2="${vmcX}" y2="${vmcY}" stroke="${c2}" stroke-width="${pw*0.7}" stroke-dasharray="5,3" stroke-linecap="round"/>`;
+    grpPipes += `<polygon points="${vmcX-5},${vmcY+4} ${vmcX+3},${vmcY} ${vmcX-5},${vmcY-4}" fill="${c2}" opacity=".9"/>`;
+    grpLabels += `<text x="${colX+18}" y="${(colY+vmcY)/2}" fill="var(--muted)" font-size="6.5">prof. ${S.profondeur}m</text>`;
+  }
+  else if(v==='dual'){
+    const halfW = hw * 0.4 + 90;
+    const x1 = cx - halfW, x2 = cx + halfW;
+    const yHiv = pipeTop + roomW * 0.25;
+    const yEte = pipeTop + roomW * 0.7;
+
+    // Hiver circuit
+    grpPipes += `<line x1="${x1}" y1="${yHiv}" x2="${x2}" y2="${yHiv}" stroke="#5b8def" stroke-width="${pw}" stroke-linecap="round" opacity=".9"/>`;
+    grpPipes += `<rect x="${x1-12}" y="${yHiv-8}" width="10" height="16" rx="2" fill="var(--card2)" stroke="#5b8def" stroke-width="1.2"/>`;
+    grpPipes += `<text x="${x1-7}" y="${yHiv+2}" text-anchor="middle" fill="#5b8def" font-size="5.5" font-weight="700">PA</text>`;
+    grpPipes += `<text x="${x2+11}" y="${yHiv+3}" fill="#5b8def" font-size="7" font-weight="700">HIVER</text>`;
+    grpPipes += `<line x1="${cx-15}" y1="${vmcY}" x2="${cx-15}" y2="${yHiv}" stroke="#5b8def" stroke-width="${pw*0.6}" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+    grpPipes += `<polygon points="${cx-19},${vmcY+3} ${cx-12},${vmcY} ${cx-19},${vmcY-3}" fill="#5b8def" opacity=".9"/>`;
+
+    // Été circuit
+    grpPipes += `<line x1="${x1}" y1="${yEte}" x2="${x2}" y2="${yEte}" stroke="#ef8f5b" stroke-width="${pw}" stroke-linecap="round" opacity=".9"/>`;
+    grpPipes += `<rect x="${x1-12}" y="${yEte-8}" width="10" height="16" rx="2" fill="var(--card2)" stroke="#ef8f5b" stroke-width="1.2"/>`;
+    grpPipes += `<text x="${x1-7}" y="${yEte+2}" text-anchor="middle" fill="#ef8f5b" font-size="5.5" font-weight="700">PA</text>`;
+    grpPipes += `<text x="${x2+11}" y="${yEte+3}" fill="#ef8f5b" font-size="7" font-weight="700">ÉTÉ</text>`;
+    grpPipes += `<line x1="${cx+15}" y1="${vmcY}" x2="${cx+15}" y2="${yEte}" stroke="#ef8f5b" stroke-width="${pw*0.6}" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+    grpPipes += `<polygon points="${cx+11},${vmcY+3} ${cx+18},${vmcY} ${cx+11},${vmcY-3}" fill="#ef8f5b" opacity=".9"/>`;
+
+    grpLabels += `<text x="${(x1+x2)/2}" y="${pipeBot-8}" text-anchor="middle" fill="var(--muted)" font-size="7">2 circuits indépendants · ${S.longueur}m total</text>`;
+
+    // Flow dots
+    for(let i=0;i<3;i++){
+      grpArrows += `<circle r="2.5" fill="#5b8def" opacity=".7" class="gd" style="animation-delay:${i*1}s"><animateMotion dur="3s" repeatCount="indefinite" path="M${x1},${yHiv} L${x2},${yHiv}" begin="${i*1}s"/></circle>`;
+      grpArrows += `<circle r="2.5" fill="#ef8f5b" opacity=".7" class="gd" style="animation-delay:${i*1+.5}s"><animateMotion dur="3s" repeatCount="indefinite" path="M${x1},${yEte} L${x2},${yEte}" begin="${i*1+.5}s"/></circle>`;
+    }
+  }
+
+  // --- Depth scale bar ---
+  const scaleX = W - 80;
+  const scaleY1 = 18;
+  const scaleY2 = scaleY1 + S.profondeur * 28;
+  elems += `<line x1="${scaleX}" y1="${scaleY1}" x2="${scaleX}" y2="${scaleY2}" stroke="var(--accent)" stroke-width="2"/>`;
+  elems += `<line x1="${scaleX-5}" y1="${scaleY1}" x2="${scaleX+5}" y2="${scaleY1}" stroke="var(--accent)" stroke-width="1.2"/>`;
+  elems += `<line x1="${scaleX-5}" y1="${scaleY2}" x2="${scaleX+5}" y2="${scaleY2}" stroke="var(--accent)" stroke-width="1.2"/>`;
+  elems += `<polygon points="${scaleX-4},${scaleY2} ${scaleX},${scaleY2+6} ${scaleX+4},${scaleY2}" fill="var(--accent)"/>`;
+  elems += `<text x="${scaleX}" y="${scaleY1-4}" text-anchor="middle" fill="var(--accent)" font-size="7" font-weight="700">Prof. ${S.profondeur}m</text>`;
+  elems += `<rect x="${scaleX-14}" y="${scaleY1}" width="28" height="${scaleY2-scaleY1}" fill="rgba(198,122,75,.06)" rx="2"/>`;
+
+  // --- Temperature legend ---
+  const legX = 15, legY = H - 120;
+  elems += `<rect x="${legX}" y="${legY}" width="10" height="80" rx="4" fill="url(#tLeg_${gId})" stroke="var(--border)" stroke-width=".5"/>`;
+  elems += `<text x="${legX+16}" y="${legY+8}" fill="var(--muted)" font-size="7">${z.tEte}°C</text>`;
+  elems += `<text x="${legX+16}" y="${legY+78}" fill="var(--muted)" font-size="7">${z.tHiv}°C</text>`;
+  elems += `<text x="${legX+5}" y="${legY+46}" fill="var(--muted)" font-size="6" transform="rotate(-90,${legX+5},${legY+46})">T° air</text>`;
+
+  // --- Legend gradient for temperature ---
+  elems += `<defs><linearGradient id="tLeg_${gId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${tCol(z.tEte)}"/><stop offset="100%" stop-color="${tCol(z.tHiv)}"/></linearGradient></defs>`;
+
+  // --- North arrow ---
+  elems += `<g transform="translate(${W-30},${H-80})"><polygon points="0,-14 -4,14 0,8 4,14" fill="var(--muted)"/><text x="0" y="-17" text-anchor="middle" fill="var(--muted)" font-size="7" font-weight="700">N</text></g>`;
+
+  // --- Legend items ---
+  elems += `<rect x="15" y="${H-30}" width="10" height="4" rx="1" fill="var(--green)"/><text x="30" y="${H-25}" fill="var(--muted)" font-size="6">Prise d'air</text>`;
+  elems += `<line x1="15" y1="${H-15}" x2="25" y2="${H-15}" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="3,2"/><text x="30" y="${H-11}" fill="var(--muted)" font-size="6">Conduit vers VMC</text>`;
+  elems += `<circle cx="20" cy="${H-5}" r="2.5" fill="${c2}" opacity=".7"/><text x="30" y="${H-1}" fill="var(--muted)" font-size="6">Flux d'air</text>`;
+
+  svg.innerHTML = elems + grpPipes + grpArrows + grpLabels + `<text x="${W/2}" y="${H-6}" text-anchor="middle" fill="var(--muted)" font-size="7">${S.nbTuyaux} tuyau(x) Ø${S.diametre}mm · ${MAT[S.materiau].nom} · Sol ${SOLS[S.typeSol].nom}</text>`;
+}
+
+/* ========================================
+   RENDER: COUPE (CROSS-SECTION)
+   ======================================== */
+function rCoupe(){
+  const svg = document.getElementById('svgC');
+  const z = ZONES[S.zoneClim], p = S.profondeur;
+  const W = 300, H = 220;
+  const groundY = 55;
+  const pipeY = groundY + p * 30;
+  const pr = Math.max(S.diametre/200 * 8, 6);
+
+  let s = '';
+
+  // Sky
+  s += `<rect width="${W}" height="${groundY-3}" fill="#1a2e1a"/>`;
+  // Sun
+  s += `<circle cx="${W-30}" cy="18" r="14" fill="var(--gold)" opacity=".7"/>`;
+  // Clouds
+  s += `<ellipse cx="60" cy="15" rx="18" ry="8" fill="rgba(240,230,216,.08)"/><ellipse cx="75" cy="12" rx="14" ry="7" fill="rgba(240,230,216,.06)"/>`;
+
+  // Ground surface
+  s += `<rect x="0" y="${groundY-3}" width="${W}" height="6" rx="1" fill="#4a6b3a"/>`;
+  s += `<text x="10" y="${groundY-5}" fill="#6a9b5a" font-size="7">Surface (0 m)</text>`;
+
+  // Soil layers
+  const layers = [
+    {y:groundY+3, h: Math.min(p*8, 26), c:'#5c4a3a', l:'Terre végétale'},
+    {y:groundY+29, h: p*15, c:'#6b5545', l: SOLS[S.typeSol].nom},
+    {y:groundY+29 + p*15 - 5, h: H - (groundY+29 + p*15 - 5), c:'#7a6350', l:'Sous-sol profond'}
+  ];
+  layers.forEach(L => {
+    if(L.h > 0){
+      s += `<rect x="0" y="${L.y}" width="${W}" height="${L.h}" fill="${L.c}" opacity=".55"/>`;
+      s += `<text x="6" y="${L.y+12}" fill="rgba(240,230,216,.35)" font-size="5.5">${L.l}</text>`;
+    }
+  });
+
+  // Pipe cross-section
+  s += `<ellipse cx="${W/2}" cy="${pipeY}" rx="${pr+3}" ry="${pr/2+2}" fill="none" stroke="var(--accent)" stroke-width="1.5"/>`;
+  s += `<ellipse cx="${W/2}" cy="${pipeY}" rx="${pr}" ry="${pr/2}" fill="var(--card)" stroke="var(--accent3)" stroke-width="1"/>`;
+  s += `<text x="${W/2}" y="${pipeY+1.5}" text-anchor="middle" fill="var(--accent2)" font-size="6" font-weight="700">Ø${S.diametre}</text>`;
+
+  // Temperature label at pipe depth (show range: winter min / summer max)
+  const tSoilHiv = cTSoilExt(true);
+  const tSoilEte = cTSoilExt(false);
+  const tSoilMoy = (tSoilHiv + tSoilEte) / 2;
+  s += `<rect x="${W/2-35}" y="${pipeY-pr/2-16}" width="70" height="13" rx="3" fill="rgba(125,155,118,.12)" stroke="var(--green)" stroke-width=".7"/>`;
+  s += `<text x="${W/2}" y="${pipeY-pr/2-8}" text-anchor="middle" fill="var(--green)" font-size="6.5" font-weight="700">${tSoilHiv.toFixed(1)} — ${tSoilEte.toFixed(1)} °C</text>`;
+
+  // Depth dimension
+  s += `<line x1="${W-45}" y1="${groundY}" x2="${W-45}" y2="${pipeY}" stroke="var(--fg2)" stroke-width=".8" stroke-dasharray="4,3"/>`;
+  s += `<line x1="${W-49}" y1="${groundY}" x2="${W-41}" y2="${groundY}" stroke="var(--fg2)" stroke-width=".8"/>`;
+  s += `<line x1="${W-49}" y1="${pipeY}" x2="${W-41}" y2="${pipeY}" stroke="var(--fg2)" stroke-width=".8"/>`;
+  s += `<text x="${W-35}" y="${(groundY+pipeY)/2+3}" fill="var(--fg2)" font-size="7" font-weight="700">${p.toFixed(1)}m</text>`;
+
+  // House
+  s += `<rect x="${W/2-28}" y="8" width="56" height="30" rx="3" fill="var(--card2)" stroke="var(--fg2)" stroke-width="1.3"/>`;
+  s += `<text x="${W/2}" y="20" text-anchor="middle" fill="var(--fg)" font-size="7" font-weight="700">Habitation</text>`;
+  s += `<text x="${W/2}" y="30" text-anchor="middle" fill="var(--muted)" font-size="5.5">VMC</text>`;
+
+  // VMC conduit to pipe
+  s += `<line x1="${W/2}" y1="38" x2="${W/2}" y2="${pipeY-pr/2-2}" stroke="var(--muted)" stroke-width=".9" stroke-dasharray="3,3"/>`;
+  s += `<text x="${W/2+5}" y="50" fill="var(--muted)" font-size="6">conduit</text>`;
+
+  // Air intake
+  s += `<rect x="12" y="${groundY-10}" width="10" height="16" rx="3" fill="var(--card2)" stroke="var(--green)" stroke-width="1"/>`;
+  s += `<text x="17" y="${groundY-13}" text-anchor="middle" fill="var(--green)" font-size="5.5" font-weight="700">PA</text>`;
+  s += `<path d="M22,${groundY} Q65,${pipeY} ${W/2-pr},${pipeY}" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4,3"/>`;
+
+  // Flow arrow in pipe
+  s += `<defs><marker id="aR2" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="var(--accent2)"/></marker></defs>`;
+  s += `<line x1="${W/2-pr-5}" y1="${pipeY}" x2="${W/2-3}" y2="${pipeY}" stroke="var(--accent2)" stroke-width="1.5" marker-end="url(#aR2)"/>`;
+
+  // Footer with amplitude info
+  const amplSurf = (z.tEte - z.tHiv) / 2;
+  const amplDepth = (tSoilEte - tSoilHiv) / 2;
+  const reduc = Math.round((1 - amplDepth / Math.max(amplSurf, 0.1)) * 100);
+  s += `<text x="${W/2}" y="${H-10}" text-anchor="middle" fill="var(--muted)" font-size="5.5">Coupe schématique · Prof. ${p.toFixed(1)} m · ${SOLS[S.typeSol].nom} · Amplitude réduite de ${reduc}%</text>`;
+
+  svg.innerHTML = s;
+}
+
+/* ========================================
+   RENDER: VARIANT INFO + COMPARISON
+   ======================================== */
+function rVInfo(){
+  const v = VAR[S.variante];
+  document.getElementById('vInfo').innerHTML = `
+    <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem">
+      <i class="fa-solid ${v.ic}" style="color:var(--accent);font-size:1rem"></i>
+      <h3 style="font-size:.85rem">${v.nom}</h3>
+    </div>
+    <p style="font-size:.72rem;color:var(--fg2);margin-bottom:.6rem;line-height:1.4">${v.desc}</p>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:.3rem .5rem;font-size:.68rem;align-items:center">
+      <span style="color:var(--green)"><i class="fa-solid fa-check" style="font-size:.5rem"></i> Efficacité</span>
+      <div class="eb"><div class="ef" style="width:${v.ef*20}%;background:var(--green)"></div></div>
+      <span style="color:var(--gold)"><i class="fa-solid fa-wrench" style="font-size:.5rem"></i> Complexité</span>
+      <div class="eb"><div class="ef" style="width:${v.cx*20}%;background:var(--gold)"></div></div>
+      <span style="color:var(--red)"><i class="fa-solid fa-coins" style="font-size:.5rem"></i> Coût</span>
+      <div class="eb"><div class="ef" style="width:${v.co*20}%;background:var(--red)"></div></div>
+    </div>
+    <div style="margin-top:.5rem;font-size:.65rem;color:var(--green)">
+      <strong>Avantages :</strong> ${v.av.slice(0,3).join(' · ')}
+    </div>
+    <div style="margin-top:.15rem;font-size:.65rem;color:var(--red);opacity:.8">
+      <strong>Limites :</strong> ${v.inc.slice(0,3).join(' · ')}
+    </div>
+    <p style="font-size:.66rem;color:var(--muted);margin-top:.5rem;font-style:italic;line-height:1.3">${v.rc}</p>`;
+}
+
+function rVComp(){
+  const keys = Object.keys(VAR), act = S.variante;
+  document.getElementById('vComp').innerHTML = `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;font-size:.72rem">
+    ${keys.map(k=>{const v=VAR[k];const isA=k===act;
+      return`<div style="background:${isA?'rgba(198,122,75,.08)':'var(--card)'};border:1px solid ${isA?'var(--accent)':'var(--border)'};border-radius:9px;padding:.75rem;cursor:pointer;transition:all .25s" onclick="selVar('${k}')" onmouseenter="this.style.borderColor='var(--accent3)'" onmouseleave="this.style.borderColor='${isA?'var(--accent)':'var(--border)'}'">
+        <div style="font-weight:700;margin-bottom:.35rem;color:${isA?'var(--accent2)':'var(--fg)'}"><i class="fa-solid ${v.ic}" style="margin-right:.3rem"></i>${v.nom}</div>
+        <div style="color:var(--green);font-size:.63rem;margin-bottom:.15rem;line-height:1.3">${v.av.slice(0,2).join(' · ')}</div>
+        <div style="color:var(--red);font-size:.63rem;opacity:.7;line-height:1.3">${v.inc.slice(0,2).join(' · ')}</div>
+      </div>`}).join('')}
+  </div>`;
+}
+
+function selVar(k){
+  S.variante = k;
+  document.querySelectorAll('.vt').forEach(t => t.classList.toggle('a', t.dataset.v === k));
+  rPlan(); rCoupe(); rVInfo(); rVComp(); rKPI(); rRec(); rCout();
+}
+
+/* ========================================
+   FULL UPDATE
+   ======================================== */
+function updateAll(preserveDebit){
+  const dR = cDRec();
+  document.getElementById('vDr').textContent = dR;
+  if(!preserveDebit){
+    S.debit = dR;
+    document.getElementById('iD').value = dR;
+    document.getElementById('vD').textContent = dR;
+  }
+  rKPI(); rChart(); rRec(); rCout(); rPlan(); rCoupe(); rVInfo(); rVComp(); rSim();
+}
+
+/* ========================================
+   EVENTS
+   ======================================== */
+function initEvt(){
+  // Type de puits radio
+  document.querySelectorAll('#typePuits .ri').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      document.querySelectorAll('#typePuits .ri').forEach(x=>x.classList.remove('a'));
+      c.classList.add('a');
+      S.typePuits = c.dataset.val;
+      updateAll(false);
+    });
+  });
+
+  // Sliders
+  [{id:'iS',k:'surface',vId:'vS',p:parseInt, fmt:v=>v},
+   {id:'iD',k:'debit',vId:'vD',p:parseInt, fmt:v=>v},
+   {id:'iL',k:'longueur',vId:'vL',p:parseInt, fmt:v=>v},
+   {id:'iP',k:'profondeur',vId:'vP',p:parseFloat, fmt:v=>v.toFixed(1)}
+  ].forEach(s=>{
+    const el = document.getElementById(s.id);
+    const handler = (e) => {
+      S[s.k] = s.p(e.target.value);
+      document.getElementById(s.vId).textContent = s.fmt(S[s.k]);
+      updateAll(s.k === 'debit');
+    };
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+    // Also update the displayed value once without triggering full update
+  });
+
+  // Selects
+  [{id:'iE',k:'etages',p:parseInt},
+   {id:'iStd',k:'standard'},
+   {id:'iVt',k:'typeVent'},
+   {id:'iMat',k:'materiau'},
+   {id:'iDia',k:'diametre',p:parseInt},
+   {id:'iNb',k:'nbTuyaux',p:parseInt},
+   {id:'iSol',k:'typeSol'},
+   {id:'iZ',k:'zoneClim'}
+  ].forEach(s=>{
+    document.getElementById(s.id).addEventListener('change', e=>{
+      S[s.k] = s.p ? s.p(e.target.value) : e.target.value;
+      updateAll(s.k !== 'standard');
+    });
+  });
+
+  // By-pass toggle
+  const tg = document.getElementById('tBp');
+  tg.addEventListener('click', ()=>{
+    S.bypass = !S.bypass;
+    tg.classList.toggle('on', S.bypass);
+    tg.setAttribute('aria-checked', S.bypass);
+    updateAll(true);
+  });
+  tg.addEventListener('keydown', e=>{
+    if(e.key===' '||e.key==='Enter'){ e.preventDefault(); tg.click(); }
+  });
+
+  // Simulator events
+  document.getElementById('iSimMois').addEventListener('change', rSim);
+  document.getElementById('iSimT').addEventListener('input', rSim);
+}
+
+/* ========================================
+   INITIALIZATION
+   ======================================== */
+function init(){
+  S.debit = cDRec();
+  document.getElementById('iD').value = S.debit;
+  document.getElementById('vD').textContent = S.debit;
+
+  // Variant tabs
+  const tc = document.getElementById('vTabs');
+  tc.innerHTML = Object.keys(VAR).map(k =>
+    `<div class="vt ${k===S.variante?'a':''}" data-v="${k}" onclick="selVar('${k}')"><i class="fa-solid ${VAR[k].ic}" style="margin-right:.25rem"></i>${VAR[k].nom}</div>`
+  ).join('');
+
+  initEvt();
+
+  // Init simulator with current month and zone monthly average
+  const curMonth = new Date().getMonth();
+  document.getElementById('iSimMois').value = curMonth;
+  const defaultT = ZONES[S.zoneClim].tm[curMonth];
+  document.getElementById('iSimT').value = defaultT;
+  document.getElementById('vSimT').textContent = defaultT;
+
+  updateAll(false);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
