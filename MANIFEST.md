@@ -3,7 +3,7 @@
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
 - 49 tables, 7 vues
-- Scripts : 119 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- Scripts : 129 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
@@ -13,6 +13,9 @@
 | `analyse_emergences.py` | `tools/admin/` | Détecteur de tensions transversales (phase 1 du « conseil ») |
 | `analyse_fiches.py` | `tools/admin/` | Analyse consciente des fiches via pattern agent_runner. |
 | `audit_anglicismes.py` | `tools/admin/` | Détecte les anglicismes résiduels dans le corpus. |
+| `audit_bq_deepseek.py` | `tools/admin/` | Nettoyage des BQ (base de connaissances) via DeepSeek V4. |
+| `audit_bq_legacy_ids.py` | `tools/admin/` | Détecte les références BQ #NNN (IDs numériques legacy) |
+| `audit_bq_verify.py` | `tools/admin/` | Vérification factuelle des alertes audit_bq_deepseek. |
 | `audit_bt.py` | `tools/admin/` | Audit de l'arbre BT (hyperonymes) du thésaurus. |
 | `audit_canoniques_anglais.py` | `tools/admin/` | Détection des canoniques FR qui sont en réalité des termes anglais. |
 | `audit_center.py` | `tools/admin/` | Centre d'audit du corpus : le FIL DIRECTEUR, tiré au démarrage. |
@@ -22,13 +25,12 @@
 | `audit_factuel_pdf.py` | `tools/admin/` | Vérification profonde : la source dit-elle ce qu'on prétend ? |
 | `audit_factuel_scholarai.py` | `tools/admin/` | Vérification live des sources flaggées par la gâche 3. |
 | `audit_fiches.py` | `tools/admin/` | Audit complet des fiches integrees. |
-| `audit_focus.py` | `tools/admin/` | Audits focalisés via agent_runner (Opus, 3 phases). |
+| `audit_focus.py` | `tools/admin/` | Audits focalisés via agent_runner (3 phases). |
 | `audit_graines.py` | `tools/admin/` | Contrôle qualité des graines (fiche_sections) AVANT envoi Jenni. |
-| `audit_meta.py` | `tools/admin/` | Méta-audit : lit tous les audit_reports/json/*_latest.json |
-| `audit_opus.py` | `tools/admin/` | Audit approfondi du corpus via agents Task LLM |
+| `audit_meta.py` | `tools/admin/` | Méta-audit : lit tous les jmj/rapports/audit_data/json/*_latest.json |
 | `audit_repartition.py` | `tools/admin/` | Audit de répartition par strate. |
 | `audit_sources_orphelines.py` | `tools/admin/` | Audit des sources sans DOI ni URL, avec remontée au docx d'origine pour récupérer les RIS sources. |
-| `audit_thesaurus.py` | `tools/admin/` | Rapport d'audit consolidé du thésaurus (axes A→H, doctrine BQ #155). |
+| `audit_thesaurus.py` | `tools/admin/` | Rapport d'audit consolidé du thésaurus (axes A→H, doctrine BQ `audit_thesaurus`). |
 | `backfill_biblio.py` | `tools/admin/` | consolidation jenni_sources depuis docx + prompts. |
 | `backup_rotation.py` | `tools/admin/` | Backup externe avec rotation 7 jours (rsync). |
 | `bq_query.py` | `tools/admin/` | Consultation BQ on-demand (filesystem) |
@@ -38,15 +40,20 @@
 | `dedupe_thesaurus.py` | `tools/admin/` | Détecte et fusionne les doublons du thésaurus. |
 | `deploy_publications.py` | `tools/admin/` | Synchronise Publications/web/ vers ../Publications/ |
 | `dump_db_sql.py` | `tools/admin/` | Dump SQL compressé de sol_vivant.db → backups/sol_vivant.sql.gz. |
+| `enrich_hal.py` | `tools/admin/` | Enrichissement des jenni_sources via l'API HAL (CCSD). |
 | `enrich_jenni_sources_crossref.py` | `tools/admin/` | Enrichissement direct des jenni_sources via CrossRef. |
 | `enrich_scholarai.py` | `tools/admin/` | Enrichissement des jenni_sources via ScholarAI API. |
+| `enrich_thesaurus_api.py` | `tools/admin/` | Enrichissement direct du thésaurus via ScholarAI. |
 | `explorer.py` | `tools/admin/` | Interface web locale pour consulter sol_vivant.db |
 | `export_biblio.py` | `tools/admin/` | exporte la biblio jenni_sources au format RIS ou APA. |
 | `export_mismatches_inrae.py` | `tools/admin/` | Export des mismatches corpus ↔ INRAE pour arbitrage. |
 | `export_termes_candidats.py` | `tools/admin/` | Export des termes candidats non insérés pour validation. |
 | `export_tools.py` | `tools/admin/` | Exporte les scripts depuis le filesystem (tools/lib/scripts_inventory.py) vers un ZIP versionné |
 | `export_zotero.py` | `tools/admin/` | Export RIS pour import Zotero avec tags (strate/doc_code). |
+| `fix_bq_arbitrages.py` | `tools/admin/` | Applique les corrections confirmées de l'audit BQ. |
+| `fix_bq_arbitrages_scripts.py` | `tools/admin/` | Applique les corrections BQ #NNN dans les scripts Python. |
 | `fix_titres.py` | `tools/admin/` | Remplace le tiret par un point après les numéros de chapitre romains (I à X max). |
+| `gen_pending_template.py` | `tools/admin/` | Génère le template du pending session recap. |
 | `ingest_structured_links.py` | `tools/admin/` | Câblage des cards orphelines depuis le travail d'audit déjà structuré. |
 | `pedago_links_apply.py` | `tools/admin/` | Insère dans pedago_links les suggestions de pedago_links_suggest.py, selon des seuils par rôle. |
 | `pedago_links_suggest.py` | `tools/admin/` | Suggestion de cards pédagogiques à lier aux fiches/docs |
@@ -57,12 +64,13 @@
 | `relink_fiche_refs.py` | `tools/admin/` | Reconnecte les refs JSON de fiche_contenus.refs vers jenni_sources.id, et garantit la présence des source_usages. |
 | `repair_thesaurus_defs.py` | `tools/admin/` | Répare deux corruptions héritées du champ terms.definition. |
 | `repair_usages_collision_millesime.py` | `tools/admin/` | Purge des source_usages parasites créés par une collision de millésime (bug short_authors d'integrate_fiche.py). |
-| `resolve_sources_crossref.py` | `tools/admin/` | Phase 1 Crossref auto pour sources orphelines (BQ #129 wf_source_integration). |
+| `resolve_sources_crossref.py` | `tools/admin/` | Phase 1 Crossref auto pour sources orphelines (BQ `wf_source_integration`). |
 | `resolve_term_relations.py` | `tools/admin/` | Résout les relations orphelines du thésaurus. |
 | `retag_source_usages.py` | `tools/admin/` | Rétro-tag des source_usages depuis les inline citations de fiche_retour_sections. |
-| `session_end.py` | `tools/admin/` | Clôture de session (CLI local). |
+| `session_end.py` | `tools/admin/` | Clôture de session (opencode CLI local). |
 | `session_start.py` | `tools/admin/` | Dashboard de démarrage de session (CLI local) |
 | `sync_syn_inrae.py` | `tools/admin/` | Enrichit syn_fr/syn_en du thésaurus corpus depuis INRAE. |
+| `verify_citations.py` | `tools/admin/` | Vérification des citations APA inline contre jenni_sources + Zotero. |
 | `analyse_corpus.py` | `tools/batch/` | Analyse modulaire du corpus  v4.1 |
 | `gen_archive.py` | `tools/docs/` | Génère une archive ZIP hors-ligne du site Sol Vivant. |
 | `gen_bq_page.py` | `tools/docs/` | page HTML cartographique simple des BQ. |
@@ -83,6 +91,7 @@
 | `gen_triangle_textures.py` | `tools/docs/` | Génère une page HTML interactive du triangle des textures GEPPA/USDA, liée au corpus Sol Vivant. |
 | `gen_web.py` | `tools/docs/` | Cartographie React interactive (consultation publique web) |
 | `gen_workflows.py` | `tools/docs/` | Génère un fichier MD de workflow par domaine technique. |
+| `enrich_fiche_section_hybrid.py` | `tools/jenni/` | Pipeline hybride ScholarAI → DeepSeek pour SECTION de FICHE. |
 | `enrich_thesaurus.py` | `tools/jenni/` | Pipeline unifie d'enrichissement du thesaurus. |
 | `export_jenni_doc.py` | `tools/jenni/` | Génération mécanique des prompts Jenni |
 | `export_thesaurus_incomplets.py` | `tools/jenni/` | Génère des docx Jenni pour termes incomplets. |
@@ -101,16 +110,17 @@
 | `agent_runner.py` | `tools/lib/` | Pattern « préparateur → agents Task → consolidateur » |
 | `apa.py` | `tools/lib/` | Helpers partagés pour les citations APA et le matching jenni_sources. |
 | `audit_persist.py` | `tools/lib/` | Persistance des rapports d'audit sur filesystem. |
-| `audit_post_import.py` | `tools/lib/` | Audit post-import du thésaurus (BQ #146 §H.7). |
+| `audit_post_import.py` | `tools/lib/` | Audit post-import du thésaurus (BQ `regles_de_redaction_des_documents_jenni_reference` §H.7). |
 | `audit_report.py` | `tools/lib/` | Module commun pour rapports d'audit JSON structurés. |
 | `biblio_format.py` | `tools/lib/` | parsing et formatage des références bibliographiques. |
 | `bq_inventory.py` | `tools/lib/` | Inventaire/lecture des entrees BQ filesystem. |
 | `cli.py` | `tools/lib/` | Helpers CLI partagés. |
 | `concept_cards.py` | `tools/lib/` | builder unifié des payloads de cartes conceptuelles. |
-| `config.py` | `tools/lib/` | Lecture centralisée de la table config. |
+| `config.py` | `tools/lib/` | Lecture centralisée de la table config + secrets API. |
 | `db.py` | `tools/lib/` | Connexion DB standardisée. |
 | `doc_archive.py` | `tools/lib/` | archivage générique d'un docx intégré + son pendant envoyé. |
 | `docx_index.py` | `tools/lib/` | Source de vérité du mapping fiche ↔ docx archivé. |
+| `doi_utils.py` | `tools/lib/` | Helpers partagés d'extraction et résolution de DOI. |
 | `fiche_archive.py` | `tools/lib/` | archivage des fichiers sources post-intégration d'une fiche. |
 | `fiche_text.py` | `tools/lib/` | Source de vérité unique du « texte intégré » d'une fiche. |
 | `glossary.py` | `tools/lib/` | builder unifié des payloads glossaire (terms). |
@@ -137,11 +147,11 @@ projet/
 ├── AGENTS.md              # contexte persistent (opencode / LLM)
 ├── MANIFEST.md            # ce fichier
 ├── tools/
-│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_factuel_arbitrage, audit_factuel_deepseek, audit_factuel_pdf, audit_factuel_scholarai, audit_fiches, audit_focus, audit_graines, audit_meta, audit_opus, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, dump_db_sql, enrich_jenni_sources_crossref, enrich_scholarai, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, export_zotero, fix_titres, ingest_structured_links, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, relink_fiche_refs, repair_thesaurus_defs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae
+│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bq_deepseek, audit_bq_legacy_ids, audit_bq_verify, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_factuel_arbitrage, audit_factuel_deepseek, audit_factuel_pdf, audit_factuel_scholarai, audit_fiches, audit_focus, audit_graines, audit_meta, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, dump_db_sql, enrich_hal, enrich_jenni_sources_crossref, enrich_scholarai, enrich_thesaurus_api, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, export_zotero, fix_bq_arbitrages, fix_bq_arbitrages_scripts, fix_titres, gen_pending_template, ingest_structured_links, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, relink_fiche_refs, repair_thesaurus_defs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae, verify_citations
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  enrich_thesaurus, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, raccorde_refs_cache, resolve_import_conflicts
-│   ├── lib/                    agent_context, agent_guards, agent_runner, apa, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, fiche_archive, fiche_text, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
+│   ├── jenni/                  enrich_fiche_section_hybrid, enrich_thesaurus, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, raccorde_refs_cache, resolve_import_conflicts
+│   ├── lib/                    agent_context, agent_guards, agent_runner, apa, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, doi_utils, fiche_archive, fiche_text, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
 │   ├── veille/                 scholarai_search, weekly_scan
 │   ├── regen_all.py
 ├── docx/                      Documents .docx (retours Jenni)
@@ -195,8 +205,8 @@ python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --doc S2
 python3 tools/jenni/export_jenni_doc.py --db sol_vivant.db --all
 
 # Audit
-python3 tools/admin/audit_opus.py --db sol_vivant.db --dry-run
+python3 tools/admin/audit_focus.py --db sol_vivant.db --target chaines --prepare
 python3 tools/admin/session_start.py --db sol_vivant.db
 ```
 
-Les scripts d'inférence (`analyse_corpus.py`, `audit_opus.py`) suivent le workflow en 3 phases via `agent_runner.py` : `--prepare` → agents Task dans une session LLM → `--consolidate`. Plus d'API Anthropic externe depuis v4.
+Les scripts d'inférence (`analyse_corpus.py`, `analyse_fiches.py`, `audit_focus.py`) suivent le workflow en 3 phases via `agent_runner.py` : `--prepare` → agents Task dans une session LLM → `--consolidate`. Plus d'API Anthropic externe depuis v4.

@@ -30,7 +30,7 @@ La plateforme LLM web impose une branche `llm/<nom-session>`. Toutes les modific
 
 ### 3. Clôture (propagation `main` obligatoire)
 
-La clôture est **scriptée**, jamais manuelle. Prérequis : écrire d'abord `jmj/.pending_session_recap.md` (BQ #119), working tree propre.
+La clôture est **scriptée**, jamais manuelle. Prérequis : écrire d'abord `jmj/.pending_session_recap.md` (BQ `maintenance_sessions_journal_de_bord`), working tree propre.
 
 ```bash
 python3 tools/admin/session_end.py --db sol_vivant.db
@@ -43,7 +43,7 @@ Le script enchaîne : regen pages web → `check_integrity --strict` → insert 
 ## Dispositifs transverses (détail : règles actives + BQ)
 
 - **Conseil** — dispositif de délibération en **deux temps** (cf. `jmj/outils/conseil_v2_prompt.md`) : génération jugée à la **fécondité** (pontonnier + filtre, garde-friction) → valve → validation jugée justesse/nécessité (3 lentilles + contradicteur + anti-marteau, 2 rounds, double critique) → vérif DB → verdict JMJ. La **vérité** revient à un juge externe (Jenni). Règles : `conseil_contradicteur`, `integration_conseil_audit`, `ouverture_conseil` ; BQ : `conseil_modele`.
-- **Agents Task** — pour N>5 items LLM indépendants : pattern `agent_runner.py` en 3 phases (`--prepare` → agents Task en parallèle → `--consolidate`) ; toujours `model='opus'` par défaut. **Interdits** pour la rédaction éditoriale du corpus (`pas_agent_redacteur`).
+- **Agents Task** — pour N>5 items LLM indépendants : pattern `agent_runner.py` en 3 phases (`--prepare` → agents Task en parallèle → `--consolidate`) ; toujours `model='glm-5.2'` par défaut. **Interdits** pour la rédaction éditoriale du corpus (`pas_agent_redacteur`).
 - **Ouverture de session** — lire le dernier handoff de clôture (`jmj/rapports/session/`) puis tenir le Conseil sur les arbitrages ouverts AVANT d'agir (`ouverture_conseil`).
 
 ## Règles actives
@@ -90,10 +90,18 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 | `bq` | BQ elle-même | technique | architecture BQ, consultation, doctrine |
 | `session` | Gestion de session | technique | démarrage, clôture, git, propagation main |
 | `integrite` | Intégrité DB | technique | check_integrity, audit structurel, FK, orphelins |
-| `analyse` | Analyse corpus | technique | analyse_corpus, audit_opus, veille, agent_runner |
+| `analyse` | Analyse corpus | technique | analyse_corpus, veille, agent_runner |
 | `archivage` | Archivage post-intégration | technique | règles fichiers/fiches/prompts traités |
 | `jenni-workflow` | Workflow Jenni | technique | prompts docx, OMML, charte rédaction, refs APA |
 | `sources-autoritaires` | Sources autoritaires externes | technique | doctrines de référence (INRAE, Shift, etc.) utilisées pour aligner le corpus |
+
+## Guides techniques associés
+
+- `api_externes.md` — architecture des 5 API externes (ScholarAI/DeepSeek/HAL/Crossref/Zotero) : acquisition, enrichissement, vérification
+- `architecture.md` — architecture DB générale (tables, vues, FK)
+- `guide_git.md` — guide git pour l'auteur (mono-utilisateur, DB binaire)
+- `reproduire_le_patron.md` — reproduction du patron pour un autre domaine
+
 
 ## Cheat-sheet — commandes usuelles
 
