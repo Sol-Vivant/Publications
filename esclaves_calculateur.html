@@ -1922,7 +1922,7 @@ input[type="text"], input[type="search"], input[type="number"], input[type="emai
 <header class="sv-header">
   <a class="sv-corpus-link" href="index.html">Le Sol Vivant cet Holobionte</a>
   <h1>Esclaves énergétiques<span class="sv-h1-sub"> : Quantification de la dépendance énergétique fossile</span></h1>
-  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-06-26 00:01 — <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="MIT License">MIT</a></div>
+  <div class="sv-meta">Jean-Michel Juzan — Généré le 2026-07-18 19:16 — <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.85);text-decoration:none" title="MIT License">MIT</a></div>
 </header>
 
 <nav class="sv-nav-pages"><a href="index.html">🗺️ Cartographie</a>  ·  <a href="mo_calculateur.html">🧪 Matière organique</a>  ·  <a href="lifofer.html">🌿 LiFoFer</a>  ·  <a href="triangle_textures.html">🔺 Textures GEPPA</a>  ·  <a href="tests_terrain.html">🧫 Tests terrain</a>  ·  <a href="cahier.html">📚 Cahier de Science</a>  ·  <span class="sv-nav-current">⚡ Esclaves énergétiques</span>  ·  <a href="transition_robuste.html">🌱 Transition robuste</a>  ·  <a href="concept_cards.html">📋 Concept Cards</a></nav>
@@ -2592,16 +2592,17 @@ function SvRichText({ text, onCardRef, skipPrefixes, autoGloss }) {
   const renderInline = (s, keyPrefix) => {
     if (!s) return null;
     const out = [];
-    const regex = /Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|\*([^*\n]+?)\*|fiche (\d+)/g;
+    const regex = /\[CARD #(\d+)\]|Card #(\d+)(?:\s*\([^)]*\))?|Card "([^"]+)"|`([^`]+)`|\*\*([^*]+?)\*\*|\*([^*\n]+?)\*|\[FICHE #(\d+)\]|fiche (\d+)/g;
     let last = 0, m, n = 0;
     while ((m = regex.exec(s)) !== null) {
       if (m.index > last) { const _seg = s.substring(last, m.index); if (autoGloss) out.push(..._svMarkGloss(_seg, keyPrefix + '-ag' + n, gseen)); else out.push(_seg); }
-      if (m[1]) {
-        const id = parseInt(m[1]);
+      if (m[1] || m[2]) {
+        const id = parseInt(m[1] || m[2]);
+        const lbl = m[1] ? ('CARD #' + id) : ('#' + id);
         out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(id)}
-                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>#{id}</a>);
-      } else if (m[2]) {
-        const title = m[2];
+                     style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{lbl}</a>);
+      } else if (m[3]) {
+        const title = m[3];
         const found = (DATA.cards || []).find(c => c.title && c.title.includes(title));
         if (found) {
           out.push(<a key={keyPrefix + '-ref-' + (n++)} onClick={() => onCardRef && onCardRef(found.id)}
@@ -2609,14 +2610,14 @@ function SvRichText({ text, onCardRef, skipPrefixes, autoGloss }) {
         } else {
           out.push(title);
         }
-      } else if (m[3]) {
-        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark" title={(DATA.glossary || {})[m[3].toLowerCase()] || undefined}>{m[3]}</span>);
       } else if (m[4]) {
-        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[4]}</span>);
+        out.push(<span key={keyPrefix + '-term-' + (n++)} className="sv-mark" title={(DATA.glossary || {})[m[4].toLowerCase()] || undefined}>{m[4]}</span>);
       } else if (m[5]) {
-        out.push(<em key={keyPrefix + '-it-' + (n++)}>{m[5]}</em>);
+        out.push(<span key={keyPrefix + '-em-' + (n++)} className="sv-emphasis">{m[5]}</span>);
       } else if (m[6]) {
-        const fid = parseInt(m[6]);
+        out.push(<em key={keyPrefix + '-it-' + (n++)}>{m[6]}</em>);
+      } else if (m[7] || m[8]) {
+        const fid = parseInt(m[7] || m[8]);
         out.push(<a key={keyPrefix + '-fiche-' + (n++)} href={'cahier.html#fiche-' + fid}
                      style={{color:'var(--accent)',cursor:'pointer',textDecoration:'underline'}}>{m[0]}</a>);
       }
@@ -2836,7 +2837,7 @@ function SvConceptCardDetail({ card, onCardRef }) {
         const otherId = isFrom ? l.to_id : l.from_id;
         const otherTitle = isFrom ? l.to_title : l.from_title;
         return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
-          <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+          {(() => { const lt={contradicts:{c:'var(--danger)',b:'var(--danger-light)',i:'\u26a0'},completes:{c:'var(--success)',b:'var(--success-light)',i:'+'},prerequisite:{c:'var(--info)',b:'var(--info-light)',i:'\u2192'},derives_from:{c:'#7c3aed',b:'rgba(124,58,237,0.1)',i:'\u2197'},related_to:{c:'var(--text-secondary)',b:'transparent',i:'\u2022'},example_of:{c:'var(--accent)',b:'var(--accent-light)',i:'ex'},supersedes:{c:'var(--warning)',b:'var(--warning-light)',i:'\u21d2'}}[l.link_type]||{c:'var(--text-secondary)',b:'transparent',i:'\u2022'}; return <span style={{color:lt.c,background:lt.b,fontStyle:'italic',padding:'1px 6px',borderRadius:'4px',fontSize:'var(--font-xs)',fontWeight:l.link_type==='contradicts'?600:400,minWidth:'100px'}}>{lt.i} {l.link_type.replace(/_/g,' ')}</span>; })()}
           <CardLink id={otherId} title={otherTitle} />
         </div>;
       })}
@@ -2960,7 +2961,7 @@ function SvConceptCardList({ cards }) {
                 const otherId = isFrom ? l.to_id : l.from_id;
                 const otherTitle = isFrom ? l.to_title : l.from_title;
                 return <div key={i} style={{display:'flex', gap:'8px', alignItems:'baseline', marginTop:'2px', fontSize:'var(--font-sm)'}}>
-                  <span style={{color:'var(--text-secondary)', fontStyle:'italic', minWidth:'100px'}}>{l.link_type}</span>
+                  {(() => { const lt={contradicts:{c:'var(--danger)',b:'var(--danger-light)',i:'\u26a0'},completes:{c:'var(--success)',b:'var(--success-light)',i:'+'},prerequisite:{c:'var(--info)',b:'var(--info-light)',i:'\u2192'},derives_from:{c:'#7c3aed',b:'rgba(124,58,237,0.1)',i:'\u2197'},related_to:{c:'var(--text-secondary)',b:'transparent',i:'\u2022'},example_of:{c:'var(--accent)',b:'var(--accent-light)',i:'ex'},supersedes:{c:'var(--warning)',b:'var(--warning-light)',i:'\u21d2'}}[l.link_type]||{c:'var(--text-secondary)',b:'transparent',i:'\u2022'}; return <span style={{color:lt.c,background:lt.b,fontStyle:'italic',padding:'1px 6px',borderRadius:'4px',fontSize:'var(--font-xs)',fontWeight:l.link_type==='contradicts'?600:400,minWidth:'100px'}}>{lt.i} {l.link_type.replace(/_/g,' ')}</span>; })()}
                   <CardLink id={otherId} title={otherTitle} />
                 </div>;
               })}
@@ -3234,6 +3235,15 @@ function SvFicheCard({ fiche, color, defaultOpen,
     return Object.assign({}, s, { _num: num, _lvl: lvl, _title: title });
   });
 
+  // H1 coquilles (titre sans prose, contenu porte par les H2 enfants) :
+  // rendu « en-tete de groupe » (2026-07-18, arbitrage JMJ — modele fiche 112
+  // section 3) : chaque section et sous-section est une entree de nav propre ;
+  // la coquille n'a pas de contenu, elle est une ligne-titre non expansible
+  // (style H1 gras via sv-sections-nav-row-h1) sous laquelle ses H2 apparaissent
+  // indentes. Ne JAMAIS rendre les enfants dans le corps du parent : cela les
+  // « inclut » dans la section (refus JMJ) et doublonne avec leurs entrees.
+  const _hasOwnContent = s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci;
+
   const body = <div className="sv-text-column">
     <div style={{padding:'0.5rem 0'}}>
       {(_showMeta || partial) && <div style={{display:'flex',gap:'0.5rem',marginBottom:'0.75rem',fontSize:'var(--font-xs)',flexWrap:'wrap'}}>
@@ -3255,7 +3265,7 @@ function SvFicheCard({ fiche, color, defaultOpen,
             getLevel={s => s._lvl}
             getDotColor={s => s.blocks && s.blocks.length > 0 ? 'var(--success)'
                               : (s.contexte_sci ? 'var(--warning)' : 'var(--color-bg-muted)')}
-            hasContent={s => (s.blocks && s.blocks.length > 0) || !!s.contexte_sci}
+            hasContent={s => _hasOwnContent(s)}
             renderContent={s => {
               if (s.blocks && s.blocks.length > 0) return <SvFicheBlocks blocks={s.blocks} />;
               if (s.contexte_sci) return <SvRichText text={s.contexte_sci} autoGloss />;
@@ -3288,6 +3298,24 @@ function SvFicheCard({ fiche, color, defaultOpen,
       {f.refs && f.refs.length > 0 && <div className="sv-fiche-view-refs" style={{marginTop:'1.25rem'}}>
         <SvCollapse title={'Sources (' + f.refs.length + ')'} icon="📚" defaultOpen={false}>
           <SvSourceList sources={f.refs} />
+        </SvCollapse>
+      </div>}
+      {f.articulations && f.articulations.length > 0 && <div style={{marginTop:'1.25rem'}}>
+        <SvCollapse title={'Articulations (' + f.articulations.length + ')'} icon="🔗" defaultOpen={false}>
+          <div style={{display:'flex',flexDirection:'column',gap:'0.4rem'}}>
+            {f.articulations.map((a, i) => <a key={i} href={'#fiche-' + a.id}
+              title={a.titre + (a.note ? ' — ' + a.note : '')}
+              style={{display:'block',padding:'0.5rem 0.75rem',textDecoration:'none',
+                      background:'var(--color-bg-subtle)',borderRadius:'6px',border:'1px solid var(--border)'}}>
+              <div style={{display:'flex',alignItems:'baseline',gap:'0.4rem'}}>
+                <span style={{fontSize:'var(--font-xs)',fontWeight:700,color:'var(--info)'}}>#{a.id}</span>
+                <span style={{fontSize:'var(--font-sm)',fontWeight:600,color:'var(--accent)'}}>{a.pivot}</span>
+              </div>
+              <div style={{fontSize:'var(--font-xs)',color:'var(--color-text-muted)',marginTop:'0.15rem'}}>
+                {(a.note || '').slice(0,150) + (a.note.length > 150 ? '…' : '')}
+              </div>
+            </a>)}
+          </div>
         </SvCollapse>
       </div>}
     </div>
@@ -3496,6 +3524,7 @@ function SvNavList({ items, isActive, onSelect, getKey, getCode, getDotColor,
     })}
   </div>;
 }
+
 
 
 

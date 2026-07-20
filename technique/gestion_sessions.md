@@ -28,22 +28,23 @@ La plateforme LLM web impose une branche `llm/<nom-session>`. Toutes les modific
 
 **Regle** : on édite la DB (`config`, `concept_cards`, `terms`, fiches… ; `html_templates` pour le web) + les scripts Python (versionnés par git dans `tools/`), **jamais** les fichiers générés (HTML, README, MD). Plus de table `scripts` ni de sync DB↔fichiers depuis Session B.
 
-### 3. Clôture (propagation `main` obligatoire)
+### 3. Clôture
 
-La clôture est **scriptée**, jamais manuelle. Prérequis : écrire d'abord `jmj/.pending_session_recap.md` (BQ `maintenance_sessions_journal_de_bord`), working tree propre.
+La clôture est **scriptée**, jamais manuelle. En CLI local, le working tree sale est accepté par défaut (git add -A l'incluera dans le commit).
 
 ```bash
-python3 tools/admin/session_end.py --db sol_vivant.db
+python3 tools/admin/session_end.py --db sol_vivant.db           # session substantielle
+python3 tools/admin/session_end.py --db sol_vivant.db --short   # session courte
 ```
 
-Le script enchaîne : regen pages web → `check_integrity --strict` → insert `session_recap` → purge `audit_log` → flush WAL (`PRAGMA wal_checkpoint(TRUNCATE)`) → commit des regens → push branche → checkout `main` → `merge --ff-only` → push `main` → reste sur `main`.
+Le script enchaîne : session recap → regen pages web → `check_integrity` (bloquant si failed/critique) → purge `audit_log` → dump SQL compressé (`backups/sol_vivant.sql.gz`) → commit (`git add -A`, message structuré) → push branche courante vers son upstream.
 
-**Fast-forward strict** ; s'il échoue (ne devrait jamais arriver en mono-session) → **stop et demander à JMJ**. Clôture prématurée (JMJ veut tester un fichier) : même script, puis on reste sur `main`.
+**Local-first** : le working tree sale est normal (on travaille dessus), git gère le versioning. `--require-clean` pour l'ancien comportement strict. `--short` pour les sessions courtes (skip regen + integrity + dump). L'agent ne force jamais la topologie git (pas de checkout main, pas de merge FF, pas de force-with-lease) — JMJ arbitre les fusions lui-même.
 
 ## Dispositifs transverses (détail : règles actives + BQ)
 
 - **Conseil** — dispositif de délibération en **deux temps** (cf. `jmj/outils/conseil_v2_prompt.md`) : génération jugée à la **fécondité** (pontonnier + filtre, garde-friction) → valve → validation jugée justesse/nécessité (3 lentilles + contradicteur + anti-marteau, 2 rounds, double critique) → vérif DB → verdict JMJ. La **vérité** revient à un juge externe (Jenni). Règles : `conseil_contradicteur`, `integration_conseil_audit`, `ouverture_conseil` ; BQ : `conseil_modele`.
-- **Agents Task** — pour N>5 items LLM indépendants : pattern `agent_runner.py` en 3 phases (`--prepare` → agents Task en parallèle → `--consolidate`) ; toujours `model='glm-5.2'` par défaut. **Interdits** pour la rédaction éditoriale du corpus (`pas_agent_redacteur`).
+- **Agents Task** — pour N>5 items LLM indépendants : pattern `agent_runner.py` en 3 phases (`--prepare` → agents Task en parallèle → `--consolidate`) ; toujours `model='deepseek-v4-pro'` par défaut. **Interdits** pour la rédaction éditoriale du corpus (`pas_agent_redacteur`).
 - **Ouverture de session** — lire le dernier handoff de clôture (`jmj/rapports/session/`) puis tenir le Conseil sur les arbitrages ouverts AVANT d'agir (`ouverture_conseil`).
 
 ## Règles actives
@@ -97,7 +98,7 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 
 ## Guides techniques associés
 
-- `api_externes.md` — architecture des 5 API externes (ScholarAI/DeepSeek/HAL/Crossref/Zotero) : acquisition, enrichissement, vérification
+- `api_externes.md` — architecture des 5 API externes (Semantic Scholar/DeepSeek/HAL/Crossref/Zotero) : acquisition, enrichissement, vérification
 - `architecture.md` — architecture DB générale (tables, vues, FK)
 - `guide_git.md` — guide git pour l'auteur (mono-utilisateur, DB binaire)
 - `reproduire_le_patron.md` — reproduction du patron pour un autre domaine

@@ -14,11 +14,11 @@ Un corpus de 18 documents scientifiques sur l'agriculture régénératrice et la
 ### Le corpus en chiffres
 
 - **18 documents** répartis en 5 strates
-- **4000 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
-- **42 chaînes causales** et **0 renvois** inter-documents
-- **186 fiches conceptuelles** et **192 prompts** structurés
+- **4048 termes** canoniques (français/anglais) — 100.0% documentés, 100.0% définis
+- **45 chaînes causales** et **0 renvois** inter-documents
+- **237 fiches conceptuelles** et **192 prompts** structurés
 - **10 pages web** interactives (calculateurs, cartographie, triangle des textures)
-- **49 tables** SQLite, 129 scripts Python
+- **51 tables** SQLite, 137 scripts Python
 
 ### Les forces de cette architecture
 
@@ -44,11 +44,11 @@ Les scripts génèrent les fichiers dans `Publications/` (prompts, cartographie,
 Tools/
 ├── sol_vivant.db              Source de vérité données (SQLite)
 ├── tools/
-│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bq_deepseek, audit_bq_legacy_ids, audit_bq_verify, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_factuel_arbitrage, audit_factuel_deepseek, audit_factuel_pdf, audit_factuel_scholarai, audit_fiches, audit_focus, audit_graines, audit_meta, audit_repartition, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, dump_db_sql, enrich_hal, enrich_jenni_sources_crossref, enrich_scholarai, enrich_thesaurus_api, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_tools, export_zotero, fix_bq_arbitrages, fix_bq_arbitrages_scripts, fix_titres, gen_pending_template, ingest_structured_links, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, relink_fiche_refs, repair_thesaurus_defs, repair_usages_collision_millesime, resolve_sources_crossref, resolve_term_relations, retag_source_usages, session_end, session_start, sync_syn_inrae, verify_citations
+│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bq_deepseek, audit_bq_legacy_ids, audit_bq_verify, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_factuel_arbitrage, audit_factuel_deepseek, audit_fiche_md_deepseek, audit_fiches, audit_focus, audit_meta, audit_repartition, audit_revue_bq_scripts, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, build_inrae_matches, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, diag_refs, dump_db_sql, enrich_hal, enrich_sources_crossref, enrich_thesaurus_s2, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_zotero, fix_sections_h2_inline, fix_sections_titre_repete, gen_agents_md, gen_pending_template, ingest_structured_links, integrate_resolved_cites, migrate_refs, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, repair_sections_batch_20260704, resolve_sources_crossref, resolve_term_relations, run_thesaurus_batches, session_end, session_start, sync_syn_inrae, verify_citations
 │   ├── batch/                  analyse_corpus
 │   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
-│   ├── jenni/                  enrich_fiche_section_hybrid, enrich_thesaurus, export_jenni_doc, export_thesaurus_incomplets, export_validation, gen_fiche_docx, gen_prompt_thesaurus, import_termes_jenni, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, raccorde_refs_cache, resolve_import_conflicts
-│   ├── lib/                    agent_context, agent_guards, agent_runner, apa, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, doc_archive, docx_index, doi_utils, fiche_archive, fiche_text, glossary, inrae, jenni_format, parse_jenni_docx, pub_path, refs, repair_json, reports_inventory, scripts_inventory, term_rels, text_norm, thesaurus_completion, web_template
+│   ├── integration/            enrich_thesaurus, export_thesaurus_incomplets, export_validation, import_termes, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, resolve_import_conflicts
+│   ├── lib/                    agent_context, agent_guards, agent_report, agent_runner, agent_thinking, apa, api_urls, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, deepseek_client, deepseek_meta, doc_archive, docx_index, fiche_archive, fiche_text, glossary, http_client, inrae, parse_jenni_docx, parse_jenni_md, prompt_format, pub_path, refs, repair_json, reports_inventory, scripts_inventory, section, source_enrich, term_rels, text_norm, thesaurus_completion, web_template
 ├── docx/                      Documents .docx (retours Jenni)
 ├── jmj/                       Documents de travail
 └── Publications/web/           Pages web (→ rsync vers dépôt Pages)
@@ -62,8 +62,6 @@ Tools/
 sol_vivant.db → export_jenni_doc.py → prompts/
                                         ↓
                                Jenni AI (biblio curée) → .docx
-                                        ↓
-                               LLM (analyse) → prompt_contenus
                                         ↓
                                Publications/ (contenu accessible)
 ```

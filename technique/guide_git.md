@@ -35,7 +35,7 @@ git status
 
 # 2. Ajouter les fichiers modifies
 git add sol_vivant.db                    # un fichier specifique
-git add tools/jenni/export_jenni_doc.py  # un autre fichier
+git add tools/integration/export_jenni_doc.py  # ⚠ ARCHIVÉ — exemple legacy  # un autre fichier
 git add -A                               # TOUT ajouter (attention)
 
 # 3. Commiter avec un message
