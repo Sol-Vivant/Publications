@@ -2,8 +2,8 @@
 
 ## Base de donnees
 - `sol_vivant.db` — source de verite (corpus + audit_log + config + refs)
-- 51 tables, 14 vues
-- Scripts : 137 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
+- 52 tables, 14 vues
+- Scripts : 143 fichiers Python dans `tools/` (filesystem = source de verite, voir Session B)
 
 ## Scripts
 
@@ -20,6 +20,7 @@
 | `audit_canoniques_anglais.py` | `tools/admin/` | Détection des canoniques FR qui sont en réalité des termes anglais. |
 | `audit_center.py` | `tools/admin/` | Centre d'audit du corpus : le FIL DIRECTEUR, tiré au démarrage. |
 | `audit_corpus_relations.py` | `tools/admin/` | Audit dynamique des relations du corpus. |
+| `audit_doc_coverage.py` | `tools/admin/` | Audit de couverture sémantique d'un document par son contenu réel. |
 | `audit_factuel_arbitrage.py` | `tools/admin/` | Arbitrage des sources INCONNUABLES (gâche 3). |
 | `audit_factuel_deepseek.py` | `tools/admin/` | Gâche 3 de l'audit conscient (vérification factuelle DeepSeek). |
 | `audit_fiche_md_deepseek.py` | `tools/admin/` | Audit conformité Markdown des fiches (DeepSeek V4 Pro). |
@@ -55,6 +56,7 @@
 | `gen_pending_template.py` | `tools/admin/` | Génère le template du pending session recap. |
 | `ingest_structured_links.py` | `tools/admin/` | Câblage des cards orphelines depuis le travail d'audit déjà structuré. |
 | `integrate_resolved_cites.py` | `tools/admin/` | Intègre les citations inline résolues (chantier A). |
+| `maintain_opencode_db.py` | `tools/admin/` | Rétention du journal `event` + des sessions de opencode.db. |
 | `migrate_refs.py` | `tools/admin/` | Migration canonique des refs biblio (création sources + câblages + réécritures cites). |
 | `pedago_links_apply.py` | `tools/admin/` | Insère dans pedago_links les suggestions de pedago_links_suggest.py, selon des seuils par rôle. |
 | `pedago_links_suggest.py` | `tools/admin/` | Suggestion de cards pédagogiques à lier aux fiches/docs |
@@ -62,7 +64,6 @@
 | `purge_audit_log.py` | `tools/admin/` | Rétention du journal audit_log. |
 | `push_zotero.py` | `tools/admin/` | Pousse les sources vers Zotero via le connector local. |
 | `push_zotero_web.py` | `tools/admin/` | Push sources vers Zotero via API web (api.zotero.org). |
-| `repair_sections_batch_20260704.py` | `tools/admin/` | Répare les sections des fiches du batch 2026-07-04. |
 | `resolve_sources_crossref.py` | `tools/admin/` | Phase 1 Crossref auto pour sources orphelines (BQ `wf_source_integration`). |
 | `resolve_term_relations.py` | `tools/admin/` | Résout les relations orphelines du thésaurus. |
 | `run_thesaurus_batches.py` | `tools/admin/` | Runner DeepSeek pour les batches enrich_thesaurus. |
@@ -76,6 +77,7 @@
 | `gen_cahier.py` | `tools/docs/` | Cahier de Science (livre pédagogique multi-chapitres) |
 | `gen_concept_cards.py` | `tools/docs/` | Page interactive des concept cards |
 | `gen_dashboard.py` | `tools/docs/` | Génère le tableau de bord LLM / Sol Vivant. |
+| `gen_ebauche_pack.py` | `tools/docs/` | Génère les packs de rédaction (.docx) des documents de strate. |
 | `gen_esclaves_calc.py` | `tools/docs/` | Generer Publications/web/esclaves_calculateur.html |
 | `gen_explorer.py` | `tools/docs/` | Génère la page Explorer DB statique |
 | `gen_fiches_index.py` | `tools/docs/` | Régénère recherches/fiches/INDEX.md depuis la DB. |
@@ -99,6 +101,7 @@
 | `integrate_source.py` | `tools/integration/` | Integration consciente d'un rapport de source. |
 | `integrate_validation_refs.py` | `tools/integration/` | Intégration des refs biblio d'une RÉPONSE de validation / question de sourçage. |
 | `resolve_import_conflicts.py` | `tools/integration/` | Résout les blocs Jenni bloqués par multiples matches. |
+| `resolve_inline_citations_batch.py` | `tools/integration/` | Création des source_usages manquants pour |
 | `agent_context.py` | `tools/lib/` | Contexte agent FRAIS et tracé (anti « effet mémoire »). |
 | `agent_guards.py` | `tools/lib/` | Garde-fous pour scripts agent_runner. |
 | `agent_report.py` | `tools/lib/` | Écrit un rapport depuis un agent Task (contournement du |
@@ -117,6 +120,7 @@
 | `db.py` | `tools/lib/` | Connexion DB standardisée. |
 | `deepseek_client.py` | `tools/lib/` | Helper partagé pour les appels DeepSeek API. |
 | `deepseek_meta.py` | `tools/lib/` | Méta-contexte partagé à injecter dans les consignes DeepSeek. |
+| `disambiguate.py` | `tools/lib/` | Désambiguïsation des citations (surname, year) ambiguës. |
 | `doc_archive.py` | `tools/lib/` | archivage générique d'un docx intégré + son pendant envoyé. |
 | `docx_index.py` | `tools/lib/` | Source de vérité du mapping fiche ↔ docx archivé. |
 | `fiche_archive.py` | `tools/lib/` | archivage des fichiers sources post-intégration d'une fiche. |
@@ -137,8 +141,9 @@
 | `term_rels.py` | `tools/lib/` | Helpers pour écrire dans `term_relations` (source de vérité |
 | `text_norm.py` | `tools/lib/` | Normalisation canonique pour le matching des termes du thésaurus. |
 | `thesaurus_completion.py` | `tools/lib/` | Critère canonique de complétude du thésaurus. |
+| `validate_targets.py` | `tools/lib/` | Validateur de cibles anormales (garde-fou G11). |
 | `web_template.py` | `tools/lib/` | Template HTML partagé pour les pages outils Sol Vivant. |
-| `server.py` | `tools/mcp/` | interface typée aux outils canoniques. |
+| `server.py` | `tools/mcp/` | Server MCP pour Le Sol Vivant : interface typée aux outils canoniques. |
 | `openlibrary.py` | `tools/veille/` | Recherche livres et ISBN via Open Library (Internet Archive). |
 | `search_bnf.py` | `tools/veille/` | Recherche livres et documents FR via BnF Catalogue général (API SRU). |
 | `search_crossref.py` | `tools/veille/` | Recherche Crossref ouverte par auteur + titre/co-auteur + année. |
@@ -146,6 +151,7 @@
 | `semantic_scholar.py` | `tools/veille/` | Client Semantic Scholar Academic Graph API (v1). |
 | `veille_services.py` | `tools/veille/` | Veille hebdomadaire des API services externes. |
 | `weekly_scan.py` | `tools/veille/` | Veille PubMed hebdomadaire. |
+| `wikidata.py` | `tools/veille/` | Recherche d'entités Wikidata pour le thésaurus (synonymes + identifiants). |
 
 ## Arborescence
 
@@ -155,12 +161,12 @@ projet/
 ├── AGENTS.md              # contexte persistent (opencode / LLM)
 ├── MANIFEST.md            # ce fichier
 ├── tools/
-│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bq_deepseek, audit_bq_legacy_ids, audit_bq_verify, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_factuel_arbitrage, audit_factuel_deepseek, audit_fiche_md_deepseek, audit_fiches, audit_focus, audit_meta, audit_repartition, audit_revue_bq_scripts, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, build_inrae_matches, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, diag_refs, dump_db_sql, enrich_hal, enrich_sources_crossref, enrich_thesaurus_s2, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_zotero, fix_sections_h2_inline, fix_sections_titre_repete, gen_agents_md, gen_pending_template, ingest_structured_links, integrate_resolved_cites, migrate_refs, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, repair_sections_batch_20260704, resolve_sources_crossref, resolve_term_relations, run_thesaurus_batches, session_end, session_start, sync_syn_inrae, verify_citations
+│   ├── admin/                  analyse_emergences, analyse_fiches, audit_anglicismes, audit_bq_deepseek, audit_bq_legacy_ids, audit_bq_verify, audit_bt, audit_canoniques_anglais, audit_center, audit_corpus_relations, audit_doc_coverage, audit_factuel_arbitrage, audit_factuel_deepseek, audit_fiche_md_deepseek, audit_fiches, audit_focus, audit_meta, audit_repartition, audit_revue_bq_scripts, audit_sources_orphelines, audit_thesaurus, backfill_biblio, backup_rotation, bq_query, build_inrae_matches, check_forbidden_jenni, check_integrity, conseil_emergences, dedupe_thesaurus, deploy_publications, diag_refs, dump_db_sql, enrich_hal, enrich_sources_crossref, enrich_thesaurus_s2, explorer, export_biblio, export_mismatches_inrae, export_termes_candidats, export_zotero, fix_sections_h2_inline, fix_sections_titre_repete, gen_agents_md, gen_pending_template, ingest_structured_links, integrate_resolved_cites, maintain_opencode_db, migrate_refs, pedago_links_apply, pedago_links_suggest, pull_zotero, purge_audit_log, push_zotero, push_zotero_web, resolve_sources_crossref, resolve_term_relations, run_thesaurus_batches, session_end, session_start, sync_syn_inrae, verify_citations
 │   ├── batch/                  analyse_corpus
-│   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
-│   ├── integration/            enrich_thesaurus, export_thesaurus_incomplets, export_validation, import_termes, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, resolve_import_conflicts
-│   ├── lib/                    agent_context, agent_guards, agent_report, agent_runner, agent_thinking, apa, api_urls, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, deepseek_client, deepseek_meta, doc_archive, docx_index, fiche_archive, fiche_text, glossary, http_client, inrae, parse_jenni_docx, parse_jenni_md, prompt_format, pub_path, refs, repair_json, reports_inventory, scripts_inventory, section, source_enrich, term_rels, text_norm, thesaurus_completion, web_template
-│   ├── veille/                 openlibrary, search_bnf, search_crossref, search_zotero, semantic_scholar, veille_services, weekly_scan
+│   ├── docs/                   gen_archive, gen_bq_page, gen_cahier, gen_concept_cards, gen_dashboard, gen_ebauche_pack, gen_esclaves_calc, gen_explorer, gen_fiches_index, gen_illustration_prompts, gen_lifofer, gen_mo_calc, gen_readme, gen_scripts, gen_technique, gen_tests_terrain, gen_transition_robuste, gen_triangle_textures, gen_web, gen_workflows
+│   ├── integration/            enrich_thesaurus, export_thesaurus_incomplets, export_validation, import_termes, integrate_fiche, integrate_fiche_refs, integrate_source, integrate_validation_refs, resolve_import_conflicts, resolve_inline_citations_batch
+│   ├── lib/                    agent_context, agent_guards, agent_report, agent_runner, agent_thinking, apa, api_urls, audit_persist, audit_post_import, audit_report, biblio_format, bq_inventory, cli, concept_cards, config, db, deepseek_client, deepseek_meta, disambiguate, doc_archive, docx_index, fiche_archive, fiche_text, glossary, http_client, inrae, parse_jenni_docx, parse_jenni_md, prompt_format, pub_path, refs, repair_json, reports_inventory, scripts_inventory, section, source_enrich, term_rels, text_norm, thesaurus_completion, validate_targets, web_template
+│   ├── veille/                 openlibrary, search_bnf, search_crossref, search_zotero, semantic_scholar, veille_services, weekly_scan, wikidata
 │   ├── regen_all.py
 ├── docx/                      Documents .docx (retours Jenni)
 ├── jmj/                       Documents de travail

@@ -53,8 +53,8 @@ touchées.
 ## Phase 1 — Enrichissement (remplissage métadonnées)
 
 Remplir les `resume_court` (et `doi`/`url`) manquants dans `sources`.
-Coverage actuelle : **9407/10098 (93%) avec abstract**,
-9668 avec DOI.
+Coverage actuelle : **9558/10528 (91%) avec abstract**,
+10081 avec DOI.
 
 ### 2a. Semantic Scholar — découverte paper (DOI / titre)
 
@@ -133,8 +133,8 @@ Scholar est le juge de vérité externe du Conseil** (`conseil_modele`).
 
 | Table | Effectif | Rôle | Phase(s) | L/E |
 |-------|----------|------|----------|-----|
-| `sources` | 10098 | Métadonnées sources (DOI, auteurs, `resume_court`) | 1, 2, 3 | R+W |
-| `source_usages` | 19852 | Liens sources ↔ entités (fiches, prompts, cards) | 1 | W |
+| `sources` | 10528 | Métadonnées sources (DOI, auteurs, `resume_court`) | 1, 2, 3 | R+W |
+| `source_usages` | 21398 | Liens sources ↔ entités (fiches, prompts, cards) | 1 | W |
 | `refs` | 364 | Évidence chiffrée typée (kind, valeur, `source_id`) | 3 | W |
 | `ref_links` | 1295 | Liens génériques refs ↔ targets | 3 | W |
 | `audit_log` | — | Journal des opérations (chaque UPDATE batch) | 2 | W |

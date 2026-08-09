@@ -93,7 +93,7 @@ python3 tools/admin/bq_query.py --db sol_vivant.db --list
 | `integrite` | Intégrité DB | technique | check_integrity, audit structurel, FK, orphelins |
 | `analyse` | Analyse corpus | technique | analyse_corpus, veille, agent_runner |
 | `archivage` | Archivage post-intégration | technique | règles fichiers/fiches/prompts traités |
-| `jenni-workflow` | Workflow Jenni | technique | prompts docx, OMML, charte rédaction, refs APA |
+| `redaction` | Workflow rédaction | technique | production fiches/termes via sous-agents + API, retours rédacteur, intégration (ex-jenni-workflow) |
 | `sources-autoritaires` | Sources autoritaires externes | technique | doctrines de référence (INRAE, Shift, etc.) utilisées pour aligner le corpus |
 
 ## Guides techniques associés

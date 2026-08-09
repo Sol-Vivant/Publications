@@ -4,7 +4,7 @@
 
 L'architecture Sol Vivant est un **patron generique** pour construire un corpus de connaissances structure. Elle n'est pas limitee a l'agriculture : tout domaine qui a besoin d'organiser des documents, un vocabulaire technique et des outils interactifs peut l'utiliser.
 
-Le patron Sol Vivant gere actuellement 4048 termes, 192 prompts, 45 chaines causales et 10 pages web interactives, avec 137 scripts Python.
+Le patron Sol Vivant gere actuellement 6835 termes, 192 prompts, 48 chaines causales et 10 pages web interactives, avec 143 scripts Python.
 
 ## Architecture modulaire
 
