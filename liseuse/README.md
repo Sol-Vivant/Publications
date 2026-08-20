@@ -28,13 +28,15 @@ Le site est 100 % statique — n'importe quel serveur de fichiers suffit :
 
 ```bash
 git clone https://github.com/Sol-Vivant/Publications.git
-cd Publications
-python3 -m http.server 8080
-# → http://localhost:8080/Publications/
+cd ..
+mkdir -p pubroot/Publications
+ln -s "$(pwd -P)/Publications/liseuse" pubroot/Publications/liseuse
+cd pubroot && python3 -m http.server 8080
+# → http://localhost:8080/Publications/liseuse/
 ```
 
-> ⚠ Le chemin **/Publications/** fait partie de l'URL (le build est préfixé
-> pour GitHub Pages). Servir `liseuse/` sous un autre chemin casse liens et
+> ⚠ Le chemin **/Publications/liseuse/** fait partie de l'URL (le build est
+> préfixé pour GitHub Pages). Servir sous un autre chemin casse liens et
 > Service Worker — pour un autre préfixe, rebuildez (ci-dessous).
 
 ## Rebuilder depuis les sources
@@ -44,7 +46,7 @@ lecture) :
 
 ```bash
 # Prérequis : Node ≥ 20 (verrouillé 22.x), Python 3, pandoc ≥ 3.10
-export ASTRO_BASE=/Publications/          # préfixe d'hébergement
+export ASTRO_BASE=/Publications/liseuse/   # préfixe d'hébergement
 bash tools/liseuse/build.sh --db sol_vivant.db --force
 bash tools/liseuse/deploy_publications.sh # copie dist/ → repo public
 ```
