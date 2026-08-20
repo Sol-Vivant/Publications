@@ -1,35 +1,737 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>La structuration du microbiome : assemblage, core microbiome et coalescence — Le Sol Vivant</title><meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta name="theme-color" content="#2563eb"><meta property="og:type" content="website"><meta property="og:site_name" content="Le Sol Vivant cet Holobionte"><meta property="og:title" content="La structuration du microbiome : assemblage, core microbiome et coalescence — Le Sol Vivant"><meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta property="og:locale" content="fr_FR"><link rel="canonical" href="/Publications/liseuse/fiche/294/"><link rel="manifest" href="/Publications/liseuse/manifest.webmanifest"><link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml"><script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CUXLGMvH.css"></head><body><a class="sv-skip" href="#sv-main">Aller au contenu</a><header class="sv-header"><button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button><a href="/Publications/liseuse/" class="sv-brand"><span class="sv-brand-dot" aria-hidden="true"></span><span>Le Sol Vivant</span></a><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island><button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button></header><div class="sv-shell"><nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus"><p class="sv-side-label">Strates</p><ul class="sv-side-tree"><li class><a href="/Publications/liseuse/strate/F/"><span class="sv-strate-badge sv-strate-F">F</span> Fondements</a></li><li class="is-open"><a href="/Publications/liseuse/strate/S/"><span class="sv-strate-badge sv-strate-S">S</span> Sol</a><ul class="sv-side-sub"><li class><a href="/Publications/liseuse/doc/S0/"><strong>S0</strong> — L&#39;Eau dans le Sol Vivant</a></li><li class><a href="/Publications/liseuse/doc/S1/"><strong>S1</strong> — Architecture du Sol</a></li><li class="is-open"><a href="/Publications/liseuse/doc/S2/"><strong>S2</strong> — Le Microbiome du Sol</a><ul class="sv-side-sub sv-side-l3"><li class="sv-side-ouverture"><a href="/Publications/liseuse/fiche/332/"><strong>Ouverture</strong> — le récit du document</a></li><li><a href="/Publications/liseuse/fiche/3/">Microbiome du sol vivant et thermotolérance des plantes</a></li><li><a href="/Publications/liseuse/fiche/10/">Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote</a></li><li><a href="/Publications/liseuse/fiche/19/">Protozoaires du Sol et Boucle Microbienne</a></li><li><a href="/Publications/liseuse/fiche/22/">Quorum Sensing et Communication Chimique Rhizosphérique</a></li><li><a href="/Publications/liseuse/fiche/27/">Les Archées du Sol — Un Troisième Domaine Sous-estimé</a></li><li><a href="/Publications/liseuse/fiche/28/">Le Cycle du Fer et les Bactéries Ferro-réductrices</a></li><li><a href="/Publications/liseuse/fiche/60/">Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</a></li><li><a href="/Publications/liseuse/fiche/61/">Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</a></li><li><a href="/Publications/liseuse/fiche/67/">Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</a></li><li><a href="/Publications/liseuse/fiche/73/">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</a></li><li><a href="/Publications/liseuse/fiche/74/">Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</a></li><li><a href="/Publications/liseuse/fiche/76/">Lombriciens — écologie, services et pilotage des populations</a></li><li><a href="/Publications/liseuse/fiche/82/">Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</a></li><li><a href="/Publications/liseuse/fiche/83/">Cascade phosphore — du minéral inerte à l&#39;os humain</a></li><li><a href="/Publications/liseuse/fiche/88/">Mémoire microbienne paléoclimatique — héritage 20 000 ans</a></li><li><a href="/Publications/liseuse/fiche/95/">Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</a></li><li><a href="/Publications/liseuse/fiche/96/">Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</a></li><li><a href="/Publications/liseuse/fiche/99/">Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</a></li><li><a href="/Publications/liseuse/fiche/103/">Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité</a></li><li><a href="/Publications/liseuse/fiche/105/">Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</a></li><li><a href="/Publications/liseuse/fiche/106/">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</a></li><li><a href="/Publications/liseuse/fiche/107/">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</a></li><li><a href="/Publications/liseuse/fiche/108/">‘Faim d’azote’ après apport carboné (immobilisation)</a></li><li><a href="/Publications/liseuse/fiche/113/">Antifragilité : stress modéré → diversification de l&#39;hologénome</a></li><li><a href="/Publications/liseuse/fiche/115/">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</a></li><li><a href="/Publications/liseuse/fiche/116/">Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</a></li><li><a href="/Publications/liseuse/fiche/118/">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</a></li><li><a href="/Publications/liseuse/fiche/119/">Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</a></li><li><a href="/Publications/liseuse/fiche/124/">Stabilité d’agrégats faible / désagrégation rapide</a></li><li><a href="/Publications/liseuse/fiche/125/">Mésofaune : collemboles et acariens, régulateurs des micro-habitats</a></li><li><a href="/Publications/liseuse/fiche/134/">KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</a></li><li><a href="/Publications/liseuse/fiche/136/">Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</a></li><li><a href="/Publications/liseuse/fiche/138/">Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</a></li><li><a href="/Publications/liseuse/fiche/139/">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</a></li><li><a href="/Publications/liseuse/fiche/140/">Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</a></li><li><a href="/Publications/liseuse/fiche/141/">Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</a></li><li><a href="/Publications/liseuse/fiche/142/">Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</a></li><li><a href="/Publications/liseuse/fiche/144/">Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</a></li><li><a href="/Publications/liseuse/fiche/148/">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</a></li><li><a href="/Publications/liseuse/fiche/151/">AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/152/">Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/154/">Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</a></li><li><a href="/Publications/liseuse/fiche/160/">Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</a></li><li><a href="/Publications/liseuse/fiche/163/">Microsites</a></li><li><a href="/Publications/liseuse/fiche/172/">Plant diversity drives rhizosphere microbiome</a></li><li><a href="/Publications/liseuse/fiche/177/">Tri-trophic interactions CEP / Trichoderma / soil mites</a></li><li><a href="/Publications/liseuse/fiche/181/">Microbial necromass on the rise</a></li><li><a href="/Publications/liseuse/fiche/194/">Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</a></li><li><a href="/Publications/liseuse/fiche/195/">Chaulage et azote en prairie : interactions sur la minéralisation du carbone</a></li><li><a href="/Publications/liseuse/fiche/196/">Root exudates contribute to belowground ecosystem hotspots: A</a></li><li><a href="/Publications/liseuse/fiche/200/">Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)</a></li><li><a href="/Publications/liseuse/fiche/202/">Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</a></li><li><a href="/Publications/liseuse/fiche/205/">Carbon Use Efficiency microbienne — pivot stockage/respiration</a></li><li><a href="/Publications/liseuse/fiche/206/">Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</a></li><li><a href="/Publications/liseuse/fiche/207/">Hiérarchie des agrégats et co-évolution structure-fonction</a></li><li><a href="/Publications/liseuse/fiche/218/">Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport</a></li><li><a href="/Publications/liseuse/fiche/224/">Dormance microbienne et persisters — banque de semences invisible du sol</a></li><li><a href="/Publications/liseuse/fiche/225/">Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</a></li><li><a href="/Publications/liseuse/fiche/229/">Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</a></li><li><a href="/Publications/liseuse/fiche/231/">Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</a></li><li><a href="/Publications/liseuse/fiche/234/">Effet Birch — pulse de minéralisation à la réhumectation des sols</a></li><li><a href="/Publications/liseuse/fiche/237/">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</a></li><li><a href="/Publications/liseuse/fiche/238/">Cycle du soufre : du sol à la santé humaine</a></li><li><a href="/Publications/liseuse/fiche/243/">Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</a></li><li><a href="/Publications/liseuse/fiche/245/">Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</a></li><li><a href="/Publications/liseuse/fiche/247/">Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</a></li><li><a href="/Publications/liseuse/fiche/250/">Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</a></li><li><a href="/Publications/liseuse/fiche/251/">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</a></li><li><a href="/Publications/liseuse/fiche/254/">Les fils rouges du sol vivant — thèses transversales et renversements</a></li><li><a href="/Publications/liseuse/fiche/258/">Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</a></li><li><a href="/Publications/liseuse/fiche/260/">La transition robuste : une vallée à traverser, quatre âges, trois gestes</a></li><li><a href="/Publications/liseuse/fiche/261/">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</a></li><li><a href="/Publications/liseuse/fiche/263/">Le régime fixe les rôles — du sol vivant à la plante saine</a></li><li><a href="/Publications/liseuse/fiche/264/">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</a></li><li><a href="/Publications/liseuse/fiche/269/">Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</a></li><li><a href="/Publications/liseuse/fiche/270/">Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</a></li><li><a href="/Publications/liseuse/fiche/271/">Silvopastoralisme tempéré — arbre, prairie et animal</a></li><li><a href="/Publications/liseuse/fiche/272/">Pompage nutritif profond et filet de sécurité racinaire</a></li><li><a href="/Publications/liseuse/fiche/273/">Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</a></li><li><a href="/Publications/liseuse/fiche/274/">L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</a></li><li><a href="/Publications/liseuse/fiche/275/">La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone</a></li><li><a href="/Publications/liseuse/fiche/276/">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</a></li><li><a href="/Publications/liseuse/fiche/289/">Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion</a></li><li><a href="/Publications/liseuse/fiche/290/">Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</a></li><li><a href="/Publications/liseuse/fiche/293/">Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</a></li><li><a href="/Publications/liseuse/fiche/294/" aria-current="page">La structuration du microbiome : assemblage, core microbiome et coalescence</a></li><li><a href="/Publications/liseuse/fiche/298/">Le microbiome de la graine : l&#39;héritage microbien de la plante-mère</a></li><li><a href="/Publications/liseuse/fiche/299/">Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère</a></li><li><a href="/Publications/liseuse/fiche/301/">Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté</a></li><li><a href="/Publications/liseuse/fiche/303/">La plastisphère : le biofilm microbien des microplastiques du sol</a></li><li><a href="/Publications/liseuse/fiche/304/">La phagothérapie végétale : des bactériophages contre les phytopathogènes</a></li><li><a href="/Publications/liseuse/fiche/308/">La rhizosphère : la zone d&#39;influence où la plante parle au sol</a></li><li><a href="/Publications/liseuse/fiche/309/">L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol</a></li><li><a href="/Publications/liseuse/fiche/310/">L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol</a></li><li><a href="/Publications/liseuse/fiche/312/">Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</a></li><li><a href="/Publications/liseuse/fiche/315/">Battance et croûte de surface : mécanismes, diagnostic et remédiation</a></li><li><a href="/Publications/liseuse/fiche/319/">Couleur du sol : le premier diagnostic par le regard</a></li><li><a href="/Publications/liseuse/fiche/346/">Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse</a></li></ul></li><li class><a href="/Publications/liseuse/doc/S3/"><strong>S3</strong> — Le Microbiome Fongique et Mycorhizien</a></li><li class><a href="/Publications/liseuse/doc/S4/"><strong>S4</strong> — Le Carbone et les Grands Cycles</a></li></ul></li><li class><a href="/Publications/liseuse/strate/V/"><span class="sv-strate-badge sv-strate-V">V</span> Vivant</a></li><li class><a href="/Publications/liseuse/strate/P/"><span class="sv-strate-badge sv-strate-P">P</span> Pratiques</a></li><li class><a href="/Publications/liseuse/strate/H/"><span class="sv-strate-badge sv-strate-H">H</span> Humain</a></li></ul><p class="sv-side-label">Outils</p><ul class="sv-side-tree"><li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li><li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li><li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li><li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li><li><a href="/Publications/liseuse/references/">Références — les sources</a></li></ul></nav><main class="sv-main" id="sv-main"><nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane"><a href="/Publications/liseuse/">Accueil</a><span aria-hidden="true">›</span><a href="/Publications/liseuse/strate/S/">Sol</a><span aria-hidden="true">›</span><a href="/Publications/liseuse/doc/S2/">S2</a><span aria-hidden="true">›</span><span aria-current="page">Fiche 294</span></nav><div class="sv-reading"><article class="sv-prose"><h1>La structuration du microbiome : assemblage, core microbiome et coalescence</h1><div class="sv-card" id="resume"><h2>Résumé</h2><div class="sv-markdown"><p>Trois concepts unifient la compréhension de la construction des microbiomes. L'<strong>assemblage</strong> décompose la structuration en quatre processus — sélection, dispersion, dérive, <span class="sv-cite" tabindex="0">spéciation<span class="sv-cite-tip" role="tooltip">Processus évolutif de divergence par lequel de nouvelles espèces se forment à partir d'une population ancestrale (Ciminera, 2017; Molinier, 2013). Elle implique souvent un isolement reproductif, qu'il soit géographique (spéciation allopatrique) ou génétique, empêchant le croisement des populations différenciées (Anonyme, 1995) <a href="/terme/2729/">→ Vocabulaire</a></span></span> — dont le rapport de force, mesurable, fait la part du déterminisme et du hasard (Vellend, 2010 ; Nemergut et al., 2013). Le <strong>core microbiome</strong> est le noyau persistant qui porte les fonctions essentielles de l'holobionte ; sa redondance fonctionnelle garantit la résilience, et sa supériorité sur les assemblages recomposés est expérimentalement démontrée (Zhou et al., 2024). La <strong>coalescence</strong> décrit le mélange des communautés : asymétrique au profit du résident, elle explique l'échec des inoculants, la propagation du résistome et l'importance des effets de priorité. Piloter la structuration suppose alors d'agir sur les termes de l'équation : le moment de l'inoculation, le filtrage variétal, la conduite des couverts et des amendements, et la faune ingénieure. Le cadre théorique est mûr ; la technologie est en chantier.</p>
-</div></div><section id="s0"><h2>Introduction</h2><div class="sv-markdown"><p>Pourquoi deux sols voisins n'abritent-ils pas les mêmes communautés microbiennes ? Pourquoi une souche inoculée disparaît-elle en quelques semaines alors que le <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> résident persiste des années ? Derrière ces questions pratiques se cache l'un des cadres théoriques les plus structurants de l'écologie microbienne contemporaine : la <strong>structuration des communautés</strong> — comment elles se construisent, se maintiennent et se transforment. Trois concepts en forment la colonne vertébrale. L'<strong>assemblage des communautés</strong> décrit les processus qui trient les taxons au fil du temps. Le <strong>core microbiome</strong> identifie le noyau persistant qui porte les fonctions essentielles de l'holobionte. La <strong>coalescence</strong> explique ce qui se passe quand deux communautés se rencontrent — cas de figure omniprésent dès qu'on amende, inocule ou plante. Ce triptyque, longtemps resté confiné à l'écologie théorique, est devenu opérationnel : il dicte aujourd'hui comment réussir (ou rater) une inoculation, un amendement ou une restauration de sol.</p>
-</div></section><section id="s1"><h2>Le cadre fondateur : quatre processus d&#39;assemblage</h2><div class="sv-markdown"><p>Le sol n'est pas un contenant inerte que les microbes rempliraient au <span class="sv-cite" tabindex="0">hasard<span class="sv-cite-tip" role="tooltip">Phénomène stochastique caractérisant des événements dont le résultat ne peut être prédit à partir de l'état initial, comme les mutations ponctuelles de l'ADN (Pagès, 2025). Le hasard génère des accidents génétiques héréditaires (disparition de gènes, erreurs de positionnement) qui fournissent la variabilité nécessaire à la sélection naturelle (Delsol, 2006; Iglesias, 2019) <a href="/terme/3309/">→ Vocabulaire</a></span></span> : c'est un filtre, un corridor et un réacteur. Chaque agrégat, chaque pore rempli d'eau, chaque rhizodépôt est le théâtre d'un tri permanent entre les taxons qui arrivent, ceux qui survivent et ceux qui disparaissent. La théorie de l'assemblage donne un nom à chacune de ces forces, et c'est en les mesurant séparément qu'on peut espérer, un jour, piloter leur résultat.</p>
-</div><div id="s1-1"><h3>Sélection, dispersion, dérive, spéciation</h3><div class="sv-markdown"><p>L'écologie des communautés s'est unifiée autour d'une synthèse simple : toute communauté, microbienne ou non, résulte de quatre processus — la <strong><span class="sv-cite" tabindex="0">sélection<span class="sv-cite-tip" role="tooltip">Processus fondamental d'amélioration des plantes consistant à identifier et multiplier les individus présentant des caractéristiques phénotypiques ou génétiques avantageuses (Slewinski et al., 2025). Elle s'appuie sur la variation génétique, qu'elle soit préexistante ou induite, pour délivrer des cultures offrant une meilleure qualité et performance (Slewinski et al., 2025) <a href="/terme/2888/">→ Vocabulaire</a></span></span></strong> (les conditions filtrent qui survit), la <strong>dispersion</strong> (les taxons arrivent ou non), la <strong>dérive</strong> (les fluctuations de hasard font basculer les petites populations) et la <strong>spéciation</strong> (la nouveauté émerge localement) (Vellend, 2010). Appliqué au microbien, ce cadre a montré sa fécondité : il permet de décomposer la construction d'un microbiome de sol en mécanismes identifiables et, surtout, mesurables (Nemergut et al., 2013). En pratique, la spéciation est négligeable aux échelles agronomiques : la partie se joue entre sélection et dispersion, la dérive agissant en arbitre quand les populations sont petites ou les conditions relâchées.</p>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La structuration du microbiome : assemblage, core microbiome et coalescence — Le Sol Vivant</title>
+    <meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="theme-color" content="#2563eb">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Le Sol Vivant cet Holobionte">
+    <meta property="og:title" content="La structuration du microbiome : assemblage, core microbiome et coalescence — Le Sol Vivant">
+    <meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="La structuration du microbiome : assemblage, core microbiome et coalescence — Le Sol Vivant">
+    <meta name="twitter:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <link rel="canonical" href="/Publications/liseuse/fiche/294/">
+    <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
+    <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.BlPM9bjb.css"></head>
+  <body>
+    <a class="sv-skip" href="#sv-main">Aller au contenu</a>
+    <header class="sv-header">
+      <button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button>
+      <a href="/Publications/liseuse/" class="sv-brand">
+        <span class="sv-brand-dot" aria-hidden="true"></span>
+        <span>Le Sol Vivant</span>
+      </a>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island>
+      <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
+    </header>
+    <div class="sv-shell">
+      <nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus">
+  <p class="sv-side-label">Strates</p>
+  <ul class="sv-side-tree">
+    <li class>
+        <a href="/Publications/liseuse/strate/F/">
+          <span class="sv-strate-badge sv-strate-F">F</span> Fondements
+        </a>
+        
+      </li><li class="is-open">
+        <a href="/Publications/liseuse/strate/S/">
+          <span class="sv-strate-badge sv-strate-S">S</span> Sol
+        </a>
+        <ul class="sv-side-sub">
+            <li class>
+                <a href="/Publications/liseuse/doc/S0/">
+                  <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S1/">
+                  <strong>S1</strong> — Architecture du Sol
+                </a>
+                
+              </li><li class="is-open">
+                <a href="/Publications/liseuse/doc/S2/">
+                  <strong>S2</strong> — Le Microbiome du Sol
+                </a>
+                <ul class="sv-side-sub sv-side-l3">
+                    <li class="sv-side-ouverture">
+                        <a href="/Publications/liseuse/fiche/332/">
+                          <strong>Ouverture</strong> — le récit du document
+                        </a>
+                      </li>
+                    <li>
+                        <a href="/Publications/liseuse/fiche/3/">
+                          Microbiome du sol vivant et thermotolérance des plantes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/10/">
+                          Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/19/">
+                          Protozoaires du Sol et Boucle Microbienne
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/22/">
+                          Quorum Sensing et Communication Chimique Rhizosphérique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/27/">
+                          Les Archées du Sol — Un Troisième Domaine Sous-estimé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/28/">
+                          Le Cycle du Fer et les Bactéries Ferro-réductrices
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/60/">
+                          Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/61/">
+                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/67/">
+                          Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/73/">
+                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/74/">
+                          Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/76/">
+                          Lombriciens — écologie, services et pilotage des populations
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/82/">
+                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/83/">
+                          Cascade phosphore — du minéral inerte à l&#39;os humain
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/88/">
+                          Mémoire microbienne paléoclimatique — héritage 20 000 ans
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/95/">
+                          Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/96/">
+                          Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/99/">
+                          Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/103/">
+                          Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/105/">
+                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/106/">
+                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/107/">
+                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/108/">
+                          ‘Faim d’azote’ après apport carboné (immobilisation)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/113/">
+                          Antifragilité : stress modéré → diversification de l&#39;hologénome
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/115/">
+                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/116/">
+                          Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/118/">
+                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/119/">
+                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/124/">
+                          Stabilité d’agrégats faible / désagrégation rapide
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/125/">
+                          Mésofaune : collemboles et acariens, régulateurs des micro-habitats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/134/">
+                          KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/136/">
+                          Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/138/">
+                          Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/139/">
+                          Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/140/">
+                          Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/141/">
+                          Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/142/">
+                          Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/144/">
+                          Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/148/">
+                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/151/">
+                          AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/152/">
+                          Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/154/">
+                          Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/160/">
+                          Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/163/">
+                          Microsites
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/172/">
+                          Plant diversity drives rhizosphere microbiome
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/177/">
+                          Tri-trophic interactions CEP / Trichoderma / soil mites
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/181/">
+                          Microbial necromass on the rise
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/194/">
+                          Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/195/">
+                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/196/">
+                          Root exudates contribute to belowground ecosystem hotspots: A
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/200/">
+                          Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/202/">
+                          Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/205/">
+                          Carbon Use Efficiency microbienne — pivot stockage/respiration
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/206/">
+                          Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/207/">
+                          Hiérarchie des agrégats et co-évolution structure-fonction
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/218/">
+                          Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/224/">
+                          Dormance microbienne et persisters — banque de semences invisible du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/225/">
+                          Virosphère du sol et bactériophages — top-down viral et renouvellement microbien
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/229/">
+                          Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/231/">
+                          Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/234/">
+                          Effet Birch — pulse de minéralisation à la réhumectation des sols
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/237/">
+                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/238/">
+                          Cycle du soufre : du sol à la santé humaine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/243/">
+                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/245/">
+                          Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/247/">
+                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/250/">
+                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/251/">
+                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/254/">
+                          Les fils rouges du sol vivant — thèses transversales et renversements
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/258/">
+                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/260/">
+                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/261/">
+                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/263/">
+                          Le régime fixe les rôles — du sol vivant à la plante saine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/264/">
+                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/269/">
+                          Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/270/">
+                          Haies, bocage et brise-vent — fonctions sol, lisière et microclimat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/271/">
+                          Silvopastoralisme tempéré — arbre, prairie et animal
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/272/">
+                          Pompage nutritif profond et filet de sécurité racinaire
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/273/">
+                          Trognes et arbres-ressources — biomasse renouvelable et rôle écologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/274/">
+                          L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/275/">
+                          La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/276/">
+                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/289/">
+                          Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/290/">
+                          Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/293/">
+                          Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/294/" aria-current="page">
+                          La structuration du microbiome : assemblage, core microbiome et coalescence
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/298/">
+                          Le microbiome de la graine : l&#39;héritage microbien de la plante-mère
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/299/">
+                          Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/301/">
+                          Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/303/">
+                          La plastisphère : le biofilm microbien des microplastiques du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/304/">
+                          La phagothérapie végétale : des bactériophages contre les phytopathogènes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/308/">
+                          La rhizosphère : la zone d&#39;influence où la plante parle au sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/309/">
+                          L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/310/">
+                          L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/312/">
+                          Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/315/">
+                          Battance et croûte de surface : mécanismes, diagnostic et remédiation
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/319/">
+                          Couleur du sol : le premier diagnostic par le regard
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/346/">
+                          Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse
+                        </a>
+                      </li>
+                  </ul>
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S3/">
+                  <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S4/">
+                  <strong>S4</strong> — Le Carbone et les Grands Cycles
+                </a>
+                
+              </li>
+          </ul>
+      </li><li class>
+        <a href="/Publications/liseuse/strate/V/">
+          <span class="sv-strate-badge sv-strate-V">V</span> Vivant
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/P/">
+          <span class="sv-strate-badge sv-strate-P">P</span> Pratiques
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/H/">
+          <span class="sv-strate-badge sv-strate-H">H</span> Humain
+        </a>
+        
+      </li>
+  </ul>
+  <p class="sv-side-label">Outils</p>
+  <ul class="sv-side-tree">
+    <li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li>
+    <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
+    <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
+    <li><a href="/Publications/liseuse/references/">Références — les sources</a></li>
+    <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
+  </ul>
+</nav>
+      <main class="sv-main" id="sv-main">
+        
+  <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/Publications/liseuse/">Accueil</a>
+    <span aria-hidden="true">›</span>
+    <a href="/Publications/liseuse/strate/S/">Sol</a>
+    <span aria-hidden="true">›</span>
+    <a href="/Publications/liseuse/doc/S2/">S2</a><span aria-hidden="true">›</span>
+    <span aria-current="page">Fiche 294</span>
+  </nav>
+
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>La structuration du microbiome : assemblage, core microbiome et coalescence</h1>
+
+      
+
+      <div class="sv-card" id="resume">
+          <h2>Résumé</h2>
+          <div class="sv-markdown"><p>Trois concepts unifient la compréhension de la construction des microbiomes. L'<strong>assemblage</strong> décompose la structuration en quatre processus — sélection, dispersion, dérive, <span class="sv-cite" tabindex="0">spéciation<span class="sv-cite-tip" role="tooltip">Processus évolutif de divergence par lequel de nouvelles espèces se forment à partir d'une population ancestrale (Ciminera, 2017; Molinier, 2013). Elle implique souvent un isolement reproductif, qu'il soit géographique (spéciation allopatrique) ou génétique, empêchant le croisement des populations différenciées (Anonyme, 1995) <a href="/terme/2729/">→ Vocabulaire</a></span></span> — dont le rapport de force, mesurable, fait la part du déterminisme et du hasard (Vellend, 2010 ; Nemergut et al., 2013). Le <strong>core microbiome</strong> est le noyau persistant qui porte les fonctions essentielles de l'holobionte ; sa redondance fonctionnelle garantit la résilience, et sa supériorité sur les assemblages recomposés est expérimentalement démontrée (Zhou et al., 2024). La <strong>coalescence</strong> décrit le mélange des communautés : asymétrique au profit du résident, elle explique l'échec des inoculants, la propagation du résistome et l'importance des effets de priorité. Piloter la structuration suppose alors d'agir sur les termes de l'équation : le moment de l'inoculation, le filtrage variétal, la conduite des couverts et des amendements, et la faune ingénieure. Le cadre théorique est mûr ; la technologie est en chantier.</p>
+</div>
+          
+        </div>
+
+      <section id="s0">
+          <h2>Introduction</h2>
+          <div class="sv-markdown"><p>Pourquoi deux sols voisins n'abritent-ils pas les mêmes communautés microbiennes ? Pourquoi une souche inoculée disparaît-elle en quelques semaines alors que le <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> résident persiste des années ? Derrière ces questions pratiques se cache l'un des cadres théoriques les plus structurants de l'écologie microbienne contemporaine : la <strong>structuration des communautés</strong> — comment elles se construisent, se maintiennent et se transforment. Trois concepts en forment la colonne vertébrale. L'<strong>assemblage des communautés</strong> décrit les processus qui trient les taxons au fil du temps. Le <strong>core microbiome</strong> identifie le noyau persistant qui porte les fonctions essentielles de l'holobionte. La <strong>coalescence</strong> explique ce qui se passe quand deux communautés se rencontrent — cas de figure omniprésent dès qu'on amende, inocule ou plante. Ce triptyque, longtemps resté confiné à l'écologie théorique, est devenu opérationnel : il dicte aujourd'hui comment réussir (ou rater) une inoculation, un amendement ou une restauration de sol.</p>
+</div>
+          
+        </section><section id="s1">
+          <h2>Le cadre fondateur : quatre processus d&#39;assemblage</h2>
+          <div class="sv-markdown"><p>Le sol n'est pas un contenant inerte que les microbes rempliraient au <span class="sv-cite" tabindex="0">hasard<span class="sv-cite-tip" role="tooltip">Phénomène stochastique caractérisant des événements dont le résultat ne peut être prédit à partir de l'état initial, comme les mutations ponctuelles de l'ADN (Pagès, 2025). Le hasard génère des accidents génétiques héréditaires (disparition de gènes, erreurs de positionnement) qui fournissent la variabilité nécessaire à la sélection naturelle (Delsol, 2006; Iglesias, 2019) <a href="/terme/3309/">→ Vocabulaire</a></span></span> : c'est un filtre, un corridor et un réacteur. Chaque agrégat, chaque pore rempli d'eau, chaque rhizodépôt est le théâtre d'un tri permanent entre les taxons qui arrivent, ceux qui survivent et ceux qui disparaissent. La théorie de l'assemblage donne un nom à chacune de ces forces, et c'est en les mesurant séparément qu'on peut espérer, un jour, piloter leur résultat.</p>
+</div>
+          <div id="s1-1">
+              <h3>Sélection, dispersion, dérive, spéciation</h3>
+              <div class="sv-markdown"><p>L'écologie des communautés s'est unifiée autour d'une synthèse simple : toute communauté, microbienne ou non, résulte de quatre processus — la <strong><span class="sv-cite" tabindex="0">sélection<span class="sv-cite-tip" role="tooltip">Processus fondamental d'amélioration des plantes consistant à identifier et multiplier les individus présentant des caractéristiques phénotypiques ou génétiques avantageuses (Slewinski et al., 2025). Elle s'appuie sur la variation génétique, qu'elle soit préexistante ou induite, pour délivrer des cultures offrant une meilleure qualité et performance (Slewinski et al., 2025) <a href="/terme/2888/">→ Vocabulaire</a></span></span></strong> (les conditions filtrent qui survit), la <strong>dispersion</strong> (les taxons arrivent ou non), la <strong>dérive</strong> (les fluctuations de hasard font basculer les petites populations) et la <strong>spéciation</strong> (la nouveauté émerge localement) (Vellend, 2010). Appliqué au microbien, ce cadre a montré sa fécondité : il permet de décomposer la construction d'un microbiome de sol en mécanismes identifiables et, surtout, mesurables (Nemergut et al., 2013). En pratique, la spéciation est négligeable aux échelles agronomiques : la partie se joue entre sélection et dispersion, la dérive agissant en arbitre quand les populations sont petites ou les conditions relâchées.</p>
 <p>Dans un sol, ces processus ne s'exercent pas uniformément. La sélection y est multipolaire : pH, potentiel redox, disponibilité en carbone labile, pression osmotique — chaque facteur filtre une fraction du pool régional. La dispersion y est contrainte par la connectivité hydrique : un film d'eau continu à potentiel matriciel élevé est un corridor ; un sol sec est un archipel de microsites isolés, où la dérive prend le pas sur la sélection faute de flux migratoires compensateurs. Le labour, en brassant les horizons, est une perturbation de dispersion autant que de sélection : il connecte ce qui était séparé et expose à l'oxygène ce qui vivait en anaérobiose.</p>
-</div></div><div id="s1-2"><h3>Déterminisme contre stochasticité : un continuum mesuré</h3><div class="sv-markdown"><p>La vieille opposition entre vision déterministe (« les conditions dictent la communauté ») et vision stochastique (« le <span class="sv-cite" tabindex="0">hasard<span class="sv-cite-tip" role="tooltip">Phénomène stochastique caractérisant des événements dont le résultat ne peut être prédit à partir de l'état initial, comme les mutations ponctuelles de l'ADN (Pagès, 2025). Le hasard génère des accidents génétiques héréditaires (disparition de gènes, erreurs de positionnement) qui fournissent la variabilité nécessaire à la sélection naturelle (Delsol, 2006; Iglesias, 2019) <a href="/terme/3309/">→ Vocabulaire</a></span></span> historique décide ») s'est dissoute dans un continuum quantifiable. Après une perturbation, la reconstitution des communautés bactériennes du sol suit une trajectoire <strong>autogène et déterministe</strong> : les mêmes successions se répètent, comme si le sol possédait une mémoire fonctionnelle de son propre assemblage (Jurburg et al., 2017). À plus grande échelle, l'assemblage des communautés régule directement le potentiel fonctionnel du microbiome — la composition n'est pas un décor, elle code les fonctions (Zhu et al., 2024). La leçon agronomique est double : le filtre environnemental (pH, humidité, structure) est le premier levier de pilotage, et l'histoire du sol — ses perturbations passées — pèse sur tout ce qu'on tente d'y introduire.</p>
+</div>
+            </div><div id="s1-2">
+              <h3>Déterminisme contre stochasticité : un continuum mesuré</h3>
+              <div class="sv-markdown"><p>La vieille opposition entre vision déterministe (« les conditions dictent la communauté ») et vision stochastique (« le <span class="sv-cite" tabindex="0">hasard<span class="sv-cite-tip" role="tooltip">Phénomène stochastique caractérisant des événements dont le résultat ne peut être prédit à partir de l'état initial, comme les mutations ponctuelles de l'ADN (Pagès, 2025). Le hasard génère des accidents génétiques héréditaires (disparition de gènes, erreurs de positionnement) qui fournissent la variabilité nécessaire à la sélection naturelle (Delsol, 2006; Iglesias, 2019) <a href="/terme/3309/">→ Vocabulaire</a></span></span> historique décide ») s'est dissoute dans un continuum quantifiable. Après une perturbation, la reconstitution des communautés bactériennes du sol suit une trajectoire <strong>autogène et déterministe</strong> : les mêmes successions se répètent, comme si le sol possédait une mémoire fonctionnelle de son propre assemblage (Jurburg et al., 2017). À plus grande échelle, l'assemblage des communautés régule directement le potentiel fonctionnel du microbiome — la composition n'est pas un décor, elle code les fonctions (Zhu et al., 2024). La leçon agronomique est double : le filtre environnemental (pH, humidité, structure) est le premier levier de pilotage, et l'histoire du sol — ses perturbations passées — pèse sur tout ce qu'on tente d'y introduire.</p>
 <p>Ce continuum se mesure. Les approches par modèles nuls (null models) et indices de renouvellement phylogénétique (turnover) (βNTI, RCbray) permettent de quantifier, pour un jeu de données donné, la part relative du déterminisme et de la stochasticité. Le résultat est presque toujours un entre-deux : la sélection domine quand le gradient environnemental est fort (front redox, gradient de pH, rhizosphère active), la dérive et la dispersion limitante prennent le relais quand le gradient se relâche (sol nu, jachère, profondeur). La structuration du microbiome n'est pas un interrupteur binaire, c'est un potentiomètre que les pratiques agronomiques font glisser dans un sens ou dans l'autre.</p>
-</div></div></section><section id="s2"><h2>Le core microbiome : le noyau fonctionnel de l&#39;holobionte</h2><div class="sv-markdown"><p>Si l'assemblage explique le tri, le <span class="sv-cite" tabindex="0">core microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des taxons microbiens persistants et ubiquitaires associés à un hôte (plante, animal) ou à un habitat (sol, rhizosphère). Le core microbiome représente la fraction stable du microbiome, transmise verticalement ou recrutée de manière prévisible, par opposition aux taxons transitoires ou conditionnels. Sa définition est statistique (taxons présents dans ≥X% des échantillons), mais sa signification écologique est fonctionnelle : le core porte les fonctions essentielles (nutrition, protection, signalisation) qui maintiennent l'holobionte. <a href="/terme/5016/">→ Vocabulaire</a></span></span> en est le produit stable — la fraction de la communauté que le filtre de l'hôte et du sol retient, génération après génération. C'est la mémoire vivante de la coévolution plante-microbiome, et c'est aussi le capital fonctionnel sur lequel l'agriculture peut miser.</p>
-</div><div id="s2-1"><h3>Définition statistique, signification fonctionnelle</h3><div class="sv-markdown"><p>Le <strong><span class="sv-cite" tabindex="0">core microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des taxons microbiens persistants et ubiquitaires associés à un hôte (plante, animal) ou à un habitat (sol, rhizosphère). Le core microbiome représente la fraction stable du microbiome, transmise verticalement ou recrutée de manière prévisible, par opposition aux taxons transitoires ou conditionnels. Sa définition est statistique (taxons présents dans ≥X% des échantillons), mais sa signification écologique est fonctionnelle : le core porte les fonctions essentielles (nutrition, protection, signalisation) qui maintiennent l'holobionte. <a href="/terme/5016/">→ Vocabulaire</a></span></span></strong> désigne l'ensemble des taxons persistants et ubiquitaires associés à un hôte ou à un habitat, par opposition aux taxons transitoires. Sa définition opérationnelle est statistique — présence dans une majorité d'échantillons — mais sa portée est fonctionnelle : le noyau porte les traits qui assurent résistance et résilience des communautés face aux perturbations (Shade et al., 2012). C'est le « noyau dur » de l'holobionte : nutrition minérale, synthèse de phytohormones, protection contre les stress biotiques et abiotiques. La frontière noyau/transitoire n'est pas figée : un taxon conditionnel peut être recruté sous stress — la logique du cri-pour-secours rhizosphérique — puis éliminé quand la pression cesse.</p>
+</div>
+            </div>
+        </section><section id="s2">
+          <h2>Le core microbiome : le noyau fonctionnel de l&#39;holobionte</h2>
+          <div class="sv-markdown"><p>Si l'assemblage explique le tri, le <span class="sv-cite" tabindex="0">core microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des taxons microbiens persistants et ubiquitaires associés à un hôte (plante, animal) ou à un habitat (sol, rhizosphère). Le core microbiome représente la fraction stable du microbiome, transmise verticalement ou recrutée de manière prévisible, par opposition aux taxons transitoires ou conditionnels. Sa définition est statistique (taxons présents dans ≥X% des échantillons), mais sa signification écologique est fonctionnelle : le core porte les fonctions essentielles (nutrition, protection, signalisation) qui maintiennent l'holobionte. <a href="/terme/5016/">→ Vocabulaire</a></span></span> en est le produit stable — la fraction de la communauté que le filtre de l'hôte et du sol retient, génération après génération. C'est la mémoire vivante de la coévolution plante-microbiome, et c'est aussi le capital fonctionnel sur lequel l'agriculture peut miser.</p>
+</div>
+          <div id="s2-1">
+              <h3>Définition statistique, signification fonctionnelle</h3>
+              <div class="sv-markdown"><p>Le <strong><span class="sv-cite" tabindex="0">core microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des taxons microbiens persistants et ubiquitaires associés à un hôte (plante, animal) ou à un habitat (sol, rhizosphère). Le core microbiome représente la fraction stable du microbiome, transmise verticalement ou recrutée de manière prévisible, par opposition aux taxons transitoires ou conditionnels. Sa définition est statistique (taxons présents dans ≥X% des échantillons), mais sa signification écologique est fonctionnelle : le core porte les fonctions essentielles (nutrition, protection, signalisation) qui maintiennent l'holobionte. <a href="/terme/5016/">→ Vocabulaire</a></span></span></strong> désigne l'ensemble des taxons persistants et ubiquitaires associés à un hôte ou à un habitat, par opposition aux taxons transitoires. Sa définition opérationnelle est statistique — présence dans une majorité d'échantillons — mais sa portée est fonctionnelle : le noyau porte les traits qui assurent résistance et résilience des communautés face aux perturbations (Shade et al., 2012). C'est le « noyau dur » de l'holobionte : nutrition minérale, synthèse de phytohormones, protection contre les stress biotiques et abiotiques. La frontière noyau/transitoire n'est pas figée : un taxon conditionnel peut être recruté sous stress — la logique du cri-pour-secours rhizosphérique — puis éliminé quand la pression cesse.</p>
 <p>Il faut distinguer deux définitions opérationnelles qui ne se recouvrent qu'imparfaitement. Le noyau <strong>d'occurrence</strong> (présence dans ≥80 % des échantillons) identifie des taxons fidèles mais pas nécessairement abondants ; le noyau <strong>d'abondance</strong> (fraction dominante des lectures) identifie les taxons qui font le gros du flux métabolique. Les deux listes se chevauchent pour les fonctions essentielles (nitrification, solubilisation du phosphore) mais divergent pour les fonctions de secours, portées par des taxons rares à l'état basal mais amplifiables sous stress. Cette distinction a une conséquence agronomique directe : un noyau d'occurrence appauvri peut passer inaperçu au séquençage de routine tout en ayant perdu sa capacité de réponse aux stress.</p>
-</div></div><div id="s2-2"><h3>Les cores du continuum sol-plante</h3><div class="sv-markdown"><p>Le concept décline sur toutes les niches du continuum : noyau rhizosphérique, noyau phyllosphérique, noyau endosphérique — et noyau de la graine. Ce dernier compartiment est stratégique : chez le haricot, une fraction du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> semencier se transmet de manière stable sur plusieurs générations, constituant un héritage microbien vertical qui amorce l'assemblage de la plante fille (Sulesky-Grieb et al., 2024). La plante ne recrute pas son microbiome à zéro à chaque génération : elle part avec un fonds de roulement.</p>
+</div>
+            </div><div id="s2-2">
+              <h3>Les cores du continuum sol-plante</h3>
+              <div class="sv-markdown"><p>Le concept décline sur toutes les niches du continuum : noyau rhizosphérique, noyau phyllosphérique, noyau endosphérique — et noyau de la graine. Ce dernier compartiment est stratégique : chez le haricot, une fraction du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> semencier se transmet de manière stable sur plusieurs générations, constituant un héritage microbien vertical qui amorce l'assemblage de la plante fille (Sulesky-Grieb et al., 2024). La plante ne recrute pas son microbiome à zéro à chaque génération : elle part avec un fonds de roulement.</p>
 <p>Cette transmission verticale, bien que partielle, change la perspective sur la domestication. Les pratiques de sélection variétale et de traitement de semences (fongicides, enrobages) ont pu, sans le savoir, éroder ce capital microbien transmis. Restaurer le noyau semencier devient alors un levier de résilience au moins aussi puissant que l'inoculation au champ — et probablement plus durable, puisqu'il opère au moment où la coalescence avec le sol est la moins asymétrique, à la germination.</p>
-</div></div><div id="s2-3"><h3>Redondance fonctionnelle et résilience</h3><div class="sv-markdown"><p>La force du <span class="sv-cite" tabindex="0">noyau<span class="sv-cite-tip" role="tooltip">Organite cellulaire délimité par une double membrane phospholipidique (enveloppe nucléaire), contenant l'essentiel du génome de la cellule eucaryote sous forme de chromatine. Siège de la réplication de l'ADN, de la transcription des gènes et de la maturation des ARN messagers, le noyau constitue le centre de contrôle de l'expression génétique et de la division cellulaire. <a href="/terme/7182/">→ Vocabulaire</a></span></span> tient à sa <strong>redondance fonctionnelle</strong> : plusieurs taxons y portent la même fonction, si bien que l'élimination de l'un est compensée par les autres. Cette redondance est la signature d'une sélection stabilisatrice exercée par l'hôte via ses exsudats et ses gènes de management du microbiome. Le noyau n'est donc pas une liste d'espèces mais une architecture coévolutive — ce que le concept d'holobionte décrit au niveau de l'individu, le noyau le décline au niveau des fonctions.</p>
+</div>
+            </div><div id="s2-3">
+              <h3>Redondance fonctionnelle et résilience</h3>
+              <div class="sv-markdown"><p>La force du <span class="sv-cite" tabindex="0">noyau<span class="sv-cite-tip" role="tooltip">Organite cellulaire délimité par une double membrane phospholipidique (enveloppe nucléaire), contenant l'essentiel du génome de la cellule eucaryote sous forme de chromatine. Siège de la réplication de l'ADN, de la transcription des gènes et de la maturation des ARN messagers, le noyau constitue le centre de contrôle de l'expression génétique et de la division cellulaire. <a href="/terme/7182/">→ Vocabulaire</a></span></span> tient à sa <strong>redondance fonctionnelle</strong> : plusieurs taxons y portent la même fonction, si bien que l'élimination de l'un est compensée par les autres. Cette redondance est la signature d'une sélection stabilisatrice exercée par l'hôte via ses exsudats et ses gènes de management du microbiome. Le noyau n'est donc pas une liste d'espèces mais une architecture coévolutive — ce que le concept d'holobionte décrit au niveau de l'individu, le noyau le décline au niveau des fonctions.</p>
 <p>La redondance n'est cependant pas gratuite. Elle a un coût écologique (compétition intra-fonctionnelle) et un coût évolutif (pression de sélection relâchée sur chaque taxon redondant). Dans un sol soumis à une pression constante (monoculture, intrants uniformes), la redondance peut s'éroder silencieusement — chaque fonction reste assurée, mais par un nombre réduit de taxons — d'où une fragilité latente. Le microbiome paraît fonctionnel jusqu'au jour où ce taxon unique est éliminé par une perturbation nouvelle. C'est l'illusion d'assurance que dissipe l'analyse fonctionnelle du noyau : la redondance n'est pas un luxe, c'est une police d'assurance contre l'imprévisible.</p>
-</div></div><div id="s2-4"><h3>Le core natif, condition de succès des SynComs</h3><div class="sv-markdown"><p>La valeur de cette architecture coévolutive se mesure expérimentalement. En comparant SynComs bâtis sur des souches natives du <span class="sv-cite" tabindex="0">noyau<span class="sv-cite-tip" role="tooltip">Organite cellulaire délimité par une double membrane phospholipidique (enveloppe nucléaire), contenant l'essentiel du génome de la cellule eucaryote sous forme de chromatine. Siège de la réplication de l'ADN, de la transcription des gènes et de la maturation des ARN messagers, le noyau constitue le centre de contrôle de l'expression génétique et de la division cellulaire. <a href="/terme/7182/">→ Vocabulaire</a></span></span>, natives hors noyau et non natives, Zhou et al. (2024) montrent que le consortium le plus performant (SC2, +129 % de biomasse végétale nette une fois formulé) doit son effet à sa capacité à <strong>recruter le noyau natif</strong> de la rhizosphère — fixation d'azote, production d'AIA, solubilisation du phosphore — et non à ses seules souches introduites. Leçon retournée pour l'ingénierie des consortia microbiens : un bon SynCom n'écrase pas le microbiome résident, il l'active. Le noyau natif n'est pas l'obstacle à l'inoculation, il en est le partenaire indispensable.</p>
+</div>
+            </div><div id="s2-4">
+              <h3>Le core natif, condition de succès des SynComs</h3>
+              <div class="sv-markdown"><p>La valeur de cette architecture coévolutive se mesure expérimentalement. En comparant SynComs bâtis sur des souches natives du <span class="sv-cite" tabindex="0">noyau<span class="sv-cite-tip" role="tooltip">Organite cellulaire délimité par une double membrane phospholipidique (enveloppe nucléaire), contenant l'essentiel du génome de la cellule eucaryote sous forme de chromatine. Siège de la réplication de l'ADN, de la transcription des gènes et de la maturation des ARN messagers, le noyau constitue le centre de contrôle de l'expression génétique et de la division cellulaire. <a href="/terme/7182/">→ Vocabulaire</a></span></span>, natives hors noyau et non natives, Zhou et al. (2024) montrent que le consortium le plus performant (SC2, +129 % de biomasse végétale nette une fois formulé) doit son effet à sa capacité à <strong>recruter le noyau natif</strong> de la rhizosphère — fixation d'azote, production d'AIA, solubilisation du phosphore — et non à ses seules souches introduites. Leçon retournée pour l'ingénierie des consortia microbiens : un bon SynCom n'écrase pas le microbiome résident, il l'active. Le noyau natif n'est pas l'obstacle à l'inoculation, il en est le partenaire indispensable.</p>
 <p>Ce résultat redéfinit le cahier des charges d'un inoculant rationnel. Plutôt que de viser la persistance des souches introduites — pari statistiquement perdant face à l'asymétrie du résident —, la stratégie gagnante consiste à introduire des « leviers microbiens » : des souches dont la fonction écologique est de réveiller, de connecter ou de supplémenter le noyau natif, sans chercher à le remplacer. C'est le passage d'une logique de peuplement à une logique de facilitation.</p>
-</div></div></section><section id="s3"><h2>La coalescence : quand les communautés se rencontrent</h2><div class="sv-markdown"><p>L'agriculture est, du point de vue microbien, une suite ininterrompue de coalescences. Chaque semis est une coalescence graine-sol, chaque amendement une coalescence compost-sol, chaque <span class="sv-cite" tabindex="0">inoculation<span class="sv-cite-tip" role="tooltip">Apport volontaire dans le sol ou sur les semences de souches microbiennes sélectionnées pour leurs effets bénéfiques sur le développement végétal (Dorioz et al., 2008). Le succès de cette pratique dépend de la survie de l'inoculant et de sa capacité à coloniser le milieu face à la compétition de la microflore indigène (Papin, 2024; Papin et al., 2024; Veen et al., 1997) <a href="/terme/2676/">→ Vocabulaire</a></span></span> une coalescence inoculum-rhizosphère. Comprendre les règles de ces rencontres, c'est se donner les moyens d'en orienter l'issue.</p>
-</div><div id="s3-1"><h3>Mécanismes et déterminants</h3><div class="sv-markdown"><p>La <strong>coalescence microbienne</strong> — rencontre et mélange de deux communautés distinctes — produit une communauté dont la composition et la fonction ne sont pas prédictibles par simple addition des partenaires (Liu &amp; Salles, 2024). Trois facteurs structurent le résultat : le ratio d'abondance entre communautés, leur condition physiologique (cellules actives contre dormantes issues de la banque de semences microbienne), et les interactions biotiques — compétition, prédation, coopération. Sur le terrain, les déterminants biotiques et abiotiques se combinent : une étude multi-sites sur les coalescences sol-rhizosphère montre que le filtre de l'hôte et les propriétés du sol pèsent autant que la composition de l'inoculum entrant (Li et al., 2024).</p>
+</div>
+            </div>
+        </section><section id="s3">
+          <h2>La coalescence : quand les communautés se rencontrent</h2>
+          <div class="sv-markdown"><p>L'agriculture est, du point de vue microbien, une suite ininterrompue de coalescences. Chaque semis est une coalescence graine-sol, chaque amendement une coalescence compost-sol, chaque <span class="sv-cite" tabindex="0">inoculation<span class="sv-cite-tip" role="tooltip">Apport volontaire dans le sol ou sur les semences de souches microbiennes sélectionnées pour leurs effets bénéfiques sur le développement végétal (Dorioz et al., 2008). Le succès de cette pratique dépend de la survie de l'inoculant et de sa capacité à coloniser le milieu face à la compétition de la microflore indigène (Papin, 2024; Papin et al., 2024; Veen et al., 1997) <a href="/terme/2676/">→ Vocabulaire</a></span></span> une coalescence inoculum-rhizosphère. Comprendre les règles de ces rencontres, c'est se donner les moyens d'en orienter l'issue.</p>
+</div>
+          <div id="s3-1">
+              <h3>Mécanismes et déterminants</h3>
+              <div class="sv-markdown"><p>La <strong>coalescence microbienne</strong> — rencontre et mélange de deux communautés distinctes — produit une communauté dont la composition et la fonction ne sont pas prédictibles par simple addition des partenaires (Liu &amp; Salles, 2024). Trois facteurs structurent le résultat : le ratio d'abondance entre communautés, leur condition physiologique (cellules actives contre dormantes issues de la banque de semences microbienne), et les interactions biotiques — compétition, prédation, coopération. Sur le terrain, les déterminants biotiques et abiotiques se combinent : une étude multi-sites sur les coalescences sol-rhizosphère montre que le filtre de l'hôte et les propriétés du sol pèsent autant que la composition de l'inoculum entrant (Li et al., 2024).</p>
 <p>La banque de semences microbienne — ce réservoir de cellules dormantes, viables mais inactives, présentes dans le sol — est un acteur sous-estimé de la coalescence. Une communauté entrante, même minoritaire, peut contenir des cellules actives qui trouvent immédiatement leur niche ; une communauté résidente, même majoritaire, peut être majoritairement dormante et ne réagir qu'avec un temps de latence. Le résultat de la coalescence dépend donc autant de la physiologie que de la taxonomie.</p>
-</div></div><div id="s3-2"><h3>L&#39;asymétrie du résident : pourquoi les inoculants échouent</h3><div class="sv-markdown"><p>La coalescence est rarement symétrique : la communauté résidente, plus abondante, plus diverse et chez elle, domine presque toujours l'entrante. Cette asymétrie est le socle de la doctrine <span class="sv-cite" tabindex="0">inoculation<span class="sv-cite-tip" role="tooltip">Apport volontaire dans le sol ou sur les semences de souches microbiennes sélectionnées pour leurs effets bénéfiques sur le développement végétal (Dorioz et al., 2008). Le succès de cette pratique dépend de la survie de l'inoculant et de sa capacité à coloniser le milieu face à la compétition de la microflore indigène (Papin, 2024; Papin et al., 2024; Veen et al., 1997) <a href="/terme/2676/">→ Vocabulaire</a></span></span> de l'ouvrage — la capture indigène contre l'inoculum standardisé — et elle explique l'échec chronique des inoculants en plein champ : le sol exerce un filtre biotique qui élimine la plupart des souches introduites. La pression top-down en est un acteur, mais bidirectionnel : l'ajout de protozoaires prédateurs diminue la survie d'un inoculant <em>Bacillus mycoides</em> tout en augmentant celle de <em>B. pumilus</em>, en rebouclant toute la dynamique du microbiome résident (Mawarda et al., 2022) — le filtre trie selon la souche, pas uniformément. Même quand l'inoculant disparaît, il laisse une trace — le <strong>legacy (héritage) microbien</strong>, modification durable de la communauté résidente et de ses fonctions (Liu et al., 2022) — et les consortia multi-souches ne performent pas automatiquement mieux que les souches seules (Liu et al., 2023). L'échec de l'inoculation n'est donc pas un échec de la souche : c'est la victoire prévisible du résident.</p>
+</div>
+            </div><div id="s3-2">
+              <h3>L&#39;asymétrie du résident : pourquoi les inoculants échouent</h3>
+              <div class="sv-markdown"><p>La coalescence est rarement symétrique : la communauté résidente, plus abondante, plus diverse et chez elle, domine presque toujours l'entrante. Cette asymétrie est le socle de la doctrine <span class="sv-cite" tabindex="0">inoculation<span class="sv-cite-tip" role="tooltip">Apport volontaire dans le sol ou sur les semences de souches microbiennes sélectionnées pour leurs effets bénéfiques sur le développement végétal (Dorioz et al., 2008). Le succès de cette pratique dépend de la survie de l'inoculant et de sa capacité à coloniser le milieu face à la compétition de la microflore indigène (Papin, 2024; Papin et al., 2024; Veen et al., 1997) <a href="/terme/2676/">→ Vocabulaire</a></span></span> de l'ouvrage — la capture indigène contre l'inoculum standardisé — et elle explique l'échec chronique des inoculants en plein champ : le sol exerce un filtre biotique qui élimine la plupart des souches introduites. La pression top-down en est un acteur, mais bidirectionnel : l'ajout de protozoaires prédateurs diminue la survie d'un inoculant <em>Bacillus mycoides</em> tout en augmentant celle de <em>B. pumilus</em>, en rebouclant toute la dynamique du microbiome résident (Mawarda et al., 2022) — le filtre trie selon la souche, pas uniformément. Même quand l'inoculant disparaît, il laisse une trace — le <strong>legacy (héritage) microbien</strong>, modification durable de la communauté résidente et de ses fonctions (Liu et al., 2022) — et les consortia multi-souches ne performent pas automatiquement mieux que les souches seules (Liu et al., 2023). L'échec de l'inoculation n'est donc pas un échec de la souche : c'est la victoire prévisible du résident.</p>
 <p>Cette asymétrie a une conséquence pratique immédiate : la dose d'inoculum n'est pas le problème. Comme l'illustrent les travaux sur le filtrage biotique (Mawarda et al., 2022), augmenter la concentration de l'inoculant de dix ou cent fois ne change pas le rapport de force fondamental — le résident occupe les niches, l'entrant doit les conquérir une à une. La seule fenêtre où le rapport s'inverse est celle où le résident n'est pas encore établi : la germination, la levée, le jeune plant. D'où l'importance stratégique de l'inoculation précoce et du traitement de semence.</p>
-</div></div><div id="s3-3"><h3>Coalescence et résistome</h3><div class="sv-markdown"><p>La coalescence a une face sombre : elle est aussi le mécanisme de propagation des gènes de résistance. L'apport de fumier porcin déclenche une coalescence entre communauté de l'effluent et communauté du sol, et c'est le filtrage conjoint de la plante et du mélange qui détermine la dissémination des gènes de résistance aux tétracyclines dans la rhizosphère (Wen et al., 2024). Le cadre de la coalescence unifie ainsi deux chantiers de l'ouvrage — le pilotage du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> et la maîtrise du résistome : mêmes mécanismes, enjeux opposés.</p>
+</div>
+            </div><div id="s3-3">
+              <h3>Coalescence et résistome</h3>
+              <div class="sv-markdown"><p>La coalescence a une face sombre : elle est aussi le mécanisme de propagation des gènes de résistance. L'apport de fumier porcin déclenche une coalescence entre communauté de l'effluent et communauté du sol, et c'est le filtrage conjoint de la plante et du mélange qui détermine la dissémination des gènes de résistance aux tétracyclines dans la rhizosphère (Wen et al., 2024). Le cadre de la coalescence unifie ainsi deux chantiers de l'ouvrage — le pilotage du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> et la maîtrise du résistome : mêmes mécanismes, enjeux opposés.</p>
 <p>L'unification est précieuse parce qu'elle évite de traiter le résistome comme un problème séparé. Tout ce qu'on apprend sur la coalescence bénéfique (comment favoriser l'établissement d'un inoculant) éclaire, par symétrie, la coalescence indésirable (comment empêcher l'établissement d'un gène de résistance). Le filtre biotique qui exclut l'inoculant est le même mécanisme qui pourrait, si on sait le renforcer, exclure le pathogène ou le gène de résistance.</p>
-</div></div><div id="s3-4"><h3>Coalescence dans les agrégats</h3><div class="sv-markdown"><p>À l'échelle du microsite, la coalescence se joue dans les pores : le remaniement des agrégats — ingestion par la mésofaune, cycles hydro-thermiques — force le mélange de communautés qui vivaient séparées, et la <span class="sv-cite" tabindex="0">sélection<span class="sv-cite-tip" role="tooltip">Processus fondamental d'amélioration des plantes consistant à identifier et multiplier les individus présentant des caractéristiques phénotypiques ou génétiques avantageuses (Slewinski et al., 2025). Elle s'appuie sur la variation génétique, qu'elle soit préexistante ou induite, pour délivrer des cultures offrant une meilleure qualité et performance (Slewinski et al., 2025) <a href="/terme/2888/">→ Vocabulaire</a></span></span> déterministe y rencontre l'assemblage stochastique. L'agrégat est le réacteur où la structuration se fabrique au quotidien ; sa stabilité physique conditionne la stabilité des assemblages qu'il abrite.</p>
+</div>
+            </div><div id="s3-4">
+              <h3>Coalescence dans les agrégats</h3>
+              <div class="sv-markdown"><p>À l'échelle du microsite, la coalescence se joue dans les pores : le remaniement des agrégats — ingestion par la mésofaune, cycles hydro-thermiques — force le mélange de communautés qui vivaient séparées, et la <span class="sv-cite" tabindex="0">sélection<span class="sv-cite-tip" role="tooltip">Processus fondamental d'amélioration des plantes consistant à identifier et multiplier les individus présentant des caractéristiques phénotypiques ou génétiques avantageuses (Slewinski et al., 2025). Elle s'appuie sur la variation génétique, qu'elle soit préexistante ou induite, pour délivrer des cultures offrant une meilleure qualité et performance (Slewinski et al., 2025) <a href="/terme/2888/">→ Vocabulaire</a></span></span> déterministe y rencontre l'assemblage stochastique. L'agrégat est le réacteur où la structuration se fabrique au quotidien ; sa stabilité physique conditionne la stabilité des assemblages qu'il abrite.</p>
 <p>Cette perspective micro-structurale éclaire le rôle de la faune ingénieure. Un ver de terre qui ingère un agrégat et en excrète un turricule opère une triple coalescence : mélange de communautés issues de microsites distincts, mise en contact avec le mucus intestinal (substrat nutritif sélectif), et exposition à l'oxygène en surface. Le turricule est une communauté néoformée, dont l'assemblage résulte d'une coalescence orchestrée par l'ingénieur. C'est à cette échelle — celle du geste biologique — que la structuration se pilote, bien avant les interventions agronomiques macroscopiques.</p>
-</div></div></section><section id="s4"><h2>Piloter la structuration : leviers agronomiques</h2><div class="sv-markdown"><p>Le passage de la théorie à la pratique tient en une question : peut-on orienter les processus d'assemblage pour obtenir un <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> cible, de manière fiable et répétable ? La réponse, aujourd'hui, est « partiellement, et sous conditions ». Mais les leviers identifiés — effets de priorité, filtrage variétal, pratiques culturales — sont déjà actionnables.</p>
-</div><div id="s4-1"><h3>Les effets de priorité : qui arrive premier compte</h3><div class="sv-markdown"><p>L'ordre d'arrivée des taxons n'est pas un détail chronologique : c'est une variable de contrôle. Les <strong>effets de priorité</strong> — l'avantage durable conféré aux premiers occupants d'une niche — structurent l'assemblage du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> dès la colonisation racinaire (Debray et al., 2022). Conséquence pratique majeure : inoculer tôt (semence, jeune plantule), avant que le résident n'ait verrouillé les niches, change radicalement les chances d'établissement. La fenêtre de la graine et de la germination est le moment où la coalescence est la moins asymétrique.</p>
+</div>
+            </div>
+        </section><section id="s4">
+          <h2>Piloter la structuration : leviers agronomiques</h2>
+          <div class="sv-markdown"><p>Le passage de la théorie à la pratique tient en une question : peut-on orienter les processus d'assemblage pour obtenir un <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> cible, de manière fiable et répétable ? La réponse, aujourd'hui, est « partiellement, et sous conditions ». Mais les leviers identifiés — effets de priorité, filtrage variétal, pratiques culturales — sont déjà actionnables.</p>
+</div>
+          <div id="s4-1">
+              <h3>Les effets de priorité : qui arrive premier compte</h3>
+              <div class="sv-markdown"><p>L'ordre d'arrivée des taxons n'est pas un détail chronologique : c'est une variable de contrôle. Les <strong>effets de priorité</strong> — l'avantage durable conféré aux premiers occupants d'une niche — structurent l'assemblage du <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> dès la colonisation racinaire (Debray et al., 2022). Conséquence pratique majeure : inoculer tôt (semence, jeune plantule), avant que le résident n'ait verrouillé les niches, change radicalement les chances d'établissement. La fenêtre de la graine et de la germination est le moment où la coalescence est la moins asymétrique.</p>
 <p>Les effets de priorité ne sont pas binaires (premier arrivé gagne tout) mais graduels : l'avantage initial se cumule, par amplification numérique, modification de l'environnement local (pH, exsudats), et exclusion compétitive des arrivants tardifs. Dans le sol, cet avantage est renforcé par la structure physique : une bactérie qui colonise un pore de 2 μm devient physiquement inaccessible aux protozoaires prédateurs et aux compétiteurs de plus grande taille. L'espace poral est un multiplicateur d'effets de priorité.</p>
-</div></div><div id="s4-2"><h3>Le filtrage par l&#39;hôte : gènes M et sélection variétale</h3><div class="sv-markdown"><p>L'hôte n'est pas un récipient passif de la coalescence : il en est un opérateur. Via ses exsudats et ses gènes de management du microbiome, il filtre, recrute et stabilise. Cette propriété est héritable et donc sélectionnable — le microbiome interactif devient un caractère de <span class="sv-cite" tabindex="0">sélection variétale<span class="sv-cite-tip" role="tooltip">Approche d'amélioration génétique visant à sélectionner des cultivars capables d'optimiser leurs interactions avec le microbiome. Elle cible des traits végétaux (exsudats, architecture racinaire) facilitant le recrutement de microbes bénéfiques pour améliorer la nutrition, la croissance et la tolérance aux stress (Gouleau et al., 2021; Jacquet et al., 2022; L’Hoir &amp; Duponnois, 2021; Slezack, 2021) <a href="/terme/460/">→ Vocabulaire</a></span></span>, comme le montre l'identification de cultivars de pomme de terre à traits d'interaction microbienne contrastés (Zhao et al., 2025). L'holobionte programmable commence là : dans le génome de la plante autant que dans celui du microbe.</p>
+</div>
+            </div><div id="s4-2">
+              <h3>Le filtrage par l&#39;hôte : gènes M et sélection variétale</h3>
+              <div class="sv-markdown"><p>L'hôte n'est pas un récipient passif de la coalescence : il en est un opérateur. Via ses exsudats et ses gènes de management du microbiome, il filtre, recrute et stabilise. Cette propriété est héritable et donc sélectionnable — le microbiome interactif devient un caractère de <span class="sv-cite" tabindex="0">sélection variétale<span class="sv-cite-tip" role="tooltip">Approche d'amélioration génétique visant à sélectionner des cultivars capables d'optimiser leurs interactions avec le microbiome. Elle cible des traits végétaux (exsudats, architecture racinaire) facilitant le recrutement de microbes bénéfiques pour améliorer la nutrition, la croissance et la tolérance aux stress (Gouleau et al., 2021; Jacquet et al., 2022; L’Hoir &amp; Duponnois, 2021; Slezack, 2021) <a href="/terme/460/">→ Vocabulaire</a></span></span>, comme le montre l'identification de cultivars de pomme de terre à traits d'interaction microbienne contrastés (Zhao et al., 2025). L'holobionte programmable commence là : dans le génome de la plante autant que dans celui du microbe.</p>
 <p>Cette héritabilité ouvre une voie de sélection qui complète la sélection classique sur le rendement. Un cultivar qui excelle en station expérimentale (sol fumé, irrigation optimale, protection phytosanitaire) peut sous-performer au champ parce que son génotype M (management du microbiome) a été sélectionné sous perfusion d'intrants et ne recrute plus efficacement son noyau natif. La sélection variétale de demain intégrera le phénotype étendu qu'est le microbiome rhizosphérique.</p>
-</div></div><div id="s4-3"><h3>Amendements, couverts et pression de la faune</h3><div class="sv-markdown"><p>Les pratiques modifient les termes de la coalescence. Pour les couverts, c'est la <strong>conduite</strong> (export, destruction, enfouissement) plus que la composition botanique qui imprime sa marque au <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> du sol (Romdhane et al., 2019). Le compost améliore la santé du sol et maintient le rendement en modifiant durablement la communauté résidente (Edlinger et al., 2025). Et l'expérience d'exclusion granulométrique en prairie le rappelle : la faune du sol exerce un contrôle top-down majeur sur l'assemblage microbien (Jeanbille et al., 2024) — piloter la structuration, c'est aussi laisser les ingénieurs du sol faire leur travail.</p>
+</div>
+            </div><div id="s4-3">
+              <h3>Amendements, couverts et pression de la faune</h3>
+              <div class="sv-markdown"><p>Les pratiques modifient les termes de la coalescence. Pour les couverts, c'est la <strong>conduite</strong> (export, destruction, enfouissement) plus que la composition botanique qui imprime sa marque au <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> du sol (Romdhane et al., 2019). Le compost améliore la santé du sol et maintient le rendement en modifiant durablement la communauté résidente (Edlinger et al., 2025). Et l'expérience d'exclusion granulométrique en prairie le rappelle : la faune du sol exerce un contrôle top-down majeur sur l'assemblage microbien (Jeanbille et al., 2024) — piloter la structuration, c'est aussi laisser les ingénieurs du sol faire leur travail.</p>
 <p>Le point commun à ces trois leviers est qu'ils agissent sur les termes de l'équation de coalescence sans injecter de microbes. La conduite des couverts modifie le réservoir de carbone et la structure du sol — donc la sélection et la dispersion. Le compost modifie le réservoir de matière organique et la communauté résidente — donc le ratio d'abondance de la coalescence. La faune modifie la topologie spatiale des microsites — donc la fréquence et l'intensité des coalescences locales. C'est une leçon de modestie pour l'ingénierie microbienne : les meilleurs résultats s'obtiennent parfois en retirant des contraintes plutôt qu'en ajoutant des microbes.</p>
-</div></div></section><section id="s5"><h2>Limites honnêtes</h2><div class="sv-markdown"><p>Le cadre est puissant mais jeune. La définition du noyau reste conventionnelle — le seuil de présence qui fait basculer un taxon du transitoire au cœur est un choix d'analyste autant qu'une réalité biologique. La coalescence, concept en explosion depuis 2020, manque encore de prédictions quantitatives testables au champ : on décrit bien les mélanges, on les pilote mal. Les effets de priorité sont démontrés en microcosmes plus qu'en parcelles. Enfin, la traduction agronomique — SynComs rationnels, variétés favorables au <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> (« microbiome-friendly »), amendements calibrés — promet beaucoup et n'a encore livré que des succès partiels et contextuels. La structuration du microbiome est le bon cadre théorique ; en faire une technologie fiable reste le chantier.</p>
+</div>
+            </div>
+        </section><section id="s5">
+          <h2>Limites honnêtes</h2>
+          <div class="sv-markdown"><p>Le cadre est puissant mais jeune. La définition du noyau reste conventionnelle — le seuil de présence qui fait basculer un taxon du transitoire au cœur est un choix d'analyste autant qu'une réalité biologique. La coalescence, concept en explosion depuis 2020, manque encore de prédictions quantitatives testables au champ : on décrit bien les mélanges, on les pilote mal. Les effets de priorité sont démontrés en microcosmes plus qu'en parcelles. Enfin, la traduction agronomique — SynComs rationnels, variétés favorables au <span class="sv-cite" tabindex="0">microbiome<span class="sv-cite-tip" role="tooltip">Ensemble des micro-organismes habitant un habitat spécifique (le microbiote) ainsi que leur &quot;théâtre d'activité&quot;, incluant leurs génomes (métagénome), leurs métabolites et les conditions environnementales locales (Rochefort, 2020). Dans les agrosystèmes, le microbiome du sol et de la rhizosphère est considéré comme le principal moteur de la nutrition et de l'immunité des plantes (Barro, 2021; Berg et al., 2020) <a href="/terme/1314/">→ Vocabulaire</a></span></span> (« microbiome-friendly »), amendements calibrés — promet beaucoup et n'a encore livré que des succès partiels et contextuels. La structuration du microbiome est le bon cadre théorique ; en faire une technologie fiable reste le chantier.</p>
 <p>À ces limites s'en ajoute une, plus fondamentale : les quatre processus de Vellend sont conceptuellement étanches mais expérimentalement intriqués. Quand on mesure un signal de sélection, on mesure aussi l'ombre de la dispersion passée et la trace de la dérive non résolue. Les partitionner exige des dispositifs (mésocosmes, transplants réciproques, gradients contrôlés) qui s'éloignent des conditions du champ. Le défi de la décennie à venir est de construire des prédictions qui tiennent debout sans échafaudage expérimental — des règles de gestion du microbiome aussi robustes en plein champ qu'en laboratoire.</p>
-</div></section><nav class="sv-pager" aria-label="Lecture guidée"><a href="/Publications/liseuse/fiche/293/">← Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</a><a href="/Publications/liseuse/fiche/298/">Le microbiome de la graine : l&#39;héritage microbien de la plante-mère →</a></nav></article><nav class="sv-toc" aria-label="Sommaire de la fiche"><p class="sv-side-label">Sur cette page</p><a class="sv-navlist-item" href="#resume"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Résumé</span></a><a class="sv-navlist-item" href="#s0"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Introduction</span></a><a class="sv-navlist-item" href="#s1"><span class="sv-navlist-num">1</span><span class="sv-navlist-title">Le cadre fondateur : quatre processus d&#39;assemblage</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s1-1"><span class="sv-navlist-num">1.1</span><span class="sv-navlist-title">Sélection, dispersion, dérive, spéciation</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s1-2"><span class="sv-navlist-num">1.2</span><span class="sv-navlist-title">Déterminisme contre stochasticité : un continuum mesuré</span></a><a class="sv-navlist-item" href="#s2"><span class="sv-navlist-num">2</span><span class="sv-navlist-title">Le core microbiome : le noyau fonctionnel de l&#39;holobionte</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-1"><span class="sv-navlist-num">2.1</span><span class="sv-navlist-title">Définition statistique, signification fonctionnelle</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-2"><span class="sv-navlist-num">2.2</span><span class="sv-navlist-title">Les cores du continuum sol-plante</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-3"><span class="sv-navlist-num">2.3</span><span class="sv-navlist-title">Redondance fonctionnelle et résilience</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-4"><span class="sv-navlist-num">2.4</span><span class="sv-navlist-title">Le core natif, condition de succès des SynComs</span></a><a class="sv-navlist-item" href="#s3"><span class="sv-navlist-num">3</span><span class="sv-navlist-title">La coalescence : quand les communautés se rencontrent</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-1"><span class="sv-navlist-num">3.1</span><span class="sv-navlist-title">Mécanismes et déterminants</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-2"><span class="sv-navlist-num">3.2</span><span class="sv-navlist-title">L&#39;asymétrie du résident : pourquoi les inoculants échouent</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-3"><span class="sv-navlist-num">3.3</span><span class="sv-navlist-title">Coalescence et résistome</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-4"><span class="sv-navlist-num">3.4</span><span class="sv-navlist-title">Coalescence dans les agrégats</span></a><a class="sv-navlist-item" href="#s4"><span class="sv-navlist-num">4</span><span class="sv-navlist-title">Piloter la structuration : leviers agronomiques</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-1"><span class="sv-navlist-num">4.1</span><span class="sv-navlist-title">Les effets de priorité : qui arrive premier compte</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-2"><span class="sv-navlist-num">4.2</span><span class="sv-navlist-title">Le filtrage par l&#39;hôte : gènes M et sélection variétale</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-3"><span class="sv-navlist-num">4.3</span><span class="sv-navlist-title">Amendements, couverts et pression de la faune</span></a><a class="sv-navlist-item" href="#s5"><span class="sv-navlist-num">5</span><span class="sv-navlist-title">Limites honnêtes</span></a><astro-island uid="ZO12yl" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.C3E-2e-z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;kind&quot;:[0,&quot;fiche&quot;],&quot;id&quot;:[0,&quot;294&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" style="border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:999px;padding:0.35rem 0.85rem;cursor:pointer;font-size:0.85rem" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island></nav></div><p class="sv-meta">📚 <a href="/Publications/liseuse/references/?f=294">Références académiques (18) → consulter</a></p><aside class="sv-card"><h2>Cards liées</h2><ul><li><a href="/Publications/liseuse/card/236/">Core microbiome : le noyau fonctionnel de l&#39;holobionte</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/237/">Coalescence microbienne : quand les communautés se mélangent</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/240/">Assemblage des communautés : sélection, dispersion, dérive</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/200/">Holobionte</a> <span class="sv-meta">(reference)</span></li></ul></aside><aside class="sv-card"><h2>Les mots de ce texte (12)</h2><ul><li><a href="/Publications/liseuse/terme/7182/">noyau</a></li><li><a href="/Publications/liseuse/terme/5016/">core microbiome</a></li><li><a href="/Publications/liseuse/terme/2620/">Inoculant</a></li><li><a href="/Publications/liseuse/terme/1314/">microbiome</a></li><li><a href="/Publications/liseuse/terme/2888/">Sélection</a></li><li><a href="/Publications/liseuse/terme/3309/">Hasard</a></li><li><a href="/Publications/liseuse/terme/2729/">Spéciation</a></li><li><a href="/Publications/liseuse/terme/182/">résistome</a></li><li><a href="/Publications/liseuse/terme/2676/">inoculation</a></li><li><a href="/Publications/liseuse/terme/460/">sélection variétale</a></li><li><a href="/Publications/liseuse/terme/88/">Holobionte</a></li><li><a href="/Publications/liseuse/terme/4247/">Gène de résistance</a></li></ul></aside><aside class="sv-card"><h2>Chaînes causales (4)</h2><ul><li><a href="/Publications/liseuse/chain/C14/">C14 — Signalisation holobionte : du quorum sensing à l&#39;immunité végétale</a></li><li><a href="/Publications/liseuse/chain/C16/">C16 — Résistome environnemental : du sol au One Health</a></li><li><a href="/Publications/liseuse/chain/C34/">C34 — Sol vivant → SCFA → axe intestin-cerveau : du microbiome édaphique à la santé mentale</a></li><li><a href="/Publications/liseuse/chain/C6/">C6 — Diversité des couverts → Résilience immunitaire des populations</a></li></ul></aside></main></div><footer class="sv-footer"><p>Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.© 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a></p></footer><astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island><script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body></html>
+</div>
+          
+        </section>
+
+      
+
+      <nav class="sv-pager" aria-label="Lecture guidée">
+          <a href="/Publications/liseuse/fiche/293/">← Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</a>
+          <a href="/Publications/liseuse/fiche/298/">Le microbiome de la graine : l&#39;héritage microbien de la plante-mère →</a>
+        </nav>
+    </article>
+
+    <nav class="sv-toc" aria-label="Sommaire de la fiche">
+      <p class="sv-side-label">Sur cette page</p>
+      <a class="sv-navlist-item" href="#resume"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Résumé</span></a>
+      
+          <a class="sv-navlist-item" href="#s0">
+            <span class="sv-navlist-num">●</span>
+            <span class="sv-navlist-title">Introduction</span>
+          </a>
+          
+          <a class="sv-navlist-item" href="#s1">
+            <span class="sv-navlist-num">1</span>
+            <span class="sv-navlist-title">Le cadre fondateur : quatre processus d&#39;assemblage</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s1-1">
+              <span class="sv-navlist-num">1.1</span>
+              <span class="sv-navlist-title">Sélection, dispersion, dérive, spéciation</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s1-2">
+              <span class="sv-navlist-num">1.2</span>
+              <span class="sv-navlist-title">Déterminisme contre stochasticité : un continuum mesuré</span>
+            </a>
+          <a class="sv-navlist-item" href="#s2">
+            <span class="sv-navlist-num">2</span>
+            <span class="sv-navlist-title">Le core microbiome : le noyau fonctionnel de l&#39;holobionte</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s2-1">
+              <span class="sv-navlist-num">2.1</span>
+              <span class="sv-navlist-title">Définition statistique, signification fonctionnelle</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-2">
+              <span class="sv-navlist-num">2.2</span>
+              <span class="sv-navlist-title">Les cores du continuum sol-plante</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-3">
+              <span class="sv-navlist-num">2.3</span>
+              <span class="sv-navlist-title">Redondance fonctionnelle et résilience</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-4">
+              <span class="sv-navlist-num">2.4</span>
+              <span class="sv-navlist-title">Le core natif, condition de succès des SynComs</span>
+            </a>
+          <a class="sv-navlist-item" href="#s3">
+            <span class="sv-navlist-num">3</span>
+            <span class="sv-navlist-title">La coalescence : quand les communautés se rencontrent</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s3-1">
+              <span class="sv-navlist-num">3.1</span>
+              <span class="sv-navlist-title">Mécanismes et déterminants</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-2">
+              <span class="sv-navlist-num">3.2</span>
+              <span class="sv-navlist-title">L&#39;asymétrie du résident : pourquoi les inoculants échouent</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-3">
+              <span class="sv-navlist-num">3.3</span>
+              <span class="sv-navlist-title">Coalescence et résistome</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-4">
+              <span class="sv-navlist-num">3.4</span>
+              <span class="sv-navlist-title">Coalescence dans les agrégats</span>
+            </a>
+          <a class="sv-navlist-item" href="#s4">
+            <span class="sv-navlist-num">4</span>
+            <span class="sv-navlist-title">Piloter la structuration : leviers agronomiques</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s4-1">
+              <span class="sv-navlist-num">4.1</span>
+              <span class="sv-navlist-title">Les effets de priorité : qui arrive premier compte</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s4-2">
+              <span class="sv-navlist-num">4.2</span>
+              <span class="sv-navlist-title">Le filtrage par l&#39;hôte : gènes M et sélection variétale</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s4-3">
+              <span class="sv-navlist-num">4.3</span>
+              <span class="sv-navlist-title">Amendements, couverts et pression de la faune</span>
+            </a>
+          <a class="sv-navlist-item" href="#s5">
+            <span class="sv-navlist-num">5</span>
+            <span class="sv-navlist-title">Limites honnêtes</span>
+          </a>
+          
+      
+      <astro-island uid="ZO12yl" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.C3E-2e-z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;kind&quot;:[0,&quot;fiche&quot;],&quot;id&quot;:[0,&quot;294&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" style="border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:999px;padding:0.35rem 0.85rem;cursor:pointer;font-size:0.85rem" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+    </nav>
+  </div>
+
+  <p class="sv-meta">
+      📚 <a href="/Publications/liseuse/references/?f=294">Références académiques (18) → consulter</a>
+    </p><aside class="sv-card">
+      <h2>Cards liées</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/card/236/">Core microbiome : le noyau fonctionnel de l&#39;holobionte</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/237/">Coalescence microbienne : quand les communautés se mélangent</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/240/">Assemblage des communautés : sélection, dispersion, dérive</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/200/">Holobionte</a> <span class="sv-meta">(reference)</span></li>
+      </ul>
+    </aside><aside class="sv-card">
+      <h2>Les mots de ce texte (12)</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/terme/7182/">noyau</a></li><li><a href="/Publications/liseuse/terme/5016/">core microbiome</a></li><li><a href="/Publications/liseuse/terme/2620/">Inoculant</a></li><li><a href="/Publications/liseuse/terme/1314/">microbiome</a></li><li><a href="/Publications/liseuse/terme/2888/">Sélection</a></li><li><a href="/Publications/liseuse/terme/3309/">Hasard</a></li><li><a href="/Publications/liseuse/terme/2729/">Spéciation</a></li><li><a href="/Publications/liseuse/terme/182/">résistome</a></li><li><a href="/Publications/liseuse/terme/2676/">inoculation</a></li><li><a href="/Publications/liseuse/terme/460/">sélection variétale</a></li><li><a href="/Publications/liseuse/terme/88/">Holobionte</a></li><li><a href="/Publications/liseuse/terme/4247/">Gène de résistance</a></li>
+      </ul>
+    </aside><aside class="sv-card">
+      <h2>Chaînes causales (4)</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/chain/C14/">C14 — Signalisation holobionte : du quorum sensing à l&#39;immunité végétale</a></li><li><a href="/Publications/liseuse/chain/C16/">C16 — Résistome environnemental : du sol au One Health</a></li><li><a href="/Publications/liseuse/chain/C34/">C34 — Sol vivant → SCFA → axe intestin-cerveau : du microbiome édaphique à la santé mentale</a></li><li><a href="/Publications/liseuse/chain/C6/">C6 — Diversité des couverts → Résilience immunitaire des populations</a></li>
+      </ul>
+    </aside>
+      </main>
+    </div>
+    <footer class="sv-footer">
+      <p>
+        Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.
+        © 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a>
+      </p>
+    </footer>
+    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body>
+</html>

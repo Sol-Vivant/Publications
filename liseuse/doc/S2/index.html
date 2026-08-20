@@ -1,3 +1,942 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>S2 — Le Microbiome du Sol — Le Sol Vivant</title><meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta name="theme-color" content="#2563eb"><meta property="og:type" content="website"><meta property="og:site_name" content="Le Sol Vivant cet Holobionte"><meta property="og:title" content="S2 — Le Microbiome du Sol — Le Sol Vivant"><meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta property="og:locale" content="fr_FR"><link rel="canonical" href="/Publications/liseuse/doc/S2/"><link rel="manifest" href="/Publications/liseuse/manifest.webmanifest"><link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml"><script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CUXLGMvH.css"></head><body><a class="sv-skip" href="#sv-main">Aller au contenu</a><header class="sv-header"><button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button><a href="/Publications/liseuse/" class="sv-brand"><span class="sv-brand-dot" aria-hidden="true"></span><span>Le Sol Vivant</span></a><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island><button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button></header><div class="sv-shell"><nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus"><p class="sv-side-label">Strates</p><ul class="sv-side-tree"><li class><a href="/Publications/liseuse/strate/F/"><span class="sv-strate-badge sv-strate-F">F</span> Fondements</a></li><li class="is-open"><a href="/Publications/liseuse/strate/S/"><span class="sv-strate-badge sv-strate-S">S</span> Sol</a><ul class="sv-side-sub"><li class><a href="/Publications/liseuse/doc/S0/"><strong>S0</strong> — L&#39;Eau dans le Sol Vivant</a></li><li class><a href="/Publications/liseuse/doc/S1/"><strong>S1</strong> — Architecture du Sol</a></li><li class="is-open"><a href="/Publications/liseuse/doc/S2/" aria-current="page"><strong>S2</strong> — Le Microbiome du Sol</a><ul class="sv-side-sub sv-side-l3"><li class="sv-side-ouverture"><a href="/Publications/liseuse/fiche/332/"><strong>Ouverture</strong> — le récit du document</a></li><li><a href="/Publications/liseuse/fiche/3/">Microbiome du sol vivant et thermotolérance des plantes</a></li><li><a href="/Publications/liseuse/fiche/10/">Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote</a></li><li><a href="/Publications/liseuse/fiche/19/">Protozoaires du Sol et Boucle Microbienne</a></li><li><a href="/Publications/liseuse/fiche/22/">Quorum Sensing et Communication Chimique Rhizosphérique</a></li><li><a href="/Publications/liseuse/fiche/27/">Les Archées du Sol — Un Troisième Domaine Sous-estimé</a></li><li><a href="/Publications/liseuse/fiche/28/">Le Cycle du Fer et les Bactéries Ferro-réductrices</a></li><li><a href="/Publications/liseuse/fiche/60/">Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</a></li><li><a href="/Publications/liseuse/fiche/61/">Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</a></li><li><a href="/Publications/liseuse/fiche/67/">Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</a></li><li><a href="/Publications/liseuse/fiche/73/">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</a></li><li><a href="/Publications/liseuse/fiche/74/">Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</a></li><li><a href="/Publications/liseuse/fiche/76/">Lombriciens — écologie, services et pilotage des populations</a></li><li><a href="/Publications/liseuse/fiche/82/">Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</a></li><li><a href="/Publications/liseuse/fiche/83/">Cascade phosphore — du minéral inerte à l&#39;os humain</a></li><li><a href="/Publications/liseuse/fiche/88/">Mémoire microbienne paléoclimatique — héritage 20 000 ans</a></li><li><a href="/Publications/liseuse/fiche/95/">Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</a></li><li><a href="/Publications/liseuse/fiche/96/">Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</a></li><li><a href="/Publications/liseuse/fiche/99/">Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</a></li><li><a href="/Publications/liseuse/fiche/103/">Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité</a></li><li><a href="/Publications/liseuse/fiche/105/">Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</a></li><li><a href="/Publications/liseuse/fiche/106/">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</a></li><li><a href="/Publications/liseuse/fiche/107/">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</a></li><li><a href="/Publications/liseuse/fiche/108/">‘Faim d’azote’ après apport carboné (immobilisation)</a></li><li><a href="/Publications/liseuse/fiche/113/">Antifragilité : stress modéré → diversification de l&#39;hologénome</a></li><li><a href="/Publications/liseuse/fiche/115/">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</a></li><li><a href="/Publications/liseuse/fiche/116/">Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</a></li><li><a href="/Publications/liseuse/fiche/118/">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</a></li><li><a href="/Publications/liseuse/fiche/119/">Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</a></li><li><a href="/Publications/liseuse/fiche/124/">Stabilité d’agrégats faible / désagrégation rapide</a></li><li><a href="/Publications/liseuse/fiche/125/">Mésofaune : collemboles et acariens, régulateurs des micro-habitats</a></li><li><a href="/Publications/liseuse/fiche/134/">KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</a></li><li><a href="/Publications/liseuse/fiche/136/">Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</a></li><li><a href="/Publications/liseuse/fiche/138/">Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</a></li><li><a href="/Publications/liseuse/fiche/139/">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</a></li><li><a href="/Publications/liseuse/fiche/140/">Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</a></li><li><a href="/Publications/liseuse/fiche/141/">Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</a></li><li><a href="/Publications/liseuse/fiche/142/">Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</a></li><li><a href="/Publications/liseuse/fiche/144/">Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</a></li><li><a href="/Publications/liseuse/fiche/148/">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</a></li><li><a href="/Publications/liseuse/fiche/151/">AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/152/">Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/154/">Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</a></li><li><a href="/Publications/liseuse/fiche/160/">Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</a></li><li><a href="/Publications/liseuse/fiche/163/">Microsites</a></li><li><a href="/Publications/liseuse/fiche/172/">Plant diversity drives rhizosphere microbiome</a></li><li><a href="/Publications/liseuse/fiche/177/">Tri-trophic interactions CEP / Trichoderma / soil mites</a></li><li><a href="/Publications/liseuse/fiche/181/">Microbial necromass on the rise</a></li><li><a href="/Publications/liseuse/fiche/194/">Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</a></li><li><a href="/Publications/liseuse/fiche/195/">Chaulage et azote en prairie : interactions sur la minéralisation du carbone</a></li><li><a href="/Publications/liseuse/fiche/196/">Root exudates contribute to belowground ecosystem hotspots: A</a></li><li><a href="/Publications/liseuse/fiche/200/">Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)</a></li><li><a href="/Publications/liseuse/fiche/202/">Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</a></li><li><a href="/Publications/liseuse/fiche/205/">Carbon Use Efficiency microbienne — pivot stockage/respiration</a></li><li><a href="/Publications/liseuse/fiche/206/">Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</a></li><li><a href="/Publications/liseuse/fiche/207/">Hiérarchie des agrégats et co-évolution structure-fonction</a></li><li><a href="/Publications/liseuse/fiche/218/">Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport</a></li><li><a href="/Publications/liseuse/fiche/224/">Dormance microbienne et persisters — banque de semences invisible du sol</a></li><li><a href="/Publications/liseuse/fiche/225/">Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</a></li><li><a href="/Publications/liseuse/fiche/229/">Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</a></li><li><a href="/Publications/liseuse/fiche/231/">Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</a></li><li><a href="/Publications/liseuse/fiche/234/">Effet Birch — pulse de minéralisation à la réhumectation des sols</a></li><li><a href="/Publications/liseuse/fiche/237/">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</a></li><li><a href="/Publications/liseuse/fiche/238/">Cycle du soufre : du sol à la santé humaine</a></li><li><a href="/Publications/liseuse/fiche/243/">Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</a></li><li><a href="/Publications/liseuse/fiche/245/">Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</a></li><li><a href="/Publications/liseuse/fiche/247/">Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</a></li><li><a href="/Publications/liseuse/fiche/250/">Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</a></li><li><a href="/Publications/liseuse/fiche/251/">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</a></li><li><a href="/Publications/liseuse/fiche/254/">Les fils rouges du sol vivant — thèses transversales et renversements</a></li><li><a href="/Publications/liseuse/fiche/258/">Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</a></li><li><a href="/Publications/liseuse/fiche/260/">La transition robuste : une vallée à traverser, quatre âges, trois gestes</a></li><li><a href="/Publications/liseuse/fiche/261/">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</a></li><li><a href="/Publications/liseuse/fiche/263/">Le régime fixe les rôles — du sol vivant à la plante saine</a></li><li><a href="/Publications/liseuse/fiche/264/">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</a></li><li><a href="/Publications/liseuse/fiche/269/">Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</a></li><li><a href="/Publications/liseuse/fiche/270/">Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</a></li><li><a href="/Publications/liseuse/fiche/271/">Silvopastoralisme tempéré — arbre, prairie et animal</a></li><li><a href="/Publications/liseuse/fiche/272/">Pompage nutritif profond et filet de sécurité racinaire</a></li><li><a href="/Publications/liseuse/fiche/273/">Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</a></li><li><a href="/Publications/liseuse/fiche/274/">L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</a></li><li><a href="/Publications/liseuse/fiche/275/">La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone</a></li><li><a href="/Publications/liseuse/fiche/276/">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</a></li><li><a href="/Publications/liseuse/fiche/289/">Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion</a></li><li><a href="/Publications/liseuse/fiche/290/">Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</a></li><li><a href="/Publications/liseuse/fiche/293/">Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</a></li><li><a href="/Publications/liseuse/fiche/294/">La structuration du microbiome : assemblage, core microbiome et coalescence</a></li><li><a href="/Publications/liseuse/fiche/298/">Le microbiome de la graine : l&#39;héritage microbien de la plante-mère</a></li><li><a href="/Publications/liseuse/fiche/299/">Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère</a></li><li><a href="/Publications/liseuse/fiche/301/">Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté</a></li><li><a href="/Publications/liseuse/fiche/303/">La plastisphère : le biofilm microbien des microplastiques du sol</a></li><li><a href="/Publications/liseuse/fiche/304/">La phagothérapie végétale : des bactériophages contre les phytopathogènes</a></li><li><a href="/Publications/liseuse/fiche/308/">La rhizosphère : la zone d&#39;influence où la plante parle au sol</a></li><li><a href="/Publications/liseuse/fiche/309/">L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol</a></li><li><a href="/Publications/liseuse/fiche/310/">L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol</a></li><li><a href="/Publications/liseuse/fiche/312/">Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</a></li><li><a href="/Publications/liseuse/fiche/315/">Battance et croûte de surface : mécanismes, diagnostic et remédiation</a></li><li><a href="/Publications/liseuse/fiche/319/">Couleur du sol : le premier diagnostic par le regard</a></li><li><a href="/Publications/liseuse/fiche/346/">Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse</a></li></ul></li><li class><a href="/Publications/liseuse/doc/S3/"><strong>S3</strong> — Le Microbiome Fongique et Mycorhizien</a></li><li class><a href="/Publications/liseuse/doc/S4/"><strong>S4</strong> — Le Carbone et les Grands Cycles</a></li></ul></li><li class><a href="/Publications/liseuse/strate/V/"><span class="sv-strate-badge sv-strate-V">V</span> Vivant</a></li><li class><a href="/Publications/liseuse/strate/P/"><span class="sv-strate-badge sv-strate-P">P</span> Pratiques</a></li><li class><a href="/Publications/liseuse/strate/H/"><span class="sv-strate-badge sv-strate-H">H</span> Humain</a></li></ul><p class="sv-side-label">Outils</p><ul class="sv-side-tree"><li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li><li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li><li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li><li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li><li><a href="/Publications/liseuse/references/">Références — les sources</a></li></ul></nav><main class="sv-main" id="sv-main"><nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane"><a href="/Publications/liseuse/">Accueil</a><span aria-hidden="true">›</span><a href="/Publications/liseuse/strate/S/">Sol</a><span aria-hidden="true">›</span><span aria-current="page">S2</span></nav><article class="sv-prose"><h1>S2 — Le Microbiome du Sol</h1><p class="sv-meta">99 textes — l'ouverture, puis 98 fiches.</p><section class="sv-card sv-section"><h2 id="ouverture">Ouverture</h2><p class="sv-meta">Le récit du document — par où commencer, avant les fiches qui suivent.</p><div class="sv-actions"><a class="sv-cta" href="/Publications/liseuse/fiche/332/">Commencer la lecture</a></div></section><h2>Fiches du document (98)</h2><div class="sv-fiche-list"><a class="sv-fiche-item" href="/Publications/liseuse/fiche/3/"><strong>Microbiome du sol vivant et thermotolérance des plantes</strong><span class="sv-badge">revue_critique</span><p class="sv-meta">Le microbiome du sol vivant n&#39;est pas un accessoire de la thermotolérance végétale : il en est un pilier. Les bactéries à ACC désaminase res…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/10/"><strong>Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document analyse le rôle pivot du cobalt en tant qu&#39;oligoélément essentiel, bien que souvent méconnu, dans les systèmes agricoles reposan…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/19/"><strong>Protozoaires du Sol et Boucle Microbienne</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document met en lumière le rôle pivot des protistes du sol, longtemps sous-estimés, dans la régulation de la boucle microbienne et la per…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/22/"><strong>Quorum Sensing et Communication Chimique Rhizosphérique</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le Quorum Sensing s&#39;est imposé comme un mécanisme central de coordination multicellulaire, permettant aux populations microbiennes de la rhi…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/27/"><strong>Les Archées du Sol — Un Troisième Domaine Sous-estimé</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document dresse un état des lieux exhaustif du domaine des Archées, confirmant leur statut de troisième domaine de la vie, indispensables…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/28/"><strong>Le Cycle du Fer et les Bactéries Ferro-réductrices</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document explore le rôle central du fer en tant que moteur biogéochimique dans les environnements de surface et de subsurface, avec un ac…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/60/"><strong>Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document présente une analyse approfondie du potentiel des bactéries pourpres non sulfureuses — notamment les genres Rhodopseudomonas, Ce…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/61/"><strong>Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce travail a permis de démontrer que la vulnérabilité des cultures aux ravageurs n&#39;est pas une fatalité biologique, mais le résultat d&#39;un dé…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/67/"><strong>Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le système Bokashi s’est imposé comme une solution de pointe pour la biotransformation décentralisée des déchets organiques, se distinguant …</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/73/"><strong>Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</strong><span class="sv-badge">transversale</span><p class="sv-meta">La régulation trophique descendante (top-down control) s&#39;établit comme un pilier fondamental de la santé des sols et de la résilience des ag…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/74/"><strong>Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le cycle de la rhizophagie, formalisé par White et ses collaborateurs en 2018 (White et al., 2018), représente un changement de paradigme da…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/76/"><strong>Lombriciens — écologie, services et pilotage des populations</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le pilotage de la santé des sols repose sur une compréhension fine de l&#39;écologie des lombriciens, véritables &quot;ingénieurs de l&#39;écosystème&quot; qu…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/82/"><strong>Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le effet d&#39;amorçage, plus spécifiquement celui de la rhizosphère, est un processus biogéochimique central où l&#39;apport de carbone (C) organiq…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/83/"><strong>Cascade phosphore — du minéral inerte à l&#39;os humain</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document explore la &quot;cascade du phosphore&quot;, un cycle complexe reliant la santé des sols à la physiologie osseuse humaine. Le phosphore (P…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/88/"><strong>Mémoire microbienne paléoclimatique — héritage 20 000 ans</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce mémoire analyse l&#39;émergence du concept de mémoire microbienne comme paramètre fondamental de la réponse des écosystèmes aux changements g…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/95/"><strong>Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</strong><span class="sv-badge">transversale</span><p class="sv-meta">La fermentation lactique anaérobie acidifiante (pH 3,5-4) par les bactéries lactiques — Lactobacillus principalement, avec le récent éclatem…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/96/"><strong>Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</strong><span class="sv-badge">transversale</span><p class="sv-meta">La capture et la culture des microorganismes indigènes sont le fondement biologique commun à KNF-IMO (Park, 2008 ; méthode IMO de Cho Han Ky…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/99/"><strong>Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</strong><span class="sv-badge">transversale</span><p class="sv-meta">Les bactéries phototrophes pourpres non-sulfureuses (PNSB), pivotées par Rhodopseudomonas palustris, pratiquent la photosynthèse anoxygéniqu…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/103/"><strong>Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le principe d&#39;exclusion compétitive par saturation de niche trophique constitue un mécanisme fondamental de l&#39;écologie microbienne et la bas…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/105/"><strong>Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document explore le potentiel de la fermentation en milieu solide, une technologie émergente au cœur de la bioéconomie circulaire, pour l…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/"><strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/"><strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/108/"><strong>‘Faim d’azote’ après apport carboné (immobilisation)</strong><span class="sv-badge">zoom</span><p class="sv-meta">La faim d’azote désigne l’immobilisation transitoire de l’azote minéral du sol par les micro-organismes décomposeurs lorsqu’ils sont confron…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/113/"><strong>Antifragilité : stress modéré → diversification de l&#39;hologénome</strong><span class="sv-badge">zoom</span><p class="sv-meta">La transition vers une agriculture régénérative marque le passage d&#39;un paradigme de robustesse (résister au stress) à celui d&#39;antifragilité,…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/115/"><strong>Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document analyse l’importance des enzymes du sol — la β-glucosidase, les phosphatases acides et l&#39;uréase — comme bio-indicateurs de la sa…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/116/"><strong>Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</strong><span class="sv-badge">zoom</span><p class="sv-meta">La toxicité ferreuse (Fe²⁺) en sols hydromorphes constitue une contrainte abiotique majeure pour la sécurité alimentaire, affectant particul…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/118/"><strong>Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</strong><span class="sv-badge">zoom</span><p class="sv-meta">La fixation biologique de l&#39;azote représente le pilier central d&#39;une agriculture décarbonée et durable, capable de réduire la dépendance mon…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/"><strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente une synthèse exhaustive des connaissances actuelles sur les archées Asgard et leur rôle fondamental dans l&#39;eucaryogenès…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/124/"><strong>Stabilité d’agrégats faible / désagrégation rapide</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document synthétise les mécanismes de stabilisation structurelle des sols, en mettant l&#39;accent sur la transition d&#39;une gestion extractive…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/125/"><strong>Mésofaune : collemboles et acariens, régulateurs des micro-habitats</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document synthétise le rôle fondamental de la mésofaune, particulièrement les Collemboles et les Acariens, en tant que régulateurs clés d…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/134/"><strong>KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;utilisation des bactéries solubilisant le potassium représente un levier stratégique pour la transition vers une agriculture durable, perm…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/136/"><strong>Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente une transition fondamentale dans la compréhension de l&#39;architecture biogéochimique des sols : le passage du modèle géom…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/138/"><strong>Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</strong><span class="sv-badge">zoom</span><p class="sv-meta">99.1 L’ambivalence fongique au cœur des cycles biogéochimiques
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>S2 — Le Microbiome du Sol — Le Sol Vivant</title>
+    <meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="theme-color" content="#2563eb">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Le Sol Vivant cet Holobionte">
+    <meta property="og:title" content="S2 — Le Microbiome du Sol — Le Sol Vivant">
+    <meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="S2 — Le Microbiome du Sol — Le Sol Vivant">
+    <meta name="twitter:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <link rel="canonical" href="/Publications/liseuse/doc/S2/">
+    <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
+    <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.BlPM9bjb.css"></head>
+  <body>
+    <a class="sv-skip" href="#sv-main">Aller au contenu</a>
+    <header class="sv-header">
+      <button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button>
+      <a href="/Publications/liseuse/" class="sv-brand">
+        <span class="sv-brand-dot" aria-hidden="true"></span>
+        <span>Le Sol Vivant</span>
+      </a>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island>
+      <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
+    </header>
+    <div class="sv-shell">
+      <nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus">
+  <p class="sv-side-label">Strates</p>
+  <ul class="sv-side-tree">
+    <li class>
+        <a href="/Publications/liseuse/strate/F/">
+          <span class="sv-strate-badge sv-strate-F">F</span> Fondements
+        </a>
+        
+      </li><li class="is-open">
+        <a href="/Publications/liseuse/strate/S/">
+          <span class="sv-strate-badge sv-strate-S">S</span> Sol
+        </a>
+        <ul class="sv-side-sub">
+            <li class>
+                <a href="/Publications/liseuse/doc/S0/">
+                  <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S1/">
+                  <strong>S1</strong> — Architecture du Sol
+                </a>
+                
+              </li><li class="is-open">
+                <a href="/Publications/liseuse/doc/S2/" aria-current="page">
+                  <strong>S2</strong> — Le Microbiome du Sol
+                </a>
+                <ul class="sv-side-sub sv-side-l3">
+                    <li class="sv-side-ouverture">
+                        <a href="/Publications/liseuse/fiche/332/">
+                          <strong>Ouverture</strong> — le récit du document
+                        </a>
+                      </li>
+                    <li>
+                        <a href="/Publications/liseuse/fiche/3/">
+                          Microbiome du sol vivant et thermotolérance des plantes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/10/">
+                          Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/19/">
+                          Protozoaires du Sol et Boucle Microbienne
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/22/">
+                          Quorum Sensing et Communication Chimique Rhizosphérique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/27/">
+                          Les Archées du Sol — Un Troisième Domaine Sous-estimé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/28/">
+                          Le Cycle du Fer et les Bactéries Ferro-réductrices
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/60/">
+                          Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/61/">
+                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/67/">
+                          Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/73/">
+                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/74/">
+                          Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/76/">
+                          Lombriciens — écologie, services et pilotage des populations
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/82/">
+                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/83/">
+                          Cascade phosphore — du minéral inerte à l&#39;os humain
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/88/">
+                          Mémoire microbienne paléoclimatique — héritage 20 000 ans
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/95/">
+                          Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/96/">
+                          Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/99/">
+                          Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/103/">
+                          Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/105/">
+                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/106/">
+                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/107/">
+                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/108/">
+                          ‘Faim d’azote’ après apport carboné (immobilisation)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/113/">
+                          Antifragilité : stress modéré → diversification de l&#39;hologénome
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/115/">
+                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/116/">
+                          Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/118/">
+                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/119/">
+                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/124/">
+                          Stabilité d’agrégats faible / désagrégation rapide
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/125/">
+                          Mésofaune : collemboles et acariens, régulateurs des micro-habitats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/134/">
+                          KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/136/">
+                          Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/138/">
+                          Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/139/">
+                          Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/140/">
+                          Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/141/">
+                          Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/142/">
+                          Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/144/">
+                          Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/148/">
+                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/151/">
+                          AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/152/">
+                          Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/154/">
+                          Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/160/">
+                          Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/163/">
+                          Microsites
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/172/">
+                          Plant diversity drives rhizosphere microbiome
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/177/">
+                          Tri-trophic interactions CEP / Trichoderma / soil mites
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/181/">
+                          Microbial necromass on the rise
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/194/">
+                          Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/195/">
+                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/196/">
+                          Root exudates contribute to belowground ecosystem hotspots: A
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/200/">
+                          Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/202/">
+                          Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/205/">
+                          Carbon Use Efficiency microbienne — pivot stockage/respiration
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/206/">
+                          Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/207/">
+                          Hiérarchie des agrégats et co-évolution structure-fonction
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/218/">
+                          Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/224/">
+                          Dormance microbienne et persisters — banque de semences invisible du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/225/">
+                          Virosphère du sol et bactériophages — top-down viral et renouvellement microbien
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/229/">
+                          Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/231/">
+                          Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/234/">
+                          Effet Birch — pulse de minéralisation à la réhumectation des sols
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/237/">
+                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/238/">
+                          Cycle du soufre : du sol à la santé humaine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/243/">
+                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/245/">
+                          Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/247/">
+                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/250/">
+                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/251/">
+                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/254/">
+                          Les fils rouges du sol vivant — thèses transversales et renversements
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/258/">
+                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/260/">
+                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/261/">
+                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/263/">
+                          Le régime fixe les rôles — du sol vivant à la plante saine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/264/">
+                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/269/">
+                          Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/270/">
+                          Haies, bocage et brise-vent — fonctions sol, lisière et microclimat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/271/">
+                          Silvopastoralisme tempéré — arbre, prairie et animal
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/272/">
+                          Pompage nutritif profond et filet de sécurité racinaire
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/273/">
+                          Trognes et arbres-ressources — biomasse renouvelable et rôle écologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/274/">
+                          L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/275/">
+                          La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/276/">
+                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/289/">
+                          Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/290/">
+                          Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/293/">
+                          Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/294/">
+                          La structuration du microbiome : assemblage, core microbiome et coalescence
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/298/">
+                          Le microbiome de la graine : l&#39;héritage microbien de la plante-mère
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/299/">
+                          Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/301/">
+                          Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/303/">
+                          La plastisphère : le biofilm microbien des microplastiques du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/304/">
+                          La phagothérapie végétale : des bactériophages contre les phytopathogènes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/308/">
+                          La rhizosphère : la zone d&#39;influence où la plante parle au sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/309/">
+                          L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/310/">
+                          L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/312/">
+                          Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/315/">
+                          Battance et croûte de surface : mécanismes, diagnostic et remédiation
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/319/">
+                          Couleur du sol : le premier diagnostic par le regard
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/346/">
+                          Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse
+                        </a>
+                      </li>
+                  </ul>
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S3/">
+                  <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S4/">
+                  <strong>S4</strong> — Le Carbone et les Grands Cycles
+                </a>
+                
+              </li>
+          </ul>
+      </li><li class>
+        <a href="/Publications/liseuse/strate/V/">
+          <span class="sv-strate-badge sv-strate-V">V</span> Vivant
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/P/">
+          <span class="sv-strate-badge sv-strate-P">P</span> Pratiques
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/H/">
+          <span class="sv-strate-badge sv-strate-H">H</span> Humain
+        </a>
+        
+      </li>
+  </ul>
+  <p class="sv-side-label">Outils</p>
+  <ul class="sv-side-tree">
+    <li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li>
+    <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
+    <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
+    <li><a href="/Publications/liseuse/references/">Références — les sources</a></li>
+    <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
+  </ul>
+</nav>
+      <main class="sv-main" id="sv-main">
+        
+  <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/Publications/liseuse/">Accueil</a>
+    <span aria-hidden="true">›</span>
+    <a href="/Publications/liseuse/strate/S/">Sol</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">S2</span>
+  </nav>
 
-Les champignons du sol occupent une position fonctionnelle singulière, capab…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/139/"><strong>Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document analyse la dynamique des sols à travers le prisme des régulations ascendantes (bottom-up) et descendantes (top-down), en démontr…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/140/"><strong>Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente une synthèse des avancées en bio-indication microbiologique de précision, soulignant son rôle critique dans le pilotage…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/141/"><strong>Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</strong><span class="sv-badge">zoom</span><p class="sv-meta">Face à la &quot;pandémie silencieuse&quot; de la résistance aux antimicrobiens, qui menace de causer jusqu&#39;à 1,91 million de décès imputables par an d…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/142/"><strong>Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente un cadre théorique et technique pour l&#39;ingénierie rationnelle des communautés microbiennes synthétiques, positionnant c…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/144/"><strong>Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">La distinction entre les stratégies de Scavenging (glanage) et de Mining (extraction) constitue un pilier de l&#39;écologie fongique moderne. Al…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/148/"><strong>Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document explore la dualité biochimique et évolutive de la biosynthèse de la vitamine B12 (cobalamine) et son rôle pivot dans l&#39;agricultu…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/151/"><strong>AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document synthétise la transition paradigmatique de la microbiologie des sols, passant d&#39;une vision centrée sur les bactéries nitrifiante…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/152/"><strong>Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;oxydation anaérobie du méthane est un processus biogéochimique vital qui intercepte la quasi-totalité du méthane produit dans les sédiment…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/154/"><strong>Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</strong><span class="sv-badge">zoom</span><p class="sv-meta">La mémoire du sol ne se limite plus à un simple stock de nutriments ; elle est définie comme une interaction complexe entre un héritage maté…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/160/"><strong>Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</strong><span class="sv-badge">zoom</span><p class="sv-meta">Inoculer (souche importée) ou capturer (communauté indigène) ? L&#39;inoculation standardisée promet une fonction précise mais échoue souvent en…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/163/"><strong>Microsites</strong><span class="sv-badge">zoom</span><p class="sv-meta">La synthèse des recherches publiées entre 2021 et 2025 confirme que la gestion des microsites est le levier fondamental pour réconcilier la …</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/172/"><strong>Plant diversity drives rhizosphere microbiome</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document explore la relation bidirectionnelle entre la diversité végétale et le microbiome de la rhizosphère dans une perspective systémi…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/177/"><strong>Tri-trophic interactions CEP / Trichoderma / soil mites</strong><span class="sv-badge">zoom</span><p class="sv-meta">Les maladies telluriques ne relèvent plus du modèle « un agent-une maladie » mais du pathobiome : le CEP (complexe d&#39;espèces pathogènes tell…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/181/"><strong>Microbial necromass on the rise</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le passage à la notion de Pompe Microbienne du Carbone, qui met en évidence le rôle de la nécromasse microbienne dans la séquestration du ca…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/194/"><strong>Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</strong><span class="sv-badge">zoom</span><p class="sv-meta">Cette étude démontre que la santé humaine est intrinsèquement liée à un continuum microbien s&#39;étendant du sol aux systèmes biologiques compl…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/195/"><strong>Chaulage et azote en prairie : interactions sur la minéralisation du carbone</strong><span class="sv-badge">zoom</span></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/196/"><strong>Root exudates contribute to belowground ecosystem hotspots: A</strong><span class="sv-badge">zoom</span><p class="sv-meta">Contexte et enjeux Les exsudats racinaires constituent un flux de carbone (C) massif, estimé à l&#39;échelle mondiale à 13,4 Pg C par an, soit e…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/200/"><strong>Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)</strong><span class="sv-badge">zoom</span><p class="sv-meta">La découverte des bactéries comammox (oxydation complète de l&#39;ammoniac en nitrate) a redéfini notre compréhension du cycle de l&#39;azote, révél…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/202/"><strong>Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce résumé synthétise les mécanismes de la transition agroécologique à travers le prisme de la succession microbienne, en articulant les stra…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/205/"><strong>Carbon Use Efficiency microbienne — pivot stockage/respiration</strong><span class="sv-badge">zoom</span><p class="sv-meta">Certaines études ont suggéré que l&#39;efficience d&#39;utilisation du carbone (CUE) par les microorganismes du sol pourrait être un facteur prédict…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/206/"><strong>Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le prélèvement composite invisible les extrêmes : les points chauds (microsites à activité décuplée — rhizosphère, turricules) et hot moment…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/207/"><strong>Hiérarchie des agrégats et co-évolution structure-fonction</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente une synthèse actualisée de la hiérarchie des agrégats et des mécanismes de pédogenèse, en s&#39;appuyant sur les avancées s…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/218/"><strong>Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport</strong><span class="sv-badge">zoom</span></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/224/"><strong>Dormance microbienne et persisters — banque de semences invisible du sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document synthétise les avancées récentes sur la dormance microbienne et les cellules persistantes dans les sols, soulignant leur rôle de…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/225/"><strong>Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document explore le rôle fondamental des bactériophages dans l&#39;écologie des sols, en mettant l&#39;accent sur leur diversité, leurs cycles de…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/229/"><strong>Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document analyse l&#39;interaction complexe entre la santé des sols, la gestion des mycotoxines et la sécurité de la chaîne alimentaire. Face…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/231/"><strong>Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</strong><span class="sv-badge">methodologique</span><p class="sv-meta">La mesure de la biodiversité du sol exige de dépasser la simple richesse spécifique pour capturer la complexité des fonctions écosystémique.…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/234/"><strong>Effet Birch — pulse de minéralisation à la réhumectation des sols</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;effet Birch, caractérisé par un pic massif de minéralisation lors de la réhumectation des sols secs, représente un pivot critique des cycl…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/"><strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong><span class="sv-badge">revue_critique</span><p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/238/"><strong>Cycle du soufre : du sol à la santé humaine</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document analyse la dynamique complexe du soufre (S), depuis sa biologie tellurique jusqu&#39;à son impact sur la santé humaine, dans un cont…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/243/"><strong>Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</strong><span class="sv-badge">transversale</span><p class="sv-meta">Le diagnostic moderne de la santé du sol marque une rupture avec les approches statiques traditionnelles pour s&#39;orienter vers une analyse dy…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/245/"><strong>Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document présente une synthèse critique des connaissances scientifiques actuelles sur les extraits de compost (thés de compost), en exami…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/247/"><strong>Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</strong><span class="sv-badge">transversale</span></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/250/"><strong>Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</strong><span class="sv-badge">transversale</span><p class="sv-meta">Ce document explore le rôle pivot du fer dans le continuum sol-plante-humain, en adoptant le paradigme de l&#39;agriculture régénératrice et cel…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/251/"><strong>Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</strong><span class="sv-badge">transversale</span><p class="sv-meta">L&#39;agriculture moderne est confrontée à une dépendance énergétique critique : la synthèse industrielle de l&#39;azote (procédé Haber-Bosch) mobil…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/"><strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong><span class="sv-badge">transversale</span><p class="sv-meta">Trois fils rouges traversent l&#39;ouvrage : (1) gouvernance biologique — le microbiome structure la MO, pas l&#39;inverse ; (2) coévolution holobio…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/258/"><strong>Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</strong><p class="sv-meta">Les fermentations paysannes (choucroute, kéfir, kombucha, EM-Bokashi) reposent sur un triptyque : couper l&#39;air (anaérobiose), produire de l&#39;…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/260/"><strong>La transition robuste : une vallée à traverser, quatre âges, trois gestes</strong><p class="sv-meta">La transition vers le sol vivant n&#39;est pas un interrupteur mais une vallée à traverser. Quatre âges : (1) sevrage (0-3 ans) — le sol dépenda…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/"><strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong><p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/263/"><strong>Le régime fixe les rôles — du sol vivant à la plante saine</strong><p class="sv-meta">Un sol sain fait une plante saine, qui fait une chaîne alimentaire saine (Howard 1940). La science récente révèle le mécanisme : microbiome …</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/264/"><strong>Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</strong><span class="sv-badge">zoom</span><p class="sv-meta">Ce document propose un changement de paradigme dans la compréhension des microsites anoxiques du sol, passant d&#39;une vision de refuges isolés…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/269/"><strong>Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">Les effluents d&#39;élevage ne sont pas de simples engrais : ils transportent un cocktail antibiotiques + métaux + résistome préformé (ARG). L&#39;é…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/270/"><strong>Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</strong><span class="sv-badge">zoom</span><p class="sv-meta">La haie est une infrastructure plurifonctionnelle : brise-vent (réduction evapotranspiration), pompe à nutriments (remontée racinaire), habi…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/271/"><strong>Silvopastoralisme tempéré — arbre, prairie et animal</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le silvopastoralisme tempéré associe arbre + prairie + animal dans un système où le couvert ligneux module microclimat, flux biogéochimiques…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/272/"><strong>Pompage nutritif profond et filet de sécurité racinaire</strong><span class="sv-badge">zoom</span><p class="sv-meta">Les nutriments lessivés au-delà de 30 cm ne disparaissent pas : ils forment un trésor profond inaccessible aux cultures superficielles. Les …</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/273/"><strong>Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</strong><span class="sv-badge">zoom</span><p class="sv-meta">La trogne (arbre taillé cycliquement) produit biomasse renouvelable (bois, fourrage, paillis) sans défricher. Techniques : têtard, émonde, t…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/274/"><strong>L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</strong><span class="sv-badge">zoom</span><p class="sv-meta">La spécialisation élevage/grandes cultures a rompu le couplage culture-élevage qui soutenait la fertilité depuis le Néolithique. L&#39;animal es…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/275/"><strong>La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone</strong><span class="sv-badge">zoom</span><p class="sv-meta">La fonction hydraulique de la matière organique stabilisée — rétention d&#39;eau, agrégation, porosité — est un service écosystémique aussi préc…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/"><strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/289/"><strong>Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;exclusion compétitive est le principe de défense qui n&#39;attaque pas : retirer à l&#39;envahisseur la place plutôt que la vie. Fondée sur le pri…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/290/"><strong>Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le transfert horizontal de gènes (HGT) est l&#39;échange de matériel génétique entre bactéries contemporaines, par quatre voies : conjugaison (c…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/293/"><strong>Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</strong><span class="sv-badge">zoom</span><p class="sv-meta">La sécheresse attaque la plante à son interface avec le sol, et c&#39;est là que vit son microbiome. À l&#39;échelle cellulaire, bactéries et champi…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/294/"><strong>La structuration du microbiome : assemblage, core microbiome et coalescence</strong><span class="sv-badge">transversale</span><p class="sv-meta">Trois concepts unifient la compréhension de la construction des microbiomes. L&#39;assemblage décompose la structuration en quatre processus — s…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/298/"><strong>Le microbiome de la graine : l&#39;héritage microbien de la plante-mère</strong><span class="sv-badge">zoom</span><p class="sv-meta">La graine transmet un microbiome — bactéries et champignons hérités de la mère par voie verticale, complétés par le contexte local (Shade et…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/299/"><strong>Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère</strong><span class="sv-badge">transversale</span><p class="sv-meta">Les PGPR sont les bactéries rhizosphériques à effet net positif sur la plante — définies par la fonction, non la taxonomie (Lugtenberg &amp; Kam…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/301/"><strong>Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté</strong><span class="sv-badge">zoom</span><p class="sv-meta">Les effets de priorité établissent que l&#39;ordre et le moment d&#39;arrivée des taxons structurent les microbiomes — sous deux conditions : un poo…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/303/"><strong>La plastisphère : le biofilm microbien des microplastiques du sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">La plastisphère (terme canonique : plasticosphère, 2239) est le biofilm microbien qui colonise les microplastiques du sol — un habitat synth…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/304/"><strong>La phagothérapie végétale : des bactériophages contre les phytopathogènes</strong><span class="sv-badge">transversale</span><p class="sv-meta">La phagothérapie végétale mobilise les bactériophages, prédateurs ultra-spécifiques des bactéries, contre les phytopathogènes. Après un sièc…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/308/"><strong>La rhizosphère : la zone d&#39;influence où la plante parle au sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">La rhizosphère — zone de sol sous influence racinaire, née avec Hiltner en 1904 — est l&#39;interface où la plante achète ses services au sol pa…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/309/"><strong>L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;éthylène (C₂H₄), hormone végétale gazeuse, est un signal de compaction du sol : en sol résistant, elle s&#39;accumule autour des racines et in…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/310/"><strong>L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol</strong><span class="sv-badge">zoom</span><p class="sv-meta">L&#39;ozone troposphérique (O₃), polluant photochimique, atteint le microbiome du sol principalement par la voie indirecte de la litière altérée…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/312/"><strong>Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</strong><span class="sv-badge">zoom</span><p class="sv-meta">Le podzol doit sa toxicité à l’aluminium échangeable (Al³⁺), qui bloque la croissance racinaire (moignon) et cimente le phosphore en varisci…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/315/"><strong>Battance et croûte de surface : mécanismes, diagnostic et remédiation</strong><span class="sv-badge">concept</span><p class="sv-meta">La battance est un phénomène de dégradation superficielle des sols, particulièrement des sols limoneux, résultant de l&#39;impact des gouttes de…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/319/"><strong>Couleur du sol : le premier diagnostic par le regard</strong><span class="sv-badge">concept</span><p class="sv-meta">La couleur du sol est un indicateur de premier niveau, accessible au simple regard, qui renseigne sur la teneur en matière organique (noir-b…</p></a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/346/"><strong>Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse</strong><span class="sv-badge">zoom</span><p class="sv-meta">La croûte biologique du sol est la peau vivante qui amorce la pédogenèse sur les terres arides : un consortium de cyanobactéries, d&#39;algues, …</p></a></div><section><h2>Termes du document (280)</h2><p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p><ul class="sv-term-links"><li><a href="/Publications/liseuse/terme/6362/">abiotique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5925/">Chaleur</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5017/">coalescence microbienne</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5016/">core microbiome</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6629/">couleur du sol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6915/">horizon</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7051/">lyse</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a><span class="sv-badge">majeur</span></li></ul></section></article></main></div><footer class="sv-footer"><p>Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.© 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a></p></footer><astro-island uid="239i22" prefix="r3" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island><script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body></html>
+  <article class="sv-prose">
+    <h1>S2 — Le Microbiome du Sol</h1>
+
+    <p class="sv-meta">99 textes — l'ouverture, puis 98 fiches.</p>
+
+    <section class="sv-card sv-section">
+        <h2 id="ouverture">Ouverture</h2>
+        <p class="sv-meta">Le récit du document — par où commencer, avant les fiches qui suivent.</p>
+        <div class="sv-actions">
+          <a class="sv-cta" href="/Publications/liseuse/fiche/332/">Commencer la lecture</a>
+        </div>
+      </section>
+
+    <h2>Fiches du document (98)</h2>
+    <div class="sv-fiche-list">
+        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/3/">
+              <strong>Microbiome du sol vivant et thermotolérance des plantes</strong>
+              <span class="sv-badge">revue_critique</span>
+              <p class="sv-meta">Le microbiome du sol vivant n&#39;est pas un accessoire de la thermotolérance végétale : il en est un pilier. Les bactéries à ACC désaminase res…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/10/">
+              <strong>Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document analyse le rôle pivot du cobalt en tant qu&#39;oligoélément essentiel, bien que souvent méconnu, dans les systèmes agricoles reposan…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/19/">
+              <strong>Protozoaires du Sol et Boucle Microbienne</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document met en lumière le rôle pivot des protistes du sol, longtemps sous-estimés, dans la régulation de la boucle microbienne et la per…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/22/">
+              <strong>Quorum Sensing et Communication Chimique Rhizosphérique</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le Quorum Sensing s&#39;est imposé comme un mécanisme central de coordination multicellulaire, permettant aux populations microbiennes de la rhi…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/27/">
+              <strong>Les Archées du Sol — Un Troisième Domaine Sous-estimé</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document dresse un état des lieux exhaustif du domaine des Archées, confirmant leur statut de troisième domaine de la vie, indispensables…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/28/">
+              <strong>Le Cycle du Fer et les Bactéries Ferro-réductrices</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document explore le rôle central du fer en tant que moteur biogéochimique dans les environnements de surface et de subsurface, avec un ac…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/60/">
+              <strong>Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document présente une analyse approfondie du potentiel des bactéries pourpres non sulfureuses — notamment les genres Rhodopseudomonas, Ce…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/61/">
+              <strong>Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce travail a permis de démontrer que la vulnérabilité des cultures aux ravageurs n&#39;est pas une fatalité biologique, mais le résultat d&#39;un dé…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/67/">
+              <strong>Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le système Bokashi s’est imposé comme une solution de pointe pour la biotransformation décentralisée des déchets organiques, se distinguant …</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/73/">
+              <strong>Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">La régulation trophique descendante (top-down control) s&#39;établit comme un pilier fondamental de la santé des sols et de la résilience des ag…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/74/">
+              <strong>Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le cycle de la rhizophagie, formalisé par White et ses collaborateurs en 2018 (White et al., 2018), représente un changement de paradigme da…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/76/">
+              <strong>Lombriciens — écologie, services et pilotage des populations</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le pilotage de la santé des sols repose sur une compréhension fine de l&#39;écologie des lombriciens, véritables &quot;ingénieurs de l&#39;écosystème&quot; qu…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/82/">
+              <strong>Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le effet d&#39;amorçage, plus spécifiquement celui de la rhizosphère, est un processus biogéochimique central où l&#39;apport de carbone (C) organiq…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/83/">
+              <strong>Cascade phosphore — du minéral inerte à l&#39;os humain</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document explore la &quot;cascade du phosphore&quot;, un cycle complexe reliant la santé des sols à la physiologie osseuse humaine. Le phosphore (P…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/88/">
+              <strong>Mémoire microbienne paléoclimatique — héritage 20 000 ans</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce mémoire analyse l&#39;émergence du concept de mémoire microbienne comme paramètre fondamental de la réponse des écosystèmes aux changements g…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/95/">
+              <strong>Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">La fermentation lactique anaérobie acidifiante (pH 3,5-4) par les bactéries lactiques — Lactobacillus principalement, avec le récent éclatem…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/96/">
+              <strong>Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">La capture et la culture des microorganismes indigènes sont le fondement biologique commun à KNF-IMO (Park, 2008 ; méthode IMO de Cho Han Ky…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/99/">
+              <strong>Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Les bactéries phototrophes pourpres non-sulfureuses (PNSB), pivotées par Rhodopseudomonas palustris, pratiquent la photosynthèse anoxygéniqu…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/103/">
+              <strong>Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le principe d&#39;exclusion compétitive par saturation de niche trophique constitue un mécanisme fondamental de l&#39;écologie microbienne et la bas…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/105/">
+              <strong>Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document explore le potentiel de la fermentation en milieu solide, une technologie émergente au cœur de la bioéconomie circulaire, pour l…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/">
+              <strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
+              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/108/">
+              <strong>‘Faim d’azote’ après apport carboné (immobilisation)</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La faim d’azote désigne l’immobilisation transitoire de l’azote minéral du sol par les micro-organismes décomposeurs lorsqu’ils sont confron…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/113/">
+              <strong>Antifragilité : stress modéré → diversification de l&#39;hologénome</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La transition vers une agriculture régénérative marque le passage d&#39;un paradigme de robustesse (résister au stress) à celui d&#39;antifragilité,…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/115/">
+              <strong>Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document analyse l’importance des enzymes du sol — la β-glucosidase, les phosphatases acides et l&#39;uréase — comme bio-indicateurs de la sa…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/116/">
+              <strong>Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La toxicité ferreuse (Fe²⁺) en sols hydromorphes constitue une contrainte abiotique majeure pour la sécurité alimentaire, affectant particul…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/118/">
+              <strong>Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La fixation biologique de l&#39;azote représente le pilier central d&#39;une agriculture décarbonée et durable, capable de réduire la dépendance mon…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/">
+              <strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente une synthèse exhaustive des connaissances actuelles sur les archées Asgard et leur rôle fondamental dans l&#39;eucaryogenès…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/124/">
+              <strong>Stabilité d’agrégats faible / désagrégation rapide</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document synthétise les mécanismes de stabilisation structurelle des sols, en mettant l&#39;accent sur la transition d&#39;une gestion extractive…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/125/">
+              <strong>Mésofaune : collemboles et acariens, régulateurs des micro-habitats</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document synthétise le rôle fondamental de la mésofaune, particulièrement les Collemboles et les Acariens, en tant que régulateurs clés d…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/134/">
+              <strong>KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;utilisation des bactéries solubilisant le potassium représente un levier stratégique pour la transition vers une agriculture durable, perm…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/136/">
+              <strong>Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente une transition fondamentale dans la compréhension de l&#39;architecture biogéochimique des sols : le passage du modèle géom…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/138/">
+              <strong>Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">99.1 L’ambivalence fongique au cœur des cycles biogéochimiques
+
+Les champignons du sol occupent une position fonctionnelle singulière, capab…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/139/">
+              <strong>Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document analyse la dynamique des sols à travers le prisme des régulations ascendantes (bottom-up) et descendantes (top-down), en démontr…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/140/">
+              <strong>Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente une synthèse des avancées en bio-indication microbiologique de précision, soulignant son rôle critique dans le pilotage…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/141/">
+              <strong>Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Face à la &quot;pandémie silencieuse&quot; de la résistance aux antimicrobiens, qui menace de causer jusqu&#39;à 1,91 million de décès imputables par an d…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/142/">
+              <strong>Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente un cadre théorique et technique pour l&#39;ingénierie rationnelle des communautés microbiennes synthétiques, positionnant c…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/144/">
+              <strong>Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La distinction entre les stratégies de Scavenging (glanage) et de Mining (extraction) constitue un pilier de l&#39;écologie fongique moderne. Al…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/148/">
+              <strong>Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document explore la dualité biochimique et évolutive de la biosynthèse de la vitamine B12 (cobalamine) et son rôle pivot dans l&#39;agricultu…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/151/">
+              <strong>AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document synthétise la transition paradigmatique de la microbiologie des sols, passant d&#39;une vision centrée sur les bactéries nitrifiante…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/152/">
+              <strong>Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;oxydation anaérobie du méthane est un processus biogéochimique vital qui intercepte la quasi-totalité du méthane produit dans les sédiment…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/154/">
+              <strong>Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La mémoire du sol ne se limite plus à un simple stock de nutriments ; elle est définie comme une interaction complexe entre un héritage maté…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/160/">
+              <strong>Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Inoculer (souche importée) ou capturer (communauté indigène) ? L&#39;inoculation standardisée promet une fonction précise mais échoue souvent en…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/163/">
+              <strong>Microsites</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La synthèse des recherches publiées entre 2021 et 2025 confirme que la gestion des microsites est le levier fondamental pour réconcilier la …</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/172/">
+              <strong>Plant diversity drives rhizosphere microbiome</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document explore la relation bidirectionnelle entre la diversité végétale et le microbiome de la rhizosphère dans une perspective systémi…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/177/">
+              <strong>Tri-trophic interactions CEP / Trichoderma / soil mites</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Les maladies telluriques ne relèvent plus du modèle « un agent-une maladie » mais du pathobiome : le CEP (complexe d&#39;espèces pathogènes tell…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/181/">
+              <strong>Microbial necromass on the rise</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le passage à la notion de Pompe Microbienne du Carbone, qui met en évidence le rôle de la nécromasse microbienne dans la séquestration du ca…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/194/">
+              <strong>Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Cette étude démontre que la santé humaine est intrinsèquement liée à un continuum microbien s&#39;étendant du sol aux systèmes biologiques compl…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/195/">
+              <strong>Chaulage et azote en prairie : interactions sur la minéralisation du carbone</strong>
+              <span class="sv-badge">zoom</span>
+              
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/196/">
+              <strong>Root exudates contribute to belowground ecosystem hotspots: A</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Contexte et enjeux Les exsudats racinaires constituent un flux de carbone (C) massif, estimé à l&#39;échelle mondiale à 13,4 Pg C par an, soit e…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/200/">
+              <strong>Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La découverte des bactéries comammox (oxydation complète de l&#39;ammoniac en nitrate) a redéfini notre compréhension du cycle de l&#39;azote, révél…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/202/">
+              <strong>Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce résumé synthétise les mécanismes de la transition agroécologique à travers le prisme de la succession microbienne, en articulant les stra…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/205/">
+              <strong>Carbon Use Efficiency microbienne — pivot stockage/respiration</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Certaines études ont suggéré que l&#39;efficience d&#39;utilisation du carbone (CUE) par les microorganismes du sol pourrait être un facteur prédict…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/206/">
+              <strong>Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le prélèvement composite invisible les extrêmes : les points chauds (microsites à activité décuplée — rhizosphère, turricules) et hot moment…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/207/">
+              <strong>Hiérarchie des agrégats et co-évolution structure-fonction</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente une synthèse actualisée de la hiérarchie des agrégats et des mécanismes de pédogenèse, en s&#39;appuyant sur les avancées s…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/218/">
+              <strong>Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport</strong>
+              <span class="sv-badge">zoom</span>
+              
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/224/">
+              <strong>Dormance microbienne et persisters — banque de semences invisible du sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document synthétise les avancées récentes sur la dormance microbienne et les cellules persistantes dans les sols, soulignant leur rôle de…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/225/">
+              <strong>Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document explore le rôle fondamental des bactériophages dans l&#39;écologie des sols, en mettant l&#39;accent sur leur diversité, leurs cycles de…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/229/">
+              <strong>Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document analyse l&#39;interaction complexe entre la santé des sols, la gestion des mycotoxines et la sécurité de la chaîne alimentaire. Face…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/231/">
+              <strong>Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</strong>
+              <span class="sv-badge">methodologique</span>
+              <p class="sv-meta">La mesure de la biodiversité du sol exige de dépasser la simple richesse spécifique pour capturer la complexité des fonctions écosystémique.…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/234/">
+              <strong>Effet Birch — pulse de minéralisation à la réhumectation des sols</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;effet Birch, caractérisé par un pic massif de minéralisation lors de la réhumectation des sols secs, représente un pivot critique des cycl…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
+              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
+              <span class="sv-badge">revue_critique</span>
+              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/238/">
+              <strong>Cycle du soufre : du sol à la santé humaine</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document analyse la dynamique complexe du soufre (S), depuis sa biologie tellurique jusqu&#39;à son impact sur la santé humaine, dans un cont…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/243/">
+              <strong>Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Le diagnostic moderne de la santé du sol marque une rupture avec les approches statiques traditionnelles pour s&#39;orienter vers une analyse dy…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/245/">
+              <strong>Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document présente une synthèse critique des connaissances scientifiques actuelles sur les extraits de compost (thés de compost), en exami…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/247/">
+              <strong>Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</strong>
+              <span class="sv-badge">transversale</span>
+              
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/250/">
+              <strong>Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Ce document explore le rôle pivot du fer dans le continuum sol-plante-humain, en adoptant le paradigme de l&#39;agriculture régénératrice et cel…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/251/">
+              <strong>Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">L&#39;agriculture moderne est confrontée à une dépendance énergétique critique : la synthèse industrielle de l&#39;azote (procédé Haber-Bosch) mobil…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/">
+              <strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Trois fils rouges traversent l&#39;ouvrage : (1) gouvernance biologique — le microbiome structure la MO, pas l&#39;inverse ; (2) coévolution holobio…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/258/">
+              <strong>Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</strong>
+              
+              <p class="sv-meta">Les fermentations paysannes (choucroute, kéfir, kombucha, EM-Bokashi) reposent sur un triptyque : couper l&#39;air (anaérobiose), produire de l&#39;…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/260/">
+              <strong>La transition robuste : une vallée à traverser, quatre âges, trois gestes</strong>
+              
+              <p class="sv-meta">La transition vers le sol vivant n&#39;est pas un interrupteur mais une vallée à traverser. Quatre âges : (1) sevrage (0-3 ans) — le sol dépenda…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
+              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
+              
+              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/263/">
+              <strong>Le régime fixe les rôles — du sol vivant à la plante saine</strong>
+              
+              <p class="sv-meta">Un sol sain fait une plante saine, qui fait une chaîne alimentaire saine (Howard 1940). La science récente révèle le mécanisme : microbiome …</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/264/">
+              <strong>Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Ce document propose un changement de paradigme dans la compréhension des microsites anoxiques du sol, passant d&#39;une vision de refuges isolés…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/269/">
+              <strong>Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Les effluents d&#39;élevage ne sont pas de simples engrais : ils transportent un cocktail antibiotiques + métaux + résistome préformé (ARG). L&#39;é…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/270/">
+              <strong>Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La haie est une infrastructure plurifonctionnelle : brise-vent (réduction evapotranspiration), pompe à nutriments (remontée racinaire), habi…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/271/">
+              <strong>Silvopastoralisme tempéré — arbre, prairie et animal</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le silvopastoralisme tempéré associe arbre + prairie + animal dans un système où le couvert ligneux module microclimat, flux biogéochimiques…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/272/">
+              <strong>Pompage nutritif profond et filet de sécurité racinaire</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Les nutriments lessivés au-delà de 30 cm ne disparaissent pas : ils forment un trésor profond inaccessible aux cultures superficielles. Les …</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/273/">
+              <strong>Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La trogne (arbre taillé cycliquement) produit biomasse renouvelable (bois, fourrage, paillis) sans défricher. Techniques : têtard, émonde, t…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/274/">
+              <strong>L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La spécialisation élevage/grandes cultures a rompu le couplage culture-élevage qui soutenait la fertilité depuis le Néolithique. L&#39;animal es…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/275/">
+              <strong>La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La fonction hydraulique de la matière organique stabilisée — rétention d&#39;eau, agrégation, porosité — est un service écosystémique aussi préc…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/">
+              <strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/289/">
+              <strong>Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;exclusion compétitive est le principe de défense qui n&#39;attaque pas : retirer à l&#39;envahisseur la place plutôt que la vie. Fondée sur le pri…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/290/">
+              <strong>Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le transfert horizontal de gènes (HGT) est l&#39;échange de matériel génétique entre bactéries contemporaines, par quatre voies : conjugaison (c…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/293/">
+              <strong>Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La sécheresse attaque la plante à son interface avec le sol, et c&#39;est là que vit son microbiome. À l&#39;échelle cellulaire, bactéries et champi…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/294/">
+              <strong>La structuration du microbiome : assemblage, core microbiome et coalescence</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Trois concepts unifient la compréhension de la construction des microbiomes. L&#39;assemblage décompose la structuration en quatre processus — s…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/298/">
+              <strong>Le microbiome de la graine : l&#39;héritage microbien de la plante-mère</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La graine transmet un microbiome — bactéries et champignons hérités de la mère par voie verticale, complétés par le contexte local (Shade et…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/299/">
+              <strong>Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">Les PGPR sont les bactéries rhizosphériques à effet net positif sur la plante — définies par la fonction, non la taxonomie (Lugtenberg &amp; Kam…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/301/">
+              <strong>Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Les effets de priorité établissent que l&#39;ordre et le moment d&#39;arrivée des taxons structurent les microbiomes — sous deux conditions : un poo…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/303/">
+              <strong>La plastisphère : le biofilm microbien des microplastiques du sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La plastisphère (terme canonique : plasticosphère, 2239) est le biofilm microbien qui colonise les microplastiques du sol — un habitat synth…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/304/">
+              <strong>La phagothérapie végétale : des bactériophages contre les phytopathogènes</strong>
+              <span class="sv-badge">transversale</span>
+              <p class="sv-meta">La phagothérapie végétale mobilise les bactériophages, prédateurs ultra-spécifiques des bactéries, contre les phytopathogènes. Après un sièc…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/308/">
+              <strong>La rhizosphère : la zone d&#39;influence où la plante parle au sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La rhizosphère — zone de sol sous influence racinaire, née avec Hiltner en 1904 — est l&#39;interface où la plante achète ses services au sol pa…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/309/">
+              <strong>L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;éthylène (C₂H₄), hormone végétale gazeuse, est un signal de compaction du sol : en sol résistant, elle s&#39;accumule autour des racines et in…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/310/">
+              <strong>L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">L&#39;ozone troposphérique (O₃), polluant photochimique, atteint le microbiome du sol principalement par la voie indirecte de la litière altérée…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/312/">
+              <strong>Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">Le podzol doit sa toxicité à l’aluminium échangeable (Al³⁺), qui bloque la croissance racinaire (moignon) et cimente le phosphore en varisci…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/315/">
+              <strong>Battance et croûte de surface : mécanismes, diagnostic et remédiation</strong>
+              <span class="sv-badge">concept</span>
+              <p class="sv-meta">La battance est un phénomène de dégradation superficielle des sols, particulièrement des sols limoneux, résultant de l&#39;impact des gouttes de…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/319/">
+              <strong>Couleur du sol : le premier diagnostic par le regard</strong>
+              <span class="sv-badge">concept</span>
+              <p class="sv-meta">La couleur du sol est un indicateur de premier niveau, accessible au simple regard, qui renseigne sur la teneur en matière organique (noir-b…</p>
+            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/346/">
+              <strong>Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse</strong>
+              <span class="sv-badge">zoom</span>
+              <p class="sv-meta">La croûte biologique du sol est la peau vivante qui amorce la pédogenèse sur les terres arides : un consortium de cyanobactéries, d&#39;algues, …</p>
+            </a>
+      </div>
+
+    <section>
+        <h2>Termes du document (280)</h2>
+        <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+        <ul class="sv-term-links">
+          <li><a href="/Publications/liseuse/terme/6362/">abiotique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5925/">Chaleur</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5017/">coalescence microbienne</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5016/">core microbiome</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6629/">couleur du sol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6915/">horizon</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7051/">lyse</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a><span class="sv-badge">majeur</span></li>
+        </ul>
+      </section>
+  </article>
+
+      </main>
+    </div>
+    <footer class="sv-footer">
+      <p>
+        Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.
+        © 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a>
+      </p>
+    </footer>
+    <astro-island uid="239i22" prefix="r3" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body>
+</html>

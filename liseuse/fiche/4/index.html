@@ -1,122 +1,927 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Stœchiométrie CNPS de Kirkby et bilan AMG — Le Sol Vivant</title><meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta name="theme-color" content="#2563eb"><meta property="og:type" content="website"><meta property="og:site_name" content="Le Sol Vivant cet Holobionte"><meta property="og:title" content="Stœchiométrie CNPS de Kirkby et bilan AMG — Le Sol Vivant"><meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales."><meta property="og:locale" content="fr_FR"><link rel="canonical" href="/Publications/liseuse/fiche/4/"><link rel="manifest" href="/Publications/liseuse/manifest.webmanifest"><link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml"><script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CUXLGMvH.css"></head><body><a class="sv-skip" href="#sv-main">Aller au contenu</a><header class="sv-header"><button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button><a href="/Publications/liseuse/" class="sv-brand"><span class="sv-brand-dot" aria-hidden="true"></span><span>Le Sol Vivant</span></a><style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island><button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button></header><div class="sv-shell"><nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus"><p class="sv-side-label">Strates</p><ul class="sv-side-tree"><li class><a href="/Publications/liseuse/strate/F/"><span class="sv-strate-badge sv-strate-F">F</span> Fondements</a></li><li class="is-open"><a href="/Publications/liseuse/strate/S/"><span class="sv-strate-badge sv-strate-S">S</span> Sol</a><ul class="sv-side-sub"><li class><a href="/Publications/liseuse/doc/S0/"><strong>S0</strong> — L&#39;Eau dans le Sol Vivant</a></li><li class><a href="/Publications/liseuse/doc/S1/"><strong>S1</strong> — Architecture du Sol</a></li><li class><a href="/Publications/liseuse/doc/S2/"><strong>S2</strong> — Le Microbiome du Sol</a></li><li class><a href="/Publications/liseuse/doc/S3/"><strong>S3</strong> — Le Microbiome Fongique et Mycorhizien</a></li><li class="is-open"><a href="/Publications/liseuse/doc/S4/"><strong>S4</strong> — Le Carbone et les Grands Cycles</a><ul class="sv-side-sub sv-side-l3"><li class="sv-side-ouverture"><a href="/Publications/liseuse/fiche/334/"><strong>Ouverture</strong> — le récit du document</a></li><li><a href="/Publications/liseuse/fiche/3/">Microbiome du sol vivant et thermotolérance des plantes</a></li><li><a href="/Publications/liseuse/fiche/4/" aria-current="page">Stœchiométrie CNPS de Kirkby et bilan AMG</a></li><li><a href="/Publications/liseuse/fiche/10/">Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote</a></li><li><a href="/Publications/liseuse/fiche/11/">Le Soil Continuum Model — Fin du Paradigme de l&#39;Humification</a></li><li><a href="/Publications/liseuse/fiche/23/">Thermodynamique Redox des Sols</a></li><li><a href="/Publications/liseuse/fiche/25/">Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique</a></li><li><a href="/Publications/liseuse/fiche/27/">Les Archées du Sol — Un Troisième Domaine Sous-estimé</a></li><li><a href="/Publications/liseuse/fiche/28/">Le Cycle du Fer et les Bactéries Ferro-réductrices</a></li><li><a href="/Publications/liseuse/fiche/29/">Les Cycles Couplés C-N-P-S-Fe dans les Sols</a></li><li><a href="/Publications/liseuse/fiche/30/">Le Cycle du Potassium dans les Sols Vivants</a></li><li><a href="/Publications/liseuse/fiche/41/">Fragilité systémique fossile et transition robuste (méthode Shift PREF)</a></li><li><a href="/Publications/liseuse/fiche/43/">Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</a></li><li><a href="/Publications/liseuse/fiche/57/">Cascade des conséquences — de la parcelle à la biosphère</a></li><li><a href="/Publications/liseuse/fiche/58/">Cascade temporelle — du jour au géologique</a></li><li><a href="/Publications/liseuse/fiche/60/">Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</a></li><li><a href="/Publications/liseuse/fiche/62/">Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</a></li><li><a href="/Publications/liseuse/fiche/63/">Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone</a></li><li><a href="/Publications/liseuse/fiche/64/">Carences minérales silencieuses — de l appauvrissement du sol à la santé publique</a></li><li><a href="/Publications/liseuse/fiche/65/">Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</a></li><li><a href="/Publications/liseuse/fiche/68/">Mode d application des amendements — surface versus incorporation et incidence pédologique</a></li><li><a href="/Publications/liseuse/fiche/69/">Couverts végétaux — design, biomasse et services rendus</a></li><li><a href="/Publications/liseuse/fiche/70/">Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</a></li><li><a href="/Publications/liseuse/fiche/71/">Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</a></li><li><a href="/Publications/liseuse/fiche/75/">Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques</a></li><li><a href="/Publications/liseuse/fiche/76/">Lombriciens — écologie, services et pilotage des populations</a></li><li><a href="/Publications/liseuse/fiche/77/">Biochar : architecte de sol (habitat, CEC, carbone stable)</a></li><li><a href="/Publications/liseuse/fiche/81/">Couplages biogéochimiques Fe-P-S-N sous alternance redox</a></li><li><a href="/Publications/liseuse/fiche/82/">Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</a></li><li><a href="/Publications/liseuse/fiche/87/">Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</a></li><li><a href="/Publications/liseuse/fiche/88/">Mémoire microbienne paléoclimatique — héritage 20 000 ans</a></li><li><a href="/Publications/liseuse/fiche/89/">Densité nutritionnelle alimentaire — du sol à l&#39;assiette</a></li><li><a href="/Publications/liseuse/fiche/90/">Glycoprotéines fongiques — glomaline et GRSP, pivot de la pompe carbone</a></li><li><a href="/Publications/liseuse/fiche/91/">Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health</a></li><li><a href="/Publications/liseuse/fiche/92/">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</a></li><li><a href="/Publications/liseuse/fiche/97/">Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone</a></li><li><a href="/Publications/liseuse/fiche/98/">Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique</a></li><li><a href="/Publications/liseuse/fiche/101/">Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua</a></li><li><a href="/Publications/liseuse/fiche/106/">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</a></li><li><a href="/Publications/liseuse/fiche/107/">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</a></li><li><a href="/Publications/liseuse/fiche/108/">‘Faim d’azote’ après apport carboné (immobilisation)</a></li><li><a href="/Publications/liseuse/fiche/111/">Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</a></li><li><a href="/Publications/liseuse/fiche/112/">Glomaline : glycoprotéine fongique et stockage C profond</a></li><li><a href="/Publications/liseuse/fiche/114/">Eh terrain : sondes redox, gradient mV/cm et méthode in situ</a></li><li><a href="/Publications/liseuse/fiche/115/">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</a></li><li><a href="/Publications/liseuse/fiche/116/">Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</a></li><li><a href="/Publications/liseuse/fiche/118/">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</a></li><li><a href="/Publications/liseuse/fiche/120/">Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale</a></li><li><a href="/Publications/liseuse/fiche/121/">Asphyxie / anaérobie locale (odeurs, horizons réduits)</a></li><li><a href="/Publications/liseuse/fiche/134/">KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</a></li><li><a href="/Publications/liseuse/fiche/135/">BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</a></li><li><a href="/Publications/liseuse/fiche/136/">Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</a></li><li><a href="/Publications/liseuse/fiche/137/">Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne</a></li><li><a href="/Publications/liseuse/fiche/151/">AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/152/">Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</a></li><li><a href="/Publications/liseuse/fiche/163/">Microsites</a></li><li><a href="/Publications/liseuse/fiche/167/">allocation C photosynthétique aux exsudats</a></li><li><a href="/Publications/liseuse/fiche/169/">Silicium — biostimulant</a></li><li><a href="/Publications/liseuse/fiche/174/">Controverses sur le stockage du carbone du sol : trois paradigmes en débat</a></li><li><a href="/Publications/liseuse/fiche/179/">Trade-off plant vs soil C under elevated CO2</a></li><li><a href="/Publications/liseuse/fiche/181/">Microbial necromass on the rise</a></li><li><a href="/Publications/liseuse/fiche/190/">Mineral protection counteracted by root exudates</a></li><li><a href="/Publications/liseuse/fiche/193/">Mycorrhiza-mediated competition drives soil C</a></li><li><a href="/Publications/liseuse/fiche/195/">Chaulage et azote en prairie : interactions sur la minéralisation du carbone</a></li><li><a href="/Publications/liseuse/fiche/204/">Saturation MAOM et plafond de séquestration carbone</a></li><li><a href="/Publications/liseuse/fiche/205/">Carbon Use Efficiency microbienne — pivot stockage/respiration</a></li><li><a href="/Publications/liseuse/fiche/206/">Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</a></li><li><a href="/Publications/liseuse/fiche/208/">Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM</a></li><li><a href="/Publications/liseuse/fiche/216/">Cultures associées (intercropping) — principe, complémentarité et conduite</a></li><li><a href="/Publications/liseuse/fiche/234/">Effet Birch — pulse de minéralisation à la réhumectation des sols</a></li><li><a href="/Publications/liseuse/fiche/237/">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</a></li><li><a href="/Publications/liseuse/fiche/238/">Cycle du soufre : du sol à la santé humaine</a></li><li><a href="/Publications/liseuse/fiche/239/">Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone</a></li><li><a href="/Publications/liseuse/fiche/240/">Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification</a></li><li><a href="/Publications/liseuse/fiche/241/">Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite</a></li><li><a href="/Publications/liseuse/fiche/242/">L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable</a></li><li><a href="/Publications/liseuse/fiche/243/">Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</a></li><li><a href="/Publications/liseuse/fiche/244/">Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle</a></li><li><a href="/Publications/liseuse/fiche/246/">Le bore, du sol à la plante : disponibilité, paroi cellulaire et marge étroite</a></li><li><a href="/Publications/liseuse/fiche/247/">Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</a></li><li><a href="/Publications/liseuse/fiche/248/">Le cuivre, du sol à la plante : transport électronique, lignification et accumulation</a></li><li><a href="/Publications/liseuse/fiche/250/">Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</a></li><li><a href="/Publications/liseuse/fiche/256/">La matière organique du sol : deux carbones, un plafond, une recette</a></li><li><a href="/Publications/liseuse/fiche/260/">La transition robuste : une vallée à traverser, quatre âges, trois gestes</a></li><li><a href="/Publications/liseuse/fiche/261/">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</a></li><li><a href="/Publications/liseuse/fiche/263/">Le régime fixe les rôles — du sol vivant à la plante saine</a></li><li><a href="/Publications/liseuse/fiche/264/">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</a></li><li><a href="/Publications/liseuse/fiche/266/">Pâturage tournant : broutage, exsudation racinaire et pompe à carbone</a></li><li><a href="/Publications/liseuse/fiche/268/">Thermodynamique des fermentations : énergie libre, cascade d&#39;accepteurs d&#39;électrons et transfert d&#39;hydrogène</a></li><li><a href="/Publications/liseuse/fiche/270/">Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</a></li><li><a href="/Publications/liseuse/fiche/271/">Silvopastoralisme tempéré — arbre, prairie et animal</a></li><li><a href="/Publications/liseuse/fiche/272/">Pompage nutritif profond et filet de sécurité racinaire</a></li><li><a href="/Publications/liseuse/fiche/273/">Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</a></li><li><a href="/Publications/liseuse/fiche/274/">L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</a></li><li><a href="/Publications/liseuse/fiche/280/">Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</a></li><li><a href="/Publications/liseuse/fiche/284/">Photofermentation : la photosynthèse sans oxygène — versatilité métabolique des bactéries pourpres</a></li><li><a href="/Publications/liseuse/fiche/286/">Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction</a></li><li><a href="/Publications/liseuse/fiche/287/">Solubilisation acide des minéraux : dissoudre la roche comme une racine — du WCA à l&#39;altération biologique</a></li><li><a href="/Publications/liseuse/fiche/288/">Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi</a></li><li><a href="/Publications/liseuse/fiche/291/">Co-sélection de l&#39;antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ</a></li><li><a href="/Publications/liseuse/fiche/295/">Le cycle de l&#39;azote : de la fixation symbiotique à la fuite N₂O</a></li><li><a href="/Publications/liseuse/fiche/296/">Le N₂O et l&#39;inhibition de la nitrification : fermer le robinet, ouvrir le puits</a></li><li><a href="/Publications/liseuse/fiche/297/">Le legacy phosphorus : le gisement enfoui sous nos fermes</a></li><li><a href="/Publications/liseuse/fiche/302/">Les PFAS dans le sol agricole : des polluants éternels à tenir hors du cycle</a></li><li><a href="/Publications/liseuse/fiche/306/">L&#39;adsorption : l&#39;interface où le sol retient — et relâche</a></li><li><a href="/Publications/liseuse/fiche/307/">La biodisponibilité : un nutriment n&#39;existe que s&#39;il est accessible</a></li><li><a href="/Publications/liseuse/fiche/311/">Oxydes de fer et d&#39;aluminium : les surfaces réactives du sol</a></li><li><a href="/Publications/liseuse/fiche/316/">Hydrophobie du sol (SWR) : quand le sol refuse l&#39;eau</a></li><li><a href="/Publications/liseuse/fiche/318/">Films IRIS : cartographier les microzones réductrices du sol</a></li><li><a href="/Publications/liseuse/fiche/344/">La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres</a></li></ul></li></ul></li><li class><a href="/Publications/liseuse/strate/V/"><span class="sv-strate-badge sv-strate-V">V</span> Vivant</a></li><li class><a href="/Publications/liseuse/strate/P/"><span class="sv-strate-badge sv-strate-P">P</span> Pratiques</a></li><li class><a href="/Publications/liseuse/strate/H/"><span class="sv-strate-badge sv-strate-H">H</span> Humain</a></li></ul><p class="sv-side-label">Outils</p><ul class="sv-side-tree"><li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li><li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li><li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li><li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li><li><a href="/Publications/liseuse/references/">Références — les sources</a></li></ul></nav><main class="sv-main" id="sv-main"><nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane"><a href="/Publications/liseuse/">Accueil</a><span aria-hidden="true">›</span><a href="/Publications/liseuse/strate/S/">Sol</a><span aria-hidden="true">›</span><a href="/Publications/liseuse/doc/S4/">S4</a><span aria-hidden="true">›</span><span aria-current="page">Fiche 4</span></nav><div class="sv-reading"><article class="sv-prose"><h1>Stœchiométrie CNPS de Kirkby et bilan AMG</h1><p class="sv-meta">Aussi traitée dans : <a href="/Publications/liseuse/doc/S1/">S1</a> · <a href="/Publications/liseuse/doc/P1/">P1</a> · <a href="/Publications/liseuse/doc/P2/">P2</a></p><div class="sv-card" id="resume"><h2>Résumé</h2><div class="sv-markdown"><p>La gestion moderne du carbone organique du sol repose sur le passage d'une vision quantitative (apports de biomasse brute) à une approche qualitative et prédictive, structurée autour de trois piliers fondamentaux : la <strong><span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> élémentaire</strong>, la <strong>dynamique microbienne</strong> et la <strong>modélisation cinétique</strong>.</p>
-</div></div><section id="s0"><h2>Introduction</h2><div class="sv-markdown"><p>Le stockage du carbone organique du sol s'est imposé comme un pilier des stratégies d'atténuation du changement climatique, tout en garantissant la résilience de la fertilité des sols (Chenu et al., 2022 ; Samson, 2021). Cependant, les recherches récentes soulignent que la séquestration durable ne peut être optimisée par le seul apport de biomasse ; elle est strictement conditionnée par la disponibilité de nutriments essentiels nécessaires à la stabilisation microbienne (Yousra et al., 2025).<br>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stœchiométrie CNPS de Kirkby et bilan AMG — Le Sol Vivant</title>
+    <meta name="description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="theme-color" content="#2563eb">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Le Sol Vivant cet Holobionte">
+    <meta property="og:title" content="Stœchiométrie CNPS de Kirkby et bilan AMG — Le Sol Vivant">
+    <meta property="og:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stœchiométrie CNPS de Kirkby et bilan AMG — Le Sol Vivant">
+    <meta name="twitter:description" content="Liseuse du corpus « Le Sol Vivant cet Holobionte » — fiches, thésaurus, concept cards, chaînes causales.">
+    <meta name="twitter:image" content="https://sol-vivant.github.io/Publications/liseuse/og-image.png">
+    <link rel="canonical" href="/Publications/liseuse/fiche/4/">
+    <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
+    <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.BlPM9bjb.css"></head>
+  <body>
+    <a class="sv-skip" href="#sv-main">Aller au contenu</a>
+    <header class="sv-header">
+      <button type="button" class="sv-burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sv-sidebar">☰</button>
+      <a href="/Publications/liseuse/" class="sv-brand">
+        <span class="sv-brand-dot" aria-hidden="true"></span>
+        <span>Le Sol Vivant</span>
+      </a>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1kSC5A" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.C8vNY3fi.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div style="position:relative;flex:1 1 320px;max-width:420px"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island>
+      <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
+    </header>
+    <div class="sv-shell">
+      <nav class="sv-sidebar" id="sv-sidebar" aria-label="Navigation du corpus">
+  <p class="sv-side-label">Strates</p>
+  <ul class="sv-side-tree">
+    <li class>
+        <a href="/Publications/liseuse/strate/F/">
+          <span class="sv-strate-badge sv-strate-F">F</span> Fondements
+        </a>
+        
+      </li><li class="is-open">
+        <a href="/Publications/liseuse/strate/S/">
+          <span class="sv-strate-badge sv-strate-S">S</span> Sol
+        </a>
+        <ul class="sv-side-sub">
+            <li class>
+                <a href="/Publications/liseuse/doc/S0/">
+                  <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S1/">
+                  <strong>S1</strong> — Architecture du Sol
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S2/">
+                  <strong>S2</strong> — Le Microbiome du Sol
+                </a>
+                
+              </li><li class>
+                <a href="/Publications/liseuse/doc/S3/">
+                  <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
+                </a>
+                
+              </li><li class="is-open">
+                <a href="/Publications/liseuse/doc/S4/">
+                  <strong>S4</strong> — Le Carbone et les Grands Cycles
+                </a>
+                <ul class="sv-side-sub sv-side-l3">
+                    <li class="sv-side-ouverture">
+                        <a href="/Publications/liseuse/fiche/334/">
+                          <strong>Ouverture</strong> — le récit du document
+                        </a>
+                      </li>
+                    <li>
+                        <a href="/Publications/liseuse/fiche/3/">
+                          Microbiome du sol vivant et thermotolérance des plantes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/4/" aria-current="page">
+                          Stœchiométrie CNPS de Kirkby et bilan AMG
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/10/">
+                          Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/11/">
+                          Le Soil Continuum Model — Fin du Paradigme de l&#39;Humification
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/23/">
+                          Thermodynamique Redox des Sols
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/25/">
+                          Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/27/">
+                          Les Archées du Sol — Un Troisième Domaine Sous-estimé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/28/">
+                          Le Cycle du Fer et les Bactéries Ferro-réductrices
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/29/">
+                          Les Cycles Couplés C-N-P-S-Fe dans les Sols
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/30/">
+                          Le Cycle du Potassium dans les Sols Vivants
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/41/">
+                          Fragilité systémique fossile et transition robuste (méthode Shift PREF)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/43/">
+                          Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/57/">
+                          Cascade des conséquences — de la parcelle à la biosphère
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/58/">
+                          Cascade temporelle — du jour au géologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/60/">
+                          Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/62/">
+                          Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/63/">
+                          Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/64/">
+                          Carences minérales silencieuses — de l appauvrissement du sol à la santé publique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/65/">
+                          Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/68/">
+                          Mode d application des amendements — surface versus incorporation et incidence pédologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/69/">
+                          Couverts végétaux — design, biomasse et services rendus
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/70/">
+                          Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/71/">
+                          Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/75/">
+                          Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/76/">
+                          Lombriciens — écologie, services et pilotage des populations
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/77/">
+                          Biochar : architecte de sol (habitat, CEC, carbone stable)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/81/">
+                          Couplages biogéochimiques Fe-P-S-N sous alternance redox
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/82/">
+                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/87/">
+                          Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/88/">
+                          Mémoire microbienne paléoclimatique — héritage 20 000 ans
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/89/">
+                          Densité nutritionnelle alimentaire — du sol à l&#39;assiette
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/90/">
+                          Glycoprotéines fongiques — glomaline et GRSP, pivot de la pompe carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/91/">
+                          Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/92/">
+                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/97/">
+                          Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/98/">
+                          Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/101/">
+                          Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/106/">
+                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/107/">
+                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/108/">
+                          ‘Faim d’azote’ après apport carboné (immobilisation)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/111/">
+                          Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/112/">
+                          Glomaline : glycoprotéine fongique et stockage C profond
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/114/">
+                          Eh terrain : sondes redox, gradient mV/cm et méthode in situ
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/115/">
+                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/116/">
+                          Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/118/">
+                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/120/">
+                          Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/121/">
+                          Asphyxie / anaérobie locale (odeurs, horizons réduits)
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/134/">
+                          KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/135/">
+                          BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/136/">
+                          Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/137/">
+                          Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/151/">
+                          AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/152/">
+                          Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/163/">
+                          Microsites
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/167/">
+                          allocation C photosynthétique aux exsudats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/169/">
+                          Silicium — biostimulant
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/174/">
+                          Controverses sur le stockage du carbone du sol : trois paradigmes en débat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/179/">
+                          Trade-off plant vs soil C under elevated CO2
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/181/">
+                          Microbial necromass on the rise
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/190/">
+                          Mineral protection counteracted by root exudates
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/193/">
+                          Mycorrhiza-mediated competition drives soil C
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/195/">
+                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/204/">
+                          Saturation MAOM et plafond de séquestration carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/205/">
+                          Carbon Use Efficiency microbienne — pivot stockage/respiration
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/206/">
+                          Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/208/">
+                          Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/216/">
+                          Cultures associées (intercropping) — principe, complémentarité et conduite
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/234/">
+                          Effet Birch — pulse de minéralisation à la réhumectation des sols
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/237/">
+                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/238/">
+                          Cycle du soufre : du sol à la santé humaine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/239/">
+                          Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/240/">
+                          Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/241/">
+                          Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/242/">
+                          L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/243/">
+                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/244/">
+                          Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/246/">
+                          Le bore, du sol à la plante : disponibilité, paroi cellulaire et marge étroite
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/247/">
+                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/248/">
+                          Le cuivre, du sol à la plante : transport électronique, lignification et accumulation
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/250/">
+                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/256/">
+                          La matière organique du sol : deux carbones, un plafond, une recette
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/260/">
+                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/261/">
+                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/263/">
+                          Le régime fixe les rôles — du sol vivant à la plante saine
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/264/">
+                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/266/">
+                          Pâturage tournant : broutage, exsudation racinaire et pompe à carbone
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/268/">
+                          Thermodynamique des fermentations : énergie libre, cascade d&#39;accepteurs d&#39;électrons et transfert d&#39;hydrogène
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/270/">
+                          Haies, bocage et brise-vent — fonctions sol, lisière et microclimat
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/271/">
+                          Silvopastoralisme tempéré — arbre, prairie et animal
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/272/">
+                          Pompage nutritif profond et filet de sécurité racinaire
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/273/">
+                          Trognes et arbres-ressources — biomasse renouvelable et rôle écologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/274/">
+                          L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/280/">
+                          Lactofermentation : technologie alimentaire ancestrale et successions microbiennes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/284/">
+                          Photofermentation : la photosynthèse sans oxygène — versatilité métabolique des bactéries pourpres
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/286/">
+                          Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/287/">
+                          Solubilisation acide des minéraux : dissoudre la roche comme une racine — du WCA à l&#39;altération biologique
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/288/">
+                          Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/291/">
+                          Co-sélection de l&#39;antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/295/">
+                          Le cycle de l&#39;azote : de la fixation symbiotique à la fuite N₂O
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/296/">
+                          Le N₂O et l&#39;inhibition de la nitrification : fermer le robinet, ouvrir le puits
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/297/">
+                          Le legacy phosphorus : le gisement enfoui sous nos fermes
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/302/">
+                          Les PFAS dans le sol agricole : des polluants éternels à tenir hors du cycle
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/306/">
+                          L&#39;adsorption : l&#39;interface où le sol retient — et relâche
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/307/">
+                          La biodisponibilité : un nutriment n&#39;existe que s&#39;il est accessible
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/311/">
+                          Oxydes de fer et d&#39;aluminium : les surfaces réactives du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/316/">
+                          Hydrophobie du sol (SWR) : quand le sol refuse l&#39;eau
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/318/">
+                          Films IRIS : cartographier les microzones réductrices du sol
+                        </a>
+                      </li><li>
+                        <a href="/Publications/liseuse/fiche/344/">
+                          La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </li><li class>
+        <a href="/Publications/liseuse/strate/V/">
+          <span class="sv-strate-badge sv-strate-V">V</span> Vivant
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/P/">
+          <span class="sv-strate-badge sv-strate-P">P</span> Pratiques
+        </a>
+        
+      </li><li class>
+        <a href="/Publications/liseuse/strate/H/">
+          <span class="sv-strate-badge sv-strate-H">H</span> Humain
+        </a>
+        
+      </li>
+  </ul>
+  <p class="sv-side-label">Outils</p>
+  <ul class="sv-side-tree">
+    <li><a href="/Publications/liseuse/fiches/">Sommaire — l'ouvrage</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les mots</a></li>
+    <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
+    <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
+    <li><a href="/Publications/liseuse/references/">Références — les sources</a></li>
+    <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
+  </ul>
+</nav>
+      <main class="sv-main" id="sv-main">
+        
+  <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
+    <a href="/Publications/liseuse/">Accueil</a>
+    <span aria-hidden="true">›</span>
+    <a href="/Publications/liseuse/strate/S/">Sol</a>
+    <span aria-hidden="true">›</span>
+    <a href="/Publications/liseuse/doc/S4/">S4</a><span aria-hidden="true">›</span>
+    <span aria-current="page">Fiche 4</span>
+  </nav>
+
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>Stœchiométrie CNPS de Kirkby et bilan AMG</h1>
+
+      <p class="sv-meta">
+          Aussi traitée dans : <a href="/Publications/liseuse/doc/S1/">S1</a> · <a href="/Publications/liseuse/doc/P1/">P1</a> · <a href="/Publications/liseuse/doc/P2/">P2</a>
+        </p>
+
+      <div class="sv-card" id="resume">
+          <h2>Résumé</h2>
+          <div class="sv-markdown"><p>La gestion moderne du carbone organique du sol repose sur le passage d'une vision quantitative (apports de biomasse brute) à une approche qualitative et prédictive, structurée autour de trois piliers fondamentaux : la <strong><span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> élémentaire</strong>, la <strong>dynamique microbienne</strong> et la <strong>modélisation cinétique</strong>.</p>
+</div>
+          
+        </div>
+
+      <section id="s0">
+          <h2>Introduction</h2>
+          <div class="sv-markdown"><p>Le stockage du carbone organique du sol s'est imposé comme un pilier des stratégies d'atténuation du changement climatique, tout en garantissant la résilience de la fertilité des sols (Chenu et al., 2022 ; Samson, 2021). Cependant, les recherches récentes soulignent que la séquestration durable ne peut être optimisée par le seul apport de biomasse ; elle est strictement conditionnée par la disponibilité de nutriments essentiels nécessaires à la stabilisation microbienne (Yousra et al., 2025).<br>
 La découverte majeure de Kirkby et ses collaborateurs, confirmée par des études récentes, établit que l'humus stable possède une signature élémentaire quasi-invariante : un ratio massique <strong>C:N:P:S de 10 000 : 833 : 200 : 143</strong> (Amin et al., 2023 ; Kirkby et al., 2016). Cette contrainte biologique implique que l'absence de l'un de ces éléments bloque la voie de la stabilisation (de la MO), conduisant les microorganismes à minéraliser l'excès de carbone sous forme de CO₂ plutôt qu'à le stabiliser (Buchkowski et al., 2019). L'alignement stœchiométrique des apports (par exemple, co-fertilisation NPS sur résidus de paille) permet de doubler l'efficience de cette stabilisation (Amin et al., 2023), passant de <strong>7 % à 15 %</strong> de carbone stabilisé (Kirkby et al., 2016).<br>
 Au cœur de ce processus, le paradigme moderne oppose deux fractions : la matière organique particulaire et la matière organique associée aux minéraux (Chang et al., 2023). Si la théorie classique de la « pompe microbienne » privilégiait la <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> microbienne comme source quasi exclusive de la MAOM, des modèles stœchiométriques récents suggèrent une contribution plus équilibrée, avec <strong>53 % à 66 %</strong> de la fraction stable issue directement de résidus végétaux et <strong>34 % à 47 %</strong> d'origine microbienne (Chang et al., 2023). Ces découvertes renforcent l'importance de la qualité chimique des apports (fraction soluble, lignine) en complément de l'équilibre nutritif (Kyker-Snowman et al., 2020 ; Chang et al., 2024).<br>
 Pour piloter ces dynamiques à l'échelle de l'exploitation, le modèle <strong>AMG</strong> se distingue par sa robustesse. Calibré sur des essais de longue durée, il sépare le COS en trois compartiments (frais, actif, stable) et permet de prédire les stocks avec une précision remarquable (marge d'erreur d'environ <strong>3 t C/ha sur 30 ans</strong>) (Levavasseur et al., 2022). Dans les systèmes de grandes cultures, le modèle considère par défaut qu'environ <strong>65 %</strong> du carbone initial appartient à la fraction stable, le reste étant piloté par les pratiques de gestion (cultures intermédiaires, amendements, biogaz) (Levavasseur et al., 2022).<br>
 Cette fiche technique articule ces trois cadres — la stœchiométrie de Kirkby, les voies de formation MAOM/POM et la modélisation AMG — pour proposer des leviers opérationnels permettant d'optimiser le bilan humique (terme du modèle AMG : bilan des flux et stocks de carbone organique du sol) et la santé globale des agroécosystèmes.</p>
-</div></section><section id="s1"><h2>La formule de Kirkby — stœchiométrie CNPS de l&#39;humus stable</h2><div class="sv-markdown"><p>La recherche contemporaine confirme que la stabilisation du carbone organique du sol est intrinsèquement liée à un équilibre précis entre le carbone et les nutriments essentiels. La &quot;formule de Kirkby&quot; définit la signature élémentaire de l'humus stable avec un ratio massique cible de <strong>10 000 : 833 : 200 : 143 (C:N:P:S)</strong> (Yousra et al., 2025). Ce ratio, une fois normalisé, sert de cadre de référence opérationnel avec des rapports <strong>C:N ≈ 12</strong>, <strong>C:P ≈ 50</strong> et <strong>C:S ≈ 70</strong> (Yousra et al., 2025).</p>
-</div><div id="s1-1"><h3>Preuves récentes et efficacité mesurée (2023-2025)</h3><div class="sv-markdown"><p>Les travaux les plus récents démontrent que le respect de cette <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> transforme radicalement le devenir des résidus de culture :</p>
+</div>
+          
+        </section><section id="s1">
+          <h2>La formule de Kirkby — stœchiométrie CNPS de l&#39;humus stable</h2>
+          <div class="sv-markdown"><p>La recherche contemporaine confirme que la stabilisation du carbone organique du sol est intrinsèquement liée à un équilibre précis entre le carbone et les nutriments essentiels. La &quot;formule de Kirkby&quot; définit la signature élémentaire de l'humus stable avec un ratio massique cible de <strong>10 000 : 833 : 200 : 143 (C:N:P:S)</strong> (Yousra et al., 2025). Ce ratio, une fois normalisé, sert de cadre de référence opérationnel avec des rapports <strong>C:N ≈ 12</strong>, <strong>C:P ≈ 50</strong> et <strong>C:S ≈ 70</strong> (Yousra et al., 2025).</p>
+</div>
+          <div id="s1-1">
+              <h3>Preuves récentes et efficacité mesurée (2023-2025)</h3>
+              <div class="sv-markdown"><p>Les travaux les plus récents démontrent que le respect de cette <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> transforme radicalement le devenir des résidus de culture :</p>
 <ul>
 <li><strong>Réduction des pertes gazeuses</strong> : L'alignement des apports organiques (comme les pailles de blé ou de maïs) sur le ratio de la MO stabilisée réduit l'efflux de CO₂ de <strong>33 % à 39 %</strong> par rapport à un apport de paille seule (Yousra et al., 2025).</li>
 <li><strong>Gain de stabilisation</strong> : En complétant les résidus avec des nutriments inorganiques (N, P, S) pour atteindre 30 % du ratio cible de la MO stabilisée, on observe une augmentation de la stabilisation du COS de <strong>11 % à 25 %</strong> (Yousra et al., 2025).</li>
 <li><strong>Contrainte microbienne</strong> : Ce processus est dicté par l'homéostasie microbienne. Si, en effet, les nutriments manquent, les microorganismes minéralisent le carbone pour extraire l'azote ou le phosphore du sol, au lieu de construire de nouveaux composés organiques stabilisés (Ge et al., 2020).</li>
 </ul>
-</div></div><div id="s1-2"><h3>Vers un pilotage par les flux élémentaires</h3><div class="sv-markdown"><p>Le paradigme actuel évolue d'une gestion centrée sur la seule biomasse vers un pilotage par la <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> des ressources&quot;(Luo et al., 2025).</p>
+</div>
+            </div><div id="s1-2">
+              <h3>Vers un pilotage par les flux élémentaires</h3>
+              <div class="sv-markdown"><p>Le paradigme actuel évolue d'une gestion centrée sur la seule biomasse vers un pilotage par la <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> des ressources&quot;(Luo et al., 2025).</p>
 <ul>
 <li><strong>Le coût de la séquestration</strong> : Des études de 2023 soulignent l'importance de la stœchiométrie des nutriments et le rôle clé de la matière organique du sol dans sa fertilité et sa fonctionnalité (Kirkegaard et al., 2023).</li>
 <li><strong>Divergence des écosystèmes</strong> : Contrairement aux écosystèmes naturels, les agroécosystèmes présentent des dynamiques élémentaires très variables, rendant l'ajustement local de la stœchiométrie indispensable pour optimiser la formation de la matière organique associée aux minéraux (Luo et al., 2025).<br>
 En résumé, l'application de la formule de Kirkby ne constitue plus seulement une théorie académique, mais un levier agronomique mesurable : l'apport combiné de paille et de nutriments (N, P, S) permet de doubler l'efficience de la stabilisation (de la MO), limitant ainsi le gaspillage de carbone par la respiration microbienne.</li>
 </ul>
-</div></div><div id="s1-3"><h3>Le verrou stœchiométrique</h3><div class="sv-markdown"><p>La stabilisation durable du carbone sous forme de MO stabilisée n'est possible que si les ressources en azote, phosphore et soufre sont disponibles dans un ratio massique précis de <strong>10 000 : 833 : 200 : 143</strong> (Amin et al., 2023). L'ajustement des apports sur cette cible permet de réduire les pertes gazeuses de CO₂ de <strong>33 % à 39 %</strong> et d'augmenter l'efficience de la stabilisation de <strong>11 % à 25 %</strong> (Yousra et al., 2025). Ce pilotage par les flux nutritifs génère des gains de rendement mesurables, atteignant <strong>+8 % pour le maïs</strong> et jusqu'à <strong>+17 % pour le blé</strong> (Yousra et al., 2024).</p>
-</div></div></section><section id="s2"><h2>Rôle dans la stabilisation : voie microbienne MAOM</h2><div class="sv-markdown"><p>La stabilisation durable du carbone repose sur la transition de la matière organique particulaire vers la matière organique associée aux minéraux, un processus piloté par la <strong>Pompe Microbienne à Carbone</strong> (Zhu et al., 2020). Ce mécanisme transforme les intrants végétaux labiles en biomasse, puis en <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> microbienne (fragments de parois, protéines, sucres aminés), laquelle est piégée par les surfaces minérales dans un processus qualifié d'« effet d'ensevelissement » (entombing effect) (Kästner et al., 2021).</p>
-</div><div id="s2-1"><h3>Efficience microbienne et couplage stœchiométrique</h3><div class="sv-markdown"><p>Les recherches récentes démontrent que la formation de la MAOM ne dépend pas seulement de la quantité de carbone, mais de l'<strong>efficience de l'utilisation du carbone</strong> par les microorganismes (Yang et al., 2025).</p>
+</div>
+            </div><div id="s1-3">
+              <h3>Le verrou stœchiométrique</h3>
+              <div class="sv-markdown"><p>La stabilisation durable du carbone sous forme de MO stabilisée n'est possible que si les ressources en azote, phosphore et soufre sont disponibles dans un ratio massique précis de <strong>10 000 : 833 : 200 : 143</strong> (Amin et al., 2023). L'ajustement des apports sur cette cible permet de réduire les pertes gazeuses de CO₂ de <strong>33 % à 39 %</strong> et d'augmenter l'efficience de la stabilisation de <strong>11 % à 25 %</strong> (Yousra et al., 2025). Ce pilotage par les flux nutritifs génère des gains de rendement mesurables, atteignant <strong>+8 % pour le maïs</strong> et jusqu'à <strong>+17 % pour le blé</strong> (Yousra et al., 2024).</p>
+</div>
+            </div>
+        </section><section id="s2">
+          <h2>Rôle dans la stabilisation : voie microbienne MAOM</h2>
+          <div class="sv-markdown"><p>La stabilisation durable du carbone repose sur la transition de la matière organique particulaire vers la matière organique associée aux minéraux, un processus piloté par la <strong>Pompe Microbienne à Carbone</strong> (Zhu et al., 2020). Ce mécanisme transforme les intrants végétaux labiles en biomasse, puis en <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> microbienne (fragments de parois, protéines, sucres aminés), laquelle est piégée par les surfaces minérales dans un processus qualifié d'« effet d'ensevelissement » (entombing effect) (Kästner et al., 2021).</p>
+</div>
+          <div id="s2-1">
+              <h3>Efficience microbienne et couplage stœchiométrique</h3>
+              <div class="sv-markdown"><p>Les recherches récentes démontrent que la formation de la MAOM ne dépend pas seulement de la quantité de carbone, mais de l'<strong>efficience de l'utilisation du carbone</strong> par les microorganismes (Yang et al., 2025).</p>
 <ul>
 <li><strong>Contrainte nutritive</strong> : L'accumulation la plus forte de MAOM se produit lorsque les déséquilibres stœchiométriques en azote (N) et phosphore (P) sont minimisés (Mao et al., 2024). Une limitation faible en N et P favorise les stratégies microbiennes de type « copiotrophes » (r-stratèges), qui augmentent la production de <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> stable au détriment de la respiration de CO₂ (Yang et al., 2024).</li>
 <li><strong>Couplage MCP-MnCP</strong> (pompe microbienne du carbone — pompe microbienne manganèse-carbone) : L'efficacité de la stabilisation est maximale lors du couplage entre la pompe microbienne et la pompe minérale ; le phosphore total du sol apparaît comme un facteur clé améliorant l'efficacité de la MCP, tandis que le potassium influence la MnCP (Li et al., 2025).</li>
 </ul>
-</div></div><div id="s2-2"><h3>Réévaluation des sources : l&#39;équilibre plante-microbe</h3><div class="sv-markdown"><p>Alors que la théorie classique attribuait la quasi-totalité de la MAOM à l'origine microbienne, des études stœchiométriques de 2023-2024 nuancent ce paradigme :</p>
+</div>
+            </div><div id="s2-2">
+              <h3>Réévaluation des sources : l&#39;équilibre plante-microbe</h3>
+              <div class="sv-markdown"><p>Alors que la théorie classique attribuait la quasi-totalité de la MAOM à l'origine microbienne, des études stœchiométriques de 2023-2024 nuancent ce paradigme :</p>
 <ul>
 <li><strong>Contribution mixte</strong> : Les modèles de mélange isotopique suggèrent que la MAOM est composée de <strong>34 % à 47 %</strong> d'intrants microbiens et de <strong>53 % à 66 %</strong> de résidus végétaux directs (notamment par les exsudats racinaires et la fraction dissoute) (Chang et al., 2023).</li>
 <li><strong>Vitesse de renouvellement</strong> : Bien que riche en azote, la MAOM d'origine microbienne peut se décomposer plus rapidement que prévu (renouvellement en quelques décennies) si elle est liée par des interactions organo-organiques plutôt que par une sorption minérale directe (Jia et al., 2025).</li>
 </ul>
-</div></div><div id="s2-3"><h3>Déterminants minéralogiques et régulation biologique</h3><div class="sv-markdown"><p>La capacité du sol à « fixer » cette <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> dépend de sa texture et de sa minéralogie :</p>
+</div>
+            </div><div id="s2-3">
+              <h3>Déterminants minéralogiques et régulation biologique</h3>
+              <div class="sv-markdown"><p>La capacité du sol à « fixer » cette <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> dépend de sa texture et de sa minéralogie :</p>
 <ul>
 <li><strong>Rôle des oxydes de fer</strong> : La fraction « légère » de la MAOM, riche en oxydes de fer peu cristallins, peut séquestrer jusqu'à <strong>4,3 fois plus</strong> de carbone microbien que les fractions dominées par les phyllosilicates (argiles classiques) (Zhao et al., 2025).</li>
 <li><strong>Surface spécifique</strong> : Les taux d'accumulation du carbone et de l'azote issus de la nécromasse sont positivement corrélés à la surface spécifique des minéraux argileux (Wang et al., 2024).</li>
 <li><strong>Régulation virale</strong> : Des recherches indiquent que les virus du sol régulent l'efficacité de la MCP en modifiant le ratio biomasse/nécromasse par lyse cellulaire, influençant indirectement le stock de carbone stable (Li et al., 2025).<br>
 En conclusion, la voie microbienne MAOM n'est pas un simple réservoir passif mais un compartiment dynamique dont l'optimisation exige un pilotage précis des apports nutritifs (N, P, S) pour maximiser le rendement de la « pompe » tout en saturant les sites de protection minéraux.</li>
 </ul>
-</div></div><div id="s2-4"><h3>La voie MAOM et l&#39;efficience microbienne</h3><div class="sv-markdown"><p>Le stockage à long terme s'opère majoritairement dans la fraction de la matière organique associée aux minéraux (Wu et al., 2023). Contrairement aux théories anciennes, les recherches révèlent que cette fraction stable est issue à la fois de la <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> microbienne (<strong>34-47 %</strong>) et directement de résidus végétaux (<strong>53-66 %</strong>). L'optimisation de la « Pompe Microbienne » via un équilibre nutritif adéquat favorise l'accumulation de carbone dans les sites de protection minéraux, particulièrement sur les oxydes de fer et les argiles à forte surface spécifique (Wu et al., 2023).</p>
-</div></div></section><section id="s3"><h2>Le compartiment stable et la fraction inerte du modèle AMG</h2><div class="sv-markdown"><p>Le modèle AMG s’est imposé comme l’outil de référence pour piloter le bilan humique en France grâce à sa structure simplifiée et sa précision opérationnelle (Levavasseur et al., 2022). AMG repose sur une cinétique à trois compartiments : le carbone frais (C_fresh_), le carbone actif (C_active_) et le <span class="sv-cite" tabindex="0">carbone stable<span class="sv-cite-tip" role="tooltip">Fraction du carbone organique protégée physiquement ou chimiquement (souvent associée aux minéraux du sous-sol), présentant un temps de résidence de plusieurs siècles à millénaires (Sierra et al., 2024). La stabilisation de ce carbone est un enjeu majeur pour l'atténuation du changement climatique par séquestration durable dans les horizons profonds du sol (Sierra et al., 2024) <a href="/terme/517/">→ Vocabulaire</a></span></span> (C_stable_) (Levavasseur et al., 2022).</p>
-</div><div id="s3-1"><h3>Architecture et partitionnement par défaut</h3><div class="sv-markdown"><p>La force du modèle réside dans sa gestion du compartiment stable, considéré comme inerte à l'échelle des simulations (30 à 50 ans) (Levavasseur et al., 2022).</p>
+</div>
+            </div><div id="s2-4">
+              <h3>La voie MAOM et l&#39;efficience microbienne</h3>
+              <div class="sv-markdown"><p>Le stockage à long terme s'opère majoritairement dans la fraction de la matière organique associée aux minéraux (Wu et al., 2023). Contrairement aux théories anciennes, les recherches révèlent que cette fraction stable est issue à la fois de la <span class="sv-cite" tabindex="0">nécromasse<span class="sv-cite-tip" role="tooltip">Ensemble des résidus d'organismes morts (plantes, animaux, micro-organismes) présents dans un écosystème. La nécromasse microbienne (notamment fongique) constitue une proportion significative de la matière organique du sol (jusqu'à 62 %) et joue un rôle prépondérant dans la stabilisation du carbone et le recyclage des nutriments (Kästner et al., 2021; Le Carbone Au Cœur Du Fonctionnement Microbien Des Sols : Comprendre et Piloter Les Interactions MOS-Communautés Microbiennes Pour Renforcer La Disponibilité et l’efficience d’utilisation Des Éléments Minéraux (N et S) Dans Les Agroécosystèmes, 2020; Louis, 2016) <a href="/terme/1209/">→ Vocabulaire</a></span></span> microbienne (<strong>34-47 %</strong>) et directement de résidus végétaux (<strong>53-66 %</strong>). L'optimisation de la « Pompe Microbienne » via un équilibre nutritif adéquat favorise l'accumulation de carbone dans les sites de protection minéraux, particulièrement sur les oxydes de fer et les argiles à forte surface spécifique (Wu et al., 2023).</p>
+</div>
+            </div>
+        </section><section id="s3">
+          <h2>Le compartiment stable et la fraction inerte du modèle AMG</h2>
+          <div class="sv-markdown"><p>Le modèle AMG s’est imposé comme l’outil de référence pour piloter le bilan humique en France grâce à sa structure simplifiée et sa précision opérationnelle (Levavasseur et al., 2022). AMG repose sur une cinétique à trois compartiments : le carbone frais (C_fresh_), le carbone actif (C_active_) et le <span class="sv-cite" tabindex="0">carbone stable<span class="sv-cite-tip" role="tooltip">Fraction du carbone organique protégée physiquement ou chimiquement (souvent associée aux minéraux du sous-sol), présentant un temps de résidence de plusieurs siècles à millénaires (Sierra et al., 2024). La stabilisation de ce carbone est un enjeu majeur pour l'atténuation du changement climatique par séquestration durable dans les horizons profonds du sol (Sierra et al., 2024) <a href="/terme/517/">→ Vocabulaire</a></span></span> (C_stable_) (Levavasseur et al., 2022).</p>
+</div>
+          <div id="s3-1">
+              <h3>Architecture et partitionnement par défaut</h3>
+              <div class="sv-markdown"><p>La force du modèle réside dans sa gestion du compartiment stable, considéré comme inerte à l'échelle des simulations (30 à 50 ans) (Levavasseur et al., 2022).</p>
 <ul>
 <li><strong>La règle des 65 %</strong> : Pour les parcelles ayant un long historique de grandes cultures sans apports massifs récents de produits résiduaires organiques, le modèle est initialisé par défaut avec <strong>65 % du stock de carbone initial</strong> affecté au compartiment stable (Levavasseur et al., 2022).</li>
 <li><strong>Le carbone actif</strong> : Les 35 % restants constituent le réservoir minéralisable, dont la dégradation suit une cinétique de premier ordre influencée par la température, l'humidité, la teneur en argile et le calcaire (Levavasseur et al., 2022).</li>
 </ul>
-</div></div><div id="s3-2"><h3>Innovations en initialisation : le couplage Rock-Eval®</h3><div class="sv-markdown"><p>L'un des défis majeurs identifiés en 2022 est l'incertitude liée à l'initialisation manuelle de ces compartiments (Bruni et al., 2022). Une avancée majeure permet désormais de s'affranchir des valeurs par défaut :</p>
+</div>
+            </div><div id="s3-2">
+              <h3>Innovations en initialisation : le couplage Rock-Eval®</h3>
+              <div class="sv-markdown"><p>L'un des défis majeurs identifiés en 2022 est l'incertitude liée à l'initialisation manuelle de ces compartiments (Bruni et al., 2022). Une avancée majeure permet désormais de s'affranchir des valeurs par défaut :</p>
 <ul>
 <li><strong>Méthode <span class="sv-cite" tabindex="0">PARTYSOC<span class="sv-cite-tip" role="tooltip">Modèle de partitionnement du carbone organique du sol basé sur l'apprentissage automatique (machine-learning) et l'analyse thermique Rock-Eval®. Il permet de quantifier les fractions de carbone &quot;centennalement stables&quot; (stabilité géochimique) et &quot;actives&quot; (disponibilité biologique) sans nécessiter de fractionnement physique fastidieux (Cécillon et al., 2021; Delahaie et al., 2024; Kanari et al., 2022) <a href="/terme/2035/">→ Vocabulaire</a></span></span></strong> : L'utilisation de l'analyse thermique <strong>Rock-Eval®</strong> couplée à l'apprentissage automatique (machine learning (apprentissage automatique)) permet de mesurer directement la proportion de carbone stable et actif d'un échantillon (Kanari et al., 2022).</li>
 <li><strong>Gain de précision</strong> : Ce partitionnement &quot;mesuré&quot; plutôt qu'estimé améliore significativement la fidélité des prédictions du modèle AMG, particulièrement lors de la reproduction des dynamiques observées dans les réseaux d'essais de longue durée (Kanari et al., 2022).</li>
 </ul>
-</div></div><div id="s3-3"><h3>Validation et limites de fiabilité</h3><div class="sv-markdown"><p>Les performances du modèle ont été rigoureusement validées sur une multitude de sites expérimentaux (Levavasseur et al., 2022) :</p>
+</div>
+            </div><div id="s3-3">
+              <h3>Validation et limites de fiabilité</h3>
+              <div class="sv-markdown"><p>Les performances du modèle ont été rigoureusement validées sur une multitude de sites expérimentaux (Levavasseur et al., 2022) :</p>
 <ul>
 <li><strong>Marge d'<span class="sv-cite" tabindex="0">erreur<span class="sv-cite-tip" role="tooltip">Écart entre une valeur mesurée, estimée ou modélisée et la valeur réelle supposée, constituant l'une des composantes fondamentales de l'incertitude avec le biais systématique ; en science du sol, les erreurs peuvent provenir de l'échantillonnage, de la mesure instrumentale, de la calibration ou de la modélisation numérique. <a href="/terme/6766/">→ Vocabulaire</a></span></span></strong> : L'erreur de simulation moyenne de la version AMGv2 est estimée à environ <strong>3 t C/ha</strong>, ce qui est comparable à l'écart-type des mesures directes effectuées sur le terrain (Levavasseur et al., 2022).</li>
 <li><strong>Robustesse</strong> : Le modèle a démontré sa capacité à simuler avec précision le stockage après l'apport de matières organiques exogènes (Levavasseur et al., 2022).</li>
 <li><strong>Incertitude</strong> : Malgré sa fiabilité, la définition de la fraction &quot;inerte&quot; contribue à l'incertitude dans les prévisions à long terme (objectifs &quot;4 pour 1000&quot;), soulignant l'importance d'un échantillonnage rigoureux au démarrage du diagnostic (Bruni et al., 2022).<br>
 En résumé, le modèle AMG transforme le concept théorique de stœchiométrie de Kirkby en un outil de calcul robuste où le compartiment stable sert de socle de la fertilité physique, tandis que le compartiment actif régule les flux nutritifs.</li>
 </ul>
-</div></div><div id="s3-4"><h3>Pilotage opérationnel par le modèle AMG</h3><div class="sv-markdown"><p>Le modèle <strong>AMG</strong> constitue l'outil de référence pour simuler ces dynamiques à l'échelle de l'exploitation. Il se distingue par :</p>
+</div>
+            </div><div id="s3-4">
+              <h3>Pilotage opérationnel par le modèle AMG</h3>
+              <div class="sv-markdown"><p>Le modèle <strong>AMG</strong> constitue l'outil de référence pour simuler ces dynamiques à l'échelle de l'exploitation. Il se distingue par :</p>
 <ul>
 <li><strong>Précision</strong> : Une marge d'<span class="sv-cite" tabindex="0">erreur<span class="sv-cite-tip" role="tooltip">Écart entre une valeur mesurée, estimée ou modélisée et la valeur réelle supposée, constituant l'une des composantes fondamentales de l'incertitude avec le biais systématique ; en science du sol, les erreurs peuvent provenir de l'échantillonnage, de la mesure instrumentale, de la calibration ou de la modélisation numérique. <a href="/terme/6766/">→ Vocabulaire</a></span></span> moyenne sur 30 cm (Martín et al., 2022).</li>
 <li><strong>Innovation</strong> : La possibilité d'initialiser les compartiments actifs et stables par analyse thermique <strong>Rock-Eval®</strong> (méthode PARTYSOC), augmentant la fiabilité des prédictions locales (Kanari et al., 2022).</li>
 <li><strong>Sélectivité</strong> : L'utilisation de coefficients d'humification (k₁ — nom du paramètre du modèle AMG : fraction du carbone entrant convertie en carbone stable) pour privilégier les produits à haut potentiel de stabilisation, comme les composts et les digestats stabilisés (Levavasseur &amp; Houot, 2019).</li>
 </ul>
-</div></div></section><section id="s4"><h2>Efficacité agronomique mesurée et leviers d&#39;optimisation</h2><div class="sv-markdown"><p>L'adoption de pratiques de stockage du carbone n'est pas seulement une mesure environnementale, mais un levier direct de performance agronomique. Les recherches de 2024-2025 suggèrent que l'optimisation de la séquestration via la <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> C:N:P:S génère des gains de productivité quantifiables (Yousra et al., 2024).</p>
-</div><div id="s4-1"><h3>Gains de rendement et fertilité chimique</h3><div class="sv-markdown"><p>L'alignement des apports sur les besoins de la stabilisation (ratio C:N:P:S) améliore la biodisponibilité des nutriments et la structure du sol :</p>
+</div>
+            </div>
+        </section><section id="s4">
+          <h2>Efficacité agronomique mesurée et leviers d&#39;optimisation</h2>
+          <div class="sv-markdown"><p>L'adoption de pratiques de stockage du carbone n'est pas seulement une mesure environnementale, mais un levier direct de performance agronomique. Les recherches de 2024-2025 suggèrent que l'optimisation de la séquestration via la <span class="sv-cite" tabindex="0">stœchiométrie<span class="sv-cite-tip" role="tooltip">Étude de l'équilibre des éléments chimiques (principalement C, N, P) au sein des organismes et des écosystèmes en relation avec la disponibilité des ressources dans l'environnement (Taddei &amp; Fallot, 2023). Dans les sols, les microorganismes tendent vers une homéostasie stœchiométrique, maintenant un rapport C:N:P relativement constant (moyenne globale microbienne de 60:7:1) malgré les fluctuations du milieu (Taddei &amp; Fallot, 2023). Les écarts entre les ratios des ressources et ceux de la biomasse microbienne régissent l'efficience d'utilisation des nutriments et les cycles biogéochimiques (Taddei &amp; Fallot, 2023). <a href="/terme/4858/">→ Vocabulaire</a></span></span> C:N:P:S génère des gains de productivité quantifiables (Yousra et al., 2024).</p>
+</div>
+          <div id="s4-1">
+              <h3>Gains de rendement et fertilité chimique</h3>
+              <div class="sv-markdown"><p>L'alignement des apports sur les besoins de la stabilisation (ratio C:N:P:S) améliore la biodisponibilité des nutriments et la structure du sol :</p>
 <ul>
 <li><strong>Performance des cultures</strong> : L'application de produits humiques (produits commerciaux à base d'extraits alcalins — acides humiques/fulviques du commerce) sur le maïs a montré des augmentations de rendement allant de <strong>7 % à 19 %</strong> dans certaines conditions (Olk et al., 2021).</li>
 <li><strong>Efficience de séquestration</strong> : L'application de paille de maïs et de blé avec des nutriments supplémentaires pour atteindre 30 % du ratio C:N:P:S de la MO stabilisée a entraîné une stabilisation de 11 à 25% de COS en plus par rapport à la seule application de paille (Yousra et al., 2025).</li>
 <li><strong>Synthèse mondiale</strong> : À l'échelle mondiale, l'intégration de résidus de culture, associée à l'application d'engrais inorganiques, a entraîné une augmentation des rendements céréaliers de <strong>6,12 % à 8,64 %</strong>, atténuant ainsi la limitation en carbone (Liu et al., 2023).</li>
 </ul>
-</div></div><div id="s4-2"><h3>Leviers d&#39;optimisation et gestion des résidus</h3><div class="sv-markdown"><p>Le succès de la séquestration repose sur une gestion différenciée des leviers techniques :</p>
+</div>
+            </div><div id="s4-2">
+              <h3>Leviers d&#39;optimisation et gestion des résidus</h3>
+              <div class="sv-markdown"><p>Le succès de la séquestration repose sur une gestion différenciée des leviers techniques :</p>
 <ul>
 <li><strong>Le dilemme des résidus</strong> : L'exportation totale des pailles pour la bioéconomie (énergie, matériaux) peut être compensé par le retour au sol de coproduits plus récalcitrants. L'apport de <strong>biochar (pyrolyse)</strong> peut augmenter le stock de COS jusqu'à 127% et même doubler les niveaux de carbone dans le sol à long terme tout en permettant une récolte complète des résidus (Bo et al., 2023 ; Díaz et al., 2022).</li>
 <li><strong>Cultures intermédiaires et amendements</strong> : L'usage de digestats de méthanisation montre des résultats contrastés, avec des augmentations de COS dans seulement 50 % des cas étudiés en France, soulignant l'importance d'un pilotage précis par le <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span> (Díaz et al., 2022).</li>
 <li><strong>Ciblage pédoclimatique</strong> : L'efficacité des leviers est accrue dans les sols à <strong>forte teneur en argile</strong>, où la rétention des résidus de culture favorise l'augmentation du COS (Quijano et al., 2024).</li>
 </ul>
-</div></div><div id="s4-3"><h3>Rentabilité et durabilité</h3><div class="sv-markdown"><p>Le coût de la séquestration (achat de nutriments supplémentaires N, P, S pour stabiliser le carbone) doit être mis en balance avec les bénéfices à long terme (Kirkegaard et al., 2023).</p>
+</div>
+            </div><div id="s4-3">
+              <h3>Rentabilité et durabilité</h3>
+              <div class="sv-markdown"><p>Le coût de la séquestration (achat de nutriments supplémentaires N, P, S pour stabiliser le carbone) doit être mis en balance avec les bénéfices à long terme (Kirkegaard et al., 2023).</p>
 <ul>
 <li><strong>Saturation</strong> : On observe que l'augmentation du ratio C:N (P) du sol et les gains de rendement associés tendent à plafonner après des années de pratiques constantes, suggérant la nécessité d'ajuster les stratégies au fil du temps pour maintenir l'équilibre stœchiométrique (Liu et al., 2023).</li>
 <li><strong>Résilience climatique</strong> : La stabilisation du carbone via ces leviers réduit l'impact des hausses de température qui accélèrent normalement la décomposition de la matière organique (Georgiou et al., 2024).<br>
 En conclusion, le levier le plus efficace pour optimiser la séquestration reste la co-application de résidus organiques et de nutriments minéraux ciblés, transformant le sol d'une source potentielle de CO₂ en un puits de carbone fertile et productif.</li>
 </ul>
-</div></div><div id="s4-4"><h3>Systèmes intégrés et perspectives</h3><div class="sv-markdown"><p>L'insertion de cultures intermédiaires, l'<span class="sv-cite" tabindex="0">agroforesterie<span class="sv-cite-tip" role="tooltip">Système de gestion des terres qui intègre délibérément des composantes ligneuses (arbres ou arbustes) dans les systèmes de production agricole ou pastorale (Lima et al., 2018). Elle exploite la complémentarité entre les espèces pour assurer des fonctions de production, de protection du sol et d'amélioration des microclimats, tout en renforçant la sécurité alimentaire par la diversification des strates cultivées (Pinto-Correia &amp; Bellon, 2019; Quevedo-Cascante et al., 2022) <a href="/terme/456/">→ Vocabulaire</a></span></span> et le recyclage des digestats forment des synergies robustes. Les systèmes agroforestiers permettent notamment une séquestration de carbone allant de <strong>1,4 à 2,2 Mg C/ha/an</strong> (Kim et al., 2022), tandis que les digestats de méthanisation offrent un carbone récalcitrant capable de stabiliser durablement le réservoir de MO active (Latorre et al., 2024).<br>
+</div>
+            </div><div id="s4-4">
+              <h3>Systèmes intégrés et perspectives</h3>
+              <div class="sv-markdown"><p>L'insertion de cultures intermédiaires, l'<span class="sv-cite" tabindex="0">agroforesterie<span class="sv-cite-tip" role="tooltip">Système de gestion des terres qui intègre délibérément des composantes ligneuses (arbres ou arbustes) dans les systèmes de production agricole ou pastorale (Lima et al., 2018). Elle exploite la complémentarité entre les espèces pour assurer des fonctions de production, de protection du sol et d'amélioration des microclimats, tout en renforçant la sécurité alimentaire par la diversification des strates cultivées (Pinto-Correia &amp; Bellon, 2019; Quevedo-Cascante et al., 2022) <a href="/terme/456/">→ Vocabulaire</a></span></span> et le recyclage des digestats forment des synergies robustes. Les systèmes agroforestiers permettent notamment une séquestration de carbone allant de <strong>1,4 à 2,2 Mg C/ha/an</strong> (Kim et al., 2022), tandis que les digestats de méthanisation offrent un carbone récalcitrant capable de stabiliser durablement le réservoir de MO active (Latorre et al., 2024).<br>
 En conclusion, l'optimisation du bilan humique exige une stratégie intégrée : <strong>restituer</strong> les résidus, <strong>équilibrer</strong> les nutriments selon la formule de Kirkby, et <strong>simuler</strong> les trajectoires via le modèle AMG pour garantir la résilience climatique et la productivité des agroécosystèmes.</p>
-</div></div></section><section id="s5"><h2>Privilégier les produits à haut coefficient d&#39;humification</h2><div class="sv-markdown"><p>Le succès d'une stratégie de stockage du carbone dépend moins de la quantité totale de biomasse apportée que de sa qualité biochimique, traduite dans le <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span> par le <strong>coefficient d'humification (k₁)</strong> (Bouthier et al., 2014). Ce paramètre représente la fraction du carbone entrant qui est effectivement convertie en carbone stabilisé (réservoir actif) plutôt que d'être minéralisée sous forme de CO₂ à court terme (Bouthier et al., 2014).</p>
-</div><div id="s5-1"><h3>Hiérarchie des amendements et potentiel de stockage</h3><div class="sv-markdown"><p>L'efficacité de la conversion du carbone frais en MO stabilisée varie considérablement selon le degré de transformation du produit (Pellerin et al., 2021) :</p>
+</div>
+            </div>
+        </section><section id="s5">
+          <h2>Privilégier les produits à haut coefficient d&#39;humification</h2>
+          <div class="sv-markdown"><p>Le succès d'une stratégie de stockage du carbone dépend moins de la quantité totale de biomasse apportée que de sa qualité biochimique, traduite dans le <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span> par le <strong>coefficient d'humification (k₁)</strong> (Bouthier et al., 2014). Ce paramètre représente la fraction du carbone entrant qui est effectivement convertie en carbone stabilisé (réservoir actif) plutôt que d'être minéralisée sous forme de CO₂ à court terme (Bouthier et al., 2014).</p>
+</div>
+          <div id="s5-1">
+              <h3>Hiérarchie des amendements et potentiel de stockage</h3>
+              <div class="sv-markdown"><p>L'efficacité de la conversion du carbone frais en MO stabilisée varie considérablement selon le degré de transformation du produit (Pellerin et al., 2021) :</p>
 <ul>
 <li><strong>Résidus de culture vs produits fermentés</strong> : L'incorporation de paille de maïs brute et de paille fermentée par des champignons spécifiques (ex. : Trichoderma reesei) augmente le contenu en substances humiques du sol, la paille fermentée entraînant une augmentation plus significative de certaines fractions humiques (Zhang et al., 2022).</li>
 <li><strong>Composts vs Digestats</strong> : Les composts, riches en molécules récalcitrantes (lignine, polymères organiques stabilisés), présentent une stabilité élevée. À l'inverse, les digestats bruts de méthanisation peuvent présenter une stabilité moindre si la phase de digestion a consommé les fractions carbonées facilement stabilisables ; leur compostage ultérieur est alors recommandé pour restaurer un potentiel élevé de stabilisation (Bayard &amp; Massardier-Nageotte, 2022 ; Kpemoua et al., 2022).</li>
 <li><strong>Le rôle de l'azote</strong> : La stabilité des amendements est inversement corrélée à leur respiration microbienne initiale. Les produits à rapport C:N élevé (comme les pailles) nécessitent souvent une co-fertilisation pour éviter que les microorganismes ne consomment la matière organique du sol pour trouver l'azote manquant (Mazuecos-Aguilera et al., 2024).</li>
 </ul>
-</div></div><div id="s5-2"><h3>L&#39;indicateur ISMO : un outil de pilotage précis</h3><div class="sv-markdown"><p>Pour affiner les prédictions du <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span>, la recherche française a développé l'<strong>Indicateur de Stabilité de la Matière Organique</strong>.</p>
+</div>
+            </div><div id="s5-2">
+              <h3>L&#39;indicateur ISMO : un outil de pilotage précis</h3>
+              <div class="sv-markdown"><p>Pour affiner les prédictions du <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span>, la recherche française a développé l'<strong>Indicateur de Stabilité de la Matière Organique</strong>.</p>
 <ul>
 <li>**Prédiction du **k₁ : L'ISMO permet de caractériser en laboratoire la valeur de k₁ pour une large gamme de produits résiduaires organiques sans attendre les résultats d'essais de longue durée au champ.</li>
 <li><strong>Variabilité biochimique</strong> : Cet indicateur met en évidence que la stabilisation dépend de la protection physico-chimique et physique des molécules. Un produit dont l'ISMO est élevé garantit qu'une proportion plus importante de carbone rejoindra le réservoir stable à long terme (Raclot, 2021 ; Zoghaib, 2021)</li>
 </ul>
-</div></div><div id="s5-3"><h3>Recommandations pratiques</h3><div class="sv-markdown"><p>Pour maximiser le <span class="sv-cite" tabindex="0">bilan humique<span class="sv-cite-tip" role="tooltip">Méthode de calcul permettant d'estimer l'évolution du stock de matière organique stable (humus) d'un sol en comparant les gains liés aux apports de matières organiques fraîches et les pertes dues à la minéralisation (Granger, 2012; Houot et al., 2014). Il s'appuie généralement sur l'équation de Hénin-Dupuis faisant intervenir le coefficient iso-humique (K₁) des apports et le coefficient de minéralisation (K₂) du sol (Caquelard, 2018; Recous et al., 2011) <a href="/terme/515/">→ Vocabulaire</a></span></span> à la parcelle, il est conseillé de :</p>
+</div>
+            </div><div id="s5-3">
+              <h3>Recommandations pratiques</h3>
+              <div class="sv-markdown"><p>Pour maximiser le <span class="sv-cite" tabindex="0">bilan humique<span class="sv-cite-tip" role="tooltip">Méthode de calcul permettant d'estimer l'évolution du stock de matière organique stable (humus) d'un sol en comparant les gains liés aux apports de matières organiques fraîches et les pertes dues à la minéralisation (Granger, 2012; Houot et al., 2014). Il s'appuie généralement sur l'équation de Hénin-Dupuis faisant intervenir le coefficient iso-humique (K₁) des apports et le coefficient de minéralisation (K₂) du sol (Caquelard, 2018; Recous et al., 2011) <a href="/terme/515/">→ Vocabulaire</a></span></span> à la parcelle, il est conseillé de :</p>
 <ul>
 <li>Privilégier les apports de <strong>fumiers compostés</strong> ou de composts de déchets verts pour leur effet structurant et leur haut coefficient d'humification (k₁) (Araujo, 2022 ; Faye et al., 2023).</li>
 <li>Utiliser les <strong>cultures intermédiaires</strong> (couverts végétaux) pour leur apport continu en carbone racinaire (Pellerin et al., 2021), car leur facteur de conversion en carbone stable dans le sol est plus élevé.</li>
 <li>Ajuster les doses d'apport en fonction de la <strong>texture du sol</strong> (teneur en argile), car la capacité de protection minérale peut saturer si les apports à haut coefficient d'humification (k₁) sont excessifs par rapport aux sites de liaison disponibles (Duddigan et al., 2022).<br>
 En résumé, le choix d'un produit à haut coefficient d'humification (k₁) permet d'optimiser l'efficacité du stockage : à apport de carbone égal, un compost bien mûri peut stocker deux à trois fois plus de carbone durable qu'un résidu de culture labile.</li>
 </ul>
-</div></div></section><section id="s6"><h2>Cultures intermédiaires, agroforesterie et systèmes biogaz</h2><div class="sv-markdown"><p>L’intensification des systèmes de culture par l’insertion de biomasse additionnelle et de structures pérennes constitue le levier le plus puissant pour augmenter les stocks de carbone organique du sol. Le <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span> permet aujourd’hui de quantifier précisément l’impact de ces changements systémiques.</p>
-</div><div id="s6-1"><h3>Cultures intermédiaires et CIVE : un apport massif de carbone</h3><div class="sv-markdown"><p>L'introduction de cultures intermédiaires (couverts végétaux) transforme le sol de &quot;nu&quot; à &quot;productif&quot; durant les périodes d'interculture, maximisant les entrées de carbone racinaire et aérien.</p>
+</div>
+            </div>
+        </section><section id="s6">
+          <h2>Cultures intermédiaires, agroforesterie et systèmes biogaz</h2>
+          <div class="sv-markdown"><p>L’intensification des systèmes de culture par l’insertion de biomasse additionnelle et de structures pérennes constitue le levier le plus puissant pour augmenter les stocks de carbone organique du sol. Le <span class="sv-cite" tabindex="0">modèle AMG<span class="sv-cite-tip" role="tooltip">Modèle de simulation du carbone organique du sol à pas de temps annuel, conçu pour prévoir l'évolution à long terme des stocks humiques selon les pratiques culturales et le climat (Autret, 2017; Bouthier et al., 2014). Il repose sur une structure simplifiée à trois compartiments : les résidus de culture, la matière organique active (décomposable) et la matière organique stable (inerte) (Bijon, 2022; Levavasseur et al., 2022) <a href="/terme/514/">→ Vocabulaire</a></span></span> permet aujourd’hui de quantifier précisément l’impact de ces changements systémiques.</p>
+</div>
+          <div id="s6-1">
+              <h3>Cultures intermédiaires et CIVE : un apport massif de carbone</h3>
+              <div class="sv-markdown"><p>L'introduction de cultures intermédiaires (couverts végétaux) transforme le sol de &quot;nu&quot; à &quot;productif&quot; durant les périodes d'interculture, maximisant les entrées de carbone racinaire et aérien.</p>
 <ul>
 <li><strong>CIVE et <span class="sv-cite" tabindex="0">biogaz<span class="sv-cite-tip" role="tooltip">Mélange gazeux, principalement composé de méthane (CH₄) et de dioxyde de carbone (CO₂), produit par la fermentation anaérobie de matières organiques (fumiers, lisiers, résidus de culture) (Ravard, 2014). La valorisation énergétique du biogaz permet de réduire la dépendance énergétique des exploitations agricoles et de stabiliser les effluents de l'élevage (Ravard, 2014) <a href="/terme/1167/">→ Vocabulaire</a></span></span></strong> : Les Cultures Intermédiaires à Vocation Énergétique produisent une biomasse significativement plus élevée (<strong>6,7 à 11,1 t MS/ha</strong>) (Carton et al., 2022). Malgré l'exportation de la biomasse pour la méthanisation, le retour du digestat au sol peut permettre une augmentation de la matière organique du sol (Sadet-Bourgeteau, 2021).</li>
 <li><strong>Potentiel de stockage</strong> : Une généralisation des cultures intermédiaires pourrait accroître les stocks de COS d'environ 3,8 MtCO₂/an en 2050 dans Climagri (Grimault et al., 2022). Pour la plantation de 75 arbres/ha sur des parcelles cultivées, un stockage de COS de 0,25 t C/ha/an est estimé (Pellerin et al., 2021).</li>
 </ul>
-</div></div><div id="s6-2"><h3>Agroforesterie : le stockage profond et pérenne</h3><div class="sv-markdown"><p>L'<span class="sv-cite" tabindex="0">agroforesterie<span class="sv-cite-tip" role="tooltip">Système de gestion des terres qui intègre délibérément des composantes ligneuses (arbres ou arbustes) dans les systèmes de production agricole ou pastorale (Lima et al., 2018). Elle exploite la complémentarité entre les espèces pour assurer des fonctions de production, de protection du sol et d'amélioration des microclimats, tout en renforçant la sécurité alimentaire par la diversification des strates cultivées (Pinto-Correia &amp; Bellon, 2019; Quevedo-Cascante et al., 2022) <a href="/terme/456/">→ Vocabulaire</a></span></span> (alignement d'arbres dans les parcelles) combine le stockage de carbone dans la biomasse ligneuse et dans le sol (Pellerin et al., 2021).</p>
+</div>
+            </div><div id="s6-2">
+              <h3>Agroforesterie : le stockage profond et pérenne</h3>
+              <div class="sv-markdown"><p>L'<span class="sv-cite" tabindex="0">agroforesterie<span class="sv-cite-tip" role="tooltip">Système de gestion des terres qui intègre délibérément des composantes ligneuses (arbres ou arbustes) dans les systèmes de production agricole ou pastorale (Lima et al., 2018). Elle exploite la complémentarité entre les espèces pour assurer des fonctions de production, de protection du sol et d'amélioration des microclimats, tout en renforçant la sécurité alimentaire par la diversification des strates cultivées (Pinto-Correia &amp; Bellon, 2019; Quevedo-Cascante et al., 2022) <a href="/terme/456/">→ Vocabulaire</a></span></span> (alignement d'arbres dans les parcelles) combine le stockage de carbone dans la biomasse ligneuse et dans le sol (Pellerin et al., 2021).</p>
 <ul>
 <li><strong>Taux de séquestration</strong> : Les méta-analyses récentes indiquent un potentiel de séquestration de carbone dans les systèmes agroforestiers qui varie considérablement selon le type d'agroforesterie, le climat et d'autres facteurs (Drexler et al., 2021). Globalement, les taux de séquestration du carbone organique du sol en agroforesterie ont été révélés varier de 1,4 à 2,2 Mg C ha−1 an−1 par des méta-analyses mondiales (Kim et al., 2022).</li>
 <li><strong>Synergie stœchiométrique</strong> : La diversité physico-chimique de la litière peut avoir un impact important sur la communauté microbienne lorsque des arbres aux traits différents cohabitent, et une plus grande diversité chimique des apports de litière entraîne une plus grande diversité d'enzymes produites et une probabilité accrue de l'effet d'amorçage (López-Marcos et al., 2024).</li>
 </ul>
-</div></div><div id="s6-3"><h3>Systèmes biogaz et digestats : vers une économie circulaire du carbone</h3><div class="sv-markdown"><p>L'intégration de la méthanisation modifie la nature du carbone retourné au sol, passant de résidus frais à des produits stabilisés (Sadet-Bourgeteau, 2021).</p>
+</div>
+            </div><div id="s6-3">
+              <h3>Systèmes biogaz et digestats : vers une économie circulaire du carbone</h3>
+              <div class="sv-markdown"><p>L'intégration de la méthanisation modifie la nature du carbone retourné au sol, passant de résidus frais à des produits stabilisés (Sadet-Bourgeteau, 2021).</p>
 <ul>
 <li><strong>Récalcitrance du <span class="sv-cite" tabindex="0">digestat<span class="sv-cite-tip" role="tooltip">Le digestat est le résidu organique issu du processus de méthanisation (digestion anaérobie) de biomasse ou de déchets (Sadet-Bourgeteau, 2021). Ce produit est riche en éléments minéraux (azote, phosphore, potassium) et en matière organique plus ou moins stabilisée, ce qui lui confère une valeur fertilisante et amendante pour les sols agricoles (Askri, 2015; Guilayn et al., 2017; Moletta-Denat et al., 2017) <a href="/terme/1097/">→ Vocabulaire</a></span></span></strong> : Le digestat issu de la méthanisation apporte un carbone hautement récalcitrant. Son application seule peut augmenter les stocks de COS par rapport à un système sans apport (Villarino et al., 2025).</li>
 <li><strong>Adaptation du modèle AMG</strong> : Le modèle AMG a été récemment adapté pour intégrer les coefficients de rétention spécifiques aux nouveaux produits de la bioéconomie (digestats, biochar, mélasses d'éthanol), permettant de simuler l'évolution du COS selon les scénarios de méthanisation (Díaz et al., 2022).</li>
 <li><strong>Avertissement sur l'effet &quot;amorçage&quot;</strong> : Des études récentes mettent en garde contre un possible &quot;effet d'amorçage&quot; où l'apport de carbone labile issu de certains couverts pourrait stimuler la minéralisation du carbone ancien. Ce phénomène souligne l'importance d'un suivi à long terme pour valider les gains réels de stockage (Chaplot &amp; Smith, 2023).<br>
 L'utilisation d'outils de simulation comme AMG est indispensable pour ajuster les pratiques aux objectifs de neutralité carbone (Díaz et al., 2022).</li>
 </ul>
-</div></div></section><nav class="sv-pager" aria-label="Lecture guidée"><a href="/Publications/liseuse/fiche/3/">← Microbiome du sol vivant et thermotolérance des plantes</a><a href="/Publications/liseuse/fiche/10/">Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote →</a></nav></article><nav class="sv-toc" aria-label="Sommaire de la fiche"><p class="sv-side-label">Sur cette page</p><a class="sv-navlist-item" href="#resume"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Résumé</span></a><a class="sv-navlist-item" href="#s0"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Introduction</span></a><a class="sv-navlist-item" href="#s1"><span class="sv-navlist-num">1</span><span class="sv-navlist-title">La formule de Kirkby — stœchiométrie CNPS de l&#39;humus stable</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s1-1"><span class="sv-navlist-num">1.1</span><span class="sv-navlist-title">Preuves récentes et efficacité mesurée (2023-2025)</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s1-2"><span class="sv-navlist-num">1.2</span><span class="sv-navlist-title">Vers un pilotage par les flux élémentaires</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s1-3"><span class="sv-navlist-num">1.3</span><span class="sv-navlist-title">Le verrou stœchiométrique</span></a><a class="sv-navlist-item" href="#s2"><span class="sv-navlist-num">2</span><span class="sv-navlist-title">Rôle dans la stabilisation : voie microbienne MAOM</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-1"><span class="sv-navlist-num">2.1</span><span class="sv-navlist-title">Efficience microbienne et couplage stœchiométrique</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-2"><span class="sv-navlist-num">2.2</span><span class="sv-navlist-title">Réévaluation des sources : l&#39;équilibre plante-microbe</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-3"><span class="sv-navlist-num">2.3</span><span class="sv-navlist-title">Déterminants minéralogiques et régulation biologique</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s2-4"><span class="sv-navlist-num">2.4</span><span class="sv-navlist-title">La voie MAOM et l&#39;efficience microbienne</span></a><a class="sv-navlist-item" href="#s3"><span class="sv-navlist-num">3</span><span class="sv-navlist-title">Le compartiment stable et la fraction inerte du modèle AMG</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-1"><span class="sv-navlist-num">3.1</span><span class="sv-navlist-title">Architecture et partitionnement par défaut</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-2"><span class="sv-navlist-num">3.2</span><span class="sv-navlist-title">Innovations en initialisation : le couplage Rock-Eval®</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-3"><span class="sv-navlist-num">3.3</span><span class="sv-navlist-title">Validation et limites de fiabilité</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s3-4"><span class="sv-navlist-num">3.4</span><span class="sv-navlist-title">Pilotage opérationnel par le modèle AMG</span></a><a class="sv-navlist-item" href="#s4"><span class="sv-navlist-num">4</span><span class="sv-navlist-title">Efficacité agronomique mesurée et leviers d&#39;optimisation</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-1"><span class="sv-navlist-num">4.1</span><span class="sv-navlist-title">Gains de rendement et fertilité chimique</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-2"><span class="sv-navlist-num">4.2</span><span class="sv-navlist-title">Leviers d&#39;optimisation et gestion des résidus</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-3"><span class="sv-navlist-num">4.3</span><span class="sv-navlist-title">Rentabilité et durabilité</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s4-4"><span class="sv-navlist-num">4.4</span><span class="sv-navlist-title">Systèmes intégrés et perspectives</span></a><a class="sv-navlist-item" href="#s5"><span class="sv-navlist-num">5</span><span class="sv-navlist-title">Privilégier les produits à haut coefficient d&#39;humification</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s5-1"><span class="sv-navlist-num">5.1</span><span class="sv-navlist-title">Hiérarchie des amendements et potentiel de stockage</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s5-2"><span class="sv-navlist-num">5.2</span><span class="sv-navlist-title">L&#39;indicateur ISMO : un outil de pilotage précis</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s5-3"><span class="sv-navlist-num">5.3</span><span class="sv-navlist-title">Recommandations pratiques</span></a><a class="sv-navlist-item" href="#s6"><span class="sv-navlist-num">6</span><span class="sv-navlist-title">Cultures intermédiaires, agroforesterie et systèmes biogaz</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s6-1"><span class="sv-navlist-num">6.1</span><span class="sv-navlist-title">Cultures intermédiaires et CIVE : un apport massif de carbone</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s6-2"><span class="sv-navlist-num">6.2</span><span class="sv-navlist-title">Agroforesterie : le stockage profond et pérenne</span></a><a class="sv-navlist-item sv-navlist-sub" href="#s6-3"><span class="sv-navlist-num">6.3</span><span class="sv-navlist-title">Systèmes biogaz et digestats : vers une économie circulaire du carbone</span></a><astro-island uid="Z1ss97e" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.C3E-2e-z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;kind&quot;:[0,&quot;fiche&quot;],&quot;id&quot;:[0,&quot;4&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" style="border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:999px;padding:0.35rem 0.85rem;cursor:pointer;font-size:0.85rem" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island></nav></div><p class="sv-meta">📚 <a href="/Publications/liseuse/references/?f=4">Références académiques (64) → consulter</a></p><aside class="sv-card"><h2>Cards liées</h2><ul><li><a href="/Publications/liseuse/card/45/">Stœchiométrie CNPS et modèle AMG</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/31/">Azote (formes, pertes) → stœchiométrie → stratégies microbiennes</a> <span class="sv-meta">(reference)</span></li><li><a href="/Publications/liseuse/card/40/">Sol ‘inerte’ / faible activité apparente</a> <span class="sv-meta">(reference)</span></li></ul></aside><aside class="sv-card"><h2>Les mots de ce texte (12)</h2><ul><li><a href="/Publications/liseuse/terme/514/">modèle AMG</a></li><li><a href="/Publications/liseuse/terme/4858/">Stœchiométrie</a></li><li><a href="/Publications/liseuse/terme/515/">bilan humique</a></li><li><a href="/Publications/liseuse/terme/1167/">Biogaz</a></li><li><a href="/Publications/liseuse/terme/72/">humification</a></li><li><a href="/Publications/liseuse/terme/456/">agroforesterie</a></li><li><a href="/Publications/liseuse/terme/1097/">digestat</a></li><li><a href="/Publications/liseuse/terme/2035/">PARTYSOC</a></li><li><a href="/Publications/liseuse/terme/7861/">équilibre nutritif</a></li><li><a href="/Publications/liseuse/terme/1209/">nécromasse</a></li><li><a href="/Publications/liseuse/terme/517/">carbone stable</a></li><li><a href="/Publications/liseuse/terme/6766/">erreur</a></li></ul></aside><aside class="sv-card"><h2>Chaînes causales (9)</h2><ul><li><a href="/Publications/liseuse/chain/C1/">C1 — Photosynthèse du couvert → Immunité intestinale humaine</a></li><li><a href="/Publications/liseuse/chain/C10/">C10 — Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O</a></li><li><a href="/Publications/liseuse/chain/C15/">C15 — Valorisation des MAFOR : BRF, compost, biochar et stabilisation de la MO</a></li><li><a href="/Publications/liseuse/chain/C17/">C17 — Cascade phosphore : du minéral inerte à l&#39;os humain</a></li><li><a href="/Publications/liseuse/chain/C2/">C2 — Haber-Bosch → Maladie chronique (chaîne de dégradation)</a></li><li><a href="/Publications/liseuse/chain/C21/">C21 — Glycoprotéines fongiques : de la glomaline au stockage C profond</a></li><li><a href="/Publications/liseuse/chain/C32/">C32 — Carbon Use Efficiency : ratio C/N du paillage → capital biologique séquestré</a></li><li><a href="/Publications/liseuse/chain/C33/">C33 — Verrou stœchiométrique CNPS : ratio des résidus → dépendance aux intrants</a></li><li><a href="/Publications/liseuse/chain/C5/">C5 — Diagnostic terrain → Trajectoire économique</a></li></ul></aside></main></div><footer class="sv-footer"><p>Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.© 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a></p></footer><astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island><script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body></html>
+</div>
+            </div>
+        </section>
+
+      
+
+      <nav class="sv-pager" aria-label="Lecture guidée">
+          <a href="/Publications/liseuse/fiche/3/">← Microbiome du sol vivant et thermotolérance des plantes</a>
+          <a href="/Publications/liseuse/fiche/10/">Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote →</a>
+        </nav>
+    </article>
+
+    <nav class="sv-toc" aria-label="Sommaire de la fiche">
+      <p class="sv-side-label">Sur cette page</p>
+      <a class="sv-navlist-item" href="#resume"><span class="sv-navlist-num">●</span><span class="sv-navlist-title">Résumé</span></a>
+      
+          <a class="sv-navlist-item" href="#s0">
+            <span class="sv-navlist-num">●</span>
+            <span class="sv-navlist-title">Introduction</span>
+          </a>
+          
+          <a class="sv-navlist-item" href="#s1">
+            <span class="sv-navlist-num">1</span>
+            <span class="sv-navlist-title">La formule de Kirkby — stœchiométrie CNPS de l&#39;humus stable</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s1-1">
+              <span class="sv-navlist-num">1.1</span>
+              <span class="sv-navlist-title">Preuves récentes et efficacité mesurée (2023-2025)</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s1-2">
+              <span class="sv-navlist-num">1.2</span>
+              <span class="sv-navlist-title">Vers un pilotage par les flux élémentaires</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s1-3">
+              <span class="sv-navlist-num">1.3</span>
+              <span class="sv-navlist-title">Le verrou stœchiométrique</span>
+            </a>
+          <a class="sv-navlist-item" href="#s2">
+            <span class="sv-navlist-num">2</span>
+            <span class="sv-navlist-title">Rôle dans la stabilisation : voie microbienne MAOM</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s2-1">
+              <span class="sv-navlist-num">2.1</span>
+              <span class="sv-navlist-title">Efficience microbienne et couplage stœchiométrique</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-2">
+              <span class="sv-navlist-num">2.2</span>
+              <span class="sv-navlist-title">Réévaluation des sources : l&#39;équilibre plante-microbe</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-3">
+              <span class="sv-navlist-num">2.3</span>
+              <span class="sv-navlist-title">Déterminants minéralogiques et régulation biologique</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s2-4">
+              <span class="sv-navlist-num">2.4</span>
+              <span class="sv-navlist-title">La voie MAOM et l&#39;efficience microbienne</span>
+            </a>
+          <a class="sv-navlist-item" href="#s3">
+            <span class="sv-navlist-num">3</span>
+            <span class="sv-navlist-title">Le compartiment stable et la fraction inerte du modèle AMG</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s3-1">
+              <span class="sv-navlist-num">3.1</span>
+              <span class="sv-navlist-title">Architecture et partitionnement par défaut</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-2">
+              <span class="sv-navlist-num">3.2</span>
+              <span class="sv-navlist-title">Innovations en initialisation : le couplage Rock-Eval®</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-3">
+              <span class="sv-navlist-num">3.3</span>
+              <span class="sv-navlist-title">Validation et limites de fiabilité</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s3-4">
+              <span class="sv-navlist-num">3.4</span>
+              <span class="sv-navlist-title">Pilotage opérationnel par le modèle AMG</span>
+            </a>
+          <a class="sv-navlist-item" href="#s4">
+            <span class="sv-navlist-num">4</span>
+            <span class="sv-navlist-title">Efficacité agronomique mesurée et leviers d&#39;optimisation</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s4-1">
+              <span class="sv-navlist-num">4.1</span>
+              <span class="sv-navlist-title">Gains de rendement et fertilité chimique</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s4-2">
+              <span class="sv-navlist-num">4.2</span>
+              <span class="sv-navlist-title">Leviers d&#39;optimisation et gestion des résidus</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s4-3">
+              <span class="sv-navlist-num">4.3</span>
+              <span class="sv-navlist-title">Rentabilité et durabilité</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s4-4">
+              <span class="sv-navlist-num">4.4</span>
+              <span class="sv-navlist-title">Systèmes intégrés et perspectives</span>
+            </a>
+          <a class="sv-navlist-item" href="#s5">
+            <span class="sv-navlist-num">5</span>
+            <span class="sv-navlist-title">Privilégier les produits à haut coefficient d&#39;humification</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s5-1">
+              <span class="sv-navlist-num">5.1</span>
+              <span class="sv-navlist-title">Hiérarchie des amendements et potentiel de stockage</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s5-2">
+              <span class="sv-navlist-num">5.2</span>
+              <span class="sv-navlist-title">L&#39;indicateur ISMO : un outil de pilotage précis</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s5-3">
+              <span class="sv-navlist-num">5.3</span>
+              <span class="sv-navlist-title">Recommandations pratiques</span>
+            </a>
+          <a class="sv-navlist-item" href="#s6">
+            <span class="sv-navlist-num">6</span>
+            <span class="sv-navlist-title">Cultures intermédiaires, agroforesterie et systèmes biogaz</span>
+          </a>
+          <a class="sv-navlist-item sv-navlist-sub" href="#s6-1">
+              <span class="sv-navlist-num">6.1</span>
+              <span class="sv-navlist-title">Cultures intermédiaires et CIVE : un apport massif de carbone</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s6-2">
+              <span class="sv-navlist-num">6.2</span>
+              <span class="sv-navlist-title">Agroforesterie : le stockage profond et pérenne</span>
+            </a><a class="sv-navlist-item sv-navlist-sub" href="#s6-3">
+              <span class="sv-navlist-num">6.3</span>
+              <span class="sv-navlist-title">Systèmes biogaz et digestats : vers une économie circulaire du carbone</span>
+            </a>
+      
+      <astro-island uid="Z1ss97e" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.C3E-2e-z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;kind&quot;:[0,&quot;fiche&quot;],&quot;id&quot;:[0,&quot;4&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" style="border:1px solid var(--border);background:var(--card-bg);color:var(--text);border-radius:999px;padding:0.35rem 0.85rem;cursor:pointer;font-size:0.85rem" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+    </nav>
+  </div>
+
+  <p class="sv-meta">
+      📚 <a href="/Publications/liseuse/references/?f=4">Références académiques (64) → consulter</a>
+    </p><aside class="sv-card">
+      <h2>Cards liées</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/card/45/">Stœchiométrie CNPS et modèle AMG</a> <span class="sv-meta">(primaire)</span></li><li><a href="/Publications/liseuse/card/31/">Azote (formes, pertes) → stœchiométrie → stratégies microbiennes</a> <span class="sv-meta">(reference)</span></li><li><a href="/Publications/liseuse/card/40/">Sol ‘inerte’ / faible activité apparente</a> <span class="sv-meta">(reference)</span></li>
+      </ul>
+    </aside><aside class="sv-card">
+      <h2>Les mots de ce texte (12)</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/terme/514/">modèle AMG</a></li><li><a href="/Publications/liseuse/terme/4858/">Stœchiométrie</a></li><li><a href="/Publications/liseuse/terme/515/">bilan humique</a></li><li><a href="/Publications/liseuse/terme/1167/">Biogaz</a></li><li><a href="/Publications/liseuse/terme/72/">humification</a></li><li><a href="/Publications/liseuse/terme/456/">agroforesterie</a></li><li><a href="/Publications/liseuse/terme/1097/">digestat</a></li><li><a href="/Publications/liseuse/terme/2035/">PARTYSOC</a></li><li><a href="/Publications/liseuse/terme/7861/">équilibre nutritif</a></li><li><a href="/Publications/liseuse/terme/1209/">nécromasse</a></li><li><a href="/Publications/liseuse/terme/517/">carbone stable</a></li><li><a href="/Publications/liseuse/terme/6766/">erreur</a></li>
+      </ul>
+    </aside><aside class="sv-card">
+      <h2>Chaînes causales (9)</h2>
+      <ul>
+        <li><a href="/Publications/liseuse/chain/C1/">C1 — Photosynthèse du couvert → Immunité intestinale humaine</a></li><li><a href="/Publications/liseuse/chain/C10/">C10 — Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O</a></li><li><a href="/Publications/liseuse/chain/C15/">C15 — Valorisation des MAFOR : BRF, compost, biochar et stabilisation de la MO</a></li><li><a href="/Publications/liseuse/chain/C17/">C17 — Cascade phosphore : du minéral inerte à l&#39;os humain</a></li><li><a href="/Publications/liseuse/chain/C2/">C2 — Haber-Bosch → Maladie chronique (chaîne de dégradation)</a></li><li><a href="/Publications/liseuse/chain/C21/">C21 — Glycoprotéines fongiques : de la glomaline au stockage C profond</a></li><li><a href="/Publications/liseuse/chain/C32/">C32 — Carbon Use Efficiency : ratio C/N du paillage → capital biologique séquestré</a></li><li><a href="/Publications/liseuse/chain/C33/">C33 — Verrou stœchiométrique CNPS : ratio des résidus → dépendance aux intrants</a></li><li><a href="/Publications/liseuse/chain/C5/">C5 — Diagnostic terrain → Trajectoire économique</a></li>
+      </ul>
+    </aside>
+      </main>
+    </div>
+    <footer class="sv-footer">
+      <p>
+        Le Sol Vivant cet Holobionte — corpus scientifique, pédagogique et métier.
+        © 2026 Jean-Michel Juzan · <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" rel="license">Licence CC0 1.0 Universel</a>
+      </p>
+    </footer>
+    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.C3dJMQ5Z.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body>
+</html>
