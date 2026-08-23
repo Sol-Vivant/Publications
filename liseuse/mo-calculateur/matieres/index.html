@@ -19,7 +19,7 @@
     <link rel="canonical" href="/Publications/liseuse/mo-calculateur/matieres/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B-DN6ufs.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CFcUJIb6.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -104,7 +104,7 @@
         <details class="sv-side-tool">
             <summary><a href="/Publications/liseuse/tests-terrain/">Tests terrain — le diagnostic du sol sans laboratoire</a></summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/tests-terrain/diagnostic/">Les 25 tests de terrain</a></li>
+              <li><a href="/Publications/liseuse/tests-terrain/diagnostic/">Les 25 tests de terrain</a></li><li><a href="/Publications/liseuse/tests-terrain/diagnostic-interactif/">Diagnostic interactif — mes tests</a></li>
             </ul>
           </details>
       </li>
@@ -150,7 +150,8 @@
           C/N, coefficient isohumique, densité et matière sèche — groupées par
           famille, avec leurs portes d'entrée dans le corpus.
         </p>
-        <div class="sv-markdown"><div class="admonition note"><div class="title"><p>Lecture des valeurs</p></div><p>Estimation de potentiel, pas un bilan : le devenir réel dépend du sol, du climat et de la vie déjà présente. Le plafond de stockage dépend de l'argile (fiche #256, card #185). La texture dont l'argile dérive s'estime avec le triangle des textures (outil Textures GEPPA).</p></div></div>
+        <div class="sv-markdown"><div class="admonition note"><div class="title"><p>Lecture des résultats</p></div><p>Estimation de potentiel, pas un bilan : le devenir réel dépend du sol, du climat et de la vie déjà présente. Le plafond de stockage dépend de l'argile (fiche #256, card #185). La texture dont l'argile dérive s'estime avec le triangle des textures (outil Textures GEPPA).</p></div></div>
+        
         <input type="search" id="sv-matieres-filter" class="sv-filter" placeholder="Filtrer par matière ou synonyme…" aria-label="Filtrer les matières par nom ou synonyme">
         <button id="sv-expand-sv-matieres-list" class="sv-expand-all" type="button" data-target="sv-matieres-list">
     Tout déplier
@@ -1286,6 +1287,8 @@
         <p class="sv-meta" id="sv-matieres-empty" hidden>Aucune matière ne correspond.</p>
 
         <script type="module">var e=document.getElementById(`sv-matieres-filter`),t=document.querySelectorAll(`#sv-matieres-list .sv-fiche-item`),n=document.querySelectorAll(`#sv-matieres-list details.sv-doc-group`);e?.addEventListener(`input`,()=>{let r=e.value.trim().toLowerCase(),i=0;t.forEach(e=>{let t=!r||(e.getAttribute(`data-titre`)||``).includes(r);e.style.display=t?``:`none`,t&&i++}),n.forEach(e=>{let t=[...e.querySelectorAll(`.sv-fiche-item`)].filter(e=>e.style.display!==`none`).length;e.open=!!r&&t>0,e.style.display=t===0&&r?`none`:``}),document.getElementById(`sv-matieres-empty`)?.toggleAttribute(`hidden`,i>0)});var r=()=>{if(!location.hash)return;let e=document.getElementById(location.hash.slice(1));e&&e.tagName===`DETAILS`&&(e.open=!0,requestAnimationFrame(()=>e.scrollIntoView({behavior:`smooth`})))};window.addEventListener(`load`,r),window.addEventListener(`hashchange`,r);</script>
+
+    
 
     
 
