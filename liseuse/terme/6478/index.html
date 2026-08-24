@@ -28,7 +28,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1fpLn6" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.DPnMjdX6.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap" style="position:relative"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1fpLn6" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.B21GxWJo.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap" style="position:relative"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-secondary)" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" style="width:100%;padding:0.45rem 0.9rem 0.45rem 2rem;border:1px solid var(--border);border-radius:999px;font-size:0.92rem;background:var(--card-bg);color:var(--text)" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -101,37 +101,117 @@
     <li><a href="/Publications/liseuse/outils/">Tous les outils</a></li>
     <li>
         <details class="sv-side-tool">
-            <summary><a href="/Publications/liseuse/lifofer/">LiFoFer — Litière Forestière Fermentée</a></summary>
+            <summary>
+              <a href="/Publications/liseuse/lifofer/">
+                LiFoFer — Litière Forestière Fermentée
+              </a>
+            </summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/lifofer/usages/">Usages rapportés</a></li><li><a href="/Publications/liseuse/lifofer/calculateur-mere/">Calculateur — mère solide</a></li><li><a href="/Publications/liseuse/lifofer/calculateur-activation/">Calculateur — activation liquide</a></li><li><a href="/Publications/liseuse/lifofer/equivalences-sucre/">Équivalences sucre</a></li>
+              <li>
+                  <a href="/Publications/liseuse/lifofer/usages/">
+                    Usages rapportés
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/lifofer/calculateur-mere/">
+                    Calculateur — mère solide
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/lifofer/calculateur-activation/">
+                    Calculateur — activation liquide
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/lifofer/equivalences-sucre/">
+                    Équivalences sucre
+                  </a>
+                </li>
             </ul>
           </details>
       </li><li>
         <details class="sv-side-tool">
-            <summary><a href="/Publications/liseuse/mo-calculateur/">Calculateur de matière organique</a></summary>
+            <summary>
+              <a href="/Publications/liseuse/mo-calculateur/">
+                Calculateur de matière organique
+              </a>
+            </summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/mo-calculateur/calculateur/">Calculateur — C/N &amp; stock</a></li><li><a href="/Publications/liseuse/mo-calculateur/melanges/">Mélanges prédéfinis</a></li><li><a href="/Publications/liseuse/mo-calculateur/matieres/">Bibliothèque des matières</a></li><li><a href="/Publications/liseuse/mo-calculateur/ratio-mo-argile/">Ratio MO/argile</a></li>
+              <li>
+                  <a href="/Publications/liseuse/mo-calculateur/calculateur/">
+                    Calculateur — C/N &amp; stock
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/mo-calculateur/melanges/">
+                    Mélanges prédéfinis
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/mo-calculateur/matieres/">
+                    Bibliothèque des matières
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/mo-calculateur/ratio-mo-argile/">
+                    Ratio MO/argile
+                  </a>
+                </li>
             </ul>
           </details>
       </li><li>
         <details class="sv-side-tool">
-            <summary><a href="/Publications/liseuse/textures-geppa/">Triangle des textures — classification simplifiée (GEPPA/USDA adapté, 14 classes)</a></summary>
+            <summary>
+              <a href="/Publications/liseuse/textures-geppa/">
+                Triangle des textures — classification simplifiée (GEPPA/USDA adapté, 14 classes)
+              </a>
+            </summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/textures-geppa/triangle/">Triangle interactif</a></li><li><a href="/Publications/liseuse/textures-geppa/test-bocal/">Test du bocal</a></li><li><a href="/Publications/liseuse/textures-geppa/classes/">Les 14 classes</a></li>
+              <li>
+                  <a href="/Publications/liseuse/textures-geppa/triangle/">
+                    Triangle interactif
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/textures-geppa/test-bocal/">
+                    Test du bocal
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/textures-geppa/classes/">
+                    Les 14 classes
+                  </a>
+                </li>
             </ul>
           </details>
       </li><li>
         <details class="sv-side-tool">
-            <summary><a href="/Publications/liseuse/transition-robuste/">Transition robuste — le plan Shift × le corpus</a></summary>
+            <summary>
+              <a href="/Publications/liseuse/transition-robuste/">
+                Transition robuste — le plan Shift × le corpus
+              </a>
+            </summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/transition-robuste/chantiers/">Les 22 chantiers — grille corpus</a></li><li><a href="/Publications/liseuse/transition-robuste/france/">France — chiffres de contexte</a></li>
+              <li>
+                  <a href="/Publications/liseuse/transition-robuste/chantiers/">
+                    Les 22 chantiers — grille corpus
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/transition-robuste/france/">
+                    France — chiffres de contexte
+                  </a>
+                </li>
             </ul>
           </details>
       </li><li>
         <details class="sv-side-tool">
-            <summary><a href="/Publications/liseuse/tests-terrain/">Tests terrain — le diagnostic du sol sans laboratoire</a></summary>
+            <summary>
+              <a href="/Publications/liseuse/tests-terrain/">
+                Tests terrain — le diagnostic du sol sans laboratoire
+              </a>
+            </summary>
             <ul class="sv-side-sub">
-              <li><a href="/Publications/liseuse/tests-terrain/diagnostic/">Les 25 tests de terrain</a></li><li><a href="/Publications/liseuse/tests-terrain/diagnostic-interactif/">Diagnostic interactif — mes tests</a></li>
+              <li>
+                  <a href="/Publications/liseuse/tests-terrain/diagnostic/">
+                    Les 25 tests de terrain
+                  </a>
+                </li><li>
+                  <a href="/Publications/liseuse/tests-terrain/diagnostic-interactif/">
+                    Diagnostic interactif — mes tests
+                  </a>
+                </li>
             </ul>
           </details>
       </li>
@@ -142,18 +222,23 @@
       <main class="sv-main" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
-    <a href="/Publications/liseuse/">Accueil</a>
-    <span aria-hidden="true">›</span>
-    <a href="/Publications/liseuse/thesaurus/">Vocabulaire</a>
-    
-        <span aria-hidden="true">›</span>
-        <a href="/Publications/liseuse/terme/1065/">biomasse</a>
+  
       
-    <span aria-hidden="true">›</span>
-    <a href="/Publications/liseuse/thesaurus/#sec-S">S</a>
-    <span aria-hidden="true">›</span>
-    <span aria-current="page">biomasse ligneuse</span>
-  </nav>
+      <a href="/Publications/liseuse/">Accueil</a>
+    
+      <span aria-hidden="true">›</span>
+      <a href="/Publications/liseuse/thesaurus/">Vocabulaire</a>
+    
+      <span aria-hidden="true">›</span>
+      <a href="/Publications/liseuse/terme/1065/">biomasse</a>
+    
+      <span aria-hidden="true">›</span>
+      <a href="/Publications/liseuse/thesaurus/#sec-S">S</a>
+    
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">biomasse ligneuse</span>
+    
+</nav>
 
   <article class="sv-prose sv-terme">
     <div class="sv-terme-head">
@@ -208,5 +293,5 @@
       </p>
     </footer>
     <astro-island uid="239i22" prefix="r3" component-url="/Publications/liseuse/_astro/SvPwaUpdate.B9YFXjau.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.DFMOYWvF.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
-    <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=n=>{t.classList.toggle(`sv-dark`,n),e.setAttribute(`aria-pressed`,n?`true`:`false`);try{localStorage.setItem(`sv-theme`,n?`dark`:`light`)}catch{}},r=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();n(r===`dark`||!r&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>n(!t.classList.contains(`sv-dark`)));var i=document.querySelector(`.sv-burger`),a=document.getElementById(`sv-sidebar`);i.addEventListener(`click`,()=>{let e=a.classList.toggle(`is-open`);i.setAttribute(`aria-expanded`,e?`true`:`false`)}),a.addEventListener(`click`,e=>{e.target.closest(`a`)&&a.classList.contains(`is-open`)&&(a.classList.remove(`is-open`),i.setAttribute(`aria-expanded`,`false`))});</script></body>
+    <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});</script></body>
 </html>
