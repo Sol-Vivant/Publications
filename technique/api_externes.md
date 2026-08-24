@@ -1,9 +1,11 @@
-# API externes — architecture d'acquisition et de vérification
+# Services externes — architecture d'acquisition et de vérification
 
-Le corpus s'appuie sur **5 API externes** pour l'acquisition, l'enrichissement
-et la vérification de ses sources bibliographiques. Ce guide détaille les
-phases où ces appels interviennent, les scripts impliqués, et les tables DB
-touchées.
+Le corpus s'appuie sur **8 services externes** (3 natures) pour l'acquisition,
+l'enrichissement et la vérification de ses sources bibliographiques : **6 sources
+veille** (Semantic Scholar, Crossref, Zotero, Wikidata, OpenLibrary, BnF),
+**HAL (veille + enrichissement)** et **1 fournisseur LLM** (DeepSeek). Ce guide
+détaille les phases où ces appels interviennent, les scripts impliqués, et les
+tables DB touchées.
 
 ## Architecture post-ménage 2026-07
 
@@ -38,23 +40,53 @@ touchées.
   `audit_factuel_arbitrage.py`). API gratuite, aucune couche LLM, évidence brute.
 - **L'orchestrateur** (agent primaire, modèle choisi par JMJ au sélecteur) = orchestration + intégration (écriture DB avec Conseil d'audit).
 
-## Les 5 API en jeu
+## Les 8 services externes en jeu
 
-| API | Base URL | Auth | Rôle | Script(s) |
-|-----|----------|------|------|-----------|
-| **Semantic Scholar** | `api.semanticscholar.org/graph/v1` | `SEMANTIC_SCHOLAR_API_KEY` (optionnelle, sinon 1000 req/s partagé) | Découverte + enrichissement + vérification factuelle (juge de vérité du Conseil) | `semantic_scholar.py`, `audit_factuel_arbitrage.py` |
-| **DeepSeek** | `api.deepseek.com` | `DEEPSEEK_API_KEY` (header `Authorization: Bearer`) | Audit factuel + cohérence + synthèse thésaurus. Modèle `deepseek-v4-pro`, thinking activé | `audit_factuel_deepseek.py`, `audit_bq_deepseek.py`, `enrich_thesaurus.py` |
-| **HAL (CCSD)** | `api.archives-ouvertes.fr` | Aucune (ouverte) | Enrichissement francophone (thèses, papiers INRAE) | `enrich_hal.py` |
-| **Crossref** | `api.crossref.org/works` | Polite (mail dans User-Agent) | Résolution DOI (arbitrage) | `resolve_sources_crossref.py`, `audit_factuel_arbitrage.py` |
-| **Zotero** | `api.zotero.org` (user 19582809) | `ZOTERO_API_KEY` (env) | Sync citation manager (biblio riche JMJ) | `pull_zotero.py`, `push_zotero_web.py` |
+| Service | Nature | Base URL | Auth | Rôle | Script(s) |
+|---------|--------|----------|------|------|-----------|
+| **Semantic Scholar** | veille | `api.semanticscholar.org/graph/v1` | `SEMANTIC_SCHOLAR_API_KEY` (optionnelle, sinon 1000 req/s partagé) | Découverte + enrichissement + vérification factuelle (juge de vérité du Conseil) | `tools/veille/semantic_scholar.py`, `audit_factuel_arbitrage.py` |
+| **Crossref** | veille | `api.crossref.org/works` | Polite (mail dans User-Agent) | Résolution DOI (arbitrage) | `tools/veille/search_crossref.py`, `resolve_sources_crossref.py` |
+| **Zotero** | veille | `api.zotero.org` (user 19582809) | `ZOTERO_API_KEY` (env) | Sync citation manager (biblio riche JMJ) | `tools/veille/search_zotero.py`, `pull_zotero.py`, `push_zotero_web.py` |
+| **Wikidata** | veille | `wikidata.org` (`wbsearchentities`) | Aucune | Thésaurus : synonymes FR/EN + identifiants externes (NCBI, CAS) | `tools/veille/wikidata.py` |
+| **OpenLibrary** | veille | `openlibrary.org` | Aucune | Livres ISBN (works/editions) — fort sur pré-2000 | `tools/veille/openlibrary.py` |
+| **BnF** | veille | `catalogue.bnf.fr` (SRU) | Aucune | Catalogue général FR (14M docs) — livres/essais/thèses francophones | `tools/veille/search_bnf.py` |
+| **HAL (CCSD)** | veille + enrich | `api.archives-ouvertes.fr` (search + référentiels `/ref`) | Aucune (ouverte) | Francophone (thèses TEL, papiers INRAE, abstracts/PDF OA, référentiels auteurs/structures/revues) — script dédié veille (2026-08-24) + routing `source_enrich` | `search_hal.py`, `enrich_hal.py`, `lib/source_enrich.py` |
+| **DeepSeek** | LLM | `api.deepseek.com` | `DEEPSEEK_API_KEY` (header `Authorization: Bearer`) | Audit factuel + cohérence + synthèse thésaurus. Modèle `deepseek-v4-pro`, thinking activé | `audit_factuel_deepseek.py`, `audit_bq_deepseek.py` |
+
+---
+
+## Couche MCP — 11 tools veille
+
+Les services de veille sont exposés aux agents via le **MCP server**
+(`tools/mcp/server.py`) : les tools `veille_*` wrappent les scripts
+`tools/veille/*.py` en `--json` (enveloppe `{ok, source, query, count,
+results, errors}` — retour structuré, plus de Markdown à re-parser).
+
+| Tool MCP | Script wrappé | Service |
+|----------|---------------|---------|
+| `veille_s2_search` / `veille_s2_paper` / `veille_s2_recommend` | `semantic_scholar.py` | Semantic Scholar |
+| `veille_crossref_search` | `search_crossref.py` | Crossref |
+| `veille_zotero_search` | `search_zotero.py` | Zotero |
+| `veille_wikidata` | `wikidata.py` | Wikidata |
+| `veille_openlibrary` | `openlibrary.py` | OpenLibrary |
+| `veille_bnf_search` | `search_bnf.py` | BnF |
+| `veille_hal_search` / `veille_hal_ref` | `search_hal.py` | HAL (CCSD) |
+| `veille_health` | `veille_services.py` | Check global (5 services) |
+
+**Routing multi-source de l'enrichissement** (tools `enrich_abstracts` /
+`enrich_source_fields`, via `lib/source_enrich.py::route_doi`) :
+papers académiques → CrossRef puis S2 (tldr en fallback) ; livres
+(10.x/978*) → OpenLibrary puis CrossRef ; HAL (hal., 10.x/hal.) → HAL API ;
+preprints (10.22541, 10.48550, 10.2643) → S2 puis CrossRef ; Zenodo
+(10.5281) → CrossRef puis S2.
 
 ---
 
 ## Phase 1 — Enrichissement (remplissage métadonnées)
 
 Remplir les `resume_court` (et `doi`/`url`) manquants dans `sources`.
-Coverage actuelle : **9558/10528 (91%) avec abstract**,
-10081 avec DOI.
+Coverage actuelle : **9959/10680 (93%) avec abstract**,
+10235 avec DOI.
 
 ### 2a. Semantic Scholar — découverte paper (DOI / titre)
 
@@ -133,10 +165,10 @@ Scholar est le juge de vérité externe du Conseil** (`conseil_modele`).
 
 | Table | Effectif | Rôle | Phase(s) | L/E |
 |-------|----------|------|----------|-----|
-| `sources` | 10528 | Métadonnées sources (DOI, auteurs, `resume_court`) | 1, 2, 3 | R+W |
-| `source_usages` | 21398 | Liens sources ↔ entités (fiches, prompts, cards) | 1 | W |
+| `sources` | 10680 | Métadonnées sources (DOI, auteurs, `resume_court`) | 1, 2, 3 | R+W |
+| `source_usages` | 21714 | Liens sources ↔ entités (fiches, prompts, cards) | 1 | W |
 | `refs` | 364 | Évidence chiffrée typée (kind, valeur, `source_id`) | 3 | W |
-| `ref_links` | 1295 | Liens génériques refs ↔ targets | 3 | W |
+| `ref_links` | 1290 | Liens génériques refs ↔ targets | 3 | W |
 | `audit_log` | — | Journal des opérations (chaque UPDATE batch) | 2 | W |
 
 ---
@@ -153,15 +185,14 @@ committée.
 | `SEMANTIC_SCHOLAR_API_KEY` | `.env` (racine) ou export shell | Optionnelle (1000 req/s partagé sans clé ; 1 RPS dédié avec) |
 | `DEEPSEEK_API_KEY` | `.env` (racine) ou export shell | DeepSeek V4 pro (audit factuel + vérification cohérence, API appelée par l'orchestrateur GLM). Modèle + thinking pilotés par config DB (`api.deepseek_*`) |
 | `ZOTERO_API_KEY` | `.env` (racine) ou export shell | API web Zotero (library + write) |
-| HAL / Crossref | Aucune auth | APIs publiques |
+| HAL / Crossref / Wikidata / OpenLibrary / BnF | Aucune auth | APIs publiques |
 
 **Mise en place** : `cp .env.example .env` puis renseigner les clés.
 
 ## Voir aussi
 
 - BQ `doctrine_deepseek_api` — intégration API DeepSeek (V4 pro, thinking, dépréciation reasoner)
-- BQ `wf_fiche_production` — workflow production fiche (**OBSOLÈTE**, `is_active: false`, workflow Session A abandonné)
-- BQ `wf_fiche_integration` — workflow intégration (GLM + Conseil d'audit)
+- BQ `wf_fiche_integration` — workflow intégration fiche MD (GLM + Conseil d'audit)
 - BQ `conseil_modele` — Conseil (Semantic Scholar = juge de vérité externe)
 - BQ `wf_audit_factuel` — workflow vérification factuelle
 - BQ `wf_source_integration` — workflow intégration source (arbitrage conscient)

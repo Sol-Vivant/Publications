@@ -5,7 +5,7 @@
 ```bash
 # Cloner le depot
 git clone {GITHUB_TOOLS_URL}.git
-cd Tools
+cd GLM_depot    # racine du repo (working dir canonique)
 
 # Publications/ fait partie du depot principal — rien d'autre a cloner
 ```
@@ -15,7 +15,7 @@ cd Tools
 ### Recuperer les dernieres modifications
 
 ```bash
-cd ~/Documents/Sol_Vivant/GitHub/Tools
+cd /home/jmj/glm/GLM_depot    # racine du depot
 git pull origin main
 ```
 
@@ -35,7 +35,7 @@ git status
 
 # 2. Ajouter les fichiers modifies
 git add sol_vivant.db                    # un fichier specifique
-git add tools/integration/export_jenni_doc.py  # ⚠ ARCHIVÉ — exemple legacy  # un autre fichier
+git add tools/docs/gen_readme.py         # un autre fichier (exemple)
 git add -A                               # TOUT ajouter (attention)
 
 # 3. Commiter avec un message
@@ -76,7 +76,7 @@ git branch -d test-nouveau-truc
 
 ## Regenerer le site (Publications/)
 
-Publications/ est versionne dans le depot principal — il se commit avec le reste (pas de second depot). La regeneration et la propagation vers `main` sont prises en charge par `session_end.py`.
+Publications/ est versionne dans le depot principal — il se commit avec le reste (pas de second depot). La regeneration est prise en charge par `session_end.py` (via `regen_all.py`) ; la propagation vers `main` est arbitree par JMJ (local-first).
 
 ```bash
 # Regenerer toutes les pages et docs depuis la DB
@@ -114,10 +114,15 @@ git push origin main
 
 ### "La DB est en conflit" (fichier binaire)
 
+La DB binaire **ne se merge pas** — jamais de résolution binaire à l’aveugle. Deux voies de restauration :
+
 ```bash
-# La DB ne peut pas etre mergee — choisir une version :
-git checkout --ours sol_vivant.db     # garder MA version
-git checkout --theirs sol_vivant.db   # garder la version du SERVEUR
+# Voie 1 : le backup du jour (auto au demarrage de session, backups/)
+cp backups/sol_vivant_backup_<date>.db sol_vivant.db
+
+# Voie 2 : le dump SQL versionne (regenere la DB complete)
+gunzip -c backups/sol_vivant.sql.gz | sqlite3 sol_vivant.db
+
 git add sol_vivant.db
 git commit -m "Resolution conflit DB"
 ```
@@ -143,20 +148,20 @@ git stash drop
 git config core.hooksPath .githooks/   # active le pre-commit du projet
 ```
 
-Le pre-commit `.githooks/pre-commit` lance `check_forbidden_jenni.py` : il **bloque** le commit si du meta-vocab interdit apparait dans un contenu destine a Jenni. Sur session web, les `.llm/hooks/` (SessionStart) provisionnent l'environnement automatiquement (pip/npm + `core.hooksPath`).
+Le pre-commit `.githooks/pre-commit` lance `check_forbidden_jenni.py` : il **bloque** le commit si du meta-vocab interdit apparait dans un contenu destine a Jenni. L'activation manuelle ci-dessus suffit (une fois par clone).
 
-## Workflow de session (web)
+## Workflow de session
 
-1. **Demarrage** — `session_start.py` (sync git + backup DB + dashboard) ; saute sur le web (assure par les hooks SessionStart).
-2. **Travail** — edition DB + scripts sur la branche `llm/<session>` imposee par la plateforme.
-3. **Cloture** — `session_end.py` : regen pages + `check_integrity` + merge `--ff-only` vers main + push.
+1. **Demarrage** — `session_start.py` : etat git (informationnel) + backup DB journalier + WAL checkpoint. **Aucun dashboard** — le briefing analytique est delegue au subagent `session-scribe`.
+2. **Travail** — edition DB + scripts sur la branche courante, laissee a la discretion de l'utilisateur (doctrine local-first, cf. AGENTS.md).
+3. **Cloture** — `session_end.py` : regen pages + `check_integrity` + dump SQL + commit de la branche courante vers son upstream + push (seulement si commits a pousser).
 
 Detail complet : `gestion_sessions.md`.
 
 ## Regles du projet
 
-1. **main = production** — sessions web : on travaille sur la branche `llm/<session>` imposee par la plateforme, propagee vers main en `--ff-only` par `session_end.py`
+1. **`origin/main` = source de verite** — on travaille sur la branche courante ; `session_end.py` commit et pousse vers son upstream. **JMJ arbitre les fusions vers main lui-même** (le script ne force jamais la topologie : ni merge forcé, ni checkout).
 2. **Branches = exploration** — pour tester sans risque
-3. **La DB est binaire** — pas de merge possible, un seul editeur a la fois
+3. **La DB est binaire** — pas de merge possible, un seul editeur a la fois ; versionnee via `backups/sol_vivant.sql.gz` (exclue de git depuis 2026-06-22)
 4. **Publications/ est versionne dans le depot principal** — pages generees (`gen_*.py`), ne pas editer a la main
-5. **Cloture par `session_end.py`** — regen + integrity + merge `--ff-only` + push (pas de commit `WIP` manuel)
+5. **Cloture par `session_end.py`** — regen + integrity + dump SQL + commit + push de la branche courante (pas de commit `WIP` manuel)
