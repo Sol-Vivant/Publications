@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four à Biochar — Atelier de Fabrication (RoCC à cadre H)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #12100e;
+    --bg2: #1a1714;
+    --card: #221e19;
+    --card-hover: #2b2620;
+    --accent: #e8622b;
+    --accent2: #f2a33c;
+    --accent3: #c9451f;
+    --ember: #ff9d45;
+    --fg: #f2e9dc;
+    --muted: #94867a;
+    --border: #3a322a;
+    --green: #7fae6e;
+    --red: #d95c48;
+    --gold: #d9a94a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--fg); line-height:1.65; overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:'Space Grotesk',sans-serif; }
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--accent); }
+
+  .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; text-align:center; padding:6rem 1rem 4rem; }
+  .hero::before { content:''; position:absolute; inset:0; background:
+    radial-gradient(ellipse 70% 45% at 50% 100%, rgba(232,98,43,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 25% 80%, rgba(242,163,60,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 78% 70%, rgba(201,69,31,0.07) 0%, transparent 55%);
+    pointer-events:none; }
+
+  .flame-wrap { position:relative; width:120px; height:150px; margin:0 auto 1.5rem; }
+  .flame { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); width:70px; height:100px;
+    background:radial-gradient(ellipse at 50% 85%, #ffd97a 0%, var(--ember) 35%, var(--accent) 65%, transparent 78%);
+    border-radius:50% 50% 50% 50% / 62% 62% 38% 38%; filter:blur(2px);
+    animation:flameFlicker 1.6s ease-in-out infinite alternate; transform-origin:bottom center; }
+  .flame.inner { width:38px; height:62px; background:radial-gradient(ellipse at 50% 88%, #fff3c4 0%, #ffd97a 45%, var(--ember) 75%, transparent 85%); animation-duration:1.1s; }
+  @keyframes flameFlicker {
+    0% { transform:translateX(-50%) scale(1,1) rotate(-1.5deg); }
+    50% { transform:translateX(-52%) scale(0.94,1.06) rotate(1deg); }
+    100% { transform:translateX(-48%) scale(1.04,0.96) rotate(-1deg); } }
+  .ember-dot { position:absolute; bottom:30px; width:5px; height:5px; border-radius:50%; background:var(--ember); opacity:0; animation:emberRise var(--dur) ease-out infinite var(--delay); }
+  @keyframes emberRise {
+    0% { opacity:0; transform:translate(0,0) scale(1); }
+    15% { opacity:.9; }
+    100% { opacity:0; transform:translate(var(--dx),-130px) scale(.2); } }
+
+  .nav-glass { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(18,16,14,0.88); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); transition:transform .3s ease; }
+  .nav-glass.hidden-nav { transform:translateY(-100%); }
+  .nav-link { position:relative; color:var(--muted); transition:color .3s; font-size:.85rem; font-weight:500; white-space:nowrap; }
+  .nav-link:hover,.nav-link.active { color:var(--accent2); }
+  .nav-link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--accent); transition:width .3s; }
+  .nav-link:hover::after,.nav-link.active::after { width:100%; }
+
+  .section-title { font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:700; margin-bottom:.6rem; }
+  .section-sub { color:var(--muted); max-width:46rem; margin:0 auto 2.5rem; font-size:.95rem; }
+  .kicker { display:inline-block; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent2); font-weight:600; margin-bottom:.8rem; }
+
+  .card { background:var(--card); border:1px solid var(--border); border-radius:14px; transition:all .3s; }
+  .card:hover { background:var(--card-hover); border-color:#4a4036; transform:translateY(-2px); }
+
+  .stat-num { font-family:'Space Grotesk',sans-serif; font-size:1.9rem; font-weight:700; color:var(--accent2); line-height:1.1; }
+  .stat-lbl { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+
+  .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.6rem; border-radius:10px; font-weight:600; font-size:.9rem; transition:all .25s; cursor:pointer; border:none; }
+  .btn-primary { background:linear-gradient(135deg,var(--accent),var(--accent3)); color:#fff; }
+  .btn-primary:hover { filter:brightness(1.12); transform:translateY(-1px); }
+  .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--fg); }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent2); }
+
+  .pro { color:var(--green); } .con { color:var(--red); }
+  .tag { display:inline-block; font-size:.66rem; padding:.15rem .55rem; border-radius:99px; background:rgba(232,98,43,.12); color:var(--accent2); border:1px solid rgba(232,98,43,.25); }
+  .tag.green { background:rgba(127,174,110,.12); color:var(--green); border-color:rgba(127,174,110,.3); }
+  .tag.gold { background:rgba(217,169,74,.12); color:var(--gold); border-color:rgba(217,169,74,.3); }
+
+  table.cmp { width:100%; border-collapse:collapse; font-size:.78rem; }
+  table.cmp th, table.cmp td { padding:.55rem .6rem; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+  table.cmp th { color:var(--accent2); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; }
+  table.cmp tr:hover td { background:rgba(232,98,43,.05); }
+  table.cmp td.hl { background:rgba(232,98,43,.09); font-weight:600; }
+
+  .step { border:1px solid var(--border); border-radius:12px; background:var(--card); overflow:hidden; }
+  .step-head { display:flex; align-items:center; gap:.9rem; padding:1rem 1.2rem; cursor:pointer; user-select:none; }
+  .step-num { width:34px; height:34px; flex-shrink:0; border-radius:9px; display:flex; align-items:center; justify-content:center; font-weight:700; background:var(--bg2); border:1px solid var(--border); color:var(--muted); transition:all .3s; }
+  .step.done .step-num { background:rgba(127,174,110,.18); border-color:var(--green); color:var(--green); }
+  .step-body { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+  .step.open .step-body { max-height:3000px; }
+  .step-body-inner { padding:0 1.2rem 1.2rem; color:#d8ccbc; font-size:.9rem; }
+
+  .acc-item { border:1px solid var(--border); border-radius:12px; background:var(--card); overflow:hidden; }
+  .acc-head { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.95rem 1.2rem; cursor:pointer; font-weight:600; font-size:.92rem; user-select:none; }
+  .acc-body { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .acc-item.open .acc-body { max-height:600px; }
+  .acc-body-inner { padding:0 1.2rem 1.1rem; color:#d8ccbc; font-size:.88rem; }
+
+  input[type=number], select { background:var(--bg2); border:1px solid var(--border); color:var(--fg); border-radius:8px; padding:.5rem .7rem; font-size:.9rem; width:100%; font-family:'DM Sans',sans-serif; }
+  input[type=number]:focus, select:focus { outline:none; border-color:var(--accent); }
+  .field-lbl { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:.3rem; }
+  .chk { display:flex; align-items:center; gap:.6rem; cursor:pointer; font-size:.88rem; padding:.35rem 0; }
+  .chk input { accent-color:var(--accent); width:16px; height:16px; }
+
+  .out-table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  .out-table th,.out-table td { padding:.45rem .6rem; border-bottom:1px solid var(--border); text-align:left; }
+  .out-table th { color:var(--accent2); font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; }
+  .badge-ok { background:rgba(127,174,110,.15); color:var(--green); padding:.2rem .6rem; border-radius:6px; font-size:.75rem; font-weight:600; }
+  .badge-warn { background:rgba(217,169,74,.15); color:var(--gold); padding:.2rem .6rem; border-radius:6px; font-size:.75rem; font-weight:600; }
+  .badge-err { background:rgba(217,92,72,.15); color:var(--red); padding:.2rem .6rem; border-radius:6px; font-size:.75rem; font-weight:600; }
+
+  .pos-btn { padding:.5rem .8rem; border-radius:9px; border:1px solid var(--border); background:var(--bg2); color:var(--muted); font-size:.8rem; cursor:pointer; transition:all .2s; font-weight:600; }
+  .pos-btn:hover { border-color:var(--accent); color:var(--fg); }
+  .pos-btn.active { background:rgba(232,98,43,.16); border-color:var(--accent); color:var(--accent2); }
+
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  .quote { border-left:3px solid var(--accent); padding:.8rem 1.1rem; background:rgba(232,98,43,.06); border-radius:0 10px 10px 0; font-size:.88rem; color:#d8ccbc; }
+  .quote .src { display:block; margin-top:.4rem; font-size:.72rem; color:var(--muted); }
+
+  .progress-track { height:8px; background:var(--bg2); border-radius:99px; overflow:hidden; border:1px solid var(--border); }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--accent3),var(--accent2)); width:0%; transition:width .4s ease; }
+
+  .warn-strip { display:flex; gap:.8rem; align-items:flex-start; background:rgba(217,92,72,.09); border:1px solid rgba(217,92,72,.35); border-radius:10px; padding:.9rem 1.1rem; font-size:.85rem; }
+  .info-strip { display:flex; gap:.8rem; align-items:flex-start; background:rgba(217,169,74,.08); border:1px solid rgba(217,169,74,.3); border-radius:10px; padding:.9rem 1.1rem; font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<nav class="nav-glass" id="mainNav">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+    <a href="#hero" class="flex items-center gap-2 font-semibold" style="font-family:'Space Grotesk'">
+      <i class="fa-solid fa-fire" style="color:var(--accent)"></i>
+      <span class="text-sm">Four à Biochar</span>
+    </a>
+    <div class="hidden xl:flex items-center gap-5">
+      <a href="#pourquoi" class="nav-link">Pourquoi</a>
+      <a href="#systemes" class="nav-link">Systèmes</a>
+      <a href="#choix" class="nav-link">Choix</a>
+      <a href="#dimensionnement" class="nav-link">Dimensionnement</a>
+      <a href="#fabrication" class="nav-link">Fabrication</a>
+      <a href="#kontiki" class="nav-link">Kon-Tiki</a>
+      <a href="#utilisation" class="nav-link">Utilisation</a>
+      <a href="#depannage" class="nav-link">Dépannage</a>
+      <a href="#securite" class="nav-link">Sécurité</a>
+      <a href="#sources" class="nav-link">Sources</a>
+    </div>
+    <button id="mobileBtn" class="xl:hidden text-xl"><i class="fa-solid fa-bars"></i></button>
+  </div>
+  <div id="mobileMenu" class="hidden xl:hidden flex-col gap-1 px-4 pb-4" style="background:var(--bg2)">
+    <a href="#pourquoi" class="nav-link py-1.5 block">Pourquoi</a>
+    <a href="#systemes" class="nav-link py-1.5 block">Systèmes</a>
+    <a href="#choix" class="nav-link py-1.5 block">Choix</a>
+    <a href="#dimensionnement" class="nav-link py-1.5 block">Dimensionnement</a>
+    <a href="#fabrication" class="nav-link py-1.5 block">Fabrication</a>
+    <a href="#kontiki" class="nav-link py-1.5 block">Kon-Tiki</a>
+    <a href="#utilisation" class="nav-link py-1.5 block">Utilisation</a>
+    <a href="#depannage" class="nav-link py-1.5 block">Dépannage</a>
+    <a href="#securite" class="nav-link py-1.5 block">Sécurité</a>
+    <a href="#sources" class="nav-link py-1.5 block">Sources</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="flame-wrap">
+    <div class="flame"></div>
+    <div class="flame inner"></div>
+    <div class="ember-dot" style="left:35%;--dur:2.6s;--delay:0s;--dx:-14px"></div>
+    <div class="ember-dot" style="left:55%;--dur:3.2s;--delay:.7s;--dx:18px"></div>
+    <div class="ember-dot" style="left:45%;--dur:2.2s;--delay:1.3s;--dx:-6px"></div>
+    <div class="ember-dot" style="left:62%;--dur:2.9s;--delay:1.9s;--dx:10px"></div>
+  </div>
+  <div class="kicker">Atelier low-tech · système métrique · retours terrain</div>
+  <h1 class="text-4xl md:text-6xl font-bold mb-4" style="line-height:1.1">Fabriquer un four à <span style="color:var(--accent2)">biochar</span></h1>
+  <p class="max-w-2xl mx-auto mb-8" style="color:var(--muted)">
+    Cylindre rotatif couvert sur cadre en H (« RoCC H-Frame »), à partir d'un fût de 200 L :
+    le compromis validé par le terrain — protégé du vent, mélange par rotation, vidange par gravité,
+    fabriqué en un week-end pour environ 100 € de matériaux neufs.
+  </p>
+  <div class="flex flex-wrap justify-center gap-3 mb-10">
+    <a href="#dimensionnement" class="btn btn-primary"><i class="fa-solid fa-ruler-combined"></i> Dimensionner mon four</a>
+    <a href="#fabrication" class="btn btn-ghost"><i class="fa-solid fa-hammer"></i> Atelier de fabrication</a>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+    <div><div class="stat-num">29 kg</div><div class="stat-lbl">biochar / jour / personne — four à 2 fûts (mesuré au Kenya)</div></div>
+    <div><div class="stat-num">24 h</div><div class="stat-lbl">de fabrication à deux (retour Kenya)</div></div>
+    <div><div class="stat-num">≈ 100 €</div><div class="stat-lbl">matériaux neufs (quasi gratuit en récupération)</div></div>
+    <div><div class="stat-num">22 ± 5 %</div><div class="stat-lbl">rendement mesuré (flamme cap)</div></div>
+  </div>
+</section>
+
+<section id="pourquoi" class="py-20 px-4 max-w-6xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Pourquoi</div>
+    <h2 class="section-title">Le biochar, charbon qui nourrit les sols</h2>
+    <p class="section-sub">Pyrolyser la biomasse au lieu de la brûler ou de la laisser pourrir : on obtient un charbon stable qui améliore le sol et séquestre le carbone pour des siècles — sans fumée si la conduite est bonne.</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-5">
+    <div class="card p-6 reveal">
+      <i class="fa-solid fa-lungs text-2xl mb-3" style="color:var(--accent2)"></i>
+      <h3 class="font-semibold mb-2">Sans fumée : le rideau de flammes</h3>
+      <p class="text-sm" style="color:var(--muted)">Les gaz de pyrolyse brûlent en surface dans un « rideau de flammes » qui consomme l'oxygène et protège le charbon en dessous. Résultat : très peu de fumée, contrairement à la carbonisation en meule. La fumée (PM2,5) est un enjeu de santé majeur (AVC, infarctus, cancers).</p>
+    </div>
+    <div class="card p-6 reveal">
+      <i class="fa-solid fa-seedling text-2xl mb-3" style="color:var(--green)"></i>
+      <h3 class="font-semibold mb-2">Un amendement qui dure</h3>
+      <p class="text-sm" style="color:var(--muted)">Le biochar augmente la rétention d'eau et de nutriments et stimule la vie du sol. Les effets sont documentés sur plus de 150 ans (anciennes aires de charbonnage : meilleur travail du sol, meilleur drainage, meilleure levée). Il doit être « chargé » (compost, fumier) avant incorporation.</p>
+    </div>
+    <div class="card p-6 reveal">
+      <i class="fa-solid fa-temperature-low text-2xl mb-3" style="color:var(--gold)"></i>
+      <h3 class="font-semibold mb-2">Du carbone retiré de l'atmosphère</h3>
+      <p class="text-sm" style="color:var(--muted)">Environ la moitié du carbone de la biomasse devient un charbon stable pour des siècles : 1 t de biochar ≈ 2,5 t de CO2 retirées. 50 kg de biochar produits au jardin ≈ 125 kg de CO2 séquestrés.</p>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-4 gap-4 mt-8">
+    <div class="card p-5 text-center reveal"><div class="stat-num">20-30 %</div><div class="stat-lbl">rendement biochar — 22 ± 5 % mesuré (contre 7-10 % pour la braise)</div></div>
+    <div class="card p-5 text-center reveal"><div class="stat-num">2-8 h</div><div class="stat-lbl">par fournée selon le système et la biomasse (contre plusieurs jours en meule)</div></div>
+    <div class="card p-5 text-center reveal"><div class="stat-num">650-750 °C</div><div class="stat-lbl">zone de pyrolyse sous les flammes</div></div>
+    <div class="card p-5 text-center reveal"><div class="stat-num">≈ 25 kg/h</div><div class="stat-lbl">biomasse traitée (taille fût, mesuré)</div></div>
+  </div>
+</section>
+
+<section id="systemes" class="py-20 px-4 max-w-7xl mx-auto" style="background:var(--bg2)">
+  <div class="text-center reveal">
+    <div class="kicker">Comparatif</div>
+    <h2 class="section-title">Les grandes familles de fours</h2>
+    <p class="section-sub">Toutes reposent sur le même principe physique (rideau de flammes sur cavité), mais les compromis coût / débit / confort diffèrent fortement. Avantages et inconvénients issus des documents de référence et des retours terrain.</p>
+  </div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5" id="systemsGrid"></div>
+  <div class="mt-10 overflow-x-auto card p-5 reveal">
+    <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-table mr-2"></i>Tableau comparatif</h3>
+    <table class="cmp">
+      <thead><tr>
+        <th>Critère</th><th>Tranchée</th><th>Auge</th><th>TLUD fût</th><th>Kon-Tiki cône</th><th>Retort</th><th style="color:var(--accent)">RoCC cadre H (fût)</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Coût</td><td>0 €</td><td>élevé (acier)</td><td>20-90 €</td><td>30-5000 €</td><td>moyen à élevé</td><td class="hl">0-100 €</td></tr>
+        <tr><td>Débit biochar</td><td>faible</td><td>~250 kg/j</td><td>~5 kg/fournée</td><td>~1 m³ / après-midi</td><td>par fournée</td><td class="hl">~30 kg/j mesuré, 5 kg/h</td></tr>
+        <tr><td>Biomasse acceptée</td><td>tout, fin</td><td>tout, long</td><td>sèche, petite</td><td>tout jusqu'à 1,2 m, humide OK</td><td>grosse, sèche</td><td class="hl">tiges, branches, plaquettes, bois fendu</td></tr>
+        <tr><td>Attention requise</td><td>constante</td><td>constante</td><td>faible (fournée)</td><td>constante (5-10 min)</td><td>faible à moyenne</td><td class="hl">présente mais souple (15-20 min)</td></tr>
+        <tr><td>Sensibilité vent / pluie</td><td>forte</td><td>forte</td><td>faible</td><td>moyenne (bouclier)</td><td>faible</td><td class="hl">faible (cylindre couvert)</td></tr>
+        <tr><td>Mélange en cours de cuisson</td><td>non</td><td>non</td><td>non</td><td>non</td><td>non</td><td class="hl">oui (rotation)</td></tr>
+        <tr><td>Vidange</td><td>manuelle</td><td>manuelle</td><td>basculer</td><td>eau + bascule</td><td>refroidir + lever</td><td class="hl">gravité</td></tr>
+        <tr><td>Protection de l'opérateur</td><td>aucune</td><td>aucune</td><td>bonne</td><td>partielle</td><td>bonne</td><td class="hl">bonne (cylindre)</td></tr>
+        <tr><td>Récupération de chaleur</td><td>non</td><td>non</td><td>cuisson</td><td>oui (~1 MWh/cuisson)</td><td>oui</td><td class="hl">oui (hotte + cheminées)</td></tr>
+        <tr><td>Évolutivité</td><td>non</td><td>limitée</td><td>non</td><td>oui (jusqu'à 2 m³)</td><td>moyenne</td><td class="hl">oui (cylindres de 3 m × 2,1 m documentés)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="choix" class="py-20 px-4 max-w-6xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Le choix retenu</div>
+    <h2 class="section-title">RoCC à cadre H sur fût de 200 L</h2>
+    <p class="section-sub">Un cylindre fermé (le fût) percé d'un portail latéral, monté sur deux essieux courts dans un cadre en H. On le fait tourner à la main pour mélanger, charger et vider. C'est le système recommandé par l'inventeur depuis 2021 et le seul éprouvé en production quotidienne à ce niveau de coût.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5 mb-8">
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3" style="color:var(--green)"><i class="fa-solid fa-circle-check mr-2"></i>Ce que le terrain confirme</h3>
+      <ul class="space-y-2 text-sm" style="color:#d8ccbc">
+        <li><b>Production réelle</b> : au Kenya (2021-2022), 1 travailleur, 1 fournée de 2-3 h par jour sur un four à 2 fûts → <b>29 kg de biochar en moyenne</b> (10-15 kg par fût) ; 4,2 t produites en 8 mois avec tiges de maïs, broussailles, herbes, bagasse.</li>
+        <li><b>Fabrication</b> : premier four kenyan construit en <b>24 h à deux</b> sur le porche d'un atelier de soudure.</li>
+        <li><b>Coût</b> : four 2 fûts avec roues &lt; 200 USD au Kenya ; ~100 USD de matériaux neufs pour le cadre H seul.</li>
+        <li><b>Rendement</b> : 19 % mesuré avec bois fendu sec (60 kg → 9,4 kg de charbon en 2 h 30).</li>
+        <li><b>Émissions</b> : surtout des flammes franches dans les cheminées ; brèves fumées uniquement pendant le chargement.</li>
+      </ul>
+    </div>
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3" style="color:var(--gold)"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Limites à connaître</h3>
+      <ul class="space-y-2 text-sm" style="color:#d8ccbc">
+        <li><b>Soudure</b> nécessaire (ou boulonnage soigné) — c'est le principal prérequis.</li>
+        <li>Un cylindre horizontal contient <b>moins de biomasse</b> qu'une cuve verticale à encombrement égal.</li>
+        <li>Chargement un peu moins direct qu'un four ouvert (par le portail).</li>
+        <li>Sciure et balles de riz : <b>difficile</b> — uniquement en alimentation continue par très petites quantités.</li>
+        <li><b>Brevet</b> : technologie RoCC brevetée aux États-Unis et en instance dans 41 pays européens (jusque vers 2040). Usage personnel encouragé ; en cas de gains commerciaux, un partage avec l'inventeur est attendu (contact : psanders@ilstu.edu).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="space-y-4">
+    <div class="quote reveal">« 1 travailleur, 1 fournée, 1 four, 1 jour : 29 kg de biochar en moyenne. 1 semaine → 100 kg. 10 semaines → 1 tonne. »<span class="src">Biochar Pamoja Kenya — webinaire Green Carbon, 24/02/2022 (données juil. 2021 → févr. 2022)</span></div>
+    <div class="quote reveal">« L'unité complète a été fabriquée en 24 heures par deux ouvriers sur le porche d'un atelier de soudure d'une communauté rurale kenyanne. »<span class="src">RoCC Barrel-size Char-Maker : Kenya Experience, woodgas.com, 28/03/2020</span></div>
+    <div class="quote reveal">« Le coût du four est quasi négligeable devant les coûts d'exploitation : moins de 200 USD, cela fait moins de 0,50 USD par jour sur un an. »<span class="src">RoCC Kilns and Biochar in Kenya, 24/02/2022</span></div>
+  </div>
+  <div class="info-strip mt-6 reveal">
+    <i class="fa-solid fa-lightbulb mt-0.5" style="color:var(--gold)"></i>
+    <div><b>Leçons publiées par l'inventeur (2023) — ce qu'il ne faut PAS faire :</b> porte inutile ; hotte et cheminées inutiles dans la plupart des cas (optionnelles) ; grille de portail inutile ; acier doux suffisant (l'inox est inutile) ; pas d'isolation ; peinture et galvanisation ne tiennent pas ; user de la récupération autant que possible.</div>
+  </div>
+  <div class="card p-6 mt-6 reveal" style="border-color:rgba(242,163,60,.35)">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <h3 class="font-semibold">Vous préférez le cône vertical — ou le coût zéro ?</h3>
+        <p class="text-sm mt-1" style="color:var(--muted)">L'atelier Kon-Tiki (cône métallique open source) et sa variante primitive (fosse conique, validée par la mesure) sont aussi documentés, avec leur conduite de feu spécifique.</p>
+      </div>
+      <a href="#kontiki" class="btn btn-ghost" style="white-space:nowrap"><i class="fa-solid fa-volcano"></i> Voir l'atelier Kon-Tiki</a>
+    </div>
+  </div>
+</section>
+
+<section id="dimensionnement" class="py-20 px-4 max-w-6xl mx-auto" style="background:var(--bg2)">
+  <div class="text-center reveal">
+    <div class="kicker">Dimensionnement</div>
+    <h2 class="section-title">Calculateur : de votre fût à la liste de débit</h2>
+    <p class="section-sub">Entrez les dimensions de votre cylindre et les tubes dont vous disposez : l'outil génère la liste de débit, le plan de perçage, vérifie le jeu de rotation essieu/manchon et estime le budget. Tout est en unités métriques.</p>
+  </div>
+  <div class="grid lg:grid-cols-5 gap-6">
+    <div class="lg:col-span-2 card p-6 reveal">
+      <h3 class="font-semibold mb-4 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-sliders mr-2"></i>Paramètres</h3>
+      <div class="mb-4">
+        <label class="field-lbl" for="preset">Cylindre</label>
+        <select id="preset">
+          <option value="fut200" selected>Fût standard 200 L (Ø 57,5 cm × 86 cm)</option>
+          <option value="custom">Dimensions personnalisées</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div><label class="field-lbl" for="inD">Diamètre (cm)</label><input type="number" id="inD" value="57.5" min="30" max="150" step="0.5"></div>
+        <div><label class="field-lbl" for="inL">Longueur (cm)</label><input type="number" id="inL" value="86" min="40" max="250" step="1"></div>
+      </div>
+      <div class="mb-4">
+        <label class="field-lbl" for="inSq">Tube carré du cadre</label>
+        <select id="inSq">
+          <option value="25" selected>25 × 25 mm (recommandé)</option>
+          <option value="30">30 × 30 mm (plus rigide)</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <div><label class="field-lbl" for="inAxle">Essieu Ø ext. (mm)</label><input type="number" id="inAxle" value="32" min="15" max="60" step="0.5"></div>
+        <div><label class="field-lbl" for="inSleeve">Manchon Ø ext. (mm)</label><input type="number" id="inSleeve" value="40" min="20" max="80" step="0.5"></div>
+        <div><label class="field-lbl" for="inWall">Épaisseur paroi (mm)</label><input type="number" id="inWall" value="2.6" min="1" max="6" step="0.1"></div>
+      </div>
+      <div class="mb-4">
+        <label class="field-lbl" for="inAsm">Assemblage</label>
+        <select id="inAsm">
+          <option value="weld" selected>Soudé (plus rapide, plus solide)</option>
+          <option value="bolt">Boulonné (démontable pour transport)</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="field-lbl">Options</label>
+        <label class="chk"><input type="checkbox" id="optWheels" checked> Roues métalliques (transport au champ)</label>
+        <label class="chk"><input type="checkbox" id="optHood"> Hotte + 2 cheminées (émissions, récupération de chaleur)</label>
+        <label class="chk"><input type="checkbox" id="optTray" checked> Tôle de décharge (vidange dirigée)</label>
+        <label class="chk"><input type="checkbox" id="optShelf"> Étagère de chargement</label>
+      </div>
+    </div>
+    <div class="lg:col-span-3 space-y-5">
+      <div class="card p-6 reveal">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold text-sm" style="color:var(--accent2)"><i class="fa-solid fa-list-check mr-2"></i>Liste de débit</h3>
+          <span id="clearBadge" class="badge-ok">Jeu de rotation : OK</span>
+        </div>
+        <table class="out-table" id="cutTable"></table>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="card p-6 reveal">
+          <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-drafting-compass mr-2"></i>Portail &amp; perçages</h3>
+          <div id="portalOut" class="text-sm space-y-1.5" style="color:#d8ccbc"></div>
+        </div>
+        <div class="card p-6 reveal">
+          <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-coins mr-2"></i>Budget &amp; production estimés</h3>
+          <div id="budgetOut" class="text-sm space-y-1.5" style="color:#d8ccbc"></div>
+        </div>
+      </div>
+      <div class="card p-6 reveal">
+        <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-circle-info mr-2"></i>Capacités attendues (valeurs mesurées, taille fût)</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div><div class="stat-num text-xl">≈ 25 kg/h</div><div class="stat-lbl">biomasse sèche traitée</div></div>
+          <div><div class="stat-num text-xl">≈ 5 kg/h</div><div class="stat-lbl">biochar produit (rendement ~20 %)</div></div>
+          <div><div class="stat-num text-xl">10-15 kg</div><div class="stat-lbl">biochar par fournée de 2-3 h</div></div>
+          <div><div class="stat-num text-xl">≈ 83 kWh/h</div><div class="stat-lbl">énergie thermique dégagée</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fabrication" class="py-20 px-4 max-w-6xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Atelier</div>
+    <h2 class="section-title">Fabrication pas à pas</h2>
+    <p class="section-sub">Sept étapes, de la préparation du fût au premier essai de rotation. Cochez au fur et à mesure. Comptez un week-end avec soudure ; davantage si vous boulonnez tout à la perceuse.</p>
+  </div>
+  <div class="mb-6 reveal">
+    <div class="flex justify-between text-xs mb-2" style="color:var(--muted)"><span>Progression</span><span id="progressTxt">0 / 7</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="card p-6 mb-6 reveal">
+    <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Matériel et outils</h3>
+    <div class="grid md:grid-cols-2 gap-4 text-sm" style="color:#d8ccbc">
+      <div>
+        <b>Matériaux</b> (voir liste de débit du dimensionneur) :
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>1 fût métallique de 200 L (propre, jamais de produits toxiques)</li>
+          <li>Tube carré acier (25×25 ou 30×30 mm)</li>
+          <li>2 platines acier 3 mm (30 × 30 cm) + tube essieu Ø 32 mm</li>
+          <li>Tube manchon Ø 40 mm (alésage ≥ 34 mm)</li>
+          <li>Visserie M8, 2 tiges filetées M10 × 35 cm, écrous, rondelles</li>
+          <li>2 poignées (tube, fer à béton ou manche récupéré) ; roues métalliques en option</li>
+        </ul>
+      </div>
+      <div>
+        <b>Outils</b> :
+        <ul class="list-disc ml-5 mt-1 space-y-1">
+          <li>Poste à souder (ou perceuse + boulonnerie)</li>
+          <li>Meuleuse avec disque à tronçonner + disque à ébavurer</li>
+          <li>Perceuse, forets Ø 8 et Ø 10 mm</li>
+          <li>Mètre, équerre, niveau, serre-joints, craie de marquage</li>
+          <li>Lunettes, gants cuir, vêtements en fibres naturelles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-3" id="stepsBox"></div>
+  <div class="card p-6 mt-8 reveal">
+    <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-compass-drafting mr-2"></i>Schéma de principe</h3>
+    <div class="overflow-x-auto">
+      <svg viewBox="0 0 900 330" class="w-full" style="min-width:640px">
+        <text x="210" y="22" fill="#d9a94a" font-size="13" font-weight="600" text-anchor="middle">Vue de face (côté portail)</text>
+        <g stroke="#94867a" stroke-width="2" fill="none">
+          <line x1="60" y1="70" x2="60" y2="270"/><line x1="360" y1="70" x2="360" y2="270"/>
+          <line x1="60" y1="70" x2="160" y2="70"/><line x1="260" y1="70" x2="360" y2="70"/>
+          <line x1="60" y1="270" x2="360" y2="270"/>
+          <line x1="60" y1="270" x2="360" y2="120" stroke-dasharray="5 4" opacity=".55"/>
+          <line x1="360" y1="270" x2="60" y2="120" stroke-dasharray="5 4" opacity=".55"/>
+        </g>
+        <circle cx="210" cy="165" r="78" fill="none" stroke="#e8622b" stroke-width="3"/>
+        <path d="M 158 108 A 78 78 0 0 1 262 108" fill="none" stroke="#12100e" stroke-width="7"/>
+        <path d="M 158 108 A 78 78 0 0 1 262 108" fill="none" stroke="#f2a33c" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="210" y="92" fill="#f2a33c" font-size="11" text-anchor="middle">portail (~33 cm sur la courbure)</text>
+        <rect x="198" y="158" width="24" height="14" fill="none" stroke="#94867a" stroke-width="1.5"/>
+        <line x1="210" y1="165" x2="210" y2="140" stroke="#94867a" stroke-width="1.5"/>
+        <circle cx="210" cy="165" r="4" fill="#94867a"/>
+        <text x="210" y="200" fill="#94867a" font-size="10" text-anchor="middle">essieu court + platine 30×30</text>
+        <line x1="60" y1="158" x2="132" y2="158" stroke="#7fae6e" stroke-width="2"/>
+        <line x1="288" y1="158" x2="360" y2="158" stroke="#7fae6e" stroke-width="2"/>
+        <text x="96" y="150" fill="#7fae6e" font-size="10" text-anchor="middle">entretoise à 40 cm du haut</text>
+        <circle cx="60" cy="278" r="8" fill="none" stroke="#94867a" stroke-width="2"/>
+        <circle cx="360" cy="278" r="8" fill="none" stroke="#94867a" stroke-width="2"/>
+        <text x="210" y="300" fill="#94867a" font-size="10" text-anchor="middle">montants : 100 cm · barres basses : 120 cm · croisillon arrière en X : 180 cm</text>
+        <text x="670" y="22" fill="#d9a94a" font-size="13" font-weight="600" text-anchor="middle">Vue de côté</text>
+        <g stroke="#94867a" stroke-width="2" fill="none">
+          <line x1="480" y1="270" x2="860" y2="270"/>
+          <line x1="500" y1="270" x2="500" y2="90"/><line x1="840" y1="270" x2="840" y2="90"/>
+          <line x1="500" y1="158" x2="560" y2="158"/><line x1="780" y1="158" x2="840" y2="158"/>
+        </g>
+        <rect x="560" y="87" width="220" height="156" rx="10" fill="none" stroke="#e8622b" stroke-width="3"/>
+        <line x1="560" y1="165" x2="500" y2="165" stroke="#94867a" stroke-width="2"/>
+        <line x1="780" y1="165" x2="840" y2="165" stroke="#94867a" stroke-width="2"/>
+        <circle cx="500" cy="165" r="4" fill="#94867a"/><circle cx="840" cy="165" r="4" fill="#94867a"/>
+        <path d="M 640 87 L 700 87" stroke="#f2a33c" stroke-width="3"/>
+        <text x="670" y="76" fill="#f2a33c" font-size="11" text-anchor="middle">portail (largeur ≈ longueur − 8 cm)</text>
+        <line x1="840" y1="165" x2="884" y2="132" stroke="#7fae6e" stroke-width="2.5"/>
+        <text x="862" y="120" fill="#7fae6e" font-size="10" text-anchor="middle">poignée 60-75 cm</text>
+        <circle cx="520" cy="278" r="8" fill="none" stroke="#94867a" stroke-width="2"/>
+        <circle cx="820" cy="278" r="8" fill="none" stroke="#94867a" stroke-width="2"/>
+        <text x="670" y="300" fill="#94867a" font-size="10" text-anchor="middle">le cadre peut être tourné de 90° pour abaisser le portail près du sol (chargement)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="kontiki" class="py-20 px-4 max-w-6xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Second atelier</div>
+    <h2 class="section-title">Kon-Tiki : le cône à rideau de flammes</h2>
+    <p class="section-sub">L'autre grande famille validée par le terrain : une cuve conique ouverte, allumée par le haut, où chaque couche de biomasse pyrolyse sous le rideau de flammes. Deux versions documentées ici : le cône métallique (Ithaka, open source) et sa variante primitive — une simple fosse conique, dont les résultats sont validés par la mesure.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5 mb-8">
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3" style="color:var(--accent2)"><i class="fa-solid fa-volcano mr-2"></i>Version 1 — le cône métallique</h3>
+      <ol class="list-decimal ml-5 text-sm space-y-2" style="color:#d8ccbc">
+        <li><b>Tracé</b> : paroi inclinée à 63-70° ; dimensions de référence Ø supérieur 1,5 m × hauteur 0,9 m (~850 L, soit ~1 m³ de biochar par fournée). Deux tôles de 2,4 × 1,2 m en acier doux 3 mm suffisent (diamètre maximal réalisable : ~1,65 m) — l'inox est inutile.</li>
+        <li><b>Roulage du cône</b> puis soudure du joint (rouleuse ou chaudronnier). Sans rouleuse : <b>variante octogonale</b> — 8 panneaux trapézoïdaux découpés dans 2 tôles de 2,0 × 1,0 m (idée publiée par un utilisateur), soudés ou boulonnés entre cornières.</li>
+        <li><b>Fond</b> : petit cône ou platine soudée en partie basse ; prévoir un robinet ou un tube obturable au point le plus bas pour l'extinction par le bas (activation à la vapeur, voir plus bas).</li>
+        <li><b>Bouclier de rive</b> : cylindre en tôle fine (0,8 mm, galvanisée) dépassant de ~10 cm au-dessus du bord, avec un jour autour du cône. Simplement posé, amovible : il préchauffe l'air, protège des rafales et stabilise le vortex ; il reste sous 60 °C.</li>
+        <li><b>Pieds et vidange</b> : pieds stables sur sol plat et nu ; charnières de basculement ou tourillons pour vider le four (suggestion d'utilisateurs). Éviter les supports sensibles à la chaleur.</li>
+        <li><b>Essai</b> : première fournée avec bois sec en couches minces ; le rideau de flammes doit couvrir toute la surface — ajustez le rythme d'ajout des couches.</li>
+      </ol>
+    </div>
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3" style="color:var(--accent2)"><i class="fa-solid fa-trowel mr-2"></i>Version 2 — la fosse conique (variante primitive)</h3>
+      <ol class="list-decimal ml-5 text-sm space-y-2" style="color:#d8ccbc">
+        <li><b>Creuser</b> : trou conique, Ø 1 à 2 m en surface, profondeur 0,9 à 1,5 m, parois aussi lisses et régulières que possible, dans un sol stable. Les parois de terre jouent le rôle de cavité protégeant le charbon de l'air.</li>
+        <li><b>Améliorations optionnelles</b> : collerette en tôle conique de 50 cm de haut, enterrée au tiers (retour du Népal : combustion plus propre) ; parois d'argile ou de pierres ; bouclier en tôle au-dessus du bord.</li>
+        <li><b>Même conduite que le Kon-Tiki</b> : lit de braises initial bien établi au fond, puis couches successives dès que la cendre blanche apparaît. Extinction à l'eau, ou sous 5-10 cm de terre, de sable ou de fumier.</li>
+        <li><b>Sécurité</b> : baliser et condamner le trou ouvert (enfants, animaux, nuit) ; reboucher ou couvrir après usage.</li>
+      </ol>
+      <div class="quote mt-4">Mesuré au Népal (17 cuissons instrumentées) : rendements, teneur en carbone et émissions des fosses coniques <b>comparables aux cônes tout acier</b> — la solution gratuite est scientifiquement validée.<span class="src">Cornelissen et al. 2016, PLOS ONE</span></div>
+    </div>
+  </div>
+
+  <div class="card p-6 mb-8 reveal">
+    <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-compass-drafting mr-2"></i>Schéma de principe</h3>
+    <div class="overflow-x-auto">
+      <svg viewBox="0 0 900 360" class="w-full" style="min-width:640px">
+        <defs>
+          <marker id="arrk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94867a"/></marker>
+        </defs>
+        <text x="215" y="24" fill="#d9a94a" font-size="13" font-weight="600" text-anchor="middle">Cône métallique (Kon-Tiki)</text>
+        <line x1="30" y1="300" x2="430" y2="300" stroke="#3a322a" stroke-width="2"/>
+        <path d="M 75 110 L 165 290 L 265 290 L 355 110" fill="rgba(232,98,43,.05)" stroke="#e8622b" stroke-width="3"/>
+        <line x1="58" y1="118" x2="58" y2="56" stroke="#d9a94a" stroke-width="2"/>
+        <line x1="372" y1="118" x2="372" y2="56" stroke="#d9a94a" stroke-width="2"/>
+        <line x1="52" y1="56" x2="64" y2="56" stroke="#d9a94a" stroke-width="2"/>
+        <line x1="366" y1="56" x2="378" y2="56" stroke="#d9a94a" stroke-width="2"/>
+        <text x="215" y="50" fill="#d9a94a" font-size="10" text-anchor="middle">bouclier de rive (tôle 0,8 mm, dépasse de ~10 cm)</text>
+        <ellipse cx="215" cy="282" rx="42" ry="7" fill="rgba(232,98,43,.55)"/>
+        <line x1="172" y1="255" x2="258" y2="255" stroke="#94867a" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <line x1="152" y1="228" x2="278" y2="228" stroke="#94867a" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <line x1="132" y1="201" x2="298" y2="201" stroke="#94867a" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M 140 198 q 7 -24 14 0 q 7 -18 14 0 q 7 -26 14 0 q 7 -16 14 0 q 7 -22 14 0 q 7 -18 14 0 q 7 -24 14 0 q 7 -16 14 0 q 7 -20 14 0 q 7 -18 14 0" fill="none" stroke="#f2a33c" stroke-width="2.5"/>
+        <text x="215" y="152" fill="#f2a33c" font-size="11" text-anchor="middle">rideau de flammes — pyrolyse à 650-700 °C dessous</text>
+        <text x="215" y="246" fill="#94867a" font-size="9.5" text-anchor="middle">couches successives de biomasse</text>
+        <text x="215" y="316" fill="#94867a" font-size="9.5" text-anchor="middle">lit de braises</text>
+        <line x1="75" y1="92" x2="355" y2="92" stroke="#94867a" stroke-width="1.5" marker-start="url(#arrk)" marker-end="url(#arrk)"/>
+        <text x="215" y="84" fill="#94867a" font-size="10" text-anchor="middle">Ø supérieur ~1,5 m</text>
+        <line x1="400" y1="110" x2="400" y2="290" stroke="#94867a" stroke-width="1.5" marker-start="url(#arrk)" marker-end="url(#arrk)"/>
+        <text x="412" y="205" fill="#94867a" font-size="10" text-anchor="middle" transform="rotate(90 412 205)">hauteur ~0,9 m</text>
+        <path d="M 40 250 L 40 140" stroke="#7fae6e" stroke-width="2" marker-end="url(#arrk)"/>
+        <text x="26" y="200" fill="#7fae6e" font-size="9.5" text-anchor="middle" transform="rotate(-90 26 200)">air préchauffé par la paroi</text>
+        <text x="670" y="24" fill="#d9a94a" font-size="13" font-weight="600" text-anchor="middle">Variante primitive : la fosse conique</text>
+        <line x1="470" y1="140" x2="880" y2="140" stroke="#3a322a" stroke-width="2.5"/>
+        <path d="M 530 140 L 670 300 L 810 140" fill="rgba(232,98,43,.05)" stroke="#e8622b" stroke-width="3"/>
+        <ellipse cx="670" cy="288" rx="24" ry="6" fill="rgba(232,98,43,.55)"/>
+        <path d="M 648 284 q 6 -20 11 0 q 6 -14 11 0 q 6 -22 11 0 q 6 -14 11 0" fill="none" stroke="#f2a33c" stroke-width="2.5"/>
+        <line x1="530" y1="122" x2="810" y2="122" stroke="#94867a" stroke-width="1.5" marker-start="url(#arrk)" marker-end="url(#arrk)"/>
+        <text x="670" y="114" fill="#94867a" font-size="10" text-anchor="middle">Ø surface : 1 à 2 m</text>
+        <line x1="845" y1="140" x2="845" y2="300" stroke="#94867a" stroke-width="1.5" marker-start="url(#arrk)" marker-end="url(#arrk)"/>
+        <text x="858" y="225" fill="#94867a" font-size="10" text-anchor="middle" transform="rotate(90 858 225)">profondeur : 0,9 à 1,5 m</text>
+        <text x="670" y="322" fill="#94867a" font-size="9.5" text-anchor="middle">feu et couches au fond — parois de terre = cavité protectrice</text>
+        <text x="670" y="342" fill="#94867a" font-size="9.5" text-anchor="middle">variante : collerette en tôle conique de 50 cm, enterrée au tiers (Népal), ou parois d'argile / pierres</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-5">
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-fire-flame-simple mr-2"></i>Conduite du feu (propre au Kon-Tiki)</h3>
+      <ol class="list-decimal ml-5 text-sm space-y-2" style="color:#d8ccbc">
+        <li><b>Allumage « cheminée de bois »</b> : montez au centre du four une cheminée carrée de bois sec, ajourée, jusqu'aux 3/4 de la hauteur. Enflammez <b>par le haut</b> : après ~10 minutes, des morceaux en feu tombent et allument le fond ; 5 minutes plus tard, effondrez la cheminée et étalez les braises.</li>
+        <li><b>Première couche</b> : quand le lit de braises est franc et que la surface se couvre de cendre blanche, étalez une première couche mince et régulière.</li>
+        <li><b>Couches successives</b> : ajoutez la suivante dès que la cendre blanche apparaît en surface (toutes les 5-10 minutes). Trop d'un coup : le rideau faiblit, ça fume ; trop peu : le charbon passe en cendres.</li>
+        <li><b>Remplissage</b> : au maximum jusqu'à 10 cm sous le bord (sinon le vortex de gaz est perturbé). Les 2-3 dernières couches en matériaux fins faciles à carboniser.</li>
+        <li><b>Extinction</b> : par le bas (robinet ouvert ~20 min avant la fin : la vapeur montante éteint doucement et <b>active</b> le charbon — la dernière couche de braises qui surnage s'arrose par le haut) ; ou par arrosage copieux par le haut ; ou étouffement sous 5-10 cm de terre (charbon réservé au combustible, plus riche en goudrons).</li>
+        <li><b>Eau d'extinction</b> : claire, savonneuse et très basique — utilisable au jardin contre limaces et champignons (observation de terrain).</li>
+      </ol>
+    </div>
+    <div class="space-y-5">
+      <div class="card p-6 reveal">
+        <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-chart-simple mr-2"></i>Chiffres clés (mesurés et publiés)</h3>
+        <div class="grid grid-cols-2 gap-4 text-center">
+          <div><div class="stat-num text-xl">~1 m³</div><div class="stat-lbl">biochar par fournée</div></div>
+          <div><div class="stat-num text-xl">2-8 h</div><div class="stat-lbl">copeaux secs 2 h · tailles fraîches 4-5 h · bois vert 8 h</div></div>
+          <div><div class="stat-num text-xl">15-20 %</div><div class="stat-lbl">rendement matière sèche</div></div>
+          <div><div class="stat-num text-xl">1,2 m</div><div class="stat-lbl">longueur de morceaux acceptés · biomasse humide OK</div></div>
+          <div><div class="stat-num text-xl">~1 MWh</div><div class="stat-lbl">chaleur dégagée par fournée</div></div>
+          <div><div class="stat-num text-xl">2-4 fours</div><div class="stat-lbl">menés par une personne (1-1,5 t/jour)</div></div>
+        </div>
+      </div>
+      <div class="info-strip reveal">
+        <i class="fa-solid fa-droplet mt-0.5" style="color:var(--accent2)"></i>
+        <div><b>L'extinction par le bas est une activation</b> : la vapeur à 600-700 °C traverse le lit de charbon, expulse les condensats des pores et augmente la surface spécifique (289 m²/g mesurés sur un Kon-Tiki arrosé). À défaut de robinet, arrosez copieusement le charbon étalé encore chaud. Voir la section Utilisation : « Ouvrir les pores du charbon ».</div>
+      </div>
+      <div class="info-strip reveal">
+        <i class="fa-solid fa-wind mt-0.5" style="color:var(--gold)"></i>
+        <div><b>Limite connue</b> : présence continue obligatoire pendant toute la fournée, et sensibilité aux rafales sans bouclier de rive. C'est le prix du débit élevé et de la qualité EBC.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="utilisation" class="py-20 px-4 max-w-6xl mx-auto" style="background:var(--bg2)">
+  <div class="text-center reveal">
+    <div class="kicker">Utilisation</div>
+    <h2 class="section-title">Conduite du four : les positions du portail</h2>
+    <p class="section-sub">Le portail (l'ouverture) se positionne en tournant le fût. 0° = portail en haut, rotation dans le sens horaire. L'étiquetage par lettres varie selon les documents : fiez-vous aux angles et aux fonctions.</p>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-8 items-start">
+    <div class="card p-6 reveal">
+      <svg viewBox="0 0 260 260" class="w-full max-w-xs mx-auto">
+        <circle cx="130" cy="130" r="100" fill="none" stroke="#3a322a" stroke-width="2"/>
+        <circle cx="130" cy="130" r="86" fill="none" stroke="#94867a" stroke-width="2.5"/>
+        <line x1="20" y1="238" x2="240" y2="238" stroke="#3a322a" stroke-width="2"/>
+        <line x1="230" y1="130" x2="252" y2="130" stroke="#7fae6e" stroke-width="3"/>
+        <text x="248" y="120" fill="#7fae6e" font-size="9" text-anchor="end">étagère (3 h)</text>
+        <g id="portalGroup" style="transition:transform .6s ease; transform-origin:130px 130px">
+          <path d="M 74.7 64.2 A 86 86 0 0 1 185.3 64.2" fill="none" stroke="#e8622b" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="130" cy="44" r="4" fill="#f2a33c"/>
+        </g>
+        <text x="130" y="20" fill="#94867a" font-size="10" text-anchor="middle">0°</text>
+        <text x="245" y="145" fill="#94867a" font-size="10" text-anchor="end">90°</text>
+        <text x="130" y="255" fill="#94867a" font-size="10" text-anchor="middle">180°</text>
+        <text x="18" y="145" fill="#94867a" font-size="10">270°</text>
+      </svg>
+      <div class="flex flex-wrap justify-center gap-2 mt-4" id="posBtns"></div>
+    </div>
+    <div class="space-y-4">
+      <div class="card p-5 reveal">
+        <h3 class="font-semibold mb-1 text-sm" id="posTitle" style="color:var(--accent2)">Position normale — alimentation sur étagère</h3>
+        <p class="text-sm" id="posDesc" style="color:#d8ccbc"></p>
+      </div>
+      <div class="card p-5 reveal">
+        <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-fire-flame-simple mr-2"></i>Déroulé d'une fournée typique (2-3 h)</h3>
+        <ol class="list-decimal ml-5 text-sm space-y-2" style="color:#d8ccbc">
+          <li><b>Allumage</b> : portail vers le haut, petit feu de démarrage au fond (copeaux, brindilles sèches). Laisser s'installer un lit de braises.</li>
+          <li><b>Passage en position normale</b> (portail à ~50°, bord bas aligné avec l'étagère ou à hauteur de chargement).</li>
+          <li><b>Alimentation par couches minces</b> toutes les 15-20 minutes : la biomasse doit « voir » la flamme. Trop d'un coup = fumée ; trop peu = cendres.</li>
+          <li><b>Mélange occasionnel</b> : un balancement ou une rotation complète pour exposer les morceaux mal pyrolysés.</li>
+          <li><b>Fin de fournée</b> : quand le volume de charbon approche du portail, cesser d'alimenter et laisser le rideau de flammes consommer les derniers gaz.</li>
+          <li><b>Vidange</b> : portail vers le bas (140-220°), le charbon chaud tombe sur la tôle de décharge. Balancer doucement pour aider.</li>
+          <li><b>Extinction et activation</b> : arroser copieusement le tas de charbon étalé — la vapeur produite traverse le charbon chaud et nettoie ses pores (voir ci-dessous). À défaut, étouffer sous la terre, mais ce charbon moins propre sera réservé au combustible. Surveiller jusqu'à refroidissement complet.</li>
+          <li><b>Test qualité</b> : pas de trace noire sur les mains, structure du bois d'origine conservée et miniaturisée, aucun morceau mi-cru, pas d'odeur de goudron.</li>
+        </ol>
+      </div>
+      <div class="card p-5 reveal">
+        <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)"><i class="fa-solid fa-splotch mr-2"></i>Ouvrir les pores du charbon : l'activation</h3>
+        <p class="text-sm mb-2" style="color:#d8ccbc">À la sortie du four, une partie des pores est obstruée par des condensats (goudrons) : le charbon est hydrophobe et peut freiner la germination. Trois étapes pour l'ouvrir :</p>
+        <ol class="list-decimal ml-5 text-sm space-y-2" style="color:#d8ccbc">
+          <li><b>La vapeur de l'extinction</b> : l'eau versée sur le charbon chaud se vaporise, traverse le tas et expulse goudrons et polluants des pores. Mesuré : un charbon éteint à l'eau développe une surface spécifique bien plus grande qu'un charbon étouffé à sec (215 contre 149 m²/g) et contient moins d'HAP — qualité « premium » contre « basic ». C'est le moment clé : arrosez le charbon <b>étalé et encore chaud</b>, à distance (vapeur brûlante).</li>
+          <li><b>Concasser</b> : réduire en morceaux de 0,5 à 2 cm multiplie la surface accessible à l'eau, aux nutriments et à la vie du sol.</li>
+          <li><b>Charger</b> : composter plusieurs semaines avec compost ou fumier — les micro-organismes colonisent les pores, finissent de consommer les goudrons et rendent le charbon hydrophile.</li>
+        </ol>
+      </div>
+      <div class="info-strip reveal">
+        <i class="fa-solid fa-seedling mt-0.5" style="color:var(--green)"></i>
+        <div><b>Avant d'aller au sol</b> : le biochar frais capte l'azote du sol. Une fois activé, chargez-le : compostez-le plusieurs semaines, ou mélangez 1 volume de fumier pour 2 volumes de biochar (ratio pratiqué au Kenya), ou arrosez d'urine diluée. Incorporer ensuite à la plantation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="depannage" class="py-20 px-4 max-w-4xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Dépannage</div>
+    <h2 class="section-title">Problèmes courants, solutions de terrain</h2>
+    <p class="section-sub">Issues des retours d'utilisateurs et des leçons publiées.</p>
+  </div>
+  <div class="space-y-3" id="accBox"></div>
+</section>
+
+<section id="securite" class="py-20 px-4 max-w-6xl mx-auto" style="background:var(--bg2)">
+  <div class="text-center reveal">
+    <div class="kicker">Sécurité</div>
+    <h2 class="section-title">Avant le premier feu</h2>
+    <p class="section-sub">Le feu ne pardonne pas l'improvisation. Ces règles viennent d'incidents réellement rapportés par les utilisateurs.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="warn-strip reveal"><i class="fa-solid fa-skull-crossbones mt-0.5" style="color:var(--red)"></i><div><b>Monoxyde de carbone</b> : incolore, inodore, mortel. Le four tourne toujours <b>dehors</b>, jamais dans un bâtiment fermé ou sous un abri bas, même « juste pour essayer ».</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-fire mt-0.5" style="color:var(--red)"></i><div><b>Auto-inflammation du charbon frais</b> : le biochar chaud peut se rallumer seul au contact de l'air au-dessus de ~350 °C. Des bennes de camion ont brûlé ainsi. Ne jamais stocker du charbon tiède dans un bâtiment, un véhicule ou près de matières inflammables.</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-hand-back-fist mt-0.5" style="color:var(--red)"></i><div><b>Rayonnement</b> : si vous « voyez » la flamme, vous recevez son rayonnement. Gants cuir, manches longues en fibres naturelles (jamais de synthétique), lunettes ; le cylindre du RoCC est justement votre écran — restez de son côté.</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-droplet mt-0.5" style="color:var(--red)"></i><div><b>Eau sur métal brûlant</b> : vapeur surchauffée et projections. Arrosez le charbon étalé, pas la tôle rouge ; à distance, progressivement.</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-wind mt-0.5" style="color:var(--red)"></i><div><b>Vent et sécheresse</b> : ne pas lancer de fournée par grand vent ou en période d'interdiction de feu (arrêté préfectoral, sécheresse). Dégager 5 m autour, garder de l'eau à portée, ne jamais laisser sans surveillance.</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-ban mt-0.5" style="color:var(--red)"></i><div><b>Fût clos</b> : ne jamais fermer hermétiquement un fût chaud ou en chauffe (pression, explosion). Le portail reste toujours ouvert ; les bouchons de bondes doivent pouvoir céder.</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-person mt-0.5" style="color:var(--red)"></i><div><b>Enfants et animaux</b> : périmètre de sécurité ; le métal reste brûlant longtemps après la fin de la fournée (poignées comprises).</div></div>
+    <div class="warn-strip reveal"><i class="fa-solid fa-mask-face mt-0.5" style="color:var(--red)"></i><div><b>Fumées</b> : restez au vent des flammes ; une conduite correcte (rideau de flammes entretenu) ne produit quasiment pas de fumée — si ça fume, c'est un signal de conduite à corriger.</div></div>
+  </div>
+</section>
+
+<section id="sources" class="py-20 px-4 max-w-5xl mx-auto">
+  <div class="text-center reveal">
+    <div class="kicker">Sources</div>
+    <h2 class="section-title">D'où viennent ces informations</h2>
+    <p class="section-sub">Priorité aux documents les plus à jour (woodgas.com/resources) et aux données mesurées. La synthèse complète est dans <code style="color:var(--accent2)">recherche_biochar_2026.md</code> à la racine de ce dépôt.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)">Référence principale (la plus à jour)</h3>
+      <ul class="text-sm space-y-2" style="color:#d8ccbc">
+        <li><b>woodgas.com/resources</b> — Paul S. Anderson (« Dr TLUD ») : RoCC Kiln – Innovator Perspective (15/12/2023) ; H-Frame Design with Updates (04/08/2021) ; RoCC Kiln Manual (13/04/2020) ; Comparison Flame Cap vs RoCC (05/03/2020) ; Kenya Experience (28/03/2020) ; RoCC Kilns and Biochar in Kenya (24/02/2022) ; Small- and Medium-Scale Biochar Production (30/08/2022).</li>
+      </ul>
+    </div>
+    <div class="card p-6 reveal">
+      <h3 class="font-semibold mb-3 text-sm" style="color:var(--accent2)">Études et retours complémentaires</h3>
+      <ul class="text-sm space-y-2" style="color:#d8ccbc">
+        <li><b>Cornelissen G. et al. (2016)</b>, PLOS ONE 11(5) : émissions et qualité du charbon des fours Kon-Tiki (17 cuissons instrumentées au Népal).</li>
+        <li><b>Schmidt H.-P. &amp; Taylor P. (2014)</b>, the Biochar Journal : Kon-Tiki, démocratisation de la production de biochar (+ commentaires d'utilisateurs).</li>
+        <li><b>Jans L. (2022)</b>, UCLouvain : bénéfices et risques du biochar en agriculture (45 enquêtes agriculteurs, Wallonie).</li>
+        <li><b>biochar.ch</b> (CarbonZero) : four basse température à fût 200 L, retours de fabrication.</li>
+        <li><b>Warm Heart Foundation</b> : tranchée, auge, TLUD (version française).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="info-strip mt-6 reveal">
+    <i class="fa-solid fa-scale-balanced mt-0.5" style="color:var(--gold)"></i>
+    <div><b>Note sur le brevet RoCC</b> : la technologie RoCC (y compris le cadre H) est brevetée aux États-Unis et en instance au Canada et dans 41 pays européens, avec une couverture probable jusqu'en 2040. Les fours ouverts de type Kon-Tiki sont totalement libres. L'inventeur encourage la fabrication pour usage personnel et demande à en être informé ; tout gain financier (production, crédits carbone) devrait donner lieu à un partage — contact : psanders@ilstu.edu.</div>
+  </div>
+</section>
+
+<footer class="py-8 text-center text-xs" style="border-top:1px solid var(--border); color:var(--muted)">
+  <a href="index.html" style="color:var(--accent2)"><i class="fa-solid fa-arrow-left mr-1"></i>Retour aux outils</a>
+  <span class="mx-2">·</span>Four à Biochar — atelier low-tech, données terrain 2019-2023
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const systems = [
+    { name:'Tranchée / fosse', icon:'fa-trowel', tags:['0 €','flame cap'],
+      pros:['Coût nul (une houe, une tôle éventuelle)','Fosses en terre : rendements et émissions comparables aux cônes acier (mesuré au Népal)','Accessible partout, aucun outil'],
+      cons:['Attention de tous les instants','Pas de mélange possible, carbonisation inhomogène si mal conduite','Sensible au vent ; extinction peu pratique','Production limitée'],
+      data:'Rendement ~22 % mesuré en fosse (Cornelissen 2016)',
+      link:'#kontiki', linkTxt:'Atelier : la fosse conique' },
+    { name:'Auge / trough', icon:'fa-water', tags:['acier','débit élevé'],
+      pros:['Débit élevé : jusqu\'à ~250 kg de biochar par jour','Forme rectangulaire adaptée aux combustibles longs','Rapide'],
+      cons:['Coûteux en acier, soudure','Attention constante','Sensible au vent, pas de mélange'],
+      data:'Warm Heart : auge de 2000 L pour tiges de maïs' },
+    { name:'TLUD (fût 200 L)', icon:'fa-oil-can', tags:['20-90 €','fournée'],
+      pros:['Très faible coût','Peut être laissé seul pendant la cuisson','~5 kg de charbon par fût ; cuisson propre','Retour d\'échelle : ~100 000 foyers au Bengale → ~80 t/jour'],
+      cons:['Fonctionne par fournées (pas de continu)','Exige biomasse sèche et de petite taille (tiges, branches mal acceptées)','Il faut éteindre et vider avant de recharger'],
+      data:'0,8 kg de charbon/jour/foyer (mesure terrain Inde)' },
+    { name:'Kon-Tiki (cône à rideau de flammes)', icon:'fa-volcano', tags:['1 m³ / après-midi','open source'],
+      pros:['~1 m³ de biochar en une après-midi','Accepte morceaux jusqu\'à 1,2 m et biomasse très humide (sert de séchoir)','Qualité EBC premium avec extinction à l\'eau ; émissions très faibles mesurées','~1 MWh de chaleur par cuisson ; open source, > 50 pays'],
+      cons:['Présence continue (couche toutes les 5-10 min)','Cône roulé : fabrication plus technique','Rendement 15-22 %, un peu inférieur aux retorts','Corrosion interne signalée par des utilisateurs'],
+      data:'2-8 h selon biomasse ; 1 personne mène 2-4 fours (1-1,5 t/j)',
+      link:'#kontiki', linkTxt:'Atelier : fabrication du cône' },
+    { name:'Octogonal / tôles plates', icon:'fa-shapes', tags:['variante Kon-Tiki'],
+      pros:['Évite le roulage du cône : 8 panneaux trapézoïdaux','2 tôles standard de 2,0 × 1,0 m suffisent (retour utilisateur)','Même physique que le Kon-Tiki'],
+      cons:['Angles : compactage moins homogène','Peu de retours documentés','Présence continue également'],
+      data:'Idée publiée par Sven Norén (Suède) dans les commentaires Ithaka',
+      link:'#kontiki', linkTxt:'Atelier : cône (variante octogonale)' },
+    { name:'Retort (Adam, basse température)', icon:'fa-box-archive', tags:['fournée','30-45 %'],
+      pros:['Rendement élevé 30-45 % (Adam)','Émissions réduites d\'environ 75 % vs meule traditionnelle','Version basse température auto-régulée vers 470 °C, sans surveillance active une fois lancée'],
+      cons:['Investissement plus élevé','Consomme du bois d\'allumage précieux (Adam)','Fournée par fournée ; gros morceaux secs uniquement','Risques spécifiques rapportés : briques ordinaires qui explosent, CO, auto-inflammation > 350 °C'],
+      data:'CarbonZero (biochar.ch) : fût 200 L dans enceinte isolée en briques réfractaires' },
+    { name:'RoCC à cadre H (fût 200 L)', icon:'fa-rotate', tags:['recommandé','terrain'],
+      pros:['Éprouvé en production quotidienne (Kenya : 4,2 t en 8 mois)','Flamme protégée du vent et de la pluie','Rotation = mélange ; vidange par gravité','Le cylindre protège l\'opérateur du rayonnement','~100 € de matériaux neufs ; 24 h de fabrication à deux','Évolutif : roues, hotte, double fût'],
+      cons:['Soudure (ou boulonnage soigné) indispensable','Cylindre horizontal : moins de volume qu\'une cuve verticale','Sciure / balles de riz difficiles','Brevet en instance dans 41 pays européens'],
+      data:'29 kg biochar/j sur un four 2 fûts (Kenya) · 19 % de rendement · 25 kg biomasse/h' }
+  ];
+
+  const grid = document.getElementById('systemsGrid');
+  systems.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'card p-6 reveal';
+    el.innerHTML = `
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(232,98,43,.14)"><i class="fa-solid ${s.icon}" style="color:var(--accent2)"></i></div>
+        <h3 class="font-semibold">${s.name}</h3>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mb-3">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="grid grid-cols-1 gap-2 text-sm mb-3">
+        <div><span class="pro font-semibold"><i class="fa-solid fa-plus mr-1"></i>Avantages</span><ul class="list-disc ml-5 mt-1 space-y-0.5" style="color:#d8ccbc">${s.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+        <div><span class="con font-semibold"><i class="fa-solid fa-minus mr-1"></i>Inconvénients</span><ul class="list-disc ml-5 mt-1 space-y-0.5" style="color:#d8ccbc">${s.cons.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+      </div>
+      <div class="text-xs pt-2" style="border-top:1px dashed var(--border); color:var(--muted)"><i class="fa-solid fa-chart-simple mr-1"></i>${s.data}</div>
+      ${s.link ? `<a href="${s.link}" class="inline-block mt-3 text-xs font-semibold" style="color:var(--accent2)"><i class="fa-solid fa-hammer mr-1"></i>${s.linkTxt} <i class="fa-solid fa-arrow-down ml-1"></i></a>` : ''}`;
+    grid.appendChild(el);
+  });
+
+  const steps = [
+    { t:'Préparer le fût', b:`
+      <p>Choisissez un fût de 200 L propre (jamais de produits toxiques). Repérez la couture soudée d'origine : elle devra se trouver dans la zone découpée du portail.</p>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Positionnez le fût comme en position de repos (portail vers le haut) : le gros bouchon de bonde en bas de flanc — il servira à sonder le fond si besoin.</li>
+        <li>Tracez le portail : <b>33 cm mesurés le long de la courbure</b> (≈ 30 cm d'ouverture droite), centré sur la longueur en laissant <b>4 cm de matière à chaque extrémité</b> pour ne pas affaiblir les fonds.</li>
+        <li>La couture du fût doit tomber dans la zone à découper (elle renforcera sinon le bord du portail).</li>
+        <li>Découpez à la meuleuse (disque à tronçonner) ou à la scie sabre métal ; ébavurez soigneusement tous les bords — ils seront manipulés à chaud.</li>
+      </ul>` },
+    { t:'Souder les essieux courts', b:`
+      <p>Chaque fond du fût reçoit un essieu court : un tube de 20 cm soudé au centre d'une platine de 30 × 30 cm (acier 3 mm), qui renforce le fond mince du fût.</p>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Tracez les diagonales de chaque platine pour trouver le centre exact.</li>
+        <li>Soudez le tube bien perpendiculaire à la platine (pointez à 90°, vérifiez à l'équerre, puis soudez tout le tour).</li>
+        <li>Soudez ensuite chaque ensemble platine + tube au centre du fond du fût, tout le tour de la platine.</li>
+        <li>Vérifiez que les deux essieux sont dans le même axe : faites rouler le fût sur deux cales — il ne doit pas louvoyer.</li>
+      </ul>` },
+    { t:'Fabriquer les deux cadres en H', b:`
+      <p>Chaque extrémité du four reçoit un « H » : deux montants verticaux reliés en haut et en bas par des barres horizontales. L'entretoise porte-essieu (avec son manchon) vient se loger entre les montants, à hauteur réglable.</p>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Coupez 4 montants et 4 barres horizontales (8 morceaux de 100 cm pour un fût standard).</li>
+        <li>Percez chaque montant de deux trous traversants Ø 8 mm à <b>40 cm et 50 cm d'une même extrémité</b> : ils recevront l'entretoise selon le diamètre du cylindre (40 cm pour un fût de ~58 cm).</li>
+        <li>Soudez (ou boulonnez) les barres hautes et basses pour former deux H ; écartement intérieur des montants : ~26 cm pour une entretoise de 25 cm.</li>
+        <li>Soudez un manchon de 13 cm au centre de chaque entretoise ; soudez un manchon de 10 cm à l'extrémité de chaque poignée.</li>
+        <li>L'entretoise n'est PAS soudée en place : elle est tenue par une tige filetée M10 qui traverse les montants — ainsi le cylindre reste démontable.</li>
+      </ul>` },
+    { t:'Assembler le châssis', b:`
+      <p>Reliez les deux H par les barres basses (120 cm) et le croisillon arrière en X (180 cm).</p>
+      <ul class="list-disc ml-5 mt-2 space-y-1">
+        <li>Version soudée : soudez barres basses et croisillon directement sur les H — plus rapide, plus rigide.</li>
+        <li>Version boulonnée : interposez des manchons rectangulaires (chutes de tube plus grand) aux jonctions, percez, boulonnez M8 — le four se démonte pour le transport.</li>
+        <li>Le croisillon en X est à l'ARRIÈRE (côté opposé au chargement), pas aux extrémités : ce n'est pas un cadre en X.</li>
+        <li>Enfilez les glissières (6 morceaux de 15 cm en tube carré plus grand) sur les 6 extrémités libres : elles porteront les roues et/ou les barres latérales.</li>
+      </ul>` },
+    { t:'Monter le cylindre, poignées et blocage', b:`
+      <ul class="list-disc ml-5 space-y-1">
+        <li>Présentez le fût entre les deux H, essieux face aux entretoises ; glissez chaque entretoise (manchon enfilé sur l'essieu) entre les montants et serrez la tige filetée M10 avec écrous et rondelles.</li>
+        <li>Vérifiez la rotation libre : le jeu manchon/essieu doit être franc (au moins 2 mm de diamètre). Si ça frotte, changez l'épaisseur de paroi du manchon.</li>
+        <li>Ajoutez les poignées (60-75 cm) : manchon soudé + tube ; elles servent à tourner et à bloquer.</li>
+        <li>Blocage de position « tube et goupille » : un tube soudé au cadre reçoit une goupille qui traverse le manchon de poignée pour immobiliser le four dans la position voulue.</li>
+      </ul>` },
+    { t:'Roues et mobilité (option)', b:`
+      <ul class="list-disc ml-5 space-y-1">
+        <li>Utilisez des roues <b>métalliques</b> : le caoutchouc et les pneus gonflables ne supportent pas la proximité de la chaleur.</li>
+        <li>Les roues se montent sur les glissières et restent amovibles : grandes roues pour les terrains meubles, petites pour la stabilité.</li>
+        <li>Le cadre entier peut être tourné de 90° sur le côté pour abaisser le portail près du sol : pratique pour charger à la fourche.</li>
+      </ul>` },
+    { t:'Options et premier essai', b:`
+      <ul class="list-disc ml-5 space-y-1">
+        <li><b>Tôle de décharge</b> : tôle ondulée inclinée sous le four, côté arrière, pour guider le charbon chaud vers un seau métallique.</li>
+        <li><b>Étagère de chargement</b> : plan incliné à hauteur du bord bas du portail en position normale ; soutenu par le cadre de hotte ou deux tréteaux.</li>
+        <li><b>Hotte + 2 cheminées</b> (Ø ≥ 25 cm) : seulement si vous voulez canaliser les émissions ou récupérer la chaleur ; la plupart des usages s'en passent.</li>
+        <li><b>Ailettes internes</b> (option) : 3-4 cornières de ~10 cm de haut soudées en longueur à l'intérieur améliorent le mélange par rotation et rigidifient le fût.</li>
+        <li>Premier essai à vide : faites faire au four plusieurs rotations complètes, vérifiez chaque position (alimentation, vidange), le blocage, et l'absence de frottement.</li>
+      </ul>` }
+  ];
+
+  const stepsBox = document.getElementById('stepsBox');
+  steps.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'step reveal';
+    el.innerHTML = `
+      <div class="step-head">
+        <div class="step-num">${i+1}</div>
+        <div class="font-semibold flex-1">${s.t}</div>
+        <label class="chk" style="padding:0" onclick="event.stopPropagation()"><input type="checkbox" class="stepChk" data-i="${i}"><span class="text-xs" style="color:var(--muted)">fait</span></label>
+        <i class="fa-solid fa-chevron-down text-sm" style="color:var(--muted)"></i>
+      </div>
+      <div class="step-body"><div class="step-body-inner">${s.b}</div></div>`;
+    el.querySelector('.step-head').addEventListener('click', () => el.classList.toggle('open'));
+    stepsBox.appendChild(el);
+  });
+
+  const chks = document.querySelectorAll('.stepChk');
+  function updateProgress() {
+    let n = 0;
+    chks.forEach(c => { if (c.checked) n++; c.closest('.step').classList.toggle('done', c.checked); });
+    document.getElementById('progressTxt').textContent = n + ' / ' + steps.length;
+    document.getElementById('progressFill').style.width = (n / steps.length * 100) + '%';
+  }
+  chks.forEach(c => c.addEventListener('change', updateProgress));
+
+  const positions = [
+    { id:'normal', label:'Alimentation (normale)', angle:50, title:'Position normale — alimentation sur étagère (10° → 90°)',
+      desc:'Le bord bas du portail est aligné avec l\'étagère de chargement (côté 3 h). C\'est la position de pyrolyse : meilleur rideau de flammes, alimentation en continu par couches minces toutes les 15-20 minutes.' },
+    { id:'bulk', label:'Versement', angle:310, title:'Versement en vrac (270° → 350°)',
+      desc:'Le portail regarde vers le haut et l\'arrière : on peut déverser une brassée de biomasse d\'un coup. Position à utiliser peu de temps : le tirage est faible (le portail sort de la hotte).' },
+    { id:'simmer', label:'Feu ralenti', angle:0, title:'Feu ralenti — portail en haut (320° → 40°)',
+      desc:'Entrée d\'air minimale : le feu « mijote ». Utile pour ralentir la combustion, par exemple en fin de fournée ou pour laisser sécher une biomasse humide sans éteindre.' },
+    { id:'unload', label:'Vidange', angle:180, title:'Vidange — portail vers le bas (140° → 220°)',
+      desc:'Le charbon chaud tombe par gravité sur la tôle de décharge. Balancer doucement le four pour aider. Position à n\'utiliser que brièvement, quand la fournée est finie et le rideau de flammes tombé.' },
+    { id:'rock', label:'Balancement', angle:240, title:'Balancement (± autour de 240°)',
+      desc:'Oscillations d\'avant en arrière : le contenu culbute sans sortir. Sert à mélanger et à « déterrer » les morceaux mal exposés à la chaleur, sans vidanger.' },
+    { id:'full', label:'Rotation complète', angle:360, title:'Rotation complète (360° et plus)',
+      desc:'Mélange énergique de tout le contenu, possible grâce au cylindre couvert (impossible sur un four ouvert : tout sortirait). À faire avec discernement selon le type de biomasse : certains combustibles très fins peuvent être éjectés.' }
+  ];
+
+  const posBtns = document.getElementById('posBtns');
+  const portalGroup = document.getElementById('portalGroup');
+  positions.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.className = 'pos-btn';
+    b.textContent = p.label;
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.pos-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      portalGroup.style.transform = 'rotate(' + p.angle + 'deg)';
+      document.getElementById('posTitle').textContent = p.title;
+      document.getElementById('posDesc').textContent = p.desc;
+    });
+    posBtns.appendChild(b);
+  });
+  posBtns.firstChild.click();
+
+  const acc = [
+    { q:'Beaucoup de fumée blanche ou grise', a:'Cause la plus fréquente : trop de biomasse d\'un coup — le rideau de flammes est étouffé et les gaz ne brûlent plus (mesuré : pics de méthane jusqu\'à 1-3 %). Autre cause : biomasse très humide en début de fournée. Solution : retirer un peu de combustible si possible, attendre le retour des flammes, puis recharger par couches plus minces, toutes les 15-20 minutes.' },
+    { q:'Les flammes s\'éteignent sans arrêt', a:'Vérifiez la position du portail (la position normale donne le meilleur tirage) et l\'orientation au vent. Avec des biomasses fines et denses (balles de riz, herbe coupée), l\'alimentation doit être continue et par très petites quantités — c\'est la technique validée au Kenya pour le riz. Un portail obstrué par trop de charbon accumulé coupe aussi l\'air : vidangez une partie.' },
+    { q:'Des morceaux ressortent à moitié pyrolysés', a:'Ils ont été « enterrés » avant d\'avoir vu la flamme. Faites un balancement ou une rotation complète pour les ramener en surface, puis rechargement plus mince. Le rayonnement ne traverse pas les solides : chaque morceau doit voir les flammes. Les gros morceaux (> 8-10 cm de diamètre) demandent plus de temps — fendez-les.' },
+    { q:'Beaucoup de cendres, peu de charbon', a:'Trop d\'oxygène atteint le charbon : portail trop face au vent (tournez le four ou utilisez la position feu ralenti), ou couches trop fines qui laissent passer l\'air. Vérifiez aussi que vous n\'attendez pas trop longtemps entre deux couches (le charbon exposé sans alimentation finit en cendre).' },
+    { q:'Le fût se déforme / gondole', a:'Normal sur de la tôle mince, surtout autour du portail : la chaleur est intense et les contraintes thermiques importantes. Ne jetez jamais d\'eau sur la tôle rouge (trempe = déformation garantie + vapeur dangereuse). Le cadre et les platines d\'essieu maintiennent l\'ensemble ; un fût déformé mais étanche reste utilisable.' },
+    { q:'La rotation devient dure', a:'Vérifiez le jeu essieu/manchon (il faut au moins 2 mm de diamètre de jeu), retirez les cendres tombées dans les manchons, graissez légèrement à froid. Si le four est chargé très plein, la rotation demande plus d\'effort : allongez les poignées (bras de levier) ou vidangez un peu avant.' },
+    { q:'Le biochar se rallume pendant le refroidissement', a:'Le charbon frais peut s\'auto-enflammer au contact de l\'air au-dessus de ~350 °C. Étalez le tas, arrosez abondamment et remuez pour que l\'eau pénètre au cœur, ou étouffez sous 10 cm de terre. Ne stockez jamais un charbon encore tiède dans un récipient fermé, un bâtiment ou un véhicule : surveillez jusqu\'à refroidissement complet (plusieurs heures).' },
+    { q:'Rendement faible (< 15 %)', a:'Biomasse trop humide (l\'énergie part en évaporation), surcharges répétées (le charbon reste trop longtemps exposé), ou trop d\'air. Un bois fendu et sec donne ~19-22 %. Faites sécher la biomasse au soleil quelques jours, chargez régulièrement, et gardez le rideau de flammes vivant sans excès d\'air.' },
+    { q:'Le biochar sent la fumée ou le goudron', a:'Des condensats sont restés dans les pores : extinction par étouffement sans eau, ou pyrolyse incomplète. Pour un usage au sol, réactivez-le : étalez-le et arrosez-le copieusement alors qu\'il est encore très chaud — la vapeur traverse le tas et entraîne les goudrons (mesuré : surface spécifique plus élevée et moins d\'HAP après extinction à l\'eau qu\'après étouffement à sec). Puis compostez plusieurs semaines. Un charbon bien pyrolysé et activé ne sent presque plus rien.' }
+  ];
+  const accBox = document.getElementById('accBox');
+  acc.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'acc-item reveal';
+    el.innerHTML = `
+      <div class="acc-head"><span><i class="fa-solid fa-circle-question mr-2" style="color:var(--accent2)"></i>${item.q}</span><i class="fa-solid fa-chevron-down text-sm" style="color:var(--muted)"></i></div>
+      <div class="acc-body"><div class="acc-body-inner">${item.a}</div></div>`;
+    el.querySelector('.acc-head').addEventListener('click', () => {
+      const wasOpen = el.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(x => x.classList.remove('open'));
+      if (!wasOpen) el.classList.add('open');
+    });
+    accBox.appendChild(el);
+  });
+
+  const preset = document.getElementById('preset');
+  const inD = document.getElementById('inD'), inL = document.getElementById('inL');
+  preset.addEventListener('change', () => {
+    if (preset.value === 'fut200') { inD.value = 57.5; inL.value = 86; }
+    calc();
+  });
+
+  function fmt(n, d=1) { return n.toLocaleString('fr-FR', { minimumFractionDigits:0, maximumFractionDigits:d }); }
+
+  function calc() {
+    const Draw = parseFloat(inD.value) || 57.5;
+    const Lraw = parseFloat(inL.value) || 86;
+    const D = Math.min(Math.max(Draw, 30), 150);
+    const L = Math.min(Math.max(Lraw, 40), 250);
+    const clampNotes = [];
+    if (Draw !== D) clampNotes.push('diamètre ramené à ' + fmt(D) + ' cm (plage 30-150)');
+    if (Lraw !== L) clampNotes.push('longueur ramenée à ' + fmt(L,0) + ' cm (plage 40-250)');
+    const sq = document.getElementById('inSq').value;
+    const axle = parseFloat(document.getElementById('inAxle').value) || 32;
+    const sleeveOut = parseFloat(document.getElementById('inSleeve').value) || 40;
+    const wall = parseFloat(document.getElementById('inWall').value) || 2.6;
+    const bolted = document.getElementById('inAsm').value === 'bolt';
+    const wheels = document.getElementById('optWheels').checked;
+    const hood = document.getElementById('optHood').checked;
+    const tray = document.getElementById('optTray').checked;
+    const shelf = document.getElementById('optShelf').checked;
+
+    const big = D > 70;
+    const posSpacer = Math.round(D/2 + 11);
+    const baseVert = big ? 120 : 100;
+    const vert = Math.max(baseVert, Math.ceil(posSpacer + D/2 + 12));
+    const groundClr = Math.round(vert - posSpacer - D/2);
+    const sideBar = Math.round(L + 34);
+    const xBar = Math.round(sideBar * 1.5);
+    const spacer = 25;
+    const plate = big ? 35 : 30;
+    const sliderTube = sq === '25' ? '32 × 32' : '40 × 40';
+
+    const sqLen = (8 * vert + 2 * sideBar + 2 * xBar + 2 * spacer) / 100;
+    const sqPrice = sq === '25' ? 3.5 : 4.5;
+    let budget = sqLen * sqPrice + 2 * 8 + 0.4 * 6 + 0.46 * 7 + 15 + 15;
+    if (bolted) budget += 12;
+    if (wheels) budget += 30;
+    if (hood) budget += 40;
+    if (tray) budget += 15;
+    if (shelf) budget += 15;
+
+    const sleeveIn = sleeveOut - 2 * wall;
+    const clearance = sleeveIn - axle;
+    const badge = document.getElementById('clearBadge');
+    if (clearance >= 2) { badge.className = 'badge-ok'; badge.textContent = 'Jeu de rotation : ' + fmt(clearance,1) + ' mm — OK'; }
+    else if (clearance >= 0) { badge.className = 'badge-warn'; badge.textContent = 'Jeu ' + fmt(clearance,1) + ' mm — juste, prendre une paroi plus fine'; }
+    else { badge.className = 'badge-err'; badge.textContent = 'Jeu négatif : le manchon ne tourne pas — changer de tube'; }
+
+    const rows = [
+      ['Tube carré ' + sq + '×' + sq + ' mm', '8 × ' + vert + ' cm', 'montants et barres des deux H'],
+      ['Tube carré ' + sq + '×' + sq + ' mm', '2 × ' + sideBar + ' cm', 'barres basses du châssis'],
+      ['Tube carré ' + sq + '×' + sq + ' mm', '2 × ' + xBar + ' cm', 'croisillon arrière en X'],
+      ['Tube carré ' + sq + '×' + sq + ' mm', '2 × ' + spacer + ' cm', 'entretoises porte-essieux (non soudées)'],
+      ['Tôle acier 3 mm', '2 × ' + plate + ' × ' + plate + ' cm', 'platines de renfort des fonds'],
+      ['Tube acier Ø ' + fmt(axle,0) + ' mm', '2 × 20 cm', 'essieux courts, soudés au centre des platines'],
+      ['Tube acier Ø ' + fmt(sleeveOut,0) + ' mm (alésage ≥ ' + fmt(Math.max(sleeveIn, axle+2),0) + ' mm)', '2 × 13 cm + 2 × 10 cm', 'manchons : sur entretoises et sur poignées'],
+      ['Tube ou fer rond', '2 × 60-75 cm', 'poignées de rotation'],
+      ['Tube carré ' + sliderTube + ' mm (paroi fine)', '6 × 15 cm', 'glissières (roues / barres latérales)'],
+      ['Visserie M8 (boulons 70 mm, écrous, rondelles)', bolted ? '≈ 24' : '≈ 8', bolted ? 'jonctions démontables du châssis' : 'accessoires et options'],
+      ['Tige filetée M10', '2 × 35 cm', 'maintien des entretoises entre les montants']
+    ];
+    if (bolted) rows.splice(9, 0, ['Manchons en tube rectangulaire (' + (sq === '25' ? '30 × 50' : '40 × 60') + ' mm env.)', '4 × ~4 cm de large', 'jonctions démontables des barres basses']);
+    document.getElementById('cutTable').innerHTML =
+      '<thead><tr><th>Élément</th><th>Quantité / longueur</th><th>Usage</th></tr></thead><tbody>' +
+      rows.map(r => '<tr><td>' + r[0] + '</td><td style="white-space:nowrap;color:var(--accent2);font-weight:600">' + r[1] + '</td><td style="color:var(--muted)">' + r[2] + '</td></tr>').join('') + '</tbody>';
+
+    const arc = 0.57 * D;
+    const chord = 0.54 * D;
+    document.getElementById('portalOut').innerHTML =
+      (clampNotes.length ? '<p style="color:var(--gold)"><b>Valeur hors plage : ' + clampNotes.join(' · ') + '.</b></p>' : '') +
+      '<p><b style="color:var(--fg)">Portail</b> : ' + fmt(arc) + ' cm mesurés le long de la courbure → ≈ ' + fmt(chord) + ' cm d\'ouverture droite.</p>' +
+      '<p>Largeur : ' + fmt(L - 8) + ' cm (laisser 4 cm de matière à chaque extrémité).</p>' +
+      '<p>Couture du fût dans la zone découpée ; bords ébavurés.</p>' +
+      '<p><b style="color:var(--fg)">Perçages des montants</b> : sur chacun des 4 montants, 2 trous traversants Ø 8 mm à <b>' + posSpacer + ' cm</b> et <b>' + (posSpacer+10) + ' cm</b> d\'une même extrémité.</p>' +
+      '<p>Entretoise à ' + posSpacer + ' cm du haut · fond du cylindre à ~' + groundClr + ' cm du sol (montants de ' + vert + ' cm).</p>';
+
+    document.getElementById('budgetOut').innerHTML =
+      '<p><b style="color:var(--fg)">Budget matériaux neufs</b> : ≈ <b style="color:var(--accent2)">' + fmt(budget,0) + ' €</b> (tube carré ' + fmt(sqLen,1) + ' m, platines, tubes, visserie, fût).</p>' +
+      '<p>Avec récupération (fût, tubes, roues) : <b>20-40 €</b> — retour terrain Kenya : quasi gratuit.</p>' +
+      '<p>Temps : un week-end à deux avec soudure (24 h documenté au Kenya).</p>' +
+      '<p>Production attendue : <b>10-15 kg de biochar</b> par fournée de 2-3 h (≈ 50-75 kg de biomasse sèche), soit ~125 kg de CO2 retirés pour 50 kg de biochar.</p>';
+  }
+
+  ['inD','inL','inSq','inAxle','inSleeve','inWall','inAsm','optWheels','optHood','optTray','optShelf'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calc);
+    document.getElementById(id).addEventListener('change', calc);
+  });
+  calc();
+
+  const mobileBtn = document.getElementById('mobileBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [...document.querySelectorAll('section[id]')];
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const nav = document.getElementById('mainNav');
+    if (y > lastY && y > 400) nav.classList.add('hidden-nav'); else nav.classList.remove('hidden-nav');
+    lastY = y;
+    let cur = '';
+    sections.forEach(s => { if (y >= s.offsetTop - 120) cur = s.id; });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+  }, { passive:true });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold:0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>

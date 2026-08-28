@@ -12,7 +12,7 @@ et des outils low-tech indépendants.
 |---|---|---|
 | **La Liseuse** | `liseuse/` | L'ouvrage complet : fiches de lecture par strate, thésaurus bilingue, concept cards, chaînes causales. Recherche plein texte, hors-ligne (PWA), exports EPUB/PDF. |
 | **Guide technique** | `technique/` | L'architecture du projet : DB source de vérité, pipeline de régénération, services externes, workflow de session, patron reproductible. |
-| **Outils low-tech** | `Outils/` | Simulateurs indépendants du corpus : four solaire, puits canadien, parabole solaire. |
+| **Outils low-tech** | `Outils/` | Simulateurs indépendants du corpus : four solaire, puits canadien, parabole solaire, four à biochar. |
 
 La page d'accueil (`index.html`) présente ces trois entrées.
 
