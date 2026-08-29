@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/F1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="efcf1a03e4fc341e";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="87a3fbbf601c556a";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.BiAf4tT7.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -514,6 +514,183 @@
 <p>Le XXe siècle a cru pouvoir s'affranchir de cette histoire en substituant la chimie à la biologie. Il a gagné des rendements, et il a perdu de vue la robustesse. Les travaux récents sur la matière organique le rappellent : sa persistance tient moins aux molécules qu'à l'écosystème qui les abrite (Schmidt, 2011). Autrement dit, on ne stocke pas le carbone dans le sol comme on remplit un silo ; on entretient les conditions — agrégats, activité microbienne, absence de perturbation — qui lui permettent de le retenir. Hamant (2023) tire du rapport Meadows une leçon plus large : une agriculture tournée vers la seule performance devient fragile, car elle optimise ce qui se mesure et néglige ce qui la tient. L'efficience véritable n'est pas celle du rendement à court terme ; c'est celle d'un système qui conserve son énergie, comme la fermentation conserve la sienne, plutôt que de la brûler en pure perte.</p>
 <p>Ce que le passé éclaire, ce sont les solutions du présent. Le sol nous tend un mode d'emploi écrit en quatre milliards d'années : ne pas forcer ce qui se fait tout seul, mais accompagner ce qui, depuis l'Archéen, travaille sans nous. Accompagner, ce n'est pas renoncer à agir ; c'est agir dans le sens du vivant au lieu de le contraindre. C'est préférer la fermentation au compostage quand on veut conserver l'énergie, ménager les réseaux plutôt que les rompre, nourrir l'agrégat plutôt que le miner. Car nous ne sommes pas au-dessus de ce vivant, mais pris dedans : la continuité du sol à l'intestin fait de chaque assiette un fragment de cette histoire. Ce n'est pas un slogan ; c'est une grille de lecture. Devant chaque décision agronomique, la question devient : cette pratique va-t-elle dans le sens d'une histoire de quatre milliards d'années, ou contre elle ? Le vivant a déjà fait la démonstration. Il ne reste qu'à l'entendre.</p>
 </div>
+        </section>
+
+      
+      <section id="references" class="sv-card sv-related">
+          <h2>Références (35)</h2>
+          <ul class="sv-link-list">
+            <li>
+                <a href="https://doi.org/10.1038/s41467-026-70605-x" rel="noopener">
+                    Asiloglu (2026)
+                  </a>
+                 Predator-mediated local convergence fosters global microbial community divergence — Nature Communications
+              </li><li>
+                <a href="https://doi.org/10.1093/femsec/fiy120" rel="noopener">
+                    Bolourian (2018)
+                  </a>
+                 Streptomyces, shared microbiome member of soil and gut, as &#39;old friends&#39; against colon cancer — FEMS Microbiology Ecology
+              </li><li>
+                <a href="https://doi.org/10.1038/s41598-023-31334-z" rel="noopener">
+                    Brandolini (2023)
+                  </a>
+                 Modelling the impact of historic landscape change on — Scientific Reports
+              </li><li>
+                <a href="https://doi.org/10.36783/18069657rbcs20220130" rel="noopener">
+                    Carvalho (2023)
+                  </a>
+                 Stabilization of organic matter in soils: drivers, mechanisms, and analytical tools – a literature review [Review of Stabilization of organic matter in soils: drivers, mechanisms, and analytical tools — Revista Brasileira de Ciência Do Solo
+              </li><li>
+                <a href="https://doi.org/10.1126/sciadv.aax1420" rel="noopener">
+                    Catling (2020)
+                  </a>
+                 The Archean atmosphere — Science Advances
+              </li><li>
+                <a href="https://doi.org/10.1021/acs.est.2c05842" rel="noopener">
+                    Ceriotti (2022)
+                  </a>
+                 Morphology and Size of Bacterial Colonies Control Anoxic — Environmental Science &amp; Technology
+              </li><li>
+                <a href="https://doi.org/10.1126/science.1155495" rel="noopener">
+                    Chivian (2008)
+                  </a>
+                 Environmental genomics reveals a single-species ecosystem deep within Earth — Science
+              </li><li>
+                <a href="https://doi.org/10.1038/s41586-023-06186-2" rel="noopener">
+                    Eme (2023)
+                  </a>
+                 Inference and reconstruction of the heimdallarchaeial ancestry of — Nature
+              </li><li>
+                <a href="https://doi.org/10.1016/j.geoderma.2020.114925" rel="noopener">
+                    Evans (2021)
+                  </a>
+                 Buried solutions: How Maya urban life substantiates soil — Geoderma
+              </li><li>
+                <a href="https://doi.org/10.3390/plants15071121" rel="noopener">
+                    Garcia (2026)
+                  </a>
+                 Genomic Footprints of Multiple Host Lineages in the Mitochondrial and Nuclear Genomes of the Holoparasite Prosopanche americana — Plants
+              </li><li>
+                <a href="https://doi.org/10.1371/journal.pone.0329084" rel="noopener">
+                    Giosan (2025)
+                  </a>
+                 Morphodynamic Foundations of Sumer — PLOS One
+              </li><li>
+                <a href="https://doi.org/10.1017/qpb.2023.2" rel="noopener">
+                    Hamant (2023)
+                  </a>
+                 The 1972 Meadows report: A wake-up call for — Quantitative Plant Biology
+              </li><li>
+                <a href="https://doi.org/10.1086/726154" rel="noopener">
+                    Howlader (2023)
+                  </a>
+                 Environmental Recovery after the Dust Bowl: Implications of — Journal of the Association of Environmental and Resource Economists
+              </li><li>
+                <a href="https://doi.org/10.1099/ijsem.0.006435" rel="noopener">
+                    Imachi (2024)
+                  </a>
+                 Promethearchaeum syntrophicum gen — International Journal of Systematic and Evolutionary Microbiology
+              </li><li>
+                <a href="https://doi.org/10.1038/s41467-017-01406-6" rel="noopener">
+                    Keiluweit (2017)
+                  </a>
+                 Anaerobic microsites have an unaccounted role in soil carbon stabilization — Nature Communications
+              </li><li>
+                <a href="https://doi.org/10.1016/j.still.2023.105941" rel="noopener">
+                    Koza (2023)
+                  </a>
+                 Wind erosion after steppe conversion in Kazakhstan — Soil and Tillage Research
+              </li><li>
+                <a href="https://doi.org/10.1038/s43247-021-00323-3" rel="noopener">
+                    Kraamwinkel (2021)
+                  </a>
+                 Planetary limits to soil degradation — Communications Earth &amp; Environment
+              </li><li>
+                <a href="https://doi.org/10.1016/j.geoderma.2025.117165" rel="noopener">
+                    Lacroix (2025)
+                  </a>
+                 Soil carbon concentration drives anoxic microsites across horizons, textures, and aggregate position in a California grassland — Geoderma
+              </li><li>
+                <a href="https://doi.org/10.1016/j.soilbio.2017.03.015" rel="noopener">
+                    Lamont (2017)
+                  </a>
+                 Soil Biology and Biochemistry, 111 — Soil Biology and Biochemistry
+              </li><li>
+                <a href="https://doi.org/10.1038/nature09486" rel="noopener">
+                    Lane (2010)
+                  </a>
+                  — Nature
+              </li><li>
+                <a href="https://doi.org/10.1111/gcb.14859" rel="noopener">
+                    Lavallee (2019)
+                  </a>
+                 Conceptualizing soil organic matter into particulate and mineral‐associated forms to address global change in the 21st century — Global Change Biology
+              </li><li>
+                <span>Loiret (2013)</span>
+                 L&#39;indice Ka de distance à l&#39;équilibre et la diversité biologique — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.1038/s41467-025-62989-z" rel="noopener">
+                    Ma (2025)
+                  </a>
+                 The soil-plant-human gut microbiome axis into perspective — Nature Communications
+              </li><li>
+                <a href="https://doi.org/10.1038/s41561-018-0221-6" rel="noopener">
+                    Magnabosco (2018)
+                  </a>
+                 The biomass and biodiversity of the continental subsurface — Nature Geoscience
+              </li><li>
+                <a href="https://doi.org/10.15255/kui.2023.047" rel="noopener">
+                    Medvidović (2024)
+                  </a>
+                 Indoor Pretreatment of Biowaste Using the Bokashi Method — Kemija u industriji
+              </li><li>
+                <a href="https://doi.org/10.1038/s41586-022-05550-y" rel="noopener">
+                    Rodrigues-Oliveira (2022)
+                  </a>
+                 Actin cytoskeleton and complex cell architecture in an — Nature
+              </li><li>
+                <a href="https://doi.org/10.5194/bg-16-3665-2019" rel="noopener">
+                    Schlüter (2019)
+                  </a>
+                 Physical constraints for respiration in microbial hotspots in — Biogeosciences
+              </li><li>
+                <span>Science (news article) (2026)</span>
+                 Scientists stunned by &#39;fundamentally new way&#39; life produces DNA — bacterial defense system challenges central dogma — Science (news)
+              </li><li>
+                <a href="https://doi.org/10.3389/feart.2023.1239301" rel="noopener">
+                    Sedov (2023)
+                  </a>
+                 Soil toposequences, soil erosion, and ancient Maya land — Frontiers in Earth Science
+              </li><li>
+                <a href="https://doi.org/10.1016/j.catena.2024.108074" rel="noopener">
+                    Shojaeezadeh (2024)
+                  </a>
+                 Soil erosion in the United States: Present and — CATENA
+              </li><li>
+                <span>Séré (2007)</span>
+                 Fonctionnement et évolution pédogénétique de Technosols issus d’un procédé de construction de sol — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.1080/24694452.2020.1867497" rel="noopener">
+                    Vadjunec (2021)
+                  </a>
+                 Footprints from the Dust Bowl: Using Historical Geographic — Annals of the American Association of Geographers
+              </li><li>
+                <a href="https://doi.org/10.1080/10643389.2021.1892015" rel="noopener">
+                    Wu (2021)
+                  </a>
+                 An invisible workforce in soil: The neglected role — Critical Reviews in Environmental Science and Technology
+              </li><li>
+                <a href="https://doi.org/10.1029/2021gl096983" rel="noopener">
+                    Zhang (2022)
+                  </a>
+                 Human Impacts Overwhelmed Hydroclimate Control of Soil Erosion — Geophysical Research Letters
+              </li><li>
+                <a href="https://doi.org/10.1038/s41586-025-08955-7" rel="noopener">
+                    Zhang (2025)
+                  </a>
+                 Deep origin of eukaryotes outside Heimdallarchaeia within Asgardarchaeota — Nature
+              </li>
+          </ul>
         </section>
 
       

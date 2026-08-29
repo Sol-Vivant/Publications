@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/V2/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="efcf1a03e4fc341e";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="87a3fbbf601c556a";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.BiAf4tT7.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -810,6 +810,206 @@
 <p>Le chemin reste exigeant. Il demande de raisonner en systèmes plutôt qu'en produits, d'accepter des résultats plus lents et plus variables, de réapprendre à lire un sol comme on lit un organisme. Mais il ouvre une issue que l'approche par intrants ne peut plus promettre : une agriculture qui ne s'use pas elle-même, parce qu'elle s'appuie sur les alliances plutôt que de les combattre.</p>
 <p>En refermant ce parcours, une conviction s'impose, qui rejoint les avertissements adressés à la science des plantes : le réductionnisme qui isole l'organisme de son milieu a atteint ses limites, et l'heure est à penser les relations plutôt que les entités (Hamant, 2023). La plante-machine est un artefact d'observation ; la plante-holobionte est la réalité du champ. Ce que nous apprenons du vivant du sol n'est pas seulement une technologie de substitution des intrants — c'est une manière de cultiver qui reconnaît, dans chaque racine, un territoire partagé, et dans chaque récolte, le fruit d'une alliance.</p>
 </div>
+        </section>
+
+      
+      <section id="references" class="sv-card sv-related">
+          <h2>Références (40)</h2>
+          <ul class="sv-link-list">
+            <li>
+                <a href="https://doi.org/10.1016/j.micpath.2024.106772" rel="noopener">
+                    (auteurs non specifies) (2024)
+                  </a>
+                 Surviving the stress: Understanding the molecular basis of plant adaptations and uncovering the role of mycorrhizal association in plant abiotic stresses — Microbial Pathogenesis
+              </li><li>
+                <a href="https://doi.org/10.1038/nature03608" rel="noopener">
+                    Akiyama K (2005)
+                  </a>
+                 Plant sesquiterpenes induce hyphal branching in arbuscular mycorrhizal fungi — Nature
+              </li><li>
+                <a href="https://doi.org/10.53660/clm-4361-24v32" rel="noopener">
+                    Almeida (2024)
+                  </a>
+                 Trophobiosis theory: the role of nutrients in pest — Concilium
+              </li><li>
+                <a href="https://doi.org/10.3389/fmicb.2018.02213" rel="noopener">
+                    Alori &amp; Babalola (2018)
+                  </a>
+                 Microbial Inoculants for Improving Crop Quality and Human Health in Africa — Frontiers in Microbiology
+              </li><li>
+                <span>Amy (2021)</span>
+                 Optimizing nitrogen and phosphorus nutrition of rapeseed for a sustainable production through the utilization of biointrants, improving phytobiome functioning — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.1128/msystems.01397-23" rel="noopener">
+                    Batista (2024)
+                  </a>
+                 A quorum-sensing regulatory cascade for siderophore-mediated iron homeostasis — mSystems
+              </li><li>
+                <a href="https://doi.org/10.1111/nph.70982" rel="noopener">
+                    Beltrán-Torres (2026)
+                  </a>
+                 Epigenetic regulation of mycorrhizal symbioses: from plastic responses to transgenerational legacies — New Phytologist
+              </li><li>
+                <a href="https://doi.org/10.1146/annurev-arplant-102820-124504" rel="noopener">
+                    Bennett (2022)
+                  </a>
+                 The Costs and Benefits of Plant–Arbuscular Mycorrhizal Fungal — Annual Review of Plant Biology
+              </li><li>
+                <span>Bousset (2020)</span>
+                 Maladie de la plante, Epidémies, Résistance génétique, Adaptation et Tactiques : Schémas et descriptions pour mieux comprendre ces notions dans les agroécosystèmes — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.1111/nph.13132" rel="noopener">
+                    Brooker (2015)
+                  </a>
+                 Improving intercropping: a synthesis of research in agronomy, plant physiology and ecology — New Phytologist
+              </li><li>
+                <span>Chaboussou (1985)</span>
+                 Les plantes malades des pesticides (theorie de la
+              </li><li>
+                <a href="https://doi.org/10.1007/s11274-023-03608-1" rel="noopener">
+                    Chopra (2023)
+                  </a>
+                 Quorum sensing activities and genomic insights of plant — World Journal of Microbiology and Biotechnology
+              </li><li>
+                <a href="https://doi.org/10.70675/6e7f0884z92afz4ff0z8490zd3811e357d35" rel="noopener">
+                    Cottes (2019)
+                  </a>
+                 The soil redox potential (Eh) : its measurement, its impact on the mobility of nutrients and the growth of sunflower — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.70675/fa3a2a68zef6bz4d36z8eadz814ba54b4b97" rel="noopener">
+                    Domergue (2017)
+                  </a>
+                 Functional diversity of Faba-bean associated rhizobia in agro-ecosystem of South of France — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.3390/plants15071121" rel="noopener">
+                    Garcia (2026)
+                  </a>
+                 Genomic Footprints of Multiple Host Lineages in the Mitochondrial and Nuclear Genomes of the Holoparasite Prosopanche americana — Plants
+              </li><li>
+                <a href="https://doi.org/10.1017/qpb.2023.2" rel="noopener">
+                    Hamant (2023)
+                  </a>
+                 The 1972 Meadows report: A wake-up call for — Quantitative Plant Biology
+              </li><li>
+                <a href="https://doi.org/10.1007/s11104-012-1429-7" rel="noopener">
+                    Husson (2012)
+                  </a>
+                 Redox potential (Eh) and pH as drivers of soil/plant/microorganism systems: a transdisciplinary overview pointing to integrative opportunities for agronomy — Plant and Soil
+              </li><li>
+                <a href="https://doi.org/10.1371/journal.pbio.3001982" rel="noopener">
+                    Jhu (2023)
+                  </a>
+                 Dancing to a different tune, can we switch — PLOS Biology
+              </li><li>
+                <a href="https://doi.org/10.3389/fpls.2024.1464710" rel="noopener">
+                    Jung (2024)
+                  </a>
+                 Triple interactions for induced systemic resistance in plants — Frontiers in Plant Science
+              </li><li>
+                <a href="https://doi.org/10.55544/jrasb.3.4.24" rel="noopener">
+                    Kumar (2024)
+                  </a>
+                 Induced Systemic Resistance in Plants: Mechanisms and Agricultural Significance — Journal for Research in Applied Sciences and Biotechnology
+              </li><li>
+                <a href="https://doi.org/10.1038/s41467-023-37937-4" rel="noopener">
+                    Labouyrie (2023)
+                  </a>
+                 Patterns in soil microbial diversity across Europe — Nature Communications
+              </li><li>
+                <a href="https://doi.org/10.3390/plants15071135" rel="noopener">
+                    Li (2026)
+                  </a>
+                 Cloning and Characterization of IbDREB1d and Its Role in Plant Growth Regulation in Sweet Potato — Plants
+              </li><li>
+                <a href="https://doi.org/10.3389/fgene.2024.1423213" rel="noopener">
+                    Lu (2024)
+                  </a>
+                 Lactylation: The emerging frontier in post-translational modification — Frontiers in Genetics
+              </li><li>
+                <a href="https://doi.org/10.4161/psb.20155" rel="noopener">
+                    Luna (2012)
+                  </a>
+                 The epigenetic machinery controlling transgenerational systemic acquired resistance — Plant Signaling &amp; Behavior
+              </li><li>
+                <a href="https://doi.org/10.3389/fsufs.2021.701310" rel="noopener">
+                    Martinez (2021)
+                  </a>
+                 When the Medicine Feeds the Problem; Do Nitrogen — Frontiers in Sustainable Food Systems
+              </li><li>
+                <a href="https://doi.org/10.48017/dj.v10i2.3242" rel="noopener">
+                    Mata (2025)
+                  </a>
+                 The Role of Rhizophagy in Nutrient Uptake and — Diversitas Journal
+              </li><li>
+                <a href="https://doi.org/10.18231/j.ijmr.2022.029" rel="noopener">
+                    Mitra (2022)
+                  </a>
+                 Ecological importance of strigolactones hormone on arbuscular mycorrhizal fungi symbiosis in plant — Indian Journal of Microbiology Research
+              </li><li>
+                <a href="https://doi.org/10.1111/ppl.70860" rel="noopener">
+                    Moreno-Sanguino (2026)
+                  </a>
+                 Phloem Proteomics to Identify Small Open Reading Frame (sORF)-encoded Peptides With a Putative Role in the Control of Flowering Time in Arabidopsis — Physiologia Plantarum
+              </li><li>
+                <a href="https://doi.org/10.3390/plants15071093" rel="noopener">
+                    Niu (2026)
+                  </a>
+                 Maize ZmGBSS1 Promotes Early Flowering and Enhances Drought Tolerance in Arabidopsis — Plants
+              </li><li>
+                <span>Rochefort (2020)</span>
+                 The Brassica napus seed microbiota : assemblage, transmission and contribution to plant response to a soilborne fungal pathogen — HAL (Le Centre pour la Communication Scientifique Directe)
+              </li><li>
+                <a href="https://doi.org/10.1186/s12864-024-10391-2" rel="noopener">
+                    Rosling (2024)
+                  </a>
+                 Evolutionary history of arbuscular mycorrhizal fungi and genomic — BMC Genomics
+              </li><li>
+                <a href="https://doi.org/10.1007/s11104-023-06266-2" rel="noopener">
+                    Santoro (2023)
+                  </a>
+                 Role of soil abiotic processes on phosphorus availability and plant responses with a focus on strigolactones in tomato plants — Plant and Soil
+              </li><li>
+                <a href="https://doi.org/10.1111/nph.70106" rel="noopener">
+                    Selosse (2025)
+                  </a>
+                 Mixotrophy in orchids: facts, questions, and perspectives — New Phytologist
+              </li><li>
+                <a href="https://doi.org/10.9734/jabb/2025/v28i52352" rel="noopener">
+                    Shahni (2025)
+                  </a>
+                 Role of Quorum Sensing Molecules in Plant-microbe Interaction for Sustainable Agriculture: A Review — Journal of Advances in Biology &amp; Biotechnology
+              </li><li>
+                <a href="https://doi.org/10.1111/tpj.16456" rel="noopener">
+                    Skalický (2023)
+                  </a>
+                 Fluorescence-activated multi-organelle mapping of subcellular plant hormone distribution — The Plant Journal
+              </li><li>
+                <a href="https://doi.org/10.1111/nph.71048" rel="noopener">
+                    Sun (2026)
+                  </a>
+                 Novel roles of sulfur metabolism in stress-controlled stomata aperture regulation — New Phytologist
+              </li><li>
+                <a href="https://doi.org/10.3389/fgene.2024.1382445" rel="noopener">
+                    Vondracek (2024)
+                  </a>
+                 Advances in genomics and genome editing for improving strawberry (Fragaria x ananassa) — Frontiers in Genetics
+              </li><li>
+                <a href="https://doi.org/10.3390/plants15071134" rel="noopener">
+                    Wei (2026)
+                  </a>
+                 Comparing Transcriptome and Stem Anatomy Analysis Reveals That the Phenylpropanoid Pathway Is a Key Driving Factor for Lodging Resistance in Brassica rapa — Plants
+              </li><li>
+                <a href="https://doi.org/10.1101/cshperspect.a034686" rel="noopener">
+                    Yoneyama (2019)
+                  </a>
+                 How Do Strigolactones Ameliorate Nutrient Deficiencies in Plants? [Review of How Do Strigolactones Ameliorate Nutrient Deficiencies in Plants?] — Cold Spring Harbor Perspectives in Biology
+              </li><li>
+                <a href="https://doi.org/10.3389/fpls.2022.1063393" rel="noopener">
+                    Zhu (2023)
+                  </a>
+                 Innovative microbial disease biocontrol strategies mediated by quorum — Frontiers in Plant Science
+              </li>
+          </ul>
         </section>
 
       

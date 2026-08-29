@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/H1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="efcf1a03e4fc341e";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="87a3fbbf601c556a";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.BiAf4tT7.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -564,6 +564,124 @@
 <p>Il s'ensuit une conséquence qui engage la pensée même de la santé. Le concept One Health, qui réunit santé humaine, santé animale et santé des écosystèmes, restera incomplet tant qu'il n'aura pas inscrit la santé des sols à sa base. La trajectoire est pourtant en marche : les microbiomes s'invitent désormais dans la définition même de cette santé intégrée, et l'on commence à comprendre que le microbiome du sol, celui de la plante et celui de l'intestin forment un seul et même objet d'attention (Affagard et al., 2026). Une santé qui se penserait sans le sol se condamnerait à soigner des symptômes dont elle aurait abandonné la cause. Inscrire le sol à la base de One Health, ce n'est pas ajouter une case de plus à un diagramme : c'est reconnaître le socle sur lequel les autres santés reposent. On ne peut prétendre prendre soin des êtres vivants en ignorant le plus grand d'entre eux, celui qui les porte tous.</p>
 <p>Prendre soin du sol n'est donc pas une question agricole de plus. Ce n'est pas un dossier technique réservé aux agronomes, ni une préférence de consommateurs avertis. C'est, au sens le plus littéral du terme, une question de santé publique — et probablement le plus sûr investissement qu'une société puisse faire dans son avenir. Restaurer la vie du sol, c'est reconstituer, en amont de toute maladie, les conditions d'une santé qui ne demande pas à être réparée. Chaque degré Brix gagné, chaque milligramme de zinc rendu à la carotte, chaque kilomètre d'hyphes épargné par la charrue, est une avance prise sur la maladie. Le sol n'est pas un lieu où la santé finit, mais celui où elle commence. La terre que nous soignons aujourd'hui est la santé que nous récolterons demain ; et soigner la terre, c'est déjà commencer à soigner les hommes.</p>
 </div>
+        </section>
+
+      
+      <section id="references" class="sv-card sv-related">
+          <h2>Références (22)</h2>
+          <ul class="sv-link-list">
+            <li>
+                <a href="https://doi.org/10.1016/j.lanmic.2025.101319" rel="noopener">
+                    Affagard (2026)
+                  </a>
+                 Integrating microbiomes into One Health: insights from the — The Lancet Microbe
+              </li><li>
+                <a href="https://doi.org/10.53365/nrfhh/142883" rel="noopener">
+                    Alam (2021)
+                  </a>
+                 Biofortification of Staple Crops to Eradicate Hidden Hunger: — Natural Resources for Human Health
+              </li><li>
+                <a href="https://doi.org/10.3389/fmicb.2018.02213" rel="noopener">
+                    Alori &amp; Babalola (2018)
+                  </a>
+                 Microbial Inoculants for Improving Crop Quality and Human Health in Africa — Frontiers in Microbiology
+              </li><li>
+                <a href="https://doi.org/10.1001/jamainternmed.2018.4357" rel="noopener">
+                    Baudry (2018)
+                  </a>
+                 Association of Frequency of Organic Food Consumption With Cancer Risk: Findings From the NutriNet-Santé Prospective Cohort Study — JAMA Internal Medicine
+              </li><li>
+                <a href="https://doi.org/10.1126/science.aaz5819" rel="noopener">
+                    Brahney (2020)
+                  </a>
+                 Plastic rain in protected areas of the United States — Science
+              </li><li>
+                <a href="https://doi.org/10.1080/10643389.2023.2183700" rel="noopener">
+                    Chen (2023)
+                  </a>
+                 Influences of arbuscular mycorrhizal fungi on crop growth — Critical Reviews in Environmental Science and Technology
+              </li><li>
+                <a href="https://doi.org/10.1080/07315724.2004.10719409" rel="noopener">
+                    Davis (2004)
+                  </a>
+                 Changes in USDA Food Composition Data for 43 Garden Crops, 1950 to 1999 — Journal of the American College of Nutrition
+              </li><li>
+                <a href="https://doi.org/10.1038/s41598-024-67489-6" rel="noopener">
+                    Divín (2024)
+                  </a>
+                 Contacts with environmental biodiversity affect human health: links — Scientific Reports
+              </li><li>
+                <a href="https://doi.org/10.3390/antiox14050530" rel="noopener">
+                    Feliziani (2025)
+                  </a>
+                 Regenerative Organic Agriculture and Human Health: The Interconnection — Antioxidants
+              </li><li>
+                <a href="https://doi.org/10.3389/fnut.2025.1669008" rel="noopener">
+                    Gallina (2025)
+                  </a>
+                 Hidden hunger in Europe: a review on determinants, — Frontiers in Nutrition
+              </li><li>
+                <a href="https://doi.org/10.1016/j.soilbio.2017.03.015" rel="noopener">
+                    Lamont (2017)
+                  </a>
+                 Soil Biology and Biochemistry, 111 — Soil Biology and Biochemistry
+              </li><li>
+                <a href="https://doi.org/10.1007/s42773-025-00498-4" rel="noopener">
+                    Li (2025)
+                  </a>
+                 Synergistic superiority of AMF and biochar in enhancing — Biochar
+              </li><li>
+                <a href="https://doi.org/10.3389/fnut.2023.1078667" rel="noopener">
+                    Manzeke‐Kangara (2023)
+                  </a>
+                 Do agronomic approaches aligned to regenerative agriculture improve — Frontiers in Nutrition
+              </li><li>
+                <a href="https://doi.org/10.3389/fpls.2016.01146" rel="noopener">
+                    Medrano-Macías (2016)
+                  </a>
+                 Use of Iodine to Biofortify and Promote Growth — Frontiers in Plant Science
+              </li><li>
+                <a href="https://doi.org/10.3389/fnut.2020.00101" rel="noopener">
+                    Melse‐Boonstra (2020)
+                  </a>
+                 Bioavailability of Micronutrients From Nutrient-Dense Whole Foods: Zooming — Frontiers in Nutrition
+              </li><li>
+                <a href="https://doi.org/10.1186/s12940-017-0315-4" rel="noopener">
+                    Mie (2017)
+                  </a>
+                 Human health implications of organic food and organic agriculture: a comprehensive review — Environmental Health
+              </li><li>
+                <a href="https://doi.org/10.1371/journal.pone.0067860" rel="noopener">
+                    Muthayya (2013)
+                  </a>
+                 The Global Hidden Hunger Indices and Maps: An — PLoS ONE
+              </li><li>
+                <a href="https://doi.org/10.3390/su131910608" rel="noopener">
+                    Olum (2021)
+                  </a>
+                 Economic Feasibility of Iodine Agronomic Biofortification: A Projective — Sustainability
+              </li><li>
+                <a href="https://doi.org/10.1016/j.cmet.2025.08.004" rel="noopener">
+                    Preston (2025)
+                  </a>
+                 Effect of ultra-processed food consumption on male reproductive and metabolic health — Cell Metabolism
+              </li><li>
+                <a href="https://doi.org/10.3389/fnut.2025.1646750" rel="noopener">
+                    Richards (2025)
+                  </a>
+                 Micronutrient bioavailability: concepts, influencing factors, and strategies for — Frontiers in Nutrition
+              </li><li>
+                <a href="https://doi.org/10.3389/fpls.2022.1033092" rel="noopener">
+                    Saleem (2022)
+                  </a>
+                 Functions and strategies for enhancing zinc availability in — Frontiers in Plant Science
+              </li><li>
+                <a href="https://doi.org/10.3389/fmicb.2025.1666747" rel="noopener">
+                    Sulaiman (2025)
+                  </a>
+                 Proteomic study of Akkermansia muciniphila and Bifidobacterium species co-culture under different carbon sources — Frontiers in Microbiology
+              </li>
+          </ul>
         </section>
 
       

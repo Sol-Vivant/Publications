@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/V1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="efcf1a03e4fc341e";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="87a3fbbf601c556a";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.C9lc8FhA.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.BiAf4tT7.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -498,6 +498,149 @@
 <p>C'est là la leçon profonde de ce document. La fertilité n'est pas un stock que l'on recharge, mais un flux que l'on entretient ; elle ne dépend pas d'une espèce héroïque, mais d'un réseau complet et étagé, dont les maillons se protègent mutuellement. Cette restauration demande du temps — des années plutôt que des saisons — car on ne recolonise pas un réseau du haut, mais du bas, en laissant d'abord revenir la ressource avant le consommateur, le consommateur avant le prédateur. Prendre soin de la faune du sol, c'est reconnaître que la terre cultivée est un organisme peuplé, traversé d'échanges, et que la meilleure agronomie consiste moins à lui imposer qu'à lui permettre.</p>
 <p>Il y a là un renversement de regard. Pendant des décennies, l'agronomie a traité le sol comme un support inerte que l'on amende et que l'on travaille, la fertilité comme un intrant que l'on apporte, la protection comme une chimie que l'on applique. La faune du sol nous rappelle l'inverse : le sol est déjà un organisme, la fertilité est déjà un processus, la régulation est déjà une communauté. Le rôle de l'agronome n'est pas de remplacer ce qui manque, mais de ne pas détruire ce qui œuvre. Nourrir le sol, c'est nourrir ceux qui le nourrissent ; le protéger, c'est protéger ceux qui le protègent. La faune n'est pas un auxiliaire de la fertilité : elle en est la condition.</p>
 </div>
+        </section>
+
+      
+      <section id="references" class="sv-card sv-related">
+          <h2>Références (27)</h2>
+          <ul class="sv-link-list">
+            <li>
+                <a href="https://doi.org/10.3390/soilsystems9040134" rel="noopener">
+                    Altieri (2025)
+                  </a>
+                 Monitoring Soil Biodiversity and Biological Resilience in Disturbed — Soil Systems
+              </li><li>
+                <a href="https://doi.org/10.3389/frym.2020.545263" rel="noopener">
+                    Barreto (2020)
+                  </a>
+                 Armored Mites, Beetle Mites, or Moss Mites: The — Frontiers for Young Minds
+              </li><li>
+                <a href="https://doi.org/10.3389/fenvs.2019.00052" rel="noopener">
+                    Coulibaly (2019)
+                  </a>
+                 Functional Assemblages of Collembola Determine Soil Microbial Communities — Frontiers in Environmental Science
+              </li><li>
+                <a href="https://doi.org/10.1007/s11104-023-05916-9" rel="noopener">
+                    Dulaurent (2023)
+                  </a>
+                 Beneficial effects of conservation agriculture on earthworm and — Plant and Soil
+              </li><li>
+                <a href="https://doi.org/10.1007/s10493-012-9546-9" rel="noopener">
+                    Erdmann (2012)
+                  </a>
+                 Regional factors rather than forest type drive the — Experimental and Applied Acarology
+              </li><li>
+                <a href="https://doi.org/10.15666/aeer/0701_079098" rel="noopener">
+                    Gergócs (2009)
+                  </a>
+                 APPLICATION OF ORIBATID MITES AS INDICATORS (REVIEW) — Applied Ecology and Environmental Research
+              </li><li>
+                <a href="https://doi.org/10.1016/j.apsoil.2022.104390" rel="noopener">
+                    Gergócs (2022)
+                  </a>
+                 Crop species and year affect soil-dwelling Collembola and — Applied Soil Ecology
+              </li><li>
+                <a href="https://doi.org/10.1111/ejss.70149" rel="noopener">
+                    Ghaderi (2025)
+                  </a>
+                 An Innovative Framework Fosters Practical Application of Nematode‐Based — European Journal of Soil Science
+              </li><li>
+                <a href="https://doi.org/10.1017/qpb.2023.2" rel="noopener">
+                    Hamant (2023)
+                  </a>
+                 The 1972 Meadows report: A wake-up call for — Quantitative Plant Biology
+              </li><li>
+                <a href="https://doi.org/10.1007/BF00347827" rel="noopener">
+                    Hanlon (1979)
+                  </a>
+                 The effects of collembola grazing on microbial activity in decomposing leaf litter — Oecologia
+              </li><li>
+                <a href="https://doi.org/10.31289/jibioma.v7i1.6156" rel="noopener">
+                    Husamah (2025)
+                  </a>
+                 Collembola dan Konservasi Tanah Berkelanjutan: Review atas Wawasan — Jurnal Ilmiah Biologi UMA (JIBIOMA)
+              </li><li>
+                <a href="https://doi.org/10.17221/461/2022-pse" rel="noopener">
+                    Iordache (2023)
+                  </a>
+                 Chemical composition of earthworm casts as a tool — Plant, Soil and Environment
+              </li><li>
+                <a href="https://doi.org/10.4067/s0717-92002021000100081" rel="noopener">
+                    Jabbari (2021)
+                  </a>
+                 Oribatid mite (Acari, Oribatida) richness and diversity in — Bosque (Valdivia)
+              </li><li>
+                <a href="https://doi.org/10.1002/etc.5428" rel="noopener">
+                    Joimel (2022)
+                  </a>
+                 Collembola are Among the Most Pesticide-Sensitive Soil Fauna — Environmental Toxicology and Chemistry
+              </li><li>
+                <a href="https://doi.org/10.3389/fevo.2021.630919" rel="noopener">
+                    Joimel (2021)
+                  </a>
+                 Functional and Taxonomic Diversity of Collembola as Complementary — Frontiers in Ecology and Evolution
+              </li><li>
+                <a href="https://doi.org/10.3389/fpls.2023.1173157" rel="noopener">
+                    Li (2023)
+                  </a>
+                 Responses of soil nematode abundance and food web — Frontiers in Plant Science
+              </li><li>
+                <a href="https://doi.org/10.1038/s41598-025-06257-6" rel="noopener">
+                    Melloul (2025)
+                  </a>
+                 Temporal response of belowground and aboveground organisms to — Scientific Reports
+              </li><li>
+                <a href="https://doi.org/10.5194/bg-19-4089-2022" rel="noopener">
+                    Monteux (2022)
+                  </a>
+                 Dispersal of bacteria and stimulation of permafrost decomposition — Biogeosciences
+              </li><li>
+                <a href="https://doi.org/10.1016/j.geoderma.2022.116245" rel="noopener">
+                    Pham (2022)
+                  </a>
+                 Using morpho-anatomical traits to predict the effect of — Geoderma
+              </li><li>
+                <a href="https://doi.org/10.2478/jofnem-2022-0022" rel="noopener">
+                    Pothula (2022)
+                  </a>
+                 Increasing Levels of Physical Disturbance Affect Soil Nematode — Journal of Nematology
+              </li><li>
+                <a href="https://doi.org/10.1016/j.apsoil.2025.106358" rel="noopener">
+                    Prado (2025)
+                  </a>
+                 Biodiversity of oribatid mites as a tool to — Applied Soil Ecology
+              </li><li>
+                <a href="https://doi.org/10.1016/j.soilbio.2022.108640" rel="noopener">
+                    Preez (2022)
+                  </a>
+                 Nematode-based indices in soil ecology: Application, utility, and — Soil Biology and Biochemistry
+              </li><li>
+                <a href="https://doi.org/10.15666/aeer/2203_26012625" rel="noopener">
+                    Rangel (2024)
+                  </a>
+                 EDAPHIC COLLEMBOLA (COLLEMBOLA) AS INDICATORS OF THE CHEMICAL — Applied Ecology and Environmental Research
+              </li><li>
+                <a href="https://doi.org/10.1016/j.soilbio.2023.109244" rel="noopener">
+                    Sanders (2023)
+                  </a>
+                 How will climate change affect the feeding biology — Soil Biology and Biochemistry
+              </li><li>
+                <a href="https://doi.org/10.1016/j.soilbio.2025.109859" rel="noopener">
+                    Song (2025)
+                  </a>
+                 The role of earthworms in the transformation of — Soil Biology and Biochemistry
+              </li><li>
+                <a href="https://doi.org/10.1002/ecs2.70469" rel="noopener">
+                    Touray (2025)
+                  </a>
+                 Tri-trophic interactions entomopathogenic fungi / Trichoderma / soil mites — Ecosphere
+              </li><li>
+                <a href="https://doi.org/10.1186/s40168-023-01630-x" rel="noopener">
+                    Zhang (2023)
+                  </a>
+                 Long-read assembled metagenomic approaches improve our understanding on — Microbiome
+              </li>
+          </ul>
         </section>
 
       
