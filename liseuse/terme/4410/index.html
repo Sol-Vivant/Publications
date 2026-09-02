@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/4410/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,27 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S1/">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S2/">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S3/">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -93,7 +88,7 @@
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -221,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -235,66 +230,221 @@
       <a href="/Publications/liseuse/terme/5402/">dynamique de sorption</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-S0">S0</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-S0">S0</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">hystérésis de sorption</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>hystérésis de sorption</h1>
-      <astro-island uid="Z13C2mE" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;4410&quot;],&quot;label&quot;:[0,&quot;hystérésis de sorption&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>sorption hysteresis</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>hystérésis de sorption</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>sorption hysteresis</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Phénomène par lequel la courbe de désorption d'une substance (comme le phosphore) ne suit pas la même trajectoire que sa courbe d'adsorption initiale (Barrow, 2022; Okajima et al., 1983). Cet écart indique que la rétention est partiellement irréversible à court terme, souvent due à une déformation des pores du sorbant ou à une migration lente du soluté vers des sites de fixation internes moins accessibles (Debnath &amp; Mazumder, 2025; Yalin et al., 2025).</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Phénomène par lequel la courbe de désorption d&#39;une substance (comme le phosphore) ne suit pas la même trajectoire que sa courbe d&#39;adsorption initiale (Barrow, 2022; Okajima et al., 1983). Cet écart indique que la rétention est partiellement irréversible à court terme, souvent due à une déformation des pores du sorbant ou à une migration lente du soluté vers des sites de fixation internes moins accessibles (Debnath &amp; Mazumder, 2025; Yalin et al., 2025).…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-S0">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/467/" title="hydrophobie du sol">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/1/" title="hystérésis hydrique">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> hystérésis d&#39;adsorption-désorption, sorption-desorption hysteresis</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> hystérésis d&#39;adsorption-désorption, sorption-desorption hysteresis</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/5402/">dynamique de sorption</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/5402/">dynamique de sorption</a></li>
-        </ul>
-      </section>
+      
 
-    
+      <section class="sv-card sv-related">
+          <h2>Termes liés (4)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/5018/">phosphore hérité</a></li><li><a href="/Publications/liseuse/terme/6/">adsorption</a></li><li><a href="/Publications/liseuse/terme/5006/">réversibilité fonctionnelle</a></li><li><a href="/Publications/liseuse/terme/7013/">isotherm</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (4)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/5018/">phosphore hérité</a></li><li><a href="/Publications/liseuse/terme/6/">adsorption</a></li><li><a href="/Publications/liseuse/terme/5006/">réversibilité fonctionnelle</a></li><li><a href="/Publications/liseuse/terme/7013/">isotherm</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Utilisé dans (1 fiches)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/fiche/252/">Les états de l&#39;eau et la biologie du sol</a></li>
+          </ul>
+        </section>
+    </article>
 
-    <section class="sv-card sv-related">
-        <h2>Utilisé dans (1 fiches)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/fiche/252/">Les états de l&#39;eau et la biologie du sol</a></li>
-        </ul>
-      </section>
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="Z13C2mE" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;4410&quot;],&quot;label&quot;:[0,&quot;hystérésis de sorption&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — S0 (61)</summary>
+    <nav aria-label="Termes — S0 (61)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3570/" title="albédo" data-id="3570">
+          <span class="sv-navlist-title">albédo</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/538/" title="aménagement en ligne clé" data-id="538">
+          <span class="sv-navlist-title">aménagement en ligne clé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4320/" title="aridité" data-id="4320">
+          <span class="sv-navlist-title">aridité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/642/" title="bilan hydrique" data-id="642">
+          <span class="sv-navlist-title">bilan hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7955/" title="biopuncture" data-id="7955">
+          <span class="sv-navlist-title">biopuncture</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/269/" title="capacité au champ" data-id="269">
+          <span class="sv-navlist-title">capacité au champ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2365/" title="Capillarité" data-id="2365">
+          <span class="sv-navlist-title">Capillarité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3597/" title="chaleur latente" data-id="3597">
+          <span class="sv-navlist-title">chaleur latente</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6534/" title="chaleur sensible" data-id="6534">
+          <span class="sv-navlist-title">chaleur sensible</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/307/" title="Conductivité hydraulique" data-id="307">
+          <span class="sv-navlist-title">Conductivité hydraulique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3/" title="conductivité hydraulique saturée" data-id="3">
+          <span class="sv-navlist-title">conductivité hydraulique saturée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4352/" title="connectivité hydrologique" data-id="4352">
+          <span class="sv-navlist-title">connectivité hydrologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/275/" title="courbe de rétention" data-id="275">
+          <span class="sv-navlist-title">courbe de rétention</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/359/" title="couverture du sol" data-id="359">
+          <span class="sv-navlist-title">couverture du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/334/" title="dessiccation" data-id="334">
+          <span class="sv-navlist-title">dessiccation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4018/" title="Dureté de l'eau" data-id="4018">
+          <span class="sv-navlist-title">Dureté de l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4361/" title="eau biologique" data-id="4361">
+          <span class="sv-navlist-title">eau biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3609/" title="eau bleue" data-id="3609">
+          <span class="sv-navlist-title">eau bleue</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6728/" title="eau disponible" data-id="6728">
+          <span class="sv-navlist-title">eau disponible</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6729/" title="eau grise" data-id="6729">
+          <span class="sv-navlist-title">eau grise</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4363/" title="eau hygroscopique" data-id="4363">
+          <span class="sv-navlist-title">eau hygroscopique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4364/" title="eau verte / eau bleue" data-id="4364">
+          <span class="sv-navlist-title">eau verte / eau bleue</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7832/" title="écoulement le long des troncs" data-id="7832">
+          <span class="sv-navlist-title">écoulement le long des troncs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/333/" title="effet Birch" data-id="333">
+          <span class="sv-navlist-title">effet Birch</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6745/" title="empreinte eau" data-id="6745">
+          <span class="sv-navlist-title">empreinte eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/641/" title="érosion hydrique" data-id="641">
+          <span class="sv-navlist-title">érosion hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/310/" title="Exopolysaccharides" data-id="310">
+          <span class="sv-navlist-title">Exopolysaccharides</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/360/" title="flux préférentiel" data-id="360">
+          <span class="sv-navlist-title">flux préférentiel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/425/" title="galeries biogènes" data-id="425">
+          <span class="sv-navlist-title">galeries biogènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3616/" title="gradient thermique" data-id="3616">
+          <span class="sv-navlist-title">gradient thermique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2360/" title="Humidité du sol" data-id="2360">
+          <span class="sv-navlist-title">Humidité du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/467/" title="hydrophobie du sol" data-id="467">
+          <span class="sv-navlist-title">hydrophobie du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4410/" title="hystérésis de sorption" data-id="4410" aria-current="page">
+          <span class="sv-navlist-title">hystérésis de sorption</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1/" title="hystérésis hydrique" data-id="1">
+          <span class="sv-navlist-title">hystérésis hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3618/" title="inertie thermique" data-id="3618">
+          <span class="sv-navlist-title">inertie thermique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/309/" title="infiltration" data-id="309">
+          <span class="sv-navlist-title">infiltration</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/540/" title="interception végétale" data-id="540">
+          <span class="sv-navlist-title">interception végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7013/" title="isotherm" data-id="7013">
+          <span class="sv-navlist-title">isotherm</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7043/" title="loi de conservation" data-id="7043">
+          <span class="sv-navlist-title">loi de conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7040/" title="loi de Fourier" data-id="7040">
+          <span class="sv-navlist-title">loi de Fourier</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7041/" title="loi de Jurin" data-id="7041">
+          <span class="sv-navlist-title">loi de Jurin</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7042/" title="loi de Van Genuchten" data-id="7042">
+          <span class="sv-navlist-title">loi de Van Genuchten</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/409/" title="macroporosité" data-id="409">
+          <span class="sv-navlist-title">macroporosité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5273/" title="Paramètre de qualité de l'eau" data-id="5273">
+          <span class="sv-navlist-title">Paramètre de qualité de l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4479/" title="paysage-éponge" data-id="4479">
+          <span class="sv-navlist-title">paysage-éponge</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/332/" title="pF" data-id="332">
+          <span class="sv-navlist-title">pF</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7304/" title="pluviolessivat" data-id="7304">
+          <span class="sv-navlist-title">pluviolessivat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/270/" title="point de flétrissement permanent" data-id="270">
+          <span class="sv-navlist-title">point de flétrissement permanent</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5044/" title="Pompe biotique" data-id="5044">
+          <span class="sv-navlist-title">Pompe biotique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/268/" title="potentiel hydrique" data-id="268">
+          <span class="sv-navlist-title">potentiel hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2428/" title="précipitation" data-id="2428">
+          <span class="sv-navlist-title">précipitation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5045/" title="Recyclage des précipitations" data-id="5045">
+          <span class="sv-navlist-title">Recyclage des précipitations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2/" title="réserve utile" data-id="2">
+          <span class="sv-navlist-title">réserve utile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/277/" title="résilience hydrique" data-id="277">
+          <span class="sv-navlist-title">résilience hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/539/" title="Ruissellement" data-id="539">
+          <span class="sv-navlist-title">Ruissellement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7451/" title="ruissellement de surface" data-id="7451">
+          <span class="sv-navlist-title">ruissellement de surface</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4519/" title="sol-éponge" data-id="4519">
+          <span class="sv-navlist-title">sol-éponge</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4521/" title="sorptivité" data-id="4521">
+          <span class="sv-navlist-title">sorptivité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2439/" title="tension superficielle" data-id="2439">
+          <span class="sv-navlist-title">tension superficielle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5041/" title="Test de la goutte d'eau (WDPT)" data-id="5041">
+          <span class="sv-navlist-title">Test de la goutte d&#39;eau (WDPT)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2362/" title="transfert hydrique" data-id="2362">
+          <span class="sv-navlist-title">transfert hydrique</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -304,6 +454,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/181/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -66,24 +66,21 @@
                 <a href="/Publications/liseuse/doc/H1/">
                   <strong>H1</strong> — Sol, Alimentation et Santé Humaine
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H2/">
                   <strong>H2</strong> — Le Microbiome Intestinal
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H3/">
                   <strong>H3</strong> — La Résistance Antimicrobienne
                 </a>
-                
               </li>
           </ul>
       </li>
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -211,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -225,72 +222,201 @@
       <a href="/Publications/liseuse/terme/1602/">Transfert de matériel génétique</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-H3">H3</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-H3">H3</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">transfert horizontal de gènes</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>transfert horizontal de gènes</h1>
-      <astro-island uid="Z22BEBa" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;181&quot;],&quot;label&quot;:[0,&quot;transfert horizontal de gènes&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>horizontal gene transfer</strong></span>
-      <span class="sv-badge">validé</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>transfert horizontal de gènes</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>horizontal gene transfer</strong></span>
+        <span class="sv-badge">validé</span>
         
-        <div class="sv-markdown"><p>Le transfert horizontal est un processus biologique permettant l'échange de matériel génétique entre des organismes qui n'ont pas de lien de parenté direct (contrairement au transfert vertical parent-enfant) (Simonet, 2013). Chez les bactéries, ce mécanisme s'opère par transformation, transduction ou conjugaison (souvent via des plasmides) et joue un rôle prépondérant dans l'évolution rapide des populations, notamment pour la dispersion des gènes de résistance aux antibiotiques dans l'environnement (Haenni et al., 2021; Rossi et al., 2022; Tannières, 2012)</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Le transfert horizontal est un processus biologique permettant l&#39;échange de matériel génétique entre des organismes qui n&#39;ont pas de lien de parenté direct (contrairement au transfert vertical parent-enfant) (Simonet, 2013). Chez les bactéries, ce mécanisme s&#39;opère par transformation, transduction ou conjugaison (souvent via des plasmides) et joue un rôle prépondérant dans l&#39;évolution rapide des populations, notamment pour la dispersion des gènes de résistance aux antibiotiques dans l&#39;environnement (Haenni et al., 2021; Rossi et al., 2022; Tannières, 2012)…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-H3">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/7712/" title="transfert de suppressivité">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/915/" title="Transformation bactérienne">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> Transfert latéral de gènes; HGT; transfert horizontal; THG, HGT ; lateral gene transfer</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> Transfert latéral de gènes; HGT; transfert horizontal; THG, HGT ; lateral gene transfer</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1602/">Transfert de matériel génétique</a></li><li><a href="/Publications/liseuse/terme/1391/">Évolution biologique</a></li><li><a href="/Publications/liseuse/terme/1180/">coévolution</a></li><li><a href="/Publications/liseuse/terme/2456/">déterminant génétique</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1602/">Transfert de matériel génétique</a></li><li><a href="/Publications/liseuse/terme/1391/">Évolution biologique</a></li><li><a href="/Publications/liseuse/terme/1180/">coévolution</a></li><li><a href="/Publications/liseuse/terme/2456/">déterminant génétique</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Comprend (10)</h2>
+          <p class="sv-meta">8 plus importants affichés</p>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/914/">Conjugaison bactérienne</a></li><li><a href="/Publications/liseuse/terme/2234/">Point chaud de THG</a></li><li><a href="/Publications/liseuse/terme/383/">Reprogrammation plasmidique par la plante</a></li><li><a href="/Publications/liseuse/terme/950/">Saut d&#39;hôte</a></li><li><a href="/Publications/liseuse/terme/916/">transduction bactérienne</a></li><li><a href="/Publications/liseuse/terme/4945/">transfert ARG sol-plante-aliment</a></li><li><a href="/Publications/liseuse/terme/7711/">transfert de gènes</a></li><li><a href="/Publications/liseuse/terme/915/">Transformation bactérienne</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Comprend (10)</h2>
-        <p class="sv-meta">8 plus importants affichés</p>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/914/">Conjugaison bactérienne</a></li><li><a href="/Publications/liseuse/terme/2234/">Point chaud de THG</a></li><li><a href="/Publications/liseuse/terme/383/">Reprogrammation plasmidique par la plante</a></li><li><a href="/Publications/liseuse/terme/950/">Saut d&#39;hôte</a></li><li><a href="/Publications/liseuse/terme/916/">transduction bactérienne</a></li><li><a href="/Publications/liseuse/terme/4945/">transfert ARG sol-plante-aliment</a></li><li><a href="/Publications/liseuse/terme/7711/">transfert de gènes</a></li><li><a href="/Publications/liseuse/terme/915/">Transformation bactérienne</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Termes liés (10)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1766/">biofilm bactérien</a></li><li><a href="/Publications/liseuse/terme/984/">ARG (gènes de résistance aux antibiotiques)</a></li><li><a href="/Publications/liseuse/terme/914/">Conjugaison bactérienne</a></li><li><a href="/Publications/liseuse/terme/851/">flore microbienne</a></li><li><a href="/Publications/liseuse/terme/923/">Pression de sélection sublétale</a></li><li><a href="/Publications/liseuse/terme/2432/">résistance bactérienne</a></li><li><a href="/Publications/liseuse/terme/182/">résistome</a></li><li><a href="/Publications/liseuse/terme/916/">transduction bactérienne</a></li><li><a href="/Publications/liseuse/terme/915/">Transformation bactérienne</a></li><li><a href="/Publications/liseuse/terme/913/">Élément génétique mobile</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (10)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1766/">biofilm bactérien</a></li><li><a href="/Publications/liseuse/terme/984/">ARG (gènes de résistance aux antibiotiques)</a></li><li><a href="/Publications/liseuse/terme/914/">Conjugaison bactérienne</a></li><li><a href="/Publications/liseuse/terme/851/">flore microbienne</a></li><li><a href="/Publications/liseuse/terme/923/">Pression de sélection sublétale</a></li><li><a href="/Publications/liseuse/terme/2432/">résistance bactérienne</a></li><li><a href="/Publications/liseuse/terme/182/">résistome</a></li><li><a href="/Publications/liseuse/terme/916/">transduction bactérienne</a></li><li><a href="/Publications/liseuse/terme/915/">Transformation bactérienne</a></li><li><a href="/Publications/liseuse/terme/913/">Élément génétique mobile</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Utilisé dans (8 fiches)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/fiche/264/">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</a></li><li><a href="/Publications/liseuse/fiche/84/">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</a></li><li><a href="/Publications/liseuse/fiche/24/">AMR et Résistome du Sol</a></li><li><a href="/Publications/liseuse/fiche/251/">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</a></li><li><a href="/Publications/liseuse/fiche/113/">Antifragilité : stress modéré → diversification de l&#39;hologénome</a></li><li><a href="/Publications/liseuse/fiche/142/">Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</a></li><li><a href="/Publications/liseuse/fiche/166/">Biofilms</a></li><li><a href="/Publications/liseuse/fiche/221/">Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</a></li>
+          </ul>
+        </section>
+    </article>
 
-    <section class="sv-card sv-related">
-        <h2>Utilisé dans (8 fiches)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/fiche/264/">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</a></li><li><a href="/Publications/liseuse/fiche/84/">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</a></li><li><a href="/Publications/liseuse/fiche/24/">AMR et Résistome du Sol</a></li><li><a href="/Publications/liseuse/fiche/251/">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</a></li><li><a href="/Publications/liseuse/fiche/113/">Antifragilité : stress modéré → diversification de l&#39;hologénome</a></li><li><a href="/Publications/liseuse/fiche/142/">Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</a></li><li><a href="/Publications/liseuse/fiche/166/">Biofilms</a></li><li><a href="/Publications/liseuse/fiche/221/">Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</a></li>
-        </ul>
-      </section>
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="Z22BEBa" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;181&quot;],&quot;label&quot;:[0,&quot;transfert horizontal de gènes&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — H3 (48)</summary>
+    <nav aria-label="Termes — H3 (48)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4719/" title="antibiotiques vétérinaires (résidus d'élevage)" data-id="4719">
+          <span class="sv-navlist-title">antibiotiques vétérinaires (résidus d&#39;élevage)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7896/" title="appendice bactérien" data-id="7896">
+          <span class="sv-navlist-title">appendice bactérien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/984/" title="ARG (gènes de résistance aux antibiotiques)" data-id="984">
+          <span class="sv-navlist-title">ARG (gènes de résistance aux antibiotiques)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/507/" title="Beauveria bassiana" data-id="507">
+          <span class="sv-navlist-title">Beauveria bassiana</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/688/" title="Bioaérosols" data-id="688">
+          <span class="sv-navlist-title">Bioaérosols</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5046/" title="Bioprécipitation" data-id="5046">
+          <span class="sv-navlist-title">Bioprécipitation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5921/" title="Cassette d'expression" data-id="5921">
+          <span class="sv-navlist-title">Cassette d&#39;expression</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/506/" title="champignon entomopathogène" data-id="506">
+          <span class="sv-navlist-title">champignon entomopathogène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/510/" title="chitine" data-id="510">
+          <span class="sv-navlist-title">chitine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5941/" title="Compétition pour les nutriments" data-id="5941">
+          <span class="sv-navlist-title">Compétition pour les nutriments</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5940/" title="Composter" data-id="5940">
+          <span class="sv-navlist-title">Composter</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/914/" title="Conjugaison bactérienne" data-id="914">
+          <span class="sv-navlist-title">Conjugaison bactérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/917/" title="Continuum sol-plante" data-id="917">
+          <span class="sv-navlist-title">Continuum sol-plante</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/352/" title="Déterminants de résistance" data-id="352">
+          <span class="sv-navlist-title">Déterminants de résistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/913/" title="Élément génétique mobile" data-id="913">
+          <span class="sv-navlist-title">Élément génétique mobile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6761/" title="environnement anthropisé" data-id="6761">
+          <span class="sv-navlist-title">environnement anthropisé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5477/" title="génétique environnementale" data-id="5477">
+          <span class="sv-navlist-title">génétique environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/925/" title="Héritage inter-cultures" data-id="925">
+          <span class="sv-navlist-title">Héritage inter-cultures</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/921/" title="HT-qPCR" data-id="921">
+          <span class="sv-navlist-title">HT-qPCR</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6042/" title="Intégrase" data-id="6042">
+          <span class="sv-navlist-title">Intégrase</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/687/" title="Intégron" data-id="687">
+          <span class="sv-navlist-title">Intégron</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6040/" title="Interaction plante-champignon" data-id="6040">
+          <span class="sv-navlist-title">Interaction plante-champignon</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3625/" title="maladies non transmissibles" data-id="3625">
+          <span class="sv-navlist-title">maladies non transmissibles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/922/" title="Métagénomique shotgun" data-id="922">
+          <span class="sv-navlist-title">Métagénomique shotgun</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/508/" title="Metarhizium anisopliae" data-id="508">
+          <span class="sv-navlist-title">Metarhizium anisopliae</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5047/" title="Nucléation glaçogène biologique" data-id="5047">
+          <span class="sv-navlist-title">Nucléation glaçogène biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5049/" title="pétrichor" data-id="5049">
+          <span class="sv-navlist-title">pétrichor</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1046/" title="Phageome" data-id="1046">
+          <span class="sv-navlist-title">Phageome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/689/" title="Phagothérapie" data-id="689">
+          <span class="sv-navlist-title">Phagothérapie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6160/" title="Pilus" data-id="6160">
+          <span class="sv-navlist-title">Pilus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/923/" title="Pression de sélection sublétale" data-id="923">
+          <span class="sv-navlist-title">Pression de sélection sublétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7403/" title="quantification génique" data-id="7403">
+          <span class="sv-navlist-title">quantification génique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6209/" title="Ravageurs du sol" data-id="6209">
+          <span class="sv-navlist-title">Ravageurs du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4851/" title="Résidu de médicament" data-id="4851">
+          <span class="sv-navlist-title">Résidu de médicament</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7511/" title="santé respiratoire" data-id="7511">
+          <span class="sv-navlist-title">santé respiratoire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7648/" title="séquençage de l'ARNr 16S" data-id="7648">
+          <span class="sv-navlist-title">séquençage de l&#39;ARNr 16S</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/918/" title="Sol suppressif" data-id="918">
+          <span class="sv-navlist-title">Sol suppressif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7591/" title="suivi environnemental des ARG" data-id="7591">
+          <span class="sv-navlist-title">suivi environnemental des ARG</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/919/" title="Suppression générale" data-id="919">
+          <span class="sv-navlist-title">Suppression générale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/920/" title="Suppression spécifique" data-id="920">
+          <span class="sv-navlist-title">Suppression spécifique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/353/" title="suppressivité comme alternative aux antibiotiques" data-id="353">
+          <span class="sv-navlist-title">suppressivité comme alternative aux antibiotiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7621/" title="système SOS" data-id="7621">
+          <span class="sv-navlist-title">système SOS</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7656/" title="taxonomie fonctionnelle" data-id="7656">
+          <span class="sv-navlist-title">taxonomie fonctionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/916/" title="transduction bactérienne" data-id="916">
+          <span class="sv-navlist-title">transduction bactérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4945/" title="transfert ARG sol-plante-aliment" data-id="4945">
+          <span class="sv-navlist-title">transfert ARG sol-plante-aliment</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7712/" title="transfert de suppressivité" data-id="7712">
+          <span class="sv-navlist-title">transfert de suppressivité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/181/" title="transfert horizontal de gènes" data-id="181" aria-current="page">
+          <span class="sv-navlist-title">transfert horizontal de gènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/915/" title="Transformation bactérienne" data-id="915">
+          <span class="sv-navlist-title">Transformation bactérienne</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -300,6 +426,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

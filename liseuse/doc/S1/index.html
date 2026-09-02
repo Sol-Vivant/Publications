@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/S1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,242 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/S1/" aria-current="page">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/331/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/4/">
-                          Stœchiométrie CNPS de Kirkby et bilan AMG
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/11/">
-                          Le Soil Continuum Model — Fin du Paradigme de l&#39;Humification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/23/">
-                          Thermodynamique Redox des Sols
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/25/">
-                          Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/36/">
-                          L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/62/">
-                          Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/63/">
-                          Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/65/">
-                          Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/68/">
-                          Mode d application des amendements — surface versus incorporation et incidence pédologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/71/">
-                          Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/72/">
-                          Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/76/">
-                          Lombriciens — écologie, services et pilotage des populations
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/77/">
-                          Biochar : architecte de sol (habitat, CEC, carbone stable)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/81/">
-                          Couplages biogéochimiques Fe-P-S-N sous alternance redox
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/83/">
-                          Cascade phosphore — du minéral inerte à l&#39;os humain
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/85/">
-                          Thermorégulation édaphique — le sol vivant comme tampon climatique local
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/87/">
-                          Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/93/">
-                          Calcaire actif — protocole Drouineau et interprétation pour sols calcaires
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/110/">
-                          Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/111/">
-                          Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/112/">
-                          Glomaline : glycoprotéine fongique et stockage C profond
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/114/">
-                          Eh terrain : sondes redox, gradient mV/cm et méthode in situ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/120/">
-                          Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/123/">
-                          Racines superficielles / enracinement bloqué
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/124/">
-                          Stabilité d’agrégats faible / désagrégation rapide
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/125/">
-                          Mésofaune : collemboles et acariens, régulateurs des micro-habitats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/136/">
-                          Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/163/">
-                          Microsites
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/166/">
-                          Biofilms
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/189/">
-                          Plastiques biosourcés et/ou biodégradables en fin de vie
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/207/">
-                          Hiérarchie des agrégats et co-évolution structure-fonction
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/208/">
-                          Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/216/">
-                          Cultures associées (intercropping) — principe, complémentarité et conduite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/239/">
-                          Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/243/">
-                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/252/">
-                          Les états de l&#39;eau et la biologie du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/255/">
-                          Le chiendent comme bioindicateur du compactage
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/257/">
-                          La texture du sol : trois grains, une surface, un contenant
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/278/">
-                          Couvert permanent sous serre : restructurer un sol mort
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/300/">
-                          La pédogenèse : comment le vivant fabrique le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/305/">
-                          La porosité : l&#39;architecture du vide qui fait respirer le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/306/">
-                          L&#39;adsorption : l&#39;interface où le sol retient — et relâche
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/311/">
-                          Oxydes de fer et d&#39;aluminium : les surfaces réactives du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/312/">
-                          Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/318/">
-                          Films IRIS : cartographier les microzones réductrices du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/356/">
-                          Mull, Moder, Mor : lire les formes d&#39;humus dans le paradigme du continuum
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/357/">
-                          Seuils de fonctionnement du carbone — les ordres de grandeur hussoniens qui font basculer le sol
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/S2/">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S3/">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -436,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -451,248 +231,237 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>S1 — Architecture du Sol</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>S1 — Architecture du Sol</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 53 textes — l'ouverture, puis 52 fiches.</p>
+      <p class="sv-meta">
+        53 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/331/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/S1/integral/">
-            <strong>Le document S1 intégral</strong>
-            <p class="sv-meta">Le récit complet — 11 564 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Un sol, c'est d'abord une architecture. Sous nos pieds, des grains minéraux s'ordonnent en un squelette — et sur ce squelette, la vie dépose sa chair : les colles des microbes, les filaments des champignons, les débris des plantes. Comprendre le sol vivant commence donc par lire cette ossature : les argiles et leurs charges électriques, les agrégats qui s'assemblent comme des articulations, les pores qui ménagent l'eau et l'air. Ce corps minéral, répétons-le une fois, n'est pas un organisme — c'est un holobionte, une communauté qui bâtit son propre squelette. Voyons comment, grain après grain.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (52)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/4/">
-              <strong>Stœchiométrie CNPS de Kirkby et bilan AMG</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion moderne du carbone organique du sol repose sur le passage d&#39;une vision quantitative (apports de biomasse brute) à une approche qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/11/">
-              <strong>Le Soil Continuum Model — Fin du Paradigme de l&#39;Humification</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des avancées majeures dans la compréhension de la dynamique du carbone organique du sol, marquant le passa…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/23/">
-              <strong>Thermodynamique Redox des Sols</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore le rôle central de la thermodynamique redox dans le fonctionnement biogéochimique des sols, en mettant l&#39;accent sur l&#39;in…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/25/">
-              <strong>Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion de la structure du sol a évolué d&#39;une simple correction chimique vers une ingénierie complexe de la matrice physique et du cycle …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/36/">
-              <strong>L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le concept de Continuum Sol-Plante-Atmosphère constitue le cadre thermodynamique essentiel pour comprendre le cycle de l&#39;eau à l&#39;interface t…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/62/">
-              <strong>Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;évaluation de la santé des sols est une pierre angulaire de la gestion durable des écosystèmes. Ce document a démontré que la flore sponta…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/63/">
-              <strong>Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La drilosphère représente l&#39;interface fonctionnelle où l&#39;activité des vers de terre transforme les résidus organiques en fractions de carbon…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/65/">
-              <strong>Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le paradigme de la matière organique du sol a connu une révolution conceptuelle, passant de la théorie de l&#39;humification — aujourd&#39;hui inval…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/68/">
-              <strong>Mode d application des amendements — surface versus incorporation et incidence pédologique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette analyse technique compare l’application en surface (mulching/semis direct) et l’incorporation mécanique des amendements organiques à l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/71/">
-              <strong>Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pompe oxalate-carbonate représente un mécanisme biogéochimique de séquestration du carbone inorganique capable de transformer le CO₂ atmo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/72/">
-              <strong>Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le passage de l&#39;étape de &quot;Marginalisation&quot; à celle de &quot;l&#39;Effondrement&quot; (voir Section 3) n&#39;est pas dicté par le manque de charrues ou d&#39;engra…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/76/">
-              <strong>Lombriciens — écologie, services et pilotage des populations</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le pilotage de la santé des sols repose sur une compréhension fine de l&#39;écologie des lombriciens, véritables &quot;ingénieurs de l&#39;écosystème&quot; qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/77/">
-              <strong>Biochar : architecte de sol (habitat, CEC, carbone stable)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le biochar s&#39;impose comme une technologie multifonctionnelle capable de transformer durablement les propriétés physiques, chimiques et biolo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/81/">
-              <strong>Couplages biogéochimiques Fe-P-S-N sous alternance redox</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des connaissances (2021-2026) sur les couplages biogéochimiques entre le fer, le phosphore (P) et le soufr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/83/">
-              <strong>Cascade phosphore — du minéral inerte à l&#39;os humain</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la &quot;cascade du phosphore&quot;, un cycle complexe reliant la santé des sols à la physiologie osseuse humaine. Le phosphore (P…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/85/">
-              <strong>Thermorégulation édaphique — le sol vivant comme tampon climatique local</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse le rôle stratégique du sol vivant en tant que régulateur thermique, un service écosystémique essentiel pour la résilienc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/87/">
-              <strong>Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La compaction des sols est une dégradation structurelle majeure qui transforme l&#39;agroécosystème en un milieu de multiples stress pour l&#39;holo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/93/">
-              <strong>Calcaire actif — protocole Drouineau et interprétation pour sols calcaires</strong>
-              <span class="sv-badge">technique</span>
-              <p class="sv-meta">La gestion du calcaire actif constitue un pilier de la performance agronomique en sols carbonatés, où la réactivité chimique prime sur la te…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/">
-              <strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/110/">
-              <strong>Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise le rôle critique du filtre mycorhizien dans la gestion des éléments traces métalliques au sein des agroécosystèmes. L…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/111/">
-              <strong>Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La reconstruction structurelle d&#39;un sol sableux est un processus complexe qui passe d&#39;un substrat inerte à un système organo-minéral fonctio…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/112/">
-              <strong>Glomaline : glycoprotéine fongique et stockage C profond</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La glomaline, glycoprotéine produite par les champignons mycorhiziens à arbuscules, s&#39;affirme comme un pilier de la séquestration du carbone…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/114/">
-              <strong>Eh terrain : sondes redox, gradient mV/cm et méthode in situ</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le potentiel redox (Eh) est la variable la plus intégrative du sol vivant. Une sonde au champ livre en minutes l&#39;état respiratoire du sol : …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/120/">
-              <strong>Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion des sols hydromorphes organiques redox représente un défi majeur pour la sécurité alimentaire et l&#39;atténuation du changement clim…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/123/">
-              <strong>Racines superficielles / enracinement bloqué</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;architecture racinaire est le pivot de la performance agronomique, reliant la structure physique du sol à l&#39;efficience d&#39;utilisation des n…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/124/">
-              <strong>Stabilité d’agrégats faible / désagrégation rapide</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise les mécanismes de stabilisation structurelle des sols, en mettant l&#39;accent sur la transition d&#39;une gestion extractive…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/125/">
-              <strong>Mésofaune : collemboles et acariens, régulateurs des micro-habitats</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise le rôle fondamental de la mésofaune, particulièrement les Collemboles et les Acariens, en tant que régulateurs clés d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/136/">
-              <strong>Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une transition fondamentale dans la compréhension de l&#39;architecture biogéochimique des sols : le passage du modèle géom…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/163/">
-              <strong>Microsites</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La synthèse des recherches publiées entre 2021 et 2025 confirme que la gestion des microsites est le levier fondamental pour réconcilier la …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/166/">
-              <strong>Biofilms</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les biofilms telluriques représentent la forme d&#39;organisation prédominante de la vie microbienne dans les sols, transformant les interfaces …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/189/">
-              <strong>Plastiques biosourcés et/ou biodégradables en fin de vie</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse la transition systémique vers l’usage des plastiques biosourcés et biodégradables, un levier crucial pour atteindre la d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/207/">
-              <strong>Hiérarchie des agrégats et co-évolution structure-fonction</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse actualisée de la hiérarchie des agrégats et des mécanismes de pédogenèse, en s&#39;appuyant sur les avancées s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/208/">
-              <strong>Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Vers une gestion tridimensionnelle et nuancée du carbone des sols : La transition du concept classique de complexe argilo-humique vers une a…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/216/">
-              <strong>Cultures associées (intercropping) — principe, complémentarité et conduite</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les cultures associées exploitent la coexistence d’espèces aux niches complémentaires pour intensifier l’usage des ressources par unité de s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/239/">
-              <strong>Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le carbone inorganique du sol, principalement sous forme de carbonates pédogéniques, constitue un réservoir de carbone crucial mais historiq…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/243/">
-              <strong>Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le diagnostic moderne de la santé du sol marque une rupture avec les approches statiques traditionnelles pour s&#39;orienter vers une analyse dy…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/252/">
-              <strong>Les états de l&#39;eau et la biologie du sol</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des recherches récentes (2022–2026) sur les interactions complexes entre l&#39;eau, la matrice minérale et la …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/255/">
-              <strong>Le chiendent comme bioindicateur du compactage</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose une approche technique pour transformer l&#39;observation du chiendent en un outil de diagnostic hybride de la santé des sol…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/257/">
-              <strong>La texture du sol : trois grains, une surface, un contenant</strong>
-              
-              <p class="sv-meta">La texture (sable/limon/argile) détermine la surface d&#39;échange et la capacité de rétention du sol. Sable = grosses billes, drainage rapide, …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-              <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-              
-              <p class="sv-meta">Cinq réflexes pour ne pas se faire piéger en agriculture régénératrice : (1) chercher d&#39;abord ce que le vivant construit — partir du moteur,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-              <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche décrit la reconstruction, en un an, d&#39;un sol sous serre biologiquement mort après trente ans sans racines (texture sable-argile …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/300/">
-              <strong>La pédogenèse : comment le vivant fabrique le sol</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pédogenèse est la fabrication du sol à partir de la roche-mère, sous l&#39;action de cinq facteurs — climat, biote, relief, roche, temps (Jen…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/305/">
-              <strong>La porosité : l&#39;architecture du vide qui fait respirer le sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La porosité — le vide qui fait jusqu&#39;à la moitié du sol — est l&#39;architecture fonctionnelle du sol vivant : l&#39;eau, l&#39;air, les racines et le m…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/306/">
-              <strong>L&#39;adsorption : l&#39;interface où le sol retient — et relâche</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;adsorption — fixation en surface, à distinguer de l&#39;absorption — est le mécanisme élémentaire qui décide de la disponibilité réelle des nu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/311/">
-              <strong>Oxydes de fer et d&#39;aluminium : les surfaces réactives du sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les oxydes de fer et d&#39;aluminium (goethite, hématite, gibbsite) sont les surfaces minérales les plus réactives du sol : puits d&#39;anions par é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/312/">
-              <strong>Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le podzol doit sa toxicité à l’aluminium échangeable (Al³⁺), qui bloque la croissance racinaire (moignon) et cimente le phosphore en varisci…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/318/">
-              <strong>Films IRIS : cartographier les microzones réductrices du sol</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">Les films IRIS sont des membranes enduites d&#39;oxydes de fer ou de manganèse que l&#39;on insère dans le sol pour cartographier les microzones réd…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/356/">
-              <strong>Mull, Moder, Mor : lire les formes d&#39;humus dans le paradigme du continuum</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les formes d&#39;humus — Mull, Moder, Mor — se lisent au terrain : disposition de la litière, épaisseur des couches OL, OF et OH, transition ave…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/357/">
-              <strong>Seuils de fonctionnement du carbone — les ordres de grandeur hussoniens qui font basculer le sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le carbone du sol ne produit pas ses effets de façon linéaire : il existe des seuils de fonctionnement, des ordres de grandeur où le sol bas…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (205)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6086/">Moder</a></li><li><a href="/Publications/liseuse/terme/6087/">Mor</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Les minéraux argileux : l&#39;ossature chargée</h2>
+    <div class="sv-markdown"><p>Tout commence par l'argile. Des particules si fines qu'elles se comptent en micromètres, des feuillets empilés, et surtout une surface électriquement chargée, négative. Cette charge est le cœur du récit : elle attire les cations, ces éléments positifs — calcium, magnésium, potassium, ammonium — et les retient à la surface du squelette. C'est ainsi que le sol stocke des nutriments qui, sans cela, seraient lessivés par la pluie. L'argile n'est donc pas une simple poussière : c'est une surface active, une paroi qui capte. Le chapitre du cahier consacré aux textures raconte la graduation sable-limons-argiles ; ici, retenons que l'argile est l'organe qui retient.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Les complexes argilo-humiques et la CEC : le garde-manger</h2>
+    <div class="sv-markdown"><p>Mais l'argile ne travaille pas seule. Elle s'associe à l'humus — cette matière organique transformée, elle aussi chargée négativement — pour former des complexes argilo-humiques, des ponts de matière où le minéral et le vivant s'accrochent. L'ensemble décuple la capacité d'échange cationique, la CEC : le total des charges capables de retenir des nutriments sur les parois du sol. Une CEC élevée, c'est un garde-manger profond, qui tient les cations à disposition des racines sans les laisser fuir. Sables pauvres en argile, sols morts en humus : la CEC s'effondre, et le garde-manger se vide. C'est pourquoi la matière organique est, avant tout, un capital de rétention.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Les agrégats : l&#39;articulation du squelette</h2>
+    <div class="sv-markdown"><p>Les grains ne restent pas en vrac : ils s'agrègent. Des colles biologiques — polysaccharides de bactéries, filaments de champignons, glomaline des mycorhizes — cimentent argiles, limons et matières organiques en agrégats, ces petites mottes stables qui donnent au sol sa structure. Un agrégat, c'est une articulation : dedans, des micropores qui retiennent l'eau ; dehors, entre les agrégats, des macropores qui laissent passer l'air et les racines. Cette double porosité est la signature d'un sol vivant. Détruisez les colles par le labour, et les agrégats s'effondrent en poussière — le squelette se démantèle, l'eau et l'air n'y trouvent plus leur place.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Les agrégats, coffres-forts du carbone</h2>
+    <div class="sv-markdown"><p>Les agrégats font plus que structurer : ils protègent. Le carbone enfermé au cœur d'un agrégat stable est physiquement hors d'atteinte des microbes — retranché derrière une muraille de particules et de colles. C'est un coffre-fort pour la matière organique, qui s'y stabilise des années, parfois des siècles, à l'abri de la décomposition. Quand un agrégat se brise — labour, battance, dessèchement brutal — le coffre s'ouvre : le carbone exposé redevient consommable, et part en respiration. La stabilité structurale n'est donc pas un détail esthétique ; elle est le mécanisme même par lequel le sol garde son carbone. Bâtir des agrégats durables, c'est bâtir une réserve.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Porosité et eau dans les agrégats</h2>
+    <div class="sv-markdown"><p>Regardons un agrégat de près. Ses micropores, minuscules, retiennent l'eau par capillarité — cette eau qui reste collée aux parois et que la plante peut puiser. Ses macropores, plus larges, se vident après la pluie et se remplissent d'air — c'est la respiration du sol. Cette répartition en étages fait d'un agrégat un petit immeuble : des caves humides au cœur, des galeries ventilées en façade. C'est exactement l'inverse d'un sol compacté, où tout est écrasé en un bloc — l'eau ne pénètre plus, l'air ne circule plus, les racines butent. La porosité d'un agrégat, c'est la cohabitation réglée de l'eau et de l'air, la condition de toute vie.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Réserve utile et résilience à la sécheresse</h2>
+    <div class="sv-markdown"><p>Toute l'eau retenue n'est pas disponible. Entre la capacité au champ — le sol ressuyé, pores fins pleins — et le point de flétrissement — la plante n'arrive plus à extraire — s'étend la réserve utile : la part d'eau réellement mobilisable par les racines. Plus le sol est riche en agrégats et en matière organique, plus cette réserve est ample. Concrètement, un sol vivant boit la pluie, la garde dans ses micropores, et la restitue lentement aux cultures pendant les semaines sèches. C'est là que se joue la résilience à la sécheresse : non pas dans un stock d'eau brut, mais dans la finesse d'un réseau de pores qui retient sans saturer et libère sans tarir.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>MAOM et POC : les deux carbones</h2>
+    <div class="sv-markdown"><p>Le carbone du sol vit sous deux visages. Le carbone particulaire, frais, celui des débris récents — il circule vite, se décompose, respire. Et le carbone associé aux minéraux, qui s'est accroché aux argiles et aux oxydes — il se stabilise des siècles (ordre de grandeur), c'est la réserve de longue durée. Les deux font un équilibre : le premier nourrit la vie, le second la pérennise. Le récit complet de cette paire — comment on la mesure, où elle plafonne — appartient au chapitre du cahier sur la matière organique ; ce volet n'y revient que pour un point : les agrégats que nous venons de décrire sont la machine qui transforme l'un en l'autre.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>L&#39;architecture du sol cultivé</h2>
+    <div class="sv-markdown"><p>Que fait la culture à cette architecture ? Le labour, d'abord, la démolit : il brise les agrégats, ouvre les coffres, enfouit la chair organique et expose le squelette à la battance. Un sol labouré chaque année se ré-agrège en surface au printemps, mais ses colles ne tiennent plus ; la première pluie battante le plaque en croûte. Inversement, un sol peu travaillé, couvert, enraciné, reconstruit ses agrégats en continu. L'architecture n'est donc pas un donné fixe, mais un équilibre entre ce que la pratique détruit et ce que le vivant rebâtit. Le diagnostic est simple à lire : un sol qui s'effrite en mottes grumeleuses vit ; un sol qui se tasse en blocs et croûte souffre.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>Le profil idéal d&#39;un sol vivant régénératif</h2>
+    <div class="sv-markdown"><p>À quoi ressemble un sol vivant idéal ? On le reconnaît à son profil. En surface, une litière et des résidus qui nourrissent sans jamais laisser le sol nu. Puis un horizon brun, grumeleux, où les agrégats roulent sous la bêche et sentent le champignon — signe de colles abondantes et de vie fongique. Des racines qui descendent en suivant les canaux des anciennes, des vers de terre qui remontent la profondeur (leur monde, encore, relève de la strate V). Et en profondeur, une continuité : pas de semelle compactée qui coupe le profil en deux. Ce sol encaisse la pluie, la retient, la redistribue ; c'est une architecture qui se tient debout toute seule.</p>
+</div>
+    
+  </section><section id="s10">
+    <h2>Compaction et tassement : diagnostic et seuils</h2>
+    <div class="sv-markdown"><p>Le tassement est le grand ennemi silencieux de cette architecture. Passages d'engins en sol humide, surcharge, semelles de labour : le poids écrase les agrégats, et le sol perd sa porosité — souvent sans que rien ne se voie en surface. On le diagnostique par la densité apparente, la résistance à la pénétration, l'observation de la racine qui se tord au lieu de descendre. Le seuil est connu des agronomes : au-delà d'une certaine densité, la racine ne force plus, l'eau ne s'infiltre plus, l'air se raréfie. Là encore, le remède est biologique autant que mécanique : la biopuncture et les couverts réparent ce que le poids a défait, à condition de ne plus le redéfaire.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>L'architecture du sol est une ossature minérale que la vie cimente en agrégats, remplit de pores, et protège du tassement. Ses charges retiennent les nutriments, ses coffres gardent le carbone, sa porosité ménage l'eau et l'air. Un sol vivant, c'est d'abord un squelette que ses habitants entretiennent.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (205)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6086/">Moder</a></li><li><a href="/Publications/liseuse/terme/6087/">Mor</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">S1 — lecture (53)</summary>
+    <nav aria-label="S1 — lecture (53)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/S1/integral/" title="Le document S1 intégral" data-id="integral-S1">
+          <span class="sv-navlist-title">Le document S1 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/4/" title="Stœchiométrie CNPS de Kirkby et bilan AMG" data-id="fiche-4">
+          <span class="sv-navlist-title">Stœchiométrie CNPS de Kirkby et bilan AMG</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/11/" title="Le Soil Continuum Model — Fin du Paradigme de l'Humification" data-id="fiche-11">
+          <span class="sv-navlist-title">Le Soil Continuum Model — Fin du Paradigme de l&#39;Humification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/23/" title="Thermodynamique Redox des Sols" data-id="fiche-23">
+          <span class="sv-navlist-title">Thermodynamique Redox des Sols</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/25/" title="Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique" data-id="fiche-25">
+          <span class="sv-navlist-title">Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/36/" title="L'eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique" data-id="fiche-36">
+          <span class="sv-navlist-title">L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/62/" title="Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien" data-id="fiche-62">
+          <span class="sv-navlist-title">Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/63/" title="Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone" data-id="fiche-63">
+          <span class="sv-navlist-title">Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/65/" title="Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM" data-id="fiche-65">
+          <span class="sv-navlist-title">Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/68/" title="Mode d application des amendements — surface versus incorporation et incidence pédologique" data-id="fiche-68">
+          <span class="sv-navlist-title">Mode d application des amendements — surface versus incorporation et incidence pédologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/71/" title="Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale" data-id="fiche-71">
+          <span class="sv-navlist-title">Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/72/" title="Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines" data-id="fiche-72">
+          <span class="sv-navlist-title">Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/76/" title="Lombriciens — écologie, services et pilotage des populations" data-id="fiche-76">
+          <span class="sv-navlist-title">Lombriciens — écologie, services et pilotage des populations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/77/" title="Biochar : architecte de sol (habitat, CEC, carbone stable)" data-id="fiche-77">
+          <span class="sv-navlist-title">Biochar : architecte de sol (habitat, CEC, carbone stable)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/81/" title="Couplages biogéochimiques Fe-P-S-N sous alternance redox" data-id="fiche-81">
+          <span class="sv-navlist-title">Couplages biogéochimiques Fe-P-S-N sous alternance redox</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/83/" title="Cascade phosphore — du minéral inerte à l'os humain" data-id="fiche-83">
+          <span class="sv-navlist-title">Cascade phosphore — du minéral inerte à l&#39;os humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/85/" title="Thermorégulation édaphique — le sol vivant comme tampon climatique local" data-id="fiche-85">
+          <span class="sv-navlist-title">Thermorégulation édaphique — le sol vivant comme tampon climatique local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/87/" title="Compaction — de l'asphyxie racinaire à la maladie chronique végétale" data-id="fiche-87">
+          <span class="sv-navlist-title">Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/93/" title="Calcaire actif — protocole Drouineau et interprétation pour sols calcaires" data-id="fiche-93">
+          <span class="sv-navlist-title">Calcaire actif — protocole Drouineau et interprétation pour sols calcaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/106/" title="Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé" data-id="fiche-106">
+          <span class="sv-navlist-title">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/110/" title="Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire" data-id="fiche-110">
+          <span class="sv-navlist-title">Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/111/" title="Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée" data-id="fiche-111">
+          <span class="sv-navlist-title">Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/112/" title="Glomaline : glycoprotéine fongique et stockage C profond" data-id="fiche-112">
+          <span class="sv-navlist-title">Glomaline : glycoprotéine fongique et stockage C profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/114/" title="Eh terrain : sondes redox, gradient mV/cm et méthode in situ" data-id="fiche-114">
+          <span class="sv-navlist-title">Eh terrain : sondes redox, gradient mV/cm et méthode in situ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/120/" title="Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale" data-id="fiche-120">
+          <span class="sv-navlist-title">Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/123/" title="Racines superficielles / enracinement bloqué" data-id="fiche-123">
+          <span class="sv-navlist-title">Racines superficielles / enracinement bloqué</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/124/" title="Stabilité d’agrégats faible / désagrégation rapide" data-id="fiche-124">
+          <span class="sv-navlist-title">Stabilité d’agrégats faible / désagrégation rapide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/125/" title="Mésofaune : collemboles et acariens, régulateurs des micro-habitats" data-id="fiche-125">
+          <span class="sv-navlist-title">Mésofaune : collemboles et acariens, régulateurs des micro-habitats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/136/" title="Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l'agrégat" data-id="fiche-136">
+          <span class="sv-navlist-title">Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/163/" title="Microsites" data-id="fiche-163">
+          <span class="sv-navlist-title">Microsites</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/166/" title="Biofilms" data-id="fiche-166">
+          <span class="sv-navlist-title">Biofilms</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/189/" title="Plastiques biosourcés et/ou biodégradables en fin de vie" data-id="fiche-189">
+          <span class="sv-navlist-title">Plastiques biosourcés et/ou biodégradables en fin de vie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/207/" title="Hiérarchie des agrégats et co-évolution structure-fonction" data-id="fiche-207">
+          <span class="sv-navlist-title">Hiérarchie des agrégats et co-évolution structure-fonction</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/208/" title="Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM" data-id="fiche-208">
+          <span class="sv-navlist-title">Complexe argilo-humique (CAH) — passerelle FR ↔ MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/216/" title="Cultures associées (intercropping) — principe, complémentarité et conduite" data-id="fiche-216">
+          <span class="sv-navlist-title">Cultures associées (intercropping) — principe, complémentarité et conduite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/239/" title="Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone" data-id="fiche-239">
+          <span class="sv-navlist-title">Le carbone inorganique du sol : carbonates pédogéniques, dynamique et bilan carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/243/" title="Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision" data-id="fiche-243">
+          <span class="sv-navlist-title">Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/252/" title="Les états de l'eau et la biologie du sol" data-id="fiche-252">
+          <span class="sv-navlist-title">Les états de l&#39;eau et la biologie du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/255/" title="Le chiendent comme bioindicateur du compactage" data-id="fiche-255">
+          <span class="sv-navlist-title">Le chiendent comme bioindicateur du compactage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/257/" title="La texture du sol : trois grains, une surface, un contenant" data-id="fiche-257">
+          <span class="sv-navlist-title">La texture du sol : trois grains, une surface, un contenant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/262/" title="Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger" data-id="fiche-262">
+          <span class="sv-navlist-title">Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/278/" title="Couvert permanent sous serre : restructurer un sol mort" data-id="fiche-278">
+          <span class="sv-navlist-title">Couvert permanent sous serre : restructurer un sol mort</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/300/" title="La pédogenèse : comment le vivant fabrique le sol" data-id="fiche-300">
+          <span class="sv-navlist-title">La pédogenèse : comment le vivant fabrique le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/305/" title="La porosité : l'architecture du vide qui fait respirer le sol" data-id="fiche-305">
+          <span class="sv-navlist-title">La porosité : l&#39;architecture du vide qui fait respirer le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/306/" title="L'adsorption : l'interface où le sol retient — et relâche" data-id="fiche-306">
+          <span class="sv-navlist-title">L&#39;adsorption : l&#39;interface où le sol retient — et relâche</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/311/" title="Oxydes de fer et d'aluminium : les surfaces réactives du sol" data-id="fiche-311">
+          <span class="sv-navlist-title">Oxydes de fer et d&#39;aluminium : les surfaces réactives du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/312/" title="Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon" data-id="fiche-312">
+          <span class="sv-navlist-title">Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/318/" title="Films IRIS : cartographier les microzones réductrices du sol" data-id="fiche-318">
+          <span class="sv-navlist-title">Films IRIS : cartographier les microzones réductrices du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/356/" title="Mull, Moder, Mor : lire les formes d'humus dans le paradigme du continuum" data-id="fiche-356">
+          <span class="sv-navlist-title">Mull, Moder, Mor : lire les formes d&#39;humus dans le paradigme du continuum</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/357/" title="Seuils de fonctionnement du carbone — les ordres de grandeur hussoniens qui font basculer le sol" data-id="fiche-357">
+          <span class="sv-navlist-title">Seuils de fonctionnement du carbone — les ordres de grandeur hussoniens qui font basculer le sol</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

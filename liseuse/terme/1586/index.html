@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/1586/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -66,24 +66,21 @@
                 <a href="/Publications/liseuse/doc/H1/">
                   <strong>H1</strong> — Sol, Alimentation et Santé Humaine
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H2/">
                   <strong>H2</strong> — Le Microbiome Intestinal
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H3/">
                   <strong>H3</strong> — La Résistance Antimicrobienne
                 </a>
-                
               </li>
           </ul>
       </li>
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -211,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -225,67 +222,694 @@
       <a href="/Publications/liseuse/terme/1316/">Micronutriment</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-H">H</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-H">H</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">Micronutriment d&#39;origine microbienne</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>Micronutriment d&#39;origine microbienne</h1>
-      <astro-island uid="Z2aPbh9" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;1586&quot;],&quot;label&quot;:[0,&quot;Micronutriment d&#39;origine microbienne&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>microbially-derived micronutrient</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      <span class="sv-badge">terme important</span>
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>Micronutriment d&#39;origine microbienne</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>microbially-derived micronutrient</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Élément trace essentiel rendu biodisponible pour la plante grâce à l’activité métabolique des micro-organismes du sol (Pradhan et al., 2025). Ces derniers transforment les formes minérales insolubles ou séquestrées par la production d’acides organiques, de chélatants (sidérophores) ou par des changements de potentiel redox, facilitant ainsi leur absorption racinaire (Dimkpa &amp; Bindraban, 2016; Pradhan et al., 2025; Wechtler, 2020). Leur disponibilité est modulée par le pH et la complexité fonctionnelle du microbiome (Dai et al., 2023; Rengel, 2015)</p>
-</div>
+        <span class="sv-badge">terme important</span>
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Élément trace essentiel rendu biodisponible pour la plante grâce à l’activité métabolique des micro-organismes du sol (Pradhan et al., 2025). Ces derniers transforment les formes minérales insolubles ou séquestrées par la production d’acides organiques, de chélatants (sidérophores) ou par des changements de potentiel redox, facilitant ainsi leur absorption racinaire (Dimkpa &amp; Bindraban, 2016; Pradhan et al., 2025; Wechtler, 2020). Leur disponibilité est modulée par le pH et la complexité fonctionnelle du microbiome (Dai et al., 2023; Rengel, 2015)…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-H">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/7090/" title="microbiote néonatal">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/1579/" title="Modèle de santé systémique">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> oligo-élément bioactivé, microbially-solubilized micronutrient</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> oligo-élément bioactivé, microbially-solubilized micronutrient</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1316/">Micronutriment</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1316/">Micronutriment</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Comprend (1)</h2>
+          
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/185/">Cobalamine</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Comprend (1)</h2>
-        
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/185/">Cobalamine</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Termes liés (4)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/218/">biodisponibilité</a></li><li><a href="/Publications/liseuse/terme/2641/">Dissolution</a></li><li><a href="/Publications/liseuse/terme/1316/">Micronutriment</a></li><li><a href="/Publications/liseuse/terme/31/">Sidérophores</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (4)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/218/">biodisponibilité</a></li><li><a href="/Publications/liseuse/terme/2641/">Dissolution</a></li><li><a href="/Publications/liseuse/terme/1316/">Micronutriment</a></li><li><a href="/Publications/liseuse/terme/31/">Sidérophores</a></li>
-        </ul>
-      </section>
+      
+    </article>
 
-    
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="Z2aPbh9" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;1586&quot;],&quot;label&quot;:[0,&quot;Micronutriment d&#39;origine microbienne&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — H (297)</summary>
+    <nav aria-label="Termes — H (297)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5213/" title="absorption intestinale" data-id="5213">
+          <span class="sv-navlist-title">absorption intestinale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/227/" title="Acides gras à chaîne courte" data-id="227">
+          <span class="sv-navlist-title">Acides gras à chaîne courte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2955/" title="adaptabilité bactérienne" data-id="2955">
+          <span class="sv-navlist-title">adaptabilité bactérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5293/" title="adaptation microbienne" data-id="5293">
+          <span class="sv-navlist-title">adaptation microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2526/" title="ADN libre" data-id="2526">
+          <span class="sv-navlist-title">ADN libre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2244/" title="Aflatoxine B1" data-id="2244">
+          <span class="sv-navlist-title">Aflatoxine B1</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2532/" title="alcaloïde" data-id="2532">
+          <span class="sv-navlist-title">alcaloïde</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3748/" title="aliment" data-id="3748">
+          <span class="sv-navlist-title">aliment</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2245/" title="Aliment ultra-transformé" data-id="2245">
+          <span class="sv-navlist-title">Aliment ultra-transformé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3280/" title="Allergologie" data-id="3280">
+          <span class="sv-navlist-title">Allergologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3668/" title="alternatives aux antibiotiques" data-id="3668">
+          <span class="sv-navlist-title">alternatives aux antibiotiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2540/" title="antagonisme" data-id="2540">
+          <span class="sv-navlist-title">antagonisme</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/183/" title="antibiorésistance" data-id="183">
+          <span class="sv-navlist-title">antibiorésistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5219/" title="auto-immunité" data-id="5219">
+          <span class="sv-navlist-title">auto-immunité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5881/" title="AVC" data-id="5881">
+          <span class="sv-navlist-title">AVC</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2550/" title="Avirulence" data-id="2550">
+          <span class="sv-navlist-title">Avirulence</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/196/" title="axe sol-plante-goût" data-id="196">
+          <span class="sv-navlist-title">axe sol-plante-goût</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1599/" title="axe sol-plante-humain" data-id="1599">
+          <span class="sv-navlist-title">axe sol-plante-humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2986/" title="azote vert" data-id="2986">
+          <span class="sv-navlist-title">azote vert</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4231/" title="Bactérie pathogène" data-id="4231">
+          <span class="sv-navlist-title">Bactérie pathogène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2552/" title="bactérie résistante" data-id="2552">
+          <span class="sv-navlist-title">bactérie résistante</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3072/" title="Bactéries à Gram négatif" data-id="3072">
+          <span class="sv-navlist-title">Bactéries à Gram négatif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2315/" title="barrière intestinale" data-id="2315">
+          <span class="sv-navlist-title">barrière intestinale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5221/" title="barrière muqueuse" data-id="5221">
+          <span class="sv-navlist-title">barrière muqueuse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3164/" title="Bientraitance" data-id="3164">
+          <span class="sv-navlist-title">Bientraitance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2248/" title="Bifidobacterium" data-id="2248">
+          <span class="sv-navlist-title">Bifidobacterium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/217/" title="bio-accessibilité et chélation naturelle" data-id="217">
+          <span class="sv-navlist-title">bio-accessibilité et chélation naturelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1808/" title="Bio-intensification" data-id="1808">
+          <span class="sv-navlist-title">Bio-intensification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6461/" title="biochimie des aliments" data-id="6461">
+          <span class="sv-navlist-title">biochimie des aliments</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/218/" title="biodisponibilité" data-id="218">
+          <span class="sv-navlist-title">biodisponibilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/219/" title="Biofortification biologique" data-id="219">
+          <span class="sv-navlist-title">Biofortification biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5322/" title="biogéochimie de la rhizosphère" data-id="5322">
+          <span class="sv-navlist-title">biogéochimie de la rhizosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5903/" title="BIOLOG" data-id="5903">
+          <span class="sv-navlist-title">BIOLOG</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1588/" title="Biologie végétale spécialisée" data-id="1588">
+          <span class="sv-navlist-title">Biologie végétale spécialisée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1798/" title="Biomarqueur du microbiome" data-id="1798">
+          <span class="sv-navlist-title">Biomarqueur du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3690/" title="biomarqueur du microbiote" data-id="3690">
+          <span class="sv-navlist-title">biomarqueur du microbiote</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2999/" title="biomasse totale" data-id="2999">
+          <span class="sv-navlist-title">biomasse totale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2829/" title="biosécurité" data-id="2829">
+          <span class="sv-navlist-title">biosécurité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1596/" title="biostimulant de l'hôte" data-id="1596">
+          <span class="sv-navlist-title">biostimulant de l&#39;hôte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6488/" title="biosûreté" data-id="6488">
+          <span class="sv-navlist-title">biosûreté</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1747/" title="Biotiques" data-id="1747">
+          <span class="sv-navlist-title">Biotiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3003/" title="blooms algaux" data-id="3003">
+          <span class="sv-navlist-title">blooms algaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5917/" title="Caco-2" data-id="5917">
+          <span class="sv-navlist-title">Caco-2</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3694/" title="calcification vasculaire" data-id="3694">
+          <span class="sv-navlist-title">calcification vasculaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5919/" title="Calories vides" data-id="5919">
+          <span class="sv-navlist-title">Calories vides</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3076/" title="Candida" data-id="3076">
+          <span class="sv-navlist-title">Candida</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3019/" title="Cassette de gènes" data-id="3019">
+          <span class="sv-navlist-title">Cassette de gènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5342/" title="cellule épithéliale" data-id="5342">
+          <span class="sv-navlist-title">cellule épithéliale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3700/" title="cellules caliciformes" data-id="3700">
+          <span class="sv-navlist-title">cellules caliciformes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5225/" title="cGMP" data-id="5225">
+          <span class="sv-navlist-title">cGMP</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6557/" title="cholestérol" data-id="6557">
+          <span class="sv-navlist-title">cholestérol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6558/" title="choline" data-id="6558">
+          <span class="sv-navlist-title">choline</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3171/" title="Cinq libertés" data-id="3171">
+          <span class="sv-navlist-title">Cinq libertés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3705/" title="cognition animale" data-id="3705">
+          <span class="sv-navlist-title">cognition animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5932/" title="Colistine" data-id="5932">
+          <span class="sv-navlist-title">Colistine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3083/" title="Compétence" data-id="3083">
+          <span class="sv-navlist-title">Compétence</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5368/" title="comportement biologique" data-id="5368">
+          <span class="sv-navlist-title">comportement biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5856/" title="Composé alimentaire" data-id="5856">
+          <span class="sv-navlist-title">Composé alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1804/" title="Concept de santé globale" data-id="1804">
+          <span class="sv-navlist-title">Concept de santé globale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1637/" title="Contamination environnementale" data-id="1637">
+          <span class="sv-navlist-title">Contamination environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1384/" title="Continuum de transfert de l'information biologique" data-id="1384">
+          <span class="sv-navlist-title">Continuum de transfert de l&#39;information biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5276/" title="culture protectrice" data-id="5276">
+          <span class="sv-navlist-title">culture protectrice</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2588/" title="cycle lytique" data-id="2588">
+          <span class="sv-navlist-title">cycle lytique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2722/" title="Cytokines" data-id="2722">
+          <span class="sv-navlist-title">Cytokines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3103/" title="cytokines pro-inflammatoires" data-id="3103">
+          <span class="sv-navlist-title">cytokines pro-inflammatoires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4572/" title="découplage hydraulique" data-id="4572">
+          <span class="sv-navlist-title">découplage hydraulique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3185/" title="Dégradation" data-id="3185">
+          <span class="sv-navlist-title">Dégradation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3447/" title="Densité minérale des aliments" data-id="3447">
+          <span class="sv-navlist-title">Densité minérale des aliments</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2837/" title="dérive génétique" data-id="2837">
+          <span class="sv-navlist-title">dérive génétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5286/" title="détérioration alimentaire" data-id="5286">
+          <span class="sv-navlist-title">détérioration alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2456/" title="déterminant génétique" data-id="2456">
+          <span class="sv-navlist-title">déterminant génétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2600/" title="Déterminant génétique environnemental" data-id="2600">
+          <span class="sv-navlist-title">Déterminant génétique environnemental</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6723/" title="déterminisme génétique" data-id="6723">
+          <span class="sv-navlist-title">déterminisme génétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3111/" title="dissémination aérienne" data-id="3111">
+          <span class="sv-navlist-title">dissémination aérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3249/" title="Dommage" data-id="3249">
+          <span class="sv-navlist-title">Dommage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3181/" title="Dopamine" data-id="3181">
+          <span class="sv-navlist-title">Dopamine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1578/" title="Dynamique des communautés microbiennes" data-id="1578">
+          <span class="sv-navlist-title">Dynamique des communautés microbiennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1860/" title="Dysfonctionnement biologique" data-id="1860">
+          <span class="sv-navlist-title">Dysfonctionnement biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2255/" title="EcoAntibio" data-id="2255">
+          <span class="sv-navlist-title">EcoAntibio</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5801/" title="écologie alimentaire" data-id="5801">
+          <span class="sv-navlist-title">écologie alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1267/" title="Écologie de la santé" data-id="1267">
+          <span class="sv-navlist-title">Écologie de la santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5806/" title="écologie des écosystèmes" data-id="5806">
+          <span class="sv-navlist-title">écologie des écosystèmes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/197/" title="effet de dilution" data-id="197">
+          <span class="sv-navlist-title">effet de dilution</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5148/" title="efficacité alimentaire" data-id="5148">
+          <span class="sv-navlist-title">efficacité alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3299/" title="ellagitanins" data-id="3299">
+          <span class="sv-navlist-title">ellagitanins</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6746/" title="empreinte écologique" data-id="6746">
+          <span class="sv-navlist-title">empreinte écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5824/" title="émulsifiant" data-id="5824">
+          <span class="sv-navlist-title">émulsifiant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2304/" title="émulsifiants alimentaires" data-id="2304">
+          <span class="sv-navlist-title">émulsifiants alimentaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5415/" title="endocrinologie" data-id="5415">
+          <span class="sv-navlist-title">endocrinologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2258/" title="Endotoxémie métabolique" data-id="2258">
+          <span class="sv-navlist-title">Endotoxémie métabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3189/" title="Endotoxines" data-id="3189">
+          <span class="sv-navlist-title">Endotoxines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/220/" title="Endotoxines bactériennes" data-id="220">
+          <span class="sv-navlist-title">Endotoxines bactériennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6642/" title="enjambement chromosomique" data-id="6642">
+          <span class="sv-navlist-title">enjambement chromosomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1583/" title="Enjeu de santé publique" data-id="1583">
+          <span class="sv-navlist-title">Enjeu de santé publique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6759/" title="entérocyte" data-id="6759">
+          <span class="sv-navlist-title">entérocyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5831/" title="état physiologique" data-id="5831">
+          <span class="sv-navlist-title">état physiologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1873/" title="Éthique animale" data-id="1873">
+          <span class="sv-navlist-title">Éthique animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5834/" title="éthologie alimentaire" data-id="5834">
+          <span class="sv-navlist-title">éthologie alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3277/" title="Éthologie appliquée" data-id="3277">
+          <span class="sv-navlist-title">Éthologie appliquée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3197/" title="Eubiose" data-id="3197">
+          <span class="sv-navlist-title">Eubiose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6781/" title="exométabolome" data-id="6781">
+          <span class="sv-navlist-title">exométabolome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/202/" title="exposome cumulé" data-id="202">
+          <span class="sv-navlist-title">exposome cumulé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6798/" title="facteur de stress" data-id="6798">
+          <span class="sv-navlist-title">facteur de stress</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6801/" title="farnesol" data-id="6801">
+          <span class="sv-navlist-title">farnesol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2260/" title="Fenêtre des 1000 premiers jours" data-id="2260">
+          <span class="sv-navlist-title">Fenêtre des 1000 premiers jours</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2617/" title="fertilité durable" data-id="2617">
+          <span class="sv-navlist-title">fertilité durable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6820/" title="fièvre" data-id="6820">
+          <span class="sv-navlist-title">fièvre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1251/" title="flagelline" data-id="1251">
+          <span class="sv-navlist-title">flagelline</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3301/" title="Flux azotés" data-id="3301">
+          <span class="sv-navlist-title">Flux azotés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1974/" title="Gène de défense" data-id="1974">
+          <span class="sv-navlist-title">Gène de défense</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2519/" title="Génétique microbienne" data-id="2519">
+          <span class="sv-navlist-title">Génétique microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2927/" title="gestion des risques" data-id="2927">
+          <span class="sv-navlist-title">gestion des risques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3307/" title="Habitudes alimentaires" data-id="3307">
+          <span class="sv-navlist-title">Habitudes alimentaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6895/" title="helminthe" data-id="6895">
+          <span class="sv-navlist-title">helminthe</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2622/" title="Héritabilité" data-id="2622">
+          <span class="sv-navlist-title">Héritabilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6914/" title="homéostasie épithéliale" data-id="6914">
+          <span class="sv-navlist-title">homéostasie épithéliale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1786/" title="Hydraulique végétale" data-id="1786">
+          <span class="sv-navlist-title">Hydraulique végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6926/" title="hydrophilie" data-id="6926">
+          <span class="sv-navlist-title">hydrophilie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6931/" title="hyper-palatabilité" data-id="6931">
+          <span class="sv-navlist-title">hyper-palatabilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6935/" title="hypersensibilité immédiate" data-id="6935">
+          <span class="sv-navlist-title">hypersensibilité immédiate</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3715/" title="hypertension artérielle" data-id="3715">
+          <span class="sv-navlist-title">hypertension artérielle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3716/" title="immunoglobuline E" data-id="3716">
+          <span class="sv-navlist-title">immunoglobuline E</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2671/" title="Immunologie" data-id="2671">
+          <span class="sv-navlist-title">Immunologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3331/" title="Immunologie environnementale" data-id="3331">
+          <span class="sv-navlist-title">Immunologie environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2521/" title="immunomodulation" data-id="2521">
+          <span class="sv-navlist-title">immunomodulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1587/" title="Impact environnemental des transferts de nutriments" data-id="1587">
+          <span class="sv-navlist-title">Impact environnemental des transferts de nutriments</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1575/" title="Indicateur de qualité nutritionnelle" data-id="1575">
+          <span class="sv-navlist-title">Indicateur de qualité nutritionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2007/" title="Indice NOVA" data-id="2007">
+          <span class="sv-navlist-title">Indice NOVA</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6975/" title="indole" data-id="6975">
+          <span class="sv-navlist-title">indole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1741/" title="Infectiologie" data-id="1741">
+          <span class="sv-navlist-title">Infectiologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2419/" title="infection" data-id="2419">
+          <span class="sv-navlist-title">infection</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2624/" title="Inflammation" data-id="2624">
+          <span class="sv-navlist-title">Inflammation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2674/" title="Inflammation systémique" data-id="2674">
+          <span class="sv-navlist-title">Inflammation systémique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/199/" title="Inoculation du microbiome par l’achat local" data-id="199">
+          <span class="sv-navlist-title">Inoculation du microbiome par l’achat local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1968/" title="Interaction temporelle du sol" data-id="1968">
+          <span class="sv-navlist-title">Interaction temporelle du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3140/" title="Interleukines" data-id="3140">
+          <span class="sv-navlist-title">Interleukines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5514/" title="intoxication minérale" data-id="5514">
+          <span class="sv-navlist-title">intoxication minérale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2268/" title="Iode et axe thyroïdien" data-id="2268">
+          <span class="sv-navlist-title">Iode et axe thyroïdien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7011/" title="isolement reproductif" data-id="7011">
+          <span class="sv-navlist-title">isolement reproductif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2476/" title="Jonctions serrées" data-id="2476">
+          <span class="sv-navlist-title">Jonctions serrées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7025/" title="leucocyte" data-id="7025">
+          <span class="sv-navlist-title">leucocyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5268/" title="lymphocyte" data-id="5268">
+          <span class="sv-navlist-title">lymphocyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5241/" title="lymphocyte T" data-id="5241">
+          <span class="sv-navlist-title">lymphocyte T</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2685/" title="lysogénie" data-id="2685">
+          <span class="sv-navlist-title">lysogénie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2720/" title="M’Henni" data-id="2720">
+          <span class="sv-navlist-title">M’Henni</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7060/" title="maladie cœliaque" data-id="7060">
+          <span class="sv-navlist-title">maladie cœliaque</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5535/" title="maladie de carence minérale" data-id="5535">
+          <span class="sv-navlist-title">maladie de carence minérale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3720/" title="maladies cardiovasculaires" data-id="3720">
+          <span class="sv-navlist-title">maladies cardiovasculaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7064/" title="mastocyte" data-id="7064">
+          <span class="sv-navlist-title">mastocyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7067/" title="matière sèche" data-id="7067">
+          <span class="sv-navlist-title">matière sèche</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2273/" title="mcr-1 et résistance à la colistine" data-id="2273">
+          <span class="sv-navlist-title">mcr-1 et résistance à la colistine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5868/" title="mécanisme épigénétique" data-id="5868">
+          <span class="sv-navlist-title">mécanisme épigénétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5570/" title="médecine" data-id="5570">
+          <span class="sv-navlist-title">médecine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5571/" title="médecine environnementale" data-id="5571">
+          <span class="sv-navlist-title">médecine environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1383/" title="Médiateur de l'immunité innée" data-id="1383">
+          <span class="sv-navlist-title">Médiateur de l&#39;immunité innée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6093/" title="Méiose" data-id="6093">
+          <span class="sv-navlist-title">Méiose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5546/" title="mesure de santé publique" data-id="5546">
+          <span class="sv-navlist-title">mesure de santé publique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5870/" title="métabolite du tryptophane" data-id="5870">
+          <span class="sv-navlist-title">métabolite du tryptophane</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1585/" title="Métabolite secondaire végétal" data-id="1585">
+          <span class="sv-navlist-title">Métabolite secondaire végétal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3545/" title="métabotype" data-id="3545">
+          <span class="sv-navlist-title">métabotype</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1603/" title="Métagénome" data-id="1603">
+          <span class="sv-navlist-title">Métagénome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2717/" title="métataxonomie" data-id="2717">
+          <span class="sv-navlist-title">métataxonomie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2694/" title="micro-organismes du sol" data-id="2694">
+          <span class="sv-navlist-title">micro-organismes du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1954/" title="Microbiologie appliquée" data-id="1954">
+          <span class="sv-navlist-title">Microbiologie appliquée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7081/" title="microbiologie médicale" data-id="7081">
+          <span class="sv-navlist-title">microbiologie médicale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7087/" title="microbiostase" data-id="7087">
+          <span class="sv-navlist-title">microbiostase</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1595/" title="microbiote humain" data-id="1595">
+          <span class="sv-navlist-title">microbiote humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7090/" title="microbiote néonatal" data-id="7090">
+          <span class="sv-navlist-title">microbiote néonatal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1586/" title="Micronutriment d'origine microbienne" data-id="1586" aria-current="page">
+          <span class="sv-navlist-title">Micronutriment d&#39;origine microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1579/" title="Modèle de santé systémique" data-id="1579">
+          <span class="sv-navlist-title">Modèle de santé systémique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1750/" title="Modulateurs du microbiote" data-id="1750">
+          <span class="sv-navlist-title">Modulateurs du microbiote</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7109/" title="modulation du microbiome" data-id="7109">
+          <span class="sv-navlist-title">modulation du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5247/" title="morphologie animale" data-id="5247">
+          <span class="sv-navlist-title">morphologie animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2711/" title="Mucine" data-id="2711">
+          <span class="sv-navlist-title">Mucine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2278/" title="mucine MUC2" data-id="2278">
+          <span class="sv-navlist-title">mucine MUC2</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2712/" title="Mucus" data-id="2712">
+          <span class="sv-navlist-title">Mucus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3450/" title="Nerf vague" data-id="3450">
+          <span class="sv-navlist-title">Nerf vague</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5590/" title="neurométabolite" data-id="5590">
+          <span class="sv-navlist-title">neurométabolite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7171/" title="neuromicrobiologie" data-id="7171">
+          <span class="sv-navlist-title">neuromicrobiologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7172/" title="neuromodulation" data-id="7172">
+          <span class="sv-navlist-title">neuromodulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1891/" title="neurotransmetteur" data-id="1891">
+          <span class="sv-navlist-title">neurotransmetteur</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7175/" title="niche métabolique" data-id="7175">
+          <span class="sv-navlist-title">niche métabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2006/" title="NRF" data-id="2006">
+          <span class="sv-navlist-title">NRF</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1597/" title="nutriment du microbiome" data-id="1597">
+          <span class="sv-navlist-title">nutriment du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2752/" title="nutrition animale" data-id="2752">
+          <span class="sv-navlist-title">nutrition animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2480/" title="obésité" data-id="2480">
+          <span class="sv-navlist-title">obésité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2281/" title="oligosaccharides du lait humain" data-id="2281">
+          <span class="sv-navlist-title">oligosaccharides du lait humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7203/" title="organification" data-id="7203">
+          <span class="sv-navlist-title">organification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6120/" title="Organoleptique" data-id="6120">
+          <span class="sv-navlist-title">Organoleptique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1779/" title="Particules atmosphériques" data-id="1779">
+          <span class="sv-navlist-title">Particules atmosphériques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7234/" title="pathobionte" data-id="7234">
+          <span class="sv-navlist-title">pathobionte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7235/" title="pathogène aérien" data-id="7235">
+          <span class="sv-navlist-title">pathogène aérien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5622/" title="pathogène humain" data-id="5622">
+          <span class="sv-navlist-title">pathogène humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1259/" title="Pathologie de l'homéostasie intestinale" data-id="1259">
+          <span class="sv-navlist-title">Pathologie de l&#39;homéostasie intestinale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1593/" title="Pathologie du microbiome" data-id="1593">
+          <span class="sv-navlist-title">Pathologie du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4271/" title="Pathologie humaine" data-id="4271">
+          <span class="sv-navlist-title">Pathologie humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5684/" title="Période de développement" data-id="5684">
+          <span class="sv-navlist-title">Période de développement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/221/" title="Perméabilité intestinale" data-id="221">
+          <span class="sv-navlist-title">Perméabilité intestinale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5251/" title="perméabilité paracellulaire" data-id="5251">
+          <span class="sv-navlist-title">perméabilité paracellulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1213/" title="perturbation" data-id="1213">
+          <span class="sv-navlist-title">perturbation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2852/" title="Pharmacologie" data-id="2852">
+          <span class="sv-navlist-title">Pharmacologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1589/" title="Pharmacologie nutritionnelle" data-id="1589">
+          <span class="sv-navlist-title">Pharmacologie nutritionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1582/" title="Phénomène agronomique de productivité" data-id="1582">
+          <span class="sv-navlist-title">Phénomène agronomique de productivité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5640/" title="phénotype de résistance" data-id="5640">
+          <span class="sv-navlist-title">phénotype de résistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5128/" title="physiologie animale" data-id="5128">
+          <span class="sv-navlist-title">physiologie animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/198/" title="phyto-élicitation par le sol" data-id="198">
+          <span class="sv-navlist-title">phyto-élicitation par le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/200/" title="phytochimie fonctionnelle" data-id="200">
+          <span class="sv-navlist-title">phytochimie fonctionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1584/" title="Phytochimique de défense" data-id="1584">
+          <span class="sv-navlist-title">Phytochimique de défense</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5650/" title="politique publique de santé" data-id="5650">
+          <span class="sv-navlist-title">politique publique de santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7312/" title="pollinose" data-id="7312">
+          <span class="sv-navlist-title">pollinose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7341/" title="pression artérielle" data-id="7341">
+          <span class="sv-navlist-title">pression artérielle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/225/" title="pression de sélection" data-id="225">
+          <span class="sv-navlist-title">pression de sélection</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3263/" title="Protection animale" data-id="3263">
+          <span class="sv-navlist-title">Protection animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2800/" title="Protection du sol" data-id="2800">
+          <span class="sv-navlist-title">Protection du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5671/" title="Protéine alimentaire" data-id="5671">
+          <span class="sv-navlist-title">Protéine alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2854/" title="Protéine de signalisation" data-id="2854">
+          <span class="sv-navlist-title">Protéine de signalisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7376/" title="protéine porteuse" data-id="7376">
+          <span class="sv-navlist-title">protéine porteuse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2802/" title="Protéine R" data-id="2802">
+          <span class="sv-navlist-title">Protéine R</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5678/" title="Protéine régulatrice de la barrière" data-id="5678">
+          <span class="sv-navlist-title">Protéine régulatrice de la barrière</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1581/" title="Qualité de l'alimentation" data-id="1581">
+          <span class="sv-navlist-title">Qualité de l&#39;alimentation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7402/" title="qualité du vin" data-id="7402">
+          <span class="sv-navlist-title">qualité du vin</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2009/" title="raffinement industriel" data-id="2009">
+          <span class="sv-navlist-title">raffinement industriel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3448/" title="Ratio sodium-potassium alimentaire" data-id="3448">
+          <span class="sv-navlist-title">Ratio sodium-potassium alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2290/" title="récepteur AhR" data-id="2290">
+          <span class="sv-navlist-title">récepteur AhR</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5137/" title="récepteur d'acides gras" data-id="5137">
+          <span class="sv-navlist-title">récepteur d&#39;acides gras</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3054/" title="recombinaison" data-id="3054">
+          <span class="sv-navlist-title">recombinaison</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5138/" title="régime" data-id="5138">
+          <span class="sv-navlist-title">régime</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7424/" title="rein" data-id="7424">
+          <span class="sv-navlist-title">rein</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7480/" title="réparation environnementale" data-id="7480">
+          <span class="sv-navlist-title">réparation environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7485/" title="réponse à la sélection" data-id="7485">
+          <span class="sv-navlist-title">réponse à la sélection</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7501/" title="résilience physiologique" data-id="7501">
+          <span class="sv-navlist-title">résilience physiologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/182/" title="résistome" data-id="182">
+          <span class="sv-navlist-title">résistome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2610/" title="Rétroaction plante-sol" data-id="2610">
+          <span class="sv-navlist-title">Rétroaction plante-sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2814/" title="Risque environnemental" data-id="2814">
+          <span class="sv-navlist-title">Risque environnemental</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1813/" title="Risque sanitaire" data-id="1813">
+          <span class="sv-navlist-title">Risque sanitaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3810/" title="Rumen" data-id="3810">
+          <span class="sv-navlist-title">Rumen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2433/" title="Santé" data-id="2433">
+          <span class="sv-navlist-title">Santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1222/" title="Santé animale" data-id="1222">
+          <span class="sv-navlist-title">Santé animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3449/" title="Santé cardiovasculaire" data-id="3449">
+          <span class="sv-navlist-title">Santé cardiovasculaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3269/" title="Santé des écosystèmes" data-id="3269">
+          <span class="sv-navlist-title">Santé des écosystèmes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1590/" title="Santé environnementale" data-id="1590">
+          <span class="sv-navlist-title">Santé environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2485/" title="Santé intestinale" data-id="2485">
+          <span class="sv-navlist-title">Santé intestinale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5186/" title="santé mentale" data-id="5186">
+          <span class="sv-navlist-title">santé mentale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5187/" title="santé métabolique" data-id="5187">
+          <span class="sv-navlist-title">santé métabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5753/" title="sécrétion biologique" data-id="5753">
+          <span class="sv-navlist-title">sécrétion biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2887/" title="sécurité nutritionnelle" data-id="2887">
+          <span class="sv-navlist-title">sécurité nutritionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2295/" title="sélénium alimentaire" data-id="2295">
+          <span class="sv-navlist-title">sélénium alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2863/" title="sensibilité animale" data-id="2863">
+          <span class="sv-navlist-title">sensibilité animale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2494/" title="Séquençage" data-id="2494">
+          <span class="sv-navlist-title">Séquençage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/204/" title="services écosystémiques de régulation" data-id="204">
+          <span class="sv-navlist-title">services écosystémiques de régulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7527/" title="seuil de dommage" data-id="7527">
+          <span class="sv-navlist-title">seuil de dommage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7528/" title="seuil de pollution" data-id="7528">
+          <span class="sv-navlist-title">seuil de pollution</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2864/" title="signalisation de défense" data-id="2864">
+          <span class="sv-navlist-title">signalisation de défense</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7545/" title="sodium" data-id="7545">
+          <span class="sv-navlist-title">sodium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2867/" title="Sol vivant" data-id="2867">
+          <span class="sv-navlist-title">Sol vivant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2729/" title="Spéciation" data-id="2729">
+          <span class="sv-navlist-title">Spéciation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6274/" title="Stress chronique" data-id="6274">
+          <span class="sv-navlist-title">Stress chronique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2730/" title="Structure cellulaire" data-id="2730">
+          <span class="sv-navlist-title">Structure cellulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2880/" title="Succession de cultures" data-id="2880">
+          <span class="sv-navlist-title">Succession de cultures</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7608/" title="susceptibilité" data-id="7608">
+          <span class="sv-navlist-title">susceptibilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5751/" title="syndrome endocrinien" data-id="5751">
+          <span class="sv-navlist-title">syndrome endocrinien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2010/" title="syndrome métabolique" data-id="2010">
+          <span class="sv-navlist-title">syndrome métabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/203/" title="synergie des phytochimiques" data-id="203">
+          <span class="sv-navlist-title">synergie des phytochimiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2881/" title="Système alimentaire" data-id="2881">
+          <span class="sv-navlist-title">Système alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1577/" title="Système de régulation de l'hôte" data-id="1577">
+          <span class="sv-navlist-title">Système de régulation de l&#39;hôte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1592/" title="système de régulation neuro-immunitaire" data-id="1592">
+          <span class="sv-navlist-title">système de régulation neuro-immunitaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3737/" title="système immunitaire" data-id="3737">
+          <span class="sv-navlist-title">système immunitaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5144/" title="système nerveux autonome" data-id="5144">
+          <span class="sv-navlist-title">système nerveux autonome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6297/" title="Système parasympathique" data-id="6297">
+          <span class="sv-navlist-title">Système parasympathique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7627/" title="système rénine-angiotensine" data-id="7627">
+          <span class="sv-navlist-title">système rénine-angiotensine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2502/" title="Tanin" data-id="2502">
+          <span class="sv-navlist-title">Tanin</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2463/" title="terroir" data-id="2463">
+          <span class="sv-navlist-title">terroir</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5275/" title="terroir microbien" data-id="5275">
+          <span class="sv-navlist-title">terroir microbien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1953/" title="Théorie écologique" data-id="1953">
+          <span class="sv-navlist-title">Théorie écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1805/" title="Théorie immunologique" data-id="1805">
+          <span class="sv-navlist-title">Théorie immunologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5761/" title="thérapeutique" data-id="5761">
+          <span class="sv-navlist-title">thérapeutique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5095/" title="thermorégulation" data-id="5095">
+          <span class="sv-navlist-title">thermorégulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5758/" title="thyrotoxicose" data-id="5758">
+          <span class="sv-navlist-title">thyrotoxicose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2298/" title="TMAO" data-id="2298">
+          <span class="sv-navlist-title">TMAO</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2732/" title="Toxicologie" data-id="2732">
+          <span class="sv-navlist-title">Toxicologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5765/" title="toxine" data-id="5765">
+          <span class="sv-navlist-title">toxine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5766/" title="toxine bactérienne" data-id="5766">
+          <span class="sv-navlist-title">toxine bactérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1796/" title="Toxine biologique" data-id="1796">
+          <span class="sv-navlist-title">Toxine biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1602/" title="Transfert de matériel génétique" data-id="1602">
+          <span class="sv-navlist-title">Transfert de matériel génétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2898/" title="Transformation alimentaire" data-id="2898">
+          <span class="sv-navlist-title">Transformation alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5092/" title="triiodothyronine (T3)" data-id="5092">
+          <span class="sv-navlist-title">triiodothyronine (T3)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2906/" title="Trouble métabolique" data-id="2906">
+          <span class="sv-navlist-title">Trouble métabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2008/" title="urolithines" data-id="2008">
+          <span class="sv-navlist-title">urolithines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7753/" title="usage raisonné" data-id="7753">
+          <span class="sv-navlist-title">usage raisonné</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5789/" title="virologie" data-id="5789">
+          <span class="sv-navlist-title">virologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1994/" title="virome" data-id="1994">
+          <span class="sv-navlist-title">virome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3833/" title="vitamine" data-id="3833">
+          <span class="sv-navlist-title">vitamine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2300/" title="vitamine D et microbiote" data-id="2300">
+          <span class="sv-navlist-title">vitamine D et microbiote</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2301/" title="vitamine K2" data-id="2301">
+          <span class="sv-navlist-title">vitamine K2</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5791/" title="vitamine liposoluble" data-id="5791">
+          <span class="sv-navlist-title">vitamine liposoluble</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2303/" title="zonuline" data-id="2303">
+          <span class="sv-navlist-title">zonuline</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2005/" title="zoonose" data-id="2005">
+          <span class="sv-navlist-title">zoonose</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -295,6 +919,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/751/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -61,27 +61,22 @@
                 <a href="/Publications/liseuse/doc/P1/">
                   <strong>P1</strong> — Diagnostic du Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P2/">
                   <strong>P2</strong> — Agriculture de Conservation
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P3/">
                   <strong>P3</strong> — Biostimulants et Fermentations Appliquées
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P4/">
                   <strong>P4</strong> — Agroforesterie et Systèmes Pérennes
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P5/">
                   <strong>P5</strong> — La Transition
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -93,7 +88,7 @@
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -221,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -235,61 +230,576 @@
       <a href="/Publications/liseuse/terme/1645/">Glucoside phénolique</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-P3">P3</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-P3">P3</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">salicine</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>salicine</h1>
-      <astro-island uid="Vv4DF" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;751&quot;],&quot;label&quot;:[0,&quot;salicine&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>salicin</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>salicine</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>salicin</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Glucoside phénolique (salicoside) naturellement présent dans l'écorce et les feuilles des saules (Salix sp.) (Hanser, 2009; Maatar, 2015). Une fois ingérée par le bétail ou l'homme, elle est métabolisée en acide salicylique, conférant des propriétés anti-inflammatoires, antalgiques et fébrifuges marquées (Heymonet, 2013; Hoellinger, 2017; Vlăsceanu et al., 2023)</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Glucoside phénolique (salicoside) naturellement présent dans l&#39;écorce et les feuilles des saules (Salix sp.) (Hanser, 2009; Maatar, 2015). Une fois ingérée par le bétail ou l&#39;homme, elle est métabolisée en acide salicylique, conférant des propriétés anti-inflammatoires, antalgiques et fébrifuges marquées (Heymonet, 2013; Hoellinger, 2017; Vlăsceanu et al., 2023)…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-P3">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/6241/" title="S-métolachlore">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/6248/" title="Saponification">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> Salicoside, Salicin, salicylic alcohol glucoside</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> Salicoside, Salicin, salicylic alcohol glucoside</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1645/">Glucoside phénolique</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1645/">Glucoside phénolique</a></li>
-        </ul>
-      </section>
+      
 
-    
+      <section class="sv-card sv-related">
+          <h2>Termes liés (8)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/438/">métabolites secondaires</a></li><li><a href="/Publications/liseuse/terme/2541/">Anti-inflammatoire</a></li><li><a href="/Publications/liseuse/terme/749/">fourrage de saule</a></li><li><a href="/Publications/liseuse/terme/2780/">phytothérapie</a></li><li><a href="/Publications/liseuse/terme/1222/">Santé animale</a></li><li><a href="/Publications/liseuse/terme/1224/">saule</a></li><li><a href="/Publications/liseuse/terme/563/">Acide salicylique</a></li><li><a href="/Publications/liseuse/terme/742/">phytoremédiation</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (8)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/438/">métabolites secondaires</a></li><li><a href="/Publications/liseuse/terme/2541/">Anti-inflammatoire</a></li><li><a href="/Publications/liseuse/terme/749/">fourrage de saule</a></li><li><a href="/Publications/liseuse/terme/2780/">phytothérapie</a></li><li><a href="/Publications/liseuse/terme/1222/">Santé animale</a></li><li><a href="/Publications/liseuse/terme/1224/">saule</a></li><li><a href="/Publications/liseuse/terme/563/">Acide salicylique</a></li><li><a href="/Publications/liseuse/terme/742/">phytoremédiation</a></li>
-        </ul>
-      </section>
+      
+    </article>
 
-    
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="Vv4DF" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;751&quot;],&quot;label&quot;:[0,&quot;salicine&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — P3 (241)</summary>
+    <nav aria-label="Termes — P3 (241)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2093/" title="%Ndfa" data-id="2093">
+          <span class="sv-navlist-title">%Ndfa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/739/" title="ACC oxydase" data-id="739">
+          <span class="sv-navlist-title">ACC oxydase</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/731/" title="Acide citrique" data-id="731">
+          <span class="sv-navlist-title">Acide citrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/732/" title="Acide fumarique" data-id="732">
+          <span class="sv-navlist-title">Acide fumarique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/730/" title="Acide malique" data-id="730">
+          <span class="sv-navlist-title">Acide malique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4716/" title="acide pyroligneux (vinaigre de bois)" data-id="4716">
+          <span class="sv-navlist-title">acide pyroligneux (vinaigre de bois)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/733/" title="Acide succinique" data-id="733">
+          <span class="sv-navlist-title">Acide succinique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/355/" title="acides humiques et fulviques" data-id="355">
+          <span class="sv-navlist-title">acides humiques et fulviques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6372/" title="acidification des lisiers" data-id="6372">
+          <span class="sv-navlist-title">acidification des lisiers</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/752/" title="activité antiparasitaire" data-id="752">
+          <span class="sv-navlist-title">activité antiparasitaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/735/" title="acylsucres" data-id="735">
+          <span class="sv-navlist-title">acylsucres</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5297/" title="agent antimicrobien" data-id="5297">
+          <span class="sv-navlist-title">agent antimicrobien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4309/" title="agent de coiffage" data-id="4309">
+          <span class="sv-navlist-title">agent de coiffage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6382/" title="agitation" data-id="6382">
+          <span class="sv-navlist-title">agitation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3978/" title="Andain" data-id="3978">
+          <span class="sv-navlist-title">Andain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/736/" title="Anthocyanines" data-id="736">
+          <span class="sv-navlist-title">Anthocyanines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6406/" title="antifongique" data-id="6406">
+          <span class="sv-navlist-title">antifongique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3575/" title="application foliaire" data-id="3575">
+          <span class="sv-navlist-title">application foliaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6409/" title="apprentissage profond" data-id="6409">
+          <span class="sv-navlist-title">apprentissage profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5901/" title="Ascophyllum" data-id="5901">
+          <span class="sv-navlist-title">Ascophyllum</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4324/" title="asphyxie des spiracles" data-id="4324">
+          <span class="sv-navlist-title">asphyxie des spiracles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6429/" title="assurance écologique" data-id="6429">
+          <span class="sv-navlist-title">assurance écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6440/" title="azote critique" data-id="6440">
+          <span class="sv-navlist-title">azote critique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5904/" title="Bactéricide" data-id="5904">
+          <span class="sv-navlist-title">Bactéricide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6447/" title="bactérie thermophile" data-id="6447">
+          <span class="sv-navlist-title">bactérie thermophile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5319/" title="bio-amendement microbien" data-id="5319">
+          <span class="sv-navlist-title">bio-amendement microbien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4870/" title="Bio-huile" data-id="4870">
+          <span class="sv-navlist-title">Bio-huile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/135/" title="bio-inoculant" data-id="135">
+          <span class="sv-navlist-title">bio-inoculant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/744/" title="bioaccumulation" data-id="744">
+          <span class="sv-navlist-title">bioaccumulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4331/" title="biocomplexe métal-acide aminé" data-id="4331">
+          <span class="sv-navlist-title">biocomplexe métal-acide aminé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6483/" title="bionanotechnologie" data-id="6483">
+          <span class="sv-navlist-title">bionanotechnologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4871/" title="Bioprocédé" data-id="4871">
+          <span class="sv-navlist-title">Bioprocédé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3591/" title="biosourcé" data-id="3591">
+          <span class="sv-navlist-title">biosourcé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4233/" title="Bouillie bordelaise" data-id="4233">
+          <span class="sv-navlist-title">Bouillie bordelaise</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/338/" title="Broyat de rameaux" data-id="338">
+          <span class="sv-navlist-title">Broyat de rameaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/729/" title="brûlis" data-id="729">
+          <span class="sv-navlist-title">brûlis</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3998/" title="Calcination" data-id="3998">
+          <span class="sv-navlist-title">Calcination</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6513/" title="carbone renouvelable" data-id="6513">
+          <span class="sv-navlist-title">carbone renouvelable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/137/" title="Cascade d’action des biostimulants" data-id="137">
+          <span class="sv-navlist-title">Cascade d’action des biostimulants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5924/" title="Cendres" data-id="5924">
+          <span class="sv-navlist-title">Cendres</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2101/" title="Cerrado" data-id="2101">
+          <span class="sv-navlist-title">Cerrado</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5344/" title="certification réglementaire" data-id="5344">
+          <span class="sv-navlist-title">certification réglementaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6543/" title="charbon de bois (biochar)" data-id="6543">
+          <span class="sv-navlist-title">charbon de bois (biochar)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6545/" title="charge négative" data-id="6545">
+          <span class="sv-navlist-title">charge négative</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/633/" title="Chélation par acides aminés" data-id="633">
+          <span class="sv-navlist-title">Chélation par acides aminés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/671/" title="Chitosane" data-id="671">
+          <span class="sv-navlist-title">Chitosane</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1035/" title="Coinoculation" data-id="1035">
+          <span class="sv-navlist-title">Coinoculation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6589/" title="complexation des métaux" data-id="6589">
+          <span class="sv-navlist-title">complexation des métaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4343/" title="composé thermosensible" data-id="4343">
+          <span class="sv-navlist-title">composé thermosensible</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3601/" title="compost mûr" data-id="3601">
+          <span class="sv-navlist-title">compost mûr</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/446/" title="compostage" data-id="446">
+          <span class="sv-navlist-title">compostage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4346/" title="compostage thermophile" data-id="4346">
+          <span class="sv-navlist-title">compostage thermophile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6624/" title="conversion thermochimique" data-id="6624">
+          <span class="sv-navlist-title">conversion thermochimique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6627/" title="corrosion du béton" data-id="6627">
+          <span class="sv-navlist-title">corrosion du béton</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4013/" title="Décoction" data-id="4013">
+          <span class="sv-navlist-title">Décoction</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6718/" title="dégradation thermique" data-id="6718">
+          <span class="sv-navlist-title">dégradation thermique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4026/" title="désinfectant" data-id="4026">
+          <span class="sv-navlist-title">désinfectant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5968/" title="Détergent" data-id="5968">
+          <span class="sv-navlist-title">Détergent</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4017/" title="Dilution nutritionnelle" data-id="4017">
+          <span class="sv-navlist-title">Dilution nutritionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2167/" title="diplomatie du soja" data-id="2167">
+          <span class="sv-navlist-title">diplomatie du soja</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4671/" title="distillation à l'eau" data-id="4671">
+          <span class="sv-navlist-title">distillation à l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/845/" title="diversité de rotation" data-id="845">
+          <span class="sv-navlist-title">diversité de rotation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/846/" title="drainage biologique" data-id="846">
+          <span class="sv-navlist-title">drainage biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4362/" title="eau de mer" data-id="4362">
+          <span class="sv-navlist-title">eau de mer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7977/" title="eau de saule" data-id="7977">
+          <span class="sv-navlist-title">eau de saule</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2170/" title="effet cascade azote" data-id="2170">
+          <span class="sv-navlist-title">effet cascade azote</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4368/" title="effet fongistatique" data-id="4368">
+          <span class="sv-navlist-title">effet fongistatique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/847/" title="effets de bordure" data-id="847">
+          <span class="sv-navlist-title">effets de bordure</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2107/" title="EMBRAPA" data-id="2107">
+          <span class="sv-navlist-title">EMBRAPA</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7804/" title="Émissions de carbone" data-id="7804">
+          <span class="sv-navlist-title">Émissions de carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7843/" title="énantiosélectivité" data-id="7843">
+          <span class="sv-navlist-title">énantiosélectivité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7805/" title="Énergie cellulaire" data-id="7805">
+          <span class="sv-navlist-title">Énergie cellulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2413/" title="engrais" data-id="2413">
+          <span class="sv-navlist-title">engrais</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5417/" title="engrais chélaté" data-id="5417">
+          <span class="sv-navlist-title">engrais chélaté</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/758/" title="Engrais liquide fermenté" data-id="758">
+          <span class="sv-navlist-title">Engrais liquide fermenté</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/138/" title="enrobage de semences biologique" data-id="138">
+          <span class="sv-navlist-title">enrobage de semences biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6757/" title="entraînement à la vapeur" data-id="6757">
+          <span class="sv-navlist-title">entraînement à la vapeur</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7862/" title="équilibre redox" data-id="7862">
+          <span class="sv-navlist-title">équilibre redox</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7883/" title="évitement de la sécheresse" data-id="7883">
+          <span class="sv-navlist-title">évitement de la sécheresse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6788/" title="extraction alcaline" data-id="6788">
+          <span class="sv-navlist-title">extraction alcaline</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4197/" title="extraction de compost" data-id="4197">
+          <span class="sv-navlist-title">extraction de compost</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3893/" title="extraction microbienne" data-id="3893">
+          <span class="sv-navlist-title">extraction microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4021/" title="extraction osmotique" data-id="4021">
+          <span class="sv-navlist-title">extraction osmotique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4022/" title="extraction phytochimique" data-id="4022">
+          <span class="sv-navlist-title">extraction phytochimique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4198/" title="extrait de compost" data-id="4198">
+          <span class="sv-navlist-title">extrait de compost</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/672/" title="Extraits d’algues" data-id="672">
+          <span class="sv-navlist-title">Extraits d’algues</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/849/" title="facteurs de rendement" data-id="849">
+          <span class="sv-navlist-title">facteurs de rendement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4386/" title="farine d'os" data-id="4386">
+          <span class="sv-navlist-title">farine d&#39;os</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/339/" title="Ferments microbiens du commerce" data-id="339">
+          <span class="sv-navlist-title">Ferments microbiens du commerce</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6809/" title="fertilisation ciblée" data-id="6809">
+          <span class="sv-navlist-title">fertilisation ciblée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5998/" title="Fertilisation minérale" data-id="5998">
+          <span class="sv-navlist-title">Fertilisation minérale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6811/" title="fertilisation potassique" data-id="6811">
+          <span class="sv-navlist-title">fertilisation potassique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/850/" title="fertilité biologique" data-id="850">
+          <span class="sv-navlist-title">fertilité biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6000/" title="Fischer-Tropsch" data-id="6000">
+          <span class="sv-navlist-title">Fischer-Tropsch</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/851/" title="flore microbienne" data-id="851">
+          <span class="sv-navlist-title">flore microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/852/" title="fongitoxicité" data-id="852">
+          <span class="sv-navlist-title">fongitoxicité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4741/" title="fossé de formulation" data-id="4741">
+          <span class="sv-navlist-title">fossé de formulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/749/" title="fourrage de saule" data-id="749">
+          <span class="sv-navlist-title">fourrage de saule</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6848/" title="fractionnement de la matière organique" data-id="6848">
+          <span class="sv-navlist-title">fractionnement de la matière organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6837/" title="fumure organique" data-id="6837">
+          <span class="sv-navlist-title">fumure organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6882/" title="génie biochimique" data-id="6882">
+          <span class="sv-navlist-title">génie biochimique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/853/" title="gestion de la biomasse" data-id="853">
+          <span class="sv-navlist-title">gestion de la biomasse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/854/" title="glyphosate et microbiome" data-id="854">
+          <span class="sv-navlist-title">glyphosate et microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6008/" title="GMP" data-id="6008">
+          <span class="sv-navlist-title">GMP</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5468/" title="graminée fourragère" data-id="5468">
+          <span class="sv-navlist-title">graminée fourragère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4032/" title="groupe thiol" data-id="4032">
+          <span class="sv-navlist-title">groupe thiol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5471/" title="groupement fonctionnel organique" data-id="5471">
+          <span class="sv-navlist-title">groupement fonctionnel organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6892/" title="halophyte" data-id="6892">
+          <span class="sv-navlist-title">halophyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/855/" title="herbicide de biocontrôle" data-id="855">
+          <span class="sv-navlist-title">herbicide de biocontrôle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6026/" title="Huile essentielle" data-id="6026">
+          <span class="sv-navlist-title">Huile essentielle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6919/" title="huile minérale" data-id="6919">
+          <span class="sv-navlist-title">huile minérale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6920/" title="humate de potassium" data-id="6920">
+          <span class="sv-navlist-title">humate de potassium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6928/" title="hydrosol" data-id="6928">
+          <span class="sv-navlist-title">hydrosol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2088/" title="hydroxyapatite" data-id="2088">
+          <span class="sv-navlist-title">hydroxyapatite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4039/" title="hydroxyde de potassium" data-id="4039">
+          <span class="sv-navlist-title">hydroxyde de potassium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4040/" title="hydroxyde de sodium" data-id="4040">
+          <span class="sv-navlist-title">hydroxyde de sodium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/743/" title="hyperaccumulateur" data-id="743">
+          <span class="sv-navlist-title">hyperaccumulateur</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6033/" title="IFT" data-id="6033">
+          <span class="sv-navlist-title">IFT</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4411/" title="incompatibilité base-acide (dégagement H₂S)" data-id="4411">
+          <span class="sv-navlist-title">incompatibilité base-acide (dégagement H₂S)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4203/" title="indice de germination" data-id="4203">
+          <span class="sv-navlist-title">indice de germination</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6036/" title="Indice de nutrition azotée" data-id="6036">
+          <span class="sv-navlist-title">Indice de nutrition azotée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5031/" title="Indice de stress hydrique du couvert (CWSI)" data-id="5031">
+          <span class="sv-navlist-title">Indice de stress hydrique du couvert (CWSI)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4673/" title="Infusion" data-id="4673">
+          <span class="sv-navlist-title">Infusion</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/979/" title="Ingénierie du microbiome" data-id="979">
+          <span class="sv-navlist-title">Ingénierie du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4412/" title="inoculation de la résilience" data-id="4412">
+          <span class="sv-navlist-title">inoculation de la résilience</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/856/" title="inoculation mycorhizienne" data-id="856">
+          <span class="sv-navlist-title">inoculation mycorhizienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/134/" title="Inoculum microbien indigène" data-id="134">
+          <span class="sv-navlist-title">Inoculum microbien indigène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/290/" title="inoculum mycorhizien" data-id="290">
+          <span class="sv-navlist-title">inoculum mycorhizien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2181/" title="inoculum rhizobien" data-id="2181">
+          <span class="sv-navlist-title">inoculum rhizobien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6984/" title="insecticide de contact" data-id="6984">
+          <span class="sv-navlist-title">insecticide de contact</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6985/" title="insecticide naturel" data-id="6985">
+          <span class="sv-navlist-title">insecticide naturel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6986/" title="insecticide physique" data-id="6986">
+          <span class="sv-navlist-title">insecticide physique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/857/" title="intégration polyculture-élevage" data-id="857">
+          <span class="sv-navlist-title">intégration polyculture-élevage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/748/" title="interception de polluants" data-id="748">
+          <span class="sv-navlist-title">interception de polluants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/858/" title="interculture" data-id="858">
+          <span class="sv-navlist-title">interculture</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7012/" title="isomérie" data-id="7012">
+          <span class="sv-navlist-title">isomérie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/859/" title="labour de conservation" data-id="859">
+          <span class="sv-navlist-title">labour de conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/551/" title="lutte biologique par conservation" data-id="551">
+          <span class="sv-navlist-title">lutte biologique par conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4891/" title="Lyophilisation" data-id="4891">
+          <span class="sv-navlist-title">Lyophilisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4051/" title="macération acide" data-id="4051">
+          <span class="sv-navlist-title">macération acide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/542/" title="maraîchage sur sol vivant" data-id="542">
+          <span class="sv-navlist-title">maraîchage sur sol vivant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7066/" title="matière première renouvelable" data-id="7066">
+          <span class="sv-navlist-title">matière première renouvelable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7070/" title="maturité" data-id="7070">
+          <span class="sv-navlist-title">maturité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2091/" title="mère de vinaigre" data-id="2091">
+          <span class="sv-navlist-title">mère de vinaigre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/981/" title="modèle de langage protéique" data-id="981">
+          <span class="sv-navlist-title">modèle de langage protéique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7125/" title="mousse" data-id="7125">
+          <span class="sv-navlist-title">mousse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7129/" title="mulch de résidus" data-id="7129">
+          <span class="sv-navlist-title">mulch de résidus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6101/" title="NaCl" data-id="6101">
+          <span class="sv-navlist-title">NaCl</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4681/" title="Nanoencapsulation" data-id="4681">
+          <span class="sv-navlist-title">Nanoencapsulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4461/" title="nanofertilisant" data-id="4461">
+          <span class="sv-navlist-title">nanofertilisant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4462/" title="nanofertilisant biosynthétisé" data-id="4462">
+          <span class="sv-navlist-title">nanofertilisant biosynthétisé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4266/" title="Nanofongicide" data-id="4266">
+          <span class="sv-navlist-title">Nanofongicide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3631/" title="nanoparticule" data-id="3631">
+          <span class="sv-navlist-title">nanoparticule</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4463/" title="nanoparticule biogénique" data-id="4463">
+          <span class="sv-navlist-title">nanoparticule biogénique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4464/" title="nanoparticule d'oxyde de bore" data-id="4464">
+          <span class="sv-navlist-title">nanoparticule d&#39;oxyde de bore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4465/" title="nanoparticule de dioxyde de manganèse" data-id="4465">
+          <span class="sv-navlist-title">nanoparticule de dioxyde de manganèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4466/" title="nanoparticule de sélénium biogénique" data-id="4466">
+          <span class="sv-navlist-title">nanoparticule de sélénium biogénique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4467/" title="nanoparticule de sélénium élémentaire" data-id="4467">
+          <span class="sv-navlist-title">nanoparticule de sélénium élémentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4468/" title="nanoparticules d'oxyde de fer (amendement)" data-id="4468">
+          <span class="sv-navlist-title">nanoparticules d&#39;oxyde de fer (amendement)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7173/" title="neurotransmission" data-id="7173">
+          <span class="sv-navlist-title">neurotransmission</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6108/" title="Non-travail du sol" data-id="6108">
+          <span class="sv-navlist-title">Non-travail du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5249/" title="nuruk" data-id="5249">
+          <span class="sv-navlist-title">nuruk</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6110/" title="Nutrition microbienne" data-id="6110">
+          <span class="sv-navlist-title">Nutrition microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7213/" title="oxyde de calcium" data-id="7213">
+          <span class="sv-navlist-title">oxyde de calcium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7130/" title="paillis permanent" data-id="7130">
+          <span class="sv-navlist-title">paillis permanent</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4901/" title="Paramètre de bio-ingénierie" data-id="4901">
+          <span class="sv-navlist-title">Paramètre de bio-ingénierie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/292/" title="période critique de colonisation mycorhizienne" data-id="292">
+          <span class="sv-navlist-title">période critique de colonisation mycorhizienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4481/" title="pesticide chiral" data-id="4481">
+          <span class="sv-navlist-title">pesticide chiral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7255/" title="peuplier" data-id="7255">
+          <span class="sv-navlist-title">peuplier</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4482/" title="phase thermophile" data-id="4482">
+          <span class="sv-navlist-title">phase thermophile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2238/" title="Phytomanagement du résistome" data-id="2238">
+          <span class="sv-navlist-title">Phytomanagement du résistome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/742/" title="phytoremédiation" data-id="742">
+          <span class="sv-navlist-title">phytoremédiation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7280/" title="phytothérapie végétale" data-id="7280">
+          <span class="sv-navlist-title">phytothérapie végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6131/" title="PIM (potentiel infectieux mycorhizogène)" data-id="6131">
+          <span class="sv-navlist-title">PIM (potentiel infectieux mycorhizogène)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7309/" title="point triple" data-id="7309">
+          <span class="sv-navlist-title">point triple</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7311/" title="polarité" data-id="7311">
+          <span class="sv-navlist-title">polarité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7313/" title="polluants persistants" data-id="7313">
+          <span class="sv-navlist-title">polluants persistants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7318/" title="polymère biosourcé" data-id="7318">
+          <span class="sv-navlist-title">polymère biosourcé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4081/" title="Polysulfure de sodium" data-id="4081">
+          <span class="sv-navlist-title">Polysulfure de sodium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7333/" title="potentiel infectieux mycorhizogène" data-id="7333">
+          <span class="sv-navlist-title">potentiel infectieux mycorhizogène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4491/" title="précurseur acide" data-id="4491">
+          <span class="sv-navlist-title">précurseur acide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5666/" title="Produit de protection des cultures d'origine naturelle" data-id="5666">
+          <span class="sv-navlist-title">Produit de protection des cultures d&#39;origine naturelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4848/" title="Produit de pyrolyse" data-id="4848">
+          <span class="sv-navlist-title">Produit de pyrolyse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4906/" title="Produit thermochimique" data-id="4906">
+          <span class="sv-navlist-title">Produit thermochimique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4907/" title="Propriété de bio-ingénierie" data-id="4907">
+          <span class="sv-navlist-title">Propriété de bio-ingénierie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4088/" title="Pyrolyse douce" data-id="4088">
+          <span class="sv-navlist-title">Pyrolyse douce</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7422/" title="recépage" data-id="7422">
+          <span class="sv-navlist-title">recépage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7463/" title="réduction biologique" data-id="7463">
+          <span class="sv-navlist-title">réduction biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/753/" title="réduction méthane entérique" data-id="753">
+          <span class="sv-navlist-title">réduction méthane entérique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/754/" title="résilience à la sécheresse" data-id="754">
+          <span class="sv-navlist-title">résilience à la sécheresse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7505/" title="résistance aux ravageurs" data-id="7505">
+          <span class="sv-navlist-title">résistance aux ravageurs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7441/" title="retournement" data-id="7441">
+          <span class="sv-navlist-title">retournement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/136/" title="rhizobactéries" data-id="136">
+          <span class="sv-navlist-title">rhizobactéries</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6222/" title="Rhizofiltration" data-id="6222">
+          <span class="sv-navlist-title">Rhizofiltration</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5697/" title="risque chimique agricole" data-id="5697">
+          <span class="sv-navlist-title">risque chimique agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6225/" title="Riz cuit" data-id="6225">
+          <span class="sv-navlist-title">Riz cuit</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6241/" title="S-métolachlore" data-id="6241">
+          <span class="sv-navlist-title">S-métolachlore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/751/" title="salicine" data-id="751" aria-current="page">
+          <span class="sv-navlist-title">salicine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6248/" title="Saponification" data-id="6248">
+          <span class="sv-navlist-title">Saponification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4511/" title="savon calcique insoluble" data-id="4511">
+          <span class="sv-navlist-title">savon calcique insoluble</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4095/" title="Savon mou potassique" data-id="4095">
+          <span class="sv-navlist-title">Savon mou potassique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4287/" title="scories ferreuses" data-id="4287">
+          <span class="sv-navlist-title">scories ferreuses</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5752/" title="séchage" data-id="5752">
+          <span class="sv-navlist-title">séchage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7631/" title="séchage primaire" data-id="7631">
+          <span class="sv-navlist-title">séchage primaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7632/" title="séchage secondaire" data-id="7632">
+          <span class="sv-navlist-title">séchage secondaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4513/" title="sel de mer" data-id="4513">
+          <span class="sv-navlist-title">sel de mer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/862/" title="semis direct sous couvert" data-id="862">
+          <span class="sv-navlist-title">semis direct sous couvert</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7525/" title="semoir direct" data-id="7525">
+          <span class="sv-navlist-title">semoir direct</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6256/" title="Serre bioclimatique" data-id="6256">
+          <span class="sv-navlist-title">Serre bioclimatique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6258/" title="Sidérurgie" data-id="6258">
+          <span class="sv-navlist-title">Sidérurgie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4772/" title="solarisation" data-id="4772">
+          <span class="sv-navlist-title">solarisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4694/" title="Solvant" data-id="4694">
+          <span class="sv-navlist-title">Solvant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4916/" title="Souche technologique" data-id="4916">
+          <span class="sv-navlist-title">Souche technologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4289/" title="soufre nanométrique" data-id="4289">
+          <span class="sv-navlist-title">soufre nanométrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6264/" title="Stabilisation des métaux" data-id="6264">
+          <span class="sv-navlist-title">Stabilisation des métaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6277/" title="Sublimation" data-id="6277">
+          <span class="sv-navlist-title">Sublimation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4291/" title="Substance naturelle" data-id="4291">
+          <span class="sv-navlist-title">Substance naturelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4527/" title="substrat-appât glucidique" data-id="4527">
+          <span class="sv-navlist-title">substrat-appât glucidique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6285/" title="Sulfate de cuivre" data-id="6285">
+          <span class="sv-navlist-title">Sulfate de cuivre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4917/" title="Syngaz" data-id="4917">
+          <span class="sv-navlist-title">Syngaz</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4532/" title="synthèse verte (nanoparticules)" data-id="4532">
+          <span class="sv-navlist-title">synthèse verte (nanoparticules)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7628/" title="système trachéen" data-id="7628">
+          <span class="sv-navlist-title">système trachéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/741/" title="taillis à courte rotation" data-id="741">
+          <span class="sv-navlist-title">taillis à courte rotation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/750/" title="tanins condensés" data-id="750">
+          <span class="sv-navlist-title">tanins condensés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4105/" title="teinture alcoolique" data-id="4105">
+          <span class="sv-navlist-title">teinture alcoolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4106/" title="tensio-actif" data-id="4106">
+          <span class="sv-navlist-title">tensio-actif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4107/" title="tensio-actif anionique" data-id="4107">
+          <span class="sv-navlist-title">tensio-actif anionique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7664/" title="terreau forestier" data-id="7664">
+          <span class="sv-navlist-title">terreau forestier</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/139/" title="thé de compost aéré" data-id="139">
+          <span class="sv-navlist-title">thé de compost aéré</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4536/" title="thé de compost non aéré" data-id="4536">
+          <span class="sv-navlist-title">thé de compost non aéré</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/745/" title="tolérance au cadmium" data-id="745">
+          <span class="sv-navlist-title">tolérance au cadmium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/746/" title="tolérance au plomb" data-id="746">
+          <span class="sv-navlist-title">tolérance au plomb</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/747/" title="tolérance au zinc" data-id="747">
+          <span class="sv-navlist-title">tolérance au zinc</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2211/" title="traitement de semences inoculé" data-id="2211">
+          <span class="sv-navlist-title">traitement de semences inoculé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5774/" title="transformation thermochimique" data-id="5774">
+          <span class="sv-navlist-title">transformation thermochimique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7716/" title="transition vitreuse" data-id="7716">
+          <span class="sv-navlist-title">transition vitreuse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/670/" title="Trichoderma harzianum" data-id="670">
+          <span class="sv-navlist-title">Trichoderma harzianum</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/740/" title="tryptophane" data-id="740">
+          <span class="sv-navlist-title">tryptophane</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4182/" title="Urochloa ruziziensis" data-id="4182">
+          <span class="sv-navlist-title">Urochloa ruziziensis</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7774/" title="vigueur des cultures" data-id="7774">
+          <span class="sv-navlist-title">vigueur des cultures</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/734/" title="Γ-hydroxybutyrate" data-id="734">
+          <span class="sv-navlist-title">Γ-hydroxybutyrate</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -299,6 +809,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

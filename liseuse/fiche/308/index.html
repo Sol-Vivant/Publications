@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/fiche/308/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,434 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S1/">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                
               </li><li class="is-open">
-                <a href="/Publications/liseuse/doc/S2/">
+                <a href="/Publications/liseuse/doc/S2/" aria-current="page">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/332/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/3/">
-                          Microbiome du sol vivant et thermotolérance des plantes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/10/">
-                          Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/19/">
-                          Protozoaires du Sol et Boucle Microbienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/22/">
-                          Quorum Sensing et Communication Chimique Rhizosphérique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/27/">
-                          Les Archées du Sol — Un Troisième Domaine Sous-estimé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/28/">
-                          Le Cycle du Fer et les Bactéries Ferro-réductrices
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/60/">
-                          Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/61/">
-                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/67/">
-                          Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/73/">
-                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/74/">
-                          Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/76/">
-                          Lombriciens — écologie, services et pilotage des populations
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/82/">
-                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/83/">
-                          Cascade phosphore — du minéral inerte à l&#39;os humain
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/88/">
-                          Mémoire microbienne paléoclimatique — héritage 20 000 ans
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/95/">
-                          Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/96/">
-                          Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/99/">
-                          Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/103/">
-                          Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/105/">
-                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/108/">
-                          ‘Faim d’azote’ après apport carboné (immobilisation)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/113/">
-                          Antifragilité : stress modéré → diversification de l&#39;hologénome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/115/">
-                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/116/">
-                          Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/118/">
-                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/119/">
-                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/124/">
-                          Stabilité d’agrégats faible / désagrégation rapide
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/125/">
-                          Mésofaune : collemboles et acariens, régulateurs des micro-habitats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/134/">
-                          KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/136/">
-                          Bascule paradigme microzones anoxiques : demande biologique vs géométrie de l&#39;agrégat
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/138/">
-                          Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/139/">
-                          Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/140/">
-                          Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/141/">
-                          Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/142/">
-                          Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/144/">
-                          Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/148/">
-                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/151/">
-                          AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/152/">
-                          Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/154/">
-                          Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/160/">
-                          Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/163/">
-                          Microsites
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/172/">
-                          Plant diversity drives rhizosphere microbiome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/177/">
-                          Tri-trophic interactions CEP / Trichoderma / soil mites
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/181/">
-                          Microbial necromass on the rise
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/194/">
-                          Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/195/">
-                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/196/">
-                          Root exudates contribute to belowground ecosystem hotspots: A
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/200/">
-                          Comammox Nitrospira et nitrification — réponse à la fertilisation longue durée (Alfisol Nord-Est Chine)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/202/">
-                          Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/205/">
-                          Carbon Use Efficiency microbienne — pivot stockage/respiration
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/206/">
-                          Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/207/">
-                          Hiérarchie des agrégats et co-évolution structure-fonction
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/218/">
-                          Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/224/">
-                          Dormance microbienne et persisters — banque de semences invisible du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/225/">
-                          Virosphère du sol et bactériophages — top-down viral et renouvellement microbien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/229/">
-                          Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/231/">
-                          Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/234/">
-                          Effet Birch — pulse de minéralisation à la réhumectation des sols
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/238/">
-                          Cycle du soufre : du sol à la santé humaine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/243/">
-                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/245/">
-                          Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/247/">
-                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/250/">
-                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/251/">
-                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/254/">
-                          Les fils rouges du sol vivant — thèses transversales et renversements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/258/">
-                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/260/">
-                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/263/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/264/">
-                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/269/">
-                          Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/270/">
-                          Haies, bocage et brise-vent — fonctions sol, lisière et microclimat
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/271/">
-                          Silvopastoralisme tempéré — arbre, prairie et animal
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/272/">
-                          Pompage nutritif profond et filet de sécurité racinaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/273/">
-                          Trognes et arbres-ressources — biomasse renouvelable et rôle écologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/274/">
-                          L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/275/">
-                          La fonction hydraulique de la matière organique humifiée — retenir l&#39;eau au-delà du stock de carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/289/">
-                          Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/290/">
-                          Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/293/">
-                          Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/294/">
-                          La structuration du microbiome : assemblage, core microbiome et coalescence
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/298/">
-                          Le microbiome de la graine : l&#39;héritage microbien de la plante-mère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/299/">
-                          Les rhizobactéries promotrices de croissance (PGPR) : l&#39;armée microbienne de la rhizosphère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/301/">
-                          Les effets de priorité : quand l&#39;ordre d&#39;arrivée fait la communauté
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/303/">
-                          La plastisphère : le biofilm microbien des microplastiques du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/304/">
-                          La phagothérapie végétale : des bactériophages contre les phytopathogènes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/308/" aria-current="page">
-                          La rhizosphère : la zone d&#39;influence où la plante parle au sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/309/">
-                          L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/310/">
-                          L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/312/">
-                          Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/315/">
-                          Battance et croûte de surface : mécanismes, diagnostic et remédiation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/319/">
-                          Couleur du sol : le premier diagnostic par le regard
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/346/">
-                          Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/354/">
-                          Biodiversité et stabilité : produire sous climat non stationnaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/358/">
-                          Hiérarchie probatoire des méthodes microbiennes — de l&#39;amplicon aux isotopes
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/S3/">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -628,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -762,6 +350,8 @@
   </section>
 
 
+
+      
 
       
       <aside class="sv-card sv-related">

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/P3/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -61,274 +61,22 @@
                 <a href="/Publications/liseuse/doc/P1/">
                   <strong>P1</strong> — Diagnostic du Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P2/">
                   <strong>P2</strong> — Agriculture de Conservation
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/P3/" aria-current="page">
                   <strong>P3</strong> — Biostimulants et Fermentations Appliquées
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/327/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/1/">
-                          Les Champignons Entomopathogènes dans le Sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/14/">
-                          Rhodopseudomonas palustris — Culture et Applications Agricoles
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/16/">
-                          Chélation par Acides Aminés — Mécanisme et applications
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/18/">
-                          Fixation Biologique de l&#39;Azote — Le Modèle Brésilien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/20/">
-                          Gestion Systémique des Nématodes à Galles
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/42/">
-                          Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/59/">
-                          Champignons entomopathogènes — double identité et lutte par conservation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/60/">
-                          Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/67/">
-                          Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/68/">
-                          Mode d application des amendements — surface versus incorporation et incidence pédologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/70/">
-                          Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/73/">
-                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/74/">
-                          Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/84/">
-                          Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/95/">
-                          Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/96/">
-                          Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/97/">
-                          Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/98/">
-                          Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/100/">
-                          Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/101/">
-                          Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/102/">
-                          Fermentation acétique : KNF-BRV (Brown Rice Vinegar), précurseur des extractions minérales
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/104/">
-                          Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/105/">
-                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/117/">
-                          Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/118/">
-                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/126/">
-                          Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/127/">
-                          Redondance fonctionnelle et résilience coévolutive (H5/DP4)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/134/">
-                          KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/135/">
-                          BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/141/">
-                          Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/142/">
-                          Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/149/">
-                          Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/150/">
-                          Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/151/">
-                          AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/152/">
-                          Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/153/">
-                          Immunité végétale et ingénierie de la résistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/156/">
-                          Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/157/">
-                          Lutte intégrée bio-mimétique 4 piliers : cadre stratégique unifié pour la gestion des bioagresseurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/159/">
-                          RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/160/">
-                          Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/171/">
-                          vermicompost
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/173/">
-                          Toward a Sustainable Agriculture Through Plant Biostimulants
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/180/">
-                          CEP endophytes du maïs : potentiel larvicide et biocontrôle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/195/">
-                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/232/">
-                          Gestion régénérative des nématodes et biofumigation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/245/">
-                          Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/251/">
-                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/258/">
-                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/269/">
-                          Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/278/">
-                          Couvert permanent sous serre : restructurer un sol mort
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/280/">
-                          Lactofermentation : technologie alimentaire ancestrale et successions microbiennes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/283/">
-                          Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/285/">
-                          Fermentation acétique : l&#39;oxydation incomplète qui conserve — du vin au vinaigre au WCA
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/286/">
-                          Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/288/">
-                          Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/314/">
-                          Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/P4/">
                   <strong>P4</strong> — Agroforesterie et Systèmes Pérennes
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P5/">
                   <strong>P5</strong> — La Transition
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -468,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -483,280 +231,243 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>P3 — Biostimulants et Fermentations Appliquées</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>P3 — Biostimulants et Fermentations Appliquées</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 61 textes — l'ouverture, puis 60 fiches.</p>
+      <p class="sv-meta">
+        61 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/327/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/P3/integral/">
-            <strong>Le document P3 intégral</strong>
-            <p class="sv-meta">Le récit complet — 14 726 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Il y a, dans tout métier, des produits qui ne font pas l'ouvrage mais qui l'aident : l'apprêt du menuisier, qui ouvre le bois avant la finition ; le bain du forgeron, qui prépare le métal. Les biostimulants sont cela : non pas la matière du sol, mais un auxiliaire dosé, qui stimule ce que le vivant sait déjà faire. Extrait d'algues, acide humique, inoculant bactérien, bokashi fermenté — autant de noms pour un même geste : aider sans remplacer. La prudence est de mise, et ce volet la tient jusqu'au bout : ces préparations relèvent souvent d'une évaluation empirique, séduisante mais dépendante du contexte (<a href="/Publications/liseuse/fiche/67/">fiche #67</a>). Garde-fou posé : on ne stimule pas une machine, on accompagne un holobionte — une communauté dont la réponse ne se commande pas.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (60)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/1/">
-              <strong>Les Champignons Entomopathogènes dans le Sol</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">L&#39;intégration des champignons entomopathogènes représente une avancée majeure vers une agriculture durable, évoluant d&#39;une application ciblé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/14/">
-              <strong>Rhodopseudomonas palustris — Culture et Applications Agricoles</strong>
-              <span class="sv-badge">technique</span>
-              <p class="sv-meta">Ce document a exploré le potentiel exceptionnel de Rhodopseudomonas palustris en tant que « châssis biotechnologique » polyvalent pour la bi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/16/">
-              <strong>Chélation par Acides Aminés — Mécanisme et applications</strong>
-              <span class="sv-badge">technique</span>
-              <p class="sv-meta">Ce document synthétise les avancées scientifiques et techniques relatives à la production et à l&#39;utilisation des chélates d&#39;acides aminés (a…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/18/">
-              <strong>Fixation Biologique de l&#39;Azote — Le Modèle Brésilien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la Fixation Biologique de l&#39;Azote dans la culture du soja au Brésil, un pilier techn…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/20/">
-              <strong>Gestion Systémique des Nématodes à Galles</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion des nématodes à galles (Meloidogyne spp.) est en profonde mutation, passant d&#39;une lutte chimique curative à une stratégie de gest…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-              <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la coévolution plante-microbe comme levier fondamental pour la transition vers une agriculture régénérative et résilient…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/42/">
-              <strong>Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La réintégration des légumineuses au cœur des systèmes de culture constitue le levier prioritaire de la transition vers une agriculture régé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/59/">
-              <strong>Champignons entomopathogènes — double identité et lutte par conservation</strong>
-              <span class="sv-badge">transversale</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/60/">
-              <strong>Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse approfondie du potentiel des bactéries pourpres non sulfureuses — notamment les genres Rhodopseudomonas, Ce…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/67/">
-              <strong>Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le système Bokashi s’est imposé comme une solution de pointe pour la biotransformation décentralisée des déchets organiques, se distinguant …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/68/">
-              <strong>Mode d application des amendements — surface versus incorporation et incidence pédologique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette analyse technique compare l’application en surface (mulching/semis direct) et l’incorporation mécanique des amendements organiques à l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/70/">
-              <strong>Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore les mécanismes fondamentaux régissant la gestion du carbone fermentescible lors du compostage, en soulignant l&#39;importanc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/73/">
-              <strong>Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La régulation trophique descendante (top-down control) s&#39;établit comme un pilier fondamental de la santé des sols et de la résilience des ag…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/74/">
-              <strong>Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le cycle de la rhizophagie, formalisé par White et ses collaborateurs en 2018 (White et al., 2018), représente un changement de paradigme da…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/84/">
-              <strong>Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne repose sur le procédé Haber-Bosch, une infrastructure énergétique massive responsable de 1,2 % à 1,8 % des émissions m…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/95/">
-              <strong>Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La fermentation lactique anaérobie acidifiante (pH 3,5-4) par les bactéries lactiques — Lactobacillus principalement, avec le récent éclatem…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/96/">
-              <strong>Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La capture et la culture des microorganismes indigènes sont le fondement biologique commun à KNF-IMO (Park, 2008 ; méthode IMO de Cho Han Ky…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/97/">
-              <strong>Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;opposition entre compostage thermophile aérobie et Bokashi anaérobie repose sur des mécanismes biochimiques inversés : oxydation chez le c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/98/">
-              <strong>Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;hydrolyse protéique anaérobie convertit les protéines de matières animales et végétales en acides aminés libres et peptides courts mobiles…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/100/">
-              <strong>Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;hydrolyse osmotique par sucre concentré est un mécanisme physico-biologique qui exploite la pression osmotique d&#39;une solution sucrée à env…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/101/">
-              <strong>Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La solubilisation des minéraux insolubles par acides organiques faibles est un mécanisme géochimique universel qui rend biodisponibles les c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/102/">
-              <strong>Fermentation acétique : KNF-BRV (Brown Rice Vinegar), précurseur des extractions minérales</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La fermentation acétique transforme l&#39;éthanol en acide acétique par oxydation aérobie portée par les bactéries du genre Acetobacter et appar…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/104/">
-              <strong>Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La JADAM Organic Farming de Cho Youngsang (JADAM 2016) propose deux préparations de phyto-protection à très bas coût exploitant des mécanism…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/105/">
-              <strong>Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore le potentiel de la fermentation en milieu solide, une technologie émergente au cœur de la bioéconomie circulaire, pour l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/">
-              <strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/117/">
-              <strong>Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cet article explore le paradigme émergent de l’holobionte programmable; une approche intégrative visant à moduler les interactions métaboliq…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/118/">
-              <strong>Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La fixation biologique de l&#39;azote représente le pilier central d&#39;une agriculture décarbonée et durable, capable de réduire la dépendance mon…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/126/">
-              <strong>Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La faim d&#39;azote est un outil agronomique délibéré : maintenir un déficit en NO₃⁻ casse la dépendance nitrophile des adventices et sélectionn…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/127/">
-              <strong>Redondance fonctionnelle et résilience coévolutive (H5/DP4)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore les mécanismes par lesquels la redondance fonctionnelle et la résilience coevolutive permettent aux agrosystèmes de pass…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/134/">
-              <strong>KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;utilisation des bactéries solubilisant le potassium représente un levier stratégique pour la transition vers une agriculture durable, perm…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/135/">
-              <strong>BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose une synthèse critique et opérationnelle des doctrines de fertilisation chimique (BCSR et SLAN) articulée avec les princi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/141/">
-              <strong>Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Face à la &quot;pandémie silencieuse&quot; de la résistance aux antimicrobiens, qui menace de causer jusqu&#39;à 1,91 million de décès imputables par an d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/142/">
-              <strong>Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente un cadre théorique et technique pour l&#39;ingénierie rationnelle des communautés microbiennes synthétiques, positionnant c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/149/">
-              <strong>Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le modèle brésilien de fixation biologique de l&#39;azote pour la culture du soja s&#39;est imposé comme une référence mondiale de souveraineté biot…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/150/">
-              <strong>Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La quête d&#39;autonomie en fertilisation constitue désormais un impératif de sécurité nationale, dicté par une vulnérabilité structurelle aux c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/151/">
-              <strong>AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise la transition paradigmatique de la microbiologie des sols, passant d&#39;une vision centrée sur les bactéries nitrifiante…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/152/">
-              <strong>Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;oxydation anaérobie du méthane est un processus biogéochimique vital qui intercepte la quasi-totalité du méthane produit dans les sédiment…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/153/">
-              <strong>Immunité végétale et ingénierie de la résistance</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion de la santé des cultures fait face à un défi majeur : les pathogènes et ravageurs causent annuellement 20 % à 30 % de pertes de r…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/156/">
-              <strong>Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse l&#39;évolution des stratégies de protection des cultures, passant d&#39;une dépendance aux intrants chimiques à une intensifica…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/157/">
-              <strong>Lutte intégrée bio-mimétique 4 piliers : cadre stratégique unifié pour la gestion des bioagresseurs</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La Lutte Intégrée Bio-mimétique propose un changement de paradigme, passant d&#39;une gestion curative au moyen d&#39;intrants chimiques à une archi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/159/">
-              <strong>RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Contexte : Dans le cadre de la transition vers une agriculture régénératrice, la nécessité de substituer les pesticides conventionnels par d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/160/">
-              <strong>Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Inoculer (souche importée) ou capturer (communauté indigène) ? L&#39;inoculation standardisée promet une fonction précise mais échoue souvent en…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/171/">
-              <strong>vermicompost</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une analyse transversale du vermicompostage en tant que pilier de la bioéconomie circulaire et de l&#39;agriculture régénér…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/173/">
-              <strong>Toward a Sustainable Agriculture Through Plant Biostimulants</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document examine le rôle pivot des biostimulants dans la transition vers une agriculture durable et régénératrice. Initialement définis p…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/180/">
-              <strong>CEP endophytes du maïs : potentiel larvicide et biocontrôle</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette étude analyse le potentiel des champignons entomopathogènes, tels que Beauveria bassiana, Metarhizium anisopliae et Trichoderma aspere…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/195/">
-              <strong>Chaulage et azote en prairie : interactions sur la minéralisation du carbone</strong>
-              <span class="sv-badge">zoom</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/232/">
-              <strong>Gestion régénérative des nématodes et biofumigation</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion des nématodes phytoparasites traverse une phase de transition critique, marquée par l&#39;interdiction progressive des nématicides de…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/245/">
-              <strong>Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse critique des connaissances scientifiques actuelles sur les extraits de compost (thés de compost), en exami…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/251/">
-              <strong>Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne est confrontée à une dépendance énergétique critique : la synthèse industrielle de l&#39;azote (procédé Haber-Bosch) mobil…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/258/">
-              <strong>Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</strong>
-              
-              <p class="sv-meta">Les fermentations paysannes (choucroute, kéfir, kombucha, EM-Bokashi) reposent sur un triptyque : couper l&#39;air (anaérobiose), produire de l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/269/">
-              <strong>Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les effluents d&#39;élevage ne sont pas de simples engrais : ils transportent un cocktail antibiotiques + métaux + résistome préformé (ARG). L&#39;é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-              <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche décrit la reconstruction, en un an, d&#39;un sol sous serre biologiquement mort après trente ans sans racines (texture sable-argile …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/280/">
-              <strong>Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La lactofermentation — conversion des sucres en acide lactique sous anoxie — est la plus ancienne biotechnologie documentée, pratiquée conve…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/283/">
-              <strong>Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;extraction osmotique par sucre concentré repose sur la pression osmotique (loi de van &#39;t Hoff, 35-45 atm à 50 % de saccharose) qui plasmol…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/285/">
-              <strong>Fermentation acétique : l&#39;oxydation incomplète qui conserve — du vin au vinaigre au WCA</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La fermentation acétique est une oxydation biologique volontairement incomplète : les bactéries acétiques (Acetobacter, Gluconobacter, Komag…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/286/">
-              <strong>Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;hydrolyse protéique anaérobie découpe les protéines en peptides et acides aminés sans pousser la dégradation jusqu&#39;à l&#39;ammoniac — livrant …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/288/">
-              <strong>Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La conservation anaérobie fige la décomposition par un double verrou séquentiel : l&#39;anoxie (tassement, couverture) élimine moisissures et re…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/314/">
-              <strong>Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche explore le couplage entre l’epuration des eaux douces et la fertilisation des sols agricoles, un angle encore vierge de cet ouvr…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (191)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6414/">aquaponie</a></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6680/">dissémination</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6842/">filtration</a></li><li><a href="/Publications/liseuse/terme/6983/">insecte</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a></li><li><a href="/Publications/liseuse/terme/5707/">silencing génique</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Cadre réglementaire</h2>
+    <div class="sv-markdown"><p>Le mot même de « biostimulant » n'a de sens que depuis peu : il désigne une catégorie réglementaire autant qu'agronomique — des produits qui ne sont ni engrais ni pesticides, mais qui améliorent la vigueur, la tolérance au stress, la disponibilité des nutriments. Un cadre européen les a consacrés récemment, les distinguant clairement des intrants classiques — une reconnaissance qui dit leur place exacte : ni aliment, ni médicament, mais appui. Le praticien apprend à lire cette frontière : ce qui nourrit la plante, ce qui la protège, et ce qui ne fait que l'aider à se débrouiller seule. C'est un cadre jeune, encore mouvant, et le sérieux commence par là : savoir ce qu'on applique, et dans quelle catégorie cela tombe — avant de se demander si cela marche.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>La cascade du biostimulant à la plante</h2>
+    <div class="sv-markdown"><p>L'effet d'un biostimulant n'est jamais direct. Il déclenche une cascade : le produit agit sur le sol ou sur la plante, qui agit sur tout le reste. Un extrait d'algues ne nourrit pas la culture comme un engrais ; il signale — il réveille des défenses, stimule l'enracinement, active des enzymes. C'est une logique d'éveil plutôt que d'apport : on ne remplit pas, on sollicite. Ce n'est pas un repas qu'on sert, c'est un signal qu'on envoie — et le signal ne vaut que si l'oreille qui l'écoute est éveillée. Le praticien comprend alors pourquoi les effets sont si variables : une cascade dépend de l'état de celui qui la reçoit. Un sol épuisé répond moins qu'un sol vivant ; un biostimulant n'est pas un raccourci, c'est un amplificateur.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Biostimulants abiotiques</h2>
+    <div class="sv-markdown"><p>Certains biostimulants ne contiennent aucun vivant : des extraits d'algues, des acides humiques et fulviques, des extraits de plantes. On les dit abiotiques — de la chimie d'origine biologique, qui agit sur la plante et le sol sans les ensemencer. Leurs effets sont les mieux documentés : tolérance au stress, stimulation racinaire, mobilisation de nutriments. Les acides humiques, par exemple, ne nourrissent guère ; ils complexent, ils rendent disponible ce qui était piégé — un travail de passeur. Le praticien les manie comme l'apprêt de fond : une fine couche, au bon moment, qui prépare la culture à encaisser la sécheresse ou à mieux s'enraciner — sans prétendre remplacer ce que le sol vivant fournit déjà.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Bioinoculants</h2>
+    <div class="sv-markdown"><p>D'autres biostimulants apportent du vivant : des bactéries, des champignons, des consortiums — les bioinoculants. L'idée est belle : ensemencer le sol de microbes utiles. La réalité est plus exigeante : un microbe introduit n'est pas un microbe installé. Il doit survivre à la compétition d'une foule déjà en place — cette économie souterraine que la strate Vivant a décrite. C'est la leçon d'humilité du volet : on n'impose pas un locataire à une communauté, on lui propose — et la communauté décide. Le succès se joue donc moins dans le flacon que dans le terrain : un sol vivant offre des niches, un sol mort n'en offre plus. L'inoculation réussit quand elle trouve une place libre, pas quand elle force la porte.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Bioinoculants mycorhiziens CMA : conditions de succès</h2>
+    <div class="sv-markdown"><p>Les inoculants mycorhiziens méritent une attention particulière, car la symbiose est exigeante. Les CMA, ces alliés universels que le volet S3 a décrits, ne s'installent que si certaines conditions sont réunies : pas de labour qui hache les filaments, pas d'apport massif de phosphore soluble qui rend l'alliance inutile, une plante hôte en croissance. Inoculer sans ces conditions, c'est jeter les spores dans un sol qui les refusera. Le praticien apprend donc l'ordre des gestes : on prépare le terrain — couverts, non-labour, fertilisation raisonnée — avant de penser à inoculer. L'apprêt ne tient que sur un bois sain.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Bokashi</h2>
+    <div class="sv-markdown"><p>Le bokashi incarne la fermentation appliquée : des déchets organiques ensilés par lactofermentation — un processus anaérobie dont la biologie est celle que le volet V3 a déplié (fermentations successives, acides, tri microbien). Pour le praticien, le bokashi est un amendement fermenté qui se fabrique sur la ferme, à partir de déchets qu'on ensile — une façon de recycler sur place ce qui partirait ailleurs. Il se distingue du compost par sa rapidité et par l'absence d'air — une biologie déjà dépliée en V3, qu'ici on applique. La nuance est de taille, et la <a href="/Publications/liseuse/fiche/67/">fiche #67</a> la porte : l'efficacité du bokashi relève d'une évaluation empirique, prometteuse mais dépendante du contexte — à manœuvrer avec discernement, non comme une recette miracle.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>Modalités d&#39;application et formulations</h2>
+    <div class="sv-markdown"><p>Appliquer un biostimulant est un geste de dosage. Trop tôt, trop tard, trop concentré — et la cascade s'éteint. Le praticien apprend à raisonner en moments et en doses : en enrobage de semence, en pulvérisation foliaire au stade sensible, en apport au sol au réveil de la végétation. La formulation compte — liquide, poudre, granulés — car elle décide de la survie du produit et de son contact avec la cible. Et avant d'appliquer, observer : un praticien qui pulvérise sans avoir lu son sol applique à l'aveugle, quelle que soit la qualité du produit. Ici plus qu'ailleurs, la règle du métier vaut : la qualité du geste fait la moitié de l'effet. Un bon produit mal appliqué vaut moins qu'un produit moyen bien appliqué.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Intégration et limites</h2>
+    <div class="sv-markdown"><p>Les biostimulants ne sont pas la pièce maîtresse du métier : ils sont l'apprêt, et l'apprêt ne fait pas le meuble. Leurs effets sont réels mais variables, souvent mieux établis au laboratoire qu'au champ, toujours dépendants du sol, du climat, de la culture — ce que la <a href="/Publications/liseuse/fiche/67/">fiche #67</a> appelle une évaluation empirique, et que la thermodynamique des fermentations (<a href="/Publications/liseuse/fiche/268/">fiche #268</a>) éclaire sans le trancher. Le praticien les intègre donc en complément, jamais en substitut : un sol mort ne se ressuscite pas à coups d'inoculants. C'est pourquoi le volet les place en fin de geste, non en tête — l'apprêt vient quand l'ouvrage est déjà solide. L'apprêt sans matière première n'est qu'un vernis.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>Les biostimulants sont l'apprêt du métier : des auxiliaires dosés qui stimulent ce que le vivant sait faire, sans jamais le remplacer. Abiotiques ou vivants, fermentés ou inoculés, ils valent ce que vaut le sol qui les reçoit — et leur promesse doit se lire avec honnêteté. Le praticien les intègre en fin de geste, quand le sol est déjà vivant : l'apprêt ne fait que révéler l'ouvrage.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (191)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6414/">aquaponie</a></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6680/">dissémination</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6842/">filtration</a></li><li><a href="/Publications/liseuse/terme/6983/">insecte</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a></li><li><a href="/Publications/liseuse/terme/5707/">silencing génique</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">P3 — lecture (61)</summary>
+    <nav aria-label="P3 — lecture (61)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P3/integral/" title="Le document P3 intégral" data-id="integral-P3">
+          <span class="sv-navlist-title">Le document P3 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/1/" title="Les Champignons Entomopathogènes dans le Sol" data-id="fiche-1">
+          <span class="sv-navlist-title">Les Champignons Entomopathogènes dans le Sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/14/" title="Rhodopseudomonas palustris — Culture et Applications Agricoles" data-id="fiche-14">
+          <span class="sv-navlist-title">Rhodopseudomonas palustris — Culture et Applications Agricoles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/16/" title="Chélation par Acides Aminés — Mécanisme et applications" data-id="fiche-16">
+          <span class="sv-navlist-title">Chélation par Acides Aminés — Mécanisme et applications</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/18/" title="Fixation Biologique de l'Azote — Le Modèle Brésilien" data-id="fiche-18">
+          <span class="sv-navlist-title">Fixation Biologique de l&#39;Azote — Le Modèle Brésilien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/20/" title="Gestion Systémique des Nématodes à Galles" data-id="fiche-20">
+          <span class="sv-navlist-title">Gestion Systémique des Nématodes à Galles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/26/" title="Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi" data-id="fiche-26">
+          <span class="sv-navlist-title">Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/42/" title="Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026" data-id="fiche-42">
+          <span class="sv-navlist-title">Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/59/" title="Champignons entomopathogènes — double identité et lutte par conservation" data-id="fiche-59">
+          <span class="sv-navlist-title">Champignons entomopathogènes — double identité et lutte par conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/60/" title="Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle" data-id="fiche-60">
+          <span class="sv-navlist-title">Bactéries pourpres non sulfureuses — biofertilisation photosynthétique multi-fonctionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/67/" title="Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés" data-id="fiche-67">
+          <span class="sv-navlist-title">Micro-organismes efficaces, bokashi, LiFoFer — évaluation empirique des biostimulants fermentés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/68/" title="Mode d application des amendements — surface versus incorporation et incidence pédologique" data-id="fiche-68">
+          <span class="sv-navlist-title">Mode d application des amendements — surface versus incorporation et incidence pédologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/70/" title="Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages" data-id="fiche-70">
+          <span class="sv-navlist-title">Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/73/" title="Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies" data-id="fiche-73">
+          <span class="sv-navlist-title">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/74/" title="Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications" data-id="fiche-74">
+          <span class="sv-navlist-title">Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/84/" title="Trophobiose Chaboussou — de l'azote minéral à la résistance antimicrobienne" data-id="fiche-84">
+          <span class="sv-navlist-title">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/95/" title="Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)" data-id="fiche-95">
+          <span class="sv-navlist-title">Fermentation lactique : mécanismes biochimiques, conservation et instances praticiennes (KNF, EM, Bokashi, LiFoFer, ferments alimentaires)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/96/" title="Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS" data-id="fiche-96">
+          <span class="sv-navlist-title">Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/97/" title="Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone" data-id="fiche-97">
+          <span class="sv-navlist-title">Bokashi anaérobie vs compostage thermophile : conservation matière organique, pertes azote, empreinte carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/98/" title="Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l'azote organique" data-id="fiche-98">
+          <span class="sv-navlist-title">Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/100/" title="Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson" data-id="fiche-100">
+          <span class="sv-navlist-title">Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/101/" title="Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua" data-id="fiche-101">
+          <span class="sv-navlist-title">Solubilisation acide de minéraux insolubles : KNF-WCA/WCP, JADAM phyllite, MMS Paniagua</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/102/" title="Fermentation acétique : KNF-BRV (Brown Rice Vinegar), précurseur des extractions minérales" data-id="fiche-102">
+          <span class="sv-navlist-title">Fermentation acétique : KNF-BRV (Brown Rice Vinegar), précurseur des extractions minérales</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/104/" title="Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)" data-id="fiche-104">
+          <span class="sv-navlist-title">Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/105/" title="Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh" data-id="fiche-105">
+          <span class="sv-navlist-title">Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/106/" title="Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé" data-id="fiche-106">
+          <span class="sv-navlist-title">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/117/" title="Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels" data-id="fiche-117">
+          <span class="sv-navlist-title">Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/118/" title="Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l'azote" data-id="fiche-118">
+          <span class="sv-navlist-title">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/126/" title="Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège" data-id="fiche-126">
+          <span class="sv-navlist-title">Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/127/" title="Redondance fonctionnelle et résilience coévolutive (H5/DP4)" data-id="fiche-127">
+          <span class="sv-navlist-title">Redondance fonctionnelle et résilience coévolutive (H5/DP4)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/134/" title="KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries" data-id="fiche-134">
+          <span class="sv-navlist-title">KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/135/" title="BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht" data-id="fiche-135">
+          <span class="sv-navlist-title">BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/141/" title="Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance" data-id="fiche-141">
+          <span class="sv-navlist-title">Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/142/" title="Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l'agriculture régénérative" data-id="fiche-142">
+          <span class="sv-navlist-title">Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/149/" title="Modèle brésilien FBN soja : enseignements et limites d'une transition continentale réussie ET ambivalente" data-id="fiche-149">
+          <span class="sv-navlist-title">Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/150/" title="Souveraineté azote-fertilisation : l'autonomie nationale face à la dépendance Haber-Bosch" data-id="fiche-150">
+          <span class="sv-navlist-title">Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/151/" title="AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques" data-id="fiche-151">
+          <span class="sv-navlist-title">AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/152/" title="Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques" data-id="fiche-152">
+          <span class="sv-navlist-title">Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/153/" title="Immunité végétale et ingénierie de la résistance" data-id="fiche-153">
+          <span class="sv-navlist-title">Immunité végétale et ingénierie de la résistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/156/" title="Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP" data-id="fiche-156">
+          <span class="sv-navlist-title">Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/157/" title="Lutte intégrée bio-mimétique 4 piliers : cadre stratégique unifié pour la gestion des bioagresseurs" data-id="fiche-157">
+          <span class="sv-navlist-title">Lutte intégrée bio-mimétique 4 piliers : cadre stratégique unifié pour la gestion des bioagresseurs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/159/" title="RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision" data-id="fiche-159">
+          <span class="sv-navlist-title">RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/160/" title="Capture indigène vs inoculum standardisé : doctrine de l'origine du consortium microbien" data-id="fiche-160">
+          <span class="sv-navlist-title">Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/171/" title="vermicompost" data-id="fiche-171">
+          <span class="sv-navlist-title">vermicompost</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/173/" title="Toward a Sustainable Agriculture Through Plant Biostimulants" data-id="fiche-173">
+          <span class="sv-navlist-title">Toward a Sustainable Agriculture Through Plant Biostimulants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/180/" title="CEP endophytes du maïs : potentiel larvicide et biocontrôle" data-id="fiche-180">
+          <span class="sv-navlist-title">CEP endophytes du maïs : potentiel larvicide et biocontrôle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/195/" title="Chaulage et azote en prairie : interactions sur la minéralisation du carbone" data-id="fiche-195">
+          <span class="sv-navlist-title">Chaulage et azote en prairie : interactions sur la minéralisation du carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/232/" title="Gestion régénérative des nématodes et biofumigation" data-id="fiche-232">
+          <span class="sv-navlist-title">Gestion régénérative des nématodes et biofumigation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/245/" title="Thé de compost et extrait de compost : mécanismes d'extraction et efficacité réelle" data-id="fiche-245">
+          <span class="sv-navlist-title">Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/251/" title="Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse" data-id="fiche-251">
+          <span class="sv-navlist-title">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/258/" title="Les fermentations paysannes : couper l'air, produire l'acide, trier les microbes" data-id="fiche-258">
+          <span class="sv-navlist-title">Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/269/" title="Effluents d'élevage et antibiotiques vétérinaires : la porte d'entrée du résistome dans le sol" data-id="fiche-269">
+          <span class="sv-navlist-title">Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/278/" title="Couvert permanent sous serre : restructurer un sol mort" data-id="fiche-278">
+          <span class="sv-navlist-title">Couvert permanent sous serre : restructurer un sol mort</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/280/" title="Lactofermentation : technologie alimentaire ancestrale et successions microbiennes" data-id="fiche-280">
+          <span class="sv-navlist-title">Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/283/" title="Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ" data-id="fiche-283">
+          <span class="sv-navlist-title">Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/285/" title="Fermentation acétique : l'oxydation incomplète qui conserve — du vin au vinaigre au WCA" data-id="fiche-285">
+          <span class="sv-navlist-title">Fermentation acétique : l&#39;oxydation incomplète qui conserve — du vin au vinaigre au WCA</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/286/" title="Hydrolyse protéique anaérobie : livrer l'azote sans le brûler — du FAA à la frontière putréfaction" data-id="fiche-286">
+          <span class="sv-navlist-title">Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/288/" title="Conservation anaérobie : l'acide et l'anoxie contre la déperdition — de l'ensilage au bokashi" data-id="fiche-288">
+          <span class="sv-navlist-title">Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/314/" title="Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements" data-id="fiche-314">
+          <span class="sv-navlist-title">Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/H1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -66,216 +66,14 @@
                 <a href="/Publications/liseuse/doc/H1/" aria-current="page">
                   <strong>H1</strong> — Sol, Alimentation et Santé Humaine
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/322/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/13/">
-                          Mycobiome Intestinal et Axe Gut-Brain Fongique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/39/">
-                          L&#39;assiette et le sol — Densité nutritionnelle, UPF et cohortes biologiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/57/">
-                          Cascade des conséquences — de la parcelle à la biosphère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/64/">
-                          Carences minérales silencieuses — de l appauvrissement du sol à la santé publique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/81/">
-                          Couplages biogéochimiques Fe-P-S-N sous alternance redox
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/83/">
-                          Cascade phosphore — du minéral inerte à l&#39;os humain
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/84/">
-                          Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/86/">
-                          Polyphénols — du stress racinaire à la longévité humaine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/89/">
-                          Densité nutritionnelle alimentaire — du sol à l&#39;assiette
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/91/">
-                          Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/94/">
-                          Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/105/">
-                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/110/">
-                          Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/119/">
-                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/131/">
-                          Axe sucre simple → dysbiose intestinale → maladie cardiométabolique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/132/">
-                          Brix réfractomètre : seuils opérationnels et interprétation agronomique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/141/">
-                          Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/175/">
-                          Du sol à la santé : agriculture régénérative, qualité alimentaire et nutrition
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/194/">
-                          Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/195/">
-                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/216/">
-                          Cultures associées (intercropping) — principe, complémentarité et conduite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/220/">
-                          Hypothèse des vieux amis et biodiversité — exposition microbienne et maturation immunitaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/221/">
-                          Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/228/">
-                          Exposome chimique alimentaire et microbiote — additifs, résidus, perturbateurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/229/">
-                          Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/233/">
-                          Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/238/">
-                          Cycle du soufre : du sol à la santé humaine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/240/">
-                          Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/241/">
-                          Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/242/">
-                          L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/244/">
-                          Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/247/">
-                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/248/">
-                          Le cuivre, du sol à la plante : transport électronique, lignification et accumulation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/250/">
-                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/253/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/258/">
-                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/263/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/280/">
-                          Lactofermentation : technologie alimentaire ancestrale et successions microbiennes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/292/">
-                          Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/307/">
-                          La biodisponibilité : un nutriment n&#39;existe que s&#39;il est accessible
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/313/">
-                          Microbiomes de la transformation et conservation alimentaires — de la ferme à l&#39;assiette
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/H2/">
                   <strong>H2</strong> — Le Microbiome Intestinal
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H3/">
                   <strong>H3</strong> — La Résistance Antimicrobienne
                 </a>
-                
               </li>
           </ul>
       </li>
@@ -410,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -425,232 +223,219 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>H1 — Sol, Alimentation et Santé Humaine</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>H1 — Sol, Alimentation et Santé Humaine</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 49 textes — l'ouverture, puis 48 fiches.</p>
+      <p class="sv-meta">
+        49 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/322/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/H1/integral/">
-            <strong>Le document H1 intégral</strong>
-            <p class="sv-meta">Le récit complet — 11 448 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Regardez votre assiette. Chaque aliment qui s'y trouve est un message du sol — la trace d'un photon capté par une feuille, d'un minéral déverrouillé par un microbe, d'une chaîne vivante qui relie la parcelle à la table. La strate Humain referme cette chaîne : elle raconte ce que le sol rend à notre santé, bouchée après bouchée. Et posons le garde-fou une fois pour toutes : ni le sol ni l'humain ne sont des machines — chacun est un holobionte, une communauté de vivants qui s'organise comme un corps. Entre ces deux holobiontes, l'assiette est le pont. Ce volet le traverse, du sol jusqu'à nous.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (48)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/13/">
-              <strong>Mycobiome Intestinal et Axe Gut-Brain Fongique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Alors que le microbiome bactérien a fait l&#39;objet d&#39;études approfondies, le mycobiome intestinal émerge aujourd&#39;hui comme un régulateur essen…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/39/">
-              <strong>L&#39;assiette et le sol — Densité nutritionnelle, UPF et cohortes biologiques</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document examine l&#39;interconnexion critique entre la santé des sols, les modes de production agricole et la densité nutritionnelle de l&#39;as…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/57/">
-              <strong>Cascade des conséquences — de la parcelle à la biosphère</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la « cascade de conséquences » générée par les systèmes agricoles intensifs. Loin d&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/64/">
-              <strong>Carences minérales silencieuses — de l appauvrissement du sol à la santé publique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Objectif : Cette étude analyse les mécanismes complexes et multidimensionnels menant aux « carences minérales silencieuses » (ou faim cachée…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/81/">
-              <strong>Couplages biogéochimiques Fe-P-S-N sous alternance redox</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des connaissances (2021-2026) sur les couplages biogéochimiques entre le fer, le phosphore (P) et le soufr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/83/">
-              <strong>Cascade phosphore — du minéral inerte à l&#39;os humain</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la &quot;cascade du phosphore&quot;, un cycle complexe reliant la santé des sols à la physiologie osseuse humaine. Le phosphore (P…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/84/">
-              <strong>Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne repose sur le procédé Haber-Bosch, une infrastructure énergétique massive responsable de 1,2 % à 1,8 % des émissions m…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/86/">
-              <strong>Polyphénols — du stress racinaire à la longévité humaine</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la synergie entre le stress environnemental des plantes et la longévité humaine, en se focalisant sur le rôle des polyph…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/89/">
-              <strong>Densité nutritionnelle alimentaire — du sol à l&#39;assiette</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le présent document démontre que la densité nutritionnelle ne doit plus être analysée comme une variable isolée, mais comme le produit d&#39;un …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/91/">
-              <strong>Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La contamination des sols par les métaux lourds constitue un défi majeur pour la sécurité alimentaire mondiale, nécessitant des approches qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/92/">
-              <strong>Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’altération forcée des roches est devenue une technologie clé pour atteindre les objectifs de neutralité carbone (Hkaung et al., 2025). Le …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/94/">
-              <strong>Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse la dépendance structurelle de l&#39;agriculture aux énergies fossiles à travers le prisme des « esclaves énergétiques », un …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/105/">
-              <strong>Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore le potentiel de la fermentation en milieu solide, une technologie émergente au cœur de la bioéconomie circulaire, pour l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/">
-              <strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/110/">
-              <strong>Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise le rôle critique du filtre mycorhizien dans la gestion des éléments traces métalliques au sein des agroécosystèmes. L…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/">
-              <strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse exhaustive des connaissances actuelles sur les archées Asgard et leur rôle fondamental dans l&#39;eucaryogenès…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/131/">
-              <strong>Axe sucre simple → dysbiose intestinale → maladie cardiométabolique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document a exploré la relation complexe entre la consommation de sucres simples issus du raffinage industriel et la genèse de la dysbiose…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/132/">
-              <strong>Brix réfractomètre : seuils opérationnels et interprétation agronomique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le Brix mesure la concentration en solides dissous de la sève (indice de réfraction = pression osmotique). Promu comme « indicateur de santé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/141/">
-              <strong>Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Face à la &quot;pandémie silencieuse&quot; de la résistance aux antimicrobiens, qui menace de causer jusqu&#39;à 1,91 million de décès imputables par an d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/175/">
-              <strong>Du sol à la santé : agriculture régénérative, qualité alimentaire et nutrition</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le cadre One Health relie santé des sols, qualité des aliments et santé humaine en un continuum médié par le microbiome. L&#39;agriculture régén…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/194/">
-              <strong>Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette étude démontre que la santé humaine est intrinsèquement liée à un continuum microbien s&#39;étendant du sol aux systèmes biologiques compl…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/195/">
-              <strong>Chaulage et azote en prairie : interactions sur la minéralisation du carbone</strong>
-              <span class="sv-badge">zoom</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/216/">
-              <strong>Cultures associées (intercropping) — principe, complémentarité et conduite</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les cultures associées exploitent la coexistence d’espèces aux niches complémentaires pour intensifier l’usage des ressources par unité de s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/220/">
-              <strong>Hypothèse des vieux amis et biodiversité — exposition microbienne et maturation immunitaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document dresse une synthèse interdisciplinaire des relations entre la biodiversité des écosystèmes telluriques et la résilience immunita…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/221/">
-              <strong>Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse les interconnexions critiques entre l&#39;usage intensif des pesticides, l&#39;expansion du résistome environnemental et l&#39;émerg…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/228/">
-              <strong>Exposome chimique alimentaire et microbiote — additifs, résidus, perturbateurs</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Contexte : L&#39;exposome chimique alimentaire contemporain est marqué par une présence massive de polluants particulaires, notamment les micro-…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/229/">
-              <strong>Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse l&#39;interaction complexe entre la santé des sols, la gestion des mycotoxines et la sécurité de la chaîne alimentaire. Face…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/233/">
-              <strong>Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document démontre que le système alimentaire mondial n&#39;est plus seulement menacé par des crises conjoncturelles, mais par une fragilité s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/238/">
-              <strong>Cycle du soufre : du sol à la santé humaine</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse la dynamique complexe du soufre (S), depuis sa biologie tellurique jusqu&#39;à son impact sur la santé humaine, dans un cont…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/240/">
-              <strong>Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document synthétise les stratégies de lutte contre la carence en zinc, un enjeu majeur de santé publique affectant les populations dépend…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/241/">
-              <strong>Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le sélénium est un élément trace dont la dynamique illustre parfaitement le concept de « Une seule santé », liant la qualité minérale des so…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/242/">
-              <strong>L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse intégrée du cycle de l&#39;iode, depuis sa dynamique dans le système sol-plante jusqu&#39;à son impact critique sur…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/244/">
-              <strong>Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le magnésium s&#39;impose comme un pilier fondamental du cadre « One Health », reliant la santé des sols, la résilience des cultures et le bien-…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/247/">
-              <strong>Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</strong>
-              <span class="sv-badge">transversale</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/248/">
-              <strong>Le cuivre, du sol à la plante : transport électronique, lignification et accumulation</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette étude synthétise les dynamiques biogéochimiques du cuivre à l&#39;interface sol-plante, en mettant l&#39;accent sur les mécanismes de transpor…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/250/">
-              <strong>Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore le rôle pivot du fer dans le continuum sol-plante-humain, en adoptant le paradigme de l&#39;agriculture régénératrice et cel…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/253/">
-              <strong>Le régime fixe les rôles — du sol vivant à la plante saine</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Un sol sain fait une plante saine, qui fait une chaîne alimentaire saine (Howard, 1940). La science récente révèle le mécanisme : microbiome…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/258/">
-              <strong>Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</strong>
-              
-              <p class="sv-meta">Les fermentations paysannes (choucroute, kéfir, kombucha, EM-Bokashi) reposent sur un triptyque : couper l&#39;air (anaérobiose), produire de l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-              <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-              
-              <p class="sv-meta">Cinq réflexes pour ne pas se faire piéger en agriculture régénératrice : (1) chercher d&#39;abord ce que le vivant construit — partir du moteur,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/263/">
-              <strong>Le régime fixe les rôles — du sol vivant à la plante saine</strong>
-              
-              <p class="sv-meta">Un sol sain fait une plante saine, qui fait une chaîne alimentaire saine (Howard 1940). La science récente révèle le mécanisme : microbiome …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/">
-              <strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/280/">
-              <strong>Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La lactofermentation — conversion des sucres en acide lactique sous anoxie — est la plus ancienne biotechnologie documentée, pratiquée conve…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/292/">
-              <strong>Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le continuum sol-clinique de l&#39;antibiorésistance est prouvé dans son principe. Le résistome du sol est ancien et immense — les archives palé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/307/">
-              <strong>La biodisponibilité : un nutriment n&#39;existe que s&#39;il est accessible</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La biodisponibilité — fraction accessible d&#39;un nutriment à un moment donné — est le filtre entre le stock du sol et la plante. Elle se décli…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/313/">
-              <strong>Microbiomes de la transformation et conservation alimentaires — de la ferme à l&#39;assiette</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche explore le devenir des microbiomes alimentaires depuis la récolte jusqu’à l’assiette — un territoire encore peu cartographié ici…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (177)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/7203/">organification</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7273/">phytochimie</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Le cadre One Health</h2>
+    <div class="sv-markdown"><p>La médecine moderne a longtemps séparé les mondes : la santé humaine d'un côté, la santé animale de l'autre, celle des sols ailleurs encore. Le cadre One Health renverse ce cloisonnement : il affirme qu'il n'y a qu'une seule santé, partagée entre les humains, les animaux et les milieux qui les portent (<a href="/Publications/liseuse/fiche/194/">fiche #194</a>). Le sol y tient une place singulière — il est le réservoir primaire des micro-organismes qui circulent entre la terre, l'aliment et nos corps. Soigner un sol n'est donc plus seulement un geste agricole : c'est un geste de santé publique. Ce volet suit cette idée jusqu'au bout, maillon par maillon — du sol à l'assiette, puis de l'assiette à nous.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>La chaîne sol-plante-aliment-humain</h2>
+    <div class="sv-markdown"><p>Le lien entre le sol et la santé n'est pas une intuition vague : c'est une chaîne à quatre maillons, chacun pesant sur le suivant. Le sol d'abord — sa richesse en microbes et en minéraux décide de ce que la plante peut puiser. La plante ensuite — ce qu'elle absorbe devient ce qu'elle est. L'aliment — ce que la récolte et la transformation conservent ou détruisent. L'humain enfin — ce que son intestin, ce second sol, sait en extraire. La recherche récente donne à cette chaîne un nom : le continuum sol-plante-santé (<a href="/Publications/liseuse/fiche/89/">fiche #89</a>). Ce qui circule d'un maillon à l'autre n'est pas qu'une affaire de calories ; c'est une affaire de densité — de micronutriments, de molécules, de microbes — qui se transmet, ou se perd.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Sol et nutrition : ce qu&#39;un sol vivant donne</h2>
+    <div class="sv-markdown"><p>Ce qu'un sol vivant donne à l'aliment tient en un mot : la densité nutritionnelle — la quantité de micronutriments par calorie (<a href="/Publications/liseuse/fiche/89/">fiche #89</a>). Un sol qui regorge de vie microbienne et de matière organique déverrouille le fer, le zinc, le magnésium, le sélénium, et les met à disposition de la racine. Ses mycorhizes vont chercher le phosphore là où la racine n'atteint pas ; ses bactéries arrachent le fer aux oxydes ; ses guildes libèrent ce qui était sous clé — ce travail de déverrouillage, la strate Sol l'a raconté en détail. La plante, bien nourrie, fabrique un aliment dense. À l'inverse, un sol épuisé, dopé aux intrants solubles, produit une plante qui grossit en amidon et en eau, mais se vide de ce qui la nourrissait — et nous avec.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Métabolites secondaires et antioxydants</h2>
+    <div class="sv-markdown"><p>Un sol vivant ne fait pas que remplir la plante de minéraux : il lui apprend à se défendre. Sous une pression mesurée — un stress léger, la présence de microbes — la plante fabrique des métabolites secondaires : polyphénols, flavonoïdes, antioxydants, ces molécules qu'elle produit pour se protéger et qui, dans notre assiette, deviennent nos propres protecteurs. Le microbiome de la rhizosphère est la forge de cette phytochimie (<a href="/Publications/liseuse/fiche/89/">fiche #89</a>). Une plante élevée sous serre chimique, gavée et protégée, n'a aucune raison d'activer cette chimie : elle reste molle et pauvre en ces molécules. La densité nutritionnelle n'est donc pas qu'une affaire de minéraux — c'est aussi une affaire de molécules que le stress mesuré et la vie microbienne façonnent.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Carences documentées</h2>
+    <div class="sv-markdown"><p>Le résultat de cette chaîne appauvrie se mesure, et il est têtu. Le fer reste la carence la plus répandue à l'échelle du globe ; le zinc manque à près d'une personne sur six, avec des conséquences directes sur l'immunité et la croissance des enfants ; le magnésium, ce régulateur silencieux, se raréfie dans les aliments ultra-transformés ; le sélénium, ce bouclier antioxydant, dépend étroitement de la teneur des sols (<a href="/Publications/liseuse/fiche/64/">fiche #64</a>). Ces carences ne frappent pas que les pays pauvres : elles touchent des populations entières, nourries en calories mais sous-alimentées en micronutriments. On les appelle les carences minérales silencieuses — silencieuses parce qu'elles ne se voient pas, jusqu'au jour où elles se déclarent.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>L&#39;effet de dilution</h2>
+    <div class="sv-markdown"><p>Il y a un mécanisme derrière ce paradoxe : l'effet de dilution. Les rendements ont été multipliés, mais les teneurs n'ont pas suivi — le minéral se dilue dans une masse accrue d'amidon et de glucides. Deux moteurs se combinent. La sélection de variétés productives, d'abord : elles grossissent plus qu'elles ne s'enrichissent. L'environnement, ensuite : sous une atmosphère enrichie en CO₂, les plantes dites C3 — blé, riz, soja — voient leur concentration minérale chuter d'environ 8 % (ordre de grandeur — <a href="/Publications/liseuse/fiche/64/">fiche #64</a>). C'est la même bouchée, mais appauvrie. L'effet de dilution est la signature chiffrée d'une agriculture qui a choisi le rendement contre la densité.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>Mesures et indicateurs</h2>
+    <div class="sv-markdown"><p>Comment mesurer ce que vaut une assiette ? La densité nutritionnelle se quantifie : on rapporte les nutriments essentiels aux calories, avec des indices comme le NRF — le nutrient-rich food index — qui note les aliments sur leur teneur en éléments bénéfiques (<a href="/Publications/liseuse/fiche/89/">fiche #89</a>). La métrique évolue, et avec elle une idée neuve : ce n'est pas seulement l'aliment qu'il faut mesurer, mais la qualité du sol dont il vient — des outils de terrain commencent à relier la santé biologique de la parcelle à la densité de ce qu'elle produit. Mesurer, c'est le premier pas pour restaurer : on ne corrige que ce que l'on voit. Et ce que ces mesures révèlent, c'est un déclin documenté depuis les années 1950, que ce volet n'a pas fini d'explorer.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Solutions</h2>
+    <div class="sv-markdown"><p>Alors, comment redensifier l'assiette ? La réponse remonte la chaîne à contresens, jusqu'au sol. Restaurer la matière organique et la vie microbienne pour que le minéral redevienne disponible ; diversifier les cultures et les variétés pour casser la logique du rendement pur ; préserver le continuum du sol à la table au lieu de le détruire au raffinage (fiches <a href="/Publications/liseuse/fiche/89/">#89</a>, <a href="/Publications/liseuse/fiche/64/">#64</a>). Deux philosophies s'affrontent d'ailleurs sur la manière de nourrir le sol : l'une dose le strict minimum suffisant au rendement, l'autre vise un équilibre biologique complet — et la collection, sans en porter de fiche dédiée, incline vers la seconde. L'enjeu n'est pas de produire plus, mais de produire dense.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>L'assiette est le bout d'une chaîne qui commence sous nos pieds. Un sol vivant produit un aliment dense ; un sol épuisé produit un aliment dilué. La santé ne se décide pas à la caisse du supermarché, mais dans la richesse biologique du sol — et dans la façon dont on la préserve jusqu'à la table.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (177)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/7203/">organification</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7273/">phytochimie</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">H1 — lecture (49)</summary>
+    <nav aria-label="H1 — lecture (49)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/H1/integral/" title="Le document H1 intégral" data-id="integral-H1">
+          <span class="sv-navlist-title">Le document H1 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/13/" title="Mycobiome Intestinal et Axe Gut-Brain Fongique" data-id="fiche-13">
+          <span class="sv-navlist-title">Mycobiome Intestinal et Axe Gut-Brain Fongique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/39/" title="L'assiette et le sol — Densité nutritionnelle, UPF et cohortes biologiques" data-id="fiche-39">
+          <span class="sv-navlist-title">L&#39;assiette et le sol — Densité nutritionnelle, UPF et cohortes biologiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/57/" title="Cascade des conséquences — de la parcelle à la biosphère" data-id="fiche-57">
+          <span class="sv-navlist-title">Cascade des conséquences — de la parcelle à la biosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/64/" title="Carences minérales silencieuses — de l appauvrissement du sol à la santé publique" data-id="fiche-64">
+          <span class="sv-navlist-title">Carences minérales silencieuses — de l appauvrissement du sol à la santé publique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/81/" title="Couplages biogéochimiques Fe-P-S-N sous alternance redox" data-id="fiche-81">
+          <span class="sv-navlist-title">Couplages biogéochimiques Fe-P-S-N sous alternance redox</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/83/" title="Cascade phosphore — du minéral inerte à l'os humain" data-id="fiche-83">
+          <span class="sv-navlist-title">Cascade phosphore — du minéral inerte à l&#39;os humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/84/" title="Trophobiose Chaboussou — de l'azote minéral à la résistance antimicrobienne" data-id="fiche-84">
+          <span class="sv-navlist-title">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/86/" title="Polyphénols — du stress racinaire à la longévité humaine" data-id="fiche-86">
+          <span class="sv-navlist-title">Polyphénols — du stress racinaire à la longévité humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/89/" title="Densité nutritionnelle alimentaire — du sol à l'assiette" data-id="fiche-89">
+          <span class="sv-navlist-title">Densité nutritionnelle alimentaire — du sol à l&#39;assiette</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/91/" title="Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health" data-id="fiche-91">
+          <span class="sv-navlist-title">Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/92/" title="Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM" data-id="fiche-92">
+          <span class="sv-navlist-title">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/94/" title="Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative" data-id="fiche-94">
+          <span class="sv-navlist-title">Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/105/" title="Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh" data-id="fiche-105">
+          <span class="sv-navlist-title">Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/106/" title="Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé" data-id="fiche-106">
+          <span class="sv-navlist-title">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/110/" title="Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire" data-id="fiche-110">
+          <span class="sv-navlist-title">Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/119/" title="Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen" data-id="fiche-119">
+          <span class="sv-navlist-title">Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/131/" title="Axe sucre simple → dysbiose intestinale → maladie cardiométabolique" data-id="fiche-131">
+          <span class="sv-navlist-title">Axe sucre simple → dysbiose intestinale → maladie cardiométabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/132/" title="Brix réfractomètre : seuils opérationnels et interprétation agronomique" data-id="fiche-132">
+          <span class="sv-navlist-title">Brix réfractomètre : seuils opérationnels et interprétation agronomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/141/" title="Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance" data-id="fiche-141">
+          <span class="sv-navlist-title">Quorum Quenching One Health : désarmement enzymatique des pathogènes vs antibiorésistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/175/" title="Du sol à la santé : agriculture régénérative, qualité alimentaire et nutrition" data-id="fiche-175">
+          <span class="sv-navlist-title">Du sol à la santé : agriculture régénérative, qualité alimentaire et nutrition</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/194/" title="Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire" data-id="fiche-194">
+          <span class="sv-navlist-title">Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/195/" title="Chaulage et azote en prairie : interactions sur la minéralisation du carbone" data-id="fiche-195">
+          <span class="sv-navlist-title">Chaulage et azote en prairie : interactions sur la minéralisation du carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/216/" title="Cultures associées (intercropping) — principe, complémentarité et conduite" data-id="fiche-216">
+          <span class="sv-navlist-title">Cultures associées (intercropping) — principe, complémentarité et conduite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/220/" title="Hypothèse des vieux amis et biodiversité — exposition microbienne et maturation immunitaire" data-id="fiche-220">
+          <span class="sv-navlist-title">Hypothèse des vieux amis et biodiversité — exposition microbienne et maturation immunitaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/221/" title="Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé" data-id="fiche-221">
+          <span class="sv-navlist-title">Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/228/" title="Exposome chimique alimentaire et microbiote — additifs, résidus, perturbateurs" data-id="fiche-228">
+          <span class="sv-navlist-title">Exposome chimique alimentaire et microbiote — additifs, résidus, perturbateurs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/229/" title="Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne" data-id="fiche-229">
+          <span class="sv-navlist-title">Mycotoxines et chaîne alimentaire — quand le sol vivant brise la chaîne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/233/" title="Du baril à l'assiette : fragilité systémique de l'alimentation fossile" data-id="fiche-233">
+          <span class="sv-navlist-title">Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/238/" title="Cycle du soufre : du sol à la santé humaine" data-id="fiche-238">
+          <span class="sv-navlist-title">Cycle du soufre : du sol à la santé humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/240/" title="Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification" data-id="fiche-240">
+          <span class="sv-navlist-title">Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/241/" title="Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite" data-id="fiche-241">
+          <span class="sv-navlist-title">Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/242/" title="L'iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable" data-id="fiche-242">
+          <span class="sv-navlist-title">L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/244/" title="Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle" data-id="fiche-244">
+          <span class="sv-navlist-title">Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/247/" title="Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité" data-id="fiche-247">
+          <span class="sv-navlist-title">Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/248/" title="Le cuivre, du sol à la plante : transport électronique, lignification et accumulation" data-id="fiche-248">
+          <span class="sv-navlist-title">Le cuivre, du sol à la plante : transport électronique, lignification et accumulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/250/" title="Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive" data-id="fiche-250">
+          <span class="sv-navlist-title">Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/253/" title="Le régime fixe les rôles — du sol vivant à la plante saine" data-id="fiche-253">
+          <span class="sv-navlist-title">Le régime fixe les rôles — du sol vivant à la plante saine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/258/" title="Les fermentations paysannes : couper l'air, produire l'acide, trier les microbes" data-id="fiche-258">
+          <span class="sv-navlist-title">Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/262/" title="Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger" data-id="fiche-262">
+          <span class="sv-navlist-title">Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/263/" title="Le régime fixe les rôles — du sol vivant à la plante saine" data-id="fiche-263">
+          <span class="sv-navlist-title">Le régime fixe les rôles — du sol vivant à la plante saine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/276/" title="Test Haney et amorçage épigénétique foliaire — une intersection à explorer" data-id="fiche-276">
+          <span class="sv-navlist-title">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/280/" title="Lactofermentation : technologie alimentaire ancestrale et successions microbiennes" data-id="fiche-280">
+          <span class="sv-navlist-title">Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/292/" title="Du sol à la clinique : preuves du continuum environnemental de l'antibiorésistance (One Health)" data-id="fiche-292">
+          <span class="sv-navlist-title">Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/307/" title="La biodisponibilité : un nutriment n'existe que s'il est accessible" data-id="fiche-307">
+          <span class="sv-navlist-title">La biodisponibilité : un nutriment n&#39;existe que s&#39;il est accessible</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/313/" title="Microbiomes de la transformation et conservation alimentaires — de la ferme à l'assiette" data-id="fiche-313">
+          <span class="sv-navlist-title">Microbiomes de la transformation et conservation alimentaires — de la ferme à l&#39;assiette</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/chain/C10/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,27 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S1/">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S2/">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S3/">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -95,7 +90,7 @@
   <ul class="sv-side-tree">
     <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
-    <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
+    <li><a href="/Publications/liseuse/chaines/" aria-current="page">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
     <li><a href="/Publications/liseuse/references/">Références — les sources</a></li>
     <li><a href="/Publications/liseuse/outils/">Tous les outils</a></li>
@@ -221,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-chaines" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -236,6 +231,7 @@
     
 </nav>
 
+  <div class="sv-reading">
   <article class="sv-prose">
     
     <p class="sv-meta">
@@ -246,11 +242,12 @@
     </p>
     <div class="sv-page-head">
       <h1>Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O</h1>
-      <astro-island uid="Z1IpViP" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;chain&quot;],&quot;id&quot;:[0,&quot;C10&quot;],&quot;label&quot;:[0,&quot;C10 — Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
     </div>
 
     <div class="sv-markdown"><p>La fixation biologique de l'azote est une alternative concrète à l'engrais de synthèse — chaque kilo d'azote fixé épargne environ 2,1 kg d'urée — mais un azote mal géré se paie cher : le protoxyde d'azote (N₂O), gaz à effet de serre agricole majeur hors élevage (273 fois le CO₂, GIEC AR6 2021), la pollution des nappes par les nitrates, et une pression de sélection sur l'antibiorésistance (mécanisme indirect, à sourcer finement). Les cultures de services, en captant l'azote résiduel, sont le levier qui referme le cycle entre fertilité, eau et climat.</p>
 </div>
+
+    
 
     <section>
         <h2 id="maillons">Les maillons de la chaîne</h2>
@@ -302,83 +299,227 @@
 
     <p class="sv-meta"><a href="/Publications/liseuse/chaines/">← Toutes les chaînes causales</a></p>
 
-    <nav class="sv-pager" aria-label="Chaînes voisines">
-        <a class="sv-pager-prev" href="/Publications/liseuse/chain/C9/" title="C9 — Faune du sol → Bioturbation → Fertilité biologique">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/chain/C11/" title="C11 — Infiltration → Réserve utile → Résilience au stress hydrique">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+    <aside class="sv-card sv-related">
+        <h2>Cards traversées (30)</h2>
+        <p class="sv-meta">Les concept cards que la chaîne mobilise ou éclaire.</p>
+        <ul class="sv-link-list">
+          <li>
+              <a href="/Publications/liseuse/card/106/">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/136/">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/141/">AOA, AOB et comammox : les trois guildes nitrifiantes, partage de niche et implications agronomiques</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/135/">Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/242/">BNI : quand la plante freine sa propre nitrification</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/273/">Aquaponie sur sable (iAVs) : le lit de sable comme sol vivant minimal</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/238/">N₂O : émissions agricoles, mécanismes et mitigation</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/14/">Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/31/">Azote (formes, pertes) → stœchiométrie → stratégies microbiennes</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/38/">‘Faim d’azote’ après apport carboné (immobilisation)</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/52/">Cycle de l&#39;azote : fixation, minéralisation, nitrification, pertes</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/60/">Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/66/">Seuils nutritionnels et bascule mutualisme-parasitisme (H1 Shelake 2026)</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/72/">Co-inoculation Bradyrhizobium + Azospirillum : synergie physiologique au-delà de la FBN</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/86/">Cycle du potassium : minéraux primaires, KSB et biodisponibilité dans les sols vivants</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/87/">Couplages biogéochimiques Fe-P-S-N sous alternance redox : vivianite, NDFO et gouvernance des nutriments</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/94/">Cobalt, vitamine B12 et fixation biologique de l&#39;azote : la chaîne oligoélémentaire oubliée</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/97/">Boucle microbienne du sol : protozoaires, paradoxe fonctionnel et minéralisation pilotée</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/57/">Résistome et transfert horizontal : la face sombre du continuum</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/56/">Continuum sol-plante-humain : le fil rouge du corpus</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/139/">Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/140/">Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/161/">Immunité nutritionnelle : forme d&#39;azote (NH₄⁺/NO₃⁻) → protéosynthèse → signalisation JA-SA</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/79/">Cascade des coûts cachés — €0 direct → €5 civilisationnel (qui paye, et quand)</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/137/">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/223/">Légumineuses</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/206/">Flavonoïdes</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/228/">Symbiose</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/201/">Exsudats racinaires</a>
+            </li><li>
+              <a href="/Publications/liseuse/card/218/">Rhizosphère</a>
+            </li>
+        </ul>
+      </aside>
   </article>
 
-  <aside class="sv-card sv-related">
-      <h2>Cards traversées (30)</h2>
-      <p class="sv-meta">Les concept cards que la chaîne mobilise ou éclaire.</p>
-      <ul class="sv-link-list">
-        <li>
-            <a href="/Publications/liseuse/card/106/">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/136/">Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/141/">AOA, AOB et comammox : les trois guildes nitrifiantes, partage de niche et implications agronomiques</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/135/">Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/242/">BNI : quand la plante freine sa propre nitrification</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/273/">Aquaponie sur sable (iAVs) : le lit de sable comme sol vivant minimal</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/238/">N₂O : émissions agricoles, mécanismes et mitigation</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/14/">Profil sol calcaire/argilo-calcaire : calcium structurant, risques de blocages P/oligo</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/31/">Azote (formes, pertes) → stœchiométrie → stratégies microbiennes</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/38/">‘Faim d’azote’ après apport carboné (immobilisation)</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/52/">Cycle de l&#39;azote : fixation, minéralisation, nitrification, pertes</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/60/">Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/66/">Seuils nutritionnels et bascule mutualisme-parasitisme (H1 Shelake 2026)</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/72/">Co-inoculation Bradyrhizobium + Azospirillum : synergie physiologique au-delà de la FBN</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/86/">Cycle du potassium : minéraux primaires, KSB et biodisponibilité dans les sols vivants</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/87/">Couplages biogéochimiques Fe-P-S-N sous alternance redox : vivianite, NDFO et gouvernance des nutriments</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/94/">Cobalt, vitamine B12 et fixation biologique de l&#39;azote : la chaîne oligoélémentaire oubliée</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/97/">Boucle microbienne du sol : protozoaires, paradoxe fonctionnel et minéralisation pilotée</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/57/">Résistome et transfert horizontal : la face sombre du continuum</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/56/">Continuum sol-plante-humain : le fil rouge du corpus</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/139/">Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/140/">Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/161/">Immunité nutritionnelle : forme d&#39;azote (NH₄⁺/NO₃⁻) → protéosynthèse → signalisation JA-SA</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/79/">Cascade des coûts cachés — €0 direct → €5 civilisationnel (qui paye, et quand)</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/137/">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/223/">Légumineuses</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/206/">Flavonoïdes</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/228/">Symbiose</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/201/">Exsudats racinaires</a>
-          </li><li>
-            <a href="/Publications/liseuse/card/218/">Rhizosphère</a>
-          </li>
-      </ul>
-    </aside>
+  <div class="sv-toc-zone">
+  <astro-island uid="Z1IpViP" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;chain&quot;],&quot;id&quot;:[0,&quot;C10&quot;],&quot;label&quot;:[0,&quot;C10 — Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="chain-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Chaînes causales (57)</summary>
+    <nav aria-label="Chaînes causales (57)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C1/" title="C1 — Photosynthèse du couvert → Immunité intestinale humaine" data-id="C1">
+          <span class="sv-navlist-title">C1 — Photosynthèse du couvert → Immunité intestinale humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C2/" title="C2 — Haber-Bosch → Maladie chronique (chaîne de dégradation)" data-id="C2">
+          <span class="sv-navlist-title">C2 — Haber-Bosch → Maladie chronique (chaîne de dégradation)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C3/" title="C3 — Bokashi → Suppressivité du sol" data-id="C3">
+          <span class="sv-navlist-title">C3 — Bokashi → Suppressivité du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C4/" title="C4 — Anaérobiose archéenne → Fermentations alimentaires modernes" data-id="C4">
+          <span class="sv-navlist-title">C4 — Anaérobiose archéenne → Fermentations alimentaires modernes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C5/" title="C5 — Diagnostic terrain → Trajectoire économique" data-id="C5">
+          <span class="sv-navlist-title">C5 — Diagnostic terrain → Trajectoire économique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C6/" title="C6 — Diversité des couverts → Résilience immunitaire des populations" data-id="C6">
+          <span class="sv-navlist-title">C6 — Diversité des couverts → Résilience immunitaire des populations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C7/" title="C7 — Piège de la performance → Robustesse par les contreperformances" data-id="C7">
+          <span class="sv-navlist-title">C7 — Piège de la performance → Robustesse par les contreperformances</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C8/" title="C8 — Hydraulic lift → Architecture du sol → Résilience hydrique" data-id="C8">
+          <span class="sv-navlist-title">C8 — Hydraulic lift → Architecture du sol → Résilience hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C9/" title="C9 — Faune du sol → Bioturbation → Fertilité biologique" data-id="C9">
+          <span class="sv-navlist-title">C9 — Faune du sol → Bioturbation → Fertilité biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C10/" title="C10 — Cycle de l'azote : de la fixation symbiotique à la fuite N2O" data-id="C10" aria-current="page">
+          <span class="sv-navlist-title">C10 — Cycle de l&#39;azote : de la fixation symbiotique à la fuite N2O</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C11/" title="C11 — Infiltration → Réserve utile → Résilience au stress hydrique" data-id="C11">
+          <span class="sv-navlist-title">C11 — Infiltration → Réserve utile → Résilience au stress hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C12/" title="C12 — Cascade redox : des microsites anoxiques aux GES" data-id="C12">
+          <span class="sv-navlist-title">C12 — Cascade redox : des microsites anoxiques aux GES</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C13/" title="C13 — Agroforesterie : CMN, haies et pompe biologique profonde" data-id="C13">
+          <span class="sv-navlist-title">C13 — Agroforesterie : CMN, haies et pompe biologique profonde</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C14/" title="C14 — Signalisation holobionte : du quorum sensing à l'immunité végétale" data-id="C14">
+          <span class="sv-navlist-title">C14 — Signalisation holobionte : du quorum sensing à l&#39;immunité végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C15/" title="C15 — Valorisation des MAFOR : BRF, compost, biochar et stabilisation de la MO" data-id="C15">
+          <span class="sv-navlist-title">C15 — Valorisation des MAFOR : BRF, compost, biochar et stabilisation de la MO</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C16/" title="C16 — Résistome environnemental : du sol au One Health" data-id="C16">
+          <span class="sv-navlist-title">C16 — Résistome environnemental : du sol au One Health</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C17/" title="C17 — Cascade phosphore : du minéral inerte à l'os humain" data-id="C17">
+          <span class="sv-navlist-title">C17 — Cascade phosphore : du minéral inerte à l&#39;os humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C18/" title="C18 — Pompe oxalate-carbonate : séquestration C inorganique pérenne" data-id="C18">
+          <span class="sv-navlist-title">C18 — Pompe oxalate-carbonate : séquestration C inorganique pérenne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C19/" title="C19 — Trophobiose Chaboussou : N soluble → attractivité ravageurs → AMR" data-id="C19">
+          <span class="sv-navlist-title">C19 — Trophobiose Chaboussou : N soluble → attractivité ravageurs → AMR</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C20/" title="C20 — Thermorégulation édaphique : sol vivant comme tampon climatique local" data-id="C20">
+          <span class="sv-navlist-title">C20 — Thermorégulation édaphique : sol vivant comme tampon climatique local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C21/" title="C21 — Glycoprotéines fongiques : de la glomaline au stockage C profond" data-id="C21">
+          <span class="sv-navlist-title">C21 — Glycoprotéines fongiques : de la glomaline au stockage C profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C22/" title="C22 — Métaux lourds : exclusion mycorhizienne et sécurité alimentaire" data-id="C22">
+          <span class="sv-navlist-title">C22 — Métaux lourds : exclusion mycorhizienne et sécurité alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C23/" title="C23 — Polyphénols : du stress racinaire à la longévité humaine" data-id="C23">
+          <span class="sv-navlist-title">C23 — Polyphénols : du stress racinaire à la longévité humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C24/" title="C24 — Compaction → asphyxie racinaire → maladie chronique végétale" data-id="C24">
+          <span class="sv-navlist-title">C24 — Compaction → asphyxie racinaire → maladie chronique végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C25/" title="C25 — Antifragilité : du stress hydrique à l'innovation génomique" data-id="C25">
+          <span class="sv-navlist-title">C25 — Antifragilité : du stress hydrique à l&#39;innovation génomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C26/" title="C26 — Sucre simple → dysbiose intestinale → maladie cardiométabolique" data-id="C26">
+          <span class="sv-navlist-title">C26 — Sucre simple → dysbiose intestinale → maladie cardiométabolique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C27/" title="C27 — Cycle érosion civilisationnelle : monoculture → effondrement (Sumer/Maya/Rome/Dust Bowl)" data-id="C27">
+          <span class="sv-navlist-title">C27 — Cycle érosion civilisationnelle : monoculture → effondrement (Sumer/Maya/Rome/Dust Bowl)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C28/" title="C28 — Enhanced Rock Weathering : roche broyée → cation bridging → MAOM stable + CDR" data-id="C28">
+          <span class="sv-navlist-title">C28 — Enhanced Rock Weathering : roche broyée → cation bridging → MAOM stable + CDR</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C29/" title="C29 — Cycle K régénératif : du minéral verrouillé au cœur humain" data-id="C29">
+          <span class="sv-navlist-title">C29 — Cycle K régénératif : du minéral verrouillé au cœur humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C30/" title="C30 — Mesure rigoureuse de la biodiversité → cadrage du diagnostic → décisions agronomiques objectivées" data-id="C30">
+          <span class="sv-navlist-title">C30 — Mesure rigoureuse de la biodiversité → cadrage du diagnostic → décisions agronomiques objectivées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C31/" title="C31 — Cycle rhizophagique : exsudats racinaires → densité nutritionnelle" data-id="C31">
+          <span class="sv-navlist-title">C31 — Cycle rhizophagique : exsudats racinaires → densité nutritionnelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C32/" title="C32 — Carbon Use Efficiency : ratio C/N du paillage → capital biologique séquestré" data-id="C32">
+          <span class="sv-navlist-title">C32 — Carbon Use Efficiency : ratio C/N du paillage → capital biologique séquestré</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C33/" title="C33 — Verrou stœchiométrique CNPS : ratio des résidus → dépendance aux intrants" data-id="C33">
+          <span class="sv-navlist-title">C33 — Verrou stœchiométrique CNPS : ratio des résidus → dépendance aux intrants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C34/" title="C34 — Sol vivant → SCFA → axe intestin-cerveau : du microbiome édaphique à la santé mentale" data-id="C34">
+          <span class="sv-navlist-title">C34 — Sol vivant → SCFA → axe intestin-cerveau : du microbiome édaphique à la santé mentale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C35/" title="C35 — Effet Birch : du cycle dessiccation-réhumectation au pulse de minéralisation" data-id="C35">
+          <span class="sv-navlist-title">C35 — Effet Birch : du cycle dessiccation-réhumectation au pulse de minéralisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C36/" title="C36 — Micronutriments du sol : de la mobilisation microbienne à la faim cachée" data-id="C36">
+          <span class="sv-navlist-title">C36 — Micronutriments du sol : de la mobilisation microbienne à la faim cachée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C37/" title="C37 — Bore : du borate à la fécondation — réticulation pariétale RG-II et marge étroite" data-id="C37">
+          <span class="sv-navlist-title">C37 — Bore : du borate à la fécondation — réticulation pariétale RG-II et marge étroite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C38/" title="C38 — Cycle du soufre : du sulfate du sol à la santé humaine" data-id="C38">
+          <span class="sv-navlist-title">C38 — Cycle du soufre : du sulfate du sol à la santé humaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C39/" title="C39 — Axe thyroïdien sol-aliment : du sélénium et de l'iode du sol à la fonction thyroïdienne" data-id="C39">
+          <span class="sv-navlist-title">C39 — Axe thyroïdien sol-aliment : du sélénium et de l&#39;iode du sol à la fonction thyroïdienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C40/" title="C40 — Micronutriments métalliques : de la mobilisation mycorhizienne (sidérophores) à la correction de la faim cachée" data-id="C40">
+          <span class="sv-navlist-title">C40 — Micronutriments métalliques : de la mobilisation mycorhizienne (sidérophores) à la correction de la faim cachée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C41/" title="C41 — Rhizobactéries → priming immunitaire → antifragilité végétale" data-id="C41">
+          <span class="sv-navlist-title">C41 — Rhizobactéries → priming immunitaire → antifragilité végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C42/" title="C42 — Microsites anoxiques → compétition des accepteurs d'électrons → suppression du méthane" data-id="C42">
+          <span class="sv-navlist-title">C42 — Microsites anoxiques → compétition des accepteurs d&#39;électrons → suppression du méthane</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C43/" title="C43 — Animal → fertilité : du rumen au sol, la boucle microbienne de l'autonomie trophique" data-id="C43">
+          <span class="sv-navlist-title">C43 — Animal → fertilité : du rumen au sol, la boucle microbienne de l&#39;autonomie trophique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C44/" title="C44 — Syntropie : de la succession dirigée à la construction du sol — une cascade de régénération" data-id="C44">
+          <span class="sv-navlist-title">C44 — Syntropie : de la succession dirigée à la construction du sol — une cascade de régénération</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C45/" title="C45 — Nématodes libres : des guildes trophiques à la suppressivité — un bio-indicateur causal" data-id="C45">
+          <span class="sv-navlist-title">C45 — Nématodes libres : des guildes trophiques à la suppressivité — un bio-indicateur causal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C46/" title="C46 — Bioprécipitation : la boucle atmosphérique du vivant — hypothèse de synthèse" data-id="C46">
+          <span class="sv-navlist-title">C46 — Bioprécipitation : la boucle atmosphérique du vivant — hypothèse de synthèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C47/" title="C47 — Stress abiotique → réponse microbienne : la tolérance de l'holobionte" data-id="C47">
+          <span class="sv-navlist-title">C47 — Stress abiotique → réponse microbienne : la tolérance de l&#39;holobionte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C48/" title="C48 — Azolla : de la rizière à l'amendement azoté du sol" data-id="C48">
+          <span class="sv-navlist-title">C48 — Azolla : de la rizière à l&#39;amendement azoté du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C49/" title="C49 — Relais pédogenétiques : de la roche nue au sol profond" data-id="C49">
+          <span class="sv-navlist-title">C49 — Relais pédogenétiques : de la roche nue au sol profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C50/" title="C50 — Diversité et résistance : la production sous extrêmes climatiques" data-id="C50">
+          <span class="sv-navlist-title">C50 — Diversité et résistance : la production sous extrêmes climatiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C51/" title="C51 — Déforestation → perte du recyclage → aridification : la boucle de l'eau vivante rompue" data-id="C51">
+          <span class="sv-navlist-title">C51 — Déforestation → perte du recyclage → aridification : la boucle de l&#39;eau vivante rompue</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C52/" title="C52 — Glyphosate au sol : de l'inhibition de l'EPSPS au résistome" data-id="C52">
+          <span class="sv-navlist-title">C52 — Glyphosate au sol : de l&#39;inhibition de l&#39;EPSPS au résistome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C53/" title="C53 — P soluble → Répression mycorhizienne → Dilution micronutritionnelle : l'abondance minérale pathogène" data-id="C53">
+          <span class="sv-navlist-title">C53 — P soluble → Répression mycorhizienne → Dilution micronutritionnelle : l&#39;abondance minérale pathogène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C54/" title="C54 — Biopuncture : la vie fait le sol — du radis fourrager à la réserve utile" data-id="C54">
+          <span class="sv-navlist-title">C54 — Biopuncture : la vie fait le sol — du radis fourrager à la réserve utile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C55/" title="C55 — Capture indigène : des communautés autochtones à la suppressivité — l'alternative aux SynCom brevetées" data-id="C55">
+          <span class="sv-navlist-title">C55 — Capture indigène : des communautés autochtones à la suppressivité — l&#39;alternative aux SynCom brevetées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C56/" title="C56 — Réversibilité conditionnelle de la MAOM : un puits de carbone sous conditions" data-id="C56">
+          <span class="sv-navlist-title">C56 — Réversibilité conditionnelle de la MAOM : un puits de carbone sous conditions</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/chain/C57/" title="C57 — Lecture des flux pF→Eh : de la tension hydrique au potentiel redox" data-id="C57">
+          <span class="sv-navlist-title">C57 — Lecture des flux pF→Eh : de la tension hydrique au potentiel redox</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "chain-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
+
       </main>
     </div>
     <footer class="sv-footer">
@@ -387,6 +528,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

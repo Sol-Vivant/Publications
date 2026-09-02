@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/2160/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -56,17 +56,14 @@
                 <a href="/Publications/liseuse/doc/V1/">
                   <strong>V1</strong> — La Faune du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/V2/">
                   <strong>V2</strong> — L&#39;Holobionte Plante-Microbiome
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/V3/">
                   <strong>V3</strong> — Les Fermentations Microbiennes
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -83,7 +80,7 @@
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -211,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -225,66 +222,385 @@
       <a href="/Publications/liseuse/terme/1510/">dynamique des populations</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-V1">V1</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-V1">V1</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">contrôle top-down</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>contrôle top-down</h1>
-      <astro-island uid="6Uupm" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;2160&quot;],&quot;label&quot;:[0,&quot;contrôle top-down&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>top-down control</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>contrôle top-down</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>top-down control</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Mode de régulation des dynamiques microbiennes piloté par des interactions trophiques supérieures, notamment par la prédation exercée par les nématodes microbivores (Li et al., 2026). Ce contrôle restructure le microbiome en favorisant des taxons métaboliquement polyvalents et en augmentant la résistance du sol aux invasions pathogènes (Li et al., 2026). En ingénierie, il désigne aussi la manipulation des conditions physico-chimiques environnementales pour sélectionner les processus biologiques désirés (Kim et al., 2021)</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Mode de régulation des dynamiques microbiennes piloté par des interactions trophiques supérieures, notamment par la prédation exercée par les nématodes microbivores (Li et al., 2026). Ce contrôle restructure le microbiome en favorisant des taxons métaboliquement polyvalents et en augmentant la résistance du sol aux invasions pathogènes (Li et al., 2026). En ingénierie, il désigne aussi la manipulation des conditions physico-chimiques environnementales pour sélectionner les processus biologiques désirés (Kim et al., 2021)…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-V1">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/2159/" title="contrôle bottom-up">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/2165/" title="cuticule insecte">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> contrôle descendant, régulation par la prédation, top-down control, top-down approach</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> contrôle descendant, régulation par la prédation, top-down control, top-down approach</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1510/">dynamique des populations</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1510/">dynamique des populations</a></li>
-        </ul>
-      </section>
+      
 
-    
+      <section class="sv-card sv-related">
+          <h2>Termes liés (3)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1922/">nématode</a></li><li><a href="/Publications/liseuse/terme/1086/">prédation</a></li><li><a href="/Publications/liseuse/terme/432/">Réseau trophique</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (3)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1922/">nématode</a></li><li><a href="/Publications/liseuse/terme/1086/">prédation</a></li><li><a href="/Publications/liseuse/terme/432/">Réseau trophique</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Utilisé dans (5 fiches)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/fiche/139/">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</a></li><li><a href="/Publications/liseuse/fiche/225/">Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</a></li><li><a href="/Publications/liseuse/fiche/19/">Protozoaires du Sol et Boucle Microbienne</a></li><li><a href="/Publications/liseuse/fiche/73/">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</a></li><li><a href="/Publications/liseuse/fiche/294/">La structuration du microbiome : assemblage, core microbiome et coalescence</a></li>
+          </ul>
+        </section>
+    </article>
 
-    <section class="sv-card sv-related">
-        <h2>Utilisé dans (5 fiches)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/fiche/139/">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</a></li><li><a href="/Publications/liseuse/fiche/225/">Virosphère du sol et bactériophages — top-down viral et renouvellement microbien</a></li><li><a href="/Publications/liseuse/fiche/19/">Protozoaires du Sol et Boucle Microbienne</a></li><li><a href="/Publications/liseuse/fiche/73/">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</a></li><li><a href="/Publications/liseuse/fiche/294/">La structuration du microbiome : assemblage, core microbiome et coalescence</a></li>
-        </ul>
-      </section>
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="6Uupm" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;2160&quot;],&quot;label&quot;:[0,&quot;contrôle top-down&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — V1 (143)</summary>
+    <nav aria-label="Termes — V1 (143)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/325/" title="Acariens du sol" data-id="325">
+          <span class="sv-navlist-title">Acariens du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5882/" title="Acide carminique" data-id="5882">
+          <span class="sv-navlist-title">Acide carminique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4307/" title="activité-densité" data-id="4307">
+          <span class="sv-navlist-title">activité-densité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3972/" title="Aleurode" data-id="3972">
+          <span class="sv-navlist-title">Aleurode</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2096/" title="Amoebozoa" data-id="2096">
+          <span class="sv-navlist-title">Amoebozoa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3853/" title="anhydrase carbonique" data-id="3853">
+          <span class="sv-navlist-title">anhydrase carbonique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2097/" title="Apicomplexa" data-id="2097">
+          <span class="sv-navlist-title">Apicomplexa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4120/" title="Aporrectodea caliginosa" data-id="4120">
+          <span class="sv-navlist-title">Aporrectodea caliginosa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2140/" title="appressorium" data-id="2140">
+          <span class="sv-navlist-title">appressorium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6412/" title="aptitude au vol" data-id="6412">
+          <span class="sv-navlist-title">aptitude au vol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2142/" title="autodissémination" data-id="2142">
+          <span class="sv-navlist-title">autodissémination</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5313/" title="bactérie entomopathogène" data-id="5313">
+          <span class="sv-navlist-title">bactérie entomopathogène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2145/" title="bauverhicine" data-id="2145">
+          <span class="sv-navlist-title">bauverhicine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5907/" title="Bemisia tabaci" data-id="5907">
+          <span class="sv-navlist-title">Bemisia tabaci</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6479/" title="biomasse lombricienne" data-id="6479">
+          <span class="sv-navlist-title">biomasse lombricienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/83/" title="Bioturbation" data-id="83">
+          <span class="sv-navlist-title">Bioturbation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/271/" title="Boucle microbienne" data-id="271">
+          <span class="sv-navlist-title">Boucle microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4335/" title="brachyptère" data-id="4335">
+          <span class="sv-navlist-title">brachyptère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6497/" title="broutement" data-id="6497">
+          <span class="sv-navlist-title">broutement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6505/" title="capacité de dispersion" data-id="6505">
+          <span class="sv-navlist-title">capacité de dispersion</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/663/" title="Carabes" data-id="663">
+          <span class="sv-navlist-title">Carabes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6518/" title="carpelle" data-id="6518">
+          <span class="sv-navlist-title">carpelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5340/" title="catégorie écologique de vers de terre" data-id="5340">
+          <span class="sv-navlist-title">catégorie écologique de vers de terre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2100/" title="Cercozoa" data-id="2100">
+          <span class="sv-navlist-title">Cercozoa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3596/" title="chaîne trophique" data-id="3596">
+          <span class="sv-navlist-title">chaîne trophique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2102/" title="Ciliophora" data-id="2102">
+          <span class="sv-navlist-title">Ciliophora</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4007/" title="Cochenille" data-id="4007">
+          <span class="sv-navlist-title">Cochenille</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/82/" title="collemboles" data-id="82">
+          <span class="sv-navlist-title">collemboles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6581/" title="colorant naturel" data-id="6581">
+          <span class="sv-navlist-title">colorant naturel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6587/" title="compartiment de taille" data-id="6587">
+          <span class="sv-navlist-title">compartiment de taille</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2159/" title="contrôle bottom-up" data-id="2159">
+          <span class="sv-navlist-title">contrôle bottom-up</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2160/" title="contrôle top-down" data-id="2160" aria-current="page">
+          <span class="sv-navlist-title">contrôle top-down</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2165/" title="cuticule insecte" data-id="2165">
+          <span class="sv-navlist-title">cuticule insecte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2166/" title="destruxine" data-id="2166">
+          <span class="sv-navlist-title">destruxine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6725/" title="détritivorie" data-id="6725">
+          <span class="sv-navlist-title">détritivorie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/327/" title="Drilosphère" data-id="327">
+          <span class="sv-navlist-title">Drilosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7823/" title="échantillonnage biologique" data-id="7823">
+          <span class="sv-navlist-title">échantillonnage biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6737/" title="efficacité de transfert" data-id="6737">
+          <span class="sv-navlist-title">efficacité de transfert</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5979/" title="Eisenia" data-id="5979">
+          <span class="sv-navlist-title">Eisenia</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2218/" title="élicitine" data-id="2218">
+          <span class="sv-navlist-title">élicitine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/662/" title="Enchytréides" data-id="662">
+          <span class="sv-navlist-title">Enchytréides</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/79/" title="Endogés" data-id="79">
+          <span class="sv-navlist-title">Endogés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4376/" title="endozoochorie" data-id="4376">
+          <span class="sv-navlist-title">endozoochorie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2171/" title="enkystement" data-id="2171">
+          <span class="sv-navlist-title">enkystement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6756/" title="entomologie" data-id="6756">
+          <span class="sv-navlist-title">entomologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/78/" title="épigés" data-id="78">
+          <span class="sv-navlist-title">épigés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4378/" title="épiphragme" data-id="4378">
+          <span class="sv-navlist-title">épiphragme</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7859/" title="équilibre acide-base" data-id="7859">
+          <span class="sv-navlist-title">équilibre acide-base</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4379/" title="estivation" data-id="4379">
+          <span class="sv-navlist-title">estivation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4380/" title="estivation verticale" data-id="4380">
+          <span class="sv-navlist-title">estivation verticale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4138/" title="Eudrilus eugeniae" data-id="4138">
+          <span class="sv-navlist-title">Eudrilus eugeniae</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4384/" title="facteur de bioaccumulation" data-id="4384">
+          <span class="sv-navlist-title">facteur de bioaccumulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/295/" title="Facteur de bioturbation" data-id="295">
+          <span class="sv-navlist-title">Facteur de bioturbation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4401/" title="gastéropodes terrestres" data-id="4401">
+          <span class="sv-navlist-title">gastéropodes terrestres</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3896/" title="glandes calcifères" data-id="3896">
+          <span class="sv-navlist-title">glandes calcifères</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5484/" title="Hemiptera" data-id="5484">
+          <span class="sv-navlist-title">Hemiptera</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2178/" title="hémocœle" data-id="2178">
+          <span class="sv-navlist-title">hémocœle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6948/" title="hétérogénéité de l'habitat" data-id="6948">
+          <span class="sv-navlist-title">hétérogénéité de l&#39;habitat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6021/" title="Heterorhabditidae" data-id="6021">
+          <span class="sv-navlist-title">Heterorhabditidae</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4743/" title="Heterorhabditis" data-id="4743">
+          <span class="sv-navlist-title">Heterorhabditis</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6897/" title="hibernation" data-id="6897">
+          <span class="sv-navlist-title">hibernation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4885/" title="Hiérarchie énergétique" data-id="4885">
+          <span class="sv-navlist-title">Hiérarchie énergétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5490/" title="Homoptera" data-id="5490">
+          <span class="sv-navlist-title">Homoptera</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6940/" title="hypothèse du mass-ratio" data-id="6940">
+          <span class="sv-navlist-title">hypothèse du mass-ratio</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5497/" title="immunité innée des invertébrés" data-id="5497">
+          <span class="sv-navlist-title">immunité innée des invertébrés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/664/" title="Indice QBS-ar" data-id="664">
+          <span class="sv-navlist-title">Indice QBS-ar</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5504/" title="insecte herbivore" data-id="5504">
+          <span class="sv-navlist-title">insecte herbivore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5503/" title="insecte holométabole" data-id="5503">
+          <span class="sv-navlist-title">insecte holométabole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4254/" title="Invertébrés du sol" data-id="4254">
+          <span class="sv-navlist-title">Invertébrés du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4144/" title="ISO 23611" data-id="4144">
+          <span class="sv-navlist-title">ISO 23611</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7034/" title="lipophilie" data-id="7034">
+          <span class="sv-navlist-title">lipophilie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6059/" title="Lumbricus terrestris" data-id="6059">
+          <span class="sv-navlist-title">Lumbricus terrestris</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5531/" title="macrofaune auxiliaire" data-id="5531">
+          <span class="sv-navlist-title">macrofaune auxiliaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4434/" title="macroptère" data-id="4434">
+          <span class="sv-navlist-title">macroptère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5538/" title="mammifère herbivore" data-id="5538">
+          <span class="sv-navlist-title">mammifère herbivore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/84/" title="Marcel Bouché" data-id="84">
+          <span class="sv-navlist-title">Marcel Bouché</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2194/" title="mélanisation" data-id="2194">
+          <span class="sv-navlist-title">mélanisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/326/" title="Mésofaune" data-id="326">
+          <span class="sv-navlist-title">Mésofaune</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5584/" title="méthode d'extraction de la faune du sol" data-id="5584">
+          <span class="sv-navlist-title">méthode d&#39;extraction de la faune du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3629/" title="microbivore" data-id="3629">
+          <span class="sv-navlist-title">microbivore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2191/" title="microencapsulation" data-id="2191">
+          <span class="sv-navlist-title">microencapsulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7101/" title="miellat" data-id="7101">
+          <span class="sv-navlist-title">miellat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7112/" title="mollusque" data-id="7112">
+          <span class="sv-navlist-title">mollusque</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4456/" title="moyenne pondérée par la communauté" data-id="4456">
+          <span class="sv-navlist-title">moyenne pondérée par la communauté</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4459/" title="mycophagie" data-id="4459">
+          <span class="sv-navlist-title">mycophagie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7133/" title="myxobactérie" data-id="7133">
+          <span class="sv-navlist-title">myxobactérie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2200/" title="nanoformulation" data-id="2200">
+          <span class="sv-navlist-title">nanoformulation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6106/" title="Nemaslug" data-id="6106">
+          <span class="sv-navlist-title">Nemaslug</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5589/" title="Nematoda" data-id="5589">
+          <span class="sv-navlist-title">Nematoda</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4222/" title="nématodes bactérivores" data-id="4222">
+          <span class="sv-navlist-title">nématodes bactérivores</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/323/" title="Nématodes du sol" data-id="323">
+          <span class="sv-navlist-title">Nématodes du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4471/" title="nématodes entomopathogènes" data-id="4471">
+          <span class="sv-navlist-title">nématodes entomopathogènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4223/" title="nématodes fongivores" data-id="4223">
+          <span class="sv-navlist-title">nématodes fongivores</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4224/" title="nématodes omnivores" data-id="4224">
+          <span class="sv-navlist-title">nématodes omnivores</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/524/" title="Nématodes phytoparasites" data-id="524">
+          <span class="sv-navlist-title">Nématodes phytoparasites</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6117/" title="Opuntia" data-id="6117">
+          <span class="sv-navlist-title">Opuntia</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5600/" title="organe buccal" data-id="5600">
+          <span class="sv-navlist-title">organe buccal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5602/" title="organe excréteur" data-id="5602">
+          <span class="sv-navlist-title">organe excréteur</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5605/" title="organe respiratoire" data-id="5605">
+          <span class="sv-navlist-title">organe respiratoire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3923/" title="oxalyl-CoA décarboxylase" data-id="3923">
+          <span class="sv-navlist-title">oxalyl-CoA décarboxylase</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7236/" title="pathogène végétal" data-id="7236">
+          <span class="sv-navlist-title">pathogène végétal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7250/" title="perte de récolte" data-id="7250">
+          <span class="sv-navlist-title">perte de récolte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4483/" title="Phasmarhabditis hermaphrodita" data-id="4483">
+          <span class="sv-navlist-title">Phasmarhabditis hermaphrodita</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6158/" title="Phénoloxydase" data-id="6158">
+          <span class="sv-navlist-title">Phénoloxydase</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4843/" title="Photorhabdus" data-id="4843">
+          <span class="sv-navlist-title">Photorhabdus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7288/" title="piège Barber" data-id="7288">
+          <span class="sv-navlist-title">piège Barber</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6170/" title="Plasmodium" data-id="6170">
+          <span class="sv-navlist-title">Plasmodium</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6193/" title="Prédation bactérienne" data-id="6193">
+          <span class="sv-navlist-title">Prédation bactérienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/589/" title="prédation microbienne" data-id="589">
+          <span class="sv-navlist-title">prédation microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2206/" title="protiste du sol" data-id="2206">
+          <span class="sv-navlist-title">protiste du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5668/" title="Protiste parasite" data-id="5668">
+          <span class="sv-navlist-title">Protiste parasite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/267/" title="Protozoaires" data-id="267">
+          <span class="sv-navlist-title">Protozoaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6194/" title="Pseudopode" data-id="6194">
+          <span class="sv-navlist-title">Pseudopode</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4499/" title="radula" data-id="4499">
+          <span class="sv-navlist-title">radula</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7476/" title="régulation bottom-up" data-id="7476">
+          <span class="sv-navlist-title">régulation bottom-up</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3645/" title="régulation top-down" data-id="3645">
+          <span class="sv-navlist-title">régulation top-down</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/432/" title="Réseau trophique" data-id="432">
+          <span class="sv-navlist-title">Réseau trophique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/324/" title="Réseau trophique du sol" data-id="324">
+          <span class="sv-navlist-title">Réseau trophique du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5694/" title="Rhizaria" data-id="5694">
+          <span class="sv-navlist-title">Rhizaria</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3650/" title="seuil de nuisibilité" data-id="3650">
+          <span class="sv-navlist-title">seuil de nuisibilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4100/" title="spiracle" data-id="4100">
+          <span class="sv-navlist-title">spiracle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5742/" title="stade larvaire" data-id="5742">
+          <span class="sv-navlist-title">stade larvaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4773/" title="Steinernema" data-id="4773">
+          <span class="sv-navlist-title">Steinernema</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7685/" title="totipotence" data-id="7685">
+          <span class="sv-navlist-title">totipotence</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7689/" title="toxicité sélective" data-id="7689">
+          <span class="sv-navlist-title">toxicité sélective</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6312/" title="Toxoplasma" data-id="6312">
+          <span class="sv-navlist-title">Toxoplasma</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7691/" title="trachée" data-id="7691">
+          <span class="sv-navlist-title">trachée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7692/" title="trachéide" data-id="7692">
+          <span class="sv-navlist-title">trachéide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4216/" title="transfert racinaire" data-id="4216">
+          <span class="sv-navlist-title">transfert racinaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3653/" title="transfert trophique" data-id="3653">
+          <span class="sv-navlist-title">transfert trophique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7720/" title="transmission horizontale" data-id="7720">
+          <span class="sv-navlist-title">transmission horizontale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7742/" title="tube germinatif" data-id="7742">
+          <span class="sv-navlist-title">tube germinatif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/81/" title="turricules" data-id="81">
+          <span class="sv-navlist-title">turricules</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4943/" title="valeur c-p" data-id="4943">
+          <span class="sv-navlist-title">valeur c-p</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5786/" title="valorisation des déchets organiques" data-id="5786">
+          <span class="sv-navlist-title">valorisation des déchets organiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5788/" title="ver épigé" data-id="5788">
+          <span class="sv-navlist-title">ver épigé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/577/" title="vermicompostage" data-id="577">
+          <span class="sv-navlist-title">vermicompostage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/251/" title="Vers de terre" data-id="251">
+          <span class="sv-navlist-title">Vers de terre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/431/" title="vers de terre anéciques" data-id="431">
+          <span class="sv-navlist-title">vers de terre anéciques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7773/" title="viabilité des graines" data-id="7773">
+          <span class="sv-navlist-title">viabilité des graines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4553/" title="Xenorhabdus" data-id="4553">
+          <span class="sv-navlist-title">Xenorhabdus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5797/" title="zoochorie" data-id="5797">
+          <span class="sv-navlist-title">zoochorie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5798/" title="zoologie du sol" data-id="5798">
+          <span class="sv-navlist-title">zoologie du sol</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -294,6 +610,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

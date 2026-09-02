@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/strate/P/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -61,27 +61,22 @@
                 <a href="/Publications/liseuse/doc/P1/">
                   <strong>P1</strong> — Diagnostic du Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P2/">
                   <strong>P2</strong> — Agriculture de Conservation
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P3/">
                   <strong>P3</strong> — Biostimulants et Fermentations Appliquées
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P4/">
                   <strong>P4</strong> — Agroforesterie et Systèmes Pérennes
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P5/">
                   <strong>P5</strong> — La Transition
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -221,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -233,364 +228,107 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1><span class="sv-strate-badge sv-strate-P" role="img" aria-label="Strate Pratiques">P</span> Pratiques</h1>
-    <p class="sv-hero-lede">La strate Pratiques traduit la science en action : diagnostic terrain, agriculture de conservation (3 piliers ACS), biostimulants, agroforesterie, et la trajectoire de transition vers un sol vivant.</p>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1><span class="sv-strate-badge sv-strate-P" role="img" aria-label="Strate Pratiques">P</span> Pratiques</h1>
+      <p class="sv-hero-lede">La strate Pratiques traduit la science en action : diagnostic terrain, agriculture de conservation (3 piliers ACS), biostimulants, agroforesterie, et la trajectoire de transition vers un sol vivant.</p>
 
-    <section class="sv-card sv-section">
-        <h2 id="ouverture">Ouverture</h2>
-        <p class="sv-meta">Le récit de la strate — par où commencer, avant les chapitres qui suivent.</p>
-        <div class="sv-actions">
-          <a class="sv-cta" href="/Publications/liseuse/fiche/341/">Commencer la lecture</a>
-        </div>
-      </section>
-    
-    
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>La science du sol vivant ne sert à rien si personne ne la met en gestes. La strate Pratiques est ce passage à l'acte : elle traduit ce que les strates Sol, Vivant et Humain ont établi, en un métier — celui de l'agriculteur régénérateur. Un métier, pas une recette. Comme l'artisan qui apprend à lire sa matière avant d'outiller, le praticien apprend à lire son sol avant d'agir. C'est le seul axe de la collection où la prescription est légitime.</p>
+</div>
+  </div>
 
-    <section>
-          <h2 id="P1"><a href="/Publications/liseuse/doc/P1/">P1 — Diagnostic du Sol Vivant</a></h2>
-          <p class="sv-meta">24 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/33/">
-                <strong>Biochar, Chitosane et Extraits d&#39;Algues — Biostimulants Sous-couverts</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/70/">
-                <strong>Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S4 · V3 · P3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/77/">
-                <strong>Biochar : architecte de sol (habitat, CEC, carbone stable)</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P2 · S1 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/78/">
-                <strong>Éliciteurs biologiques exogènes : chitosane et oligogalacturonides</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P2 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-                <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · P3 · P4 · P5 · S0 · S1 · S2 · S3 · S4 · V1 · V2 · V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/108/">
-                <strong>‘Faim d’azote’ après apport carboné (immobilisation)</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/111/">
-                <strong>Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · S1 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/114/">
-                <strong>Eh terrain : sondes redox, gradient mV/cm et méthode in situ</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S0 · S1 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/115/">
-                <strong>Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S3 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/116/">
-                <strong>Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · S2 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/121/">
-                <strong>Asphyxie / anaérobie locale (odeurs, horizons réduits)</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S0 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/123/">
-                <strong>Racines superficielles / enracinement bloqué</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S0 · S1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/124/">
-                <strong>Stabilité d’agrégats faible / désagrégation rapide</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S1 · S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/126/">
-                <strong>Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · P3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/135/">
-                <strong>BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/139/">
-                <strong>Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/140/">
-                <strong>Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/153/">
-                <strong>Immunité végétale et ingénierie de la résistance</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/154/">
-                <strong>Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/169/">
-                <strong>Silicium — biostimulant</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-                <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-                <span class="sv-badge">revue_critique</span>
-                <span class="sv-meta"> — aussi dans S0 · S1 · S2 · S3 · S4 · V1 · V2 · H1 · H2 · V3 · H3 · P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-                <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P2 · S1 · V1 · P3 · S0</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/317/">
-                <strong>Odeurs du sol : la signature olfactive du sol vivant</strong>
-                <span class="sv-badge">concept</span>
-                <span class="sv-meta"> — aussi dans P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/319/">
-                <strong>Couleur du sol : le premier diagnostic par le regard</strong>
-                <span class="sv-badge">concept</span>
-                <span class="sv-meta"> — aussi dans S2</span>
-              </a>
-          </div>
-        </section><section>
-          <h2 id="P2"><a href="/Publications/liseuse/doc/P2/">P2 — Agriculture de Conservation</a></h2>
-          <p class="sv-meta">21 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/34/">
-                <strong>Agriculture de Conservation en Climat Méditerranéen et Tropical</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/42/">
-                <strong>Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P3 · S3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/43/">
-                <strong>Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P4 · S4 · F2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/69/">
-                <strong>Couverts végétaux — design, biomasse et services rendus</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/85/">
-                <strong>Thermorégulation édaphique — le sol vivant comme tampon climatique local</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S0 · S1 · P4 · F2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/87/">
-                <strong>Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S1 · S0 · S4 · V2 · P1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/117/">
-                <strong>Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · S3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/127/">
-                <strong>Redondance fonctionnelle et résilience coévolutive (H5/DP4)</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/157/">
-                <strong>Lutte intégrée bio-mimétique 4 piliers : cadre stratégique unifié pour la gestion des bioagresseurs</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/162/">
-                <strong>conductivité hydraulique saturée</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S0 · V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/167/">
-                <strong>allocation C photosynthétique aux exsudats</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/170/">
-                <strong>Carabes</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/191/">
-                <strong>Agronomic and environmental effect of soil conservation management practices in field crops production : Crop yield and soil carbon and nitrogen dynamics</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/214/">
-                <strong>Termination des couverts — leviers mécaniques, biologiques et thermiques</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/215/">
-                <strong>Mélanges multi-espèces de couverts — complémentarité fonctionnelle</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/216/">
-                <strong>Cultures associées (intercropping) — principe, complémentarité et conduite</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P4 · S1 · S4 · V2 · S3 · H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/217/">
-                <strong>Architecture racinaire — levier de design agronomique</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/218/">
-                <strong>Décomposition des résidus — déterminants C/N, lignine, mode d&#39;apport</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/226/">
-                <strong>Biofumigation — chimie volatile des glucosinolates et suppressivité</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/227/">
-                <strong>Allélopathie en agriculture régénérative — chimie inter-spécifique</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/281/">
-                <strong>Récolte de l&#39;eau de ruissellement : techniques de captation du runoff et régénération des sols dégradés en zones arides (zaï, demi-lunes, banquettes, jessour)</strong>
-                <span class="sv-badge">transversale</span>
-                
-              </a>
-          </div>
-        </section><section>
-          <h2 id="P3"><a href="/Publications/liseuse/doc/P3/">P3 — Biostimulants et Fermentations Appliquées</a></h2>
-          <p class="sv-meta">22 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/16/">
-                <strong>Chélation par Acides Aminés — Mécanisme et applications</strong>
-                <span class="sv-badge">technique</span>
-                <span class="sv-meta"> — aussi dans V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/96/">
-                <strong>Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S2 · V1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/98/">
-                <strong>Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/100/">
-                <strong>Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/102/">
-                <strong>Fermentation acétique : KNF-BRV (Brown Rice Vinegar), précurseur des extractions minérales</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/104/">
-                <strong>Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/118/">
-                <strong>Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/134/">
-                <strong>KSB et altération biologique des silicates : acidolyse, chélation et synergie AMF-bactéries</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/142/">
-                <strong>Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/151/">
-                <strong>AOA vs AOB : nitrification archéenne et bactérienne, partage de niche et implications agronomiques</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/152/">
-                <strong>Couplage méthane-fer-soufre : des mécanismes archéens aux applications agronomiques</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/156/">
-                <strong>Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V1 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/159/">
-                <strong>RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V2 · V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/160/">
-                <strong>Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/171/">
-                <strong>vermicompost</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V1 · V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/173/">
-                <strong>Toward a Sustainable Agriculture Through Plant Biostimulants</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/195/">
-                <strong>Chaulage et azote en prairie : interactions sur la minéralisation du carbone</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · P2 · S2 · H1 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/245/">
-                <strong>Thé de compost et extrait de compost : mécanismes d&#39;extraction et efficacité réelle</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/283/">
-                <strong>Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/285/">
-                <strong>Fermentation acétique : l&#39;oxydation incomplète qui conserve — du vin au vinaigre au WCA</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/286/">
-                <strong>Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/288/">
-                <strong>Conservation anaérobie : l&#39;acide et l&#39;anoxie contre la déperdition — de l&#39;ensilage au bokashi</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V3</span>
-              </a>
-          </div>
-        </section><section>
-          <h2 id="P4"><a href="/Publications/liseuse/doc/P4/">P4 — Agroforesterie et Systèmes Pérennes</a></h2>
-          <p class="sv-meta">4 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/37/">
-                <strong>Agroforesterie tempérée — Fonctions sol et productivité système</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans V2 · S3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/137/">
-                <strong>Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/265/">
-                <strong>Agriculture syntropique : succession dirigée et stratification</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/266/">
-                <strong>Pâturage tournant : broutage, exsudation racinaire et pompe à carbone</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S4 · V2</span>
-              </a>
-          </div>
-        </section><section>
-          <h2 id="P5"><a href="/Publications/liseuse/doc/P5/">P5 — La Transition</a></h2>
-          <p class="sv-meta">5 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/38/">
-                <strong>La transition agroécologique — Barrières systémiques et leviers de diffusion</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans F2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/198/">
-                <strong>Regenerative agriculture for sustainable crop productivity: A comprehensive</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/260/">
-                <strong>La transition robuste : une vallée à traverser, quatre âges, trois gestes</strong>
-                
-                <span class="sv-meta"> — aussi dans F2 · P2 · S2 · S4 · F1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-                <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P1 · V1 · P3 · S0 · F2 · H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/310/">
-                <strong>L&#39;ozone troposphérique : un stress oxydant qui atteint le microbiome du sol</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2</span>
-              </a>
-          </div>
+
+
+
+<section id="s1">
+    <h2>Le récit de la strate</h2>
+    <div class="sv-markdown"><p>Le fil de la strate Pratiques tient en un ordre : lire, agir, cheminer. Lire d'abord — le diagnostic. Avant toute décision, on ouvre le sol à la bêche, on observe sa structure, son odeur, ses habitants ; on sonde son potentiel redox de terrain, ce pouls électrique lu au propre comme au millimètre ; on regarde les plantes qui y poussent spontanément — elles disent, mieux qu'une analyse, ce que le sol leur refuse ou leur accorde. Un profil bien lu vaut un protocole : on ne soigne pas sans ausculter. Agir ensuite — l'agriculture de conservation, avec ses trois piliers qui ne tiennent qu'ensemble : couvrir le sol en permanence, diversifier les rotations, réduire le travail du sol. Les biostimulants et les fermentations appliquées viennent en appui, mais avec prudence : les recettes toutes faites, du type JADAM ou KNF, simplifient souvent ce que la biologie a de subtil — un vernis empirique que la fiche dédiée nuance (thermodynamique des fermentations, <a href="/Publications/liseuse/fiche/268/">fiche #268</a>). L'agroforesterie, elle, joue le temps long : des arbres dans les champs, de l'ombre, des racines profondes. Cheminer enfin — la transition. On ne bascule pas d'un modèle à l'autre en un jour : il y a une vallée à traverser, des âges successifs — le cahier (« transition ») en déplie la carte. La frontière est nette : P ne redémontre pas la science, il l'applique — en partenaire d'un vivant qui n'est ni une machine ni un simple support, mais un holobionte : une communauté qui s'organise.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Les concepts clés</h2>
+    <div class="sv-markdown"><ul>
+<li><strong>Le diagnostic</strong> : lire avant d'agir. La bêche, le profil, les sondes redox de terrain — l'auscultation du sol. <em>→ le détail : diagnostic du sol vivant (P1).</em></li>
+<li><strong>Les trois piliers de l'ACS</strong> : le geste central. Couverture permanente, rotation diversifiée, travail du sol réduit — trois piliers qui ne tiennent qu'ensemble. <em>→ le détail : agriculture de conservation (P2, <a href="/Publications/liseuse/fiche/34/">fiche #34</a>).</em></li>
+<li><strong>Les biostimulants</strong> : l'appui, pas la potion magique. Des préparations vivantes à manier avec discernement. <em>→ le détail : biostimulants et fermentations appliquées (P3).</em></li>
+<li><strong>L'agroforesterie</strong> : le geste long. Des arbres dans les champs, pour l'ombre, la profondeur et la diversité. <em>→ le détail : agroforesterie (P4, <a href="/Publications/liseuse/fiche/137/">fiche #137</a>).</em></li>
+<li><strong>La transition</strong> : le cheminement. Une vallée à traverser, des âges successifs — le cahier en porte la carte. <em>→ le détail : cahier « transition », P5.</em></li>
+</ul>
+</div>
+    
+  </section><section id="s3">
+    <h2>Explorer la strate</h2>
+    <div class="sv-markdown"><p>Cinq documents traduisent ce métier, dans l'ordre même du geste : lire, agir, cheminer. P1 d'abord — le diagnostic : on apprend à lire le sol avant d'y toucher (un geste sans lecture est une loterie). Puis P2, P3 et P4 — l'agir : l'agriculture de conservation, les biostimulants, l'agroforesterie, trois façons complémentaires de cultiver le vivant. P5 enfin — la transition : la trajectoire qui relie tout le reste, du premier geste au nouveau régime. Chaque document renvoie aux fiches qui portent la preuve ; la science elle-même, on l'a lue dans les strates Sol, Vivant et Humain.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>La pratique régénératrice n'est pas une liste de recettes, mais un métier : lire le sol, agir en respectant le vivant, cheminer dans la durée. C'est la seule strate qui prescrit, parce que c'est la seule qui agit — humblement, en partenaire du vivant plutôt qu'en maître d'une machine.</p>
+</div>
+    
+  </section>
         </section>
 
-    
-    <nav class="sv-pager" aria-label="Strates">
-        <span></span>
-        <a class="sv-pager-next" href="/Publications/liseuse/strate/H/" title="H — Humain">
-          <span class="sv-pager-dir">Strate suivante →</span>
+      
+      <nav class="sv-pager" aria-label="Strates">
+          <span></span>
+          <a class="sv-pager-next" href="/Publications/liseuse/strate/H/" title="H — Humain">
+            <span class="sv-pager-dir">Strate suivante →</span>
+          </a>
+        </nav>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="strate-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Strate P — cahiers (5)</summary>
+    <nav aria-label="Strate P — cahiers (5)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P1/" title="P1 — Diagnostic du Sol Vivant" data-id="doc-P1">
+          <span class="sv-navlist-title">P1 — Diagnostic du Sol Vivant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P2/" title="P2 — Agriculture de Conservation" data-id="doc-P2">
+          <span class="sv-navlist-title">P2 — Agriculture de Conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P3/" title="P3 — Biostimulants et Fermentations Appliquées" data-id="doc-P3">
+          <span class="sv-navlist-title">P3 — Biostimulants et Fermentations Appliquées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P4/" title="P4 — Agroforesterie et Systèmes Pérennes" data-id="doc-P4">
+          <span class="sv-navlist-title">P4 — Agroforesterie et Systèmes Pérennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P5/" title="P5 — La Transition" data-id="doc-P5">
+          <span class="sv-navlist-title">P5 — La Transition</span>
         </a>
-      </nav>
-  </article>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "strate-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/171/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -46,12 +46,10 @@
                 <a href="/Publications/liseuse/doc/F1/">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/F2/">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -78,7 +76,7 @@
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -206,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -220,66 +218,417 @@
       <a href="/Publications/liseuse/terme/1404/">économie de l&#39;environnement</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-F2">F2</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-F2">F2</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">Coûts cachés</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>Coûts cachés</h1>
-      <astro-island uid="Z13jhO1" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;171&quot;],&quot;label&quot;:[0,&quot;Coûts cachés&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>hidden costs</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>Coûts cachés</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>hidden costs</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Coûts environnementaux et sociaux associés à la production ou à la consommation d'un bien qui ne sont pas reflétés dans son prix de marché conventionnel (Bohas, 2013; Lolo, 2019). Ces coûts, souvent qualifiés d'externalités négatives, incluent les dommages causés à la santé, au climat ou à la biodiversité, et sont généralement supportés par la collectivité plutôt que par le producteur (Dudoy-Pichery, 2012; Nougarol, 2018)</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Coûts environnementaux et sociaux associés à la production ou à la consommation d&#39;un bien qui ne sont pas reflétés dans son prix de marché conventionnel (Bohas, 2013; Lolo, 2019). Ces coûts, souvent qualifiés d&#39;externalités négatives, incluent les dommages causés à la santé, au climat ou à la biodiversité, et sont généralement supportés par la collectivité plutôt que par le producteur (Dudoy-Pichery, 2012; Nougarol, 2018)…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-F2">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/5951/" title="Coût de maintien">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/584/" title="crédit carbone">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> Coûts externes, Externalités négatives, Coût réel, External costs, Negative externalities, True cost</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> Coûts externes, Externalités négatives, Coût réel, External costs, Negative externalities, True cost</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1404/">économie de l&#39;environnement</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1404/">économie de l&#39;environnement</a></li>
-        </ul>
-      </section>
+      
 
-    
+      <section class="sv-card sv-related">
+          <h2>Termes liés (5)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1913/">Comptabilité environnementale</a></li><li><a href="/Publications/liseuse/terme/178/">Anthropocène</a></li><li><a href="/Publications/liseuse/terme/2792/">Prix réel</a></li><li><a href="/Publications/liseuse/terme/163/">EROI</a></li><li><a href="/Publications/liseuse/terme/167/">externalités</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (5)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1913/">Comptabilité environnementale</a></li><li><a href="/Publications/liseuse/terme/178/">Anthropocène</a></li><li><a href="/Publications/liseuse/terme/2792/">Prix réel</a></li><li><a href="/Publications/liseuse/terme/163/">EROI</a></li><li><a href="/Publications/liseuse/terme/167/">externalités</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Utilisé dans (6 fiches)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/fiche/80/">Cascade des coûts cachés — du direct au civilisationnel</a></li><li><a href="/Publications/liseuse/fiche/94/">Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</a></li><li><a href="/Publications/liseuse/fiche/350/">Élevages résilients herbagers — chantier 15 Shift PREF 2026</a></li><li><a href="/Publications/liseuse/fiche/41/">Fragilité systémique fossile et transition robuste (méthode Shift PREF)</a></li><li><a href="/Publications/liseuse/fiche/253/">Le régime fixe les rôles — du sol vivant à la plante saine</a></li><li><a href="/Publications/liseuse/fiche/321/">Volet pédagogique — L&#39;Économie du Vivant</a></li>
+          </ul>
+        </section>
+    </article>
 
-    <section class="sv-card sv-related">
-        <h2>Utilisé dans (6 fiches)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/fiche/80/">Cascade des coûts cachés — du direct au civilisationnel</a></li><li><a href="/Publications/liseuse/fiche/94/">Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</a></li><li><a href="/Publications/liseuse/fiche/350/">Élevages résilients herbagers — chantier 15 Shift PREF 2026</a></li><li><a href="/Publications/liseuse/fiche/41/">Fragilité systémique fossile et transition robuste (méthode Shift PREF)</a></li><li><a href="/Publications/liseuse/fiche/253/">Le régime fixe les rôles — du sol vivant à la plante saine</a></li><li><a href="/Publications/liseuse/fiche/321/">Volet pédagogique — L&#39;Économie du Vivant</a></li>
-        </ul>
-      </section>
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="Z13jhO1" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;171&quot;],&quot;label&quot;:[0,&quot;Coûts cachés&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — F2 (159)</summary>
+    <nav aria-label="Termes — F2 (159)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4303/" title="accaparement des terres" data-id="4303">
+          <span class="sv-navlist-title">accaparement des terres</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6375/" title="action collective" data-id="6375">
+          <span class="sv-navlist-title">action collective</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7950/" title="agnotologie" data-id="7950">
+          <span class="sv-navlist-title">agnotologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/180/" title="Agriculture Organique Régénératrice" data-id="180">
+          <span class="sv-navlist-title">Agriculture Organique Régénératrice</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/533/" title="agroécologie" data-id="533">
+          <span class="sv-navlist-title">agroécologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6385/" title="aides directes" data-id="6385">
+          <span class="sv-navlist-title">aides directes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7789/" title="alerte éthique" data-id="7789">
+          <span class="sv-navlist-title">alerte éthique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6394/" title="amortissement" data-id="6394">
+          <span class="sv-navlist-title">amortissement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6395/" title="amortissement écologique" data-id="6395">
+          <span class="sv-navlist-title">amortissement écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6402/" title="annotation" data-id="6402">
+          <span class="sv-navlist-title">annotation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/178/" title="Anthropocène" data-id="178">
+          <span class="sv-navlist-title">Anthropocène</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/170/" title="Antifragilité" data-id="170">
+          <span class="sv-navlist-title">Antifragilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6500/" title="bénéfices immatériels" data-id="6500">
+          <span class="sv-navlist-title">bénéfices immatériels</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4786/" title="Bio-ontologie" data-id="4786">
+          <span class="sv-navlist-title">Bio-ontologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/375/" title="bioéconomie circulaire" data-id="375">
+          <span class="sv-navlist-title">bioéconomie circulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/367/" title="burnout planétaire" data-id="367">
+          <span class="sv-navlist-title">burnout planétaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7897/" title="cadre d'évaluation" data-id="7897">
+          <span class="sv-navlist-title">cadre d&#39;évaluation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4788/" title="Cadre philosophique des sciences" data-id="4788">
+          <span class="sv-navlist-title">Cadre philosophique des sciences</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6503/" title="capacité d'absorption" data-id="6503">
+          <span class="sv-navlist-title">capacité d&#39;absorption</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/168/" title="Capital biologique" data-id="168">
+          <span class="sv-navlist-title">Capital biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6506/" title="capital humain" data-id="6506">
+          <span class="sv-navlist-title">capital humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4337/" title="capital social" data-id="4337">
+          <span class="sv-navlist-title">capital social</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7973/" title="centre de données" data-id="7973">
+          <span class="sv-navlist-title">centre de données</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6541/" title="changement radical" data-id="6541">
+          <span class="sv-navlist-title">changement radical</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6584/" title="communauté végétale" data-id="6584">
+          <span class="sv-navlist-title">communauté végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5937/" title="Compensation carbone" data-id="5937">
+          <span class="sv-navlist-title">Compensation carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/364/" title="compromis performance/robustesse" data-id="364">
+          <span class="sv-navlist-title">compromis performance/robustesse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/639/" title="Comptabilité en triple capital" data-id="639">
+          <span class="sv-navlist-title">Comptabilité en triple capital</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5371/" title="comptabilité socio-environnementale" data-id="5371">
+          <span class="sv-navlist-title">comptabilité socio-environnementale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4349/" title="conditionnalité sociale" data-id="4349">
+          <span class="sv-navlist-title">conditionnalité sociale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6604/" title="confiance" data-id="6604">
+          <span class="sv-navlist-title">confiance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6605/" title="conformité réglementaire" data-id="6605">
+          <span class="sv-navlist-title">conformité réglementaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5377/" title="contexte systémique" data-id="5377">
+          <span class="sv-navlist-title">contexte systémique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/369/" title="contreperformances du vivant" data-id="369">
+          <span class="sv-navlist-title">contreperformances du vivant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/371/" title="contreperformances sélectionnées" data-id="371">
+          <span class="sv-navlist-title">contreperformances sélectionnées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6622/" title="contrôle de gestion" data-id="6622">
+          <span class="sv-navlist-title">contrôle de gestion</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5951/" title="Coût de maintien" data-id="5951">
+          <span class="sv-navlist-title">Coût de maintien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/171/" title="Coûts cachés" data-id="171" aria-current="page">
+          <span class="sv-navlist-title">Coûts cachés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/584/" title="crédit carbone" data-id="584">
+          <span class="sv-navlist-title">crédit carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5382/" title="crise écologique" data-id="5382">
+          <span class="sv-navlist-title">crise écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/373/" title="culture de la variabilité" data-id="373">
+          <span class="sv-navlist-title">culture de la variabilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6714/" title="défaillance du marché" data-id="6714">
+          <span class="sv-navlist-title">défaillance du marché</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4353/" title="dette biologique (du sol)" data-id="4353">
+          <span class="sv-navlist-title">dette biologique (du sol)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4354/" title="dette hydrique" data-id="4354">
+          <span class="sv-navlist-title">dette hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5413/" title="développement agricole" data-id="5413">
+          <span class="sv-navlist-title">développement agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2409/" title="développement durable" data-id="2409">
+          <span class="sv-navlist-title">développement durable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5396/" title="donnée numérique" data-id="5396">
+          <span class="sv-navlist-title">donnée numérique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5406/" title="dynamique territoriale" data-id="5406">
+          <span class="sv-navlist-title">dynamique territoriale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7828/" title="écologie des machines" data-id="7828">
+          <span class="sv-navlist-title">écologie des machines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2920/" title="Économie agricole" data-id="2920">
+          <span class="sv-navlist-title">Économie agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2412/" title="économie circulaire" data-id="2412">
+          <span class="sv-navlist-title">économie circulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6735/" title="effet cumulatif" data-id="6735">
+          <span class="sv-navlist-title">effet cumulatif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5976/" title="Effondrement" data-id="5976">
+          <span class="sv-navlist-title">Effondrement</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7970/" title="énergie nette" data-id="7970">
+          <span class="sv-navlist-title">énergie nette</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7810/" title="Équilibre de marché" data-id="7810">
+          <span class="sv-navlist-title">Équilibre de marché</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7863/" title="équité sociale" data-id="7863">
+          <span class="sv-navlist-title">équité sociale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5984/" title="Ergonomie" data-id="5984">
+          <span class="sv-navlist-title">Ergonomie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/163/" title="EROI" data-id="163">
+          <span class="sv-navlist-title">EROI</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/1359/" title="EROI agricole" data-id="1359">
+          <span class="sv-navlist-title">EROI agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5972/" title="EROI calcul" data-id="5972">
+          <span class="sv-navlist-title">EROI calcul</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/166/" title="Esclaves énergétiques" data-id="166">
+          <span class="sv-navlist-title">Esclaves énergétiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6772/" title="essai-erreur" data-id="6772">
+          <span class="sv-navlist-title">essai-erreur</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4927/" title="Éthique de la recherche" data-id="4927">
+          <span class="sv-navlist-title">Éthique de la recherche</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4381/" title="étiquetage du vrai prix" data-id="4381">
+          <span class="sv-navlist-title">étiquetage du vrai prix</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7877/" title="évaluation de la performance" data-id="7877">
+          <span class="sv-navlist-title">évaluation de la performance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4397/" title="évaluation multidimensionnelle des aliments" data-id="4397">
+          <span class="sv-navlist-title">évaluation multidimensionnelle des aliments</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6779/" title="exode rural" data-id="6779">
+          <span class="sv-navlist-title">exode rural</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/167/" title="externalités" data-id="167">
+          <span class="sv-navlist-title">externalités</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6792/" title="fabrication-falsification-plagiat" data-id="6792">
+          <span class="sv-navlist-title">fabrication-falsification-plagiat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6828/" title="formation éthique" data-id="6828">
+          <span class="sv-navlist-title">formation éthique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4884/" title="Gestion des connaissances" data-id="4884">
+          <span class="sv-navlist-title">Gestion des connaissances</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6854/" title="gestion du travail" data-id="6854">
+          <span class="sv-navlist-title">gestion du travail</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6864/" title="gouvernance de la recherche" data-id="6864">
+          <span class="sv-navlist-title">gouvernance de la recherche</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6872/" title="groupe fonctionnel végétal" data-id="6872">
+          <span class="sv-navlist-title">groupe fonctionnel végétal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/165/" title="Haber-Bosch" data-id="165">
+          <span class="sv-navlist-title">Haber-Bosch</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/179/" title="Homéostasie du sol" data-id="179">
+          <span class="sv-navlist-title">Homéostasie du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6029/" title="Hygiène industrielle" data-id="6029">
+          <span class="sv-navlist-title">Hygiène industrielle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6037/" title="Innovation" data-id="6037">
+          <span class="sv-navlist-title">Innovation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6038/" title="Intensification durable" data-id="6038">
+          <span class="sv-navlist-title">Intensification durable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4890/" title="Interdépendance" data-id="4890">
+          <span class="sv-navlist-title">Interdépendance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4415/" title="internalisation des externalités" data-id="4415">
+          <span class="sv-navlist-title">internalisation des externalités</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7006/" title="investissement direct à l'étranger" data-id="7006">
+          <span class="sv-navlist-title">investissement direct à l&#39;étranger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/637/" title="Label Bas Carbone" data-id="637">
+          <span class="sv-navlist-title">Label Bas Carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7022/" title="lanceur d'alerte" data-id="7022">
+          <span class="sv-navlist-title">lanceur d&#39;alerte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7038/" title="lock-in carbone" data-id="7038">
+          <span class="sv-navlist-title">lock-in carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/173/" title="Loi de la Trophobiose" data-id="173">
+          <span class="sv-navlist-title">Loi de la Trophobiose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/174/" title="Loi du Minimum" data-id="174">
+          <span class="sv-navlist-title">Loi du Minimum</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7056/" title="macrophyte" data-id="7056">
+          <span class="sv-navlist-title">macrophyte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/365/" title="maladaptation" data-id="365">
+          <span class="sv-navlist-title">maladaptation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6071/" title="Marché agricole" data-id="6071">
+          <span class="sv-navlist-title">Marché agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5105/" title="marché du carbone" data-id="5105">
+          <span class="sv-navlist-title">marché du carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4439/" title="marginalisation rurale" data-id="4439">
+          <span class="sv-navlist-title">marginalisation rurale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7135/" title="méconduite scientifique" data-id="7135">
+          <span class="sv-navlist-title">méconduite scientifique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7136/" title="médecine du travail" data-id="7136">
+          <span class="sv-navlist-title">médecine du travail</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3628/" title="mesure-notification-vérification" data-id="3628">
+          <span class="sv-navlist-title">mesure-notification-vérification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7145/" title="métabolisme circulaire" data-id="7145">
+          <span class="sv-navlist-title">métabolisme circulaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6099/" title="Métabolisme sociétal" data-id="6099">
+          <span class="sv-navlist-title">Métabolisme sociétal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4899/" title="Métadonnée" data-id="4899">
+          <span class="sv-navlist-title">Métadonnée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4450/" title="migrations climatiques" data-id="4450">
+          <span class="sv-navlist-title">migrations climatiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7105/" title="mine urbaine" data-id="7105">
+          <span class="sv-navlist-title">mine urbaine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4679/" title="Mise sur le marché" data-id="4679">
+          <span class="sv-navlist-title">Mise sur le marché</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4894/" title="Modèle ESR" data-id="4894">
+          <span class="sv-navlist-title">Modèle ESR</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/372/" title="monde fluctuant" data-id="372">
+          <span class="sv-navlist-title">monde fluctuant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/215/" title="néguentropie" data-id="215">
+          <span class="sv-navlist-title">néguentropie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6112/" title="Objectifs stratégiques" data-id="6112">
+          <span class="sv-navlist-title">Objectifs stratégiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4682/" title="Offre et demande" data-id="4682">
+          <span class="sv-navlist-title">Offre et demande</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6114/" title="Ontologie" data-id="6114">
+          <span class="sv-navlist-title">Ontologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6115/" title="Optimisation fragile" data-id="6115">
+          <span class="sv-navlist-title">Optimisation fragile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6116/" title="Optimisation sous contrainte" data-id="6116">
+          <span class="sv-navlist-title">Optimisation sous contrainte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6128/" title="PAC 2023" data-id="6128">
+          <span class="sv-navlist-title">PAC 2023</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/176/" title="paradigme régénératif" data-id="176">
+          <span class="sv-navlist-title">paradigme régénératif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4477/" title="particules fines PM2.5" data-id="4477">
+          <span class="sv-navlist-title">particules fines PM2.5</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7392/" title="pénibilité" data-id="7392">
+          <span class="sv-navlist-title">pénibilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/363/" title="Piège de la performance" data-id="363">
+          <span class="sv-navlist-title">Piège de la performance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/638/" title="Politique européenne de l’agriculture" data-id="638">
+          <span class="sv-navlist-title">Politique européenne de l’agriculture</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5686/" title="Qualité et sécurité" data-id="5686">
+          <span class="sv-navlist-title">Qualité et sécurité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6199/" title="Quotas d'émission" data-id="6199">
+          <span class="sv-navlist-title">Quotas d&#39;émission</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7418/" title="reconversion agricole" data-id="7418">
+          <span class="sv-navlist-title">reconversion agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7472/" title="régime métabolique minier" data-id="7472">
+          <span class="sv-navlist-title">régime métabolique minier</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5729/" title="réglementation agricole" data-id="5729">
+          <span class="sv-navlist-title">réglementation agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7492/" title="réseau social" data-id="7492">
+          <span class="sv-navlist-title">réseau social</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/177/" title="Résilience" data-id="177">
+          <span class="sv-navlist-title">Résilience</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7499/" title="résilience de l'agrosystème" data-id="7499">
+          <span class="sv-navlist-title">résilience de l&#39;agrosystème</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/459/" title="résistance" data-id="459">
+          <span class="sv-navlist-title">résistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7443/" title="revenu" data-id="7443">
+          <span class="sv-navlist-title">revenu</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6224/" title="Risques systémiques" data-id="6224">
+          <span class="sv-navlist-title">Risques systémiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6226/" title="Robustesse fragile" data-id="6226">
+          <span class="sv-navlist-title">Robustesse fragile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4914/" title="Santé au travail" data-id="4914">
+          <span class="sv-navlist-title">Santé au travail</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4915/" title="Saut technologique" data-id="4915">
+          <span class="sv-navlist-title">Saut technologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7516/" title="savoir explicite" data-id="7516">
+          <span class="sv-navlist-title">savoir explicite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7517/" title="savoir tacite" data-id="7517">
+          <span class="sv-navlist-title">savoir tacite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7520/" title="schéma de données" data-id="7520">
+          <span class="sv-navlist-title">schéma de données</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6254/" title="Scope 1" data-id="6254">
+          <span class="sv-navlist-title">Scope 1</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6255/" title="Scope 2" data-id="6255">
+          <span class="sv-navlist-title">Scope 2</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/164/" title="Scope 3" data-id="164">
+          <span class="sv-navlist-title">Scope 3</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7634/" title="sécurité agricole" data-id="7634">
+          <span class="sv-navlist-title">sécurité agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4918/" title="Sémantique scientifique" data-id="4918">
+          <span class="sv-navlist-title">Sémantique scientifique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/366/" title="sobriété comme produit de sortie" data-id="366">
+          <span class="sv-navlist-title">sobriété comme produit de sortie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/370/" title="sobriété récupérée" data-id="370">
+          <span class="sv-navlist-title">sobriété récupérée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5736/" title="socio-économie" data-id="5736">
+          <span class="sv-navlist-title">socio-économie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6280/" title="Subventions agricoles" data-id="6280">
+          <span class="sv-navlist-title">Subventions agricoles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4528/" title="subventions cachées (aux intrants)" data-id="4528">
+          <span class="sv-navlist-title">subventions cachées (aux intrants)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7600/" title="surplus collectif" data-id="7600">
+          <span class="sv-navlist-title">surplus collectif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6298/" title="Système socio-écologique" data-id="6298">
+          <span class="sv-navlist-title">Système socio-écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/374/" title="technodiversité" data-id="374">
+          <span class="sv-navlist-title">technodiversité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4919/" title="Temps de travail" data-id="4919">
+          <span class="sv-navlist-title">Temps de travail</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4707/" title="Traçabilité" data-id="4707">
+          <span class="sv-navlist-title">Traçabilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7710/" title="transfert de connaissances" data-id="7710">
+          <span class="sv-navlist-title">transfert de connaissances</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6314/" title="Transfert de technologie" data-id="6314">
+          <span class="sv-navlist-title">Transfert de technologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/377/" title="transformation par les marges" data-id="377">
+          <span class="sv-navlist-title">transformation par les marges</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7717/" title="transition économique" data-id="7717">
+          <span class="sv-navlist-title">transition économique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7940/" title="transition robuste" data-id="7940">
+          <span class="sv-navlist-title">transition robuste</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4549/" title="tyrannie des petites décisions" data-id="4549">
+          <span class="sv-navlist-title">tyrannie des petites décisions</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7756/" title="valeur agronomique" data-id="7756">
+          <span class="sv-navlist-title">valeur agronomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4709/" title="Valeur ajoutée" data-id="4709">
+          <span class="sv-navlist-title">Valeur ajoutée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7758/" title="valeur de legs" data-id="7758">
+          <span class="sv-navlist-title">valeur de legs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4183/" title="valeurs non-marchandes" data-id="4183">
+          <span class="sv-navlist-title">valeurs non-marchandes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7770/" title="verdissement de la PAC" data-id="7770">
+          <span class="sv-navlist-title">verdissement de la PAC</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7783/" title="vocabulaire contrôlé" data-id="7783">
+          <span class="sv-navlist-title">vocabulaire contrôlé</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -289,6 +638,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

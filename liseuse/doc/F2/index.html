@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/F2/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -46,143 +46,10 @@
                 <a href="/Publications/liseuse/doc/F1/">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/F2/" aria-current="page">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/321/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/18/">
-                          Fixation Biologique de l&#39;Azote — Le Modèle Brésilien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/38/">
-                          La transition agroécologique — Barrières systémiques et leviers de diffusion
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/41/">
-                          Fragilité systémique fossile et transition robuste (méthode Shift PREF)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/43/">
-                          Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/57/">
-                          Cascade des conséquences — de la parcelle à la biosphère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/61/">
-                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/64/">
-                          Carences minérales silencieuses — de l appauvrissement du sol à la santé publique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/71/">
-                          Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/72/">
-                          Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/75/">
-                          Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/80/">
-                          Cascade des coûts cachés — du direct au civilisationnel
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/84/">
-                          Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/85/">
-                          Thermorégulation édaphique — le sol vivant comme tampon climatique local
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/94/">
-                          Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/113/">
-                          Antifragilité : stress modéré → diversification de l&#39;hologénome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/119/">
-                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/149/">
-                          Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/150/">
-                          Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/222/">
-                          Compromis performance-robustesse et antifragilité — cadre Hamant-Taleb
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/233/">
-                          Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/251/">
-                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/254/">
-                          Les fils rouges du sol vivant — thèses transversales et renversements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/259/">
-                          Les esclaves énergétiques : une ampoule, mille bras, une facture cachée
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/260/">
-                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/355/">
-                          Qui finance le savoir ? Asymétrie des moyens et production de l&#39;ignorance en agriculture
-                        </a>
-                      </li>
-                  </ul>
               </li>
           </ul>
       </li><li class>
@@ -337,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -352,166 +219,185 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>F2 — L&#39;Économie du Vivant</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>F2 — L&#39;Économie du Vivant</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 32 textes — l'ouverture, puis 31 fiches.</p>
+      <p class="sv-meta">
+        32 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/321/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/F2/integral/">
-            <strong>Le document F2 intégral</strong>
-            <p class="sv-meta">Le récit complet — 10 803 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Toute exploitation tient des comptes — mais l'agriculture moderne en tient de faux. Elle inscrit à l'actif le rendement et au passif le seul prix des intrants, et laisse hors bilan l'essentiel : l'épuisement du sol, la dette énergétique, les coûts que la société paie à sa place. Ce volet ouvre le grand livre des Fondements à la page du bilan : il inventorie ce qui vaut, ce qui coûte, et ce que serait une comptabilité honnête. Garde-fou, une fois : le sol n'est pas un actif ordinaire, un stock inerte qu'on amortit — c'est un holobionte, une communauté vivante, et c'est précisément cela qui le rend si difficile à comptabiliser. Lisons ce bilan.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (31)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/18/">
-              <strong>Fixation Biologique de l&#39;Azote — Le Modèle Brésilien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la Fixation Biologique de l&#39;Azote dans la culture du soja au Brésil, un pilier techn…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-              <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la coévolution plante-microbe comme levier fondamental pour la transition vers une agriculture régénérative et résilient…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/38/">
-              <strong>La transition agroécologique — Barrières systémiques et leviers de diffusion</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La transition agroécologique ne se limite pas à une simple modification des techniques de production ; elle constitue un changement de parad…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/41/">
-              <strong>Fragilité systémique fossile et transition robuste (méthode Shift PREF)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Nos sociétés ont mobilisé une armée invisible d&#39;esclaves énergétiques fossiles qui fait tourner tous leurs secteurs — mobilité, industrie, b…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/43/">
-              <strong>Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">| Pratique régénérative | Taux moyen (Mg C ha⁻¹ an⁻¹) | Niveau de preuve scientifique |
-|---|---|---|
-| Couverts végétaux seuls | 0,32 à 0,4…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/57/">
-              <strong>Cascade des conséquences — de la parcelle à la biosphère</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la « cascade de conséquences » générée par les systèmes agricoles intensifs. Loin d&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/61/">
-              <strong>Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce travail a permis de démontrer que la vulnérabilité des cultures aux ravageurs n&#39;est pas une fatalité biologique, mais le résultat d&#39;un dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/64/">
-              <strong>Carences minérales silencieuses — de l appauvrissement du sol à la santé publique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Objectif : Cette étude analyse les mécanismes complexes et multidimensionnels menant aux « carences minérales silencieuses » (ou faim cachée…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/71/">
-              <strong>Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pompe oxalate-carbonate représente un mécanisme biogéochimique de séquestration du carbone inorganique capable de transformer le CO₂ atmo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/72/">
-              <strong>Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le passage de l&#39;étape de &quot;Marginalisation&quot; à celle de &quot;l&#39;Effondrement&quot; (voir Section 3) n&#39;est pas dicté par le manque de charrues ou d&#39;engra…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/75/">
-              <strong>Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le déploiement du Carbon Farming et du Label Bas Carbone en France et en Europe marque une transition majeure vers une agriculture axée sur …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/80/">
-              <strong>Cascade des coûts cachés — du direct au civilisationnel</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la &quot;cascade des coûts cachés&quot; des systèmes agroalimentaires, structurée de l&#39;échelle…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/84/">
-              <strong>Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne repose sur le procédé Haber-Bosch, une infrastructure énergétique massive responsable de 1,2 % à 1,8 % des émissions m…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/85/">
-              <strong>Thermorégulation édaphique — le sol vivant comme tampon climatique local</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse le rôle stratégique du sol vivant en tant que régulateur thermique, un service écosystémique essentiel pour la résilienc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/92/">
-              <strong>Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’altération forcée des roches est devenue une technologie clé pour atteindre les objectifs de neutralité carbone (Hkaung et al., 2025). Le …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/94/">
-              <strong>Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse la dépendance structurelle de l&#39;agriculture aux énergies fossiles à travers le prisme des « esclaves énergétiques », un …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/113/">
-              <strong>Antifragilité : stress modéré → diversification de l&#39;hologénome</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La transition vers une agriculture régénérative marque le passage d&#39;un paradigme de robustesse (résister au stress) à celui d&#39;antifragilité,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/">
-              <strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse exhaustive des connaissances actuelles sur les archées Asgard et leur rôle fondamental dans l&#39;eucaryogenès…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/149/">
-              <strong>Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le modèle brésilien de fixation biologique de l&#39;azote pour la culture du soja s&#39;est imposé comme une référence mondiale de souveraineté biot…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/150/">
-              <strong>Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La quête d&#39;autonomie en fertilisation constitue désormais un impératif de sécurité nationale, dicté par une vulnérabilité structurelle aux c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/222/">
-              <strong>Compromis performance-robustesse et antifragilité — cadre Hamant-Taleb</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente un cadre conceptuel novateur visant à transcender les modèles de performance linéaire pour intégrer les principes de ro…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/233/">
-              <strong>Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document démontre que le système alimentaire mondial n&#39;est plus seulement menacé par des crises conjoncturelles, mais par une fragilité s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/251/">
-              <strong>Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne est confrontée à une dépendance énergétique critique : la synthèse industrielle de l&#39;azote (procédé Haber-Bosch) mobil…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/">
-              <strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Trois fils rouges traversent l&#39;ouvrage : (1) gouvernance biologique — le microbiome structure la MO, pas l&#39;inverse ; (2) coévolution holobio…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/259/">
-              <strong>Les esclaves énergétiques : une ampoule, mille bras, une facture cachée</strong>
-              
-              <p class="sv-meta">Un être humain qui travaille dur développe ~100 W de puissance mécanique. Le tracteur le plus vendu, 134 chevaux, délivre ~100 000 W — l&#39;équ…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/260/">
-              <strong>La transition robuste : une vallée à traverser, quatre âges, trois gestes</strong>
-              
-              <p class="sv-meta">La transition vers le sol vivant n&#39;est pas un interrupteur mais une vallée à traverser. Quatre âges : (1) sevrage (0-3 ans) — le sol dépenda…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-              <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-              
-              <p class="sv-meta">Cinq réflexes pour ne pas se faire piéger en agriculture régénératrice : (1) chercher d&#39;abord ce que le vivant construit — partir du moteur,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/">
-              <strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/355/">
-              <strong>Qui finance le savoir ? Asymétrie des moyens et production de l&#39;ignorance en agriculture</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La formule « la littérature statue » masque une asymétrie : la recherche agricole a verrouillé la génétique au détriment de l&#39;agroécologie (…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (160)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Le coût réel de l&#39;agriculture industrielle</h2>
+    <div class="sv-markdown"><p>L'agriculture industrielle a un prix que son propre bilan n'affiche pas. Ce qu'elle consomme — énergie fossile, engrais de synthèse, pesticides — est facturé à l'exploitant ; mais ce qu'elle détruit — la fertilité, la biodiversité, la santé des sols et des hommes — est laissé hors des livres, et payé par la collectivité. On parle d'économie « minière » : un système qui extrait plus qu'il ne renouvelle, et présente cette extraction comme un profit (<a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Le coût réel n'est donc pas le coût affiché : entre les deux s'ouvre un abîme comptable que ce volet entreprend d'explorer, ligne par ligne.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Les esclaves énergétiques</h2>
+    <div class="sv-markdown"><p>La première ligne du bilan, c'est l'énergie. Pour labourer, moissonner, fabriquer l'azote et transporter, l'agriculture moderne a remplacé la force humaine par des machines et des intrants qui brûlent du fossile. Pour rendre cette dépendance visible, on a inventé une unité : l'esclave énergétique, la quantité d'énergie qu'il faut pour remplacer le travail d'un humain — un tracteur de l'ordre de 130 chevaux en vaut environ 250 en moyenne — et jusqu'à un millier en pointe (ordre de grandeur — <a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Le concept est développé dans le cahier (les esclaves énergétiques, une ampoule mille bras) ; ici, retenons sa portée comptable : derrière chaque calorie produite se cache une armée silencieuse d'esclaves fossiles, dont la facture n'apparaît nulle part.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>La comptabilité des externalités</h2>
+    <div class="sv-markdown"><p>La deuxième ligne, ce sont les externalités — ces coûts qu'une activité impose à d'autres sans les payer. La comptabilité en coût réel, le True Cost Accounting, cherche à les chiffrer : dépollution de l'eau, impacts sanitaires des pesticides, perte de biodiversité (<a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Le cadre est récent, mais le constat est lourd : les coûts cachés du système alimentaire mondial atteignent l'ordre de 20 000 milliards de dollars, bien au-delà de la valeur marchande des aliments eux-mêmes (ordre de grandeur — <a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Autrement dit, nous payons deux fois notre nourriture — une fois à la caisse, une fois en santé dégradée et en milieux abîmés. Une comptabilité honnête ferait apparaître cette seconde facture.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>La comptabilité incomplète</h2>
+    <div class="sv-markdown"><p>Pourquoi cette facture reste-t-elle invisible ? Parce que la comptabilité classique ne sait pas lire le vivant. Elle valorise ce qui s'achète et se vend, mais reste muette devant ce qui s'entretient — un sol vivant, un cycle de l'eau, une communauté microbienne. L'exemple chiffré en dit long : une exploitation légumière intensive peut générer des externalités négatives de plusieurs centaines d'euros par hectare, qu'aucun compte d'exploitation n'enregistre (ordre de grandeur — <a href="/Publications/liseuse/fiche/94/">fiche #94</a>). La comptabilité n'est pas neutre : en ignorant le vivant, elle le rend invisible, donc dispensable. C'est cette cécité, plus que la malveillance, qui a permis l'épuisement méthodique du capital.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Le capital biologique</h2>
+    <div class="sv-markdown"><p>Car il y a bien un capital, et il a un nom : le capital biologique. Ce n'est pas une métaphore — c'est le carbone organique du sol, cette fertilité vivante accumulée par le temps long que le volet F1 vient de dérouler (<a href="/Publications/liseuse/fiche/94/">fiche #94</a>). En France, hors prairies permanentes, les sols cultivés déstockent massivement ce carbone — de l'ordre de 170 kilos par hectare et par an (ordre de grandeur — <a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Chaque année, le capital biologique se vide un peu plus, et l'agriculture « solaire », qui renouvelait la matière organique, cède la place à une économie minière qui consomme son propre stock. C'est la ligne la plus grave du bilan : on vit sur le capital, et on l'appelle revenu.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Transitions</h2>
+    <div class="sv-markdown"><p>Que serait la transition, vue du bilan ? Non pas un renoncement, mais une substitution d'actifs : remplacer les esclaves énergétiques par le capital biologique, la fertilité achetée par la fertilité entretenue (<a href="/Publications/liseuse/fiche/94/">fiche #94</a>). Restaurer le carbone du sol, c'est reconstituer le capital ; réduire la mécanisation, c'est réduire la dette fossile ; passer au biocontrôle, c'est couper la dépendance aux intrants. La dimension agronomique de ce cheminement — la vallée à traverser, les âges successifs — appartient au cahier (la transition robuste) ; ici, restons sur le registre : une transition, c'est un bilan qu'on redresse, en changeant ce que l'on compte et ce que l'on paie.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>L&#39;antifragilité comme horizon économique</h2>
+    <div class="sv-markdown"><p>Le but de ce redressement n'est pas seulement la résilience — survivre aux chocs — mais l'antifragilité : tirer profit des perturbations, devenir plus fort à chaque crise. Une exploitation qui reconstruit son capital biologique s'enrichit de ce qui affaiblit l'agriculture minière : la sécheresse, la volatilité des prix de l'énergie, la raréfaction des intrants. Le stress modéré, qui tue un système fragile, muscle un système antifragile. Cet horizon économique n'a pas encore de fiche dédiée dans ces pages — il est posé ici comme la promesse du bilan redressé : une économie qui, au lieu de s'épuiser, s'approfondit.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Les quatre phases de la transition économique</h2>
+    <div class="sv-markdown"><p>Comment passe-t-on d'un bilan à l'autre ? Par quatre temps économiques, qu'il ne faut pas confondre avec les quatre âges agronomiques du cahier — ceux-là décrivent l'évolution des pratiques au champ ; ceux-ci décrivent l'évolution des comptes. D'abord, l'inventaire : reconnaître le capital biologique et mesurer la dette. Puis, la valorisation : adopter une comptabilité en coût réel qui fait apparaître les externalités. Ensuite, le réinvestissement : substituer le capital biologique aux esclaves énergétiques, année après année. Enfin, la consolidation : atteindre l'antifragilité, où le système s'enrichit des chocs qu'il encaisse. Quatre temps du bilan, distincts des gestes de la pratique, qui les rendent visibles.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>L'agriculture industrielle tient une comptabilité incomplète, qui masque la dette énergétique, les externalités et l'épuisement du capital biologique. Le sol n'est pas un stock amortissable : c'est un capital vivant qu'on entretient ou qu'on dilapide. Redresser le bilan — compter le réel, réinvestir le biologique, viser l'antifragilité —, c'est rendre à l'économie du vivant son vrai prix.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (160)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">F2 — lecture (32)</summary>
+    <nav aria-label="F2 — lecture (32)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/F2/integral/" title="Le document F2 intégral" data-id="integral-F2">
+          <span class="sv-navlist-title">Le document F2 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/18/" title="Fixation Biologique de l'Azote — Le Modèle Brésilien" data-id="fiche-18">
+          <span class="sv-navlist-title">Fixation Biologique de l&#39;Azote — Le Modèle Brésilien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/26/" title="Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi" data-id="fiche-26">
+          <span class="sv-navlist-title">Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/38/" title="La transition agroécologique — Barrières systémiques et leviers de diffusion" data-id="fiche-38">
+          <span class="sv-navlist-title">La transition agroécologique — Barrières systémiques et leviers de diffusion</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/41/" title="Fragilité systémique fossile et transition robuste (méthode Shift PREF)" data-id="fiche-41">
+          <span class="sv-navlist-title">Fragilité systémique fossile et transition robuste (méthode Shift PREF)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/43/" title="Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026" data-id="fiche-43">
+          <span class="sv-navlist-title">Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/57/" title="Cascade des conséquences — de la parcelle à la biosphère" data-id="fiche-57">
+          <span class="sv-navlist-title">Cascade des conséquences — de la parcelle à la biosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/61/" title="Trophobiose — de l excès d azote minéral à la pullulation des ravageurs" data-id="fiche-61">
+          <span class="sv-navlist-title">Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/64/" title="Carences minérales silencieuses — de l appauvrissement du sol à la santé publique" data-id="fiche-64">
+          <span class="sv-navlist-title">Carences minérales silencieuses — de l appauvrissement du sol à la santé publique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/71/" title="Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale" data-id="fiche-71">
+          <span class="sv-navlist-title">Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/72/" title="Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines" data-id="fiche-72">
+          <span class="sv-navlist-title">Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/75/" title="Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques" data-id="fiche-75">
+          <span class="sv-navlist-title">Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/80/" title="Cascade des coûts cachés — du direct au civilisationnel" data-id="fiche-80">
+          <span class="sv-navlist-title">Cascade des coûts cachés — du direct au civilisationnel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/84/" title="Trophobiose Chaboussou — de l'azote minéral à la résistance antimicrobienne" data-id="fiche-84">
+          <span class="sv-navlist-title">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/85/" title="Thermorégulation édaphique — le sol vivant comme tampon climatique local" data-id="fiche-85">
+          <span class="sv-navlist-title">Thermorégulation édaphique — le sol vivant comme tampon climatique local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/92/" title="Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM" data-id="fiche-92">
+          <span class="sv-navlist-title">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/94/" title="Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative" data-id="fiche-94">
+          <span class="sv-navlist-title">Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/113/" title="Antifragilité : stress modéré → diversification de l'hologénome" data-id="fiche-113">
+          <span class="sv-navlist-title">Antifragilité : stress modéré → diversification de l&#39;hologénome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/119/" title="Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen" data-id="fiche-119">
+          <span class="sv-navlist-title">Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/149/" title="Modèle brésilien FBN soja : enseignements et limites d'une transition continentale réussie ET ambivalente" data-id="fiche-149">
+          <span class="sv-navlist-title">Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/150/" title="Souveraineté azote-fertilisation : l'autonomie nationale face à la dépendance Haber-Bosch" data-id="fiche-150">
+          <span class="sv-navlist-title">Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/222/" title="Compromis performance-robustesse et antifragilité — cadre Hamant-Taleb" data-id="fiche-222">
+          <span class="sv-navlist-title">Compromis performance-robustesse et antifragilité — cadre Hamant-Taleb</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/233/" title="Du baril à l'assiette : fragilité systémique de l'alimentation fossile" data-id="fiche-233">
+          <span class="sv-navlist-title">Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/251/" title="Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse" data-id="fiche-251">
+          <span class="sv-navlist-title">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/254/" title="Les fils rouges du sol vivant — thèses transversales et renversements" data-id="fiche-254">
+          <span class="sv-navlist-title">Les fils rouges du sol vivant — thèses transversales et renversements</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/259/" title="Les esclaves énergétiques : une ampoule, mille bras, une facture cachée" data-id="fiche-259">
+          <span class="sv-navlist-title">Les esclaves énergétiques : une ampoule, mille bras, une facture cachée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/260/" title="La transition robuste : une vallée à traverser, quatre âges, trois gestes" data-id="fiche-260">
+          <span class="sv-navlist-title">La transition robuste : une vallée à traverser, quatre âges, trois gestes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/262/" title="Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger" data-id="fiche-262">
+          <span class="sv-navlist-title">Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/276/" title="Test Haney et amorçage épigénétique foliaire — une intersection à explorer" data-id="fiche-276">
+          <span class="sv-navlist-title">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/355/" title="Qui finance le savoir ? Asymétrie des moyens et production de l'ignorance en agriculture" data-id="fiche-355">
+          <span class="sv-navlist-title">Qui finance le savoir ? Asymétrie des moyens et production de l&#39;ignorance en agriculture</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

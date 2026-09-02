@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/H3/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqu7N" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;H&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -66,64 +66,14 @@
                 <a href="/Publications/liseuse/doc/H1/">
                   <strong>H1</strong> — Sol, Alimentation et Santé Humaine
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/H2/">
                   <strong>H2</strong> — Le Microbiome Intestinal
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/H3/" aria-current="page">
                   <strong>H3</strong> — La Résistance Antimicrobienne
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/324/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/24/">
-                          AMR et Résistome du Sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/57/">
-                          Cascade des conséquences — de la parcelle à la biosphère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/84/">
-                          Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/221/">
-                          Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/269/">
-                          Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/282/">
-                          La bioprécipitation : quand le vivant fait pleuvoir
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/290/">
-                          Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/291/">
-                          Co-sélection de l&#39;antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/292/">
-                          Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)
-                        </a>
-                      </li>
-                  </ul>
               </li>
           </ul>
       </li>
@@ -258,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -273,80 +223,123 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>H3 — La Résistance Antimicrobienne</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>H3 — La Résistance Antimicrobienne</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 11 textes — l'ouverture, puis 10 fiches.</p>
+      <p class="sv-meta">
+        11 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/324/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/H3/integral/">
-            <strong>Le document H3 intégral</strong>
-            <p class="sv-meta">Le récit complet — 8 628 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Il y a une dette que le vivant ne pardonne pas. Chaque fois que nous usons d'une arme chimique — un antibiotique, un pesticide, un fongicide — nous empruntons un peu de l'équilibre du monde microbien ; et le monde microbien tient ses comptes. La résistance antimicrobienne est cette dette : des gènes de résistance nés dans les sols et les élevages qui remontent, maillon par maillon, jusqu'à nous, et émoussent nos propres armes. Garde-fou, d'abord : ce vivant n'est pas un ennemi — c'est un holobionte, une communauté qui s'organise, et dont nous faisons partie. La dette ne s'efface pas ; elle se rembourse en changeant de pratiques.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (10)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/24/">
-              <strong>AMR et Résistome du Sol</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le sol représente un réservoir ancestral et dynamique de gènes de résistance aux antimicrobiens, constituant à la fois le « berceau » de la …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/57/">
-              <strong>Cascade des conséquences — de la parcelle à la biosphère</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une analyse multidimensionnelle de la « cascade de conséquences » générée par les systèmes agricoles intensifs. Loin d&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/84/">
-              <strong>Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne repose sur le procédé Haber-Bosch, une infrastructure énergétique massive responsable de 1,2 % à 1,8 % des émissions m…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/221/">
-              <strong>Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse les interconnexions critiques entre l&#39;usage intensif des pesticides, l&#39;expansion du résistome environnemental et l&#39;émerg…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/269/">
-              <strong>Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les effluents d&#39;élevage ne sont pas de simples engrais : ils transportent un cocktail antibiotiques + métaux + résistome préformé (ARG). L&#39;é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/282/">
-              <strong>La bioprécipitation : quand le vivant fait pleuvoir</strong>
-              
-              <p class="sv-meta">La pluie continentale vient en grande partie de la terre elle-même : jusqu&#39;à 40 % de recyclage par évapotranspiration (van der Ent, 2010), a…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/290/">
-              <strong>Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le transfert horizontal de gènes (HGT) est l&#39;échange de matériel génétique entre bactéries contemporaines, par quatre voies : conjugaison (c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/291/">
-              <strong>Co-sélection de l&#39;antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La co-sélection explique comment les métaux lourds entretiennent l&#39;antibiorésistance sans antibiotique : co-résistance (MRG et ARG liés sur …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/292/">
-              <strong>Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le continuum sol-clinique de l&#39;antibiorésistance est prouvé dans son principe. Le résistome du sol est ancien et immense — les archives palé…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (78)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7348/">prix</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/1547/">bilan hydrique de la parcelle</a></li><li><a href="/Publications/liseuse/terme/1766/">biofilm bactérien</a></li><li><a href="/Publications/liseuse/terme/1877/">Carbone</a></li><li><a href="/Publications/liseuse/terme/1913/">Comptabilité environnementale</a></li><li><a href="/Publications/liseuse/terme/1930/">Cycle hydrologique</a></li><li><a href="/Publications/liseuse/terme/88/">Holobionte</a></li><li><a href="/Publications/liseuse/terme/1005/">litière</a></li><li><a href="/Publications/liseuse/terme/458/">matière organique</a></li><li><a href="/Publications/liseuse/terme/33/">matière organique associée aux minéraux</a></li><li><a href="/Publications/liseuse/terme/722/">minéralisation</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Le résistome du sol : un rappel</h2>
+    <div class="sv-markdown"><p>Le sol abrite depuis toujours des gènes de résistance aux antibiotiques : c'est son résistome, un réservoir ancien et naturel, berceau de la pharmacopée que les microbes fabriquent et échangent pour se défendre entre eux. Ce mécanisme ancestral, la strate Sol l'a déjà démontré en parcourant le microbiome (S2 §11, <a href="/Publications/liseuse/fiche/24/">fiche #24</a>) — inutile d'y revenir. Ce qu'il faut retenir ici, c'est le point de bascule : ce réservoir n'est dangereux que lorsqu'on le force. Les apports massifs, les intrants, les antibiotiques versés à l'aveugle transforment un équilibre ancien en foyer de résistances qui nous concernent. La question n'est plus « le résistome existe-t-il ? » mais « comment remonte-t-il jusqu'à nous ? ».</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>La chaîne de transmission : du sol à l&#39;assiette</h2>
+    <div class="sv-markdown"><p>La remontée suit la chaîne alimentaire. La trophobiose, théorisée par Francis Chaboussou, en donne la clé : une plante gavée d'azote minéral soluble accumule des sucres et des acides aminés libres qui la rendent appétissante aux ravageurs — d'où plus de pesticides, d'où plus de pression de sélection (<a href="/Publications/liseuse/fiche/84/">fiche #84</a>). Les gènes de résistance sélectionnés au champ ne restent pas à la parcelle : ils voyagent avec les résidus, les fumiers, l'eau, et rejoignent l'aliment, puis notre intestin. Les résidus de pesticides ingérés perturbent à leur tour notre propre microbiote, et l'intestin humain devient un foyer de transfert (<a href="/Publications/liseuse/fiche/84/">fiche #84</a>). La dette remonte toute la chaîne — du sol à l'assiette, de l'assiette au ventre.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Le transfert horizontal de gènes : la mécanique</h2>
+    <div class="sv-markdown"><p>Ce qui rend cette dette contagieuse, c'est sa mécanique : le transfert horizontal de gènes. Contrairement à l'hérédité verticale, qui descend de parent à enfant, le transfert horizontal fait passer un gène de résistance d'une bactérie à une autre, sans parenté — par plasmides, par transposons, par éléments mobiles qui sautent d'un génome à l'autre (<a href="/Publications/liseuse/fiche/24/">fiche #24</a>). Dans le sol, la rhizosphère et l'intestin — des points chauds de densité microbienne — ce partage est incessant : un gène de résistance né dans une bactérie du sol peut, de proche en proche, rejoindre une bactérie pathogène pour l'humain. C'est ce qui fait de la résistance non pas une accumulation lente, mais une contagion rapide, qui se moque des frontières entre espèces et entre mondes.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Solutions : sortir de la trophobiose</h2>
+    <div class="sv-markdown"><p>La dette se rembourse à la source. Sortir de la trophobiose, c'est d'abord réduire l'azote minéral soluble qui fragilise la plante et appelle les pesticides ; c'est piloter la forme de l'azote et restaurer l'immunité naturelle des cultures pour fermer la vanne des traitements (<a href="/Publications/liseuse/fiche/84/">fiche #84</a>). C'est aussi, côté sol, entretenir la diversité microbienne qui tient les pathogènes en échec — les sols suppressifs et l'agriculture de conservation des sols atténuent la pression de sélection sans avoir besoin de forcer (<a href="/Publications/liseuse/fiche/24/">fiche #24</a>). La logique est la même qu'ailleurs dans cette collection : au lieu de combattre le vivant par la chimie, on le rééquilibre par la biologie. La résistance s'éteint quand on cesse de la nourrir.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>La résistance antimicrobienne est une dette écologique : le vivant nous présente l'addition des armes chimiques qu'on lui a imposées. Elle remonte du sol à l'assiette par transfert horizontal, nourrie par la trophobiose. La rembourser, c'est cesser de forcer le monde microbien et recommencer à le rééquilibrer.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (78)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7348/">prix</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5025/">Amorçage rhizosphérique</a></li><li><a href="/Publications/liseuse/terme/1547/">bilan hydrique de la parcelle</a></li><li><a href="/Publications/liseuse/terme/1766/">biofilm bactérien</a></li><li><a href="/Publications/liseuse/terme/1877/">Carbone</a></li><li><a href="/Publications/liseuse/terme/1913/">Comptabilité environnementale</a></li><li><a href="/Publications/liseuse/terme/1930/">Cycle hydrologique</a></li><li><a href="/Publications/liseuse/terme/88/">Holobionte</a></li><li><a href="/Publications/liseuse/terme/1005/">litière</a></li><li><a href="/Publications/liseuse/terme/458/">matière organique</a></li><li><a href="/Publications/liseuse/terme/33/">matière organique associée aux minéraux</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">H3 — lecture (11)</summary>
+    <nav aria-label="H3 — lecture (11)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/H3/integral/" title="Le document H3 intégral" data-id="integral-H3">
+          <span class="sv-navlist-title">Le document H3 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/24/" title="AMR et Résistome du Sol" data-id="fiche-24">
+          <span class="sv-navlist-title">AMR et Résistome du Sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/57/" title="Cascade des conséquences — de la parcelle à la biosphère" data-id="fiche-57">
+          <span class="sv-navlist-title">Cascade des conséquences — de la parcelle à la biosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/84/" title="Trophobiose Chaboussou — de l'azote minéral à la résistance antimicrobienne" data-id="fiche-84">
+          <span class="sv-navlist-title">Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/221/" title="Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé" data-id="fiche-221">
+          <span class="sv-navlist-title">Pesticides → AMR + inflammation low-grade — voie indirecte agrochimie/santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/269/" title="Effluents d'élevage et antibiotiques vétérinaires : la porte d'entrée du résistome dans le sol" data-id="fiche-269">
+          <span class="sv-navlist-title">Effluents d&#39;élevage et antibiotiques vétérinaires : la porte d&#39;entrée du résistome dans le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/282/" title="La bioprécipitation : quand le vivant fait pleuvoir" data-id="fiche-282">
+          <span class="sv-navlist-title">La bioprécipitation : quand le vivant fait pleuvoir</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/290/" title="Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques" data-id="fiche-290">
+          <span class="sv-navlist-title">Transfert horizontal de gènes dans le sol : conjugaison, transformation, transduction et hot spots rhizosphériques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/291/" title="Co-sélection de l'antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ" data-id="fiche-291">
+          <span class="sv-navlist-title">Co-sélection de l&#39;antibiorésistance par les métaux lourds : cuivre, zinc et pressions croisées au champ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/292/" title="Du sol à la clinique : preuves du continuum environnemental de l'antibiorésistance (One Health)" data-id="fiche-292">
+          <span class="sv-navlist-title">Du sol à la clinique : preuves du continuum environnemental de l&#39;antibiorésistance (One Health)</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

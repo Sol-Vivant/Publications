@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/S3/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,202 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S1/">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S2/">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/S3/" aria-current="page">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/333/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/1/">
-                          Les Champignons Entomopathogènes dans le Sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/3/">
-                          Microbiome du sol vivant et thermotolérance des plantes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/31/">
-                          Les Strigolactones — Signal Clé du Recrutement Mycorhizien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/35/">
-                          Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/37/">
-                          Agroforesterie tempérée — Fonctions sol et productivité système
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/42/">
-                          Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/59/">
-                          Champignons entomopathogènes — double identité et lutte par conservation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/65/">
-                          Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/66/">
-                          Réseau mycorhizien commun — controverse Simard vs Karst 2023
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/71/">
-                          Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/83/">
-                          Cascade phosphore — du minéral inerte à l&#39;os humain
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/110/">
-                          Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/112/">
-                          Glomaline : glycoprotéine fongique et stockage C profond
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/115/">
-                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/117/">
-                          Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/128/">
-                          Endophytes ubiquitaires et potentiel pathogène latent
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/138/">
-                          Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/143/">
-                          Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/144/">
-                          Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/145/">
-                          Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/146/">
-                          Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/147/">
-                          Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/148/">
-                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/172/">
-                          Plant diversity drives rhizosphere microbiome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/177/">
-                          Tri-trophic interactions CEP / Trichoderma / soil mites
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/178/">
-                          Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/193/">
-                          Mycorrhiza-mediated competition drives soil C
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/197/">
-                          Arbuscular mycorrhiza: advances and retreats in our understanding of the ecologi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/210/">
-                          Cri-pour-secours rhizosphérique — recrutement stress-induit du microbiome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/211/">
-                          Sidérophores — pivot écologique de l&#39;accès au fer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/216/">
-                          Cultures associées (intercropping) — principe, complémentarité et conduite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/232/">
-                          Gestion régénérative des nématodes et biofumigation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/240/">
-                          Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/251/">
-                          Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/254/">
-                          Les fils rouges du sol vivant — thèses transversales et renversements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/303/">
-                          La plastisphère : le biofilm microbien des microplastiques du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/316/">
-                          Hydrophobie du sol (SWR) : quand le sol refuse l&#39;eau
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/345/">
-                          Eucalyptus × Pisolithus : installer la vie sur un résidu minier acide
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -396,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -411,210 +231,217 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>S3 — Le Microbiome Fongique et Mycorhizien</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>S3 — Le Microbiome Fongique et Mycorhizien</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 43 textes — l'ouverture, puis 42 fiches.</p>
+      <p class="sv-meta">
+        43 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/333/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/S3/integral/">
-            <strong>Le document S3 intégral</strong>
-            <p class="sv-meta">Le récit complet — 15 784 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Si les bactéries sont le ventre du sol, les champignons en sont le réseau nerveux. Là où la bactérie agit localement, dans son film d'eau, le champignon s'étend : des filaments qui relient, qui transmettent — et dont on débat encore s'ils signalent — d'une racine à l'autre, d'un arbre à une plantule, parfois sur des distances qui défient l'échelle de la racine. Ce mycobiome est le tissu connectif du sol vivant, celui qui en fait autre chose qu'une foule : un réseau. Garde-fou posé : ce réseau n'est pas le système nerveux d'un organisme, mais celui d'un holobionte — une communauté qui s'organise comme un corps. Suivons ses fils.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (42)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/1/">
-              <strong>Les Champignons Entomopathogènes dans le Sol</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">L&#39;intégration des champignons entomopathogènes représente une avancée majeure vers une agriculture durable, évoluant d&#39;une application ciblé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/3/">
-              <strong>Microbiome du sol vivant et thermotolérance des plantes</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">Le microbiome du sol vivant n&#39;est pas un accessoire de la thermotolérance végétale : il en est un pilier. Les bactéries à ACC désaminase res…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-              <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la coévolution plante-microbe comme levier fondamental pour la transition vers une agriculture régénérative et résilient…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/31/">
-              <strong>Les Strigolactones — Signal Clé du Recrutement Mycorhizien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les strigolactones constituent une classe majeure d&#39;hormones végétales dérivées des caroténoïdes qui coordonnent l&#39;adaptation de la plante à…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/35/">
-              <strong>Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette synthèse explore le rôle central des symbioses mycorhiziennes — principalement les mycorhizes à arbuscules et les ectomycorhizes — en …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/37/">
-              <strong>Agroforesterie tempérée — Fonctions sol et productivité système</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’agroforesterie tempérée s’affirme comme une infrastructure écologique majeure pour restaurer les fonctions du sol et assurer la résilience…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/42/">
-              <strong>Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La réintégration des légumineuses au cœur des systèmes de culture constitue le levier prioritaire de la transition vers une agriculture régé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/59/">
-              <strong>Champignons entomopathogènes — double identité et lutte par conservation</strong>
-              <span class="sv-badge">transversale</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/65/">
-              <strong>Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le paradigme de la matière organique du sol a connu une révolution conceptuelle, passant de la théorie de l&#39;humification — aujourd&#39;hui inval…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/66/">
-              <strong>Réseau mycorhizien commun — controverse Simard vs Karst 2023</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document examine la controverse scientifique majeure entourant les réseaux mycorhiziens communs, opposant principalement la vision systém…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/71/">
-              <strong>Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pompe oxalate-carbonate représente un mécanisme biogéochimique de séquestration du carbone inorganique capable de transformer le CO₂ atmo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/83/">
-              <strong>Cascade phosphore — du minéral inerte à l&#39;os humain</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la &quot;cascade du phosphore&quot;, un cycle complexe reliant la santé des sols à la physiologie osseuse humaine. Le phosphore (P…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/110/">
-              <strong>Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise le rôle critique du filtre mycorhizien dans la gestion des éléments traces métalliques au sein des agroécosystèmes. L…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/112/">
-              <strong>Glomaline : glycoprotéine fongique et stockage C profond</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La glomaline, glycoprotéine produite par les champignons mycorhiziens à arbuscules, s&#39;affirme comme un pilier de la séquestration du carbone…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/115/">
-              <strong>Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse l’importance des enzymes du sol — la β-glucosidase, les phosphatases acides et l&#39;uréase — comme bio-indicateurs de la sa…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/117/">
-              <strong>Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cet article explore le paradigme émergent de l’holobionte programmable; une approche intégrative visant à moduler les interactions métaboliq…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/128/">
-              <strong>Endophytes ubiquitaires et potentiel pathogène latent</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette étude explore le paradigme de la plante en tant qu&#39;holobionte, une unité biologique intégrée où l&#39;hôte coévolue avec un microbiome mul…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/138/">
-              <strong>Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">99.1 L’ambivalence fongique au cœur des cycles biogéochimiques
 
-Les champignons du sol occupent une position fonctionnelle singulière, capab…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/143/">
-              <strong>Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le paradigme de l&#39;exaptation comme clé de voûte de la compréhension du parasitisme végétal et de la conception de systèm…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/144/">
-              <strong>Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La distinction entre les stratégies de Scavenging (glanage) et de Mining (extraction) constitue un pilier de l&#39;écologie fongique moderne. Al…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/145/">
-              <strong>Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse critique du concept de « Wood Wide Web », marquant le passage d&#39;une vision métaphorique de la forêt — cent…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/146/">
-              <strong>Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise l&#39;évolution des connaissances sur la symbiose entre les plantes et les champignons mycorhiziens à arbuscules, en mett…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/147/">
-              <strong>Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</strong>
-              <span class="sv-badge">zoom</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/148/">
-              <strong>Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore la dualité biochimique et évolutive de la biosynthèse de la vitamine B12 (cobalamine) et son rôle pivot dans l&#39;agricultu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/172/">
-              <strong>Plant diversity drives rhizosphere microbiome</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore la relation bidirectionnelle entre la diversité végétale et le microbiome de la rhizosphère dans une perspective systémi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/177/">
-              <strong>Tri-trophic interactions CEP / Trichoderma / soil mites</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les maladies telluriques ne relèvent plus du modèle « un agent-une maladie » mais du pathobiome : le CEP (complexe d&#39;espèces pathogènes tell…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/178/">
-              <strong>Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Dynamiques de peuplement et hiérarchie génétique Dans la rhizosphère de Citrus reticulata, les protéobactéries et les actinobactéries domine…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/193/">
-              <strong>Mycorrhiza-mediated competition drives soil C</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion du carbone organique du sol est passée d&#39;une approche purement physico-chimique à une compréhension biologique centrée sur les sy…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/197/">
-              <strong>Arbuscular mycorrhiza: advances and retreats in our understanding of the ecologi</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette synthèse présente les dynamiques complexes des champignons mycorhiziens à arbuscules au sein des agroécosystèmes, en explorant l&#39;équil…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/210/">
-              <strong>Cri-pour-secours rhizosphérique — recrutement stress-induit du microbiome</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;agriculture régénératrice trouve l&#39;un de ses piliers scientifiques dans le mécanisme de « cry for help » (appel à l&#39;aide), une stratégie c…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/211/">
-              <strong>Sidérophores — pivot écologique de l&#39;accès au fer</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette synthèse explore le rôle central des sidérophores dans la compétition pour le fer au sein de la rhizosphère, un enjeu crucial pour la …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/216/">
-              <strong>Cultures associées (intercropping) — principe, complémentarité et conduite</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les cultures associées exploitent la coexistence d’espèces aux niches complémentaires pour intensifier l’usage des ressources par unité de s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/232/">
-              <strong>Gestion régénérative des nématodes et biofumigation</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion des nématodes phytoparasites traverse une phase de transition critique, marquée par l&#39;interdiction progressive des nématicides de…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/240/">
-              <strong>Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document synthétise les stratégies de lutte contre la carence en zinc, un enjeu majeur de santé publique affectant les populations dépend…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/251/">
-              <strong>Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;agriculture moderne est confrontée à une dépendance énergétique critique : la synthèse industrielle de l&#39;azote (procédé Haber-Bosch) mobil…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/">
-              <strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Trois fils rouges traversent l&#39;ouvrage : (1) gouvernance biologique — le microbiome structure la MO, pas l&#39;inverse ; (2) coévolution holobio…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/">
-              <strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/303/">
-              <strong>La plastisphère : le biofilm microbien des microplastiques du sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La plastisphère (terme canonique : plasticosphère, 2239) est le biofilm microbien qui colonise les microplastiques du sol — un habitat synth…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/316/">
-              <strong>Hydrophobie du sol (SWR) : quand le sol refuse l&#39;eau</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">L&#39;hydrophobie du sol (SWR) est la propriété d&#39;un sol à repousser l&#39;eau. Elle est principalement causée par les hydrophobines, des protéines …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/345/">
-              <strong>Eucalyptus × Pisolithus : installer la vie sur un résidu minier acide</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;eucalyptus associé à l&#39;ectomycorhize Pisolithus s&#39;installe sur des résidus miniers acides à aluminium toxique, cette zone que le diagramme…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (179)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
-          </ul>
+
+<section id="s1">
+    <h2>Les guildes fongiques : trois façons de vivre</h2>
+    <div class="sv-markdown"><p>Les champignons se partagent en trois métiers. Les saprotrophes, les décomposeurs : ils broient la cellulose et la lignine, ce bois mort et ces feuilles que presque personne d'autre ne sait attaquer — ce sont eux qui ouvrent la matière organique au reste du microbiome. Les pathogènes, minoritaires mais redoutables : ils percent les racines et les tiges. Et les symbiotes, les mycorhiziens, qui s'associent aux plantes dans une alliance vieille de plus de 450 millions d'années (<a href="/Publications/liseuse/fiche/35/">fiche #35</a>). Chacun a sa niche, ses armes, ses enzymes ; et l'équilibre entre les trois — décomposeurs abondants, pathogènes contenus, symbiotes prospères — dessine la santé d'un sol.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Identifier le mycobiome : le code-barres ITS</h2>
+    <div class="sv-markdown"><p>Comment inventorier ces fils invisibles ? Par leur code-barres génétique. Chaque espèce de champignon porte une séquence signature, la région ITS, que l'on lit par métabarcoding : on extrait l'ADN d'une poignée de sol, on séquence, et le registre des espèces présentes se déploie. C'est un recensement sans avoir à cultiver — car la plupart des champignons du sol refusent de pousser en laboratoire. Grâce à l'ITS, on découvre une diversité fongique insoupçonnée, dont on mesure enfin la place dans la fertilité. Le sol que l'on croyait vide se révèle un herbier de filaments : le code-barres fait parler l'invisible.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Les CMA : les symbiotes universels</h2>
+    <div class="sv-markdown"><p>Les mycorhizes à arbuscules (CMA) sont l'alliance la plus répandue du monde vivant : plus de trois quarts des plantes terrestres la contractent (<a href="/Publications/liseuse/fiche/35/">fiche #35</a>). Le champignon s'insinue dans les cellules racinaires et y déploie des arbuscules, des structures d'échange fines comme une chevelure, où il cède phosphore et azote contre les sucres de la plante. Mais l'échange est plus intime encore : le champignon, incapable de fabriquer ses propres lipides, reçoit de la plante des acides gras essentiels — une dépendance qui scelle l'alliance (<a href="/Publications/liseuse/fiche/35/">fiche #35</a>). Signalons-le d'un mot : la nature exacte de ce marché — réciprocité stricte ou surplus métabolique — reste débattue, et la collection en porte les deux voix.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Bénéfices agronomiques et facteurs d&#39;inhibition</h2>
+    <div class="sv-markdown"><p>Que rapporte l'alliance ? Le phosphore, d'abord — le filament fongique explore un volume de sol que la racine n'atteint pas et ramène le nutriment rare. Mais aussi l'eau, la résistance au stress, et la colle glomaline qui cimente les agrégats. En retour, tout ce qui blesse le champignon blesse la culture : le labour qui hache les filaments, les apports massifs de phosphore soluble qui rendent la symbiose inutile, certains fongicides qui la tuent par mégarde. La logique agronomique s'en trouve inversée : fertiliser moins pour que le champignon travaille, travailler le sol moins pour qu'il tisse. Là où la chimie a remplacé la symbiose, la symbiose a désappris à répondre présente.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Les ECM et le CMN</h2>
+    <div class="sv-markdown"><p>Dans les forêts tempérées, un autre pacte domine : les ectomycorhizes (ECM), où le champignon enveloppe la racine d'un manteau au lieu de pénétrer ses cellules. Ces champignons relient les arbres entre eux : leurs filaments, de proche en proche, forment un réseau mycorhizien commun (CMN) qui court sous la litière, d'un chêne à un hêtre, d'un vieil arbre à une jeune plantule. C'est par ce réseau que l'on a cru voir les arbres s'entraider — partager du carbone, des signaux d'alerte, de la mémoire. L'image est belle ; elle a fait couler beaucoup d'encre, et c'est ici qu'elle doit être examinée de près.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Le CMN : réseau et controverse du Wood Wide Web</h2>
+    <div class="sv-markdown"><p>Ce réseau a été popularisé sous le nom de « Wood Wide Web », une forêt qui s'entraide par ses racines connectées. Puis la rigueur est venue : en 2023, une méta-analyse a dénoncé un biais de citation — on citait les preuves d'entraide, on oubliait les études qui ne montraient rien (<a href="/Publications/liseuse/fiche/145/">fiche #145</a>). Le débat, depuis, s'est affiné : le réseau existe, les transferts de carbone et de signaux sont réels, mais leur ampleur, leur sens, leur bénéfice pour l'arbre restent discutés. Retenons la leçon avec honnêteté : la métaphore du réseau est puissante, et c'est précisément pourquoi elle doit rester une hypothèse à tester, non un dogme à célébrer. Le sol vivant n'a pas besoin de contes pour être fascinant.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>La nécromasse fongique et la glomaline</h2>
+    <div class="sv-markdown"><p>À leur mort, les champignons laissent un héritage durable. Leurs parois, riches en chitine et en mélanine, résistent longtemps à la décomposition ; et surtout, ils lèguent la glomaline — ou plus exactement les protéines du sol liées à la glomaline —, une colle glycoprotéique qu'ils sécrètent de leur vivant et qui cimente les agrégats (fiches <a href="/Publications/liseuse/fiche/90/">#90</a>, <a href="/Publications/liseuse/fiche/112/">#112</a>). La glomaline est doublement précieuse : elle structure le sol et elle piège du carbone, formant une part notable de la matière organique stable. Les filaments fongiques sont ainsi, à la fois, le fil et la colle du sol — ils tissent le réseau et, en se décomposant, en cimentent l'architecture pour des années.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Le ratio F/B : indicateur clé</h2>
+    <div class="sv-markdown"><p>Bactéries ou champignons : qui domine ? Le rapport entre biomasse fongique et bactérienne — le ratio F/B — résume un état du sol. Les sols forestiers et les prairies permanentes penchent du côté fongique : des champignons abondants, un carbone stable, une matière organique qui se décompose lentement. Les sols labourés, fertilisés, penchent du côté bactérien : un renouvellement rapide, un carbone qui brûle vite. Le ratio n'est pas une note morale — chaque état a sa logique — mais c'est un indicateur de trajectoire : remonter vers le fongique, c'est remonter vers la stabilité. Suivre le F/B, c'est lire dans quel sens penche l'équilibre du sol.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>Mycoparasites et biocontrôle fongique</h2>
+    <div class="sv-markdown"><p>Les champignons se mangent entre eux. Certains, les mycoparasites, attaquent leurs congénères : ils enroulent le pathogène, percent sa paroi, le digèrent de l'intérieur. Le plus célèbre, Trichoderma, est devenu un agent de biocontrôle courant : on l'introduit pour tenir en respect les champignons qui attaquent les cultures. C'est la même logique que la suppressivité bactérienne, mais en version fongique : armer le sol de prédateurs naturels plutôt que de le stériliser. Un mycobiome diversifié fait ce travail tout seul — les pathogènes y sont tenus en échec par la concurrence et la prédation, sans qu'il soit besoin d'ajouter quoi que ce soit.</p>
+</div>
+    
+  </section><section id="s10">
+    <h2>Le mycobiome et la résistance aux pathogènes</h2>
+    <div class="sv-markdown"><p>Au-delà de la prédation, le mycobiome protège les plantes par sa simple présence. Les mycorhizes arment la racine : elles occupent la place, mobilisent les défenses de la plante, et la rendent moins appétissante aux pathogènes du sol. Un plant mycorhizé résiste mieux — on l'a montré pour des maladies racinaires majeures. La leçon rejoint celle des bactéries : la meilleure défense d'une culture n'est pas un produit qu'on applique, mais un réseau fongique vivant qu'on entretient. Le sol qui file ses champignons entre les racines est un sol qui se défend tout seul, par l'architecture même de son réseau.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>Le mycobiome est le réseau du sol : des fils qui relient, des colles qui cimentent, des prédateurs qui équilibrent. Les mycorhizes nourrissent, la glomaline structure, le réseau connecte — sous réserve d'une controverse honnête. Un sol vivant est un sol branché.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (179)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">S3 — lecture (43)</summary>
+    <nav aria-label="S3 — lecture (43)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/S3/integral/" title="Le document S3 intégral" data-id="integral-S3">
+          <span class="sv-navlist-title">Le document S3 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/1/" title="Les Champignons Entomopathogènes dans le Sol" data-id="fiche-1">
+          <span class="sv-navlist-title">Les Champignons Entomopathogènes dans le Sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/3/" title="Microbiome du sol vivant et thermotolérance des plantes" data-id="fiche-3">
+          <span class="sv-navlist-title">Microbiome du sol vivant et thermotolérance des plantes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/26/" title="Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi" data-id="fiche-26">
+          <span class="sv-navlist-title">Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/31/" title="Les Strigolactones — Signal Clé du Recrutement Mycorhizien" data-id="fiche-31">
+          <span class="sv-navlist-title">Les Strigolactones — Signal Clé du Recrutement Mycorhizien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/35/" title="Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels" data-id="fiche-35">
+          <span class="sv-navlist-title">Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/37/" title="Agroforesterie tempérée — Fonctions sol et productivité système" data-id="fiche-37">
+          <span class="sv-navlist-title">Agroforesterie tempérée — Fonctions sol et productivité système</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/42/" title="Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026" data-id="fiche-42">
+          <span class="sv-navlist-title">Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/59/" title="Champignons entomopathogènes — double identité et lutte par conservation" data-id="fiche-59">
+          <span class="sv-navlist-title">Champignons entomopathogènes — double identité et lutte par conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/65/" title="Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM" data-id="fiche-65">
+          <span class="sv-navlist-title">Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/66/" title="Réseau mycorhizien commun — controverse Simard vs Karst 2023" data-id="fiche-66">
+          <span class="sv-navlist-title">Réseau mycorhizien commun — controverse Simard vs Karst 2023</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/71/" title="Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale" data-id="fiche-71">
+          <span class="sv-navlist-title">Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/83/" title="Cascade phosphore — du minéral inerte à l'os humain" data-id="fiche-83">
+          <span class="sv-navlist-title">Cascade phosphore — du minéral inerte à l&#39;os humain</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/110/" title="Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire" data-id="fiche-110">
+          <span class="sv-navlist-title">Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/112/" title="Glomaline : glycoprotéine fongique et stockage C profond" data-id="fiche-112">
+          <span class="sv-navlist-title">Glomaline : glycoprotéine fongique et stockage C profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/115/" title="Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils" data-id="fiche-115">
+          <span class="sv-navlist-title">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/117/" title="Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels" data-id="fiche-117">
+          <span class="sv-navlist-title">Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/128/" title="Endophytes ubiquitaires et potentiel pathogène latent" data-id="fiche-128">
+          <span class="sv-navlist-title">Endophytes ubiquitaires et potentiel pathogène latent</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/138/" title="Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques" data-id="fiche-138">
+          <span class="sv-navlist-title">Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/143/" title="Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées" data-id="fiche-143">
+          <span class="sv-navlist-title">Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/144/" title="Scavenging vs Mining : stratégies fongiques d'acquisition des nutriments dans le sol" data-id="fiche-144">
+          <span class="sv-navlist-title">Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/145/" title="Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)" data-id="fiche-145">
+          <span class="sv-navlist-title">Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/146/" title="Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire" data-id="fiche-146">
+          <span class="sv-navlist-title">Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/147/" title="Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés" data-id="fiche-147">
+          <span class="sv-navlist-title">Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/148/" title="Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente" data-id="fiche-148">
+          <span class="sv-navlist-title">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/172/" title="Plant diversity drives rhizosphere microbiome" data-id="fiche-172">
+          <span class="sv-navlist-title">Plant diversity drives rhizosphere microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/177/" title="Tri-trophic interactions CEP / Trichoderma / soil mites" data-id="fiche-177">
+          <span class="sv-navlist-title">Tri-trophic interactions CEP / Trichoderma / soil mites</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/178/" title="Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation" data-id="fiche-178">
+          <span class="sv-navlist-title">Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/193/" title="Mycorrhiza-mediated competition drives soil C" data-id="fiche-193">
+          <span class="sv-navlist-title">Mycorrhiza-mediated competition drives soil C</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/197/" title="Arbuscular mycorrhiza: advances and retreats in our understanding of the ecologi" data-id="fiche-197">
+          <span class="sv-navlist-title">Arbuscular mycorrhiza: advances and retreats in our understanding of the ecologi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/210/" title="Cri-pour-secours rhizosphérique — recrutement stress-induit du microbiome" data-id="fiche-210">
+          <span class="sv-navlist-title">Cri-pour-secours rhizosphérique — recrutement stress-induit du microbiome</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/211/" title="Sidérophores — pivot écologique de l'accès au fer" data-id="fiche-211">
+          <span class="sv-navlist-title">Sidérophores — pivot écologique de l&#39;accès au fer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/216/" title="Cultures associées (intercropping) — principe, complémentarité et conduite" data-id="fiche-216">
+          <span class="sv-navlist-title">Cultures associées (intercropping) — principe, complémentarité et conduite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/232/" title="Gestion régénérative des nématodes et biofumigation" data-id="fiche-232">
+          <span class="sv-navlist-title">Gestion régénérative des nématodes et biofumigation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/240/" title="Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification" data-id="fiche-240">
+          <span class="sv-navlist-title">Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/251/" title="Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse" data-id="fiche-251">
+          <span class="sv-navlist-title">Fertilité auto-entretenue : les fonctions biologiques du sol qui réduisent la dépendance aux intrants de synthèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/254/" title="Les fils rouges du sol vivant — thèses transversales et renversements" data-id="fiche-254">
+          <span class="sv-navlist-title">Les fils rouges du sol vivant — thèses transversales et renversements</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/276/" title="Test Haney et amorçage épigénétique foliaire — une intersection à explorer" data-id="fiche-276">
+          <span class="sv-navlist-title">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/303/" title="La plastisphère : le biofilm microbien des microplastiques du sol" data-id="fiche-303">
+          <span class="sv-navlist-title">La plastisphère : le biofilm microbien des microplastiques du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/316/" title="Hydrophobie du sol (SWR) : quand le sol refuse l'eau" data-id="fiche-316">
+          <span class="sv-navlist-title">Hydrophobie du sol (SWR) : quand le sol refuse l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/345/" title="Eucalyptus × Pisolithus : installer la vie sur un résidu minier acide" data-id="fiche-345">
+          <span class="sv-navlist-title">Eucalyptus × Pisolithus : installer la vie sur un résidu minier acide</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

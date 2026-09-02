@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/S0/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irVbW" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;S&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -51,150 +51,22 @@
                 <a href="/Publications/liseuse/doc/S0/" aria-current="page">
                   <strong>S0</strong> — L&#39;Eau dans le Sol Vivant
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/330/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/36/">
-                          L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/81/">
-                          Couplages biogéochimiques Fe-P-S-N sous alternance redox
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/85/">
-                          Thermorégulation édaphique — le sol vivant comme tampon climatique local
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/87/">
-                          Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/114/">
-                          Eh terrain : sondes redox, gradient mV/cm et méthode in situ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/120/">
-                          Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/121/">
-                          Asphyxie / anaérobie locale (odeurs, horizons réduits)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/123/">
-                          Racines superficielles / enracinement bloqué
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/162/">
-                          conductivité hydraulique saturée
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/166/">
-                          Biofilms
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/189/">
-                          Plastiques biosourcés et/ou biodégradables en fin de vie
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/206/">
-                          Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/234/">
-                          Effet Birch — pulse de minéralisation à la réhumectation des sols
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/243/">
-                          Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/252/">
-                          Les états de l&#39;eau et la biologie du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/255/">
-                          Le chiendent comme bioindicateur du compactage
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/270/">
-                          Haies, bocage et brise-vent — fonctions sol, lisière et microclimat
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/271/">
-                          Silvopastoralisme tempéré — arbre, prairie et animal
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/272/">
-                          Pompage nutritif profond et filet de sécurité racinaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/273/">
-                          Trognes et arbres-ressources — biomasse renouvelable et rôle écologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/274/">
-                          L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/278/">
-                          Couvert permanent sous serre : restructurer un sol mort
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/293/">
-                          Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/314/">
-                          Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/315/">
-                          Battance et croûte de surface : mécanismes, diagnostic et remédiation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/343/">
-                          L&#39;holobionte ingénieur de sa niche : quand le vivant installe ses conditions (riz noyé, biocroûtes)
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/S1/">
                   <strong>S1</strong> — Architecture du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S2/">
                   <strong>S2</strong> — Le Microbiome du Sol
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S3/">
                   <strong>S3</strong> — Le Microbiome Fongique et Mycorhizien
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/S4/">
                   <strong>S4</strong> — Le Carbone et les Grands Cycles
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -344,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -359,156 +231,191 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>S0 — L&#39;Eau dans le Sol Vivant</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>S0 — L&#39;Eau dans le Sol Vivant</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 30 textes — l'ouverture, puis 29 fiches.</p>
+      <p class="sv-meta">
+        30 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/330/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/S0/integral/">
-            <strong>Le document S0 intégral</strong>
-            <p class="sv-meta">Le récit complet — 9 909 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Un sol vivant n'est pas une éponge, mais un corps qui irrigue. Son eau n'y stagne pas en nappe : elle y circule, comme le sang dans un réseau de veines et de capillaires — des pores larges qui drainent, des pores fins qui retiennent, des films qui collent aux grains. Comprendre l'eau du sol, c'est comprendre cette circulation : d'où elle vient, ce qui la retient, ce qui l'anime, ce qui la bloque. Et, garde-fou posé une fois pour toutes : ce « corps » n'est pas un organisme — c'est un holobionte, une communauté d'êtres vivants qui s'organise comme un corps. L'eau en est le sang, et ses habitants en sont les cœurs.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (29)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/36/">
-              <strong>L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le concept de Continuum Sol-Plante-Atmosphère constitue le cadre thermodynamique essentiel pour comprendre le cycle de l&#39;eau à l&#39;interface t…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/81/">
-              <strong>Couplages biogéochimiques Fe-P-S-N sous alternance redox</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des connaissances (2021-2026) sur les couplages biogéochimiques entre le fer, le phosphore (P) et le soufr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/85/">
-              <strong>Thermorégulation édaphique — le sol vivant comme tampon climatique local</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse le rôle stratégique du sol vivant en tant que régulateur thermique, un service écosystémique essentiel pour la résilienc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/87/">
-              <strong>Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La compaction des sols est une dégradation structurelle majeure qui transforme l&#39;agroécosystème en un milieu de multiples stress pour l&#39;holo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/114/">
-              <strong>Eh terrain : sondes redox, gradient mV/cm et méthode in situ</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le potentiel redox (Eh) est la variable la plus intégrative du sol vivant. Une sonde au champ livre en minutes l&#39;état respiratoire du sol : …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/120/">
-              <strong>Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion des sols hydromorphes organiques redox représente un défi majeur pour la sécurité alimentaire et l&#39;atténuation du changement clim…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/121/">
-              <strong>Asphyxie / anaérobie locale (odeurs, horizons réduits)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le phénomène de l&#39;asphyxie anaérobie locale, un processus biogéochimique critique influençant la santé des sols et les é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/123/">
-              <strong>Racines superficielles / enracinement bloqué</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;architecture racinaire est le pivot de la performance agronomique, reliant la structure physique du sol à l&#39;efficience d&#39;utilisation des n…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/162/">
-              <strong>conductivité hydraulique saturée</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La conductivité hydraulique saturée (Ksat) quantifie la capacité du sol à transmettre l&#39;eau (loi de Darcy). Elle varie de 10⁻³ à 10³ mm/h se…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/166/">
-              <strong>Biofilms</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les biofilms telluriques représentent la forme d&#39;organisation prédominante de la vie microbienne dans les sols, transformant les interfaces …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/189/">
-              <strong>Plastiques biosourcés et/ou biodégradables en fin de vie</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse la transition systémique vers l’usage des plastiques biosourcés et biodégradables, un levier crucial pour atteindre la d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/206/">
-              <strong>Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le prélèvement composite invisible les extrêmes : les points chauds (microsites à activité décuplée — rhizosphère, turricules) et hot moment…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/234/">
-              <strong>Effet Birch — pulse de minéralisation à la réhumectation des sols</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;effet Birch, caractérisé par un pic massif de minéralisation lors de la réhumectation des sols secs, représente un pivot critique des cycl…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/243/">
-              <strong>Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le diagnostic moderne de la santé du sol marque une rupture avec les approches statiques traditionnelles pour s&#39;orienter vers une analyse dy…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/252/">
-              <strong>Les états de l&#39;eau et la biologie du sol</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des recherches récentes (2022–2026) sur les interactions complexes entre l&#39;eau, la matrice minérale et la …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/255/">
-              <strong>Le chiendent comme bioindicateur du compactage</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose une approche technique pour transformer l&#39;observation du chiendent en un outil de diagnostic hybride de la santé des sol…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/270/">
-              <strong>Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La haie est une infrastructure plurifonctionnelle : brise-vent (réduction evapotranspiration), pompe à nutriments (remontée racinaire), habi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/271/">
-              <strong>Silvopastoralisme tempéré — arbre, prairie et animal</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le silvopastoralisme tempéré associe arbre + prairie + animal dans un système où le couvert ligneux module microclimat, flux biogéochimiques…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/272/">
-              <strong>Pompage nutritif profond et filet de sécurité racinaire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les nutriments lessivés au-delà de 30 cm ne disparaissent pas : ils forment un trésor profond inaccessible aux cultures superficielles. Les …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/273/">
-              <strong>Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La trogne (arbre taillé cycliquement) produit biomasse renouvelable (bois, fourrage, paillis) sans défricher. Techniques : têtard, émonde, t…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/274/">
-              <strong>L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La spécialisation élevage/grandes cultures a rompu le couplage culture-élevage qui soutenait la fertilité depuis le Néolithique. L&#39;animal es…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-              <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche décrit la reconstruction, en un an, d&#39;un sol sous serre biologiquement mort après trente ans sans racines (texture sable-argile …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/293/">
-              <strong>Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La sécheresse attaque la plante à son interface avec le sol, et c&#39;est là que vit son microbiome. À l&#39;échelle cellulaire, bactéries et champi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/314/">
-              <strong>Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche explore le couplage entre l’epuration des eaux douces et la fertilisation des sols agricoles, un angle encore vierge de cet ouvr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/315/">
-              <strong>Battance et croûte de surface : mécanismes, diagnostic et remédiation</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">La battance est un phénomène de dégradation superficielle des sols, particulièrement des sols limoneux, résultant de l&#39;impact des gouttes de…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/343/">
-              <strong>L&#39;holobionte ingénieur de sa niche : quand le vivant installe ses conditions (riz noyé, biocroûtes)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La niche écologique n&#39;est pas une donnée préalable du milieu : elle est une production de l&#39;holobionte, extension au couple plante-microbiom…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (182)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6362/">abiotique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6414/">aquaponie</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5925/">Chaleur</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6842/">filtration</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7348/">prix</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6233/">Réhumectation</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7833/">électrode</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>La physique de l&#39;eau dans le sol</h2>
+    <div class="sv-markdown"><p>L'eau du sol n'est presque jamais un liquide libre. Elle est retenue : par cohésion entre ses propres molécules, par adhésion aux surfaces des grains, par capillarité dans les pores fins. C'est pourquoi un sol peut être humide sans dégouliner — l'eau y est sous tension, collée aux parois comme une buée. La plante doit travailler pour l'en extraire, d'autant plus fort que le sol s'assèche : on parle de potentiel hydrique, une pression négative qui mesure l'effort d'extraction. Cette physique discrète décide de tout : la disponibilité de l'eau, sa circulation, et la vie qu'elle rend possible. Retenons l'image : l'eau du sol est moins un liquide qu'une atmosphère collante.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>La loi de Darcy : comment le sang circule</h2>
+    <div class="sv-markdown"><p>Comment ce sang se déplace-t-il ? La loi de Darcy répond par une idée simple : l'eau s'écoule d'autant plus vite que la pente qui l'appelle est forte et que le sol est perméable. Cette perméabilité se mesure en conductivité hydraulique — saturée, quand tous les pores sont pleins, c'est alors que l'eau file le plus vite par les gros canaux ; insaturée, quand il ne reste que des films, et là, elle rampe. Tout l'enjeu agronomique est dans cet écart : un sol compacté, aux pores effondrés, conduit mal l'eau, même s'il est humide. Mesurer la conductivité hydraulique saturée, c'est prendre le pouls de la circulation — un diagnostic aujourd'hui accessible au champ (<a href="/Publications/liseuse/fiche/162/">fiche #162</a>).</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>La macroporosité biologique : les artères</h2>
+    <div class="sv-markdown"><p>Les artères du sol ne sont pas creusées par hasard : ce sont des racines mortes, des galeries de vers de terre, des fissures que la vie ouvre et entretient. On parle de macroporosité biologique — des canaux larges, par lesquels l'eau de pluie s'infiltre en profondeur au lieu de ruisseler. Ces artères font plus que drainer : elles ventilent, elles guident les racines nouvelles dans les traces des anciennes. La faune qui les creuse appartient à un autre chapitre de la collection (son volet faune) — ici, retenons son œuvre : un réseau d'artères dont le diamètre et la continuité décident de la vitesse à laquelle un sol encaisse une pluie d'orage. Sans elles, l'eau s'arrête à la surface.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>La biopuncture : reconstruire la macroporosité</h2>
+    <div class="sv-markdown"><p>Quand le labour a effondré les artères, la nature sait les rouvrir. On appelle biopuncture cette reconstruction biologique de la porosité : des plantes à racines pivotantes — radis fourrager, luzerne, mélanges de couverts — que l'on sème pour qu'elles percent les semelles de labour, ces couches compactées que la charrue laisse derrière elle. La racine fait levier, elle s'insinue, meurt, et laisse un canal durable que les générations suivantes empruntent. C'est de la porosité semée : on ne décompacte plus à la dent, on confie le forage aux racines. Le résultat est un réseau d'artères qui se reconstitue en une saison, là où le labour mettrait des années à le rebâtir — s'il y parvenait.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>La remontée hydraulique : le sol pompe par le bas</h2>
+    <div class="sv-markdown"><p>Le sol sait aussi remonter l'eau. La nuit, certaines racines profondes, plantées dans les couches encore humides, relâchent de l'eau dans les couches superficielles asséchées — un phénomène nommé remontée hydraulique. Le jour, l'eau redescend vers la profondeur par le même chemin, au gré des gradients de tension. Cette pompe nocturne fait du sol un organe de redistribution : elle maintient vivantes les racines superficielles, elle ranime les films d'eau où travaillent les microbes, elle amortit le choc des sécheresses. La plante n'est plus seulement celle qui boit — elle devient le cœur qui brasse. Une synergie qui relie le sous-sol à la surface, et que le réseau des champignons vient décupler.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Remontée hydraulique et réseaux mycorhiziens : synergie</h2>
+    <div class="sv-markdown"><p>Les champignons mycorhiziens étendent cette pompe bien au-delà des racines. Leurs filaments explorent des recoins que la racine n'atteint pas, puisent l'eau des pores les plus fins, et la ramènent vers la plante — et, de proche en proche, d'une plante à l'autre. La remontée hydraulique ne s'arrête plus à la frontière d'une racine : elle circule dans un réseau souterrain partagé, où l'eau peut transiter d'un arbre profond à un couvert superficiel. C'est une circulation capillaire à grande échelle, orchestrée par la symbiose. Ce que la loi de Darcy décrit froidement, le vivant l'amplifie : le sol irrigué par ses habitants est plus résilient que le sol irrigué par la seule gravité.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>Les films d&#39;eau : la vie dans les capillaires</h2>
+    <div class="sv-markdown"><p>La vie microbienne ne nage pas dans le sol : elle rampe dans des films. Entre les grains, l'eau ne forme pas de flaques mais des pellicules fines, où se rejoignent deux mondes — l'eau qui nourrit et l'air qui fait respirer. C'est dans cette frontière humide que l'essentiel du microbiome travaille : dissoudre, décomposer, échanger. Trop d'eau, et le film devient lac, privé d'oxygène — l'activité bascule. Trop peu, et le film se rompt, la vie se met en pause. La qualité d'un sol vivant tient donc moins à sa teneur en eau qu'à la continuité de ses films : un réseau capillaire ininterrompu où chaque microbe trouve, à quelques micromètres, sa ration d'eau et d'air.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Stratégies de survie à la dessiccation</h2>
+    <div class="sv-markdown"><p>Que font les microbes quand le film s'évapore ? Ils ne meurent pas en masse : ils attendent. Certains s'enkystent, se rétractent en spores d'une résistance extraordinaire ; d'autres accumulent des sucres protecteurs qui remplacent l'eau et vitrifient leur intérieur ; d'autres encore ralentissent leur métabolisme jusqu'au quasi-sommeil. Le sol desséché n'est donc pas stérile — c'est un monde en dormance, prêt à s'embraser d'activité au premier retour d'eau. Cette patience explique un phénomène bien connu des agronomes : l'effet Birch, ce sursaut de respiration qui embrase le sol au premier arrosage après une longue sécheresse (<a href="/Publications/liseuse/fiche/234/">fiche #234</a>). La vie n'avait pas disparu ; elle n'attendait qu'un peu d'eau pour se remettre au travail.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>L&#39;eau dans les sols cultivés : asphyxie et excès</h2>
+    <div class="sv-markdown"><p>Dans le sol cultivé, l'eau devient vite un problème de trop ou de trop peu. Trop d'eau, et des poches entières s'asphyxient : privées d'oxygène, elles basculent en anaérobie, le fer rouille autrement, des toxines s'accumulent, les racines étouffent (<a href="/Publications/liseuse/fiche/120/">fiche #120</a>). Ces microzones noyées ne sont pas des anomalies à gommer — elles font partie du paysage normal d'un sol vivant, et les fiches redox en décrivent la thermodynamique fine. Trop peu d'eau, et c'est l'inverse : les films se rompent, l'activité s'éteint. Le cultivateur apprend donc à lire ce double visage de l'eau — ni l'excès qui noie, ni le manque qui éteint, mais la circulation qui vivifie.</p>
+</div>
+    
+  </section><section id="s10">
+    <h2>Gérer l&#39;eau par la biologie : leviers pratiques</h2>
+    <div class="sv-markdown"><p>Alors, comment gérer l'eau d'un sol ? Moins par la seule irrigation que par la biologie qui la retient et la fait circuler. Restaurer la matière organique, cette éponge qui multiplie la réserve utile. Couvrir le sol pour freiner l'évaporation et amortir les pluies. Semer des couverts qui biopuncturent, et garder des racines vivantes toute l'année. Laisser les galeries et les films se reconstituer. Et surveiller le pouls : les sondes redox de terrain (<a href="/Publications/liseuse/fiche/114/">fiche #114</a>) disent en continu si le sol respire ou s'asphyxie, bien mieux qu'un simple taux d'humidité. L'objectif n'est pas de stocker plus d'eau, mais de rendre au sol sa capacité à l'accueillir, la retenir et la redistribuer — de lui rendre sa circulation. Ces leviers — couverts, couverts permanents, racines vivantes — sont le cœur du métier de la strate Pratiques ; ce volet n'en retient que le principe biologique.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>L'eau du sol n'est pas une ressource qu'on applique : c'est une circulation qu'on entretient. Ses artères sont creusées par les racines et les vers, sa pompe est animée par les champignons, ses films abritent la vie. Gérer l'eau d'un sol vivant, c'est soigner sa circulation.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (182)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6362/">abiotique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6414/">aquaponie</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5925/">Chaleur</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6563/">ciment</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6842/">filtration</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7348/">prix</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6233/">Réhumectation</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7833/">électrode</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">S0 — lecture (30)</summary>
+    <nav aria-label="S0 — lecture (30)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/S0/integral/" title="Le document S0 intégral" data-id="integral-S0">
+          <span class="sv-navlist-title">Le document S0 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/36/" title="L'eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique" data-id="fiche-36">
+          <span class="sv-navlist-title">L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/81/" title="Couplages biogéochimiques Fe-P-S-N sous alternance redox" data-id="fiche-81">
+          <span class="sv-navlist-title">Couplages biogéochimiques Fe-P-S-N sous alternance redox</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/85/" title="Thermorégulation édaphique — le sol vivant comme tampon climatique local" data-id="fiche-85">
+          <span class="sv-navlist-title">Thermorégulation édaphique — le sol vivant comme tampon climatique local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/87/" title="Compaction — de l'asphyxie racinaire à la maladie chronique végétale" data-id="fiche-87">
+          <span class="sv-navlist-title">Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/114/" title="Eh terrain : sondes redox, gradient mV/cm et méthode in situ" data-id="fiche-114">
+          <span class="sv-navlist-title">Eh terrain : sondes redox, gradient mV/cm et méthode in situ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/120/" title="Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale" data-id="fiche-120">
+          <span class="sv-navlist-title">Profil sol hydromorphe/organique : redox bas, émissions, gestion de l’eau centrale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/121/" title="Asphyxie / anaérobie locale (odeurs, horizons réduits)" data-id="fiche-121">
+          <span class="sv-navlist-title">Asphyxie / anaérobie locale (odeurs, horizons réduits)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/123/" title="Racines superficielles / enracinement bloqué" data-id="fiche-123">
+          <span class="sv-navlist-title">Racines superficielles / enracinement bloqué</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/162/" title="conductivité hydraulique saturée" data-id="fiche-162">
+          <span class="sv-navlist-title">conductivité hydraulique saturée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/166/" title="Biofilms" data-id="fiche-166">
+          <span class="sv-navlist-title">Biofilms</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/189/" title="Plastiques biosourcés et/ou biodégradables en fin de vie" data-id="fiche-189">
+          <span class="sv-navlist-title">Plastiques biosourcés et/ou biodégradables en fin de vie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/206/" title="Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux" data-id="fiche-206">
+          <span class="sv-navlist-title">Points chauds et moments chauds (hot spots, hot moments) — hétérogénéité spatio-temporelle des flux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/234/" title="Effet Birch — pulse de minéralisation à la réhumectation des sols" data-id="fiche-234">
+          <span class="sv-navlist-title">Effet Birch — pulse de minéralisation à la réhumectation des sols</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/243/" title="Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision" data-id="fiche-243">
+          <span class="sv-navlist-title">Diagnostiquer la santé du sol au champ : indicateurs simples, des fonctions à la décision</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/252/" title="Les états de l'eau et la biologie du sol" data-id="fiche-252">
+          <span class="sv-navlist-title">Les états de l&#39;eau et la biologie du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/255/" title="Le chiendent comme bioindicateur du compactage" data-id="fiche-255">
+          <span class="sv-navlist-title">Le chiendent comme bioindicateur du compactage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/270/" title="Haies, bocage et brise-vent — fonctions sol, lisière et microclimat" data-id="fiche-270">
+          <span class="sv-navlist-title">Haies, bocage et brise-vent — fonctions sol, lisière et microclimat</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/271/" title="Silvopastoralisme tempéré — arbre, prairie et animal" data-id="fiche-271">
+          <span class="sv-navlist-title">Silvopastoralisme tempéré — arbre, prairie et animal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/272/" title="Pompage nutritif profond et filet de sécurité racinaire" data-id="fiche-272">
+          <span class="sv-navlist-title">Pompage nutritif profond et filet de sécurité racinaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/273/" title="Trognes et arbres-ressources — biomasse renouvelable et rôle écologique" data-id="fiche-273">
+          <span class="sv-navlist-title">Trognes et arbres-ressources — biomasse renouvelable et rôle écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/274/" title="L'animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage" data-id="fiche-274">
+          <span class="sv-navlist-title">L&#39;animal dans le cycle de fertilité — déjections, coprophages et couplage culture-élevage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/278/" title="Couvert permanent sous serre : restructurer un sol mort" data-id="fiche-278">
+          <span class="sv-navlist-title">Couvert permanent sous serre : restructurer un sol mort</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/293/" title="Tolérance à la sécheresse médiée par le microbiome — de l'osmolyte au rhizosheath" data-id="fiche-293">
+          <span class="sv-navlist-title">Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/314/" title="Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements" data-id="fiche-314">
+          <span class="sv-navlist-title">Eau douce, épuration et sol — valoriser les biomasses aquatiques comme amendements</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/315/" title="Battance et croûte de surface : mécanismes, diagnostic et remédiation" data-id="fiche-315">
+          <span class="sv-navlist-title">Battance et croûte de surface : mécanismes, diagnostic et remédiation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/343/" title="L'holobionte ingénieur de sa niche : quand le vivant installe ses conditions (riz noyé, biocroûtes)" data-id="fiche-343">
+          <span class="sv-navlist-title">L&#39;holobionte ingénieur de sa niche : quand le vivant installe ses conditions (riz noyé, biocroûtes)</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

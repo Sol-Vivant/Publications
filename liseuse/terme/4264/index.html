@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/terme/4264/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -46,12 +46,10 @@
                 <a href="/Publications/liseuse/doc/F1/">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/F2/">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -78,7 +76,7 @@
   </ul>
   <p class="sv-side-label">Outils</p>
   <ul class="sv-side-tree">
-    <li><a href="/Publications/liseuse/thesaurus/">Vocabulaire — les termes</a></li>
+    <li><a href="/Publications/liseuse/thesaurus/" aria-current="page">Vocabulaire — les termes</a></li>
     <li><a href="/Publications/liseuse/cards/">Concept cards — la rigueur</a></li>
     <li><a href="/Publications/liseuse/chaines/">Chaînes causales — les arguments</a></li>
     <li><a href="/Publications/liseuse/chantiers/">Chantiers doctrinaux — les pépites</a></li>
@@ -206,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-thesaurus" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -220,72 +218,417 @@
       <a href="/Publications/liseuse/terme/1396/">ère géologique</a>
     
       <span aria-hidden="true">›</span>
-      <a href="/Publications/liseuse/thesaurus/#sec-F1">F1</a>
+      <a href="/Publications/liseuse/thesaurus/#cat-F1">F1</a>
     
       <span aria-hidden="true">›</span>
       <span aria-current="page">milliard ennuyeux</span>
     
 </nav>
 
-  <article class="sv-prose sv-terme">
-    <div class="sv-terme-head sv-page-head">
-      <h1>milliard ennuyeux</h1>
-      <astro-island uid="2gvOmz" prefix="r3" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;4264&quot;],&quot;label&quot;:[0,&quot;milliard ennuyeux&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
-    </div>
-    <p class="sv-meta">
-      <span>EN : <strong>Boring Billion</strong></span>
-      <span class="sv-badge">standard</span>
-      
-      
-    </p>
-
-    <div class="sv-card sv-terme-def">
-        <h2>Définition</h2>
+  <div class="sv-reading">
+    <article class="sv-prose sv-terme">
+      <div class="sv-terme-head sv-page-head">
+        <h1>milliard ennuyeux</h1>
+      </div>
+      <p class="sv-meta">
+        <span>EN : <strong>Boring Billion</strong></span>
+        <span class="sv-badge">standard</span>
         
-        <div class="sv-markdown"><p>Période de l'histoire de la Terre caractérisée par une stabilité géochimique et une apparente stagnation de l'évolution biologique macroscopique. Les recherches sur la vie sous limitation énergétique extrême suggèrent que cette ère a néanmoins permis le maintien de phénotypes anciens et l'adaptation fine des micro-organismes à des flux d'énergie très faibles (Hoehler &amp; Jørgensen, 2013; Lever et al., 2015).</p>
-</div>
+        
+      </p>
+
+      
+      <div class="sv-card sv-terme-def">
+        <h2>Définition</h2>
+        <p class="sv-def-teaser">Période de l&#39;histoire de la Terre caractérisée par une stabilité géochimique et une apparente stagnation de l&#39;évolution biologique macroscopique. Les recherches sur la vie sous limitation énergétique extrême suggèrent que cette ère a néanmoins permis le maintien de phénotypes anciens et l&#39;adaptation fine des micro-organismes à des flux d&#39;énergie très faibles (Hoehler &amp; Jørgensen, 2013; Lever et al., 2015).…</p>
+        <p class="sv-meta">
+          <a href="/Publications/liseuse/thesaurus/#cat-F1">
+            Lire la définition complète dans le Vocabulaire →
+          </a>
+        </p>
       </div>
 
-    <nav class="sv-pager" aria-label="Termes voisins de la section">
-        <a class="sv-pager-prev" href="/Publications/liseuse/terme/7095/" title="micromorphologie">
-            <span class="sv-pager-dir">← Précédent</span>
-          </a>
-        <a class="sv-pager-next" href="/Publications/liseuse/terme/7113/" title="monde à ARN">
-            <span class="sv-pager-dir">Suivant →</span>
-          </a>
-      </nav>
+      <p class="sv-meta"><strong>Synonymes :</strong> Milliard stérile; Proterozoïque moyen, Boring Billion; Middle Proterozoic</p>
 
-    <p class="sv-meta"><strong>Synonymes :</strong> Milliard stérile; Proterozoïque moyen, Boring Billion; Middle Proterozoic</p>
+      <section class="sv-card sv-related">
+          <h2>Appartient à</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/1396/">ère géologique</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Appartient à</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/1396/">ère géologique</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Comprend (1)</h2>
+          
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/6055/">Limitation énergétique</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Comprend (1)</h2>
-        
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/6055/">Limitation énergétique</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Termes liés (3)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/terme/6055/">Limitation énergétique</a></li><li><a href="/Publications/liseuse/terme/5131/">protérozoïque</a></li><li><a href="/Publications/liseuse/terme/7821/">Évolution microbienne</a></li>
+          </ul>
+        </section>
 
-    <section class="sv-card sv-related">
-        <h2>Termes liés (3)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/terme/6055/">Limitation énergétique</a></li><li><a href="/Publications/liseuse/terme/5131/">protérozoïque</a></li><li><a href="/Publications/liseuse/terme/7821/">Évolution microbienne</a></li>
-        </ul>
-      </section>
+      <section class="sv-card sv-related">
+          <h2>Utilisé dans (1 fiches)</h2>
+          <ul class="sv-link-list">
+            <li><a href="/Publications/liseuse/fiche/201/">Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes</a></li>
+          </ul>
+        </section>
+    </article>
 
-    <section class="sv-card sv-related">
-        <h2>Utilisé dans (1 fiches)</h2>
-        <ul class="sv-link-list">
-          <li><a href="/Publications/liseuse/fiche/201/">Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes</a></li>
-        </ul>
-      </section>
-  </article>
+    <div class="sv-toc-zone">
+  <astro-island uid="2gvOmz" prefix="r5" component-url="/Publications/liseuse/_astro/SvBookmark.N7_Kyxhf.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;kind&quot;:[0,&quot;terme&quot;],&quot;id&quot;:[0,&quot;4264&quot;],&quot;label&quot;:[0,&quot;milliard ennuyeux&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvBookmark&quot;,&quot;value&quot;:true}" await-children><button type="button" class="sv-bookmark" aria-pressed="false">☆ Marquer</button><!--astro:end--></astro-island>
+  <details class="sv-toc sv-cat-menu" id="terme-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Termes — F1 (156)</summary>
+    <nav aria-label="Termes — F1 (156)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4306/" title="acidification des océans" data-id="4306">
+          <span class="sv-navlist-title">acidification des océans</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5886/" title="Agriculture ancienne" data-id="5886">
+          <span class="sv-navlist-title">Agriculture ancienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/700/" title="Akkadiens" data-id="700">
+          <span class="sv-navlist-title">Akkadiens</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5891/" title="Alcool" data-id="5891">
+          <span class="sv-navlist-title">Alcool</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/705/" title="Alteration chimique acide" data-id="705">
+          <span class="sv-navlist-title">Alteration chimique acide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/455/" title="altération minérale" data-id="455">
+          <span class="sv-navlist-title">altération minérale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/152/" title="Archéen" data-id="152">
+          <span class="sv-navlist-title">Archéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5277/" title="azolla" data-id="5277">
+          <span class="sv-navlist-title">azolla</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6452/" title="banque de gènes" data-id="6452">
+          <span class="sv-navlist-title">banque de gènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5911/" title="Bière" data-id="5911">
+          <span class="sv-navlist-title">Bière</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/153/" title="BIFs" data-id="153">
+          <span class="sv-navlist-title">BIFs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2399/" title="biologie" data-id="2399">
+          <span class="sv-navlist-title">biologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2400/" title="biosphère" data-id="2400">
+          <span class="sv-navlist-title">biosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6489/" title="biotaxa" data-id="6489">
+          <span class="sv-navlist-title">biotaxa</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3592/" title="bricolage évolutif" data-id="3592">
+          <span class="sv-navlist-title">bricolage évolutif</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5916/" title="Cacao" data-id="5916">
+          <span class="sv-navlist-title">Cacao</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6501/" title="calcification" data-id="6501">
+          <span class="sv-navlist-title">calcification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5918/" title="Calendrier maya" data-id="5918">
+          <span class="sv-navlist-title">Calendrier maya</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6507/" title="captage" data-id="6507">
+          <span class="sv-navlist-title">captage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4722/" title="Carbonifère" data-id="4722">
+          <span class="sv-navlist-title">Carbonifère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/393/" title="cascade hydraulique évolutive" data-id="393">
+          <span class="sv-navlist-title">cascade hydraulique évolutive</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5346/" title="changement climatique géologique" data-id="5346">
+          <span class="sv-navlist-title">changement climatique géologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2403/" title="Changement climatique historique" data-id="2403">
+          <span class="sv-navlist-title">Changement climatique historique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4789/" title="Charbon" data-id="4789">
+          <span class="sv-navlist-title">Charbon</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/155/" title="Chimiolithoautotrophie" data-id="155">
+          <span class="sv-navlist-title">Chimiolithoautotrophie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/636/" title="Chinampas" data-id="636">
+          <span class="sv-navlist-title">Chinampas</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/693/" title="choucroute" data-id="693">
+          <span class="sv-navlist-title">choucroute</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5929/" title="Cité-État" data-id="5929">
+          <span class="sv-navlist-title">Cité-État</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/697/" title="Civilisation Maya" data-id="697">
+          <span class="sv-navlist-title">Civilisation Maya</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/600/" title="Climax écologique" data-id="600">
+          <span class="sv-navlist-title">Climax écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/358/" title="colonisation terrestre" data-id="358">
+          <span class="sv-navlist-title">colonisation terrestre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5372/" title="condiment fermenté" data-id="5372">
+          <span class="sv-navlist-title">condiment fermenté</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5373/" title="conservation de la biodiversité" data-id="5373">
+          <span class="sv-navlist-title">conservation de la biodiversité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6619/" title="contingence" data-id="6619">
+          <span class="sv-navlist-title">contingence</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4657/" title="Convention de Stockholm" data-id="4657">
+          <span class="sv-navlist-title">Convention de Stockholm</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6637/" title="crise biotique" data-id="6637">
+          <span class="sv-navlist-title">crise biotique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6643/" title="croûte océanique" data-id="6643">
+          <span class="sv-navlist-title">croûte océanique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6644/" title="croûte terrestre" data-id="6644">
+          <span class="sv-navlist-title">croûte terrestre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4731/" title="Cryogénien" data-id="4731">
+          <span class="sv-navlist-title">Cryogénien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5955/" title="Culture pure" data-id="5955">
+          <span class="sv-navlist-title">Culture pure</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/454/" title="cyanobactéries" data-id="454">
+          <span class="sv-navlist-title">cyanobactéries</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6652/" title="cycle climatique" data-id="6652">
+          <span class="sv-navlist-title">cycle climatique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/159/" title="Cycle d’Indore" data-id="159">
+          <span class="sv-navlist-title">Cycle d’Indore</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/709/" title="cycles saisonniers du sol" data-id="709">
+          <span class="sv-navlist-title">cycles saisonniers du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/634/" title="Dernier Ancêtre Commun Universel" data-id="634">
+          <span class="sv-navlist-title">Dernier Ancêtre Commun Universel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6677/" title="directive cadre sur l'eau" data-id="6677">
+          <span class="sv-navlist-title">directive cadre sur l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3890/" title="dissolution des carbonates" data-id="3890">
+          <span class="sv-navlist-title">dissolution des carbonates</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/706/" title="Diversite mineralogique" data-id="706">
+          <span class="sv-navlist-title">Diversite mineralogique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/350/" title="Dust Bowl" data-id="350">
+          <span class="sv-navlist-title">Dust Bowl</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2411/" title="échelle des temps géologiques" data-id="2411">
+          <span class="sv-navlist-title">échelle des temps géologiques</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/704/" title="écogenèse" data-id="704">
+          <span class="sv-navlist-title">écogenèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2410/" title="écologie" data-id="2410">
+          <span class="sv-navlist-title">écologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7799/" title="Écosystème mature" data-id="7799">
+          <span class="sv-navlist-title">Écosystème mature</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7800/" title="Écriture cunéiforme" data-id="7800">
+          <span class="sv-navlist-title">Écriture cunéiforme</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7801/" title="Édiacarien" data-id="7801">
+          <span class="sv-navlist-title">Édiacarien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5977/" title="Effondrement maya" data-id="5977">
+          <span class="sv-navlist-title">Effondrement maya</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5978/" title="Effondrement sociétal" data-id="5978">
+          <span class="sv-navlist-title">Effondrement sociétal</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5980/" title="Empire mésopotamien" data-id="5980">
+          <span class="sv-navlist-title">Empire mésopotamien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/336/" title="endosymbiose" data-id="336">
+          <span class="sv-navlist-title">endosymbiose</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4377/" title="entités nouvelles" data-id="4377">
+          <span class="sv-navlist-title">entités nouvelles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7811/" title="Équilibre dynamique stable" data-id="7811">
+          <span class="sv-navlist-title">Équilibre dynamique stable</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7812/" title="Équilibre écosystémique" data-id="7812">
+          <span class="sv-navlist-title">Équilibre écosystémique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4803/" title="Ère Néoprotérozoïque" data-id="4803">
+          <span class="sv-navlist-title">Ère Néoprotérozoïque</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4804/" title="Ère Paléozoïque" data-id="4804">
+          <span class="sv-navlist-title">Ère Paléozoïque</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/604/" title="érosion génique" data-id="604">
+          <span class="sv-navlist-title">érosion génique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4382/" title="euxinie" data-id="4382">
+          <span class="sv-navlist-title">euxinie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7821/" title="Évolution microbienne" data-id="7821">
+          <span class="sv-navlist-title">Évolution microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7887/" title="évolution mycorhizes" data-id="7887">
+          <span class="sv-navlist-title">évolution mycorhizes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7822/" title="Évolution terrestre" data-id="7822">
+          <span class="sv-navlist-title">Évolution terrestre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4807/" title="Extinction massive" data-id="4807">
+          <span class="sv-navlist-title">Extinction massive</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5989/" title="FECA" data-id="5989">
+          <span class="sv-navlist-title">FECA</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5994/" title="Fermentation du soja" data-id="5994">
+          <span class="sv-navlist-title">Fermentation du soja</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4395/" title="flux biogéochimiques (limite planétaire)" data-id="4395">
+          <span class="sv-navlist-title">flux biogéochimiques (limite planétaire)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6017/" title="Génomique sur cellule unique" data-id="6017">
+          <span class="sv-navlist-title">Génomique sur cellule unique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6856/" title="glaciaire" data-id="6856">
+          <span class="sv-navlist-title">glaciaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4812/" title="Glaciations" data-id="4812">
+          <span class="sv-navlist-title">Glaciations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6013/" title="Gochujang" data-id="6013">
+          <span class="sv-navlist-title">Gochujang</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/462/" title="Grand Événement d’Oxydation" data-id="462">
+          <span class="sv-navlist-title">Grand Événement d’Oxydation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/703/" title="Grès rouges" data-id="703">
+          <span class="sv-navlist-title">Grès rouges</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/701/" title="Hadéen" data-id="701">
+          <span class="sv-navlist-title">Hadéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/692/" title="Hangari Onggi" data-id="692">
+          <span class="sv-navlist-title">Hangari Onggi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6024/" title="Homogénéité" data-id="6024">
+          <span class="sv-navlist-title">Homogénéité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6923/" title="hydrogène abiotique" data-id="6923">
+          <span class="sv-navlist-title">hydrogène abiotique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/605/" title="ingénierie géochimique biologique" data-id="605">
+          <span class="sv-navlist-title">ingénierie géochimique biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4413/" title="intégrité de la biosphère" data-id="4413">
+          <span class="sv-navlist-title">intégrité de la biosphère</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6994/" title="interglaciaire" data-id="6994">
+          <span class="sv-navlist-title">interglaciaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/691/" title="Jang" data-id="691">
+          <span class="sv-navlist-title">Jang</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/695/" title="Kéfir" data-id="695">
+          <span class="sv-navlist-title">Kéfir</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/690/" title="Kimchi" data-id="690">
+          <span class="sv-navlist-title">Kimchi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4428/" title="LECA (dernier ancêtre commun des eucaryotes)" data-id="4428">
+          <span class="sv-navlist-title">LECA (dernier ancêtre commun des eucaryotes)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4256/" title="Lignée pure" data-id="4256">
+          <span class="sv-navlist-title">Lignée pure</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6055/" title="Limitation énergétique" data-id="6055">
+          <span class="sv-navlist-title">Limitation énergétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/708/" title="lithologie" data-id="708">
+          <span class="sv-navlist-title">lithologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4258/" title="Lomagundi-Jatuli" data-id="4258">
+          <span class="sv-navlist-title">Lomagundi-Jatuli</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7048/" title="luminosité solaire" data-id="7048">
+          <span class="sv-navlist-title">luminosité solaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6070/" title="Maraîchage traditionnel" data-id="6070">
+          <span class="sv-navlist-title">Maraîchage traditionnel</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4260/" title="matière noire microbienne" data-id="4260">
+          <span class="sv-navlist-title">matière noire microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7963/" title="Mer d'Aral" data-id="7963">
+          <span class="sv-navlist-title">Mer d&#39;Aral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6094/" title="Mésoamérique" data-id="6094">
+          <span class="sv-navlist-title">Mésoamérique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7165/" title="météo agricole" data-id="7165">
+          <span class="sv-navlist-title">météo agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7163/" title="méthane atmosphérique" data-id="7163">
+          <span class="sv-navlist-title">méthane atmosphérique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7095/" title="micromorphologie" data-id="7095">
+          <span class="sv-navlist-title">micromorphologie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4264/" title="milliard ennuyeux" data-id="4264" aria-current="page">
+          <span class="sv-navlist-title">milliard ennuyeux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7113/" title="monde à ARN" data-id="7113">
+          <span class="sv-navlist-title">monde à ARN</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3922/" title="nucléation" data-id="3922">
+          <span class="sv-navlist-title">nucléation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7185/" title="nutrition non-ionique" data-id="7185">
+          <span class="sv-navlist-title">nutrition non-ionique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6113/" title="Olivine" data-id="6113">
+          <span class="sv-navlist-title">Olivine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4749/" title="Ordovicien" data-id="4749">
+          <span class="sv-navlist-title">Ordovicien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6137/" title="Paraclimax" data-id="6137">
+          <span class="sv-navlist-title">Paraclimax</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4475/" title="paradoxe du Jeune Soleil faible" data-id="4475">
+          <span class="sv-navlist-title">paradoxe du Jeune Soleil faible</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4478/" title="Patrimoine biologique" data-id="4478">
+          <span class="sv-navlist-title">Patrimoine biologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/157/" title="Pédogenèse" data-id="157">
+          <span class="sv-navlist-title">Pédogenèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6145/" title="Perméabilité gazeuse" data-id="6145">
+          <span class="sv-navlist-title">Perméabilité gazeuse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6196/" title="Pétrographie" data-id="6196">
+          <span class="sv-navlist-title">Pétrographie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6157/" title="Phénologie du sol" data-id="6157">
+          <span class="sv-navlist-title">Phénologie du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4274/" title="photoferrotrophie" data-id="4274">
+          <span class="sv-navlist-title">photoferrotrophie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/335/" title="photosynthèse oxygénique" data-id="335">
+          <span class="sv-navlist-title">photosynthèse oxygénique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7296/" title="plante vasculaire" data-id="7296">
+          <span class="sv-navlist-title">plante vasculaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/2383/" title="Précambrien" data-id="2383">
+          <span class="sv-navlist-title">Précambrien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5661/" title="Principe d'économie agricole" data-id="5661">
+          <span class="sv-navlist-title">Principe d&#39;économie agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5663/" title="Priorité de conservation" data-id="5663">
+          <span class="sv-navlist-title">Priorité de conservation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6187/" title="Productivisme" data-id="6187">
+          <span class="sv-navlist-title">Productivisme</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4686/" title="Protection des eaux" data-id="4686">
+          <span class="sv-navlist-title">Protection des eaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4911/" title="Quaternaire" data-id="4911">
+          <span class="sv-navlist-title">Quaternaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6204/" title="Radioactivité" data-id="6204">
+          <span class="sv-navlist-title">Radioactivité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/3933/" title="radiocarbone" data-id="3933">
+          <span class="sv-navlist-title">radiocarbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7500/" title="résilience génétique" data-id="7500">
+          <span class="sv-navlist-title">résilience génétique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/5692/" title="Ressource écologique" data-id="5692">
+          <span class="sv-navlist-title">Ressource écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7442/" title="retrait de l'eau" data-id="7442">
+          <span class="sv-navlist-title">retrait de l&#39;eau</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/226/" title="révolution verte" data-id="226">
+          <span class="sv-navlist-title">révolution verte</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/156/" title="Rhynie Chert" data-id="156">
+          <span class="sv-navlist-title">Rhynie Chert</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7972/" title="ribozyme" data-id="7972">
+          <span class="sv-navlist-title">ribozyme</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7449/" title="roche mère du sol" data-id="7449">
+          <span class="sv-navlist-title">roche mère du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4769/" title="roche tendre" data-id="4769">
+          <span class="sv-navlist-title">roche tendre</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6227/" title="Route de la Soie" data-id="6227">
+          <span class="sv-navlist-title">Route de la Soie</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/698/" title="Royaume Loulan" data-id="698">
+          <span class="sv-navlist-title">Royaume Loulan</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6250/" title="Saumure" data-id="6250">
+          <span class="sv-navlist-title">Saumure</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6251/" title="Savoirs indigènes" data-id="6251">
+          <span class="sv-navlist-title">Savoirs indigènes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7641/" title="sédimentation continentale" data-id="7641">
+          <span class="sv-navlist-title">sédimentation continentale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/154/" title="serpentinisation" data-id="154">
+          <span class="sv-navlist-title">serpentinisation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/4770/" title="Silurien" data-id="4770">
+          <span class="sv-navlist-title">Silurien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7542/" title="sixième extinction de masse" data-id="7542">
+          <span class="sv-navlist-title">sixième extinction de masse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7578/" title="stratification des eaux" data-id="7578">
+          <span class="sv-navlist-title">stratification des eaux</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/161/" title="succession écologique" data-id="161">
+          <span class="sv-navlist-title">succession écologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6282/" title="Succession naturelle" data-id="6282">
+          <span class="sv-navlist-title">Succession naturelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6283/" title="Succession secondaire" data-id="6283">
+          <span class="sv-navlist-title">Succession secondaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/699/" title="Sumeriens" data-id="699">
+          <span class="sv-navlist-title">Sumeriens</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/6290/" title="Sylvigenèse" data-id="6290">
+          <span class="sv-navlist-title">Sylvigenèse</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/707/" title="Synechococcus" data-id="707">
+          <span class="sv-navlist-title">Synechococcus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7625/" title="système des carbonates" data-id="7625">
+          <span class="sv-navlist-title">système des carbonates</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/351/" title="Terra Preta" data-id="351">
+          <span class="sv-navlist-title">Terra Preta</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/158/" title="Théorie de l'Humus" data-id="158">
+          <span class="sv-navlist-title">Théorie de l&#39;Humus</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/7694/" title="tradition agricole" data-id="7694">
+          <span class="sv-navlist-title">tradition agricole</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/702/" title="Uraninite" data-id="702">
+          <span class="sv-navlist-title">Uraninite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/696/" title="vin de riz" data-id="696">
+          <span class="sv-navlist-title">vin de riz</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/terme/694/" title="yaourt" data-id="694">
+          <span class="sv-navlist-title">yaourt</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "terme-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
@@ -295,6 +638,6 @@
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r4" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>

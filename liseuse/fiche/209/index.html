@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/fiche/209/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -56,452 +56,14 @@
                 <a href="/Publications/liseuse/doc/V1/">
                   <strong>V1</strong> — La Faune du Sol
                 </a>
-                
               </li><li class="is-open">
-                <a href="/Publications/liseuse/doc/V2/">
+                <a href="/Publications/liseuse/doc/V2/" aria-current="page">
                   <strong>V2</strong> — L&#39;Holobionte Plante-Microbiome
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/336/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/1/">
-                          Les Champignons Entomopathogènes dans le Sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/3/">
-                          Microbiome du sol vivant et thermotolérance des plantes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/10/">
-                          Cobalt, Vitamine B12 et Fixation Biologique de l&#39;Azote
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/12/">
-                          Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/16/">
-                          Chélation par Acides Aminés — Mécanisme et applications
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/21/">
-                          Extrêmes Climatiques et Triangle des Maladies Végétales
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/22/">
-                          Quorum Sensing et Communication Chimique Rhizosphérique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/31/">
-                          Les Strigolactones — Signal Clé du Recrutement Mycorhizien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/32/">
-                          Le Priming Immunitaire Végétal — Mémoire Épigénétique de la Défense
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/35/">
-                          Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/36/">
-                          L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/37/">
-                          Agroforesterie tempérée — Fonctions sol et productivité système
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/42/">
-                          Azote et légumineuses en agriculture régénératrice — chantier 14 Shift PREF 2026
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/57/">
-                          Cascade des conséquences — de la parcelle à la biosphère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/59/">
-                          Champignons entomopathogènes — double identité et lutte par conservation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/61/">
-                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/62/">
-                          Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/66/">
-                          Réseau mycorhizien commun — controverse Simard vs Karst 2023
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/69/">
-                          Couverts végétaux — design, biomasse et services rendus
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/74/">
-                          Cycle de rhizophagie — hypothèse de White 2018, état des preuves et implications
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/76/">
-                          Lombriciens — écologie, services et pilotage des populations
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/78/">
-                          Éliciteurs biologiques exogènes : chitosane et oligogalacturonides
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/82/">
-                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/83/">
-                          Cascade phosphore — du minéral inerte à l&#39;os humain
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/84/">
-                          Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/86/">
-                          Polyphénols — du stress racinaire à la longévité humaine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/87/">
-                          Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/88/">
-                          Mémoire microbienne paléoclimatique — héritage 20 000 ans
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/89/">
-                          Densité nutritionnelle alimentaire — du sol à l&#39;assiette
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/90/">
-                          Glycoprotéines fongiques — glomaline et GRSP, pivot de la pompe carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/91/">
-                          Métaux lourds — exclusion mycorhizienne et sécurité alimentaire One Health
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/98/">
-                          Hydrolyse protéique anaérobie : KNF-FAA, JADAM Fish-JLF, biol cubain et préservation de l&#39;azote organique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/99/">
-                          Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/100/">
-                          Hydrolyse osmotique par sucre concentré : KNF-FPJ, FFJ, OHN — extraction de sève et de phytochimie sans cuisson
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/103/">
-                          Exclusion compétitive et saturation de niche : suppressive soils, JADAM-JMS prophylactique, biocontrôle par diversité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/104/">
-                          Phyto-protection JADAM : tensio-actif potassique JWA et polysulfure germicide JS (lime-sulfur sans chaux)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/105/">
-                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/110/">
-                          Filtre mycorhizien ETM : exclusion métaux lourds et sécurité alimentaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/113/">
-                          Antifragilité : stress modéré → diversification de l&#39;hologénome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/117/">
-                          Holobionte programmable : ingénierie du microbiome plante par cycles de culture rationnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/118/">
-                          Triade Fe/Mo/Co pour la nitrogénase : stoechiométrie micronutritionnelle de la fixation biologique de l&#39;azote
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/128/">
-                          Endophytes ubiquitaires et potentiel pathogène latent
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/132/">
-                          Brix réfractomètre : seuils opérationnels et interprétation agronomique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/137/">
-                          Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/138/">
-                          Diversité fongique dual rôle producteur/régulateur : les champignons comme acteurs ambivalents des cycles biogéochimiques
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/142/">
-                          Synthetic Communities (SynComs) : ingénierie rationnelle de consortia microbiens pour l&#39;agriculture régénérative
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/143/">
-                          Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/144/">
-                          Scavenging vs Mining : stratégies fongiques d&#39;acquisition des nutriments dans le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/145/">
-                          Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/146/">
-                          Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/147/">
-                          Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/149/">
-                          Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/153/">
-                          Immunité végétale et ingénierie de la résistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/156/">
-                          Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/159/">
-                          RNAi exogène HIGS et SIGS : silencing génique ciblé pour le biocontrôle de précision
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/160/">
-                          Capture indigène vs inoculum standardisé : doctrine de l&#39;origine du consortium microbien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/167/">
-                          allocation C photosynthétique aux exsudats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/169/">
-                          Silicium — biostimulant
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/172/">
-                          Plant diversity drives rhizosphere microbiome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/177/">
-                          Tri-trophic interactions CEP / Trichoderma / soil mites
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/178/">
-                          Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/180/">
-                          CEP endophytes du maïs : potentiel larvicide et biocontrôle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/193/">
-                          Mycorrhiza-mediated competition drives soil C
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/194/">
-                          Interconnexion des microbiomes entre environnements — conséquences pour la santé humaine et planétaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/195/">
-                          Chaulage et azote en prairie : interactions sur la minéralisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/197/">
-                          Arbuscular mycorrhiza: advances and retreats in our understanding of the ecologi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/199/">
-                          Priming immunitaire des plantes : du déclenchement à la mémoire transgénérationnelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/209/" aria-current="page">
-                          PTI/ETI — architecture de l&#39;immunité innée végétale (Jones-Dangl)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/210/">
-                          Cri-pour-secours rhizosphérique — recrutement stress-induit du microbiome
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/211/">
-                          Sidérophores — pivot écologique de l&#39;accès au fer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/212/">
-                          Diaphonie jasmonate-salicylate — régulateur hormonal de la défense végétale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/213/">
-                          Voie phénylpropanoïde-shikimate — bouclier inductible des polyphénols
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/216/">
-                          Cultures associées (intercropping) — principe, complémentarité et conduite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/224/">
-                          Dormance microbienne et persisters — banque de semences invisible du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/225/">
-                          Virosphère du sol et bactériophages — top-down viral et renouvellement microbien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/232/">
-                          Gestion régénérative des nématodes et biofumigation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/238/">
-                          Cycle du soufre : du sol à la santé humaine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/240/">
-                          Le zinc, du sol à la nutrition humaine : disponibilité, absorption et biofortification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/241/">
-                          Le sélénium, du sol à la santé humaine : analogue du soufre à marge étroite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/242/">
-                          L&#39;iode, du sol à la thyroïde humaine : un maillon ténu, une carence évitable
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/244/">
-                          Le magnésium, du sol à la nutrition humaine : mobilité, antagonismes cationiques et chlorophylle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/246/">
-                          Le bore, du sol à la plante : disponibilité, paroi cellulaire et marge étroite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/247/">
-                          Le manganèse, du sol à la plante : redox, photosynthèse et disponibilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/248/">
-                          Le cuivre, du sol à la plante : transport électronique, lignification et accumulation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/250/">
-                          Le fer, du sol à la nutrition humaine : disponibilité, chlorose et anémie ferriprive
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/252/">
-                          Les états de l&#39;eau et la biologie du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/263/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/265/">
-                          Agriculture syntropique : succession dirigée et stratification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/266/">
-                          Pâturage tournant : broutage, exsudation racinaire et pompe à carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/283/">
-                          Extraction osmotique : la chimie douce du sucre concentré — de la plasmolyse au FPJ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/286/">
-                          Hydrolyse protéique anaérobie : livrer l&#39;azote sans le brûler — du FAA à la frontière putréfaction
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/289/">
-                          Exclusion compétitive : la défense qui n&#39;attaque pas — saturation de niche et résistance d&#39;invasion
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/293/">
-                          Tolérance à la sécheresse médiée par le microbiome — de l&#39;osmolyte au rhizosheath
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/298/">
-                          Le microbiome de la graine : l&#39;héritage microbien de la plante-mère
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/304/">
-                          La phagothérapie végétale : des bactériophages contre les phytopathogènes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/308/">
-                          La rhizosphère : la zone d&#39;influence où la plante parle au sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/309/">
-                          L&#39;éthylène : l&#39;hormone gazeuse qui sent la compaction du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/312/">
-                          Podzol et toxicité aluminique : le microbiote racinaire au secours du moignon
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/343/">
-                          L&#39;holobionte ingénieur de sa niche : quand le vivant installe ses conditions (riz noyé, biocroûtes)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/346/">
-                          Croûtes biologiques du sol (biocrusts) : la peau vivante qui amorce la pédogenèse
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/V3/">
                   <strong>V3</strong> — Les Fermentations Microbiennes
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -646,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -697,14 +259,14 @@
 
 <div class="sv-card" id="resume">
     <h2>Résumé</h2>
-    <div class="sv-markdown"><p>L'évolution des connaissances en phytopathologie et en écologie microbienne impose une transition du modèle de la plante individuelle vers celui de l'<strong><span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> végétal</strong>. Ce résumé synthétise les preuves démontrant que la santé des cultures ne dépend pas uniquement de la génétique de l'hôte, mais d'une <strong>immunité opérationnelle</strong> résultant de la synergie entre les mécanismes innés (PTI/ETI) et les services défensifs du microbiote (Pieterse, 2025).</p>
+    <div class="sv-markdown"><p>L'évolution des connaissances en phytopathologie et en écologie microbienne impose une transition du modèle de la plante individuelle vers celui de l'<strong><span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> végétal</strong>. Ce résumé synthétise les preuves démontrant que la santé des cultures ne dépend pas uniquement de la génétique de l'hôte, mais d'une <strong>immunité opérationnelle</strong> résultant de la synergie entre les mécanismes innés (PTI/ETI) et les services défensifs du microbiote (Pieterse, 2025).</p>
 </div>
     
   </div>
 
 <section id="s1">
     <h2>Perception et Assemblage de l&#39;Holobionte</h2>
-    <div class="sv-markdown"><p>La perception au sein de l’<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> ne se limite plus à une simple reconnaissance binaire « soi/non-soi ». Elle est désormais comprise comme un <strong>système immunitaire étendu</strong> où la plante coordonne une réponse multi-niveaux impliquant ses propres gènes et ses partenaires microbiens (Pieterse, 2025).</p>
+    <div class="sv-markdown"><p>La perception au sein de l’<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> ne se limite plus à une simple reconnaissance binaire « soi/non-soi ». Elle est désormais comprise comme un <strong>système immunitaire étendu</strong> où la plante coordonne une réponse multi-niveaux impliquant ses propres gènes et ses partenaires microbiens (Pieterse, 2025).</p>
 </div>
     <div id="s1-1">
         <h3>Architecture des complexes de surface</h3>
@@ -743,11 +305,11 @@
       </div>
   </section><section id="s2">
     <h2>Compromis métaboliques et ontogénie</h2>
-    <div class="sv-markdown"><p>L'activation de l'<span class="sv-cite" tabindex="0">immunité<span class="sv-cite-tip" role="tooltip">Capacité d'un organisme à reconnaître et à se défendre contre des agents pathogènes ou des molécules étrangères (Berrabah, 2016). Chez les plantes, elle repose sur deux niveaux : l'immunité déclenchée par des motifs via des récepteurs de surface, et l'immunité déclenchée par des effecteurs impliquant des protéines de résistance spécifiques (Vishwakarma et al., 2020). Cette réponse immunitaire est modulée par des signaux hormonaux comme l'acide salicylique et influencée par les interactions avec le microbiote bénéfique (Lemanceau et al., 2017; Slezack, 2021) <a href="/terme/1305/">→ Vocabulaire</a></span></span> est un processus coûteux qui se traduit souvent par une pénalité sur la croissance et le développement (Gao et al., 2024). Traditionnellement perçu comme une simple compétition passive pour les ressources, ce compromis est désormais compris comme un choix régulateur « actif » orchestré par la plante pour optimiser sa fitness face aux pressions environnementales (Campos, 2025).</p>
+    <div class="sv-markdown"><p>L'activation de l'<span class="sv-cite" tabindex="0">immunité<span class="sv-cite-tip" role="tooltip">Capacité d'un organisme à reconnaître et à se défendre contre des agents pathogènes ou des molécules étrangères (Berrabah, 2016). Chez les plantes, elle repose sur deux niveaux : l'immunité déclenchée par des motifs via des récepteurs de surface, et l'immunité déclenchée par des effecteurs impliquant des protéines de résistance spécifiques (Vishwakarma et al., 2020). Cette réponse immunitaire est modulée par des signaux hormonaux comme l'acide salicylique et influencée par les interactions avec le microbiote bénéfique (Lemanceau et al., 2017; Slezack, 2021) <a href="/terme/1305/">→ Vocabulaire</a></span></span> est un processus coûteux qui se traduit souvent par une pénalité sur la croissance et le développement (Gao et al., 2024). Traditionnellement perçu comme une simple compétition passive pour les ressources, ce compromis est désormais compris comme un choix régulateur « actif » orchestré par la plante pour optimiser sa valeur sélective face aux pressions environnementales (Campos, 2025).</p>
 </div>
     <div id="s2-1">
         <h3>La Taxe Carbone du Microbiome</h3>
-        <div class="sv-markdown"><p>L'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> repose sur un investissement métabolique continu. Les plantes exudent entre <strong>5 % et 21 %</strong> de leur carbone fixé par photosynthèse (Fadiji et al., 2025), un chiffre qui peut grimper jusqu'à <strong>40 %</strong> sous stress, pour structurer leur microbiome (Bhattacharyya et al., 2021).</p>
+        <div class="sv-markdown"><p>L'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> repose sur un investissement métabolique continu. Les plantes exudent entre <strong>5 % et 21 %</strong> de leur carbone fixé par photosynthèse (Fadiji et al., 2025), un chiffre qui peut grimper jusqu'à <strong>40 %</strong> sous stress, pour structurer leur microbiome (Bhattacharyya et al., 2021).</p>
 <ul>
 <li><strong>Arbitrage dynamique :</strong> Des recherches récentes démontrent que cet investissement est modulé par les conditions environnementales. Par exemple, sous une lumière suboptimale, la plante utilise le régulateur transcriptionnel MYC2 pour prioriser la croissance induite par le microbiote au détriment de la défense, maximisant ainsi sa survie (Hou et al., 2021).</li>
 <li><strong>Universalité du coût :</strong> Il a été observé que les micro-organismes du sol peuvent réduire la biomasse de l'hôte de manière uniforme, indépendamment de la disponibilité en azote, suggérant que le coût métabolique du microbiome est une dépense structurelle difficilement compressible (Munkager et al., 2021).</li>
@@ -775,7 +337,7 @@
 <ul>
 <li><strong>Le phénomène de Cross-priming :</strong> Des stress abiotiques préalables (températures extrêmes, blessures) peuvent préparer le <span class="sv-cite" tabindex="0">système immunitaire<span class="sv-cite-tip" role="tooltip">Ensemble des barrières physiques et des mécanismes moléculaires protégeant l'organisme contre les stress biotiques (Yeats &amp; Rose, 2013). Chez les plantes, il comprend la cuticule et les cires épicuticulaires comme première ligne de défense, ainsi que la synthèse de métabolites dérivés de la phénylalanine (salicylate, tannins, lignine) (Pascual et al., 2016; Yeats &amp; Rose, 2013). Ce système peut être activé de manière systémique par des réseaux mycorhiziens ou régulé par des mécanismes d'interférence ARN trans-règne pour silencer les gènes de virulence des pathogènes (Cai et al., 2019; Song et al., 2010) <a href="/terme/3737/">→ Vocabulaire</a></span></span> à des attaques biotiques futures via des mécanismes de mémoire immunitaire, tels que la méthylation de l'ADN ou la modification des histones (Gallusci et al., 2022).</li>
 <li><strong>Hormèse et adjuvants :</strong> L'utilisation d'acides humiques peut induire un état hormétique (réponse biphasique dose-dépendante) agissant comme un agent de amorçage chimique qui renforce la résilience globale (Canellas et al., 2020).</li>
-<li><strong>Optimisation métabolique :</strong> Certaines rhizobactéries bénéfiques (ex: Paraburkholderia) sont capables de neutraliser les effets négatifs du amorçage sur la fitness en générant des sucres solubles et en remobilisant des métabolites, comblant ainsi le déficit énergétique de la plante (Jeon et al., 2021).</li>
+<li><strong>Optimisation métabolique :</strong> Certaines rhizobactéries bénéfiques (ex: Paraburkholderia) sont capables de neutraliser les effets négatifs du amorçage sur la valeur sélective en générant des sucres solubles et en remobilisant des métabolites, comblant ainsi le déficit énergétique de la plante (Jeon et al., 2021).</li>
 </ul>
 </div>
       </div><div id="s2-5">
@@ -826,7 +388,7 @@
       </div>
   </section><section id="s4">
     <h2>Agriculture régénérative : analyse critique</h2>
-    <div class="sv-markdown"><p>L'agriculture régénérative s'appuie sur la gestion de la santé des sols pour induire une résilience systémique. Cependant, l'application pratique des concepts d'immunité <span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> révèle des nuances critiques, notamment sur la gestion de l'inoculum et la fiabilité des mécanismes de suppression.</p>
+    <div class="sv-markdown"><p>L'agriculture régénérative s'appuie sur la gestion de la santé des sols pour induire une résilience systémique. Cependant, l'application pratique des concepts d'immunité <span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> révèle des nuances critiques, notamment sur la gestion de l'inoculum et la fiabilité des mécanismes de suppression.</p>
 </div>
     <div id="s4-1">
         <h3>Le risque du « Pont Vert » et du « Pont Brun »</h3>
@@ -858,7 +420,7 @@
       </div><div id="s4-4">
         <h3>Vers une Agriculture Antifragile</h3>
         <div class="sv-markdown"><p>La gestion des cultures en agriculture régénérative s'oriente vers la <strong>conduite hormétique</strong>. L'application contrôlée de faibles niveaux de stress (eustress), via des acides humiques ou des stimulations mécaniques, déclenche des réponses biphasiques augmentant les performances et la santé globale par rapport aux témoins (Canellas et al., 2020). Cette approche transforme la plante en un système <strong>antifragile</strong> capable non seulement de résister aux aléas, mais de s'améliorer à leur contact (Axenie et al., 2024).<br>
-En conclusion, le pilotage de l'immunité opérationnelle offre une alternative robuste au paradigme chimique, en s'appuyant sur la complexité biologique de l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> pour garantir la souveraineté alimentaire et la durabilité des agrosystèmes (Jacquet et al., 2022).</p>
+En conclusion, le pilotage de l'immunité opérationnelle offre une alternative robuste au paradigme chimique, en s'appuyant sur la complexité biologique de l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> pour garantir la souveraineté alimentaire et la durabilité des agrosystèmes (Jacquet et al., 2022).</p>
 </div>
       </div>
   </section><section id="s5">
@@ -878,7 +440,7 @@ En conclusion, le pilotage de l'immunité opérationnelle offre une alternative 
         <h3>Analyse des lacunes</h3>
         <div class="sv-markdown"><p>Un fossé persiste entre les succès en conditions contrôlées et les déploiements à grande échelle. Cette &quot;perte de fonction&quot; en plein champ s'explique par plusieurs facteurs critiques :</p>
 <ul>
-<li><strong>Le modèle du Rhéostat :</strong> L'équilibre de l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> est activement contrôlé par l'hôte pour maintenir un état sain et réguler l'immunité (Bouchez et al., 2025). Les fluctuations environnementales (E) peuvent perturber ce réglage fin et réduire la résistance de l'hôte (Stevenne et al., 2021).</li>
+<li><strong>Le modèle du Rhéostat :</strong> L'équilibre de l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> est activement contrôlé par l'hôte pour maintenir un état sain et réguler l'immunité (Bouchez et al., 2025). Les fluctuations environnementales (E) peuvent perturber ce réglage fin et réduire la résistance de l'hôte (Stevenne et al., 2021).</li>
 <li><strong>Détente Immunitaire :</strong> Pour être efficaces, les agents de biocontrôle ou les microbes recrutés doivent atteindre une &quot;détente&quot; (homéostasie apaisée) avec le système immunitaire de la plante (Russ et al., 2023). L'échec de nombreux inoculants en champ provient de leur incapacité à persister face à des communautés indigènes déjà établies ou à un système immunitaire de l'hôte trop réactif (Russ et al., 2023).</li>
 <li><strong>Hétérogénéité G × E × M :</strong> La réussite d'une pratique régénérative dépend des interactions entre la génétique des plantes (G), l'environnement (E) et le microbiote (M) (Blouin et al., 2026). L'absence de protocoles standardisés pour mesurer ces interactions limite la reproductibilité des résultats (Brandes et al., 2022).</li>
 </ul>
@@ -900,7 +462,7 @@ Cette convergence redéfinit la performance sanitaire : une variété moyennemen
 </div>
     <div id="s6-1">
         <h3>Sélection variétale Compatibilité R+M</h3>
-        <div class="sv-markdown"><p>Le paradigme de sélection évolue d'une vision centrée sur l'hôte vers une sélection pour l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span>, où l'on cherche à maximiser l'« héritabilité inclusive »(Blouin et al., 2026).</p>
+        <div class="sv-markdown"><p>Le paradigme de sélection évolue d'une vision centrée sur l'hôte vers une sélection pour l'<span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span>, où l'on cherche à maximiser l'« héritabilité inclusive »(Blouin et al., 2026).</p>
 <ul>
 <li><strong>Pilotage du microbiome :</strong> Les programmes de sélection modernes intègrent désormais la capacité héréditaire de la plante à structurer son microbiote comme un trait phénotypique clé (Jacquet et al., 2022). Cela inclut la sélection de lignées capables d'exuder des précurseurs spécifiques (par exemple : métabolites de la lignine) pour maintenir l'homéostasie du phylloplan et de la rhizosphère (Su et al., 2024).</li>
 <li><strong>Interaction G × M :</strong> La résistance n'est plus vue comme une valeur absolue mais comme le résultat d'interactions génotype-microbiote (G × M). Pour des pathogènes comme Botrytis cinerea, le microbiote peut compenser une vulnérabilité génétique en réduisant la taille de la nécrose du génotype sensible (Col) à celle du génotype résistant (Can) (Blouin et al., 2026).</li>
@@ -929,6 +491,8 @@ Cette convergence redéfinit la performance sanitaire : une variété moyennemen
   </section>
 
 
+
+      
 
       
       <aside class="sv-card sv-related">

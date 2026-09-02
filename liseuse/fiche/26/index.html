@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/fiche/26/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -43,134 +43,13 @@
         </a>
         <ul class="sv-side-sub">
             <li class="is-open">
-                <a href="/Publications/liseuse/doc/F1/">
+                <a href="/Publications/liseuse/doc/F1/" aria-current="page">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/320/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/26/" aria-current="page">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/35/">
-                          Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/41/">
-                          Fragilité systémique fossile et transition robuste (méthode Shift PREF)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/58/">
-                          Cascade temporelle — du jour au géologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/65/">
-                          Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/66/">
-                          Réseau mycorhizien commun — controverse Simard vs Karst 2023
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/72/">
-                          Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/119/">
-                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/145/">
-                          Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/146/">
-                          Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/147/">
-                          Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/148/">
-                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/166/">
-                          Biofilms
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/179/">
-                          Trade-off plant vs soil C under elevated CO2
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/201/">
-                          Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/202/">
-                          Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/254/">
-                          Les fils rouges du sol vivant — thèses transversales et renversements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/258/">
-                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/260/">
-                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/263/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/264/">
-                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/280/">
-                          Lactofermentation : technologie alimentaire ancestrale et successions microbiennes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/300/">
-                          La pédogenèse : comment le vivant fabrique le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/344/">
-                          La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/354/">
-                          Biodiversité et stabilité : produire sous climat non stationnaire
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/F2/">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -325,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -412,7 +291,7 @@ Enfin, ce travail ouvre des perspectives sur l'utilisation de l'intelligence art
 </div>
     <div id="s2-1">
         <h3>Les déterminants moléculaires de la « qualité du partenaire »</h3>
-        <div class="sv-markdown"><p>La transition le long du continuum dépend de la <strong>qualité du partenaire</strong> (fitness conférée par le microbe à l'<span class="sv-cite" tabindex="0">hôte<span class="sv-cite-tip" role="tooltip">Organisme (plante ou animal) abritant des communautés microbiennes symbiotiques ou associées indispensables à sa santé et à son fonctionnement (Sessitsch et al., 2023). Les interactions entre l'hôte et son microbiome forment une entité écologique stable (l'holobionte) capable de résister aux stress environnementaux (Bissett et al., 2013) <a href="/terme/3774/">→ Vocabulaire</a></span></span>). Des études d'association pangénomique sur Sinorhizobium meliloti ont identifié trois catégories de locus contrôlant ce basculement (Batstone et al., 2022) :</p>
+        <div class="sv-markdown"><p>La transition le long du continuum dépend de la <strong>qualité du partenaire</strong> (valeur sélective conférée par le microbe à l'<span class="sv-cite" tabindex="0">hôte<span class="sv-cite-tip" role="tooltip">Organisme (plante ou animal) abritant des communautés microbiennes symbiotiques ou associées indispensables à sa santé et à son fonctionnement (Sessitsch et al., 2023). Les interactions entre l'hôte et son microbiome forment une entité écologique stable (l'holobionte) capable de résister aux stress environnementaux (Bissett et al., 2013) <a href="/terme/3774/">→ Vocabulaire</a></span></span>). Des études d'association pangénomique sur Sinorhizobium meliloti ont identifié trois catégories de locus contrôlant ce basculement (Batstone et al., 2022) :</p>
 <ul>
 <li><strong>Locus universels</strong> : gènes essentiels à la symbiose indépendamment de l'environnement, cibles privilégiées pour l'ingénierie.</li>
 <li><strong>Locus dépendants de l'hôte</strong> : gènes dont l'effet varie selon le génotype de la plante.</li>
@@ -422,7 +301,7 @@ Sur le plan métabolique, le maintien du mutualisme est corrélé à la gestion 
 </div>
       </div><div id="s2-2">
         <h3>Stabilité évolutive et le paradoxe de la « tricherie »</h3>
-        <div class="sv-markdown"><p>Malgré le « paradoxe du <span class="sv-cite" tabindex="0">mutualisme<span class="sv-cite-tip" role="tooltip">Interaction biologique entre deux espèces distinctes dont les deux partenaires tirent un bénéfice réciproque (Bronstein, 2015; Mazancourt et al., 2005). Ces relations, qui peuvent être obligatoires ou facultatives, sont fondamentales pour la stabilité des écosystèmes et reposent souvent sur un échange de ressources essentielles, comme dans le cas des symbioses plantes-pollinisateurs ou plantes-microbiotes (Hale &amp; Valdovinos, 2021; Yacine, 2021) <a href="/terme/582/">→ Vocabulaire</a></span></span> » (où la tricherie — recevoir sans donner — devrait être avantageuse), ces symbioses persistent depuis plus de 450 millions d'années (Kuyper &amp; Jansa, 2023). Les modèles récents suggèrent que la stabilité ne repose pas nécessairement sur des « sanctions » complexes de la plante, mais sur des rétroactions de fitness simples basées sur la <strong>loi du minimum de Liebig</strong> (Grasso et al., 2025). Si le partenaire ne fournit pas la ressource la plus limitante (ex. : phosphore), la croissance de l'hôte ralentit, réduisant mécaniquement l'apport en carbone pour le microbe, ce qui stabilise l'interaction par simple rétroaction métabolique (Grasso et al., 2025).</p>
+        <div class="sv-markdown"><p>Malgré le « paradoxe du <span class="sv-cite" tabindex="0">mutualisme<span class="sv-cite-tip" role="tooltip">Interaction biologique entre deux espèces distinctes dont les deux partenaires tirent un bénéfice réciproque (Bronstein, 2015; Mazancourt et al., 2005). Ces relations, qui peuvent être obligatoires ou facultatives, sont fondamentales pour la stabilité des écosystèmes et reposent souvent sur un échange de ressources essentielles, comme dans le cas des symbioses plantes-pollinisateurs ou plantes-microbiotes (Hale &amp; Valdovinos, 2021; Yacine, 2021) <a href="/terme/582/">→ Vocabulaire</a></span></span> » (où la tricherie — recevoir sans donner — devrait être avantageuse), ces symbioses persistent depuis plus de 450 millions d'années (Kuyper &amp; Jansa, 2023). Les modèles récents suggèrent que la stabilité ne repose pas nécessairement sur des « sanctions » complexes de la plante, mais sur des rétroactions de valeur sélective simples basées sur la <strong>loi du minimum de Liebig</strong> (Grasso et al., 2025). Si le partenaire ne fournit pas la ressource la plus limitante (ex. : phosphore), la croissance de l'hôte ralentit, réduisant mécaniquement l'apport en carbone pour le microbe, ce qui stabilise l'interaction par simple rétroaction métabolique (Grasso et al., 2025).</p>
 </div>
       </div><div id="s2-3">
         <h3>Points de bascule environnementaux et stress</h3>
@@ -556,7 +435,7 @@ Ce cadre d'hypothèses déplace l'objectif de la simple application d'intrants v
 </div>
     <div id="s6-1">
         <h3>Pilotage à l&#39;échelle de l&#39;holobionte</h3>
-        <div class="sv-markdown"><p>Le changement de paradigme opérationnel majeur consiste à passer d'une gestion centrée sur la culture à une gestion à l'échelle de l'« <span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la fitness et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> ».</p>
+        <div class="sv-markdown"><p>Le changement de paradigme opérationnel majeur consiste à passer d'une gestion centrée sur la culture à une gestion à l'échelle de l'« <span class="sv-cite" tabindex="0">holobionte<span class="sv-cite-tip" role="tooltip">Unité biologique fonctionnelle composée d'un hôte eucaryote (la plante) et de l'ensemble de ses microorganismes associés (microbiome). Cette entité est considérée comme un système intégré où les interactions métaboliques et immunitaires déterminent la valeur sélective et la capacité d'adaptation de l'organisme global (Berlanga-Clavero et al., 2020; Russ et al., 2023; Vishwakarma et al., 2020) <a href="/terme/88/">→ Vocabulaire</a></span></span> ».</p>
 <ul>
 <li><strong>Réintégration des symbiontes :</strong> Les pratiques régénératives visent à restaurer les « symbiontes manquants » (champignons mycorhiziens, rhizobactéries fixatrices d'azote) qui ont été érodés par l'usage intensif d'intrants synthétiques.</li>
 <li><strong>Diversité fonctionnelle :</strong> L'objectif est de reconstruire une diversité microbienne qui soutient non seulement la croissance, mais aussi la protection contre les stress et la séquestration du carbone (Sarjuni et al., 2022).</li>
@@ -593,6 +472,8 @@ Ce cadre d'hypothèses déplace l'objectif de la simple application d'intrants v
   </section>
 
 
+
+      
 
       
       <aside class="sv-card sv-related">

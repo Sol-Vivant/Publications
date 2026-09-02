@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/strate/F/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -46,12 +46,10 @@
                 <a href="/Publications/liseuse/doc/F1/">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/F2/">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -206,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -218,174 +216,102 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1><span class="sv-strate-badge sv-strate-F" role="img" aria-label="Strate Fondements">F</span> Fondements</h1>
-    <p class="sv-hero-lede">Les Fondements posent le cadre historique et économique du corpus. De l&#39;Archéen (3,8 Ga) à la première agriculture, puis l&#39;économie des intrants et du capital biologique. Ces documents ne prescrivent rien — ils fournissent le contexte.</p>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1><span class="sv-strate-badge sv-strate-F" role="img" aria-label="Strate Fondements">F</span> Fondements</h1>
+      <p class="sv-hero-lede">Les Fondements posent le cadre historique et économique du corpus. De l&#39;Archéen (3,8 Ga) à la première agriculture, puis l&#39;économie des intrants et du capital biologique. Ces documents ne prescrivent rien — ils fournissent le contexte.</p>
 
-    <section class="sv-card sv-section">
-        <h2 id="ouverture">Ouverture</h2>
-        <p class="sv-meta">Le récit de la strate — par où commencer, avant les chapitres qui suivent.</p>
-        <div class="sv-actions">
-          <a class="sv-cta" href="/Publications/liseuse/fiche/338/">Commencer la lecture</a>
-        </div>
-      </section>
-    
-    
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Le sol est un grand livre ouvert à la page des temps. Avant de décrire comment il vit (la strate Sol), comment il fabrique (Vivant), ce qu'on y fait (Pratiques) et ce qu'il nous rend (Humain), il faut lire les pages déjà écrites : des milliards d'années d'écritures biologiques, puis dix millénaires d'écritures humaines. La strate Fondements ne prescrit rien — elle ouvre le registre. Elle raconte d'où vient le capital que l'agriculture a appris à dépenser, et à quel prix.</p>
+</div>
+  </div>
 
-    <section>
-          <h2 id="F1"><a href="/Publications/liseuse/doc/F1/">F1 — Le Temps Long</a></h2>
-          <p class="sv-meta">17 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-                <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans F2 · S3 · V1 · V2 · P2 · P3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/58/">
-                <strong>Cascade temporelle — du jour au géologique</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S4 · P2 · P4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/72/">
-                <strong>Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans F2 · S1 · P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/">
-                <strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans F2 · H1 · S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/145/">
-                <strong>Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/146/">
-                <strong>Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/147/">
-                <strong>Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/148/">
-                <strong>Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2 · S3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/166/">
-                <strong>Biofilms</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S0 · S1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/201/">
-                <strong>Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/202/">
-                <strong>Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans S2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/">
-                <strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans F2 · S2 · S3 · P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-                <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-                
-                <span class="sv-meta"> — aussi dans F2 · S1 · S2 · S4 · V1 · V2 · H1 · H2 · P1 · P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-                <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-                
-                <span class="sv-meta"> — aussi dans F2 · S1 · V2 · V3 · P1 · P5 · H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/280/">
-                <strong>Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · H1 · V3 · S4 · H2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/300/">
-                <strong>La pédogenèse : comment le vivant fabrique le sol</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/354/">
-                <strong>Biodiversité et stabilité : produire sous climat non stationnaire</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S2 · P5</span>
-              </a>
-          </div>
-        </section><section>
-          <h2 id="F2"><a href="/Publications/liseuse/doc/F2/">F2 — L&#39;Économie du Vivant</a></h2>
-          <p class="sv-meta">16 fiches — en continu ou au choix.</p>
-          <div class="sv-fiche-list">
-            <a class="sv-fiche-item" href="/Publications/liseuse/fiche/18/">
-                <strong>Fixation Biologique de l&#39;Azote — Le Modèle Brésilien</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/41/">
-                <strong>Fragilité systémique fossile et transition robuste (méthode Shift PREF)</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans F1 · S4 · P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/57/">
-                <strong>Cascade des conséquences — de la parcelle à la biosphère</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P5 · S4 · V2 · H1 · H2 · H3</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/61/">
-                <strong>Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S2 · V2 · V1 · P2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/71/">
-                <strong>Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans S1 · S3 · S4 · P4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/75/">
-                <strong>Économie de la régénération — Carbon farming, Label Bas Carbone, paiements pour services écosystémiques</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P5 · S4</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/80/">
-                <strong>Cascade des coûts cachés — du direct au civilisationnel</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/84/">
-                <strong>Trophobiose Chaboussou — de l&#39;azote minéral à la résistance antimicrobienne</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans V2 · H2 · P3 · H3 · H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/94/">
-                <strong>Esclaves énergétiques en agriculture : coût fossile réel et substitution régénérative</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/113/">
-                <strong>Antifragilité : stress modéré → diversification de l&#39;hologénome</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P5 · S2 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/149/">
-                <strong>Modèle brésilien FBN soja : enseignements et limites d&#39;une transition continentale réussie ET ambivalente</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · V2</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/150/">
-                <strong>Souveraineté azote-fertilisation : l&#39;autonomie nationale face à la dépendance Haber-Bosch</strong>
-                <span class="sv-badge">zoom</span>
-                <span class="sv-meta"> — aussi dans P3 · P5</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/222/">
-                <strong>Compromis performance-robustesse et antifragilité — cadre Hamant-Taleb</strong>
-                <span class="sv-badge">zoom</span>
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/233/">
-                <strong>Du baril à l&#39;assiette : fragilité systémique de l&#39;alimentation fossile</strong>
-                <span class="sv-badge">transversale</span>
-                <span class="sv-meta"> — aussi dans P5 · H1</span>
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/259/">
-                <strong>Les esclaves énergétiques : une ampoule, mille bras, une facture cachée</strong>
-                
-                
-              </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/355/">
-                <strong>Qui finance le savoir ? Asymétrie des moyens et production de l&#39;ignorance en agriculture</strong>
-                <span class="sv-badge">transversale</span>
-                
-              </a>
-          </div>
+
+
+
+<section id="s1">
+    <h2>Le récit de la strate</h2>
+    <div class="sv-markdown"><p>Le fil des Fondements tient en deux livres d'un même registre. Le premier est celui du temps long. Il s'ouvre dans l'Archéen, il y a près de 3,8 milliards d'années (ordre de grandeur — évolution de la biosphère, <a href="/Publications/liseuse/fiche/201/">fiche #201</a>), quand la vie n'est encore qu'une chimie sans oxygène — des archées dont les lointaines cousines, les Asgard, donneront naissance à la lignée eucaryote dont nous descendons. Puis vient la grande colonisation : les plantes sortent de l'eau et, depuis quatre cent cinquante millions d'années (ordre de grandeur), elles n'ont jamais cessé de s'associer aux microbes — c'est cette coévolution qui a construit le sol tel que nous le connaissons. Enfin, l'écriture humaine : les premières agricultures, et avec elles la première grande leçon — les civilisations qui épuisent leur sol s'éteignent, du labour ancien jusqu'au Dust Bowl des années 1930. Le second livre est celui de l'économie. Il raconte comment l'agriculture industrielle a troqué le capital biologique — cette richesse vivante accumulée par le temps long — contre des intrants fabriqués à grand renfort d'énergie fossile, ces esclaves énergétiques que le cahier dénombre. La question vive de la strate : que vaut un sol, et que coûte son épuisement ?</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Les concepts clés</h2>
+    <div class="sv-markdown"><ul>
+<li><strong>Le temps long</strong> : la première page du registre. L'Archéen et ses archées, l'origine de la vie sans oxygène. <em>→ le détail : les archées du sol (F1, <a href="/Publications/liseuse/fiche/27/">fiche #27</a>), l'origine eucaryote (<a href="/Publications/liseuse/fiche/119/">fiche #119</a>).</em></li>
+<li><strong>La coévolution plante-microbe</strong> : l'alliance fondatrice. Depuis 450 millions d'années (ordre de grandeur), plantes et microbes évoluent ensemble — ni amis ni ennemis, mais un continuum. <em>→ le détail : coévolution (F1, <a href="/Publications/liseuse/fiche/26/">fiche #26</a>).</em></li>
+<li><strong>L'érosion des civilisations</strong> : la leçon répétée. Du labour ancien au Dust Bowl, le même scénario : un sol dépensé plus vite qu'il ne se refait. <em>→ le détail : érosion historique (F1, <a href="/Publications/liseuse/fiche/72/">fiche #72</a>).</em></li>
+<li><strong>Le Wood Wide Web</strong> : la controverse salutaire. L'idée d'un vaste réseau de partage entre arbres est séduisante — la science la nuance. <em>→ le détail : la controverse Simard–Karst (F1, <a href="/Publications/liseuse/fiche/145/">fiche #145</a>).</em></li>
+<li><strong>Le capital biologique</strong> : l'actif du registre. La fertilité n'est pas un stock minéral mais une communauté vivante — non pas un organisme, mais un holobionte — qu'on peut entretenir ou dilapider. <em>→ le détail : capital biologique (F2, <a href="/Publications/liseuse/fiche/94/">fiche #94</a>).</em></li>
+<li><strong>Les esclaves énergétiques</strong> : la facture cachée. Ce que l'énergie fossile accomplit en notre nom, et ce qu'elle coûte. <em>→ le détail : le cahier (« esclaves ») et la <a href="/Publications/liseuse/fiche/94/">fiche #94</a>.</em></li>
+</ul>
+</div>
+    
+  </section><section id="s3">
+    <h2>Explorer la strate</h2>
+    <div class="sv-markdown"><p>Deux documents ouvrent ce registre, dans un ordre qui respecte la chronologie du récit : F1 avant F2. On lit d'abord le temps long — l'Archéen, la coévolution, l'érosion des civilisations — parce qu'un bilan économique ne se comprend qu'après avoir lu l'histoire du capital (d'où il vient, comment il s'accumule, comment il se perd). F2 vient ensuite, l'économie du vivant : l'inventaire des intrants, le coût réel de l'énergie, et ce que serait une transition qui rémunère le capital biologique au lieu de le dépenser. Chaque document renvoie aux fiches qui portent la preuve sourcée ; la matière organique et ses deux carbones restent au cahier (« mo »).</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>Les Fondements ne prescrivent rien : ils établissent le bilan. Le sol est un capital vivant accumulé pendant des milliards d'années, et l'agriculture moderne a appris à le dépenser plus vite qu'il ne se refait. Comprendre cette strate, c'est apprendre à lire le grand livre avant de tourner la page vers le présent.</p>
+</div>
+    
+  </section>
         </section>
 
-    
-    <nav class="sv-pager" aria-label="Strates">
-        <span></span>
-        <a class="sv-pager-next" href="/Publications/liseuse/strate/S/" title="S — Sol">
-          <span class="sv-pager-dir">Strate suivante →</span>
+      
+      <nav class="sv-pager" aria-label="Strates">
+          <span></span>
+          <a class="sv-pager-next" href="/Publications/liseuse/strate/S/" title="S — Sol">
+            <span class="sv-pager-dir">Strate suivante →</span>
+          </a>
+        </nav>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="strate-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">Strate F — cahiers (2)</summary>
+    <nav aria-label="Strate F — cahiers (2)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/F1/" title="F1 — Le Temps Long" data-id="doc-F1">
+          <span class="sv-navlist-title">F1 — Le Temps Long</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/F2/" title="F2 — L'Économie du Vivant" data-id="doc-F2">
+          <span class="sv-navlist-title">F2 — L&#39;Économie du Vivant</span>
         </a>
-      </nav>
-  </article>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "strate-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

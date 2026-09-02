@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/P1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -61,230 +61,22 @@
                 <a href="/Publications/liseuse/doc/P1/" aria-current="page">
                   <strong>P1</strong> — Diagnostic du Sol Vivant
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/325/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/4/">
-                          Stœchiométrie CNPS de Kirkby et bilan AMG
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/12/">
-                          Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/20/">
-                          Gestion Systémique des Nématodes à Galles
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/22/">
-                          Quorum Sensing et Communication Chimique Rhizosphérique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/25/">
-                          Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/30/">
-                          Le Cycle du Potassium dans les Sols Vivants
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/33/">
-                          Biochar, Chitosane et Extraits d&#39;Algues — Biostimulants Sous-couverts
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/62/">
-                          Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/68/">
-                          Mode d application des amendements — surface versus incorporation et incidence pédologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/70/">
-                          Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/73/">
-                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/76/">
-                          Lombriciens — écologie, services et pilotage des populations
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/77/">
-                          Biochar : architecte de sol (habitat, CEC, carbone stable)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/78/">
-                          Éliciteurs biologiques exogènes : chitosane et oligogalacturonides
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/81/">
-                          Couplages biogéochimiques Fe-P-S-N sous alternance redox
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/82/">
-                          Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/87/">
-                          Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/93/">
-                          Calcaire actif — protocole Drouineau et interprétation pour sols calcaires
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/105/">
-                          Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/106/">
-                          Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/108/">
-                          ‘Faim d’azote’ après apport carboné (immobilisation)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/111/">
-                          Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/114/">
-                          Eh terrain : sondes redox, gradient mV/cm et méthode in situ
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/115/">
-                          Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/116/">
-                          Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/121/">
-                          Asphyxie / anaérobie locale (odeurs, horizons réduits)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/123/">
-                          Racines superficielles / enracinement bloqué
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/124/">
-                          Stabilité d’agrégats faible / désagrégation rapide
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/126/">
-                          Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/132/">
-                          Brix réfractomètre : seuils opérationnels et interprétation agronomique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/135/">
-                          BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/139/">
-                          Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/140/">
-                          Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/153/">
-                          Immunité végétale et ingénierie de la résistance
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/154/">
-                          Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/169/">
-                          Silicium — biostimulant
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/231/">
-                          Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/255/">
-                          Le chiendent comme bioindicateur du compactage
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/267/">
-                          Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/276/">
-                          Test Haney et amorçage épigénétique foliaire — une intersection à explorer
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/278/">
-                          Couvert permanent sous serre : restructurer un sol mort
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/317/">
-                          Odeurs du sol : la signature olfactive du sol vivant
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/319/">
-                          Couleur du sol : le premier diagnostic par le regard
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/P2/">
                   <strong>P2</strong> — Agriculture de Conservation
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P3/">
                   <strong>P3</strong> — Biostimulants et Fermentations Appliquées
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P4/">
                   <strong>P4</strong> — Agroforesterie et Systèmes Pérennes
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P5/">
                   <strong>P5</strong> — La Transition
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -424,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -439,236 +231,231 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>P1 — Diagnostic du Sol Vivant</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>P1 — Diagnostic du Sol Vivant</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 50 textes — l'ouverture, puis 49 fiches.</p>
+      <p class="sv-meta">
+        50 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/325/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/P1/integral/">
-            <strong>Le document P1 intégral</strong>
-            <p class="sv-meta">Le récit complet — 13 251 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>La strate Pratiques s'ouvre par le premier geste du métier : ausculter. Avant de labourer, de semer, d'amender, le praticien apprend à écouter son sol — comme le médecin pose l'oreille avant de prescrire, comme l'ébéniste palpe le bois avant de lever son rabot. Ce geste ne redémontre pas la science : les strates Sol et Vivant ont déjà dit comment ce monde fonctionne. Ici, on apprend à le lire — à faire parler la texture, le profil, les plantes, les chiffres. Garde-fou posé une fois : ce sol qu'on ausculte n'est pas un organisme qu'on examinerait comme un patient, mais un holobionte — une communauté qui s'organise comme un corps, et qu'on apprend d'abord à lire.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (49)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/4/">
-              <strong>Stœchiométrie CNPS de Kirkby et bilan AMG</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion moderne du carbone organique du sol repose sur le passage d&#39;une vision quantitative (apports de biomasse brute) à une approche qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/12/">
-              <strong>Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire</strong>
-              <span class="sv-badge">technique</span>
-              <p class="sv-meta">Le diagnostic de sève s’impose comme un outil de pilotage de précision incontournable, offrant une lecture directe et dynamique de l&#39;état ph…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/20/">
-              <strong>Gestion Systémique des Nématodes à Galles</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion des nématodes à galles (Meloidogyne spp.) est en profonde mutation, passant d&#39;une lutte chimique curative à une stratégie de gest…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/22/">
-              <strong>Quorum Sensing et Communication Chimique Rhizosphérique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le Quorum Sensing s&#39;est imposé comme un mécanisme central de coordination multicellulaire, permettant aux populations microbiennes de la rhi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/25/">
-              <strong>Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion de la structure du sol a évolué d&#39;une simple correction chimique vers une ingénierie complexe de la matrice physique et du cycle …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/30/">
-              <strong>Le Cycle du Potassium dans les Sols Vivants</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion du potassium dans les « sols vivants » marque une rupture avec l&#39;approche conventionnelle de fertilisation soluble, en replaçant …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/33/">
-              <strong>Biochar, Chitosane et Extraits d&#39;Algues — Biostimulants Sous-couverts</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document synthétise les avancées récentes (2024-2025) concernant l&#39;utilisation des biostimulants comme leviers fondamentaux de l&#39;agricult…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/62/">
-              <strong>Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;évaluation de la santé des sols est une pierre angulaire de la gestion durable des écosystèmes. Ce document a démontré que la flore sponta…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/68/">
-              <strong>Mode d application des amendements — surface versus incorporation et incidence pédologique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette analyse technique compare l’application en surface (mulching/semis direct) et l’incorporation mécanique des amendements organiques à l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/70/">
-              <strong>Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore les mécanismes fondamentaux régissant la gestion du carbone fermentescible lors du compostage, en soulignant l&#39;importanc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/73/">
-              <strong>Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La régulation trophique descendante (top-down control) s&#39;établit comme un pilier fondamental de la santé des sols et de la résilience des ag…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/76/">
-              <strong>Lombriciens — écologie, services et pilotage des populations</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le pilotage de la santé des sols repose sur une compréhension fine de l&#39;écologie des lombriciens, véritables &quot;ingénieurs de l&#39;écosystème&quot; qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/77/">
-              <strong>Biochar : architecte de sol (habitat, CEC, carbone stable)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le biochar s&#39;impose comme une technologie multifonctionnelle capable de transformer durablement les propriétés physiques, chimiques et biolo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/78/">
-              <strong>Éliciteurs biologiques exogènes : chitosane et oligogalacturonides</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La transition agroécologique actuelle repose sur le passage d&#39;une protection curative chimique à une stratégie de pré-activation biologique.…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/81/">
-              <strong>Couplages biogéochimiques Fe-P-S-N sous alternance redox</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document présente une synthèse des connaissances (2021-2026) sur les couplages biogéochimiques entre le fer, le phosphore (P) et le soufr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/82/">
-              <strong>Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le effet d&#39;amorçage, plus spécifiquement celui de la rhizosphère, est un processus biogéochimique central où l&#39;apport de carbone (C) organiq…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/87/">
-              <strong>Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La compaction des sols est une dégradation structurelle majeure qui transforme l&#39;agroécosystème en un milieu de multiples stress pour l&#39;holo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/92/">
-              <strong>Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’altération forcée des roches est devenue une technologie clé pour atteindre les objectifs de neutralité carbone (Hkaung et al., 2025). Le …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/93/">
-              <strong>Calcaire actif — protocole Drouineau et interprétation pour sols calcaires</strong>
-              <span class="sv-badge">technique</span>
-              <p class="sv-meta">La gestion du calcaire actif constitue un pilier de la performance agronomique en sols carbonatés, où la réactivité chimique prime sur la te…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/105/">
-              <strong>Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore le potentiel de la fermentation en milieu solide, une technologie émergente au cœur de la bioéconomie circulaire, pour l…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/106/">
-              <strong>Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le cycle complexe du cobalt, un oligo-élément dont l&#39;importance biologique repose sur son rôle de noyau central de la co…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/108/">
-              <strong>‘Faim d’azote’ après apport carboné (immobilisation)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La faim d’azote désigne l’immobilisation transitoire de l’azote minéral du sol par les micro-organismes décomposeurs lorsqu’ils sont confron…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/111/">
-              <strong>Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La reconstruction structurelle d&#39;un sol sableux est un processus complexe qui passe d&#39;un substrat inerte à un système organo-minéral fonctio…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/114/">
-              <strong>Eh terrain : sondes redox, gradient mV/cm et méthode in situ</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le potentiel redox (Eh) est la variable la plus intégrative du sol vivant. Une sonde au champ livre en minutes l&#39;état respiratoire du sol : …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/115/">
-              <strong>Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse l’importance des enzymes du sol — la β-glucosidase, les phosphatases acides et l&#39;uréase — comme bio-indicateurs de la sa…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/116/">
-              <strong>Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La toxicité ferreuse (Fe²⁺) en sols hydromorphes constitue une contrainte abiotique majeure pour la sécurité alimentaire, affectant particul…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/121/">
-              <strong>Asphyxie / anaérobie locale (odeurs, horizons réduits)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le phénomène de l&#39;asphyxie anaérobie locale, un processus biogéochimique critique influençant la santé des sols et les é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/123/">
-              <strong>Racines superficielles / enracinement bloqué</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;architecture racinaire est le pivot de la performance agronomique, reliant la structure physique du sol à l&#39;efficience d&#39;utilisation des n…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/124/">
-              <strong>Stabilité d’agrégats faible / désagrégation rapide</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise les mécanismes de stabilisation structurelle des sols, en mettant l&#39;accent sur la transition d&#39;une gestion extractive…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/126/">
-              <strong>Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La faim d&#39;azote est un outil agronomique délibéré : maintenir un déficit en NO₃⁻ casse la dépendance nitrophile des adventices et sélectionn…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/132/">
-              <strong>Brix réfractomètre : seuils opérationnels et interprétation agronomique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le Brix mesure la concentration en solides dissous de la sève (indice de réfraction = pression osmotique). Promu comme « indicateur de santé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/135/">
-              <strong>BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose une synthèse critique et opérationnelle des doctrines de fertilisation chimique (BCSR et SLAN) articulée avec les princi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/139/">
-              <strong>Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse la dynamique des sols à travers le prisme des régulations ascendantes (bottom-up) et descendantes (top-down), en démontr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/140/">
-              <strong>Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse des avancées en bio-indication microbiologique de précision, soulignant son rôle critique dans le pilotage…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/153/">
-              <strong>Immunité végétale et ingénierie de la résistance</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La gestion de la santé des cultures fait face à un défi majeur : les pathogènes et ravageurs causent annuellement 20 % à 30 % de pertes de r…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/154/">
-              <strong>Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La mémoire du sol ne se limite plus à un simple stock de nutriments ; elle est définie comme une interaction complexe entre un héritage maté…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/169/">
-              <strong>Silicium — biostimulant</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette étude démontre que le silicium s&#39;impose comme un levier fondamental de l&#39;agriculture de précision et régénérative, agissant non plus s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/231/">
-              <strong>Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</strong>
-              <span class="sv-badge">methodologique</span>
-              <p class="sv-meta">La mesure de la biodiversité du sol exige de dépasser la simple richesse spécifique pour capturer la complexité des fonctions écosystémique.…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/255/">
-              <strong>Le chiendent comme bioindicateur du compactage</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose une approche technique pour transformer l&#39;observation du chiendent en un outil de diagnostic hybride de la santé des sol…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-              <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-              
-              <p class="sv-meta">Cinq réflexes pour ne pas se faire piéger en agriculture régénératrice : (1) chercher d&#39;abord ce que le vivant construit — partir du moteur,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/267/">
-              <strong>Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les nématodes libres du sol forment un réseau trophique dont la composition reflète l&#39;état écologique du sol. L&#39;indice de maturité de Bonger…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/276/">
-              <strong>Test Haney et amorçage épigénétique foliaire — une intersection à explorer</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le test Haney (CO₂-burst + WEOC + WEON) mesure l&#39;activité biologique du sol invisible aux tests chimiques. Hypothèse explorée : le WEOC (car…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-              <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche décrit la reconstruction, en un an, d&#39;un sol sous serre biologiquement mort après trente ans sans racines (texture sable-argile …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/317/">
-              <strong>Odeurs du sol : la signature olfactive du sol vivant</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">L&#39;odeur du sol est un indicateur sensoriel immédiat de son état biologique et redox. La géosmine, produite par les actinomycètes du genre St…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/319/">
-              <strong>Couleur du sol : le premier diagnostic par le regard</strong>
-              <span class="sv-badge">concept</span>
-              <p class="sv-meta">La couleur du sol est un indicateur de premier niveau, accessible au simple regard, qui renseigne sur la teneur en matière organique (noir-b…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (186)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6482/">biominéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6629/">couleur du sol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6033/">IFT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7833/">électrode</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li><li><a href="/Publications/liseuse/terme/1394/">anthrosol</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>La texture comme fondation</h2>
+    <div class="sv-markdown"><p>Avant tout chiffre, un geste : prendre une poignée de terre humide, la rouler entre les doigts. Sable, limon, argile — la texture ne se décrète pas, elle se sent. C'est la fondation du diagnostic : elle décide de la rétention d'eau, de la circulation de l'air, de la facilité avec laquelle un sol se travaille. Mais c'est un donné qu'on ne change pas — on compose avec. Le récit complet de cette graduation sable-limons-argiles appartient au cahier (« textures ») ; le volet n'en retient qu'un point de métier : la texture est la matière première, et le praticien commence par la connaître — non par la combattre.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Lire le profil bêché : taches, odeurs, couleurs</h2>
+    <div class="sv-markdown"><p>Ouvrir le sol à la bêche, c'est ouvrir son carnet de santé. La couleur d'abord : un brun profond dit la matière organique, un gris bleuté annonce l'asphyxie, des taches rouille ou ocres trahissent les alternances d'eau et d'air. L'odeur ensuite : un sol vivant sent le sous-bois, le champignon ; une odeur d'œuf pourri ou de vase signale une zone privée d'oxygène où la chimie a basculé — ce monde anoxique que les volets Sol ont décrit. La structure enfin : des mottes grumeleuses qui s'effritent, ou des blocs tassés qui résistent. Un profil bien lu vaut un protocole : il dit, avant tout instrument, où le sol respire et où il étouffe.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Tests terrain</h2>
+    <div class="sv-markdown"><p>La bêche ne suffit pas : le praticien affine son oreille par des tests de terrain, simples et immédiats. Le test du slip : enterrer un linge de coton quelques semaines, et sa dégradation mesure l'activité biologique — un sol vivant le digère, un sol mort le rend presque intact. Le test du bloc : laisser tomber une motte sèche dans l'eau et regarder si elle se délite doucement ou explose en poussière — la stabilité structurale en une seconde. Ces gestes ne mesurent rien de précis ; ils éduquent l'œil et la main, ils apprennent à reconnaître du premier coup d'œil ce que l'analyse confirmera. C'est l'auscultation qui précède l'ordonnance.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Test d&#39;infiltration, Solvita et entonnoir de Baermann</h2>
+    <div class="sv-markdown"><p>Trois instruments prolongent la main. Le test d'infiltration d'abord : un cylindre, de l'eau, un chronomètre — la vitesse à laquelle le sol boit une pluie dit l'état de ses artères, cette macroporosité que le labour peut effondrer. Le test Solvita ensuite : il mesure le gaz carbonique dégagé par la respiration des microbes, ce souffle qui dit si le ventre du sol digère ou dort. Enfin l'entonnoir de Baermann, qui extrait les nématodes d'une poignée de terre pour en lire les guildes — un diagnostic que le volet V1 (§7) a déjà déplié ; ici, on le range simplement dans la trousse du praticien, sans le re-démontrer.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Plantes bio-indicatrices et lecture du profil</h2>
+    <div class="sv-markdown"><p>Le sol parle aussi par ce qu'il fait pousser spontanément. Le chiendent n'est pas une mauvaise herbe : c'est un témoin — il prolifère là où le sol se compacte, il dénonce la semelle que la charrue a laissée (<a href="/Publications/liseuse/fiche/255/">fiche #255</a>). D'autres plantes indiquent l'acidité, l'excès d'eau, la richesse en azote. Les lire, c'est apprendre un alphabet : chaque adventice est un signe, chaque envahissement un symptôme. Le praticien qui connaît ses plantes bio-indicatrices possède un diagnostic permanent et gratuit, qui se renouvelle à chaque saison — un relevé que nul laboratoire ne fournit aussi souvent.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Analyses laboratoire</h2>
+    <div class="sv-markdown"><p>Vient le moment de la précision. Le laboratoire complète l'auscultation de terrain : il dose, calibre, chiffre ce que l'œil n'a fait que deviner. Mais l'ordre du geste importe : on ne délègue pas le diagnostic à la machine, on lui demande de confirmer ce que la bêche et l'œil ont déjà pressenti. Une analyse sans lecture de terrain est un chiffre orphelin ; une lecture de terrain sans analyse est une intuition invérifiée. Le praticien apprend à marier les deux : l'auscultation oriente l'échantillonnage, le laboratoire tranche l'incertitude. C'est à ce prix que le chiffre devient une décision.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>Analyses physico-chimiques</h2>
+    <div class="sv-markdown"><p>Les analyses classiques forment le socle : pH, matière organique, capacité d'échange, éléments majeurs — parmi elles, les tests de fertilité biologique, comme l'analyse Haney, qui mesure la respiration et le carbone et l'azote mobilisables (<a href="/Publications/liseuse/fiche/276/">fiche #276</a>). Elles quantifient le garde-manger du sol, ce que la chimie peut retenir et restituer. Mais elles ont leurs limites, et le praticien les connaît : elles ne disent rien de la vie, elles figent en un instantané ce qui est un flux. À quoi servent-elles alors ? À poser les repères — le pH qui gouverne la disponibilité des nutriments, la CEC qui dit la capacité de rétention. Ce sont les constantes vitales de l'auscultation : elles ne font pas le diagnostic à elles seules, mais sans elles, il flotte.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Analyses avancées : Eh, métabarcoding, métagénomique</h2>
+    <div class="sv-markdown"><p>Une nouvelle génération d'outils descend au cœur du vivant. Les sondes redox de terrain lisent en continu le potentiel Eh — ce pouls électrique qui dit si le sol respire ou s'asphyxie, mieux que la seule humidité (<a href="/Publications/liseuse/fiche/114/">fiche #114</a>). Le métabarcoding dresse le registre des espèces présentes par leur code-barres génétique — ce que le volet fongique (S3) a déjà illustré avec l'ITS. La métagénomique va plus loin : elle lit non plus qui est là, mais ce que la communauté sait faire — les fonctions, les guildes, les potentiels. Ces outils ne remplacent pas l'œil ; ils l'équipent d'un microscope. Le praticien apprend à les lire comme on lit une radio, en gardant le sol toujours sous les yeux.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>De l&#39;analyse à la décision</h2>
+    <div class="sv-markdown"><p>Un chiffre n'est pas une ordonnance. Entre l'analyse et la décision, il y a le jugement du praticien : rapprocher la texture, le profil, les plantes, les chiffres — et trancher. Telle carence en phosphore, par exemple, ne se soigne pas de la même façon selon qu'elle vient d'un manque réel ou d'un phosphore verrouillé que la biologie pourrait déverrouiller — distinction que la strate Sol a établie. Le bon diagnostic n'est pas le plus complet, c'est celui qui change un geste : arrêter de tasser, couvrir plutôt qu'exposer, nourrir la biologie plutôt que forcer la chimie. L'auscultation n'a qu'un but : savoir où agir — et où s'abstenir.</p>
+</div>
+    
+  </section><section id="s10">
+    <h2>Tableau de bord de suivi sur 5 ans</h2>
+    <div class="sv-markdown"><p>Le diagnostic n'est pas une photo, c'est un film. Le praticien tient un tableau de bord : les mêmes mesures, les mêmes points de prélèvement, les mêmes saisons, année après année — pendant cinq ans, le temps que le sol raconte sa trajectoire. C'est la tendance qui compte, pas l'instantané : la matière organique qui remonte, la structure qui tient, le redox qui se stabilise. Ce suivi dans la durée est lui-même un geste de métier — la patience de qui juge son ouvrage sur pièce, au fil des saisons, et corrige le geste au lieu de changer d'outil à chaque échec.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>Diagnostiquer un sol vivant, c'est d'abord apprendre à l'écouter : la texture sous les doigts, le profil sous la bêche, les plantes, les chiffres, les tendances. L'auscultation n'est pas une science de plus, c'est le premier geste du métier — celui qui rend tous les autres possibles. Un praticien qui sait lire son sol n'agit plus à l'aveugle : il agit juste.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (186)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6482/">biominéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6629/">couleur du sol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6033/">IFT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7833/">électrode</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li><li><a href="/Publications/liseuse/terme/5025/">Amorçage rhizosphérique</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">P1 — lecture (50)</summary>
+    <nav aria-label="P1 — lecture (50)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P1/integral/" title="Le document P1 intégral" data-id="integral-P1">
+          <span class="sv-navlist-title">Le document P1 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/4/" title="Stœchiométrie CNPS de Kirkby et bilan AMG" data-id="fiche-4">
+          <span class="sv-navlist-title">Stœchiométrie CNPS de Kirkby et bilan AMG</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/12/" title="Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire" data-id="fiche-12">
+          <span class="sv-navlist-title">Diagnostic Différentiel K/Mg/N par pH et EC de la Sève Foliaire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/20/" title="Gestion Systémique des Nématodes à Galles" data-id="fiche-20">
+          <span class="sv-navlist-title">Gestion Systémique des Nématodes à Galles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/22/" title="Quorum Sensing et Communication Chimique Rhizosphérique" data-id="fiche-22">
+          <span class="sv-navlist-title">Quorum Sensing et Communication Chimique Rhizosphérique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/25/" title="Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique" data-id="fiche-25">
+          <span class="sv-navlist-title">Amendements minéraux structurants : marnage, chaulage, gypse, poudres de roche et articulation avec la fraction organique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/30/" title="Le Cycle du Potassium dans les Sols Vivants" data-id="fiche-30">
+          <span class="sv-navlist-title">Le Cycle du Potassium dans les Sols Vivants</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/33/" title="Biochar, Chitosane et Extraits d'Algues — Biostimulants Sous-couverts" data-id="fiche-33">
+          <span class="sv-navlist-title">Biochar, Chitosane et Extraits d&#39;Algues — Biostimulants Sous-couverts</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/62/" title="Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien" data-id="fiche-62">
+          <span class="sv-navlist-title">Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/68/" title="Mode d application des amendements — surface versus incorporation et incidence pédologique" data-id="fiche-68">
+          <span class="sv-navlist-title">Mode d application des amendements — surface versus incorporation et incidence pédologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/70/" title="Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages" data-id="fiche-70">
+          <span class="sv-navlist-title">Excès de carbone fermentescible — odeurs, chauffes et instabilités des compostages</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/73/" title="Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies" data-id="fiche-73">
+          <span class="sv-navlist-title">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/76/" title="Lombriciens — écologie, services et pilotage des populations" data-id="fiche-76">
+          <span class="sv-navlist-title">Lombriciens — écologie, services et pilotage des populations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/77/" title="Biochar : architecte de sol (habitat, CEC, carbone stable)" data-id="fiche-77">
+          <span class="sv-navlist-title">Biochar : architecte de sol (habitat, CEC, carbone stable)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/78/" title="Éliciteurs biologiques exogènes : chitosane et oligogalacturonides" data-id="fiche-78">
+          <span class="sv-navlist-title">Éliciteurs biologiques exogènes : chitosane et oligogalacturonides</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/81/" title="Couplages biogéochimiques Fe-P-S-N sous alternance redox" data-id="fiche-81">
+          <span class="sv-navlist-title">Couplages biogéochimiques Fe-P-S-N sous alternance redox</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/82/" title="Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone" data-id="fiche-82">
+          <span class="sv-navlist-title">Priming effect rhizosphérique : de la stimulation microbienne au bilan net carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/87/" title="Compaction — de l'asphyxie racinaire à la maladie chronique végétale" data-id="fiche-87">
+          <span class="sv-navlist-title">Compaction — de l&#39;asphyxie racinaire à la maladie chronique végétale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/92/" title="Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM" data-id="fiche-92">
+          <span class="sv-navlist-title">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/93/" title="Calcaire actif — protocole Drouineau et interprétation pour sols calcaires" data-id="fiche-93">
+          <span class="sv-navlist-title">Calcaire actif — protocole Drouineau et interprétation pour sols calcaires</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/105/" title="Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh" data-id="fiche-105">
+          <span class="sv-navlist-title">Fermentations enzymatiques sur substrat solide — mécanismes et cas Koji, Natto, Jiuqu, Tempeh</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/106/" title="Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé" data-id="fiche-106">
+          <span class="sv-navlist-title">Carence silencieuse en cobalt et transfert trophique sol-plante-microbiome humain : pendant Co du continuum sol-aliment-santé</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/108/" title="‘Faim d’azote’ après apport carboné (immobilisation)" data-id="fiche-108">
+          <span class="sv-navlist-title">‘Faim d’azote’ après apport carboné (immobilisation)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/111/" title="Chantier de reconstruction d'un sol sableux structurellement vide — doctrine intégrée" data-id="fiche-111">
+          <span class="sv-navlist-title">Chantier de reconstruction d&#39;un sol sableux structurellement vide — doctrine intégrée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/114/" title="Eh terrain : sondes redox, gradient mV/cm et méthode in situ" data-id="fiche-114">
+          <span class="sv-navlist-title">Eh terrain : sondes redox, gradient mV/cm et méthode in situ</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/115/" title="Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils" data-id="fiche-115">
+          <span class="sv-navlist-title">Tests enzymatiques β-glucosidase / phosphatase / uréase : protocoles et seuils</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/116/" title="Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD" data-id="fiche-116">
+          <span class="sv-navlist-title">Toxicité ferreuse en sols hydromorphes : stress oxydatif, mobilité Cd/As et stratégies AWD</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/121/" title="Asphyxie / anaérobie locale (odeurs, horizons réduits)" data-id="fiche-121">
+          <span class="sv-navlist-title">Asphyxie / anaérobie locale (odeurs, horizons réduits)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/123/" title="Racines superficielles / enracinement bloqué" data-id="fiche-123">
+          <span class="sv-navlist-title">Racines superficielles / enracinement bloqué</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/124/" title="Stabilité d’agrégats faible / désagrégation rapide" data-id="fiche-124">
+          <span class="sv-navlist-title">Stabilité d’agrégats faible / désagrégation rapide</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/126/" title="Faim d'azote comme outil agronomique : déprise adventice et sélection de cortège" data-id="fiche-126">
+          <span class="sv-navlist-title">Faim d&#39;azote comme outil agronomique : déprise adventice et sélection de cortège</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/132/" title="Brix réfractomètre : seuils opérationnels et interprétation agronomique" data-id="fiche-132">
+          <span class="sv-navlist-title">Brix réfractomètre : seuils opérationnels et interprétation agronomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/135/" title="BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht" data-id="fiche-135">
+          <span class="sv-navlist-title">BCSR vs SLAN : doctrine équilibre cationique et limites du système Albrecht</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/139/" title="Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol" data-id="fiche-139">
+          <span class="sv-navlist-title">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/140/" title="Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle" data-id="fiche-140">
+          <span class="sv-navlist-title">Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/153/" title="Immunité végétale et ingénierie de la résistance" data-id="fiche-153">
+          <span class="sv-navlist-title">Immunité végétale et ingénierie de la résistance</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/154/" title="Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique" data-id="fiche-154">
+          <span class="sv-navlist-title">Mémoire du sol et auto-régulation suppressive : la dimension transgénérationnelle de la résilience pédologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/169/" title="Silicium — biostimulant" data-id="fiche-169">
+          <span class="sv-navlist-title">Silicium — biostimulant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/231/" title="Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill" data-id="fiche-231">
+          <span class="sv-navlist-title">Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/255/" title="Le chiendent comme bioindicateur du compactage" data-id="fiche-255">
+          <span class="sv-navlist-title">Le chiendent comme bioindicateur du compactage</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/262/" title="Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger" data-id="fiche-262">
+          <span class="sv-navlist-title">Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/267/" title="Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers" data-id="fiche-267">
+          <span class="sv-navlist-title">Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/276/" title="Test Haney et amorçage épigénétique foliaire — une intersection à explorer" data-id="fiche-276">
+          <span class="sv-navlist-title">Test Haney et amorçage épigénétique foliaire — une intersection à explorer</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/278/" title="Couvert permanent sous serre : restructurer un sol mort" data-id="fiche-278">
+          <span class="sv-navlist-title">Couvert permanent sous serre : restructurer un sol mort</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/317/" title="Odeurs du sol : la signature olfactive du sol vivant" data-id="fiche-317">
+          <span class="sv-navlist-title">Odeurs du sol : la signature olfactive du sol vivant</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/319/" title="Couleur du sol : le premier diagnostic par le regard" data-id="fiche-319">
+          <span class="sv-navlist-title">Couleur du sol : le premier diagnostic par le regard</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

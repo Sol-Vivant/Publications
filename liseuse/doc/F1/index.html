@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/F1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iqe73" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;F&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -46,131 +46,10 @@
                 <a href="/Publications/liseuse/doc/F1/" aria-current="page">
                   <strong>F1</strong> — Le Temps Long
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/320/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/35/">
-                          Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/41/">
-                          Fragilité systémique fossile et transition robuste (méthode Shift PREF)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/58/">
-                          Cascade temporelle — du jour au géologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/65/">
-                          Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/66/">
-                          Réseau mycorhizien commun — controverse Simard vs Karst 2023
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/72/">
-                          Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/119/">
-                          Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/145/">
-                          Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/146/">
-                          Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/147/">
-                          Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/148/">
-                          Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/166/">
-                          Biofilms
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/179/">
-                          Trade-off plant vs soil C under elevated CO2
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/201/">
-                          Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/202/">
-                          Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/254/">
-                          Les fils rouges du sol vivant — thèses transversales et renversements
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/258/">
-                          Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/260/">
-                          La transition robuste : une vallée à traverser, quatre âges, trois gestes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/262/">
-                          Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/263/">
-                          Le régime fixe les rôles — du sol vivant à la plante saine
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/264/">
-                          Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/280/">
-                          Lactofermentation : technologie alimentaire ancestrale et successions microbiennes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/300/">
-                          La pédogenèse : comment le vivant fabrique le sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/344/">
-                          La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/354/">
-                          Biodiversité et stabilité : produire sous climat non stationnaire
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/F2/">
                   <strong>F2</strong> — L&#39;Économie du Vivant
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -325,7 +204,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -340,152 +219,189 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>F1 — Le Temps Long</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>F1 — Le Temps Long</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 29 textes — l'ouverture, puis 28 fiches.</p>
+      <p class="sv-meta">
+        29 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/320/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/F1/integral/">
-            <strong>Le document F1 intégral</strong>
-            <p class="sv-meta">Le récit complet — 12 817 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Avant de décrire comment le sol vit, comment il fabrique, ce qu'on y fait et ce qu'il nous rend, il faut descendre dans le temps. Le sol n'a pas commencé hier : il est l'archive d'un passé de plusieurs milliards d'années, empilé en couches que l'on peut lire comme des strates géologiques. Chaque couche raconte une invention du vivant — la vie sans oxygène, la photosynthèse, la sortie des eaux, l'alliance plante-microbe, puis l'agriculture et ses dérapages. Ce volet descend cette colonne des temps, de la plus ancienne à la plus récente, pour comprendre d'où vient le capital que l'agriculture a appris à dépenser.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (28)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-              <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la coévolution plante-microbe comme levier fondamental pour la transition vers une agriculture régénérative et résilient…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/35/">
-              <strong>Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Cette synthèse explore le rôle central des symbioses mycorhiziennes — principalement les mycorhizes à arbuscules et les ectomycorhizes — en …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/41/">
-              <strong>Fragilité systémique fossile et transition robuste (méthode Shift PREF)</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Nos sociétés ont mobilisé une armée invisible d&#39;esclaves énergétiques fossiles qui fait tourner tous leurs secteurs — mobilité, industrie, b…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/58/">
-              <strong>Cascade temporelle — du jour au géologique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le concept de Cascade Temporelle T0-T5 propose une lecture multidimensionnelle de la dynamique du carbone organique du sol, intégrant les pr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/65/">
-              <strong>Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le paradigme de la matière organique du sol a connu une révolution conceptuelle, passant de la théorie de l&#39;humification — aujourd&#39;hui inval…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/66/">
-              <strong>Réseau mycorhizien commun — controverse Simard vs Karst 2023</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document examine la controverse scientifique majeure entourant les réseaux mycorhiziens communs, opposant principalement la vision systém…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/72/">
-              <strong>Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le passage de l&#39;étape de &quot;Marginalisation&quot; à celle de &quot;l&#39;Effondrement&quot; (voir Section 3) n&#39;est pas dicté par le manque de charrues ou d&#39;engra…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/92/">
-              <strong>Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’altération forcée des roches est devenue une technologie clé pour atteindre les objectifs de neutralité carbone (Hkaung et al., 2025). Le …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/119/">
-              <strong>Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse exhaustive des connaissances actuelles sur les archées Asgard et leur rôle fondamental dans l&#39;eucaryogenès…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/145/">
-              <strong>Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse critique du concept de « Wood Wide Web », marquant le passage d&#39;une vision métaphorique de la forêt — cent…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/146/">
-              <strong>Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise l&#39;évolution des connaissances sur la symbiose entre les plantes et les champignons mycorhiziens à arbuscules, en mett…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/147/">
-              <strong>Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</strong>
-              <span class="sv-badge">zoom</span>
-              
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/148/">
-              <strong>Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore la dualité biochimique et évolutive de la biosynthèse de la vitamine B12 (cobalamine) et son rôle pivot dans l&#39;agricultu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/166/">
-              <strong>Biofilms</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les biofilms telluriques représentent la forme d&#39;organisation prédominante de la vie microbienne dans les sols, transformant les interfaces …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/179/">
-              <strong>Trade-off plant vs soil C under elevated CO2</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse la complexité des interactions entre la croissance végétale et la séquestration du carbone organique du sol dans le cont…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/201/">
-              <strong>Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document retrace l&#39;évolution de la biosphère terrestre, de l&#39;atmosphère anoxique de l&#39;Archéen aux écosystèmes complexes des sols modernes…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/202/">
-              <strong>Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce résumé synthétise les mécanismes de la transition agroécologique à travers le prisme de la succession microbienne, en articulant les stra…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/254/">
-              <strong>Les fils rouges du sol vivant — thèses transversales et renversements</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Trois fils rouges traversent l&#39;ouvrage : (1) gouvernance biologique — le microbiome structure la MO, pas l&#39;inverse ; (2) coévolution holobio…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/258/">
-              <strong>Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</strong>
-              
-              <p class="sv-meta">Les fermentations paysannes (choucroute, kéfir, kombucha, EM-Bokashi) reposent sur un triptyque : couper l&#39;air (anaérobiose), produire de l&#39;…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/260/">
-              <strong>La transition robuste : une vallée à traverser, quatre âges, trois gestes</strong>
-              
-              <p class="sv-meta">La transition vers le sol vivant n&#39;est pas un interrupteur mais une vallée à traverser. Quatre âges : (1) sevrage (0-3 ans) — le sol dépenda…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/262/">
-              <strong>Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</strong>
-              
-              <p class="sv-meta">Cinq réflexes pour ne pas se faire piéger en agriculture régénératrice : (1) chercher d&#39;abord ce que le vivant construit — partir du moteur,…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/263/">
-              <strong>Le régime fixe les rôles — du sol vivant à la plante saine</strong>
-              
-              <p class="sv-meta">Un sol sain fait une plante saine, qui fait une chaîne alimentaire saine (Howard 1940). La science récente révèle le mécanisme : microbiome …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/264/">
-              <strong>Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document propose un changement de paradigme dans la compréhension des microsites anoxiques du sol, passant d&#39;une vision de refuges isolés…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/280/">
-              <strong>Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La lactofermentation — conversion des sucres en acide lactique sous anoxie — est la plus ancienne biotechnologie documentée, pratiquée conve…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/300/">
-              <strong>La pédogenèse : comment le vivant fabrique le sol</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pédogenèse est la fabrication du sol à partir de la roche-mère, sous l&#39;action de cinq facteurs — climat, biote, relief, roche, temps (Jen…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/344/">
-              <strong>La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La biosphère profonde est la preuve-limite de l&#39;ubiquité du vivant : à plusieurs kilomètres sous la surface, dans la roche fracturée, une bi…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/354/">
-              <strong>Biodiversité et stabilité : produire sous climat non stationnaire</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Sous un climat non stationnaire, le rendement moyen est une statistique d&#39;un monde révolu : le budget carbone du 1,5 °C tient en quelques an…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (146)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/5017/">coalescence microbienne</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>L&#39;Archéen anaérobie</h2>
+    <div class="sv-markdown"><p>La première couche est la plus profonde. Durant l'éon Archéen, la Terre était enveloppée d'une atmosphère presque sans oxygène — une planète sombre et réductrice où la vie n'était encore qu'une chimie. Les océans de cet âge ont laissé leur trace dans les formations ferrifères rubanées, ces dépôts de fer qui datent de 3,8 à 2,5 milliards d'années (ordre de grandeur — <a href="/Publications/liseuse/fiche/201/">fiche #201</a>). C'est dans ce monde sans air que se cachent nos plus lointaines origines : les archées Asgard, dont la découverte a bouleversé la biologie en plaçant les eucaryotes — la lignée des êtres à noyau, dont nous sommes — au cœur même de ce groupe ancien (<a href="/Publications/liseuse/fiche/119/">fiche #119</a>). Le temps long commence ici, dans une chimie qui respire sans oxygène.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Les premiers métabolismes</h2>
+    <div class="sv-markdown"><p>Comment vivait ce monde sans air ? Par des métabolismes anaérobies qui exploitaient ce qui traînait : l'hydrogène, le fer dissous, le méthane. La productivité primitive reposait sur cette triade — H₂, Fe, CH₄ — bien loin du rendement solaire d'aujourd'hui (<a href="/Publications/liseuse/fiche/201/">fiche #201</a>). C'est le point décisif du récit : la vie n'a pas eu besoin d'oxygène pour commencer. Elle a appris à tirer son énergie de réactions lentes, à faible rendement, que nos sols modernes conservent encore, tapies dans leurs recoins sans air. Cette première économie du vivant — frugale, sans oxygène — n'a jamais vraiment disparu ; elle s'est repliée, et attend.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>La révolution O₂</h2>
+    <div class="sv-markdown"><p>Puis vint l'invention qui allait tout changer : la photosynthèse oxygénique. Elle a mis des centaines de millions d'années à faire basculer la planète, car l'oxygène produit était d'abord avalé par les puits minéraux — mais le point de bascule, la Grande Oxydation, est aujourd'hui daté avec précision à 2,33 milliards d'années (<a href="/Publications/liseuse/fiche/201/">fiche #201</a>). Ce fut une révolution écologique : un gaz toxique pour la vie d'alors envahit l'air et les océans, et force le vivant soit à se protéger, soit à exploiter l'énorme potentiel énergétique de la respiration aérobie. Cette respiration — brûler la matière avec de l'oxygène — allait multiplier la puissance disponible par gène, et rendre possibles les cellules complexes. Notre monde oxygéné est né d'un empoisonnement planétaire.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>L&#39;anaérobiose comme vestige vivant</h2>
+    <div class="sv-markdown"><p>Mais l'héritage anaérobie n'a pas disparu. Il s'est réfugié dans les recoins privés d'oxygène de la lithosphère et des sols : ces microsites anoxiques qui, dans un sol pourtant bien aéré, peuvent représenter jusqu'à 85 % du volume des pores (ordre de grandeur — <a href="/Publications/liseuse/fiche/201/">fiche #201</a>). C'est un monde inversé, une relique de l'Archéen qui vit encore sous nos pieds, où le fer et le méthane continuent leur cycle ancestral. Ces refuges ne sont pas des curiosités : en freinant la décomposition du carbone, l'anaérobiose stabilise la matière organique et pèse sur le climat. Le temps long n'est pas derrière nous — il est encore en nous, dans chaque motte de sol.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>La colonisation terrestre</h2>
+    <div class="sv-markdown"><p>Ensuite vint la sortie des eaux. Il y a environ 450 millions d'années, les plantes se sont installées sur les continents — et elles ne l'ont pas fait seules : la symbiose mycorhizienne a été le pont qui leur a ouvert la terre ferme (<a href="/Publications/liseuse/fiche/26/">fiche #26</a>). Cette alliance plante-champignon, vieille d'un demi-milliard d'années (ordre de grandeur), a co-construit le sol tel que nous le connaissons : les racines ont apporté le carbone, les champignons l'eau et les minéraux, et de cette coévolution est née l'architecture vivante que la strate Sol décrit. Le sol n'est pas un support que la vie a trouvé ; c'est une œuvre que la vie a bâtie, en partenariat, sur des centaines de millions d'années — non pas un organisme, mais un holobionte, une communauté qui s'organise comme un corps.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Le CMN : émergence d&#39;un réseau planétaire</h2>
+    <div class="sv-markdown"><p>À force de coévoluer, plantes et champignons ont tissé des réseaux : les filaments mycorhiziens relient les racines entre elles, formant ce que l'on a appelé un réseau mycorhizien commun — et, à l'échelle des forêts, un « réseau planétaire ». L'image est puissante ; elle a été popularisée sous le nom de « Wood Wide Web », puis rigoureusement nuancée en 2023 par une critique qui a dénoncé un biais de citation (<a href="/Publications/liseuse/fiche/145/">fiche #145</a>). Le débat complet est traité dans la strate Sol (S3 §6) ; ici, retenons la leçon mesurée : le réseau existe, mais son rôle d'entraide reste une hypothèse à tester, non un dogme à célébrer. Le temps long mérite l'honnêteté.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>L&#39;histoire agraire</h2>
+    <div class="sv-markdown"><p>Puis le temps humain s'est ouvert. Les premières agricultures ont écrit une leçon que les civilisations n'ont cessé de réapprendre : un sol dépensé plus vite qu'il ne se refait finit par emporter ceux qui en vivent. Sumer et la salinisation de ses terres, les Mayas et leurs cycles d'érosion, la Grèce antique dénudée par la pression pastorale — chaque fois, le même scénario, documenté par l'érosion historique des civilisations (<a href="/Publications/liseuse/fiche/72/">fiche #72</a>). Ce n'est pas une malédiction, mais une dynamique reproductible : convertir, intensifier, épuiser, puis s'effondrer. L'histoire agraire est la première couche écrite par l'humain dans le registre du sol — et elle est écrite en rouge.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Dust Bowl, Mer d&#39;Aral, révolution verte</h2>
+    <div class="sv-markdown"><p>L'âge industriel a donné à cette dynamique sa forme moderne. Le Dust Bowl américain des années 1930-1936 reste la catastrophe emblématique : des prairies labourées à grande échelle, une sécheresse, et le sol soulevé en tempêtes de poussière (<a href="/Publications/liseuse/fiche/72/">fiche #72</a>). La mer d'Aral, asséchée par l'irrigation massive, raconte la même fuite en avant en Asie centrale. Et la révolution verte, en dopant les rendements par les intrants, a repoussé le mur sans le supprimer — elle a différé la facture, pas l'échéance. Ces trois épisodes sont la même page : un sol traité comme un stock à consommer plutôt que comme un capital à entretenir.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>Les fermentations ancestrales : une thermodynamique sans oxygène</h2>
+    <div class="sv-markdown"><p>Revenons au monde sans air, car il n'a pas seulement survécu : il a été domestiqué. Les fermentations sont l'héritage direct de l'Archéen — des microbes qui, privés d'oxygène, tirent leur énergie de réactions en cascade, ordonnées par leur rendement : l'oxygène d'abord, puis le nitrate, le manganèse, le fer, le sulfate, le gaz carbonique (<a href="/Publications/liseuse/fiche/268/">fiche #268</a>). Cette cascade d'accepteurs d'électrons n'est pas un classement d'école : c'est elle qui décide quel microbe domine, et quels produits s'en échappent. Le bocal de choucroute, le compost chaud, le sol saturé — tous rejouent cette thermodynamique ancienne. Le récit pratique de ces fermentations appartient au volet V3 ; ici, retenons leur racine : fermenter, c'est faire travailler le temps long.</p>
+</div>
+    
+  </section><section id="s10">
+    <h2>Les successions microbiennes en fermentation</h2>
+    <div class="sv-markdown"><p>Dans le bocal comme dans le sol, les microbes se succèdent : les premiers installés modifient le milieu, et cèdent la place aux suivants. Cette succession est la même logique écologique à deux échelles — la fermentation lactique d'un légume et la maturation d'un sol suivent un continuum gouverné par la thermodynamique (<a href="/Publications/liseuse/fiche/268/">fiche #268</a>). Chaque étape prépare la suivante : l'acide chasse l'oxygène, l'anaérobiose s'installe, et la communauté se stabilise. Ce n'est pas un désordre : c'est une chorégraphie, écrite il y a des milliards d'années, que le vivant rejoue à chaque fois qu'on lui coupe l'air. La fermentation est le temps long en miniature.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>Le sol est une archive vivante : l'Archéen sans oxygène, la révolution de l'O₂, l'alliance plante-microbe, puis l'écriture humaine et ses leçons répétées. Chaque couche de ce temps long est encore active — dans les microsites anoxiques, dans les fermentations, dans la fertilité qu'elles ont accumulée. Comprendre cette profondeur, c'est mesurer la lenteur du capital que l'agriculture a appris à dépenser vite.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (146)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6417/">arbitrage</a></li><li><a href="/Publications/liseuse/terme/5017/">coalescence microbienne</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5615/">oxydation anaérobie</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7308/">point de rupture</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a></li><li><a href="/Publications/liseuse/terme/7594/">sulfure</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">F1 — lecture (29)</summary>
+    <nav aria-label="F1 — lecture (29)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/F1/integral/" title="Le document F1 intégral" data-id="integral-F1">
+          <span class="sv-navlist-title">Le document F1 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/26/" title="Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi" data-id="fiche-26">
+          <span class="sv-navlist-title">Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/35/" title="Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels" data-id="fiche-35">
+          <span class="sv-navlist-title">Mycorhizes arbusculaires (AM) et ectomycorhizes (ECM) — Symbiose et Echanges Fonctionnels</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/41/" title="Fragilité systémique fossile et transition robuste (méthode Shift PREF)" data-id="fiche-41">
+          <span class="sv-navlist-title">Fragilité systémique fossile et transition robuste (méthode Shift PREF)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/58/" title="Cascade temporelle — du jour au géologique" data-id="fiche-58">
+          <span class="sv-navlist-title">Cascade temporelle — du jour au géologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/65/" title="Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM" data-id="fiche-65">
+          <span class="sv-navlist-title">Pompe microbienne à carbone — la nécromasse comme voie dominante de stabilisation du MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/66/" title="Réseau mycorhizien commun — controverse Simard vs Karst 2023" data-id="fiche-66">
+          <span class="sv-navlist-title">Réseau mycorhizien commun — controverse Simard vs Karst 2023</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/72/" title="Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines" data-id="fiche-72">
+          <span class="sv-navlist-title">Érosion historique des civilisations — du labour ancien au Dust Bowl, leçons contemporaines</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/92/" title="Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM" data-id="fiche-92">
+          <span class="sv-navlist-title">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/119/" title="Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen" data-id="fiche-119">
+          <span class="sv-navlist-title">Archées Asgard et origine eucaryote : la lignée eucaryote prend ses racines dans le domaine archéen</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/145/" title="Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)" data-id="fiche-145">
+          <span class="sv-navlist-title">Wood Wide Web : critique scientifique du paradigme des réseaux mycorhiziens communs (CMN)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/146/" title="Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire" data-id="fiche-146">
+          <span class="sv-navlist-title">Auxotrophie et co-évolution : le virage lipidique CMA-plante comme signature de symbiose obligatoire</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/147/" title="Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés" data-id="fiche-147">
+          <span class="sv-navlist-title">Voie de symbiose commune (CSSP) : SYMRK, CCaMK, CYCLOPS comme modules universels conservés</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/148/" title="Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente" data-id="fiche-148">
+          <span class="sv-navlist-title">Voies aérobie (cob) et anaérobie (cbi) de biosynthèse de la vitamine B12 : architecture évolutive divergente</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/166/" title="Biofilms" data-id="fiche-166">
+          <span class="sv-navlist-title">Biofilms</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/179/" title="Trade-off plant vs soil C under elevated CO2" data-id="fiche-179">
+          <span class="sv-navlist-title">Trade-off plant vs soil C under elevated CO2</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/201/" title="Évolution de la Biosphère : de l'Archéen aux Sols Modernes" data-id="fiche-201">
+          <span class="sv-navlist-title">Évolution de la Biosphère : de l&#39;Archéen aux Sols Modernes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/202/" title="Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax" data-id="fiche-202">
+          <span class="sv-navlist-title">Stratégies écologiques microbiennes r/K et Y-A-S — du sol nu au climax</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/254/" title="Les fils rouges du sol vivant — thèses transversales et renversements" data-id="fiche-254">
+          <span class="sv-navlist-title">Les fils rouges du sol vivant — thèses transversales et renversements</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/258/" title="Les fermentations paysannes : couper l'air, produire l'acide, trier les microbes" data-id="fiche-258">
+          <span class="sv-navlist-title">Les fermentations paysannes : couper l&#39;air, produire l&#39;acide, trier les microbes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/260/" title="La transition robuste : une vallée à traverser, quatre âges, trois gestes" data-id="fiche-260">
+          <span class="sv-navlist-title">La transition robuste : une vallée à traverser, quatre âges, trois gestes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/262/" title="Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger" data-id="fiche-262">
+          <span class="sv-navlist-title">Raisonner juste sur un sol vivant : cinq réflexes pour ne pas se faire piéger</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/263/" title="Le régime fixe les rôles — du sol vivant à la plante saine" data-id="fiche-263">
+          <span class="sv-navlist-title">Le régime fixe les rôles — du sol vivant à la plante saine</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/264/" title="Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri" data-id="fiche-264">
+          <span class="sv-navlist-title">Le microsite anoxique comme refuge évolutif : conservation du vivant ancestral et innovation génétique à l’abri</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/280/" title="Lactofermentation : technologie alimentaire ancestrale et successions microbiennes" data-id="fiche-280">
+          <span class="sv-navlist-title">Lactofermentation : technologie alimentaire ancestrale et successions microbiennes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/300/" title="La pédogenèse : comment le vivant fabrique le sol" data-id="fiche-300">
+          <span class="sv-navlist-title">La pédogenèse : comment le vivant fabrique le sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/344/" title="La biosphère profonde : la vie habite la roche jusqu'à plusieurs kilomètres" data-id="fiche-344">
+          <span class="sv-navlist-title">La biosphère profonde : la vie habite la roche jusqu&#39;à plusieurs kilomètres</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/354/" title="Biodiversité et stabilité : produire sous climat non stationnaire" data-id="fiche-354">
+          <span class="sv-navlist-title">Biodiversité et stabilité : produire sous climat non stationnaire</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

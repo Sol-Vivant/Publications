@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/V1/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1iskd5" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;V&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -56,140 +56,14 @@
                 <a href="/Publications/liseuse/doc/V1/" aria-current="page">
                   <strong>V1</strong> — La Faune du Sol
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/335/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/19/">
-                          Protozoaires du Sol et Boucle Microbienne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/20/">
-                          Gestion Systémique des Nématodes à Galles
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/26/">
-                          Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/61/">
-                          Trophobiose — de l excès d azote minéral à la pullulation des ravageurs
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/62/">
-                          Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/63/">
-                          Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/73/">
-                          Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/76/">
-                          Lombriciens — écologie, services et pilotage des populations
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/96/">
-                          Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/99/">
-                          Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/112/">
-                          Glomaline : glycoprotéine fongique et stockage C profond
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/125/">
-                          Mésofaune : collemboles et acariens, régulateurs des micro-habitats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/127/">
-                          Redondance fonctionnelle et résilience coévolutive (H5/DP4)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/128/">
-                          Endophytes ubiquitaires et potentiel pathogène latent
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/139/">
-                          Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/140/">
-                          Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/143/">
-                          Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/156/">
-                          Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/162/">
-                          conductivité hydraulique saturée
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/170/">
-                          Carabes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/171/">
-                          vermicompost
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/230/">
-                          Gastéropodes terrestres — limaces et escargots, rôles écologiques et régulation dans les agrosystèmes
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/231/">
-                          Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/237/">
-                          Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/261/">
-                          Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/267/">
-                          Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/278/">
-                          Couvert permanent sous serre : restructurer un sol mort
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/279/">
-                          La serre comme bioréacteur : conduite tropicale et autofertilité
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/V2/">
                   <strong>V2</strong> — L&#39;Holobionte Plante-Microbiome
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/V3/">
                   <strong>V3</strong> — Les Fermentations Microbiennes
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -334,7 +208,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -349,156 +223,186 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>V1 — La Faune du Sol</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>V1 — La Faune du Sol</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 30 textes — l'ouverture, puis 29 fiches.</p>
+      <p class="sv-meta">
+        30 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/335/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/V1/integral/">
-            <strong>Le document V1 intégral</strong>
-            <p class="sv-meta">Le récit complet — 11 219 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Sur le marché souterrain que décrit la strate Vivant, tout ne se paie pas qu'en carbone : il faut des bras. Les vers de terre qui creusent, les acariens qui trient, les nématodes qui régulent — voici la faune, la main-d'œuvre visible du sol, et sa police. Garde-fou posé : ce marché n'est ni une entreprise humaine, ni un organisme — c'est un holobionte, une communauté qui s'organise comme un corps. Les bactéries et champignons que cette faune mange appartiennent à la strate Sol (S2, S3) ; ici, ce sont les mangeurs — ceux qui brassent, broient et tiennent les effectifs.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (29)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/19/">
-              <strong>Protozoaires du Sol et Boucle Microbienne</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document met en lumière le rôle pivot des protistes du sol, longtemps sous-estimés, dans la régulation de la boucle microbienne et la per…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/20/">
-              <strong>Gestion Systémique des Nématodes à Galles</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La gestion des nématodes à galles (Meloidogyne spp.) est en profonde mutation, passant d&#39;une lutte chimique curative à une stratégie de gest…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/26/">
-              <strong>Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document explore la coévolution plante-microbe comme levier fondamental pour la transition vers une agriculture régénérative et résilient…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/61/">
-              <strong>Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce travail a permis de démontrer que la vulnérabilité des cultures aux ravageurs n&#39;est pas une fatalité biologique, mais le résultat d&#39;un dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/62/">
-              <strong>Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L&#39;évaluation de la santé des sols est une pierre angulaire de la gestion durable des écosystèmes. Ce document a démontré que la flore sponta…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/63/">
-              <strong>Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La drilosphère représente l&#39;interface fonctionnelle où l&#39;activité des vers de terre transforme les résidus organiques en fractions de carbon…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/73/">
-              <strong>Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La régulation trophique descendante (top-down control) s&#39;établit comme un pilier fondamental de la santé des sols et de la résilience des ag…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/76/">
-              <strong>Lombriciens — écologie, services et pilotage des populations</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le pilotage de la santé des sols repose sur une compréhension fine de l&#39;écologie des lombriciens, véritables &quot;ingénieurs de l&#39;écosystème&quot; qu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/96/">
-              <strong>Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La capture et la culture des microorganismes indigènes sont le fondement biologique commun à KNF-IMO (Park, 2008 ; méthode IMO de Cho Han Ky…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/99/">
-              <strong>Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les bactéries phototrophes pourpres non-sulfureuses (PNSB), pivotées par Rhodopseudomonas palustris, pratiquent la photosynthèse anoxygéniqu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/112/">
-              <strong>Glomaline : glycoprotéine fongique et stockage C profond</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La glomaline, glycoprotéine produite par les champignons mycorhiziens à arbuscules, s&#39;affirme comme un pilier de la séquestration du carbone…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/125/">
-              <strong>Mésofaune : collemboles et acariens, régulateurs des micro-habitats</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document synthétise le rôle fondamental de la mésofaune, particulièrement les Collemboles et les Acariens, en tant que régulateurs clés d…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/127/">
-              <strong>Redondance fonctionnelle et résilience coévolutive (H5/DP4)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore les mécanismes par lesquels la redondance fonctionnelle et la résilience coevolutive permettent aux agrosystèmes de pass…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/128/">
-              <strong>Endophytes ubiquitaires et potentiel pathogène latent</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette étude explore le paradigme de la plante en tant qu&#39;holobionte, une unité biologique intégrée où l&#39;hôte coévolue avec un microbiome mul…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/139/">
-              <strong>Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse la dynamique des sols à travers le prisme des régulations ascendantes (bottom-up) et descendantes (top-down), en démontr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/140/">
-              <strong>Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une synthèse des avancées en bio-indication microbiologique de précision, soulignant son rôle critique dans le pilotage…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/143/">
-              <strong>Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document explore le paradigme de l&#39;exaptation comme clé de voûte de la compréhension du parasitisme végétal et de la conception de systèm…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/156/">
-              <strong>Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document analyse l&#39;évolution des stratégies de protection des cultures, passant d&#39;une dépendance aux intrants chimiques à une intensifica…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/162/">
-              <strong>conductivité hydraulique saturée</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La conductivité hydraulique saturée (Ksat) quantifie la capacité du sol à transmettre l&#39;eau (loi de Darcy). Elle varie de 10⁻³ à 10³ mm/h se…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/170/">
-              <strong>Carabes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Objectif : Cette synthèse évalue l&#39;efficacité des coléoptères Carabidés comme indicateurs de la santé et de la durabilité des agroécosystème…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/171/">
-              <strong>vermicompost</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document présente une analyse transversale du vermicompostage en tant que pilier de la bioéconomie circulaire et de l&#39;agriculture régénér…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/230/">
-              <strong>Gastéropodes terrestres — limaces et escargots, rôles écologiques et régulation dans les agrosystèmes</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les gastéropodes terrestres occupent une place ambivalente au sein des agrosystèmes, agissant comme des pivots fonctionnels entre services é…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/231/">
-              <strong>Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</strong>
-              <span class="sv-badge">methodologique</span>
-              <p class="sv-meta">La mesure de la biodiversité du sol exige de dépasser la simple richesse spécifique pour capturer la complexité des fonctions écosystémique.…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/237/">
-              <strong>Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</strong>
-              <span class="sv-badge">revue_critique</span>
-              <p class="sv-meta">La transition agroécologique repose sur la compréhension et le pilotage de mécanismes biogéochimiques et biologiques interconnectés. Ce docu…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/261/">
-              <strong>Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</strong>
-              
-              <p class="sv-meta">Un principe-racine fonde tout : le vivant engendre et retient la structure du sol ; la matière privée de vie reste inerte. De ce principe dé…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/267/">
-              <strong>Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Les nématodes libres du sol forment un réseau trophique dont la composition reflète l&#39;état écologique du sol. L&#39;indice de maturité de Bonger…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/278/">
-              <strong>Couvert permanent sous serre : restructurer un sol mort</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Cette fiche décrit la reconstruction, en un an, d&#39;un sol sous serre biologiquement mort après trente ans sans racines (texture sable-argile …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/279/">
-              <strong>La serre comme bioréacteur : conduite tropicale et autofertilité</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">La serre chauffée peut devenir un bioréacteur où le contrôle conjoint du climat, de l&#39;irrigation et de la biologie du sol permet de viser l&#39;…</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (161)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6680/">dissémination</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6983/">insecte</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7700/">traits microbiens</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Les vers de terre : la main-d&#39;œuvre du marché</h2>
+    <div class="sv-markdown"><p>Les vers de terre sont les terrassiers du marché. Trois métiers se partagent le chantier, selon l'étage. Les épigés, en surface, broient la litière fraîche ; les endogés, dans le sol, brassent la terre sans jamais monter à l'air libre ; les anéciques, les plus grands, creusent des galeries verticales et remontent chaque nuit des feuilles en profondeur. Leur travail ne se voit pas, il se mesure : des galeries qui drainent et ventilent, des turricules qui tapissent la surface, une terre qui change d'étage. Ce sont eux qui, brassant sans relâche, empêchent le sol de se tasser en bloc et lui rendent sa porosité — cette architecture décrite en S1, qu'ils entretiennent à plein temps.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Le tube digestif, bioréacteur mobile</h2>
+    <div class="sv-markdown"><p>Le vrai génie du ver n'est pas la pelle, c'est l'estomac. Son tube digestif n'est pas un simple boyau : c'est un bioréacteur mobile (<a href="/Publications/liseuse/fiche/63/">fiche #63</a>). En transitant, le sol ingéré y subit un traitement intensif — un pH qui bascule, un mucus qui lie, des minéraux qui s'accrochent au carbone. Ce qui ressort en turricules porte ainsi un carbone mieux protégé, associé aux minéraux. Le ver ne fait pas que digérer : il transforme la litière en réserve durable. Là où les vers travaillent, la matière organique associée aux minéraux — la MAOM, le coffre de longue durée du carbone — augmente de l'ordre de 21 % (<a href="/Publications/liseuse/fiche/63/">fiche #63</a>). Le ver ne mange pas le sol ; il le reconditionne.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Les services que rend cette main-d&#39;œuvre</h2>
+    <div class="sv-markdown"><p>Que rapporte cette main-d'œuvre ? Trois salaires. D'abord la structure : des galeries qui drainent l'eau, ventilent le sol et offrent aux racines nouvelles des autoroutes toutes tracées — les artères décrites en S0 ont ici leurs terrassiers. Ensuite le brassage : le ver remonte la profondeur en surface et descend la matière organique en profondeur, mélangeant ce que rien d'autre ne mélange. Enfin la fertilité : dans son tube, il concentre les nutriments, active les microbes, et restitue un engrais déjà digéré. On les nomme ingénieurs de l'écosystème — ils ne se contentent pas d'habiter le sol, ils le construisent (<a href="/Publications/liseuse/fiche/63/">fiche #63</a>). À chaque pluie, à chaque nuit de travail, la main-d'œuvre du marché répare, aère, mélange et fertilise — sans salaire, sans qu'on le lui demande.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>La faune mésoédaphique : les artisans du détail</h2>
+    <div class="sv-markdown"><p>Sous la grosse main-d'œuvre, une armée plus fine : la mésofaune, ces animaux intermédiaires, ni microbes ni vers — collemboles, acariens, petits vers — qui vivent dans les pores, entre les agrégats. Eux ne creusent pas de galeries : ils travaillent dans les interstices, là où la terre est déjà fine. Leur métier est de détail — fragmenter les débris, brouter les champignons, disséminer les spores, réveiller la décomposition à l'échelle du grain. Ce sont les artisans du marché, dont le travail ne se voit jamais mais dont l'absence se ressent. Leur effectif est pléthorique, et c'est ce nombre qui compense la petitesse de chacun : sans eux, la litière s'accumule, la décomposition ralentit, le sol s'engourdit.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>Les acariens du sol : régulateurs discrets</h2>
+    <div class="sv-markdown"><p>Parmi ces artisans, les acariens sont les plus discrets et les plus affairés. On les trouve en abondance extrême, répartis en métiers bien distincts : les oribates, blindés, broient la litière comme des meules vivantes ; d'autres broutent les champignons, régulant les moisissures ; d'autres encore chassent. Cette diversité en fait des régulateurs fins : en broutant les uns et en épargnant les autres, ils orientent la décomposition. Et parce qu'ils réagissent vite aux perturbations, ils servent d'indicateurs — un sol qui héberge des acariens variés est un sol qui travaille bien. Leur monde est celui des films d'eau et des pores, décrit en S0 ; ils en sont les occupants les plus affairés.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Les nématodes : la police du marché</h2>
+    <div class="sv-markdown"><p>Les nématodes sont les policiers du marché. Ces vers minuscules et transparents, souvent invisibles à l'œil nu, se répartissent en guildes : bactérivores, fongivores, omnivores, prédateurs, et une minorité de parasites des plantes. Leur rôle de police tient à leur appétit : en broutant les bactéries, ils libèrent l'azote piégé dans leur biomasse — c'est la boucle microbienne, qu'ils partagent avec les protozoaires (<a href="/Publications/liseuse/fiche/19/">fiche #19</a>). En chassant, ils empêchent une espèce de tout envahir. Leur composition raconte donc l'état du marché : un sol riche en nématodes prédateurs est un sol où la régulation tourne ; un sol dominé par les parasites est un sol déséquilibré.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>L&#39;entonnoir de Baermann : compter la police</h2>
+    <div class="sv-markdown"><p>Comment compter cette police ? Par un geste simple : l'entonnoir de Baermann. On pose une poignée de terre humide dans un entonnoir, l'eau attire les nématodes, et en quelques heures ils glissent vers le bas, où on les récolte. De ce comptage naissent des indices : la part des prédateurs et des omnivores face aux parasites dit si le réseau trophique est complet ou appauvri. Ce sont de véritables horloges biologiques (<a href="/Publications/liseuse/fiche/73/">fiche #73</a>) : sensibles et rapides à réagir, les nématodes figurent parmi les meilleurs indicateurs de la santé d'un sol — le thermomètre de la police du marché.</p>
+</div>
+    
+  </section><section id="s8">
+    <h2>Le réseau trophique : qui mange qui</h2>
+    <div class="sv-markdown"><p>Toute cette faune forme un réseau — la chaîne de qui mange qui. Les racines nourrissent les microbes ; protozoaires et nématodes broutent les microbes ; acariens et collemboles broutent les champignons ; les prédateurs mangent les brouteurs. Chaque étage régule celui d'en dessous : c'est la régulation top-down (<a href="/Publications/liseuse/fiche/73/">fiche #73</a>). Ce réseau est ce qui transforme une foule en marché ordonné : les nutriments y circulent, les populations s'y équilibrent, aucune espèce ne s'y emballe. Un sol vivant n'est pas un sol où il y a beaucoup d'animaux, mais un sol où ils se mangent correctement — où la chaîne est complète, du microbe au prédateur.</p>
+</div>
+    
+  </section><section id="s9">
+    <h2>Les pratiques et le réseau trophique</h2>
+    <div class="sv-markdown"><p>Que font les pratiques à ce réseau ? Le labour, d'abord, tranche dans le vif : il décapite les galeries, broie les vers, disperse la mésofaune. Les pesticides, ensuite, frappent sans trier : ils tuent la police avec les coupables. La fertilisation minérale, enfin, court-circuite le marché : en livrant l'azote tout prêt, elle rend la boucle microbienne inutile, et les brouteurs se mettent au chômage (<a href="/Publications/liseuse/fiche/73/">fiche #73</a>). À l'inverse, couvrir le sol, restituer de la matière organique, limiter le travail et la chimie, c'est remettre la main-d'œuvre au travail. Ces leviers sont le cœur de la strate Pratiques ; ce volet n'en retient que la mécanique : nourrir ceux qui nourrissent le sol.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>La faune est la main-d'œuvre et la police du sol : les vers qui brassent et reconditionnent, les artisans qui fragmentent, les nématodes et protozoaires qui régulent. Leur travail ne s'achète pas, il s'entretient — par un sol couvert, nourri, peu remué. Un sol sans faune est un marché sans bras : il cesse de fonctionner.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (161)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6680/">dissémination</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5394/">diversité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6807/">fermentations paysannes</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6020/">HAT</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6983/">insecte</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7070/">maturité</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/6243/">SHAPE</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7530/">shikimate</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7583/">strigol</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/7700/">traits microbiens</a><span class="sv-badge">majeur</span></li><li><a href="/Publications/liseuse/terme/443/">activité biologique</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">V1 — lecture (30)</summary>
+    <nav aria-label="V1 — lecture (30)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/V1/integral/" title="Le document V1 intégral" data-id="integral-V1">
+          <span class="sv-navlist-title">Le document V1 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/19/" title="Protozoaires du Sol et Boucle Microbienne" data-id="fiche-19">
+          <span class="sv-navlist-title">Protozoaires du Sol et Boucle Microbienne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/20/" title="Gestion Systémique des Nématodes à Galles" data-id="fiche-20">
+          <span class="sv-navlist-title">Gestion Systémique des Nématodes à Galles</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/26/" title="Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi" data-id="fiche-26">
+          <span class="sv-navlist-title">Coévolution plante-microbe sur 450 Ma : cadre temps-profond et continuum ami-ennemi</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/61/" title="Trophobiose — de l excès d azote minéral à la pullulation des ravageurs" data-id="fiche-61">
+          <span class="sv-navlist-title">Trophobiose — de l excès d azote minéral à la pullulation des ravageurs</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/62/" title="Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien" data-id="fiche-62">
+          <span class="sv-navlist-title">Plantes bio-indicatrices — lecture visuelle du sol et diagnostic praticien</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/63/" title="Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone" data-id="fiche-63">
+          <span class="sv-navlist-title">Drilosphère et MAOM — le tube digestif du ver comme bioréacteur de stabilisation du carbone</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/73/" title="Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies" data-id="fiche-73">
+          <span class="sv-navlist-title">Régulation trophique top-down — de la prédation microbienne à la suppressivité des maladies</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/76/" title="Lombriciens — écologie, services et pilotage des populations" data-id="fiche-76">
+          <span class="sv-navlist-title">Lombriciens — écologie, services et pilotage des populations</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/96/" title="Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS" data-id="fiche-96">
+          <span class="sv-navlist-title">Capture et culture des microorganismes indigènes : KNF-IMO, JADAM leaf mold, LiFoFer, Micro-Ben, MMS</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/99/" title="Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot" data-id="fiche-99">
+          <span class="sv-navlist-title">Photofermentation et bactéries phototrophes pourpres non-sulfureuses (PNSB) : Rhodopseudomonas palustris pivot</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/112/" title="Glomaline : glycoprotéine fongique et stockage C profond" data-id="fiche-112">
+          <span class="sv-navlist-title">Glomaline : glycoprotéine fongique et stockage C profond</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/125/" title="Mésofaune : collemboles et acariens, régulateurs des micro-habitats" data-id="fiche-125">
+          <span class="sv-navlist-title">Mésofaune : collemboles et acariens, régulateurs des micro-habitats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/127/" title="Redondance fonctionnelle et résilience coévolutive (H5/DP4)" data-id="fiche-127">
+          <span class="sv-navlist-title">Redondance fonctionnelle et résilience coévolutive (H5/DP4)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/128/" title="Endophytes ubiquitaires et potentiel pathogène latent" data-id="fiche-128">
+          <span class="sv-navlist-title">Endophytes ubiquitaires et potentiel pathogène latent</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/139/" title="Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol" data-id="fiche-139">
+          <span class="sv-navlist-title">Top-down vs bottom-up : doctrine de régulation des communautés microbiennes du sol</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/140/" title="Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle" data-id="fiche-140">
+          <span class="sv-navlist-title">Bio-indication précoce du microbiome (métabarcoding multi-marqueurs) : détection des dégradations avant manifestation visuelle</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/143/" title="Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées" data-id="fiche-143">
+          <span class="sv-navlist-title">Récepteurs ancestraux et détournement évolutif (exaptation) : KAI2, le cas-type des Orobanchacées</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/156/" title="Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP" data-id="fiche-156">
+          <span class="sv-navlist-title">Autodissémination et push-pull insectes : ingénierie comportementale et amplification CEP</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/162/" title="conductivité hydraulique saturée" data-id="fiche-162">
+          <span class="sv-navlist-title">conductivité hydraulique saturée</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/170/" title="Carabes" data-id="fiche-170">
+          <span class="sv-navlist-title">Carabes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/171/" title="vermicompost" data-id="fiche-171">
+          <span class="sv-navlist-title">vermicompost</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/230/" title="Gastéropodes terrestres — limaces et escargots, rôles écologiques et régulation dans les agrosystèmes" data-id="fiche-230">
+          <span class="sv-navlist-title">Gastéropodes terrestres — limaces et escargots, rôles écologiques et régulation dans les agrosystèmes</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/231/" title="Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill" data-id="fiche-231">
+          <span class="sv-navlist-title">Mesurer la biodiversité du sol — cadre Marcon et nombres de Hill</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/237/" title="Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique" data-id="fiche-237">
+          <span class="sv-navlist-title">Mécanismes-clé des cascades sol-plante-aliment-santé : revue critique des niveaux de support empirique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/261/" title="Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats" data-id="fiche-261">
+          <span class="sv-navlist-title">Les grands axes du sol vivant : un principe-racine, des thèses, des renversements, des débats</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/267/" title="Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers" data-id="fiche-267">
+          <span class="sv-navlist-title">Nématodes libres du sol : guildes trophiques et indice de maturité de Bongers</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/278/" title="Couvert permanent sous serre : restructurer un sol mort" data-id="fiche-278">
+          <span class="sv-navlist-title">Couvert permanent sous serre : restructurer un sol mort</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/279/" title="La serre comme bioréacteur : conduite tropicale et autofertilité" data-id="fiche-279">
+          <span class="sv-navlist-title">La serre comme bioréacteur : conduite tropicale et autofertilité</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>

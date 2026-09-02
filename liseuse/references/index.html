@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/references/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="2y9mm" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="2y9mm" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -194,7 +194,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-references" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -221,7 +221,7 @@
 
   <div id="sv-refs-banner" class="sv-card" hidden>
     <p class="sv-meta" id="sv-refs-fiche"></p>
-    <a href="/Publications/liseuse/references/">← toutes les références</a>
+    <a href="/Publications/liseuse/references/?all=1" id="sv-refs-all">← toutes les références</a>
   </div>
 
   <ol id="sv-refs-list" class="sv-refs-list" aria-label="Liste des références"></ol>
@@ -232,7 +232,169 @@
     <button type="button" id="sv-refs-more" class="sv-cta">Afficher plus</button>
   </p>
 
-  <script type="module">var e=100,t=e=>document.getElementById(e),n=e=>String(e??``).replace(/&/g,`&amp;`).replace(/</g,`&lt;`).replace(/>/g,`&gt;`).replace(/"/g,`&quot;`),r=e=>{if(!e)return``;let t=String(e).normalize(`NFKD`).replace(/[\u0300-\u036f]/g,``);return t=t.replace(/[\u2010\u2011\u2012\u2013\u2014]/g,`-`),t.toLowerCase().trim()},i=e=>{if(!e)return``;let t=String(e).replace(/\s+et\s+al\.?\s*$/i,``).trim();return t=t.split(/\s+(?:et|and)\s+|\s+&\s+/i)[0].trim(),t=t.includes(`,`)?t.split(`,`)[0].trim():t.split(/\s+/).slice(-1)[0]||``,t=t.replace(/\s+[A-Z]\.?$/,``),r(t)},a=e=>{if(!e)return``;if(/\bet\s+al\.?/i.test(e)||e.length<=80)return e;let t=e.slice(0,80),n=Math.max(t.lastIndexOf(`,`),t.lastIndexOf(`;`));return(n>20?t.slice(0,n):t.replace(/\s+\S*$/,``))+` et al.`},o=[],s=[],c=e,l=null,u=e=>{let t=`<li class="sv-refs-item">`;return t+=`<span class="sv-refs-auteurs">${n(a(e.auteurs))}</span>`,e.annee&&(t+=` <span class="sv-refs-annee">(${n(e.annee)})</span>`),t+=`<span class="sv-refs-p">`,e.titre_court&&(t+=`<span class="sv-refs-titre">${n(e.titre_court)}</span>`),e.journal&&(t+=` <em class="sv-refs-journal">${n(e.journal)}</em>`),t+=`</span>`,e.doi?t+=` <a class="sv-refs-doi" href="https://doi.org/${n(e.doi)}" target="_blank" rel="noopener">doi:${n(e.doi)}</a>`:e.url&&(t+=` <a class="sv-refs-doi" href="${n(e.url)}" target="_blank" rel="noopener">lien ↗</a>`),t+=`</li>`,t},d=()=>{let e=t(`sv-refs-list`);e.innerHTML=s.slice(0,c).map(u).join(``);let n=s.length-c;t(`sv-refs-more-wrap`).hidden=n<=0,t(`sv-refs-more`).textContent=`Afficher plus (${Math.max(n,0)})`,t(`sv-refs-empty`).hidden=s.length!==0,e.hidden=s.length===0},f=()=>{let e=s.length;t(`sv-refs-count`).textContent=l?`${e} référence${e>1?`s`:``} pour la fiche`:`${e} référence${e>1?`s`:``} au total`},p=()=>{let n=t(`sv-refs-filter`).value.trim().toLowerCase(),r=l?l.refs:o;s=n?r.filter(e=>`${e.auteurs} ${e.titre_court} ${e.journal} ${e.annee??``}`.toLowerCase().includes(n)):r.slice(),c=e,d(),f()};async function m(){let n=new URLSearchParams(location.search).get(`f`),[r,a]=await Promise.all([fetch(`/Publications/liseuse/data/html/sources.json`).then(e=>e.json()),n?fetch(`/Publications/liseuse/data/html/fiches_refs.json`).then(e=>e.json()).catch(()=>[]):Promise.resolve([])]);o=r;for(let e of o)e._key=i(e.auteurs);let u=(e,t)=>!e._key&&t._key?1:e._key&&!t._key?-1:e._key.localeCompare(t._key,`fr`)||(e.annee??0)-(t.annee??0)||e.id-t.id;if(o.sort(u),n&&a){let e=a.find(e=>String(e.id)===String(n));if(e){let n=new Map(o.map(e=>[e.id,e])),r=e.refs.map(e=>n.get(e)).filter(Boolean);r.sort(u),l={id:e.id,titre:e.titre,refs:r},t(`sv-refs-banner`).hidden=!1,t(`sv-refs-fiche`).textContent=`Références de la fiche #${e.id} — ${e.titre}`,t(`sv-refs-filter`).placeholder=`Filtrer les références de cette fiche…`}}s=(l?l.refs:o).slice(),c=e,d(),f()}t(`sv-refs-filter`).addEventListener(`input`,p),t(`sv-refs-more`).addEventListener(`click`,()=>{c+=e,d()}),m().catch(e=>{t(`sv-refs-empty`).hidden=!1,t(`sv-refs-empty`).textContent=`Impossible de charger les références (${e.message}).`});</script>
+  <script>(function(){const conceptIds = ["3","36","85","117","178","229","253","254","261","262","263","317","325","330","336","343"];
+const baseUrl = "/Publications/liseuse/";
+
+    // NB : define:vars émet un script CLASSIQUE (plus de import.meta — leçon
+    // 2026-09-02 : page vide, SyntaxError silencieuse). La base vit en var.
+    const DATA_URL = `${baseUrl}data/html/sources.json`;
+    const REFS_URL = `${baseUrl}data/html/fiches_refs.json`;
+    const BATCH = 100;
+
+    const $ = (id) => document.getElementById(id);
+    const escapeHtml = (s) => String(s ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+    // Normalisation (miroir tools/lib/apa.py::normalize — lowercase, sans
+    // accents, tirets Unicode → ASCII). Utilisée pour le tri par premier auteur.
+    const norm = (s) => {
+      if (!s) return '';
+      let n = String(s).normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+      n = n.replace(/[\u2010\u2011\u2012\u2013\u2014]/g, '-');
+      return n.toLowerCase().trim();
+    };
+    // Premier auteur (surname) d'un champ auteurs — clé de tri.
+    const firstAuthor = (a) => {
+      if (!a) return '';
+      let x = String(a).replace(/\s+et\s+al\.?\s*$/i, '').trim();
+      x = x.split(/\s+(?:et|and)\s+|\s+&\s+/i)[0].trim();
+      if (x.includes(',')) x = x.split(',')[0].trim();
+      else x = x.split(/\s+/).slice(-1)[0] || '';
+      x = x.replace(/\s+[A-Z]\.?$/, '');
+      return norm(x);
+    };
+    // Auteurs tronqués élégamment (déjà "et al." → conservé ; liste longue →
+    // coupe sur la dernière virgule avant 80 chars + " et al.").
+    const shortAuthors = (a) => {
+      if (!a) return '';
+      if (/\bet\s+al\.?/i.test(a)) return a;
+      if (a.length <= 80) return a;
+      const cut = a.slice(0, 80);
+      const lastSep = Math.max(cut.lastIndexOf(','), cut.lastIndexOf(';'));
+      const base = lastSep > 20 ? cut.slice(0, lastSep) : cut.replace(/\s+\S*$/, '');
+      return base + ' et al.';
+    };
+
+    let all = [];          // sources triées par premier auteur
+    let filtered = [];     // après recherche / filtre fiche/concept
+    let limit = BATCH;
+    let ficheFilter = null;
+    let conceptFilter = false;
+    const CONCEPT_IDS = conceptIds;
+
+    const itemHtml = (s) => {
+      let html = '<li class="sv-refs-item">';
+      html += `<span class="sv-refs-auteurs">${escapeHtml(shortAuthors(s.auteurs))}</span>`;
+      if (s.annee) html += ` <span class="sv-refs-annee">(${escapeHtml(s.annee)})</span>`;
+      html += '<span class="sv-refs-p">';
+      if (s.titre_court) html += `<span class="sv-refs-titre">${escapeHtml(s.titre_court)}</span>`;
+      if (s.journal) html += ` <em class="sv-refs-journal">${escapeHtml(s.journal)}</em>`;
+      html += '</span>';
+      if (s.doi) {
+        html += ` <a class="sv-refs-doi" href="https://doi.org/${escapeHtml(s.doi)}" target="_blank" rel="noopener">doi:${escapeHtml(s.doi)}</a>`;
+      } else if (s.url) {
+        // Fallback sans-DOI : lien direct (HAL, FAO, thèses, docs
+        // institutionnels) — audit visuel JMJ 2026-08-21.
+        html += ` <a class="sv-refs-doi" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">lien ↗</a>`;
+      }
+      html += '</li>';
+      return html;
+    };
+
+    const render = () => {
+      const list = $('sv-refs-list');
+      list.innerHTML = filtered.slice(0, limit).map(itemHtml).join('');
+      const rest = filtered.length - limit;
+      $('sv-refs-more-wrap').hidden = rest <= 0;
+      $('sv-refs-more').textContent = `Afficher plus (${Math.max(rest, 0)})`;
+      $('sv-refs-empty').hidden = filtered.length !== 0;
+      list.hidden = filtered.length === 0;
+    };
+
+    const updateCount = () => {
+      const total = filtered.length;
+      $('sv-refs-count').textContent = conceptFilter
+        ? `${total} référence${total > 1 ? 's' : ''} — Holobionte · Sol vivant`
+        : ficheFilter
+          ? `${total} référence${total > 1 ? 's' : ''} pour la fiche`
+          : `${total} référence${total > 1 ? 's' : ''} au total`;
+    };
+
+    const applySearch = () => {
+      const q = $('sv-refs-filter').value.trim().toLowerCase();
+      const base = ficheFilter ? ficheFilter.refs : all;
+      filtered = q
+        ? base.filter((s) => `${s.auteurs} ${s.titre_court} ${s.journal} ${s.annee ?? ''}`.toLowerCase().includes(q))
+        : base.slice();
+      limit = BATCH;
+      render();
+      updateCount();
+    };
+
+    async function init() {
+      const q = new URLSearchParams(location.search);
+      const ficheId = q.get('f');
+      const [sources, refsData] = await Promise.all([
+        fetch(DATA_URL).then((r) => r.json()),
+        fetch(REFS_URL).then((r) => r.json()).catch(() => []),
+      ]);
+      all = sources;
+      for (const s of all) s._key = firstAuthor(s.auteurs);
+      // tri par premier auteur ; sources sans auteurs repoussées en fin
+      const cmp = (a, b) => {
+        if (!a._key && b._key) return 1;
+        if (a._key && !b._key) return -1;
+        return a._key.localeCompare(b._key, 'fr') || (a.annee ?? 0) - (b.annee ?? 0) || a.id - b.id;
+      };
+      all.sort(cmp);
+
+      if (ficheId && refsData) {
+        const fr = refsData.find((x) => String(x.id) === String(ficheId));
+        if (fr) {
+          const byId = new Map(all.map((s) => [s.id, s]));
+          const refs = fr.refs.map((id) => byId.get(id)).filter(Boolean);
+          refs.sort(cmp);
+          ficheFilter = { id: fr.id, titre: fr.titre, refs };
+          $('sv-refs-banner').hidden = false;
+          $('sv-refs-fiche').textContent = `Références de la fiche #${fr.id} — ${fr.titre}`;
+          $('sv-refs-filter').placeholder = 'Filtrer les références de cette fiche…';
+        }
+      } else if (!q.get('all') && CONCEPT_IDS.length && refsData.length) {
+        // Vue par défaut (JMJ 2026-09-02) : références de l'Holobionte et du
+        // sol vivant — fusion dédupliquée des refs des fiches centrées sur
+        // ces concepts, tri canonique.
+        const byId = new Map(all.map((s) => [s.id, s]));
+        const ids = new Set();
+        for (const fr of refsData) {
+          if (CONCEPT_IDS.includes(String(fr.id))) for (const id of fr.refs) ids.add(id);
+        }
+        const refs = [...ids].map((id) => byId.get(id)).filter(Boolean);
+        refs.sort(cmp);
+        conceptFilter = true;
+        ficheFilter = { id: '', titre: '', refs };
+        $('sv-refs-banner').hidden = false;
+        $('sv-refs-fiche').textContent =
+          `Références de l'Holobionte et du sol vivant — ${CONCEPT_IDS.length} fiches liées`;
+        $('sv-refs-filter').placeholder = 'Filtrer les références de l’Holobionte et du sol vivant…';
+      }
+      filtered = (ficheFilter ? ficheFilter.refs : all).slice();
+      limit = BATCH;
+      render();
+      updateCount();
+    }
+
+    $('sv-refs-filter').addEventListener('input', applySearch);
+    $('sv-refs-more').addEventListener('click', () => {
+      limit += BATCH;
+      render();
+    });
+
+    init().catch((e) => {
+      $('sv-refs-empty').hidden = false;
+      $('sv-refs-empty').textContent = `Impossible de charger les références (${e.message}).`;
+    });
+  })();</script>
       </main>
     </div>
     <footer class="sv-footer">

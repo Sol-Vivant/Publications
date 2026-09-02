@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/doc/P4/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="6994f54606cd1ed7";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.B7-ImA-F.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})});</script><script>window.SV_PAGE_VERSION="dc544f8710181cb8";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.CIrqdx78.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJahrKTe.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r2" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -61,98 +61,22 @@
                 <a href="/Publications/liseuse/doc/P1/">
                   <strong>P1</strong> — Diagnostic du Sol Vivant
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P2/">
                   <strong>P2</strong> — Agriculture de Conservation
                 </a>
-                
               </li><li class>
                 <a href="/Publications/liseuse/doc/P3/">
                   <strong>P3</strong> — Biostimulants et Fermentations Appliquées
                 </a>
-                
               </li><li class="is-open">
                 <a href="/Publications/liseuse/doc/P4/" aria-current="page">
                   <strong>P4</strong> — Agroforesterie et Systèmes Pérennes
                 </a>
-                <ul class="sv-side-sub sv-side-l3">
-                    <li class="sv-side-ouverture">
-                        <a href="/Publications/liseuse/fiche/328/">
-                          <strong>Ouverture</strong> — le récit du document
-                        </a>
-                      </li>
-                    <li>
-                        <a href="/Publications/liseuse/fiche/34/">
-                          Agriculture de Conservation en Climat Méditerranéen et Tropical
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/36/">
-                          L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/37/">
-                          Agroforesterie tempérée — Fonctions sol et productivité système
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/43/">
-                          Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/58/">
-                          Cascade temporelle — du jour au géologique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/66/">
-                          Réseau mycorhizien commun — controverse Simard vs Karst 2023
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/71/">
-                          Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/85/">
-                          Thermorégulation édaphique — le sol vivant comme tampon climatique local
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/92/">
-                          Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/107/">
-                          Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/137/">
-                          Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/178/">
-                          Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/216/">
-                          Cultures associées (intercropping) — principe, complémentarité et conduite
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/217/">
-                          Architecture racinaire — levier de design agronomique
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/265/">
-                          Agriculture syntropique : succession dirigée et stratification
-                        </a>
-                      </li><li>
-                        <a href="/Publications/liseuse/fiche/266/">
-                          Pâturage tournant : broutage, exsudation racinaire et pompe à carbone
-                        </a>
-                      </li>
-                  </ul>
               </li><li class>
                 <a href="/Publications/liseuse/doc/P5/">
                   <strong>P5</strong> — La Transition
                 </a>
-                
               </li>
           </ul>
       </li><li class>
@@ -292,7 +216,7 @@
     <li><a href="/Publications/liseuse/installation/">Installation locale</a></li>
   </ul>
 </nav>
-      <main class="sv-main" id="sv-main">
+      <main class="sv-main sv-rub-fiches" id="sv-main">
         
   <nav class="sv-meta sv-breadcrumb" aria-label="Fil d'Ariane">
   
@@ -307,106 +231,150 @@
     
 </nav>
 
-  <article class="sv-prose">
-    <h1>P4 — Agroforesterie et Systèmes Pérennes</h1>
+  <div class="sv-reading">
+    <article class="sv-prose">
+      <h1>P4 — Agroforesterie et Systèmes Pérennes</h1>
 
-    <p class="sv-meta">Deux modes de lecture · 17 textes — l'ouverture, puis 16 fiches.</p>
+      <p class="sv-meta">
+        17 textes. Le récit pédagogique (l'ouverture)
+        est exposé ici ; le menu à droite sert le détail — le document
+        intégral ou une fiche précise.
+      </p>
 
-    <section class="sv-card sv-section" id="lecture">
-        <h2>Lire le document</h2>
-        <p class="sv-meta">Par le récit d'ouverture, ou le document intégral d'un trait.</p>
-        <div class="sv-fiche-list">
-          
-          <a class="sv-fiche-item" href="/Publications/liseuse/fiche/328/">
-            <strong>Version pédagogique courte</strong>
-            <p class="sv-meta">L'ouverture du document — par où commencer, avant les fiches détaillées qui suivent.</p>
-          </a>
-          <a class="sv-fiche-item" href="/Publications/liseuse/doc/P4/integral/">
-            <strong>Le document P4 intégral</strong>
-            <p class="sv-meta">Le récit complet — 14 133 mots.</p>
-          </a>
-        </div>
-      </section>
+      <section class="sv-card sv-section" id="lecture">
+          <div id="s0" class="sv-hero-lede">
+    <div class="sv-markdown"><p>Il y a des gestes que l'on pose pour soi, et des gestes que l'on pose pour ceux qui viendront. Planter un arbre est de la seconde espèce : celui qui le plante ne s'assiéra jamais sous son ombre. L'agroforesterie est ce geste long — introduire des arbres dans les champs, et avec eux un autre rythme, une autre profondeur, une autre durée. Ce volet ne redémontre pas la science des arbres : les strates Sol et Vivant ont décrit leurs racines, leurs symbioses, leurs échanges. Ici, on apprend à les mettre en place. Garde-fou : ce qu'on installe n'est pas un décor, mais un holobionte qui se construit avec le temps — une communauté qui grandit à l'échelle d'une vie, non d'une saison.</p>
+</div>
+  </div>
 
-    <h2>Fiches du document (16)</h2>
-    <div class="sv-fiche-list">
-        <a class="sv-fiche-item" href="/Publications/liseuse/fiche/34/">
-              <strong>Agriculture de Conservation en Climat Méditerranéen et Tropical</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse l&#39;Agriculture de Conservation comme un système résilient face aux défis climatiques des zones méditerranéennes et tropic…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/36/">
-              <strong>L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le concept de Continuum Sol-Plante-Atmosphère constitue le cadre thermodynamique essentiel pour comprendre le cycle de l&#39;eau à l&#39;interface t…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/37/">
-              <strong>Agroforesterie tempérée — Fonctions sol et productivité système</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’agroforesterie tempérée s’affirme comme une infrastructure écologique majeure pour restaurer les fonctions du sol et assurer la résilience…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/43/">
-              <strong>Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">| Pratique régénérative | Taux moyen (Mg C ha⁻¹ an⁻¹) | Niveau de preuve scientifique |
-|---|---|---|
-| Couverts végétaux seuls | 0,32 à 0,4…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/58/">
-              <strong>Cascade temporelle — du jour au géologique</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Le concept de Cascade Temporelle T0-T5 propose une lecture multidimensionnelle de la dynamique du carbone organique du sol, intégrant les pr…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/66/">
-              <strong>Réseau mycorhizien commun — controverse Simard vs Karst 2023</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document examine la controverse scientifique majeure entourant les réseaux mycorhiziens communs, opposant principalement la vision systém…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/71/">
-              <strong>Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">La pompe oxalate-carbonate représente un mécanisme biogéochimique de séquestration du carbone inorganique capable de transformer le CO₂ atmo…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/85/">
-              <strong>Thermorégulation édaphique — le sol vivant comme tampon climatique local</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Ce document analyse le rôle stratégique du sol vivant en tant que régulateur thermique, un service écosystémique essentiel pour la résilienc…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/92/">
-              <strong>Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">L’altération forcée des roches est devenue une technologie clé pour atteindre les objectifs de neutralité carbone (Hkaung et al., 2025). Le …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/107/">
-              <strong>Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce manuscrit démontre que la transition vers une agriculture régénérative repose sur une cascade biophysique intégrée, où la vitalité biolog…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/137/">
-              <strong>Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document définit les fondements de l&#39;agroforesterie biominérale tropicale, une approche systémique visant à maximiser la résilience clima…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/178/">
-              <strong>Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Dynamiques de peuplement et hiérarchie génétique Dans la rhizosphère de Citrus reticulata, les protéobactéries et les actinobactéries domine…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/216/">
-              <strong>Cultures associées (intercropping) — principe, complémentarité et conduite</strong>
-              <span class="sv-badge">transversale</span>
-              <p class="sv-meta">Les cultures associées exploitent la coexistence d’espèces aux niches complémentaires pour intensifier l’usage des ressources par unité de s…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/217/">
-              <strong>Architecture racinaire — levier de design agronomique</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Ce document démontre que l&#39;architecture racinaire constitue un levier agronomique majeur pour la transition vers une agriculture durable et …</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/265/">
-              <strong>Agriculture syntropique : succession dirigée et stratification</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">L&#39;agriculture syntropique se distingue de l&#39;agroforesterie classique par sa dimension dynamique : elle ne se contente pas d&#39;empiler des stra…</p>
-            </a><a class="sv-fiche-item" href="/Publications/liseuse/fiche/266/">
-              <strong>Pâturage tournant : broutage, exsudation racinaire et pompe à carbone</strong>
-              <span class="sv-badge">zoom</span>
-              <p class="sv-meta">Le pâturage tournant n&#39;est pas qu&#39;une technique de gestion des herbivores : c&#39;est un déclencheur physiologique qui convertit le broutage en …</p>
-            </a>
-      </div>
 
-    <section class="sv-card sv-related">
-          <h2>Termes (122)</h2>
-          <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
-          <ul class="sv-link-dots">
-            <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/6233/">Réhumectation</a></li><li><a href="/Publications/liseuse/terme/7700/">traits microbiens</a></li>
-          </ul>
+
+
+<section id="s1">
+    <h2>Systèmes agroforestiers</h2>
+    <div class="sv-markdown"><p>L'agroforesterie désigne une famille de systèmes : des arbres associés aux cultures, aux prairies, aux élevages — haies, alignements, parcs, prés-vergers. Le principe est partout le même : réintroduire l'étage arboré dans des paysages que l'agriculture a simplifiés jusqu'à l'horizontalité. L'arbre ajoute une dimension : il exploite la lumière en hauteur et l'eau en profondeur, il offre l'ombre, le vent coupé, la matière qui tombe. Sous les tropiques comme en climat tempéré, la grammaire est la même — associer des strates, des durées, des profondeurs — seule la partition change. C'est une architecture à plusieurs étages, là où la monoculture n'en tolère qu'un. Le praticien qui la conçoit apprend à penser en volumes et en durées, non plus seulement en surfaces et en saisons.</p>
+</div>
+    
+  </section><section id="s2">
+    <h2>Agriculture syntropique : succession vers la forêt-jardin</h2>
+    <div class="sv-markdown"><p>L'agriculture syntropique pousse la logique à son terme : elle organise la succession, comme une forêt qui se construit par étapes. On plante d'abord les pionnières, puis les espèces de milieu, puis les arbres de haut jet — en élaguant, en taillant, en guidant, pour que chaque étage cède la place au suivant. Chaque taille est à la fois une récolte et une conduite : on prélève la biomasse tout en orientant la lumière vers l'étage suivant. Entre deux tailles, le système produit déjà — légumes, fruits, bois, fourrage : la succession n'attend pas la maturité pour payer. L'horizon n'est plus la parcelle annuelle mais la forêt-jardin : un système qui, à maturité, se reproduit et se fertilise seul. C'est le geste long poussé jusqu'au bout — le praticien n'y récolte pas seulement une culture, il accompagne une succession vivante vers sa forme adulte.</p>
+</div>
+    
+  </section><section id="s3">
+    <h2>Fonctionnement biologique</h2>
+    <div class="sv-markdown"><p>Pourquoi l'arbre transforme-t-il le champ ? Parce qu'il change la biologie du sol en profondeur. Ses racines explorent des horizons que la culture annuelle n'atteint pas, remontent des nutriments, nourrissent un microbiome spécifique. Sa litière pleut en continu — des feuilles, des rameaux, du bois mort — une nourriture lente et variée pour la communauté du sol. Et sous l'arbre, le sol s'apaise : l'ombre tempère, les feuilles amortissent, la vie s'installe en strates. La matière qui tombe nourrit en continu, la profondeur qui explore stabilise en continu : le sol sous l'arbre ne connaît pas les à-coups du champ nu. Dans les tropiques, cette alliance va jusqu'à la minéralisation : des systèmes agroforestiers construisent littéralement du sol fertile en fixant la biomasse et les minéraux — la <a href="/Publications/liseuse/fiche/137/">fiche #137</a> en déplie les mécanismes biominéraux. L'arbre n'est pas un occupant de plus ; c'est un architecte du sol.</p>
+</div>
+    
+  </section><section id="s4">
+    <h2>Hydraulic lift et redistribution hydrique</h2>
+    <div class="sv-markdown"><p>L'arbre change aussi le régime de l'eau. Par le phénomène de remontée hydraulique, ses racines profondes puisent la nuit dans les couches humides et relâchent l'eau dans les couches superficielles asséchées — une pompe que le volet S0 (§5) a déjà décrite, et dont la <a href="/Publications/liseuse/fiche/36/">fiche #36</a> (§4) porte le détail. L'agroforesterie en fait un usage délibéré : l'arbre devient le cœur hydraulique de la parcelle, qui amortit les sécheresses et maintient vivantes les racines des cultures voisines. Et dans les systèmes multi-étagés, cette pompe se joue à plusieurs : l'arbre profond alimente la strate herbacée, qui en retour couvre et protège le sol — un échange d'eau contre de l'ombre. En période de stress, cette redistribution peut faire la différence entre une culture qui survit et une culture qui cède. On n'y revient pas ; on l'utilise.</p>
+</div>
+    
+  </section><section id="s5">
+    <h2>La voie oxalate-carbonate en agroforesterie</h2>
+    <div class="sv-markdown"><p>L'arbre participe même à la fabrication de la roche. Par la voie oxalate-carbonate — que le volet S4 (§8) a posée — des champignons et des bactéries associés aux arbres transforment l'oxalate en carbonate, précipitant du calcaire et piégeant du carbone sous forme minérale, stable à très long terme. Dans les systèmes agroforestiers, cette voie peut être activée par le choix des essences et par la litière qu'elles produisent. Choisir une essence dont la litière nourrit ces partenaires, c'est orienter la parcelle vers cette séquestration minérale — un levier discret, mais de très long terme. C'est un rappel que l'arbre ne stocke pas seulement du carbone dans son bois et dans le sol : il peut, par ses partenaires microbiens, le figer en pierre. Le geste long touche ici au temps géologique.</p>
+</div>
+    
+  </section><section id="s6">
+    <h2>Conception et mise en œuvre</h2>
+    <div class="sv-markdown"><p>Concevoir un système agroforestier est un exercice d'architecte : choisir les essences, les densités, les orientations — l'ombre qui ne doit pas étouffer, la lumière qui doit encore atteindre la culture, les racines qui ne doivent pas trop concurrencer. Concevoir, c'est aussi se projeter : l'agroforesterie se dessine pour une génération qui n'est pas encore là, et l'on plante en pensant à l'ombre que l'on laissera. Mettre en œuvre, ensuite, exige une patience que la mécanique ne connaît pas : planter, protéger, tailler, et attendre — des années avant le premier vrai retour. Le praticien apprend à penser en interactions et en successions, à prévoir ce que l'arbre adulte fera à la parcelle, à choisir ce qui cohabitera plutôt que ce qui dominera. C'est un geste de composition, où l'erreur se paie en décennies.</p>
+</div>
+    
+  </section><section id="s7">
+    <h2>Économie</h2>
+    <div class="sv-markdown"><p>Le geste long a une économie, et elle ne se compte pas en saisons. L'agroforesterie demande un investissement initial — plants, protection, temps — avant de produire : du bois, des fruits, du fourrage, et des services que l'on ne facture pas mais qui pèsent — l'eau retenue, le vent coupé, le sol stabilisé. Et la résilience entre dans le calcul : une parcelle arborée encaisse la sécheresse, l'orage, l'année difficile, mieux qu'une parcelle nue — une assurance que les bilans classiques oublient de chiffrer. Les comptables de l'instant n'y voient qu'un coût ; les comptables du temps long y voient le seul placement qui ne se dévalue pas. C'est un capital qui se construit lentement et se transmet : la parcelle arborée vaut plus, à terme, que la parcelle nue, et elle le doit à des arbres que l'on a plantés sans les récolter soi-même. Le praticien apprend à raisonner en patrimoine plutôt qu'en rendement immédiat — le prix du geste qui déborde une vie.</p>
+</div>
+    
+  </section>
+
+<section id="resume">
+    <h2>Conclusion</h2>
+    <div class="sv-markdown"><p>L'agroforesterie est le geste long du métier : introduire l'étage arboré, et avec lui la profondeur, l'ombre, l'eau, la pierre même — un sol que l'arbre construit sur des décennies. C'est un placement dont on ne touche pas soi-même les intérêts, mais qui enrichit la terre et ceux qui suivent. Le praticien qui plante un arbre travaille pour un temps qu'il ne verra pas finir.</p>
+</div>
+    
+  </section>
         </section>
-  </article>
+
+      <section class="sv-card sv-related">
+            <h2>Termes (122)</h2>
+            <p class="sv-meta">Les 15 plus importants — liés aux fiches de ce document :</p>
+            <ul class="sv-link-dots">
+              <li><a href="/Publications/liseuse/terme/6362/">abiotique</a></li><li><a href="/Publications/liseuse/terme/6482/">biominéral</a></li><li><a href="/Publications/liseuse/terme/5912/">Brassica</a></li><li><a href="/Publications/liseuse/terme/5976/">Effondrement</a></li><li><a href="/Publications/liseuse/terme/6851/">fumigation</a></li><li><a href="/Publications/liseuse/terme/6858/">glucosidase</a></li><li><a href="/Publications/liseuse/terme/7065/">matière organique humifiée</a></li><li><a href="/Publications/liseuse/terme/6119/">Organo-minéral</a></li><li><a href="/Publications/liseuse/terme/5627/">perte de biodiversité</a></li><li><a href="/Publications/liseuse/terme/7320/">pompe à carbone</a></li><li><a href="/Publications/liseuse/terme/7348/">prix</a></li><li><a href="/Publications/liseuse/terme/7364/">prophage</a></li><li><a href="/Publications/liseuse/terme/5675/">Protéine fongique</a></li><li><a href="/Publications/liseuse/terme/6233/">Réhumectation</a></li><li><a href="/Publications/liseuse/terme/7700/">traits microbiens</a></li>
+            </ul>
+          </section>
+    </article>
+
+    <div class="sv-toc-zone">
+  
+  <details class="sv-toc sv-cat-menu" id="doc-menu-menu" data-mode="nav" open>
+    <summary class="sv-side-label">P4 — lecture (17)</summary>
+    <nav aria-label="P4 — lecture (17)">
+      <a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/doc/P4/integral/" title="Le document P4 intégral" data-id="integral-P4">
+          <span class="sv-navlist-title">Le document P4 intégral</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/34/" title="Agriculture de Conservation en Climat Méditerranéen et Tropical" data-id="fiche-34">
+          <span class="sv-navlist-title">Agriculture de Conservation en Climat Méditerranéen et Tropical</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/36/" title="L'eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique" data-id="fiche-36">
+          <span class="sv-navlist-title">L&#39;eau dans le sol vivant — Potentiels, continuum SPAC, résilience hydrique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/37/" title="Agroforesterie tempérée — Fonctions sol et productivité système" data-id="fiche-37">
+          <span class="sv-navlist-title">Agroforesterie tempérée — Fonctions sol et productivité système</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/43/" title="Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026" data-id="fiche-43">
+          <span class="sv-navlist-title">Puits de carbone agricoles et forestiers — chantier 19 Shift PREF 2026</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/58/" title="Cascade temporelle — du jour au géologique" data-id="fiche-58">
+          <span class="sv-navlist-title">Cascade temporelle — du jour au géologique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/66/" title="Réseau mycorhizien commun — controverse Simard vs Karst 2023" data-id="fiche-66">
+          <span class="sv-navlist-title">Réseau mycorhizien commun — controverse Simard vs Karst 2023</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/71/" title="Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale" data-id="fiche-71">
+          <span class="sv-navlist-title">Voie oxalate-carbonate — séquestration inorganique du carbone par l agroforesterie tropicale</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/85/" title="Thermorégulation édaphique — le sol vivant comme tampon climatique local" data-id="fiche-85">
+          <span class="sv-navlist-title">Thermorégulation édaphique — le sol vivant comme tampon climatique local</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/92/" title="Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM" data-id="fiche-92">
+          <span class="sv-navlist-title">Enhanced Rock Weathering (ERW) — CDR émergent et cation bridging MAOM</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/107/" title="Cascade biophysique — de l'eau à la plante saine (colonne vertébrale du corpus)" data-id="fiche-107">
+          <span class="sv-navlist-title">Cascade biophysique — de l&#39;eau à la plante saine (colonne vertébrale du corpus)</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/137/" title="Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne" data-id="fiche-137">
+          <span class="sv-navlist-title">Agroforesterie biominérale tropicale : conception des systèmes oxalogènes pour séquestration C pérenne</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/178/" title="Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation" data-id="fiche-178">
+          <span class="sv-navlist-title">Holobionte rhizosphérique des arbres fruitiers : microbiome, virome et syndrome de replantation</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/216/" title="Cultures associées (intercropping) — principe, complémentarité et conduite" data-id="fiche-216">
+          <span class="sv-navlist-title">Cultures associées (intercropping) — principe, complémentarité et conduite</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/217/" title="Architecture racinaire — levier de design agronomique" data-id="fiche-217">
+          <span class="sv-navlist-title">Architecture racinaire — levier de design agronomique</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/265/" title="Agriculture syntropique : succession dirigée et stratification" data-id="fiche-265">
+          <span class="sv-navlist-title">Agriculture syntropique : succession dirigée et stratification</span>
+        </a><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/fiche/266/" title="Pâturage tournant : broutage, exsudation racinaire et pompe à carbone" data-id="fiche-266">
+          <span class="sv-navlist-title">Pâturage tournant : broutage, exsudation racinaire et pompe à carbone</span>
+        </a>
+    </nav>
+  </details>
+</div>
+
+<script>(function(){const idPrefix = "doc-menu";
+
+  // L'objet courant reste visible dans la liste au chargement (liste longue) —
+  // scrollTop manuel du conteneur nav (audit vision GLM 2026-09-02).
+  // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
+  // d'interpolation d'expression dans le script, leçon 2026-09-02).
+  const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
+  if (cur) {
+    const nav = cur.closest('nav');
+    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
+  }
+  const root = document.getElementById(`${idPrefix}-menu`);
+  if (root && root.dataset.mode === 'switch') {
+    root.querySelectorAll('a[data-id]').forEach((a) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        root.querySelectorAll('a[data-id]').forEach((x) =>
+          x.setAttribute('aria-current', x === a ? 'page' : 'false'),
+        );
+        document.dispatchEvent(
+          new CustomEvent('sv-objets-select', { detail: { id: a.dataset.id } }),
+        );
+      }),
+    );
+  }
+})();</script>
+  </div>
 
       </main>
     </div>
