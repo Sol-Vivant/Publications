@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="2y9mm" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.DBqJSBYr.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="2y9mm" prefix="r4" component-url="/Publications/liseuse/_astro/SvSearch.yeFQvmS0.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -210,40 +210,31 @@
     <article class="sv-prose">
       <h1>Concept cards</h1>
       <p class="sv-hero-lede">
-        292 cards — la rigueur du corpus. La card sélectionnée s'affiche
-        ici ; le menu à droite liste votre sélection — recherchez un
-        concept, les concept cards s'afficheront dans le menu.
+        292 cards — la rigueur du corpus. Recherchez une card ou
+        choisissez une dimension : sa description s'affiche ici, dans cette page.
       </p>
 
       <input type="search" id="sv-cards-filter" class="sv-filter" placeholder="Rechercher une card…" aria-label="Rechercher une concept card">
 
-      <div class="sv-def-zone" id="cards-zone" data-hrefbase="/Publications/liseuse/card" style="min-height:880px">
-  <article class="sv-def-bloc sv-prose" id="cards-200" data-id="200">
-      <div class="sv-def-head">
-        <h2 class="sv-def-titre">Holobionte</h2>
-        <a class="sv-cta sv-cta-mini" href="/Publications/liseuse/card/200/" title="Page complète : Holobionte">
-          Page complète →
-        </a>
-      </div>
-      <p class="sv-meta">Card #200 · Continuum</p>
-      <div class="sv-markdown"><p>L'<strong>holobionte</strong> désigne l'unité biologique fonctionnelle formée par un hôte eucaryote et l'ensemble de ses microorganismes associés (le <strong>microbiome</strong> : bactéries, archées, champignons, virus). Cette association intime transcende la simple coexistence : les interactions métaboliques, immunitaires et développementales entre les partenaires génèrent une entité intégrée, dont la valeur sélective et l'adaptation dépendent des propriétés émergentes du système. Chez les plantes, l'holobionte s'étend de la <strong>rhizosphère</strong> au <strong>phyllosphère</strong> en passant par l'<strong>endosphère</strong>, et s'inscrit dans un <strong>continuum sol-plante-microbiome</strong>. Les microorganismes modulent la nutrition minérale (azote, phosphore), la synthèse de phytohormones, la résistance aux stress biotiques et abiotiques, et la signalisation. Cette vision holistique renouvelle notre compréhension des interactions écologiques : les <strong>lombriciens</strong>, via leurs turricules et la <strong>drilosphère</strong>, construisent des biopores riches en microorganismes qui colonisent les racines, prolongeant l'holobionte dans la matrice du sol. Les <strong>champignons entomopathogènes à double identité endophyte</strong> (CEP) illustrent la plasticité fonctionnelle du microbiome, où un même organisme peut basculer d'un rôle mutualiste à un rôle parasitaire selon le contexte. Le <strong>transfert horizontal de gènes</strong> et le <strong>résistome</strong> circulant entre le sol et les plantes rappellent que l'holobionte est un nœud d'échanges génomiques constant. La <strong>mésofaune</strong> (collemboles, acariens) régule les communautés microbiennes du sol, influençant ainsi la composition et la stabilité de l'holobionte végétal. Enfin, le <strong>continuum sol-plante-humain</strong> étend cette conception à la santé globale, où l'holobionte agricole dialogue avec le microbiote intestinal humain (Zilber-Rosenberg &amp; Rosenberg, 2008).</p>
-</div>
+      <div class="sv-def-zone" id="cards-zone" style="min-height:120px">
+  <article class="sv-def-bloc sv-def-vide sv-prose" data-id="__vide__">
+      <p class="sv-def-teaser">Recherchez une card ou choisissez une dimension — sa description s’affichera ici.</p>
     </article>
+  
 </div>
 
 <script>(function(){const idPrefix = "cards";
-const hrefBase = "/Publications/liseuse/card";
 
-  // Bascule d'objet dans la zone fixe + hauteur réelle mesurée + hash #t-<id>
-  // + événement du menu objet (SvCatMenu mode switch / SvFilterMenu).
-  // NB Astro : les scripts sont du JS brut — valeurs via define:vars.
+  // Bascule d'objet dans la zone + hauteur réelle mesurée + hash #t-<id>
+  // + événement du menu objet (SvFilterMenu). NB : script JS BRUT (pas de
+  // syntaxe TS — leçon 2026-09-02).
   (() => {
     const prefix = idPrefix;
     const zone = document.getElementById(`${prefix}-zone`);
     if (!zone) return;
     const blocs = [...zone.querySelectorAll('.sv-def-bloc')];
     const select = (id, scroll) => {
-      blocs.forEach((b) => { b.hidden = b.dataset.id !== String(id); });
+      blocs.forEach((b) => { b.hidden = String(b.dataset.id) !== String(id); });
       if (scroll) zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     let max = 0;
@@ -259,13 +250,11 @@ const hrefBase = "/Publications/liseuse/card";
     });
     if (max > 0) zone.style.minHeight = `${Math.ceil(max) + 44}px`;
     document.addEventListener('sv-objets-select', (e) => {
-      const d = (e as CustomEvent).detail ?? {};
+      const d = (e.detail) ?? {};
       let bloc = zone.querySelector(`.sv-def-bloc[data-id="${d.id}"]`);
-      if (!bloc && d.titre) {
-        // Objet non pré-rendu (page principale : seul l'objet par défaut l'est)
-        // — bloc dynamique : contenu = texte de l'index de recherche, liens
-        // MD réduits à leur libellé, gras retiré (accès immédiat, zéro
-        // navigation — demande JMJ 2026-09-02 « pas de poupées russes »).
+      if (!bloc) {
+        // Objet non pré-rendu : bloc dynamique depuis le texte de l'index de
+        // recherche (liens MD réduits à leur libellé, gras retiré).
         const texte = String(d.texte ?? '')
           .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
           .replace(/\*\*/g, '');
@@ -273,11 +262,10 @@ const hrefBase = "/Publications/liseuse/card";
         bloc.className = 'sv-def-bloc sv-prose';
         bloc.dataset.id = String(d.id);
         bloc.innerHTML =
-          `<div class="sv-def-head"><h2 class="sv-def-titre"></h2>` +
-          `<a class="sv-cta sv-cta-mini" href="${hrefBase}${String(d.id)}/">Page complète →</a></div>` +
+          `<div class="sv-def-head"><h2 class="sv-def-titre"></h2></div>` +
           `<p class="sv-def-texte"></p>`;
-        (bloc.querySelector('.sv-def-titre') as HTMLElement).textContent = String(d.titre);
-        (bloc.querySelector('.sv-def-texte') as HTMLElement).textContent =
+        bloc.querySelector('.sv-def-titre').textContent = String(d.titre ?? d.id);
+        bloc.querySelector('.sv-def-texte').textContent =
           texte || 'Contenu en cours de rédaction.';
         zone.appendChild(bloc);
         blocs.push(bloc);
@@ -302,89 +290,91 @@ const hrefBase = "/Publications/liseuse/card";
 })();</script>
 
       <section class="sv-card sv-section">
-        <h2>Par dimension (12)</h2>
+        <h2>Filtrer par dimension (12)</h2>
+        <p class="sv-meta">Cliquez une dimension — ses cards s'affichent ici, sans changer de page :</p>
         <nav class="sv-index" aria-label="Dimensions">
-          <a href="/Publications/liseuse/cards/dim/Cadre----conomique/">
+          <button type="button" class="sv-index-btn" data-clef="dim|cadre-economique" data-label="Cadre — Économique">
               <span class="sv-dim-dot" style="background:#d97706" aria-hidden="true"></span>
               Cadre — Économique <span class="sv-meta">(6)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Cadre----volutif/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|cadre-evolutif" data-label="Cadre — Évolutif">
               <span class="sv-dim-dot" style="background:#4338ca" aria-hidden="true"></span>
               Cadre — Évolutif <span class="sv-meta">(33)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Types-de-sols/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|types-de-sols" data-label="Types de sols">
               <span class="sv-dim-dot" style="background:#ea580c" aria-hidden="true"></span>
               Types de sols <span class="sv-meta">(13)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Histoire/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|histoire" data-label="Histoire">
               <span class="sv-dim-dot" style="background:#78350f" aria-hidden="true"></span>
               Histoire <span class="sv-meta">(8)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Cadre---Redox/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|cadre-redox" data-label="Cadre — Redox">
               <span class="sv-dim-dot" style="background:#7c3aed" aria-hidden="true"></span>
               Cadre — Redox <span class="sv-meta">(13)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Cadre---Eau/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|cadre-eau" data-label="Cadre — Eau">
               <span class="sv-dim-dot" style="background:#0ea5e9" aria-hidden="true"></span>
               Cadre — Eau <span class="sv-meta">(6)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Cadre---Socio--conomique/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|cadre-socio-economique" data-label="Cadre — Socio-économique">
               <span class="sv-dim-dot" style="background:#f59e0b" aria-hidden="true"></span>
               Cadre — Socio-économique <span class="sv-meta">(4)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Pratique/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|pratique" data-label="Pratique">
               <span class="sv-dim-dot" style="background:#059669" aria-hidden="true"></span>
               Pratique <span class="sv-meta">(72)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Continuum/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|continuum" data-label="Continuum">
               <span class="sv-dim-dot" style="background:#0891b2" aria-hidden="true"></span>
               Continuum <span class="sv-meta">(66)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Cycle/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|cycle" data-label="Cycle">
               <span class="sv-dim-dot" style="background:#2563EB" aria-hidden="true"></span>
               Cycle <span class="sv-meta">(52)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Sympt-me---MO-Hydrique/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|symptome-mo-hydrique" data-label="Symptôme — MO/Hydrique">
               <span class="sv-dim-dot" style="background:#be185d" aria-hidden="true"></span>
               Symptôme — MO/Hydrique <span class="sv-meta">(9)</span>
-            </a><a href="/Publications/liseuse/cards/dim/Sympt-me---Structure/">
+            </button><button type="button" class="sv-index-btn" data-clef="dim|symptome-structure" data-label="Symptôme — Structure">
               <span class="sv-dim-dot" style="background:#dc2626" aria-hidden="true"></span>
               Symptôme — Structure <span class="sv-meta">(10)</span>
-            </a>
+            </button>
         </nav>
       </section>
 
       <section class="sv-card sv-section">
-        <h2>Par catégorie (16)</h2>
+        <h2>Filtrer par catégorie (16)</h2>
+        <p class="sv-meta">Cliquez une catégorie — ses cards s'affichent ici, sans changer de page :</p>
         <nav class="sv-index" aria-label="Catégories">
-          <a href="/Publications/liseuse/cards/cat/cadre/">
+          <button type="button" class="sv-index-btn" data-clef="cat|cadre" data-label="Cadre">
               Cadre <span class="sv-meta">(70)</span>
-            </a><a href="/Publications/liseuse/cards/cat/cadre-evolutif/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|cadre-evolutif" data-label="Cadre évolutif">
               Cadre évolutif <span class="sv-meta">(4)</span>
-            </a><a href="/Publications/liseuse/cards/cat/cadre-historique/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|cadre-historique" data-label="Cadre historique">
               Cadre historique <span class="sv-meta">(6)</span>
-            </a><a href="/Publications/liseuse/cards/cat/concept/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|concept" data-label="Concept">
               Concept <span class="sv-meta">(7)</span>
-            </a><a href="/Publications/liseuse/cards/cat/contaminant/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|contaminant" data-label="Contaminant">
               Contaminant <span class="sv-meta">(1)</span>
-            </a><a href="/Publications/liseuse/cards/cat/continuum/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|continuum" data-label="Continuum">
               Continuum <span class="sv-meta">(23)</span>
-            </a><a href="/Publications/liseuse/cards/cat/cycle/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|cycle" data-label="Cycle">
               Cycle <span class="sv-meta">(19)</span>
-            </a><a href="/Publications/liseuse/cards/cat/doctrine/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|doctrine" data-label="Doctrine">
               Doctrine <span class="sv-meta">(4)</span>
-            </a><a href="/Publications/liseuse/cards/cat/example-of/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|example-of" data-label="Exemple">
               Exemple <span class="sv-meta">(2)</span>
-            </a><a href="/Publications/liseuse/cards/cat/faune/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|faune" data-label="Faune">
               Faune <span class="sv-meta">(3)</span>
-            </a><a href="/Publications/liseuse/cards/cat/mecanisme/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|mecanisme" data-label="Mécanisme">
               Mécanisme <span class="sv-meta">(60)</span>
-            </a><a href="/Publications/liseuse/cards/cat/meta-cascade/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|meta-cascade" data-label="Méta-cascade">
               Méta-cascade <span class="sv-meta">(4)</span>
-            </a><a href="/Publications/liseuse/cards/cat/pratique/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|pratique" data-label="Pratique">
               Pratique <span class="sv-meta">(42)</span>
-            </a><a href="/Publications/liseuse/cards/cat/profil-sol/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|profil-sol" data-label="Profil de sol">
               Profil de sol <span class="sv-meta">(8)</span>
-            </a><a href="/Publications/liseuse/cards/cat/protocole/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|protocole" data-label="Protocole">
               Protocole <span class="sv-meta">(10)</span>
-            </a><a href="/Publications/liseuse/cards/cat/symptome/">
+            </button><button type="button" class="sv-index-btn" data-clef="cat|symptome" data-label="Symptôme">
               Symptôme <span class="sv-meta">(16)</span>
-            </a>
+            </button>
         </nav>
       </section>
     </article>
 
-    <astro-island uid="Z2opXee" prefix="r3" component-url="/Publications/liseuse/_astro/SvFilterMenu.DFXSTjvs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;genre&quot;:[0,&quot;card&quot;],&quot;inputId&quot;:[0,&quot;sv-cards-filter&quot;],&quot;defaultObjet&quot;:[0,{&quot;id&quot;:[0,200],&quot;label&quot;:[0,&quot;Holobionte&quot;]}],&quot;defaultLabel&quot;:[0,&quot;Card sélectionnée&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvFilterMenu&quot;,&quot;value&quot;:true}" await-children><div class="sv-toc-zone"><details class="sv-toc sv-cat-menu" open=""><summary class="sv-side-label">Card sélectionnée</summary><nav aria-label="Card sélectionnée — sélection"><a class="sv-navlist-item sv-navlist-title-only" href="/Publications/liseuse/card/200/" aria-current="page"><span class="sv-navlist-title">Holobionte</span></a></nav></details></div><!--astro:end--></astro-island>
+    <astro-island uid="Z2na2Qr" prefix="r3" component-url="/Publications/liseuse/_astro/SvFilterMenu.BIMbRTpu.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;genre&quot;:[0,&quot;card&quot;],&quot;inputId&quot;:[0,&quot;sv-cards-filter&quot;],&quot;listenCat&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvFilterMenu&quot;,&quot;value&quot;:true}" await-children><div class="sv-toc-zone"><details class="sv-toc sv-cat-menu" open=""><summary class="sv-side-label">Cards</summary><nav aria-label="Cards — sélection"><p class="sv-meta sv-origin-status">Recherchez ou choisissez une catégorie — cliquez un résultat pour le lire dans la page.</p></nav></details></div><!--astro:end--></astro-island>
   </div>
 
       </main>
@@ -395,6 +385,6 @@ const hrefBase = "/Publications/liseuse/card";
         © 2026 Jean-Michel Juzan · <a href="https://opensource.org/licenses/MIT" rel="license">Licence MIT</a>
       </p>
     </footer>
-    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.CPejmWzR.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
+    <astro-island uid="239i22" prefix="r5" component-url="/Publications/liseuse/_astro/SvPwaUpdate.BH17CJO-.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{}" ssr client="load" opts="{&quot;name&quot;:&quot;SvPwaUpdate&quot;,&quot;value&quot;:true}"></astro-island>
     <script type="module">var e=document.querySelector(`.sv-theme`),t=document.documentElement,n=document.querySelector(`meta[name="theme-color"]`),r=r=>{t.classList.toggle(`sv-dark`,r),e.setAttribute(`aria-pressed`,r?`true`:`false`),n&&(n.content=r?`#0f172a`:`#2563eb`);try{localStorage.setItem(`sv-theme`,r?`dark`:`light`)}catch{}},i=(()=>{try{return localStorage.getItem(`sv-theme`)}catch{return null}})();r(i===`dark`||!i&&matchMedia(`(prefers-color-scheme: dark)`).matches),e.addEventListener(`click`,()=>r(!t.classList.contains(`sv-dark`)));var a=document.querySelector(`.sv-burger`),o=document.getElementById(`sv-sidebar`);a.addEventListener(`click`,()=>{let e=o.classList.toggle(`is-open`);a.setAttribute(`aria-expanded`,e?`true`:`false`)}),o.addEventListener(`click`,e=>{e.target.closest(`a`)&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`))}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&o.classList.contains(`is-open`)&&(o.classList.remove(`is-open`),a.setAttribute(`aria-expanded`,`false`),a.focus())});var s=matchMedia(`(max-width: 1100px)`),c=()=>{s.matches&&document.querySelectorAll(`details.sv-toc`).forEach(e=>{e.open=!1})};c(),s.addEventListener(`change`,c);</script></body>
 </html>
