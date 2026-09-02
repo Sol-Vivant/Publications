@@ -29,7 +29,7 @@
         <span class="sv-brand-dot" aria-hidden="true"></span>
         <span>Le Sol Vivant</span>
       </a>
-      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.CJAzXnNs.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
+      <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(a,s,c)=>s in a?g(a,s,{enumerable:!0,configurable:!0,writable:!0,value:c}):a[s]=c;var l=(a,s,c)=>w(a,typeof s!="symbol"?s+"":s,c);var E=new Set(["__proto__","constructor","prototype"]);{let a={0:t=>y(t),1:t=>c(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(c(t)),5:t=>new Set(c(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in a?a[p](e):void 0},c=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let r=this.querySelectorAll("astro-slot"),n={},d=this.querySelectorAll("template[data-astro-template]");for(let o of d){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of r){let i=o.closest(this.tagName);i!=null&&i.isSameNode(this)&&(n[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let i=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(i+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${i}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),r.disconnect(),this.childrenConnectedCallback()},r=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});r.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let r=new URL(e,document.baseURI);return r.searchParams.set("astro-retry",Date.now().toString()),r.toString()}async importWithRetry(e){try{return await import(e)}catch(r){return await new Promise(n=>setTimeout(n,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let r=this.getAttribute("component-url"),n=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:r}});this.dispatchEvent(n)&&console.error(`[astro-island] Error hydrating ${r}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),r=this.getAttribute("client");if(Astro[r]===void 0){window.addEventListener(`astro:${r}`,()=>this.start(),{once:!0});return}try{await Astro[r](async()=>{let n=this.getAttribute("renderer-url");try{let[d,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),n?this.importWithRetry(n):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=d;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=d[h]}return this.hydrator=u,this.hydrate}catch(d){return this.handleHydrationError(d),()=>{}}},e,this)}catch(n){this.handleHydrationError(n)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="1irxaO" prefix="r3" component-url="/Publications/liseuse/_astro/SvSearch.DBqJSBYr.js" component-export="default" renderer-url="/Publications/liseuse/_astro/client.R9oufefG.js" props="{&quot;strate&quot;:[0,&quot;P&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;SvSearch&quot;,&quot;value&quot;:true}" await-children><div class="sv-search-wrap"><span class="sv-search-icon" aria-hidden="true">⌕</span><input type="search" role="combobox" aria-expanded="false" aria-controls="sv-search-results" aria-autocomplete="list" placeholder="Rechercher (fiches, termes, cards…)" aria-label="Recherche plein texte du corpus" class="sv-search-input" value=""/></div><!--astro:end--></astro-island>
       <button type="button" class="sv-theme" aria-label="Basculer le mode sombre" aria-pressed="false">◐</button>
     </header>
     <div class="sv-shell">
@@ -252,50 +252,17 @@
     </div>
 
     
-    
-          <div class="sv-hero-lede">
-              <div class="sv-markdown"><p>À consulter quand :</p>
-<ul>
-<li>Tu prépares un chantier de reconstruction (Card &quot;Chantier sableux&quot;)</li>
-<li>Ton diagnostic MO/argile est en Zone 3-4 (Husson-Boivin)</li>
-<li>Tu te demandes s'il faut travailler sur la MO, sur le minéral, ou les deux</li>
-</ul>
-</div>
-            </div>
-          <div class="sv-markdown"><p><strong>Question 1 — texture (triangle GEPPA)</strong> :<br>
-→ Sableux pur (S, SS) : levier minéral prioritaire (marnage) + levier organique<br>
-→ Sablo-limoneux (SL, LS) : levier organique prioritaire, marnage si plafond bloquant<br>
-→ Limoneux (L) : levier organique seul suffit, chaulage si pH &lt; 6<br>
-→ Argileux (A, AL, LAS) : levier organique, chaulage si pH &lt; 5,5<br>
-→ Calcaire (&gt; 15% CaCO₃) : ne <strong>pas</strong> chauler. Corrections Mg/S/Bo/Zn</p>
-<h4>Question 2 — PH</h4>
-<p>→ &lt; 5,5 : chaulage Ca ou dolomie (si carence Mg documentée)<br>
-→ 5,5 – 6,5 : option ouverte selon textures et objectifs<br>
-→ 6,5 – 7,5 : pas d'amendement pH, gypse éventuel pour Ca/S<br>
-→ &gt; 7,5 : acidification locale (S⁰) si blocage P/micro documenté</p>
-<p><strong>Question 3 — ration soutenable ? (test Hénin-Dupuis)</strong> :<br>
-→ Calcul : stock_cible × k₂ / k₁ = ration annuelle requise<br>
-→ Si ration &gt; 10 t MS/ha/an → envisager marnage pour baisser k₂ effectif<br>
-→ Si ration &lt; 5 t MS/ha/an → régime ACS seul tenable</p>
-<h4>Question 4 — profondeur du chantier</h4>
-<p>→ Mulch de surface : ok si sol déjà structuré (phase 2+ chronoséquence)<br>
-→ Incorporation 20-30 cm : ok si sol structurellement mort (phase 0), aération correcte, conditions de chantier réunies</p>
-<h4>Red flags</h4>
-<ul>
-<li><strong>Hydromorphie</strong> : <strong>stop</strong>, drainage d'abord</li>
-<li><strong>Sur-chaulage</strong> : ne <strong>pas</strong> dépasser pH 7,0 sur sol non calcaire</li>
-<li><strong>Marnage sur sol argileux</strong> : inutile et risque de compaction</li>
-</ul>
-<h4>Outils de diagnostic avancés</h4>
-<ul>
-<li>Charge Dispersive Nette (CDN) : intègre Na+Mg+K, plus précis que Ca/Mg seul pour prédire la dispersion des argiles (Rengasamy et al., 2016)</li>
-<li>CEC effective (au pH réel du sol) vs CEC potentielle (à pH 7) : la CEC effective est l'indicateur fiable en agriculture régénératrice</li>
-<li><strong>Vigilance analytique post-amendement</strong> : les roches broyées non altérées peuvent fausser les analyses (dissolution des particules par les extractants de laboratoire)</li>
-</ul>
-<h4>Basalte dans l'arbre</h4>
-<p>→ Sableux (S, SS) : basalte 6-10 t/ha en complément ou alternative au marnage — meilleure accessibilité, double bénéfice structure + séquestration C</p>
-<div class="admonition note"><div class="title"><p>Échelles à ne pas confondre</p></div><p>MO/argile ≈ 1,72 × C/argile (Van Bemmelen). L'échelle carbone internationale et ses seuils (Prout 2020 : SOC/clay 1/8, 1/10, 1/13) vivent dans le <a href="/Publications/liseuse/terme/395/">terme #395</a> ; la grille Husson-Boivin ci-dessus est en % MO/argile.</p></div></div>
+    <div class="sv-card sv-terme-def">
+      <h2>Description</h2>
+      
+          <p class="sv-def-teaser">À consulter quand : - Tu prépares un chantier de reconstruction (Card &quot;Chantier sableux&quot;) - Ton diagnostic MO/argile est en Zone 3-4 (Husson-Boivin) - Tu te demandes s&#39;il faut travailler sur la MO, sur le minéral, ou les deux…</p>
+          <p class="sv-meta">
+            <a href="/Publications/liseuse/cards/#t-63">
+              Lire la description complète dans les Concept cards →
+            </a>
+          </p>
         
+    </div>
 
     
 
@@ -521,10 +488,9 @@
   // NB Astro : les scripts sont du JS brut — valeurs via define:vars (jamais
   // d'interpolation d'expression dans le script, leçon 2026-09-02).
   const cur = document.querySelector(`#${idPrefix}-menu [aria-current="page"]`);
-  if (cur) {
-    const nav = cur.closest('nav');
-    if (nav) nav.scrollTop = Math.max(0, cur.offsetTop - 8);
-  }
+  // scrollIntoView (pas scrollTop) : les items portent content-visibility —
+  // offsetTop est faux hors écran (menus « cassés », audit JMJ 2026-09-02).
+  if (cur) requestAnimationFrame(() => cur.scrollIntoView({ block: 'center' }));
   const root = document.getElementById(`${idPrefix}-menu`);
   if (root && root.dataset.mode === 'switch') {
     root.querySelectorAll('a[data-id]').forEach((a) =>
