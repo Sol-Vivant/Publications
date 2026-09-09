@@ -1,0 +1,1 @@
+import{i as e,r as t,t as n}from"./dist.BmdHssXK.js";var r=(e,t)=>`${e}/${t}`,i=async e=>!!await t(e),a=(t,n)=>e(t,n),o=e=>n(e),s=()=>(document.querySelector(`h1`)?.textContent||``).trim()||document.title.replace(/ — Le Sol Vivant.*$/,``);export{o as a,a as i,r as n,i as r,s as t};
