@@ -20,7 +20,7 @@
     <link rel="canonical" href="/Publications/liseuse/404/">
     <link rel="manifest" href="/Publications/liseuse/manifest.webmanifest">
     <link rel="icon" href="/Publications/liseuse/favicon.svg" type="image/svg+xml">
-    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})}),window.CSS&&CSS.supports&&CSS.supports(`selector(::-webkit-scrollbar)`)||document.documentElement.classList.add(`sv-std-scroll`);</script><script>window.SV_PAGE_VERSION="742eb56a4fe1f1a3";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.0rccT6Ou.css"></head>
+    <script type="module">window.addEventListener(`beforeprint`,()=>{document.querySelectorAll(`details`).forEach(e=>{e.open=!0})}),window.CSS&&CSS.supports&&CSS.supports(`selector(::-webkit-scrollbar)`)||document.documentElement.classList.add(`sv-std-scroll`);</script><script>window.SV_PAGE_VERSION="c86084333aafce74";</script><link rel="stylesheet" href="/Publications/liseuse/_astro/Layout.DKSVjUDl.css"></head>
   <body>
     <a class="sv-skip" href="#sv-main">Aller au contenu</a>
     <header class="sv-header">
@@ -89,7 +89,7 @@
       </li><li>
         <a href="/Publications/liseuse/textures-geppa/">Triangle des textures</a>
       </li><li>
-        <a href="/Publications/liseuse/tests-terrain/">Tests terrain — le diagnostic du sol sans laboratoire</a>
+        <a href="/Publications/liseuse/tests-terrain/">Tests terrain : le diagnostic du sol sans laboratoire</a>
       </li>
   </ul>
   <p class="sv-side-label">Annexes :</p>
@@ -124,12 +124,25 @@
           return;
         }
       }
+      // #516 : afficher le chemin demandé (le 404 nu ne disait pas ce que
+      // le navigateur avait demandé — diagnostic impossible pour JMJ).
+      const slot = document.getElementById('sv-404-path');
+      if (slot) slot.textContent = p;
     })();
   })();</script><section class="sv-prose">
     <h1>Page introuvable</h1>
     <p class="sv-hero-lede">
       Cette adresse n'existe pas (ou plus). Le corpus vit : les pages
       apparaissent et disparaissent au fil des révisions.
+    </p>
+    
+    <p class="sv-meta">
+      Adresse demandée : <code id="sv-404-path">(inconnue)</code>
+    </p>
+    <p>
+      La page a peut-être été créée ou modifiée il y a peu : la publication
+      du corpus prend quelques minutes — actualisez dans un instant avant de
+      conclure à une disparition.
     </p>
     <p class="sv-meta">
       Les cards, chaînes et termes vivent désormais sur leurs pages uniques :
@@ -138,9 +151,9 @@
     </p>
     <nav class="sv-doors" aria-label="Reprendre depuis une porte d'entrée">
       <a class="sv-door" href="/Publications/liseuse/"><strong>Accueil</strong><span>Repartir du début — les 5 strates du corpus.</span></a>
-      <a class="sv-door" href="/Publications/liseuse/fiches/"><strong>Sommaire</strong><span>L'ouvrage entier : strates, documents, 306 textes.</span></a>
-      <a class="sv-door" href="/Publications/liseuse/thesaurus/"><strong>Le vocabulaire</strong><span>7322 termes définis et reliés.</span></a>
-      <a class="sv-door" href="/Publications/liseuse/chaines/"><strong>Les chaînes causales</strong><span>57 récits cause à effet.</span></a>
+      <a class="sv-door" href="/Publications/liseuse/fiches/"><strong>Sommaire</strong><span>L'ouvrage entier : strates, documents, 308 textes.</span></a>
+      <a class="sv-door" href="/Publications/liseuse/thesaurus/"><strong>Le vocabulaire</strong><span>7303 termes définis et reliés.</span></a>
+      <a class="sv-door" href="/Publications/liseuse/chaines/"><strong>Les chaînes causales</strong><span>58 récits cause à effet.</span></a>
     </nav>
   </section>
 
