@@ -1,1 +1,0 @@
-var e=`/Publications/liseuse/`.replace(/\/?$/,`/`);export{e as t};

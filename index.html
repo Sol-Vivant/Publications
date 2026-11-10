@@ -3,24 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le Sol Vivant cet Holobionte — le site a déménagé</title>
-<!-- Redirection définitive vers le site officiel (2026-11-10).
-     Le corpus n'est plus publié ici : la Liseuse, le thésaurus, les fiches et
-     les outils vivent désormais à la racine de lesolvivant.fr. -->
+<title>Le site officiel est lesolvivant.fr</title>
+<!-- Ce dépôt n'héberge plus RIEN d'autre que cette page (2026-11-10).
+     GitHub Pages impose `cache-control: max-age=600` : on ne peut pas
+     l'empêcher, donc l'ancien contenu a été SUPPRIMÉ — il n'y a plus de
+     version périmée à servir. -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <link rel="canonical" href="https://lesolvivant.fr/">
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=https://lesolvivant.fr/">
+<meta http-equiv="refresh" content="0; url=https://lesolivant.fr/">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 34rem; margin: 12vh auto;
+         padding: 0 1.5rem; color: #1d2521; background: #faf8f4; line-height: 1.6; }
+  h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+  a { color: #2f6b4f; font-weight: 600; }
+  code { background: #ece7dc; padding: .1rem .3rem; border-radius: .2rem; }
+</style>
 <script>
-(function () {
-  // Le chemin d'origine est CONSERVÉ : une ancienne adresse (/doc/S1/, /card/12/…)
-  // arrive telle quelle sur lesolvivant.fr, dont la page 404 sait déjà rediriger
-  // les codes vers les identifiants (/doc/S1/ → /doc/12/).
-  var chemin = location.pathname.replace(/^\/?(Publications\/)?/i, '');
+(function () {{
+  // Le chemin est CONSERVÉ : une ancienne adresse (…/liseuse/doc/S1/) arrive
+  // sur lesolvivant.fr, dont la page 404 ramène les codes aux identifiants.
+  var chemin = location.pathname.replace(/^\/?(Publications\/)?(liseuse\/|Outils\/|technique\/)?/i, '');
   location.replace('https://lesolvivant.fr/' + chemin + location.search + location.hash);
-})();
+}})();
 </script>
 </head>
 <body>
-<p>Le site a déménagé : <a href="https://lesolvivant.fr/">lesolvivant.fr</a>.</p>
+<h1>Le site a déménagé</h1>
+<p>Les publications, la Liseuse, le thésaurus et les outils du corpus
+<em>Le Sol Vivant cet Holobionte</em> sont désormais publiés à la racine de
+<a href="https://lesolvivant.fr/">lesolivant.fr</a>.</p>
+<p>Ce dépôt GitHub ne contient plus que cette page&nbsp;: son ancien contenu a été
+supprimé le 10 novembre 2026.</p>
 </body>
 </html>
