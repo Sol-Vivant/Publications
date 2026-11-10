@@ -1,72 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page introuvable — Le Sol Vivant cet Holobionte</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Sol Vivant cet Holobionte — le site a déménagé</title>
+<!-- Redirection définitive vers le site officiel (2026-11-10).
+     Le corpus n'est plus publié ici : la Liseuse, le thésaurus, les fiches et
+     les outils vivent désormais à la racine de lesolvivant.fr. -->
+<link rel="canonical" href="https://lesolivant.fr/">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/png" href="/Publications/img/sv-logo.png">
-<style>
-:root {
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-secondary: #475569;
-  --accent: #2563eb;
-  --border: #cbd5e1;
-  --radius: 12px;
-  --shadow: 0 2px 8px rgba(0, 0, 0, .06);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg); color: var(--text);
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  line-height: 1.6; padding: 1.5rem;
-}
-.card {
-  max-width: 34rem; width: 100%; text-align: center;
-  background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 3rem 2rem;
-}
-.code {
-  font-size: 4rem; font-weight: 800; letter-spacing: -.03em;
-  color: var(--accent); line-height: 1;
-}
-h1 { font-size: 1.4rem; margin: 1rem 0 .6rem; }
-p { color: var(--text-secondary); margin-bottom: 1.8rem; }
-.actions { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
-.btn {
-  display: inline-block; text-decoration: none; border-radius: 999px;
-  padding: .55rem 1.3rem; font-weight: 600; font-size: .95rem;
-  border: 1px solid var(--border); color: var(--text);
-}
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.btn:hover { filter: brightness(1.06); }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
-    --text-secondary: #94a3b8; --accent: #60a5fa; --border: #334155;
-    --shadow: 0 2px 8px rgba(0, 0, 0, .3);
-  }
-  .btn { color: var(--text); }
-  .btn.primary { color: #0f172a; }
-}
-</style>
+<meta http-equiv="refresh" content="0; url=https://lesolivant.fr/">
+<script>
+(function () {
+  // Le chemin d'origine est CONSERVÉ : une ancienne adresse (/doc/S1/, /card/12/…)
+  // arrive telle quelle sur lesolvivant.fr, dont la page 404 sait déjà rediriger
+  // les codes vers les identifiants (/doc/S1/ → /doc/12/).
+  var chemin = location.pathname.replace(/^\/?(Publications\/)?/i, '');
+  location.replace('https://lesolivant.fr/' + chemin + location.search + location.hash);
+})();
+</script>
 </head>
 <body>
-<main class="card">
-  <div class="code" aria-hidden="true">404</div>
-  <h1>Page introuvable</h1>
-  <p>
-    Cette page n'existe pas — ou plus. L'ouvrage a déménagé :
-    le corpus complet se lit désormais dans la Liseuse.
-  </p>
-  <div class="actions">
-    <a class="btn primary" href="/Publications/liseuse/">Ouvrir la Liseuse</a>
-    <a class="btn" href="/Publications/">Accueil des publications</a>
-  </div>
-</main>
+<p>Le site a déménagé : <a href="https://lesolivant.fr/">lesolivant.fr</a>.</p>
 </body>
 </html>

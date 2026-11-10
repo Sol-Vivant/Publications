@@ -1,135 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Sol Vivant cet Holobionte — Publications</title>
-<meta name="description" content="Publications de Jean-Michel Juzan : la Liseuse du corpus « Le Sol Vivant cet Holobionte », le guide technique du projet, et des outils low-tech indépendants.">
-<meta property="og:title" content="Le Sol Vivant cet Holobionte — Publications">
-<meta property="og:description" content="La Liseuse du corpus, le guide technique du projet, et des outils low-tech indépendants.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://sol-vivant.github.io/Publications/img/index-img.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="img/sv-logo.png">
-<style>
-:root {
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-secondary: #475569;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-  --border: #cbd5e1;
-  --radius: 12px;
-  --shadow: 0 2px 8px rgba(0, 0, 0, .06);
-  --shadow-hover: 0 6px 20px rgba(0, 0, 0, .10);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg); color: var(--text);
-  line-height: 1.6; min-height: 100vh;
-  display: flex; flex-direction: column;
-}
-a { color: var(--accent); }
-header {
-  padding: 3rem 1.5rem 2rem; text-align: center;
-  border-bottom: 1px solid var(--border); background: var(--card-bg);
-}
-header .dot {
-  display: inline-block; width: 14px; height: 14px; border-radius: 50%;
-  background: linear-gradient(135deg, #8b5cf6, #10b981, #f59e0b);
-  margin-right: .5rem; vertical-align: baseline;
-}
-header h1 { font-size: 1.9rem; letter-spacing: -.01em; }
-header p.lede {
-  max-width: 46rem; margin: .9rem auto 0; color: var(--text-secondary);
-  font-size: 1.05rem;
-}
-main { flex: 1; width: 100%; max-width: 60rem; margin: 0 auto; padding: 2.5rem 1.5rem; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.25rem; }
-.card {
-  display: flex; flex-direction: column; gap: .6rem;
-  background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.6rem;
-  box-shadow: var(--shadow); text-decoration: none; color: inherit;
-  transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
-}
-.card:hover, .card:focus-visible {
-  box-shadow: var(--shadow-hover); transform: translateY(-2px);
-  border-color: var(--accent); outline: none;
-}
-.card .kicker {
-  font-size: .72rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .08em; color: var(--accent);
-}
-.card h2 { font-size: 1.3rem; }
-.card p { color: var(--text-secondary); font-size: .95rem; flex: 1; }
-.card .go { font-weight: 600; color: var(--accent); font-size: .95rem; }
-footer {
-  border-top: 1px solid var(--border); background: var(--card-bg);
-  padding: 1.5rem; text-align: center; color: var(--text-secondary);
-  font-size: .9rem;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a; --card-bg: #1e293b; --text: #e2e8f0;
-    --text-secondary: #94a3b8; --accent: #60a5fa; --accent-light: #1e3a5f;
-    --border: #334155;
-    --shadow: 0 2px 8px rgba(0, 0, 0, .3);
-    --shadow-hover: 0 6px 20px rgba(0, 0, 0, .45);
-  }
-}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Sol Vivant cet Holobionte — le site a déménagé</title>
+<!-- Redirection définitive vers le site officiel (2026-11-10).
+     Le corpus n'est plus publié ici : la Liseuse, le thésaurus, les fiches et
+     les outils vivent désormais à la racine de lesolvivant.fr. -->
+<link rel="canonical" href="https://lesolivant.fr/">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=https://lesolivant.fr/">
+<script>
+(function () {
+  // Le chemin d'origine est CONSERVÉ : une ancienne adresse (/doc/S1/, /card/12/…)
+  // arrive telle quelle sur lesolvivant.fr, dont la page 404 sait déjà rediriger
+  // les codes vers les identifiants (/doc/S1/ → /doc/12/).
+  var chemin = location.pathname.replace(/^\/?(Publications\/)?/i, '');
+  location.replace('https://lesolivant.fr/' + chemin + location.search + location.hash);
+})();
+</script>
 </head>
 <body>
-<header>
-  <h1><span class="dot" aria-hidden="true"></span>Le Sol Vivant cet Holobionte</h1>
-  <p class="lede">
-    Corpus scientifique, pédagogique et métier sur l'agriculture régénératrice
-    et la biologie des sols — et quelques outils low-tech indépendants.
-    Auteur&nbsp;: Jean-Michel Juzan.
-  </p>
-</header>
-<main>
-  <nav class="grid" aria-label="Entrées du site">
-    <a class="card" href="liseuse/">
-      <span class="kicker">Le corpus</span>
-      <h2>La Liseuse</h2>
-      <p>
-        L'ouvrage complet : fiches de lecture par strate, thésaurus
-        bilingue, concept cards et chaînes causales. Recherche plein texte,
-        hors-ligne (PWA), exports EPUB/PDF.
-      </p>
-      <span class="go">Lire l'ouvrage →</span>
-    </a>
-    <a class="card" href="technique/">
-      <span class="kicker">Le projet</span>
-      <h2>Guide technique</h2>
-      <p>
-        L'architecture du projet : base de données source de vérité,
-        pipeline de régénération, services externes, workflow de session
-        et patron reproductible.
-      </p>
-      <span class="go">Comprendre l'architecture →</span>
-    </a>
-    <a class="card" href="Outils/">
-      <span class="kicker">Indépendant du corpus</span>
-      <h2>Outils low-tech</h2>
-      <p>
-        Des simulateurs sans rapport avec le corpus : four solaire, puits
-        canadien, parabole solaire, four à biochar. Physique, calculs et
-        dimensionnement.
-      </p>
-      <span class="go">Explorer les outils →</span>
-    </a>
-  </nav>
-</main>
-<footer>
-  <p>
-    © Jean-Michel Juzan · Licence MIT ·
-    <a href="https://github.com/Sol-Vivant/Publications">dépôt public</a>
-  </p>
-</footer>
+<p>Le site a déménagé : <a href="https://lesolivant.fr/">lesolivant.fr</a>.</p>
 </body>
 </html>
